@@ -1,0 +1,4 @@
+{"ts":"20260720T205608Z","term":"misroute","trigger":"manual","model":"sonnet","event":"draw","status":"ok","latency_s":82,"prompt_sha256":"63ca494c1ebd16f78127c4953273ed1e407ae4bf59db316be1b84e283fbc22b0","files":"ENTRY.md"}
+{"ts":"20260720T205608Z","term":"misroute","trigger":"manual","model":"opus","event":"draw","status":"ok","latency_s":71,"prompt_sha256":"63ca494c1ebd16f78127c4953273ed1e407ae4bf59db316be1b84e283fbc22b0","files":"ENTRY.md"}
+{"ts":"20260720T205842Z","term":"era-gated","trigger":"manual","model":"sonnet","event":"draw","status":"ok","latency_s":40,"prompt_sha256":"3fbf84d277f084905b4c9c4986c0c5790f9b1c67d7d59ad59996f5240b3daa8e","files":"ENTRY.md"}
+{"ts":"20260720T205842Z","term":"era-gated","trigger":"manual","model":"opus","event":"draw","status":"ok","latency_s":48,"prompt_sha256":"3fbf84d277f084905b4c9c4986c0c5790f9b1c67d7d59ad59996f5240b3daa8e","files":"ENTRY.md"}

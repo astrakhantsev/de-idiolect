@@ -1,0 +1,21 @@
+## 1. What the term denotes
+It refers to restricting a document set to only those items that existed before some defining marker event tied to the subject being studied (here, before each coined term was "retracted"), so that whatever is drawn from that restricted set cannot have been influenced by knowledge of what happened after the marker.
+
+## 2. Closest existing terms of art
+- **Point-in-time (PIT) data / look-ahead-bias avoidance** — quantitative finance / econometrics
+- **Temporal holdout (time-based train/test split)** — machine learning evaluation
+- **Ex ante vs. ex post evaluation** — economics / forecasting theory
+- **Knowledge cutoff / (training-)data contamination control** — NLP / LLM benchmarking
+- **Chronological/date-based access embargo** — archival science, records management (weaker fit, see below)
+
+## 3. Oldest expected treatments per candidate
+- **PIT data / look-ahead bias**: backtesting literature in finance from the 1990s onward — e.g., survivorship-bias studies (Elton, Gruber, Blake, mid-1990s) and the development of point-in-time fundamentals databases (Compustat PIT, late 1980s–90s) as a response to exactly this problem.
+- **Temporal holdout / time-series cross-validation**: rooted in classical forecasting-accuracy literature (e.g., Tashman, ~2000, on out-of-sample forecast testing) and later formalized as "walk-forward" validation in the algorithmic-trading/ML community.
+- **Ex ante / ex post**: the distinction is classical in economics, traceable to Myrdal (1939) and standard in later forecasting-evaluation texts (e.g., Clements & Hendry, 1998).
+- **Knowledge cutoff / contamination control**: a 2020s-era NLP concern, surfacing explicitly in discussions like the GPT-3 paper (Brown et al., 2020) and subsequent "test set contamination" studies.
+- **Archival embargo**: standard practice in archives/records law (sealed records, classified-document release schedules), long-standing but organized around *release after* a date rather than *use only before* one — opposite polarity.
+
+## 4. Coverage assessment
+The best fit is **point-in-time data / look-ahead-bias avoidance**, with **temporal holdout / contamination control** as a close second — both name exactly the same discipline: excluding any source material generated after the moment whose outcome you're trying to predict blind, so the evaluation can't leak the answer backward in time. The excerpt's usage matches this cleanly: excerpts are filtered so a model naming/defining a coined term can't have "seen" its retraction.
+
+What doesn't fit neatly: the cutoff here is **per-item and event-relative** (each term has its own retraction date gating its own excerpts) rather than a single global cutoff applied uniformly to a whole corpus or model, which is how "knowledge cutoff" and most PIT-data usage are typically framed. It's closer to running many small, independently-dated PIT slices within one document set than to a single dataset-wide holdout — a detail established terminology doesn't usually need to distinguish, since finance/ML applications rarely gate per-entity by an entity-specific event date within the same corpus. That's the one respect in which "era-gated" as used here is slightly more specific than any single candidate term normally implies, though it's still just an instance of the same general practice, not a distinct concept.

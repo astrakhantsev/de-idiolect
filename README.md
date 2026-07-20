@@ -4,6 +4,12 @@ Code and receipts for **"The vocabulary seam: why cross-community knowledge does
 
 **Status: draft package.** The interactive architecture diagram is pending realignment.
 
+## Post-submission additions (dated; the as-submitted state is tagged `flf-submission`)
+
+Competition rules permit labeled post-deadline additions; nothing in the submitted entry or companions is silently edited. ENTRY.md remains frozen as submitted.
+
+- **2026-07-20 — `hook/`: the coin-time hook, v1.** ENTRY.md §4.2 proposes the minimal inward tool and grades it "argued and unbuilt"; this directory builds it: `term-check.sh` (isolated reverse-dictionary check on frozen usage excerpts), a `/term-check` Claude Code skill, a deterministic glossary-watch Stop hook, per-draw isolation manifests, and JSONL instrumentation. Includes a committed self-application run on two of the entry's own coinages, scored against GLOSSARY.md as the answer key, with a contamination-check receipt. See `hook/README.md` for install/use.
+
 ## The entry and its companions (repo root)
 
 - **`ENTRY.md` — the competition entry itself.**

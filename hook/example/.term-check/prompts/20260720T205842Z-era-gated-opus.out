@@ -1,0 +1,37 @@
+## 1. What the term denotes
+
+"Era-gated" appears to mean **filtered by a time boundary so that only source material dated before a specified cutoff is admitted** — here, only documents predating each coinage's retraction, so that later material (which contains the answer) cannot leak into the input. In short: a temporal admissibility filter that enforces "nothing from after the cutoff."
+
+Note the cutoff is *per-item* — each of the four coinages has its own retraction date, so the gate is applied separately per term rather than as one global date.
+
+## 2. Closest established terms of art
+
+| Term of art | Field that owns it |
+|---|---|
+| **Look-ahead bias** (avoided via **point-in-time / as-of data**) | Quantitative finance, econometrics / backtesting |
+| **(Temporal) data leakage** — prevented by a **temporal split / temporal holdout** | Machine learning, evaluation methodology |
+| **Bitemporal / valid-time / transaction-time "as-of" query** | Database systems (temporal databases) |
+| **Knowledge / training cutoff** | LLM / ML systems (recent, informal) |
+| **Contemporaneous sources**, source criticism (*Quellenkritik*) | Historiography |
+
+## 3. Oldest / classic treatments I'd expect
+
+- **Look-ahead bias & point-in-time data** — practitioner and academic backtesting literature from the 1990s; closely adjacent is the data-snooping work of **Sullivan, Timmermann & White (1999)**. "Look-ahead bias" itself is folklore-attributed rather than tied to one founding paper.
+- **Data leakage** — **Kaufman, Rosset, Perlich & Stitelman**, "Leakage in Data Mining: Formulation, Detection, and Avoidance" (KDD 2011 / ACM TKDD 2012) is the canonical reference.
+- **Temporal databases (valid/transaction time)** — **Snodgrass & Ahn**, "A Taxonomy of Time in Databases" (1985); Snodgrass's **TSQL2** work (early–mid 1990s).
+- **Contemporaneous-source criticism** — **Leopold von Ranke** and 19th-century German historical method; formalized in **Bernheim** and **Langlois & Seignobos** (*Introduction to the Study of History*, 1898).
+- **Knowledge cutoff** — no classic; a 2020s LLM-era coinage.
+
+(I've named only references I'm confident exist; I have not invented citations.)
+
+## 4. How well the best candidate covers it, and what doesn't fit
+
+The best fit is the **point-in-time / look-ahead-bias** framing from backtesting, essentially tied for coverage with **temporal data leakage** from ML. Both name exactly the operation here: restrict inputs to what was knowable before a cutoff so the outcome can't contaminate the input. The *per-item, as-of* character (a separate cutoff per coinage) maps almost perfectly onto **bitemporal "as-of" semantics**, where each record is retrieved as-of its own reference time. So the concept is well-covered; "era-gated" is a local coinage for a standard idea.
+
+What doesn't cleanly fit any single candidate:
+
+- **The cutoff is anchored to a semantic event (a term's "retraction"), not a calendar date or a train/test boundary.** Finance/ML temporal splits usually assume a fixed timeline; here the gate is defined by a domain event that differs per entity. Bitemporal "as-of" handles the per-entity part but is a query/storage notion, not an evaluation-hygiene notion.
+- **The purpose is blind-evaluation integrity** (preventing the definition from "inheriting the answers"), which pulls in ML **leakage prevention** and blinding — but the word "gating" itself refers only to the temporal filter, not the blinding.
+- **"Era" hints at discrete named periods**, not continuous timestamps. The excerpt doesn't say whether documents are bucketed into coarse eras and gated at era boundaries, or filtered by exact date. If it's genuinely era-bucketed, that's coarse-grained temporal partitioning rather than precise point-in-time selection — a nuance none of the candidates specifically names.
+
+**Underdetermined:** whether "era" implies discrete epochs vs. continuous time, and whether the gate excludes *only* post-cutoff documents or also enforces a lower bound (a windowed era). If the latter, the closest term shifts toward a **windowed / epoch-based temporal partition** rather than a one-sided point-in-time cutoff.

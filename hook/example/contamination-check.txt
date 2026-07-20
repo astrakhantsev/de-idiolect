@@ -1,0 +1,17 @@
+# Contamination check — demo term selection (2026-07-20)
+# Question: do the frozen excerpts fed to the check call contain the glossary's
+# expected owner names for the checked term? (If yes, recovery proves nothing.)
+# Method: case-insensitive grep over the committed excerpt files.
+
+== misroute excerpts vs its answer-key vocabulary (GLOSSARY.md row: vocabulary-mismatch retrieval failure; 'false drop'):
+CLEAN — none present
+
+== era-gated excerpts vs its answer-key vocabulary (GLOSSARY.md row: temporal split / time-based holdout; leakage control):
+CLEAN — none present
+
+== established-literature names that ARE present in the misroute excerpts (in-boundary; they are OTHER terms' owners from the entry's SS2 table, not the checked term's):
+4:Raiffa & Schlaifer
+5:Clemen & Winkler
+6:Blackwell
+6:Murphy 1973
+7:Ho, Hull & Srihari

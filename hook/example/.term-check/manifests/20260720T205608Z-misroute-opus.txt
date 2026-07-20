@@ -1,0 +1,12 @@
+term: misroute
+model: opus
+trigger: manual
+prompt_sha256: 63ca494c1ebd16f78127c4953273ed1e407ae4bf59db316be1b84e283fbc22b0
+source_files: ENTRY.md
+tmp_cwd: fresh mktemp -d, removed after run
+tmp_home_policy: credentials file only (no settings/CLAUDE.md/memory)
+cwd_listing_before: [] (must be empty)
+cmd: HOME=<fresh> claude -p --model opus --disallowedTools <all>
+date: 2026-07-20T13:57:31-07:00
+out_sha256: 94ef38e1bee9cdf1343b330a55990768491caf9f20e61df499bddc9a59a65f64
+status: ok  latency_s: 71

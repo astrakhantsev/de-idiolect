@@ -1,0 +1,12 @@
+term: era-gated
+model: sonnet
+trigger: manual
+prompt_sha256: 3fbf84d277f084905b4c9c4986c0c5790f9b1c67d7d59ad59996f5240b3daa8e
+source_files: ENTRY.md
+tmp_cwd: fresh mktemp -d, removed after run
+tmp_home_policy: credentials file only (no settings/CLAUDE.md/memory)
+cwd_listing_before: [] (must be empty)
+cmd: HOME=<fresh> claude -p --model sonnet --disallowedTools <all>
+date: 2026-07-20T13:58:42-07:00
+out_sha256: 140a90dac9cb92db337d40e698d7ebc9c8500f24d37965fb4ff8debfe80a4cb1
+status: ok  latency_s: 40

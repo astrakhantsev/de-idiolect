@@ -1,0 +1,12 @@
+term: era-gated
+model: opus
+trigger: manual
+prompt_sha256: 3fbf84d277f084905b4c9c4986c0c5790f9b1c67d7d59ad59996f5240b3daa8e
+source_files: ENTRY.md
+tmp_cwd: fresh mktemp -d, removed after run
+tmp_home_policy: credentials file only (no settings/CLAUDE.md/memory)
+cwd_listing_before: [] (must be empty)
+cmd: HOME=<fresh> claude -p --model opus --disallowedTools <all>
+date: 2026-07-20T13:59:22-07:00
+out_sha256: eb971e5b08b4790930d54210c38582cac98a6ac2a73f0cd94750e89eb2caa3b9
+status: ok  latency_s: 48

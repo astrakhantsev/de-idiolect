@@ -1,0 +1,27 @@
+## 1. What the term denotes
+
+Given a coined or opaque expression, the project searches an established literature to find the concept/reference it "really" corresponds to. A "misroute" is what happens when that search process attaches the expression to the wrong destination — an unrelated field, paper, or document — instead of the correct original source, even though the wrong match may look superficially plausible.
+
+## 2. Closest existing terms of art
+
+1. **Entity linking / named-entity disambiguation** — Natural Language Processing / Computational Linguistics
+2. **Record linkage** (false match / linkage error) — Statistics, Database research
+3. **Author/citation disambiguation** — Bibliometrics, Digital Libraries
+4. **Word sense disambiguation** — Computational Linguistics
+5. **Call/intent misrouting** — Spoken Dialogue Systems, Conversational AI
+
+## 3. Oldest treatments per candidate
+
+1. **Entity linking**: Bunescu & Pasca, 2006 (ACL); Mihalcea & Csomai, "Wikify!", 2007; Milne & Witten, 2008 — mid-2000s is where the disambiguate-to-a-knowledge-base task is first formalized.
+2. **Record linkage**: Newcombe et al., "Automatic Linkage of Vital Records," *Science*, 1959; Fellegi & Sunter, "A Theory for Record Linkage," *JASA*, 1969 — the foundational statistical treatment.
+3. **Author/citation disambiguation**: Lawrence, Giles & Bollacker, CiteSeer, 1999; Han, Giles et al., "Two Supervised Learning Approaches for Name Disambiguation in Author Citations," 2004.
+4. **Word sense disambiguation**: Weaver's 1949 MT memo raises the ambiguity problem; Lesk, "Automatic Sense Disambiguation Using Machine-Readable Dictionaries," 1986, is the classic operational treatment; Yarowsky, 1995, for corpus-based methods.
+5. **Call/intent misrouting**: Gorin, Riccardi & Wright, "How May I Help You?", *Speech Communication*, 1997 — the origin of "call routing" as a named task, where errors are literally called misrouted calls. Later multi-skill/multi-domain voice-assistant routing papers (e.g., Xu & Sarikaya's contextual domain classification work, mid-2010s) reuse the same vocabulary for wrong-skill assignment.
+
+## 4. Fit assessment
+
+**Entity linking** is the closest structural match: an ambiguous mention is disambiguated against a set of candidate referents, and picking the wrong one is the exact shape of a "misroute" (compare "fusion promoted the misroute document" to a wrong-candidate ranking above the gold entity). But it doesn't fully cover this usage: the "mentions" here are abstract intellectual coinages (a jargon phrase, a symbol, a slogan) rather than named entities, and the goal is scholarly-priority attribution — whose literature actually owns this idea — which is closer to a "who coined this first" dispute in history-of-science than to linking a name string to a Wikipedia page.
+
+**Call/intent misrouting** likely explains the word choice itself (routing a query to the wrong destination skill/domain is literally called misrouting in that literature), but the domain is unrelated — dialogue-system routing operates on live user utterances dispatched to system skills, not on retrospective attribution of coined terms to academic sources.
+
+What doesn't fit any candidate cleanly: the explicit **fidelity-gate-before-retrieval architecture** (round-trip entailment check, external-name ban, verification required before a candidate can even be scored) is not itself a named construct in entity linking, record linkage, or WSD — those fields evaluate candidate ranking directly. It most resembles the "retrieve-then-verify" pattern in modern open-domain QA/fact-checking pipelines (e.g., FEVER-style evidence retrieval + claim verification), but even there the gate is normally applied *after* retrieval, not as a precondition restricting what may be retrieved at all — so this piece of the usage is closer to a bespoke pipeline design than an established term of art.

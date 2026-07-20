@@ -1,0 +1,35 @@
+## 1. What the term denotes
+
+A **misroute** is the failure in which a concept — presented only through a locally invented label (or a paraphrase of it) — gets matched to the *wrong established body of knowledge*: the wrong field, the wrong literature, the wrong canonical originator. The surface form of the label points at a domain that does not actually own the concept (e.g., "audit unit" pulls toward accounting when the concept belongs to statistical decision theory), and the system follows that pointer to a plausible-but-incorrect destination.
+
+Two adjacent failures the excerpts deliberately keep *separate* from misroute help fix its boundary: "definition drift" (the description no longer matches the construct) and "polarity inversion" (the description reverses the claim). Misroute is specifically the **wrong-destination / wrong-owner** error, distinct from wrong-content errors.
+
+## 2. Established terms of art (closest first)
+
+| Candidate | Owning field |
+|---|---|
+| **Entity linking / named-entity disambiguation error** (linking a mention to the wrong referent) | NLP / information retrieval |
+| **Word-sense disambiguation (WSD) error** — here driven by cross-domain **homonymy/polysemy** | Computational linguistics |
+| **The "vocabulary problem," polysemy side** (same string, different meanings across communities) | HCI / IR |
+| **False match / false positive** (Type-I linkage error) | Record linkage / statistics; Cranfield-style IR evaluation |
+| **False mapping in ontology/schema matching** — and, from translation, **"false friends" / false cognates** | Semantic Web & databases / linguistics |
+
+## 3. Oldest / classic treatments I'd expect to exist
+
+- **Entity linking / Wikification:** Bunescu & Paşca (2006); Cucerzan (2007); Mihalcea & Csomai, "Wikify!" (2007). Deeper root: cross-document coreference (Bagga & Baldwin, late 1990s).
+- **WSD:** traces to the machine-translation era — Weaver's 1949 memorandum, Bar-Hillel's 1960 "box/pen" argument that MT founders on sense ambiguity; Lesk (1986); Yarowsky (1995).
+- **The vocabulary problem:** Furnas, Landauer, Gomez & Dumais, CACM (1987).
+- **False match in record linkage:** Newcombe et al. (Science, 1959); Fellegi & Sunter, JASA (1969). IR precision/recall framing: the Cranfield experiments (Cleverdon, 1960s) and Salton's SMART work.
+- **Ontology/schema matching:** Rahm & Bernstein survey (2001); Euzénat & Shvaiko's later synthesis. **False friends:** a much older, informal staple of translation/lexicography (Koessler & Derocquigny coined *faux amis*, 1928).
+
+## 4. Fit of the best candidate, and residue
+
+**Best fit: entity-linking / disambiguation error under cross-domain homonymy.** The core mechanism the excerpts describe — a label whose surface tokens collide with a homonym in another field, so the mapping resolves to the wrong owner — is exactly what entity linking and WSD study, and the "vocabulary problem" names the underlying cause. If you want one phrase, *cross-domain disambiguation error* covers most of it; the "fusion promoted the misroute document" line is a textbook **false-positive retrieval** result, so the IR vocabulary already fully covers that part.
+
+**What doesn't cleanly fit any candidate:**
+
+- **The "owner" framing is attribution, not retrieval.** The target isn't just "the right document" but the *canonical originator* (Raiffa & Schlaifer 1961; Murphy 1973). Getting the field right but the priority/originator wrong is closer to **citation/attribution and scientific-priority** concerns (history of science) than to entity linking, which typically treats any correct-entity link as success.
+- **The adversarial, "actively misleading label" quality** ("actively misrouted") is stronger than neutral ambiguity. That maligned-cue aspect resembles **false friends / false cognates** more than the value-neutral homonymy that WSD assumes.
+- **The evaluation apparatus is project-specific, not a term of art:** working from a paraphrase *plus an explicit ban on uttering the external name*, with round-trip-entailment fidelity gates. No standard field packages "route from a definition while forbidding the canonical name" as a named task.
+
+**Underdetermined by the excerpts:** they don't pin down whether "misroute" is scored at the *retrieval* step (wrong candidates fetched), the *linking/attribution* step (wrong owner assigned), or the *generation* step (a definition that leads retrieval astray) — the three are conflated in the fusion discussion. They also never state the granularity of a correct destination (field? sub-literature? exact reference?), and the whole thing is measured single-cell and answer-aware (§5.3), so how "misroute" behaves as a population-level error rate is simply not specified. If you need the mapping to a single established term, decide the destination granularity first — that choice picks between "entity-linking error" (document/entity level) and "misattribution/priority error" (originator level).

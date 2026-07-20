@@ -1,0 +1,3 @@
+[source: ENTRY.md]
+**The countermeasure, piloted on the same record** *(measured (exploratory))*. After the retractions, we generated an anonymized term-free definition for four coinages from era-gated internal excerpts. Only documents predating each term's retraction were allowed, so definitions could not inherit the answers. Blind models then named the concept and its owner. We compared the definition arm with a coined-term control and sealed predictions per case. The control received the term as the project used it — e.g. "the cold-start operating requirement for the audit unit" — making its misrouting realistic; §5.3 later tested a truly bare one-term control.
+

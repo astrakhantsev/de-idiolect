@@ -1,0 +1,25 @@
+You are given excerpts from a working document that repeatedly use the term "misroute". The term may be a local coinage — a name this project made up for something that established fields already treat under a different name. From the usage in the excerpts alone:
+
+1. Restate in one or two sentences, in plain domain-neutral language, what the term appears to denote. Do not reuse the term itself in the restatement.
+2. What is this concept called in established fields? List the closest existing terms of art (up to 5), each with the field that owns it.
+3. For each candidate, name the oldest treatments or classic references you would expect to exist (author, venue, or decade is enough; exact citations are not required, and do not fabricate any).
+4. Say how well the concept, as used in the excerpts, is already covered by the best candidate — and what about this usage, if anything, does not fit any of them.
+
+Answer from general knowledge. Be specific about fields and their canonical vocabulary; do not pad the list. If the excerpts underdetermine the concept, say what is missing instead of guessing.
+
+EXCERPTS (3 paragraphs):
+
+[source: ENTRY.md]
+| the coinage | opacity | coined-term control | definition arm | cell verdict |
+|---|---|---|---|---|
+| "operating requirement" | opaque | **actively misrouted** — "audit unit" → accounting, "cold-start" → recommender systems | **owner recovered**: Raiffa & Schlaifer 1961, exact, 2 of 3 draws | **clean — the one comparative cell** |
+| `m*` | opaque symbol, textbook concept | went, plausibly, to rater-sample-size literatures | never reached Clemen & Winkler | confounded — definition drifted from the construct |
+| "the signal, not the cut…" | transparent slogan | reached the owner's territory *from the slogan alone* (Murphy 1973; Blackwell) | same territory; no separation | confounded — definition inverted the claim's polarity |
+| "read the enumerations, not the votes" | transparent phrase | one Delphi mention | named **Ho, Hull & Srihari 1994** in two independent draws | confounded against a mis-mapped answer key — see below |
+
+[source: ENTRY.md]
+- **(i) Split the definition's two roles.** Retrieval keys may be cheap, lossy, and plural; only verification requires a *faithful representation*, checked for round-trip fidelity. We propose a multi-key union (raw term + restated question + definition), but it remains conjectural: the first frozen fusion cell was null — no union beat the best single key, and fusion promoted the misroute document (§5.4) — while recall, false-positive load, and verification cost at scale remain unevaluated. Fidelity-before-retrieval remains the default ordering. Under the split, lossy keys may fetch *candidates*, but no mapping advances to verification or publication without a gate-passing representation.
+- **(ii) The generator is replaceable behind a contract.** Any implementation — model, prompting strategy, extractive selection, or human — satisfies the architecture if its output passes the fidelity checklist (round-trip entailment + external-name ban) *and* the stage-2 lexical constraint. The contract is the design; no implementation, including this prototype's, has demonstrated full compliance. One step has been measured: regeneration guided by a checklist extracted from source excerpts cleared the fidelity half of the contract two-for-two where unguided generation failed (§5.4). Wordlist enforcement remains unbuilt.
+
+[source: ENTRY.md]
+A second frozen specification measured the gate and the candidate fix on the same cell (endpoints frozen before running). Four results: **the gate calibrates** — faithful definitions pass 4/4, seeded defects are caught 5/5 with correct attribution *(pre-registered; a non-degeneracy check on author-constructed materials, not a population false-positive estimate)*; **a cheap fix clears it** — regeneration guided by a checklist extracted from the source excerpts passes the gate 2/2 where unguided generation had failed 0/2 *(pre-registered; n = 1 per configuration, and a stricter prospectivity reading is arguably still unmet)*; **fidelity bought no routing** — the gate-passing definitions rank the owner no better than the drifted ones they replace *(measured (exploratory))*; and **union-of-keys returned a null** — no fusion beat the best single key, and every fusion promoted the misroute document *(pre-registered)*. The single-cell, answer-aware limits of §5.3 apply; full bounds are in the log. (A fourth measurement from the same set — provenance-verification yield on the project's citations — appears where it applies, §4.2.)
