@@ -4,3 +4,5 @@ __pycache__/
 .venv/
 .http-cache/
 .DS_Store
+/.term-check/
+term-flags.md
