@@ -1,0 +1,6 @@
+- Mechanism: an ablation procedure that removes one support ingredient at a time (e.g., the solved demonstration, output-format reminders) while holding repositories and tests fixed, then measures the resulting change relative to the full-support condition.
+- Measurement/scoring: ⟦TERM⟧ is a computed difference/effect size calculated separately per removed ingredient (and per language condition), read as larger vs. smaller magnitude across conditions.
+- Applies to: code-repair/debugging task instances (including multi-file repair tasks) evaluated across benchmark items, with a second cycle using newly authored defects matched by language, test count, and estimated repair length.
+- Constraint: removal of the solved demonstration produces a sharp/greatest increase in ⟦TERM⟧, larger than removal of output-format reminders alone.
+- Constraint: the demonstration-ablation effect is not attributable solely to answer serialization/formatting.
+- Constraint: ⟦TERM⟧ is 1.9 times larger outside English for the demonstration ablation than for the formatting-cue ablation, and this gap persists after controlling for response length and repository size.

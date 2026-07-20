@@ -1,0 +1,34 @@
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights:  34%|███▍      | 132/391 [00:00<00:00, 1318.50it/s]Loading weights:  69%|██████▊   | 268/391 [00:00<00:00, 1341.74it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 1921.50it/s]
+{
+ "P01": {
+  "mutual": true
+ },
+ "P02": {
+  "mutual": false
+ },
+ "P03": {
+  "mutual": true
+ },
+ "P04": {
+  "mutual": true
+ },
+ "P05": {
+  "mutual": false
+ },
+ "P06": {
+  "mutual": true
+ },
+ "P07": {
+  "mutual": true
+ },
+ "P08": {
+  "mutual": true
+ },
+ "P09": {
+  "mutual": true
+ },
+ "P10": {
+  "mutual": true
+ },
+ "_diagnostic_corpus_centroid_cosine": 0.8413430452346802
+}

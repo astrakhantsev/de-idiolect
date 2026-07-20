@@ -1,0 +1,30 @@
+{
+  "frozen_at": "pre-generation (no D/N/F queries exist yet)",
+  "file_sha256": "01d7a855d589d0280034c763ca94a69b118b3e4134c61c3f1bac11b001e372fc",
+  "per_record": {
+    "d01": "a3362811de8af983",
+    "d02": "1314bcb521186b4d",
+    "d03": "facdff10c6229b01",
+    "d04": "9ba34fc013eff811",
+    "d05": "1fd3aad2516016b2",
+    "d06": "3a5d7b9576fff6bc",
+    "d07": "74ba138980b6c8d3",
+    "d08": "d7f2b0255b335953",
+    "d09": "dc1869333d52760f",
+    "d10": "a3ddf8c2b831c9ab",
+    "d11": "106be07cf3e1bf7c",
+    "d12": "718fae6682b67f30",
+    "d13": "43ee8e8e12071148",
+    "d14": "fc6fd7ecea6f7f76",
+    "d15": "a6a1e6cc596faf94",
+    "d16": "fe04a9fb165a3da4",
+    "d17": "b9fef595cf4d59ee",
+    "d18": "6513ae672e011939"
+  },
+  "owner_ids": [
+    "d01",
+    "d02",
+    "d03"
+  ],
+  "n_docs": 18
+}

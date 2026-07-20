@@ -1,0 +1,104 @@
+<<<DOC 01>>>
+# Mid-task reversals are still eating our scores
+
+Ran another batch of pivot check trials this week and the number is stuck around 61%, barely moved since last quarter. The failure mode is so consistent it's almost funny: user says "actually forget the CSV export, give me a JSON summary instead" at turn 4, and the agent dutifully starts the JSON work but still tacks the half-finished CSV onto the final answer like a scar tissue artifact. We've started diffing the final output against the abandoned branch just to catch it automatically instead of eyeballing transcripts.
+
+Separately, I ran a garble replay pass on the same session logs to see if the two failure modes correlate, and they mostly don't. Garble replay is a different beast entirely — you feed the agent noise where the tool output should be, syntactically fine JSON with meaningless fields, and watch whether it just barrels forward treating garbage as gospel. Our agent actually does okay here, flags the malformed-looking data and asks for a re-fetch about 80% of the time. So it's weirdly better at detecting bad inputs than at abandoning bad outputs.
+
+The quit sense angle ties both together for me now. It's not that the agent doesn't know how to stop — the garble replay numbers prove it can recognize when something's wrong and halt to ask. It's specifically that once it's invested tokens into a plan, sunk cost takes over and it can't let the CSV branch die even after being told explicitly to. Anyone else seeing this split between "notices bad input" and "can't drop bad output"?
+
+<<<DOC 02>>>
+# Stripped the demos and the planner tanked
+
+Been doing example strip runs on our support-ticket agent all week — pulled every worked example out of the prompt but left the step outline and formatting hints exactly where they were. Success rate went from 74% to 39%. That's a bigger drop than I expected given the outline was still telling it "first classify, then draft, then check tone." Apparently our model leans on seeing one solved ticket way more than it leans on being told the recipe in words. Worth noting example strip only touched the demonstrations, nothing else in the scaffold moved, so we can be fairly confident it's the demos carrying that weight and not some other prop we forgot to account for.
+
+While I had the harness open I also tried a brain swap on the planning step, keeping the small model doing subtask execution but routing the plan generation through our cheapest tier. Score dropped from 74% to 58%, less catastrophic than the example strip hit but still real. Combined, this tells us the planner is doing more of the heavy lifting than the ticket-classification step itself, which nobody on the team believed until we saw both numbers side by side.
+
+Also flagging: cold start on this same agent is brutal, first ticket in a fresh session averages 12 points below the session mean. We think it's because the agent hasn't yet inferred which of our three internal tools actually has the customer's order history. Anyone tuned their system prompt to shrink that ramp-up gap without just front-loading more examples?
+
+<<<DOC 03>>>
+# 500 workers, one shared cache, and a bad afternoon
+
+Kicked off a spray test on the new deployment pipeline agent, 500 identical copies hitting the same task against our staging cluster. Found that 6% of runs were reading a scratch file that a completely different worker instance had written to, because our tempdir naming scheme wasn't actually unique per worker, just per host. Classic. Spray test is supposed to be about smoking out exactly this kind of shared-infrastructure race, and it did its job, but it also ate half our staging budget before someone noticed the contamination number wasn't zero.
+
+While cleaning that up we had to do a hot swap on the underlying model because our vendor pushed a deprecation notice mid-debug. Genuinely nervous about this because half the workers were mid-task with files already edited and decisions already baked into the transcript. The successor model picked up the thread fine on about 90% of them, kept the existing branch names, didn't re-litigate choices already made. The other 10% just started re-reading the whole repo from scratch like it had amnesia, which cost us real wall clock time.
+
+Last thing: we double mark every hot swap output because we don't trust a single grader pass after a mid-run model change. Reflowed the diffs, resubmitted, and got two different verdicts on 4 of 60 answers even though the content was identical. Scorer's sensitive to line wrapping in ways it shouldn't be, going to file that as its own bug.
+
+<<<DOC 04>>>
+# Our pivot check numbers looked great until I checked budget bleed
+
+Posted a pivot check score of 88% last month and got some nice feedback in the team channel. Then I actually looked at what those trials cost and felt less good about it. The agent does discard the stale objective and pursue the revised one, so the check passes, but it gets there by throwing away enormous amounts of partial work and starting over almost from scratch every single time instead of salvaging anything reusable from before the reversal.
+
+So I ran the budget bleed numbers on the same trial set. Average of 34% of total tokens on those pivot trials went into work that got discarded outright, versus about 9% on trials with no mid-task instruction change. That's a real cost difference even though the pivot check metric itself doesn't see it — you can nail the pivot and still be lighting money on fire to do it. I think we've been treating pivot check as sufficient evidence of good behavior when it's really only measuring the endpoint, not the path.
+
+Also worth mentioning quit sense here because a few of the high-bleed trials weren't clean pivots at all — the agent kept a couple of stray tool calls going after the revised objective was already achieved, like it forgot to check whether it was done. Not unbounded looping exactly, more like two extra unnecessary verification passes tacked onto an already-finished task. Small thing but it shows up in both the token bill and the transcript noise.
+
+<<<DOC 05>>>
+# Swapped the model mid-run and it forgot the outline
+
+Tried something risky this week: mid-task hot swap from our usual model to a newer release, on a live refactor task with three files already modified and a partial test suite already passing. About two-thirds of the runs picked up the thread cleanly, respected the existing file structure, didn't contradict the naming decisions from before the swap. The rest treated the existing diff as suspicious and started rewriting files that were already correct, which is exactly the failure mode hot swap is supposed to surface.
+
+Paired that with a garble replay of the same task recordings, corrupting every test runner output into plausible-looking but meaningless pass/fail noise, to see if the post-swap model would sanity-check what it was being told versus a fresh model on the same corrupted feed. No real difference between pre-swap and post-swap behavior here, both flagged the garbled results about 70% of the time and asked to rerun the suite, so at least the swap didn't damage its skepticism.
+
+One more data point: we also ran example strip on this same refactor prompt, minus the two worked examples of "how to migrate a config file" that we normally include. Score dropped only slightly, maybe 6 points, way less dramatic than what other people here have reported for their tasks. My theory is this particular task leans on the step outline more than the demos, since config migration is pretty mechanical once you know the steps. Curious if others have found example strip impact varies this much by task type.
+
+<<<DOC 06>>>
+# Cheap planner, same executor, same score?
+
+Ran a brain swap on our document-QA agent, keeping the exact same execution model but routing the planning step through a much cheaper backend. Expected a cliff and didn't get one — score held at 81% versus 83% baseline, basically noise. Either our planning step for this particular task is trivial enough that a cheap model handles it fine, or the executor is quietly redoing planning work on its own regardless of what the plan handed it. Going to test that second theory by literally blanking the plan output and seeing if execution still holds up.
+
+Cold start on this same agent is the more interesting problem honestly. First task of a session averages 15 points under the session mean, and it doesn't seem tied to task difficulty, we controlled for that. Feels like the agent needs one or two tool calls just to remember which of our retrieval indexes is authoritative versus deprecated, and nothing in the system prompt currently front-loads that. Going to try seeding session memory with that fact and rerun cold start to see if the gap closes.
+
+Last thing, we double marked a batch of these QA answers after noticing the scorer seemed inconsistent on long-form responses. Reflowed line breaks, changed nothing else, resubmitted through the same grader. 9 out of 80 flipped verdicts. That's a bigger disagreement rate than I want to admit to our stakeholders, so we're auditing the grader's whitespace handling before we trust any of these session-level comparisons further.
+
+<<<DOC 07>>>
+# Concurrency bugs masquerading as pivot failures
+
+Spent two days chasing what I thought was a pivot check regression before realizing it was actually a spray test problem in disguise. We run pivot check trials in batches of 20 workers for throughput, and it turns out some of those workers were sharing a temp directory, so when one instance's stale CSV artifact got written to a path another instance also used, the wrong worker's final answer inherited leftover content from an entirely different trial's abandoned branch. Looked exactly like a failure to drop stale work. It wasn't, it was contamination.
+
+Once we isolated worker directories properly the actual pivot check number jumped from 54% to 71%, which is a huge swing to have been hiding behind an infrastructure bug this whole time. Lesson learned: run a dedicated spray test on any harness before trusting behavioral metrics that come out of batched execution, especially ones sensitive to file state like pivot check is.
+
+Also tracked budget bleed across the corrected batch out of curiosity. Even with clean isolation, the discarded-work ratio on genuine pivot trials sits around 28%, which tracks with what someone else here posted recently. Doesn't seem like an artifact of the contamination bug, that's just the real cost of the agent re-planning from scratch after a reversal. Going to keep an eye on whether newer models bring that ratio down or if it's just an inherent tax on handling mid-task instruction changes gracefully.
+
+<<<DOC 08>>>
+# When the tool feed lies, does the agent notice?
+
+Spent the afternoon on garble replay against our data-pipeline agent, swapping every tool call result for syntactically valid but semantically empty JSON blobs. It caught the corruption on 22 of 30 degraded steps and explicitly asked for a retry instead of just proceeding, which honestly beat my expectations going in. The 8 misses were all downstream of a single step type, our schema-validation tool, where the garbled output apparently still looks close enough to a real validation pass that the agent doesn't blink.
+
+That obviously feeds straight into quit sense, because the misses aren't just "wrong answer," they're the agent confidently continuing on a corrupted foundation instead of stopping to question it. We'd rather it halt and ask than push forward on nonsense, and for 8 out of 30 steps it did the wrong thing in exactly that way. Feels like a targeted fix though, not a fundamental problem, since the other tool types are handled fine.
+
+Tried an example strip on the schema-validation prompt segment specifically, removing the two worked examples of "here's what a real validation failure looks like" while leaving the instructions intact. That actually helped, oddly — success on the garble replay steps for that tool type went from 8/30 misses down to 3/30. My best guess is the examples were anchoring the agent toward one specific failure shape and making it pattern-match too loosely against anything resembling that shape, garbled or not.
+
+<<<DOC 09>>>
+# Five things that broke our eval pipeline this month
+
+Rough month. Started with a brain swap experiment gone sideways — routed planning through a cheaper model while keeping execution untouched, expecting a moderate dip, and instead task success collapsed from 79% to 31%. Turned out our executor was far more dependent on detailed subplans than we assumed, it basically can't improvise. Good data, bad surprise.
+
+Then cold start bit us during the same experiment cycle. We hadn't controlled for it, so some of the brain swap sessions were accidentally comparing a fresh-session first task against a warmed-up session's later task, which inflated the apparent gap. Redid it controlling for position in session and the real brain swap effect was still large, just not as extreme as our first pass suggested.
+
+Third, we caught a grader problem via double mark — resubmitted 200 answers with reflowed formatting only, and 14 flipped, concentrated almost entirely in the brain-swapped low-score batch, which makes sense since terser cheap-model output apparently trips something in the scorer's whitespace handling.
+
+Fourth, unrelated fire: a hot swap forced on us by an API deprecation mid-batch, and about a third of in-flight sessions lost thread coherence, restarting work that was already done in files already edited.
+
+Fifth, we finally ran a proper spray test on the shared execution cluster and found 11% cross-contamination between worker instances writing to a common cache directory, which we now suspect explains some of the weirder outliers from earlier in the month that we'd previously written off as model noise.
+
+<<<DOC 10>>>
+# Rebuilding our eval suite from scratch, notes so far
+
+Throwing out most of last year's harness and starting over, so here's where things stand. Budget bleed tracking is now built in by default — every discarded branch gets tagged with its token cost at the moment it's abandoned, so we get the dead-end ratio for free on every run instead of reconstructing it after the fact from logs. Early numbers on the new agent look decent, bleed sits around 18% on average tasks and spikes to 40%+ specifically on pivot check trials, which lines up with what a few people have reported here.
+
+Pivot check itself got a real rewrite too — we now snapshot the full working state at the moment of reversal so we can programmatically verify nothing from the stale branch made it into the final answer, instead of a human skimming the transcript. Caught two false passes from the old manual method in the first week alone.
+
+Quit sense is the piece I'm least happy with still. We've got probes for premature stopping and for looping past a finished objective, but no unified way to score them against each other, so right now it's three separate numbers instead of one coherent picture of whether the agent stops at the right moment.
+
+Also added garble replay and example strip as standing regression tests that run on every model version bump, not just ad hoc when someone gets curious. Garble replay catches feed-corruption blindness early, example strip tells us fast whether a new model needs the worked demos as badly as the last one did. Cheap insurance against surprises.
+
+<<<DOC 11>>>
+# End of quarter eval retro
+
+Wrapping up the quarter, here's the scorecard across the six things we tracked most. Brain swap on the planning component: still our biggest single-factor score driver, cheap-planner runs lose 20-40 points depending on task, confirming again that the plan is carrying more than the execution loop gets credit for. Cold start: ramp-up penalty averaged 11 points this quarter, slightly better than last quarter's 15, probably from the session-seeding change we shipped in month two.
+
+Double mark stayed a nagging problem — 6% of resubmitted answers flip verdict on reflow alone across the whole corpus, and we still haven't root-caused the scorer's whitespace sensitivity, just flagged it as known noise in every report now. Hot swap held up better than expected under our forced-deprecation events, coherent continuation rate landed at 84%, up from 71% a quarter ago, mostly because we started preserving file-edit history explicitly across the swap boundary instead of relying on the new model to infer it.
+
+Spray test contamination on the shared cluster dropped from 11% to 4% after the tempdir isolation fix, though it's not zero and probably never will be given how our worker pool shares a cache layer by design. And budget bleed, the number I care about most honestly, sits at 22% quarter-wide, worse on multi-turn tasks with instruction reversals than on straightforward single-objective ones, which tracks with everything else we've seen this quarter about reversals being expensive even when the agent ultimately gets them right.

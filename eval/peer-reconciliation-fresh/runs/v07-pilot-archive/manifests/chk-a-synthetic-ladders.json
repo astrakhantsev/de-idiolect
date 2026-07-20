@@ -1,0 +1,13 @@
+kind: claude
+model: sonnet
+cli_version: 2.1.215 (Claude Code)
+prompt_sha256: b9d0d70cd3171389269a0db98a070d685a302ca7d0689a4735469050c2bcfa19
+tmp_cwd: fresh mktemp -d, removed after run
+tmp_home_contents_policy: credentials file ONLY (no settings/memory/config)
+cwd_listing_before: [] (must be empty)
+date: 2026-07-19T13:37:46-07:00
+home_listing: [./.claude/.credentials.json ]
+cmd: HOME=<fresh> claude -p --model sonnet --disallowedTools Bash,Read,Edit,Write,Glob,Grep,Task,Agent,WebFetch,WebSearch,NotebookEdit,TodoWrite,Skill
+out_sha256: b3d8c02835aacf24edb12ddad57feddf37225a8de22114848a77a39b85653f4b
+cwd_listing_after: []
+exit: 0

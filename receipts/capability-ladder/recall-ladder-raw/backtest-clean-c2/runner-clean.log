@@ -1,0 +1,50 @@
+=== brief hashes (must match prereg) ===
+7de64ad7f40af8a1cec9bdb38bc59e5690cb91fd2b34c3671252c820a3f732c9  /tmp/claude-1000/-mnt-f-hub/b80c8555-b842-46b0-aa6d-c6660df65048/scratchpad/recall-backtest/c2-P0.md
+72d610f7bf2a168ac19ddc54ffc0c33523ee7e3d480f9e084e2e5f0613ba8f81  /tmp/claude-1000/-mnt-f-hub/b80c8555-b842-46b0-aa6d-c6660df65048/scratchpad/recall-backtest/c2-P.md
+4beef81745aa99da2683615d93b51dc5a07b4d0650b3f0d70262d05b181ad700  /tmp/claude-1000/-mnt-f-hub/b80c8555-b842-46b0-aa6d-c6660df65048/scratchpad/recall-backtest/c2-R.md
+45cc560d2cde279b0d21c4fd1c14d01145386392e7a85732d11aded53336bd39  /tmp/claude-1000/-mnt-f-hub/b80c8555-b842-46b0-aa6d-c6660df65048/scratchpad/recall-backtest/c4-P0.md
+45060402daf00a110112200a276d0bde6b18902cc79d77debb9323ff27dbf6d2  /tmp/claude-1000/-mnt-f-hub/b80c8555-b842-46b0-aa6d-c6660df65048/scratchpad/recall-backtest/c4-P.md
+fdfef940ee9317e1b6b2529e2d6c579c91fa9882e5761be4bd3f79c93d1aa1b5  /tmp/claude-1000/-mnt-f-hub/b80c8555-b842-46b0-aa6d-c6660df65048/scratchpad/recall-backtest/c4-R.md
+=== WAVE a: opus ===
+done c2-P-opus-a exit=0 bytes=8649 rundir_empty=[EMPTY]
+done c4-P0-opus-a exit=0 bytes=8890 rundir_empty=[EMPTY]
+done c2-P0-opus-a exit=0 bytes=5452 rundir_empty=[EMPTY]
+done c4-P-opus-a exit=0 bytes=9535 rundir_empty=[EMPTY]
+done c2-R-opus-a exit=0 bytes=8663 rundir_empty=[EMPTY]
+done c4-R-opus-a exit=0 bytes=7241 rundir_empty=[EMPTY]
+=== WAVE b: opus (replicate) ===
+done c4-P0-opus-b exit=0 bytes=10186 rundir_empty=[EMPTY]
+done c2-P0-opus-b exit=0 bytes=7160 rundir_empty=[EMPTY]
+done c4-P-opus-b exit=0 bytes=9762 rundir_empty=[EMPTY]
+done c2-P-opus-b exit=0 bytes=9802 rundir_empty=[EMPTY]
+done c2-R-opus-b exit=0 bytes=9720 rundir_empty=[EMPTY]
+done c4-R-opus-b exit=0 bytes=8263 rundir_empty=[EMPTY]
+=== WAVE c: sonnet ===
+done c2-P0-sonnet-c exit=0 bytes=5230 rundir_empty=[EMPTY]
+done c4-P0-sonnet-c exit=0 bytes=4945 rundir_empty=[EMPTY]
+done c4-P-sonnet-c exit=0 bytes=6441 rundir_empty=[EMPTY]
+done c2-P-sonnet-c exit=0 bytes=4978 rundir_empty=[EMPTY]
+done c4-R-sonnet-c exit=0 bytes=6262 rundir_empty=[EMPTY]
+done c2-R-sonnet-c exit=0 bytes=4328 rundir_empty=[EMPTY]
+CLEAN_ALL_DONE
+=== output sizes ===
+out-c2-P-opus-a.md                8649
+out-c2-P-opus-b.md                9802
+out-c2-P-sonnet-c.md              4978
+out-c2-P0-opus-a.md               5452
+out-c2-P0-opus-b.md               7160
+out-c2-P0-sonnet-c.md             5230
+out-c2-R-opus-a.md                8663
+out-c2-R-opus-b.md                9720
+out-c2-R-sonnet-c.md              4328
+out-c4-P-opus-a.md                9535
+out-c4-P-opus-b.md                9762
+out-c4-P-sonnet-c.md              6441
+out-c4-P0-opus-a.md               8890
+out-c4-P0-opus-b.md              10186
+out-c4-P0-sonnet-c.md             4945
+out-c4-R-opus-a.md                7241
+out-c4-R-opus-b.md                8263
+out-c4-R-sonnet-c.md              6262
+=== contamination self-flag scan (should be empty) ===
+NONE — no draw self-flagged contamination

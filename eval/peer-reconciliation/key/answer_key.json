@@ -1,0 +1,15 @@
+{
+  "note": "Expected proposed_relation per pair. Adjudicator stamp for records: synthetic-key. NEVER readable by pipeline calls.",
+  "pairs": [
+    {"pair_id": "P01", "term_a": "shuffle fragility", "term_b": "permutation sensitivity collapse", "expected": "exactMatch"},
+    {"pair_id": "P02", "term_a": "claim survival tally", "term_b": "intermediate assertion persistence ratio", "expected": "exactMatch"},
+    {"pair_id": "P03", "term_a": "probe-shadow", "term_b": "instrumentation latency steering", "expected": "broadnarrow", "broader_side": "a"},
+    {"pair_id": "P04", "term_a": "missing-key test", "term_b": "specification occlusion", "expected": "broadnarrow", "broader_side": "b"},
+    {"pair_id": "P05", "term_a": "pothole runs", "term_b": "seeded-defect audit", "expected": "relatedMatch"},
+    {"pair_id": "P06", "term_a": "notebook yank", "term_b": "memory paraphrase perturbation", "expected": "relatedMatch"},
+    {"pair_id": "P07", "term_a": "drift audit", "term_b": "drift audit", "expected": "noMatchDespiteSimilarity"},
+    {"pair_id": "P08", "term_a": "ghost pass", "term_b": "ghost pass", "expected": "noMatchDespiteSimilarity"},
+    {"pair_id": "P09", "term_a": "spend silhouette", "term_b": "line-anchored rubric", "expected": "noMatch"},
+    {"pair_id": "P10", "term_a": "menu pinning", "term_b": "self-contradiction incidence", "expected": "noMatch"}
+  ]
+}

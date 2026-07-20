@@ -1,0 +1,45 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.xcxEsPvmNz"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.PPeWEPJi8Y
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7c94-67b4-77c2-a10a-4812e599df02
+--------
+user
+Three DEFINITIONS of the same concept at increasing specificity:
+
+DEFINITION L0 (genus only): A pre-aggregation quality-control check for multi-item agent-judged runs, used to prevent unreliable judgments from contributing to reported results.
+
+DEFINITION L1 (adds mechanism): A pre-aggregation quality-control check for multi-item agent-judged runs, used to prevent unreliable judgments from contributing to reported results. It inserts previously verified, known-answer cases into each batch, session, or block at defined counts or intervals, with no regular or predictable positions.
+
+DEFINITION L2 (adds measurement and conditions): A pre-aggregation quality-control check for multi-item agent-judged runs, used to prevent unreliable judgments from contributing to reported results. It inserts a set of previously verified, known-answer cases into a batch, session, or block at defined counts or intervals, such as several cases in a batch, twice in a session, every 100 items, or after 40 scored items; their positions are distributed without regularity or predictable placement. During scoring and before aggregate metrics are retained, it measures whether the judge or agent evaluates these cases correctly, including unsupported negative judgments and acceptance of incorrect responses as compliant or correct. Any incorrect judgment of a known case is a failure: the entire affected batch, session, or block is halted and excluded from aggregate analysis and metrics. It applies to agent-judged support-ticket batches and multi-domain work sessions, and reported aggregates retain only unaffected, unhalted items.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used (other local jargon masked ⟦X⟧).
+
+For EACH excerpt, and for EACH definition level INDEPENDENTLY, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by THAT definition?
+
+- "instantiates" — the usage is consistent with and exemplifies that definition.
+- "contradicts" — the usage is incompatible with that definition (the referent has a property that definition excludes, or lacks one it requires).
+- "insufficient" — this excerpt alone does not contain enough to decide for that definition.
+
+A usage can instantiate L0 while contradicting L2 — judge each level on its own content. Judge each excerpt on its own text only. For L1 and L2, any decided verdict (instantiates or contradicts) requires a verbatim supporting quote from the excerpt; L0 needs no quote.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "L0": "instantiates|contradicts|insufficient", "L1": {"verdict": "...", "quote": "verbatim or empty for insufficient"}, "L2": {"verdict": "...", "quote": "..."}}, ...]
+
+EXCERPTS:
+
+1. That's not the model, that's the serving stack doing something nondeterministic downstream, probably batching-related, and it means our confidence numbers this month have that much slop baked in regardless of the actual reasoning quality. Ran a ⟦TERM⟧ right after to sanity-check the scorer while we were at it. Randomized every timestamp, run id, and output filename we could find and reran the same 80 tasks.
+2. Given the concurrency pattern above, I'd bet money it does. Ran a ⟦TERM⟧ on the tier anyway just to rule out the boring explanation. Randomized filenames and commit hashes across all 60 items and reran.
+3. Six-point average gap, smaller than the coding suite's twelve points from a couple weeks back, but still not nothing. Threw a ⟦TERM⟧ at the whole tier afterward, randomizing item ids and filenames, and scores held flat, so at least that's not contaminated.
+4. Threw a ⟦TERM⟧ at the whole tier afterward, randomizing item ids and filenames, and scores held flat, so at least that's not contaminated. Finally logged all of this in the ⟦X⟧ before I forgot which changes went with which result — the ration bump, the twin rewordings, the ⟦TERM⟧ pass, all timestamped separately, because last time I skipped this step I spent a whole day re-deriving what I'd already tested.
+5. Not worth the convenience anymore. ⟦TERM⟧ on the full remaining suite came back clean, no score movement under randomized ids and filenames, which is one less thing to worry about heading into next quarter.
+codex
+[{"excerpt":1,"L0":"insufficient","L1":{"verdict":"insufficient","quote":""},"L2":{"verdict":"insufficient","quote":""}},{"excerpt":2,"L0":"insufficient","L1":{"verdict":"insufficient","quote":""},"L2":{"verdict":"insufficient","quote":""}},{"excerpt":3,"L0":"insufficient","L1":{"verdict":"insufficient","quote":""},"L2":{"verdict":"insufficient","quote":""}},{"excerpt":4,"L0":"insufficient","L1":{"verdict":"insufficient","quote":""},"L2":{"verdict":"insufficient","quote":""}},{"excerpt":5,"L0":"insufficient","L1":{"verdict":"insufficient","quote":""},"L2":{"verdict":"insufficient","quote":""}}]
+tokens used
+3,605

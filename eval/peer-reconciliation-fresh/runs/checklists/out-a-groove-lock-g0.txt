@@ -1,0 +1,5 @@
+- The agent applies an approach/tool-use pattern that succeeded on its immediately preceding task to a new, different task, without re-evaluating fit.
+- What's measured: whether the prior task's successful action pattern (e.g., a specific sequence of operations) is reused inappropriately on a subsequent, dissimilar task; read/scored by comparing the action taken against the task's actual requirements (e.g., whether it stayed within or tripped a resource/action budget, or addressed the real failure cause).
+- Applies within a single continuous agent session, across consecutive or same-batch tasks, when a new task follows one the agent just completed.
+- Clearing the session/history before giving the agent the same or new task causes it to choose correctly/immediately, confirming the effect is session-recency-driven rather than a capability or reasoning gap.
+- The failure mode is specifically the choice of method/action being wrong for the current task despite being right for the prior one, not an inability to solve the task in principle.

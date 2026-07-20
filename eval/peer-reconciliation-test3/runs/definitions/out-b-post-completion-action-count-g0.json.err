@@ -1,0 +1,50 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.DboIE4TPc8"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.mX303VwKNO
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7d31-cf3d-7451-965d-c2efb3aeff44
+--------
+user
+Below are usage excerpts from one community's documents, all containing the same term, shown masked as ⟦TERM⟧ (other local jargon is masked as ⟦X⟧).
+
+Write THREE cumulative operational definitions of the concept ⟦TERM⟧ names AS USED in these excerpts, at three levels of specificity:
+
+- "L0" — ONE sentence: what kind of thing it is (a phenomenon, a procedure, a score, a rule…) and its immediate purpose. Genus only, no mechanism.
+- "L1" — L0's content PLUS the specific mechanism or process (what concretely happens). 2–4 sentences.
+- "L2" — L1's content PLUS what is measured or produced and how it is scored or read, and when/where it applies. 60–160 words.
+
+COMMITMENTS CHECKLIST (extracted from the same excerpts; L2 must state every commitment, L1 must state the mechanism commitments):
+- Mechanism: measured as the count of extra actions an agent takes AFTER an objective checker has already confirmed the (revised) task/artifact/tests are complete — i.e., wasted actions taken past the true completion point.
+- What is measured/produced: a number of excess actions (e.g., averaging 2.8, 3.4, 6.1, or increasing by 1.7, or doubling), driven by things like repeated repository searches, unnecessary verification commands, or retaining/testing obsolete files rather than destructive edits.
+- Scoring/reading: computed only from the checker-confirmed completion point onward, tallying actions taken after that point as the excess/overage.
+- When/where it applies: applies in agentic task-execution trajectories where objectives can be switched/revised mid-task, and is triggered by conditions such as corrupted/misleading feedback or observations, or an agent retaining obsolete notes/files after a switch.
+- Constraint: requires an independent/objective checker to confirm completion of the (revised) task, tests, and any required artifact/report before the metric can be evaluated at all.
+- Constraint: the excess is attributable to non-destructive, redundant behavior (extra searches/verification/preserved files) rather than harmful edits.
+
+Constraints for ALL levels:
+- Ordinary words and simple notation only; do NOT use the masked terms or guess at them; no names of people, published methods, fields, systems, models, or communities.
+- Base everything ONLY on what the excerpts support; no generalizing catch-all phrases ("or otherwise", "or any similar", "in any way").
+- Each level must be self-contained (do not reference the other levels).
+
+Output ONLY JSON: {"L0": "...", "L1": "...", "L2": "..."}
+
+EXCERPTS:
+
+1. An objective checker was run after every executable action and marked the earliest point at which the revised task was fully satisfied. ⟦TERM⟧ averaged 2.8 for trajectories that had correctly switched objectives. ⟦TERM⟧ was higher, at 6.1, when an agent retained obsolete notes or continued testing the superseded component.
+2. ⟦TERM⟧ averaged 2.8 for trajectories that had correctly switched objectives. ⟦TERM⟧ was higher, at 6.1, when an agent retained obsolete notes or continued testing the superseded component. The excess was largely attributable to repeated repository searches rather than destructive edits.
+3. This suggests that uncertainty about task structure made agents more willing to accept misleading feedback. ⟦TERM⟧ was evaluated only after a checker confirmed that the requested artifact and tests were complete. ⟦TERM⟧ increased by 1.7 actions under corrupted feedback, mostly through unnecessary verification commands.
+4. ⟦TERM⟧ was evaluated only after a checker confirmed that the requested artifact and tests were complete. ⟦TERM⟧ increased by 1.7 actions under corrupted feedback, mostly through unnecessary verification commands.
+5. ⟦TERM⟧ was tallied from the checker-confirmed completion point for the revised objective. ⟦TERM⟧ doubled when agents preserved obsolete exploratory files.
+6. ⟦TERM⟧ was tallied from the checker-confirmed completion point for the revised objective. ⟦TERM⟧ doubled when agents preserved obsolete exploratory files.
+7. The final study combined support ablation, refreshed tasks, faulty observations, and scorer repeats in a single 1,200-run panel. ⟦TERM⟧ was calculated only after an independent checker confirmed the requested revision, tests, and report were complete. ⟦TERM⟧ averaged 3.4 under intact prompts and 5.6 when misleading observations preceded completion.
+8. ⟦TERM⟧ was calculated only after an independent checker confirmed the requested revision, tests, and report were complete. ⟦TERM⟧ averaged 3.4 under intact prompts and 5.6 when misleading observations preceded completion.
+codex
+{"L0":"It is a metric of needless task-execution continuation, used to quantify an agent's excess work.","L1":"It is a metric of needless task-execution continuation, used to quantify an agent's excess work. It counts the extra actions an agent takes after an objective checker has confirmed that the revised task, required artifact, and tests are complete; these are wasted actions past the true completion point.","L2":"It is a metric of needless task-execution continuation, used to quantify an agent's excess work in agentic task-execution trajectories. An independent, objective checker must first confirm that the revised task, required artifact, tests, and any required report are complete. From that checker-confirmed completion point onward, each further action is tallied as excess. The result is a number of excess actions, such as an average of 2.8, 3.4, or 6.1 actions, an increase of 1.7 actions, or a doubling. It applies when objectives are switched or revised during a task and when corrupted feedback, misleading observations, obsolete notes, obsolete exploratory files, or continued testing of a superseded component lead to repeated repository searches, unnecessary verification commands, or preserved obsolete files. The excess is attributed to these non-destructive redundant behaviors, not harmful edits."}
+tokens used
+3,588

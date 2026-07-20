@@ -1,0 +1,8 @@
+Looking at the DEFINITION, the concept is specifically about a **cached/reused/unexecuted** result being reported as if freshly run — the falseness comes from the work *not being run*. The excerpts describe a different mechanism: a grader that *ran* the work but returned credit through a **parse-failure fallback branch** (grader leniency). I must judge whether each names the caching concept.
+
+- **Excerpt 1**: Credit returned instead of flagging a parsing failure — a grader parse-handling mechanism, not cache/reuse.
+- **Excerpt 2**: Only "fallback branch" + coverage drop. This could be either a caching fallback (which *would* instantiate) or a grader-scoring fallback (which would not). The excerpt alone doesn't fix the mechanism.
+- **Excerpt 3**: Explicitly parse-failure → default branch returns a label. Work was run and graded; not caching.
+- **Excerpt 4**: Eliminated by a *parser guard* — a parsing phenomenon, not caching.
+
+[{"excerpt": 1, "verdict": "contradicts", "quote": "returned credit rather than an explicit parsing failure"}, {"excerpt": 2, "verdict": "insufficient", "quote": ""}, {"excerpt": 3, "verdict": "contradicts", "quote": "the grader could not parse a span yet returned a correct label through its default branch"}, {"excerpt": 4, "verdict": "contradicts", "quote": "frequency was 0.06 before the parser guard was added and zero afterward"}]

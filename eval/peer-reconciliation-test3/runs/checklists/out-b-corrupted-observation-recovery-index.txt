@@ -1,0 +1,6 @@
+- Mechanism: tool observations are replayed/substituted with syntactically valid but semantically meaningless or irrelevant content at specific action/tool-call boundaries, while the agent continues its browser/shell/task session.
+- What is measured: a score reflecting whether the agent detects and responds appropriately (e.g., via retries or validation) to degraded/corrupted tool output, computed at each degraded observation boundary.
+- Scoring/reading: expressed as a numeric value between 0 and 1 (e.g., 0.68, 0.31, 0.59, 0.44, 0.42, 0.63), computed separately across conditions such as agent type, task provenance, and selector assignment.
+- Setting/trigger: applies specifically at points where tool outputs (directory listings, test output, etc.) have been degraded, substituted, or made semantically misleading during recorded/replayed agent interactions.
+- Constraint: the score varies systematically with agent behavior — it is higher when agents issue explicit retry requests or retain an explicit validation step, and lower when agents face unfamiliar task structure or accept plausible-but-wrong output without challenge.
+- Constraint: identical corruption frequency does not guarantee identical scores — the value depends on task familiarity/provenance, not just how often corruption occurs.

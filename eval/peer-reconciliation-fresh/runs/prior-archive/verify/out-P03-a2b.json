@@ -1,0 +1,14 @@
+Looking at each excerpt against the definition's key properties: model-generated eval items from a weaker/easier source, scored by pass rate, with **no separate validation step** before use and no post-hoc checking against production incidents.
+
+The critical distinctions:
+- **Executable checks/validators** = the graders that score tasks by pass rate → *consistent* with the definition (it explicitly says items are scored this way).
+- A **separate validation/review step** screening generated items for quality before use → *contradicts* the definition.
+- **Silence** on the validation dimension → insufficient.
+
+- Excerpt 1: describes machine generation from a weaker generator, but says nothing about whether generated items undergo a validation step → can't decide.
+- Excerpt 2: "filtered **only** for execution validity and duplicate surface form" affirms no substantive validation gate → instantiates.
+- Excerpt 3: "required executable validators" are graders (scoring), not an item-validation step; silent on quality review → can't decide.
+- Excerpt 4: "Human review rejected 11% of generated tasks" is exactly the separate validation step the definition excludes → contradicts.
+- Excerpt 5: mentions generators and validators (graders) only; silent on validation of items → can't decide.
+
+[{"excerpt": 1, "verdict": "insufficient", "quote": ""}, {"excerpt": 2, "verdict": "instantiates", "quote": "Generated tasks were filtered only for execution validity and duplicate surface form."}, {"excerpt": 3, "verdict": "insufficient", "quote": ""}, {"excerpt": 4, "verdict": "contradicts", "quote": "Human review rejected 11% of generated tasks for ambiguous state transitions, leaving 1,740 tasks."}, {"excerpt": 5, "verdict": "insufficient", "quote": ""}]

@@ -1,0 +1,32 @@
+{
+  "label": "EXPLORATORY post-hoc probe (L&B extractive-key borrow): raw excerpt pool as query \u2014 NOT pre-registered",
+  "first_owner_rank": 3,
+  "hits_at_5": 1,
+  "top5": [
+    [
+      "d09",
+      "misroute",
+      0.7047
+    ],
+    [
+      "d04",
+      "misroute",
+      0.6988
+    ],
+    [
+      "d02",
+      "owner",
+      0.6886
+    ],
+    [
+      "d18",
+      "distractor",
+      0.6693
+    ],
+    [
+      "d05",
+      "misroute",
+      0.6575
+    ]
+  ]
+}

@@ -1,0 +1,315 @@
+{
+ "label": "RETROSPECTIVE detection demo (era-gating not attestable; non-git vault)",
+ "cutoff": "2026-07-12",
+ "project_manifest": [
+  {
+   "file": "2026-06-29-flf-epistack-competition-brief.md",
+   "sha256": "89dde7140c54e5172f5c3f2480ab9e9cf023691349f64d7f691940dc019770db"
+  },
+  {
+   "file": "2026-07-01-flf-entry-design-and-premortem.md",
+   "sha256": "bb5f32ccf3d11f47a25a1fb3074b7123d7d500496a848e5f4ec55d9c132a1e19"
+  },
+  {
+   "file": "2026-07-02-flf-pretest-results.md",
+   "sha256": "21f546261025b1e8782bac4f119950db191c28551278c02795953dd693872f8b"
+  },
+  {
+   "file": "2026-07-02-flf-pretest-spec.md",
+   "sha256": "555375cb20fcd2254eaf5dc5bf8e60e0771d655da245e3c1cb11c42b0841a77c"
+  },
+  {
+   "file": "2026-07-03-flf-pretest-tier2-spec.md",
+   "sha256": "ba04c2ea2dad68dc261ba3fc41edb353a10101ae5f80aefc1084350d566db690"
+  },
+  {
+   "file": "2026-07-03-flf-pretest-tier2-stage0-results.md",
+   "sha256": "bc0fff9c269070f9e48733ec3a63dc823854fb7e095b261d1501d8aa59106c72"
+  },
+  {
+   "file": "2026-07-03-flf-step2-stated-vs-behavioral-spec.md",
+   "sha256": "ff53a743fabb501db7d82bf7c82d8c581acb1b19ed3ca1c4f3abbab662abdaca"
+  },
+  {
+   "file": "2026-07-03-flf-tier2-stage0-build-PROMPT.md",
+   "sha256": "22555a92d7eb608dc3b81dd160c89db1f981672e77c057cb75c30a8dd5581301"
+  },
+  {
+   "file": "2026-07-03-flf-tier2-stage0-intervention-vs-baseline.md",
+   "sha256": "2019c1bf65b0736b6400b8b6c58ff9dd9e52781c09bc62fadf871b3f00cbe59f"
+  },
+  {
+   "file": "2026-07-06-flf-methodology-stress-test-PROMPT.md",
+   "sha256": "5c21a26042d136dacac85c6bd7da0a9a433efadfbbc60a334b00c647ec47db14"
+  },
+  {
+   "file": "2026-07-06-flf-sprint-runbook.md",
+   "sha256": "efcb0dab11b9604c2e2668cb7390f49ce7abccddd55a9bad1af6ff3e2b13d994"
+  },
+  {
+   "file": "2026-07-06-flf-tier2-heldout-build-PROMPT.md",
+   "sha256": "4d55b22d83187e4f04824eaf913030f1e7315d95da6d06adcae16d87c66db50c"
+  },
+  {
+   "file": "2026-07-06-h2-gate-handoff-PROMPT.md",
+   "sha256": "bda0b4f2ea6458bbc40b792068a881dfef9f935677884b830fbe42f4fd209547"
+  },
+  {
+   "file": "2026-07-06-methodology-stress-test-verification.md",
+   "sha256": "151b95b72e0933a7ce0ac04554a3a423bb510fad564a87168058cda56f98b3c0"
+  },
+  {
+   "file": "2026-07-06-methodology-stress-test.md",
+   "sha256": "4e7c7ac5b28d7496fe010b21b8dfac324bdb6d68cfd22171eab8163b9569ec5f"
+  },
+  {
+   "file": "2026-07-07-flf-findings-fix-and-h2-run-PROMPT.md",
+   "sha256": "f6d9f1d073521217465cfa81c7d78721297ff56fba48af09606d297d17228585"
+  },
+  {
+   "file": "2026-07-07-flf-tier2-heldout-layered-summary.md",
+   "sha256": "040af41afc73644759e6c4e33465d67f453abf180d18a61f68da92eb764d6157"
+  },
+  {
+   "file": "2026-07-07-flf-tier2-heldout-results.md",
+   "sha256": "c4d7e0449906382cca6cfab62c6cf4bc6b955213c420342fd6c9192bdf9d643e"
+  },
+  {
+   "file": "2026-07-08-flf-debate-independence-design.md",
+   "sha256": "3fdbdf3c1dd05f6b1643faa150186b0706be5c56f2a97c4834336145f8cd78fd"
+  },
+  {
+   "file": "2026-07-08-flf-direct-applicability-debate-independence-PROMPT.md",
+   "sha256": "5a0d4e5f5a9edc223f264279e682a06532bafa5bdbfa6be94e02b22affcc39fe"
+  },
+  {
+   "file": "2026-07-08-flf-external-validity-and-realistic-data-brainstorm.md",
+   "sha256": "57b2306d906f8436e2565a5046c0b00d663e78f41545a5b95b357e31d92015ee"
+  },
+  {
+   "file": "2026-07-08-flf-greenberg-cascade-trial-PROMPT.md",
+   "sha256": "b7500902bbf9e95b5da56a1ccd323b32d497c85571d79504d9d1d7abb8fd0422"
+  },
+  {
+   "file": "2026-07-08-flf-h2-parroting-results.md",
+   "sha256": "14b0252f10099258c721af6146afd04dd3da6cf44960276c8795492cb88f2fea"
+  },
+  {
+   "file": "2026-07-08-flf-realistic-data-brainstorm-round2.md",
+   "sha256": "c32a81f0adbd891a84d6c3bad03bc80be94e4d14c653a34a25e1121948928ac5"
+  },
+  {
+   "file": "2026-07-08-flf-tier2-level2-mechanics-elaborated.md",
+   "sha256": "4c3ea677d26dbe240c1a0dc06389ff0f31602fd85747cfd4aaf183e42482fed4"
+  },
+  {
+   "file": "2026-07-09-flf-decision-sensitivity-build-PROMPT.md",
+   "sha256": "3a4bbecc0a096ce1090963e2b05dbfe34fea274b3eb45b3a0600134d8d5a7608"
+  },
+  {
+   "file": "2026-07-09-flf-decision-sensitivity-intuition-and-deflation.md",
+   "sha256": "d3ba049bdc5cfd4bfb179b99132c87521d01ad3d4b3601f98be47228ed941471"
+  },
+  {
+   "file": "2026-07-09-flf-decision-sensitivity-results.md",
+   "sha256": "198583df48dc7168f979d7c958f210b449c0416e4e5b1982cb0601e5d9db1b36"
+  },
+  {
+   "file": "2026-07-09-flf-numeric-backbone-build-PROMPT.md",
+   "sha256": "ef9ef1baa020bd6a79f2ce3176ad7ca3581f6fd4a7d60471f0de7d12becaea45"
+  },
+  {
+   "file": "2026-07-09-flf-numeric-backbone-results.md",
+   "sha256": "407570a52b3e8986ff27cf1971c594977b7a88a2168624f9b8694e395e2152c6"
+  },
+  {
+   "file": "2026-07-09-flf-report-agent-reliability-skeleton.md",
+   "sha256": "465b0f86314d504887a78f132545752515a72235f3ce98468bea0cc839ffcb59"
+  },
+  {
+   "file": "2026-07-10-flf-dependence-audit-eggs-experiment-design.md",
+   "sha256": "0ba2e2b75185baf0d52848a4127059241b63ced75644efb7a277854b408b9bbf"
+  },
+  {
+   "file": "2026-07-10-flf-eggs-walkthrough.md",
+   "sha256": "b80b59f5ee6004ea2bb614c62377d7a397d87ef22c6351415a823c10eff8785c"
+  },
+  {
+   "file": "2026-07-10-flf-realdata-invivo-eval-spec.md",
+   "sha256": "7118753b8d5155abf2485f13c6d19b4e54a9475b07e892a1a608ea54e1452c95"
+  },
+  {
+   "file": "2026-07-10-flf-realistic-eval-build-spec.md",
+   "sha256": "9ec051040775ad37e083520642d9ef0cf409a4fcb5693bfb4e23c43c7094d200"
+  },
+  {
+   "file": "2026-07-10-flf-realistic-eval-structural-ground-truth.md",
+   "sha256": "f40b7311e5df09b0f9207698567c2586c3c046c142af6898c98b9b2f2a3ba15d"
+  },
+  {
+   "file": "2026-07-11-flf-candidate-claims-for-dependence-honest-walkthroughs.md",
+   "sha256": "89d625299e513a69778f50b3a446f3c93243f582eca28759fb54922b6f22d7aa"
+  },
+  {
+   "file": "2026-07-11-flf-invivo-realdata-eval-session-handoff.md",
+   "sha256": "93f9420bbb969a00a055428dce221b91ec188de99a222688b7bf4d7d31f39fde"
+  },
+  {
+   "file": "2026-07-11-flf-invivo-utility-eval-and-candidate-claims-session.md",
+   "sha256": "94e1cb0d0397d2b12243207cb2520467985a7bdcdf72c19bd931b73ddb84a86c"
+  },
+  {
+   "file": "2026-07-11-flf-operating-requirement-and-estimand-scope-session.md",
+   "sha256": "e8774f3bc9eb50fa241924c060d6076f25dbcfb27563f9e19ba6d8a0df5c6726"
+  },
+  {
+   "file": "2026-07-11-flf-sodium-dependence-map-spec.md",
+   "sha256": "2874f169073e90aafd48a0c35f490d5ad4a810ae8f6e89aa3a6707ff6957e5ea"
+  },
+  {
+   "file": "2026-07-12-flf-claims-explained.md",
+   "sha256": "d718b1c4cf7deba6a8a26195d30b149bd5381174b1b48cd6a6c7d984cd1e1202"
+  },
+  {
+   "file": "2026-07-12-flf-cold-start-test-PROMPT.md",
+   "sha256": "f745d532dfa371ae46e57a062463a766803818b171f404e9f5aba96d220a30c7"
+  },
+  {
+   "file": "2026-07-12-flf-eggs-case-session-log.md",
+   "sha256": "272239b78220114b497c73d1e4523e4e96ba57ad8ff8e3bfbabb1a6f9b7f1b44"
+  },
+  {
+   "file": "2026-07-12-flf-eggs-real-computation-PROMPT.md",
+   "sha256": "e31f545b6cfa653695b357aa657451515214c79517a8e5401109399b7b70b4cd"
+  },
+  {
+   "file": "2026-07-12-flf-sensitivity-and-provenance-PROMPT.md",
+   "sha256": "7cc076562adc6156e012d57c666c5192f631afe204f470845bbb89bf00fcc85d"
+  },
+  {
+   "file": "2026-07-12-flf-writeup-outline.md",
+   "sha256": "c935d40d8d3763e46cadd2f1aa56b7bace02bdb5a913f6d29f2313432e4f62dc"
+  }
+ ],
+ "background_manifest": [
+  "vault-reference-doc-01 (private; path redacted)",
+  "vault-reference-doc-02 (private; path redacted)",
+  "vault-reference-doc-03 (private; path redacted)",
+  "vault-reference-doc-04 (private; path redacted)",
+  "vault-reference-doc-05 (private; path redacted)",
+  "vault-reference-doc-06 (private; path redacted)",
+  "vault-reference-doc-07 (private; path redacted)",
+  "vault-reference-doc-08 (private; path redacted)",
+  "vault-reference-doc-09 (private; path redacted)",
+  "vault-reference-doc-10 (private; path redacted)",
+  "novelty-protocol.md",
+  "vault-reference-doc-11 (private; path redacted)",
+  "vault-reference-doc-12 (private; path redacted)",
+  "vault-reference-doc-13 (private; path redacted)"
+ ],
+ "top25": [
+  [
+   "t2",
+   0.07644089913958359
+  ],
+  [
+   "urine",
+   0.07068280797242131
+  ],
+  [
+   "amb",
+   0.06838297172086241
+  ],
+  [
+   "sodium",
+   0.06524746301428296
+  ],
+  [
+   "spot urine",
+   0.06477063848979565
+  ],
+  [
+   "a6",
+   0.06280493860939029
+  ],
+  [
+   "t1",
+   0.0587033337584613
+  ],
+  [
+   "864",
+   0.05685279674461719
+  ],
+  [
+   "audit logged",
+   0.05592581286542671
+  ],
+  [
+   "audit logged matched",
+   0.05592581286542671
+  ],
+  [
+   "design frozen implement",
+   0.05592581286542671
+  ],
+  [
+   "faithfully open",
+   0.05592581286542671
+  ],
+  [
+   "fresh implementation",
+   0.05592581286542671
+  ],
+  [
+   "fresh implementation session",
+   0.05592581286542671
+  ],
+  [
+   "frozen implement",
+   0.05592581286542671
+  ],
+  [
+   "frozen implement faithfully",
+   0.05592581286542671
+  ],
+  [
+   "implement faithfully",
+   0.05592581286542671
+  ],
+  [
+   "implement faithfully open",
+   0.05592581286542671
+  ],
+  [
+   "implementation build",
+   0.05592581286542671
+  ],
+  [
+   "implementation build prompt",
+   0.05592581286542671
+  ],
+  [
+   "implementation session",
+   0.05592581286542671
+  ],
+  [
+   "implementation session design",
+   0.05592581286542671
+  ],
+  [
+   "logged matched",
+   0.05592581286542671
+  ],
+  [
+   "logged matched null",
+   0.05592581286542671
+  ],
+  [
+   "pair behavioral_c2",
+   0.05592581286542671
+  ]
+ ],
+ "endpoint_target": "operating requirement",
+ "endpoint_hit_top25": false,
+ "redaction_note": "Published copy: absolute private-machine paths removed. project_manifest keeps basenames + sha256 of the project documents scanned (48 at run time; one personal-strategy document removed from this listing); background_manifest (14 personal vault reference docs used only as background-frequency corpus) is redacted to opaque IDs except novelty-protocol.md, which the results discuss. The unredacted original is retained privately; hashes are unchanged."
+}

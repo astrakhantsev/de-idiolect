@@ -1,0 +1,108 @@
+{
+ "per_pair": {
+  "P01": {
+   "expected": "exactMatch",
+   "proposed": "exactMatch",
+   "a2b": "covers",
+   "b2a": "covers",
+   "sim_flag": false,
+   "mutual_hit": true,
+   "correct": true,
+   "note": ""
+  },
+  "P02": {
+   "expected": "exactMatch",
+   "proposed": "exactMatch",
+   "a2b": "covers",
+   "b2a": "covers",
+   "sim_flag": false,
+   "mutual_hit": true,
+   "correct": true,
+   "note": ""
+  },
+  "P03": {
+   "expected": "broadnarrow(a)",
+   "proposed": "insufficientEvidence",
+   "a2b": "fails",
+   "b2a": "abstain",
+   "sim_flag": false,
+   "mutual_hit": true,
+   "correct": false,
+   "note": ""
+  },
+  "P04": {
+   "expected": "broadnarrow(b)",
+   "proposed": "insufficientEvidence",
+   "a2b": "covers",
+   "b2a": "abstain",
+   "sim_flag": false,
+   "mutual_hit": true,
+   "correct": false,
+   "note": ""
+  },
+  "P05": {
+   "expected": "relatedMatch",
+   "proposed": "noMatch",
+   "a2b": "fails",
+   "b2a": "fails",
+   "sim_flag": false,
+   "mutual_hit": true,
+   "correct": false,
+   "note": ""
+  },
+  "P06": {
+   "expected": "relatedMatch",
+   "proposed": "noMatch",
+   "a2b": "fails",
+   "b2a": "fails",
+   "sim_flag": false,
+   "mutual_hit": true,
+   "correct": false,
+   "note": ""
+  },
+  "P07": {
+   "expected": "noMatchDespiteSimilarity",
+   "proposed": "noMatchDespiteSimilarity",
+   "a2b": "fails",
+   "b2a": "fails",
+   "sim_flag": true,
+   "mutual_hit": false,
+   "correct": true,
+   "note": ""
+  },
+  "P08": {
+   "expected": "noMatchDespiteSimilarity",
+   "proposed": "noMatchDespiteSimilarity",
+   "a2b": "fails",
+   "b2a": "fails",
+   "sim_flag": true,
+   "mutual_hit": false,
+   "correct": true,
+   "note": ""
+  },
+  "P09": {
+   "expected": "noMatch",
+   "proposed": "noMatch",
+   "a2b": "fails",
+   "b2a": "fails",
+   "sim_flag": false,
+   "mutual_hit": false,
+   "correct": true,
+   "note": ""
+  },
+  "P10": {
+   "expected": "noMatch",
+   "proposed": "noMatch",
+   "a2b": "fails",
+   "b2a": "fails",
+   "sim_flag": false,
+   "mutual_hit": false,
+   "correct": true,
+   "note": ""
+  }
+ },
+ "n_correct": 6,
+ "nomatch_promoted": [],
+ "jingle_specific": 2,
+ "E1_PASS": false
+}

@@ -1,0 +1,7 @@
+- Mechanism: the agent writes intermediate notes/claims during a task (e.g., "vendor B invoice is duplicate"), and ⟦TERM⟧ checks whether each note is later verified or contradicted (agent disproves its own earlier claims) versus still holding true at the end.
+- Measured/produced: a percentage score — the proportion of intermediate notes/claims still true (or "surviving" unreconciled/undisproven) at the end of the run, e.g. 90%, high 80s, 55%, 75%.
+- Applies to: multi-step agent runs (research-assistant, transactional/audit tasks), tracked across the run's steps, including under fault injection, recovery, and frozen-suite comparisons.
+- Constraint: score degrades with run length (fine on short tasks, drops sharply past ~step 15 in longer ~30-step runs).
+- Constraint: must be checked alongside/before final-answer accuracy — a threshold (e.g. >75%) is required before trusting accuracy, since high accuracy can co-occur with a poor score if notes were unreliable.
+- Constraint: recovery/fault-injection periods can generate new unverified notes that lower the score even below a clean baseline.
+- Constraint: score is comparable run-over-run in a fixed/frozen suite (same model, no fault injection) and unexpected drops signal either a real regression or a scorer bug.

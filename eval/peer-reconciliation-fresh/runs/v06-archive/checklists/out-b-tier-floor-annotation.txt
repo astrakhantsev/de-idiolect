@@ -1,0 +1,7 @@
+- Two annotators independently assign a ⟦TERM⟧ to each item before deployment/before model results are inspected.
+- The ⟦TERM⟧ is a per-item difficulty/threshold rating assigned to tasks, not a property of models or runs.
+- ⟦TERM⟧ can be revised after assignment when annotators discover hidden dependencies (e.g., unavailable credentials); in this dataset 4.7% of items were revised.
+- An agent's performance is scored against its ⟦TERM⟧: failures on items below an agent's ⟦TERM⟧ are flagged for audit rather than counted as ordinary misses.
+- Analysis is restricted to items whose ⟦TERM⟧ was stable/agreed across adjudicators, excluding those with unresolved disagreement.
+- Disagreements between annotators on ⟦TERM⟧ concentrate in items involving chained, multi-step actions rather than simple answer extraction.
+- ⟦TERM⟧-based comparisons do not imply a single monotonic capability scale, since agents can pass higher-⟦TERM⟧ items via memorized procedures while failing lower-⟦TERM⟧ items requiring unfamiliar states.

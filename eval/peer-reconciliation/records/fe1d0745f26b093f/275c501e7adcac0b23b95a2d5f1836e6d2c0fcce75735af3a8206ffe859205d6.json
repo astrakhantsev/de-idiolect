@@ -1,0 +1,47 @@
+{
+ "pair_key": "fe1d0745f26b093f",
+ "pair_id": "P03",
+ "terms": {
+  "a": "probe-shadow",
+  "b": "instrumentation latency steering"
+ },
+ "proposed_relation": "insufficientEvidence",
+ "evidence": {
+  "a2b": {
+   "n": 6,
+   "k": 6,
+   "c": 0,
+   "u": 0,
+   "agg": "covers",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 4,
+   "k": 0,
+   "c": 1,
+   "u": 3,
+   "agg": "abstain",
+   "quote_downgrades": []
+  }
+ },
+ "adjudicated_relation": "broadnarrow(a)",
+ "status": "adjudicated",
+ "adjudicator": "synthetic-key-8477e275",
+ "correct": false,
+ "provenance": {
+  "gen_a": "claude-sonnet",
+  "gen_b": "codex-gpt-5.6-terra",
+  "def_a": "claude-opus",
+  "def_b": "codex-gpt-5.6-terra",
+  "verify_a2b": "claude-opus",
+  "verify_b2a": "codex-gpt-5.6-terra"
+ },
+ "derived_from": [
+  "2ee759075d8b47b34a7c54fecb6310a32f12c9db8f7ed1306170c2ef7421732c"
+ ],
+ "earliest_found_in_search": {
+  "synthetic": true,
+  "note": "no priority inference licensed"
+ },
+ "version_id": "275c501e7adcac0b23b95a2d5f1836e6d2c0fcce75735af3a8206ffe859205d6"
+}

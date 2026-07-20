@@ -1,0 +1,6 @@
+- Maintains a chronological, append-only log of dated entries recording specific changes made to the system/config (e.g., artifact-naming scheme, cap value changes).
+- Entries record what was changed, and can be searched/scrolled back through to find a specific past change.
+- Used diagnostically: consulted before investigating an issue to find the actual root-cause change among recent entries.
+- Applies in a debugging/incident-investigation setting, triggered when unexpected behavior needs to be traced to its origin.
+- Entries are tied to specific dates ("eleven days ago," "the same day"), enabling time-based lookup.
+- Can reveal that an entry is unrelated to the issue being investigated, requiring the reader to distinguish relevant from irrelevant entries.

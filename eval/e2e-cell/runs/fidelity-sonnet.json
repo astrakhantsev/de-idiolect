@@ -1,0 +1,13 @@
+```json
+{
+  "i": "PRESERVED — The candidate frames it as whether the estimate 'is worth using instead of skipped' and notes 'the person could instead simply not compute that number at all,' matching the notes' 'how good must a dependence estimate be before it beats simply not having one?'",
+  "ii": "PRESERVED — The candidate conditions the outcome on accuracy: 'The threshold is set on the typical size of the gap between the estimate and the truth,' matching the notes' 'An estimator needs log-count RMSE ≲ 0.3 to keep ~85% of that prize.'",
+  "iii": "NOT-PRESERVED — The candidate treats it as retrospective checking ('Any specific estimating procedure can be checked against this threshold by measuring its typical error') and never states the decision is made before the instrument exists, omitting the notes' prospective framing ('The detector is SIMULATED, not run ... asks \"would an estimator this accurate suffice?\"').",
+  "iv": "PRESERVED — The candidate gives the tiered bar ('Below one level ... keeps nearly all ... around a middle level it keeps about half; past a further level the estimate stops helping and instead actively misleads'), matching the notes' '~0.6 keeps half; past ~1.0 it becomes WORSE THAN NO ESTIMATOR.'",
+  "v": "PASS — The candidate introduces no numbers, metric names (RMSE, Brier), benchmarks, or dataset/pool identifiers; it stays fully generic ('the typical size of the gap between the estimate and the truth'), adding nothing absent from the excerpts.",
+  "vi": {
+    "named_items": [],
+    "not_in_notes": []
+  }
+}
+```

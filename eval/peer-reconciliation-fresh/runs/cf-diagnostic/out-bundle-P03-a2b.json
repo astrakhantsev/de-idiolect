@@ -1,0 +1,13 @@
+Looking at the excerpts, ⟦TERM⟧ refers to a **task-generation protocol**: weaker generator models produce held-out task specifications/scenarios for evaluating agents, with executable validators, rerun per model family for fair comparison. Critically, there is **zero** language about difficulty tiers, "harder-from-easier" escalation, or extending a difficulty range — which is the defining commitment at every level here.
+
+- **L0** commits to "create a harder difficulty level out of an existing easier one." The building-test-items genus is evidenced, but nothing supports difficulty escalation, and nothing contradicts it either (silence). → insufficient.
+- **L1** additionally requires the model be "given the existing easy items and asked to produce more difficult variants" to "extend how far its difficulty reaches." Generation by (weaker) models is shown, but the easy-seed → harder-variant → extend-difficulty mechanism is absent. → insufficient.
+- **L2** adds pass-rate/wording-gap measurement, model-produced marking, and lumpy difficulty progression — none of which appear. → insufficient.
+
+```json
+[
+ {"level": "L0", "verdict": "insufficient", "quotes": ["1: A ⟦TERM⟧ produced 2,160 task specifications from a weaker generator, with executable checks withheld from the evaluated agents.", "3: Three weaker task generators produced held-out data-management scenarios under a ⟦TERM⟧.", "6: The final audit used 1,200 paired operational tasks generated under a ⟦TERM⟧."]},
+ {"level": "L1", "verdict": "insufficient", "quotes": ["1: The ⟦TERM⟧ was rerun for every model family to prevent a single task-writing distribution from dominating comparisons.", "2: Generated tasks were filtered only for execution validity and duplicate surface form.", "3: The ⟦TERM⟧ required executable validators and prevented generators from observing evaluated-agent traces."]},
+ {"level": "L2", "verdict": "insufficient", "quotes": ["4: Human review rejected 11% of generated tasks for ambiguous state transitions, leaving 1,740 tasks.", "5: A second ⟦TERM⟧ round used newly sampled generators and fresh validators.", "6: The ⟦TERM⟧ supplied executable validators while withholding task-generation traces from every evaluated system."]}
+]
+```

@@ -1,0 +1,42 @@
+# Freeze manifest — measurement session P1-P4, written 2026-07-18T22:11:29-07:00, BEFORE any judged/generated run
+## canonical spec (hub)
+2a8011dfd793ffc53e8af8b68a0d746cbf4d8b429e319a849845a2390dade859  /mnt/f/hub/10_projects/minelit/idiolect/2026-07-19-measurement-P1-P4-SPEC.md
+## P1 materials
+0b8b71248bcf371966b45cc59ffb4096124565a424059351bcc8858e150a8469  /mnt/f/src/minelit/flf-epistack/eval/measurements/p1-fidelity-calibration/definitions/A1.md
+2ee76335548b0ffe2a20c21fb2e6fe6ff41d2d06c2273514de9eb4aeb78c537a  /mnt/f/src/minelit/flf-epistack/eval/measurements/p1-fidelity-calibration/definitions/A2.md
+8dfdfd4381502f7e767373839be80bedda877e1ca65c8988f405eb9b86d2990f  /mnt/f/src/minelit/flf-epistack/eval/measurements/p1-fidelity-calibration/definitions/A3.md
+5a3165ab4f8ce7562884d96332c54e95310b9d762d55f5f63548027abff3fdb7  /mnt/f/src/minelit/flf-epistack/eval/measurements/p1-fidelity-calibration/definitions/A4.md
+29c74820f98b69103c2387119677d8b0cc2d5b4bba7a825d17b88322e10d5ef4  /mnt/f/src/minelit/flf-epistack/eval/measurements/p1-fidelity-calibration/definitions/S-a.md
+153bb612618b157db8c2fb4d677df5ed135e67ad091ea8ea31037e90481c37a6  /mnt/f/src/minelit/flf-epistack/eval/measurements/p1-fidelity-calibration/definitions/S-b.md
+3a625db8038ca68f5f43c0a7d73627407248e5a8b6bfb03c17afcc040828c1da  /mnt/f/src/minelit/flf-epistack/eval/measurements/p1-fidelity-calibration/definitions/S-c.md
+1e412ae4a11551adee1c12b5a30bb060c4da8290ce416fd24c52016a2a87cb49  /mnt/f/src/minelit/flf-epistack/eval/measurements/p1-fidelity-calibration/definitions/S-d.md
+265a542583d3368b7bd976d1cbe0581c9899c803378fd92079bae9ab4e32c06c  /mnt/f/src/minelit/flf-epistack/eval/measurements/p1-fidelity-calibration/definitions/S-e.md
+74994548425644e0d00df49975f10913949e257e387c7007be83dd08bce4154b  /mnt/f/src/minelit/flf-epistack/eval/measurements/p1-fidelity-calibration/materials.md
+39a591553c9615ef5f23582870d249d31353f7a2372b61e512fc55b530045ae3  /mnt/f/src/minelit/flf-epistack/eval/measurements/p1-fidelity-calibration/run_p1.sh
+## P4 script
+2ef23dffef9f2083c8524176e5deee2ba0e358d9ef2011205022c8db9517fc0a  /mnt/f/src/minelit/flf-epistack/eval/measurements/p4-union-keys/fuse_p4.py
+## P3 input manifest
+952baed59384c805bb32b74878dad651e6205023a447caf42cf1881ae0993bb9  /mnt/f/src/minelit/flf-epistack/eval/measurements/p3-provenance/input-manifest.txt
+## reused frozen e2e artifacts
+8bcee4c8a1b3b10a4d27a59b5fa1fa3ceaf6f295b2c2f72f76715a9e64c974c5  /mnt/f/src/minelit/flf-epistack/eval/e2e-cell/leakcheck_e2e.sh
+70a443d6c8710e750faedd92cd1ff8e3b836d585e589c17ec33e78c5ef1aa29f  /mnt/f/src/minelit/flf-epistack/eval/e2e-cell/fidelity-checklist.md
+c232ba1f35265569d875b440ef2a7d1594ba2f74e93f569b4f935ed24bcef24d  /mnt/f/src/minelit/flf-epistack/eval/e2e-cell/run_isolated.sh
+1f402e06beafcb57eeb112f32547f93808f43742096352ae7c74dc00057bb0ad  /mnt/f/src/minelit/flf-epistack/eval/e2e-cell/runs/c2-excerpts.md
+01d7a855d589d0280034c763ca94a69b118b3e4134c61c3f1bac11b001e372fc  /mnt/f/src/minelit/flf-epistack/eval/e2e-cell/records/corpus_records.jsonl
+d2e8db2c8604ef51b8547d041ab26b1c9a1ae26e7c8cc8478eb79fbaa3dc3b5b  /mnt/f/src/minelit/flf-epistack/eval/e2e-cell/runs/retrieval.json
+57511eef183dbeaa32af33c0fd0500e751186bb47fdd161f7f74069dc8393c9b  /mnt/f/src/minelit/flf-epistack/eval/e2e-cell/runs/probe_extractive_key.json
+237c22b2c6362190932d881d84d94ac3493bdf4ef9d83ae25bd44d294387f657  /mnt/f/src/minelit/flf-epistack/eval/e2e-cell/prompt-D.md
+
+## AMENDMENT M1 (2026-07-18T22:35 PT, logged BEFORE any fusion was computed)
+# fuse_p4.py variant list extended after the two spec variants failed the ID-level sanity gate;
+# full-nobold reproduces the archived probe top-5 IDs exactly (sims differ uniformly ~0.01, disclosed).
+# E affects only exploratory U6; pre-registered U3 comparisons use frozen retrieval.json ranks only.
+d2cf6eb7f6186a52fb633b2381a427b7e9012a5afb51e3b57dc484809a5e6267  /mnt/f/src/minelit/flf-epistack/eval/measurements/p4-union-keys/fuse_p4.py
+
+## AMENDMENT M2 (2026-07-18T23:0x PT, logged BEFORE any verification ran)
+# P3 universe came in at 539 occurrences / 410 unique works (3-5x the planning estimate).
+# Frozen three-facet protocol now applied to a seeded random sample of 100 occurrences
+# (seed 20260719, sample-occ-ids.json); primary endpoint = occurrence survival on the
+# sample with 95% Wilson CI; unsampled remainder reported as not-verified. Size-driven,
+# not results-driven. Work-level stats on induced works = exploratory (popularity-biased).
+be9d685bada22bd914a38034b2e9f6658ae0377aece2ab43a150e2e63d9b869a  sample-occ-ids.json

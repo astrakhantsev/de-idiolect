@@ -1,0 +1,12 @@
+Looking at the DEFINITION, ⟦TERM⟧ must be a **recurring, cyclic audit** (monthly + on model update) using a **frozen 200-task suite**, producing **numeric scores compared against the previous cycle** to detect drift.
+
+In every excerpt, the referent is instead a **per-call runtime check within a single agent trajectory** that flags plan-action mismatches — recorded/applied after each tool call, not on a monthly cycle, and reporting plan-consistency violations rather than cross-cycle numeric drift. This is incompatible with the defined concept.
+
+[
+{"excerpt": 1, "verdict": "contradicts", "quote": "A ⟦TERM⟧ was recorded after each retrieval, extraction, and table-editing call"},
+{"excerpt": 2, "verdict": "contradicts", "quote": "The ⟦TERM⟧ identified a first plan-action mismatch in 17 trajectories"},
+{"excerpt": 3, "verdict": "contradicts", "quote": "A ⟦TERM⟧ followed every tool result and compared the next call with the agent’s most recently stated reconciliation sequence"},
+{"excerpt": 4, "verdict": "contradicts", "quote": "The ⟦TERM⟧ flagged 22 runs in which the agent declared that it would verify conflicts before drafting, then drafted before opening the conflicting source"},
+{"excerpt": 5, "verdict": "contradicts", "quote": "A ⟦TERM⟧ was applied after each service call and after every revision to the citation table"},
+{"excerpt": 6, "verdict": "contradicts", "quote": "The ⟦TERM⟧ showed that agents frequently continued following an obsolete source-priority plan after bypassing the delayed service"}
+]

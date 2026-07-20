@@ -1,0 +1,8 @@
+Looking at each excerpt against the definition (the observer/probe effect: added per-action overhead from instrumentation distorts the measured behavior of the system being studied).
+
+[{"excerpt": 1, "verdict": "instantiates", "quote": "We introduced fixed delays to selected repository interfaces while holding returned content constant. ⟦TERM⟧ shifted query selection toward the uninstrumented archive"},
+{"excerpt": 2, "verdict": "instantiates", "quote": "a 900 ms delay changed the preferred first query in 27% of paired runs. This limits interpretation of observed search policies in heavily instrumented evaluations"},
+{"excerpt": 3, "verdict": "instantiates", "quote": "the parser was delayed by 1.2 seconds in a matched condition. ⟦TERM⟧ reduced parser use by 19% and increased reliance on manual arithmetic"},
+{"excerpt": 4, "verdict": "instantiates", "quote": "⟦TERM⟧ was induced by adding 750 ms to one service while preserving response content and error behavior. ⟦TERM⟧ caused agents to select the delayed service 23% less often"},
+{"excerpt": 5, "verdict": "instantiates", "quote": "⟦TERM⟧ was induced by adding 750 ms to one service while preserving response content and error behavior. ⟦TERM⟧ caused agents to select the delayed service 23% less often"},
+{"excerpt": 6, "verdict": "instantiates", "quote": "⟦TERM⟧ was tested by delaying the archive only after the first ambiguous excerpt. ⟦TERM⟧ lowered archive consultation by 16 percentage points and increased unsupported classifications accordingly"}]

@@ -1,0 +1,6 @@
+- Measures the elapsed time between repository mounting/loading and the agent's first shell, editing, or code modification action (provisioning/setup interval).
+- Recorded independently as a duration in seconds per trial, with a median around 37–41 s in shared-worker configurations and a range of 18–96 s across worker pools.
+- Applies in automated agent-trial setups where a repository or environment is provisioned before the agent begins acting, including both single-language and instruction-reversal/ablation trial designs.
+- Must be subtracted or separated out from response-time, time-to-revision, or deliberation-and-execution interval measurements rather than included in them.
+- Must be shown/verified to remain stable or balanced across conditions (instruction language, ablation cells, worker pools) so it does not confound the effect under study.
+- Must be measured or logged independently for every run/trial, prior to the agent's first action, not inferred or estimated post hoc.

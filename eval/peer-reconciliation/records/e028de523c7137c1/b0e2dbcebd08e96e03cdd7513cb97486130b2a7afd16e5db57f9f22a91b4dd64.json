@@ -1,0 +1,45 @@
+{
+ "pair_key": "e028de523c7137c1",
+ "pair_id": "P05",
+ "terms": {
+  "a": "pothole runs",
+  "b": "seeded-defect audit"
+ },
+ "proposed_relation": "insufficientEvidence",
+ "evidence": {
+  "a2b": {
+   "n": 6,
+   "k": 2,
+   "c": 0,
+   "u": 4,
+   "agg": "abstain",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 4,
+   "k": 0,
+   "c": 0,
+   "u": 4,
+   "agg": "abstain",
+   "quote_downgrades": []
+  }
+ },
+ "adjudicated_relation": "relatedMatch",
+ "status": "adjudicated",
+ "adjudicator": "synthetic-key-8477e275",
+ "correct": false,
+ "provenance": {
+  "gen_a": "claude-sonnet",
+  "gen_b": "codex-gpt-5.6-terra",
+  "def_a": "claude-opus",
+  "def_b": "codex-gpt-5.6-terra",
+  "verify_a2b": "claude-opus",
+  "verify_b2a": "codex-gpt-5.6-terra"
+ },
+ "derived_from": [],
+ "earliest_found_in_search": {
+  "synthetic": true,
+  "note": "no priority inference licensed"
+ },
+ "version_id": "b0e2dbcebd08e96e03cdd7513cb97486130b2a7afd16e5db57f9f22a91b4dd64"
+}

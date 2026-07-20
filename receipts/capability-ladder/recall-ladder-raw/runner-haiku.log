@@ -1,0 +1,19 @@
+=== brief hashes (must match prereg) ===
+7de64ad7f40af8a1cec9bdb38bc59e5690cb91fd2b34c3671252c820a3f732c9  /tmp/claude-1000/-mnt-f-hub/93d71aaf-aae4-4850-b7aa-51b8ddea4778/scratchpad/haiku-ladder/briefs/c2-P0.md
+4beef81745aa99da2683615d93b51dc5a07b4d0650b3f0d70262d05b181ad700  /tmp/claude-1000/-mnt-f-hub/93d71aaf-aae4-4850-b7aa-51b8ddea4778/scratchpad/haiku-ladder/briefs/c2-R.md
+45cc560d2cde279b0d21c4fd1c14d01145386392e7a85732d11aded53336bd39  /tmp/claude-1000/-mnt-f-hub/93d71aaf-aae4-4850-b7aa-51b8ddea4778/scratchpad/haiku-ladder/briefs/c4-P0.md
+fdfef940ee9317e1b6b2529e2d6c579c91fa9882e5761be4bd3f79c93d1aa1b5  /tmp/claude-1000/-mnt-f-hub/93d71aaf-aae4-4850-b7aa-51b8ddea4778/scratchpad/haiku-ladder/briefs/c4-R.md
+=== WAVE d: haiku (4 load-bearing draws, parallel) ===
+done c4-P0-haiku-d exit=0 bytes=2678 rundir_empty=[EMPTY]
+done c2-P0-haiku-d exit=0 bytes=2325 rundir_empty=[EMPTY]
+done c4-R-haiku-d exit=0 bytes=2454 rundir_empty=[EMPTY]
+done c2-R-haiku-d exit=0 bytes=1882 rundir_empty=[EMPTY]
+HAIKU_ALL_DONE
+=== output sizes ===
+out-c2-P0-haiku-d.md            2325
+out-c2-R-haiku-d.md             1882
+out-c4-P0-haiku-d.md            2678
+out-c4-R-haiku-d.md             2454
+=== contamination self-flag scan (should be empty) ===
+NONE
+=== nonempty stderr ===

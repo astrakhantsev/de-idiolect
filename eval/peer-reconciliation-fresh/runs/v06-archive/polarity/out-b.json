@@ -1,0 +1,18 @@
+Looking at each item, I need to check only for direction/polarity inversion between the excerpts and the definition.
+
+Let me work through each:
+
+- **Item 1**: Audit detecting verbatim carryover; definition = flags copied phrases, produces flag rate. Same direction.
+- **Item 2**: Saturation/exhaustion ratio rising as items become universally solvable; definition = fraction universally solvable. Same direction.
+- **Item 3**: Paired clean-vs-distractor tool-trace comparison; definition matches deltas and navigation-breadth claim.
+- **Item 4**: Self-output agreement *deficit* (lower agreement on own patches); definition asserts lower agreement, 7.9 vs 3.2. Same.
+- **Item 5**: Budget/quota reduction stress test; high performers shorten, low performers persist. Same.
+- **Item 6**: Seeded known-case control that halts on wrong judgments; definition matches halt conditions.
+- **Item 7**: Tool-use diversity score from successful traces, rising 1.3→2.7, more diverse = higher. Same.
+- **Item 8**: Weaker-generator held-out task creation with withheld validators. Same.
+- **Item 9**: Per-task difficulty/expected-success rating; failures below it flagged. Same direction.
+- **Item 10**: Replay of prior successful action sequences on incompatible tasks; clearing traces lowers rate. Same.
+
+None reverse polarity, swap high/low, or describe the opposite phenomenon.
+
+[{"item": 1, "verdict": "ok"}, {"item": 2, "verdict": "ok"}, {"item": 3, "verdict": "ok"}, {"item": 4, "verdict": "ok"}, {"item": 5, "verdict": "ok"}, {"item": 6, "verdict": "ok"}, {"item": 7, "verdict": "ok"}, {"item": 8, "verdict": "ok"}, {"item": 9, "verdict": "ok"}, {"item": 10, "verdict": "ok"}]

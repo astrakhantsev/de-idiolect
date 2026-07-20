@@ -1,0 +1,6 @@
+Ran a ⟦TERM⟧ to sanity-check the scorer by rerunning the same set of tasks with surface-level identifiers randomized.
+Randomizes non-substantive metadata such as timestamps, run ids, output filenames, and commit hashes before rerunning.
+Applies to a fixed batch of tasks (80 in one case, 60 in another) processed as a tier or run.
+Used to rule out spurious/nondeterministic scoring effects (e.g., serving-stack or concurrency artifacts) rather than actual reasoning quality.
+Requires rerunning the identical task set after randomization, not a new or different set of tasks.
+Triggered specifically when a suspicious or unexplained result prompts a check on whether the scorer itself is responding to irrelevant metadata.

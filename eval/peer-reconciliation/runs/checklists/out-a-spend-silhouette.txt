@@ -1,0 +1,6 @@
+- Tracks token expenditure by an agent/model across the normalized duration of a task, plotted as a curve over task progress (0–100%).
+- Produced per agent version/model run, on honest (non-cached) reruns, and compared across versions or time to detect shifts in curve shape.
+- Read/scored by where token spend concentrates along the task timeline — e.g., front-loaded (early exploration before committing to an answer) vs. back-loaded (verification passes late in the task).
+- Applies within a fixed/frozen seed menu of tasks, so that observed curve-shape changes reflect model behavior rather than task-set variation.
+- Sensitive to input perturbations such as reordered tool outputs, which can shift the curve (e.g., spike back-loaded spend) even without changing the task itself.
+- Used as a diagnostic that can surface regressions or anomalies not visible in raw pass/fail metrics.

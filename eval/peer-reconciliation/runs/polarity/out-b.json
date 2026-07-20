@@ -1,0 +1,16 @@
+Looking at each item, comparing the direction/polarity of the definition against the excerpts:
+
+- **Item 1**: Check flagging first plan-action mismatch → definition matches.
+- **Item 2**: Grading error where unparseable spans wrongly get credit → matches.
+- **Item 3**: Delay causes agents to select delayed interface *less* often → matches.
+- **Item 4**: Score high for consistent reconciliation, low when provisional dates copied → matches.
+- **Item 5**: Evidence-grounded judging requiring cited transcript lines, lowering accuracy → matches.
+- **Item 6**: Paraphrase intervention lowering accuracy/containment → matches.
+- **Item 7**: Order-shuffle reducing success → matches.
+- **Item 8**: Injected-corruption test, passes when item excluded/flagged → matches.
+- **Item 9**: Rate of disagreement between final output and earlier tool result → matches (extra fabricated "requires shuffling" claim is spurious but not a direction reversal).
+- **Item 10**: Withheld-field condition measuring seek-vs-infer split → matches.
+
+```json
+[{"item": 1, "verdict": "ok"}, {"item": 2, "verdict": "ok"}, {"item": 3, "verdict": "ok"}, {"item": 4, "verdict": "ok"}, {"item": 5, "verdict": "ok"}, {"item": 6, "verdict": "ok"}, {"item": 7, "verdict": "ok"}, {"item": 8, "verdict": "ok"}, {"item": 9, "verdict": "ok"}, {"item": 10, "verdict": "ok"}]
+```

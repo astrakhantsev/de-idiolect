@@ -1,0 +1,108 @@
+{
+ "per_pair": {
+  "P01": {
+   "expected": "exactMatch",
+   "proposed": "exactMatch",
+   "a2b": "covers",
+   "b2a": "covers",
+   "sim_flag": false,
+   "mutual_hit": true,
+   "correct": true,
+   "note": ""
+  },
+  "P02": {
+   "expected": "exactMatch",
+   "proposed": "broadnarrow(broader_side=a)",
+   "a2b": "covers",
+   "b2a": "fails",
+   "sim_flag": false,
+   "mutual_hit": false,
+   "correct": false,
+   "note": "broader_side=a"
+  },
+  "P03": {
+   "expected": "broadnarrow(a)",
+   "proposed": "insufficientEvidence",
+   "a2b": "mixed",
+   "b2a": "abstain",
+   "sim_flag": false,
+   "mutual_hit": true,
+   "correct": false,
+   "note": ""
+  },
+  "P04": {
+   "expected": "broadnarrow(b)",
+   "proposed": "relatedMatch",
+   "a2b": "fails",
+   "b2a": "mixed",
+   "sim_flag": false,
+   "mutual_hit": true,
+   "correct": false,
+   "note": "Both communities run interventions where, partway through an agent's task episode (after an early mi"
+  },
+  "P05": {
+   "expected": "relatedMatch",
+   "proposed": "noMatch",
+   "a2b": "fails",
+   "b2a": "fails",
+   "sim_flag": false,
+   "mutual_hit": false,
+   "correct": false,
+   "note": ""
+  },
+  "P06": {
+   "expected": "relatedMatch",
+   "proposed": "relatedMatch",
+   "a2b": "fails",
+   "b2a": "fails",
+   "sim_flag": false,
+   "mutual_hit": true,
+   "correct": true,
+   "note": "Both describe pipelines where AI-generated content passes through a second, ostensibly independent e"
+  },
+  "P07": {
+   "expected": "noMatchDespiteSimilarity",
+   "proposed": "noMatchDespiteSimilarity",
+   "a2b": "fails",
+   "b2a": "fails",
+   "sim_flag": true,
+   "mutual_hit": true,
+   "correct": true,
+   "note": ""
+  },
+  "P08": {
+   "expected": "noMatchDespiteSimilarity",
+   "proposed": "insufficientEvidence",
+   "a2b": "fails",
+   "b2a": "abstain",
+   "sim_flag": true,
+   "mutual_hit": true,
+   "correct": false,
+   "note": ""
+  },
+  "P09": {
+   "expected": "noMatch",
+   "proposed": "insufficientEvidence",
+   "a2b": "fails",
+   "b2a": "abstain",
+   "sim_flag": false,
+   "mutual_hit": true,
+   "correct": false,
+   "note": ""
+  },
+  "P10": {
+   "expected": "noMatch",
+   "proposed": "noMatch",
+   "a2b": "fails",
+   "b2a": "fails",
+   "sim_flag": false,
+   "mutual_hit": true,
+   "correct": true,
+   "note": ""
+  }
+ },
+ "n_correct": 4,
+ "nomatch_promoted": [],
+ "jingle_specific": 1,
+ "E1_PASS": false
+}

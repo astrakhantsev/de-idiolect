@@ -1,0 +1,14 @@
+```json
+[
+  {"item": 1, "verdict": "conformant", "reason": ""},
+  {"item": 2, "verdict": "conformant", "reason": ""},
+  {"item": 3, "verdict": "conformant", "reason": ""},
+  {"item": 4, "verdict": "conformant", "reason": ""},
+  {"item": 5, "verdict": "nonconformant", "reason": "condition 1: L0 commits to the intervention 'assessing how agents adjust verification work under changing resource limits,' but L1 states only the trigger and mechanism of changing the resource quota mid-task, with no statement that it assesses or measures agent adjustment behavior — that purpose only reappears in L2."},
+  {"item": 6, "verdict": "conformant", "reason": ""},
+  {"item": 7, "verdict": "conformant", "reason": ""},
+  {"item": 8, "verdict": "conformant", "reason": ""},
+  {"item": 9, "verdict": "conformant", "reason": ""},
+  {"item": 10, "verdict": "conformant", "reason": ""}
+]
+```

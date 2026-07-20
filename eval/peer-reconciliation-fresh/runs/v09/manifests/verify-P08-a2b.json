@@ -1,0 +1,13 @@
+kind: claude
+model: opus
+cli_version: 2.1.215 (Claude Code)
+prompt_sha256: a4d29336d8e0eb4c9aa5e7f346d399d8bd4caabab0fe8753f47aee9b7c4e4d54
+tmp_cwd: fresh mktemp -d, removed after run
+tmp_home_contents_policy: credentials file ONLY (no settings/memory/config)
+cwd_listing_before: [] (must be empty)
+date: 2026-07-19T18:12:26-07:00
+home_listing: [./.claude/.credentials.json ]
+cmd: HOME=<fresh> claude -p --model opus --disallowedTools Bash,Read,Edit,Write,Glob,Grep,Task,Agent,WebFetch,WebSearch,NotebookEdit,TodoWrite,Skill
+out_sha256: 56aeb9192f582e82dbe6659d291135afce9551b555c693c2fc5eba4fafcd067e
+cwd_listing_after: []
+exit: 0

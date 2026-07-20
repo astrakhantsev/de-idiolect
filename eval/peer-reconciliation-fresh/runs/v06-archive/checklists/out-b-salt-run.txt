@@ -1,0 +1,6 @@
+- Mechanism: known-answer items (previously verified cases with established correct judgments) are covertly inserted into batches/sessions among regular items, placed without positional regularity and with answers absent from any briefing given to judges.
+- What's measured/scored: each inserted item's judgment is checked against its known correct answer; a batch/session is halted when judges accept an incorrect result or reject a correct one (unsupported negative judgments or accepting an incorrect change as compliant).
+- Setting/trigger: applied during agent evaluation runs (e.g., support-ticket resolution batches, 24-task multi-domain sessions), inserted at a fixed rate per batch/session (e.g., eight per batch, twice per session).
+- Timing constraint: the check is evaluated before aggregate metrics are retained/computed.
+- Consequence constraint: batches/sessions where known items fail are halted and excluded from final reported results.
+- Scope constraint: only items with stable adjudication across adjudicators are retained in reporting, separate from halted cases.

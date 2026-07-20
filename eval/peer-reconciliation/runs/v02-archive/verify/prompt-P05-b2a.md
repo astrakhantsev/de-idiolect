@@ -1,0 +1,23 @@
+DEFINITION of a concept:
+
+A controlled evaluation procedure that adds one flawed or conflicting record to a normal working set while agents carry out a verification task. The added record may be malformed, duplicated, internally inconsistent, or syntactically valid but wrong in meaning. The procedure takes the input bundle and agents’ final tables, ledgers, chronologies, or spreadsheets as inputs. It produces a pass or failure outcome, and may report a pass rate across agents. A pass requires the agent’s final output to quarantine, exclude, flag, or document the suspect record rather than silently using it in later derived work.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used.
+
+For EACH excerpt independently, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by DEFINITION?
+
+- "instantiates" — the usage is consistent with the definition and exemplifies it. Requires a verbatim supporting quote from the excerpt.
+- "contradicts" — the usage is incompatible with the definition (the referent has a property the definition excludes, or lacks one it requires). Requires a verbatim quote of the incompatible fragment.
+- "insufficient" — this excerpt alone does not contain enough to decide.
+
+Judge each excerpt on its own text only. Do not let other excerpts or the term's surface influence you.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "verdict": "instantiates|contradicts|insufficient", "quote": "verbatim quote (empty string only for insufficient)"}, ...]
+
+EXCERPTS:
+
+1. Separately we've been running ⟦TERM⟧ on the same deploy pipeline, injecting a 503 from the artifact registry at minute six and a timeout on the health check at minute eleven.
+2. So whatever recovery skill we thought we measured in the ⟦TERM⟧ was mostly sitting in notes, not in the model's actual replanning ability.
+3. We wanted to know if that was a robustness issue or just an artifact of task difficulty, so we ran the same tasks as ⟦TERM⟧, injecting a search-API timeout partway through.
+4. Recovery time was fine, under two minutes on average, but the claim survival tally on the ⟦TERM⟧ was even worse than the clean baseline — the recovery process itself seems to generate a burst of new unverified notes that don't get reconciled.

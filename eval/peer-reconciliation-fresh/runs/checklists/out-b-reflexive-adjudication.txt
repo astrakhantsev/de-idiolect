@@ -1,0 +1,6 @@
+- Mechanism: a blinded/anonymized grading procedure in which the evaluated agent (or external graders) is shown anonymized final patches/outputs/answers and rationales sampled from multiple systems/agents and asked to grade or agree/disagree with them, without knowing which output was its own.
+- Measures/produces: a "self-output agreement deficit" — the percentage-point gap between how often the agent agrees with graders on its own successful outputs versus on matched peer outputs (e.g., 6.4, 7.9, 3.2, 5.1 point deficits reported).
+- Applies when: anonymized final patches, rationales, or answers from a round, task variant, or release are pooled and blind-graded, including cases where rationale text or answer text is stripped and only final actions/validators remain visible.
+- Constraint: the deficit persists after excluding outputs with identifying filenames or unusually long explanations, and after removing rationale text entirely, indicating it is not solely explained by superficial stylistic cues.
+- Constraint: paraphrasing examples to reduce copied phrasing does not eliminate or materially change the measured effect.
+- Constraint: the deficit is larger under distractor context and concentrated among outputs with unusually confident rationales or reused distinctive tool-log phrasing.

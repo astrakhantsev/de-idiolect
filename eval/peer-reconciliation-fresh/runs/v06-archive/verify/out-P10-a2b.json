@@ -1,0 +1,10 @@
+Looking at each excerpt against the definition (an enforced runtime cap on file rereads that yields a pass/fail verdict). Notably, none of the excerpts mention rereads, files, disk, or holding contents in memory — instead they describe ⟦TERM⟧ as a human-assigned, per-item evaluation annotation (predicting failures, assigned by annotators, revised for content reasons). That role is incompatible with a mechanical reread cap.
+
+[
+{"excerpt": 1, "verdict": "contradicts", "quote": "assigned independently by two annotators before deployment"},
+{"excerpt": 2, "verdict": "contradicts", "quote": "Disagreements were concentrated in items involving chained browser actions rather than answer extraction."},
+{"excerpt": 3, "verdict": "contradicts", "quote": "report only items whose ⟦TERM⟧ was stable across adjudicators"},
+{"excerpt": 4, "verdict": "contradicts", "quote": "The ⟦TERM⟧ was revised for 4.7% of items after annotators discovered hidden dependencies on unavailable credentials"},
+{"excerpt": 5, "verdict": "contradicts", "quote": "The ⟦TERM⟧ was revised for 4.7% of items after annotators discovered hidden dependencies on unavailable credentials"},
+{"excerpt": 6, "verdict": "insufficient", "quote": ""}
+]

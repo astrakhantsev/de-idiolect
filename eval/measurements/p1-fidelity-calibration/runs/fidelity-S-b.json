@@ -1,0 +1,13 @@
+```json
+{
+  "i": "PRESERVED — the notes frame the core question as \"how good must a dependence estimate be before it beats simply not having one?\" and ask \"would an estimator this accurate suffice?\", matching the definition's scoring of \"how much benefit a proposed estimating tool would deliver\" and weighing it \"against other considerations.\"",
+  "ii": "PRESERVED — the notes condition on accuracy (\"An estimator needs log-count RMSE ≲ 0.3\" and it \"takes the true planted count and corrupts it with the measured C0* error distribution ... 'would an estimator this accurate suffice?'\"), matching \"Given an assumed or simulated typical-error level.\"",
+  "iii": "PRESERVED — the notes are explicitly prospective (\"The detector is SIMULATED, not run\", asked in a \"cold-start setting (novel claim, one-off decision)\" where \"Nobody has tested the instrument\"), matching \"used before the tool is built.\"",
+  "iv": "NOT-PRESERVED — the notes have explicit threshold structure (\"keep ~85% of that prize; ~0.6 keeps half; past ~1.0 it becomes WORSE THAN NO ESTIMATOR\" and \"Both estimators clear the bar\"), but the definition denies it: \"there is no particular error level at which the verdict changes.\"",
+  "v": "PASS — the definition uses only generic language (\"a fixed default number\", \"typical-error level\") and introduces no benchmark, dataset, or metric (no Brier, RMSE value, C0*/C2, or pool) not present in the excerpts.",
+  "vi": {
+    "named_items_in_definition": [],
+    "not_in_notes": []
+  }
+}
+```

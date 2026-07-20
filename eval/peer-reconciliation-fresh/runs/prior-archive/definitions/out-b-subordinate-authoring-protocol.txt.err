@@ -1,0 +1,43 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.HOWkFlSCAk"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.EQQcK6rSNo
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7b43-6dc2-7e03-924d-381460075ebb
+--------
+user
+Below are usage excerpts from one community's documents, all containing the same term, shown masked as ⟦TERM⟧ (other local jargon is masked as ⟦X⟧).
+
+Write a short, self-contained, operational definition of the concept ⟦TERM⟧ names AS USED in these excerpts: what kind of thing it is (a phenomenon, a procedure, a score, a rule…), its inputs and outputs where applicable, what it asserts, and when it applies.
+
+COMMITMENTS CHECKLIST (extracted from the same excerpts — the definition must state every commitment, including the specific mechanism):
+- Weaker/held-out task generators (not the evaluated agents) produce the task specifications or scenarios under this protocol.
+- Executable checks/validators are required and are withheld from the evaluated agents being tested.
+- Generators are prevented from observing evaluated-agent traces during task creation.
+- The protocol is rerun (with newly sampled generators and fresh validators) across model families/rounds to prevent one task-writing distribution from dominating results.
+- Generated tasks are filtered for execution validity and duplicate surface form, and further reviewed by humans to reject ambiguous cases (e.g., 11% rejected for ambiguous state transitions).
+- Applies to producing large batches of task specifications (e.g., 2,160 or 1,740 tasks) for evaluating agents, including data-management scenarios.
+
+Constraints:
+- Ordinary words and simple notation only.
+- Do NOT use the masked terms or guess at them; do not use names of people, published methods, fields, systems, models, or communities.
+- Base the definition ONLY on what the excerpts support; do not import outside assumptions.
+- Do NOT add generalizing catch-all phrases (such as "or otherwise", "or any similar", "in any way", "or by other means") beyond what the excerpts support — state the specific mechanism, not its genus.
+- 60–160 words. Output ONLY the definition text, nothing else.
+
+EXCERPTS:
+
+1. A ⟦TERM⟧ produced 2,160 task specifications from a weaker generator, with executable checks withheld from the evaluated agents. The ⟦TERM⟧ was rerun for every model family to prevent a single task-writing distribution from dominating comparisons.
+2. A ⟦TERM⟧ produced 2,160 task specifications from a weaker generator, with executable checks withheld from the evaluated agents. The ⟦TERM⟧ was rerun for every model family to prevent a single task-writing distribution from dominating comparisons. Generated tasks were filtered only for execution validity and duplicate surface form.
+3. Three weaker task generators produced held-out data-management scenarios under a ⟦TERM⟧. The ⟦TERM⟧ required executable validators and prevented generators from observing evaluated-agent traces.
+4. Three weaker task generators produced held-out data-management scenarios under a ⟦TERM⟧. The ⟦TERM⟧ required executable validators and prevented generators from observing evaluated-agent traces. Human review rejected 11% of generated tasks for ambiguous state transitions, leaving 1,740 tasks.
+5. This pattern held after normalizing for the number of available tools and the length of task instructions. A second ⟦TERM⟧ round used newly sampled generators and fresh validators.
+codex
+A procedure for creating held-out task batches to evaluate agents. Weaker task generators, not the agents being evaluated, create task specifications or scenarios. Each task must have executable checks or validators that are withheld from evaluated agents, and generators must not observe evaluated-agent traces while creating tasks. Generated tasks are kept only if they execute validly and do not duplicate another task’s surface form; humans then reject ambiguous cases, such as unclear state transitions. The procedure is rerun across model families or rounds with newly sampled generators and fresh validators, preventing one task-writing distribution from dominating results. It applies to producing large evaluation sets, including data-management scenarios.
+tokens used
+2,840

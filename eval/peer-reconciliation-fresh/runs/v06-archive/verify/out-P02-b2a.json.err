@@ -1,0 +1,42 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.ZdMHVXCXE9"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.iqsjhsD1oo
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7b9b-5c33-7ff1-b72d-5d7e640cfbf8
+--------
+user
+DEFINITION of a concept:
+
+A suite-maintenance score, recomputed after every evaluation round, that gives the fraction of items that have become universally solvable. It ranges from 0 to 1 and is calculated for the full suite and separately for each difficulty tier. It tracks successive model releases and weekly reruns to identify items becoming trivially solvable. Items above the exhaustion threshold are excluded from the primary ranking but retained for longitudinal reporting. Removing these items is used to improve ranking stability across reruns. Higher values indicate that exhaustion is concentrated in simple retrieval and formatting tasks rather than in the highest difficulty tier.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used.
+
+For EACH excerpt independently, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by DEFINITION?
+
+- "instantiates" — the usage is consistent with the definition and exemplifies it. Requires a verbatim supporting quote from the excerpt.
+- "contradicts" — the usage is incompatible with the definition (the referent has a property the definition excludes, or lacks one it requires). Requires a verbatim quote of the incompatible fragment.
+- "insufficient" — this excerpt alone does not contain enough to decide.
+
+Judge each excerpt on its own text only. Do not let other excerpts or the term's surface influence you.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "verdict": "instantiates|contradicts|insufficient", "quote": "verbatim quote (empty string only for insufficient)"}, ...]
+
+EXCERPTS:
+
+1. No capability gap, just recency doing the choosing instead of the task. Separately, been doing a ⟦TERM⟧ on our internal migration-eval suite before the quarterly review. Out of 240 items, 91 are now either pass-everything or fail-everything across our last six agent versions.
+2. Finally finished the ⟦TERM⟧ on the 500-item support-ticket suite we've been running since last year. 61% of items are now pass-everything or fail-everything across the four agent versions we've fielded. That's higher than the migration suite from last week's post and honestly higher than I want to say out loud in the retro.
+3. Rough afternoon of eval debugging. Started with a ⟦TERM⟧ sanity check on our onboarding-flow suite — 44% pass-everything or fail-everything, worse than last quarter, and I think it's because two agent generations back we plateaued on the exact skill this suite tests, so nothing separates anymore.
+4. Title: Q3 Suite Refresh — What Actually Moved We ran our ⟦TERM⟧ before the sprint and it came back uglier than last time — almost a third of the legacy suite is now either universal-pass or universal-fail across every version we've fielded since March. The ⟦TERM⟧ doesn't lie about this kind of thing; once an item stops separating your best model from your worst it's just burning compute for a number nobody trusts.
+5. Title: Q3 Suite Refresh — What Actually Moved We ran our ⟦TERM⟧ before the sprint and it came back uglier than last time — almost a third of the legacy suite is now either universal-pass or universal-fail across every version we've fielded since March. The ⟦TERM⟧ doesn't lie about this kind of thing; once an item stops separating your best model from your worst it's just burning compute for a number nobody trusts.
+6. Title: Self-Authored Items — First Read Tried the ⟦X⟧ approach this cycle since our ⟦TERM⟧ keeps flagging holes faster than we can hand-author replacements.
+codex
+[{"excerpt":1,"verdict":"contradicts","quote":"91 are now either pass-everything or fail-everything"},{"excerpt":2,"verdict":"contradicts","quote":"61% of items are now pass-everything or fail-everything"},{"excerpt":3,"verdict":"contradicts","quote":"44% pass-everything or fail-everything"},{"excerpt":4,"verdict":"contradicts","quote":"either universal-pass or universal-fail"},{"excerpt":5,"verdict":"contradicts","quote":"either universal-pass or universal-fail"},{"excerpt":6,"verdict":"insufficient","quote":""}]
+tokens used
+3,074

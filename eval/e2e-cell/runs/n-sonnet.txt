@@ -1,0 +1,1 @@
+How accurate does a count-estimating tool need to be to actually help decisions, compared to just guessing a fixed number, when you have no past results to calibrate it against?

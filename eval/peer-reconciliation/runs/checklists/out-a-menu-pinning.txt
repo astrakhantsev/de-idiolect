@@ -1,0 +1,6 @@
+Fixes the same set of task/seed assignments across every eval run, so each task always uses the identical seed instead of a randomly sampled one.
+Applies at the start of an eval run, whenever comparing results across different runs or model versions over time.
+Freezes only the task-to-seed pairing; it does not control or freeze other randomization sources in the harness (e.g., result ordering).
+Comparisons made under this fixed-seed condition read as differences due to the model itself, not due to variation in the task/seed mix.
+Necessary but not sufficient on its own for run-to-run reproducibility if other randomization sources remain unfrozen.
+Used to make spend/budget curves and score trajectories comparable across versions by ensuring the same task mix underlies each curve.

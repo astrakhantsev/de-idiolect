@@ -1,0 +1,6 @@
+- Injects a specific fault (e.g., a 503 from a service, a timeout) into a running task/pipeline at a predetermined point to test recovery.
+- Uses a fixed fault schedule/injection timing so runs are comparable across model versions or task types.
+- Measures time-to-recovery (not whether failure occurs), reported as e.g. median seconds to recover.
+- Applies during an active task or pipeline run (e.g., a deploy pipeline or multi-step task), triggered by the injected fault partway through execution.
+- Recovery must come from the model's own replanning ability, not from external scratchpad/notes carried over from before the injection.
+- Can be run alongside a check of the trail/notes quality (e.g., rate of unreconciled or unverified claims) produced during the recovery process, not just the final answer's correctness.

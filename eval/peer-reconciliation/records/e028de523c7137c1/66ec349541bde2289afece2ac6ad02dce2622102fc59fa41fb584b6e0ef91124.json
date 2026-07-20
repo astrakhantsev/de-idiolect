@@ -1,0 +1,26 @@
+{
+ "pair_key": "e028de523c7137c1",
+ "pair_id": "P05",
+ "terms": {
+  "a": "pothole runs",
+  "b": "seeded-defect audit"
+ },
+ "proposed_relation": "exactMatch",
+ "evidence": {
+  "basis": "partisan-demo: community-a maintainer asserts identity"
+ },
+ "adjudicated_relation": null,
+ "status": "proposed",
+ "adjudicator": null,
+ "provenance": {
+  "source": "fork-demo"
+ },
+ "derived_from": [
+  "b0e2dbcebd08e96e03cdd7513cb97486130b2a7afd16e5db57f9f22a91b4dd64"
+ ],
+ "earliest_found_in_search": {
+  "synthetic": true,
+  "note": "no priority inference licensed"
+ },
+ "version_id": "66ec349541bde2289afece2ac6ad02dce2622102fc59fa41fb584b6e0ef91124"
+}

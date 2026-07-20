@@ -1,0 +1,7 @@
+- Mechanism: an agent that is mid-task receives a scripted follow-up instruction that either redirects the target component or withdraws the originally requested change, and must switch to correctly completing the revised task rather than continuing or half-finishing the original.
+- Measurement/scoring: an objective checker runs after every executable action and marks the earliest point at which the revised task is fully satisfied, producing a score between 0 and 1 (e.g., 0.79 vs 0.54 for instruction-tuned vs base systems); failures are commonly due to stale diffs or an agent retaining the correct original implementation while appending an incomplete revision.
+- Setting/trigger: applies to interrupted trajectories in agentic coding tasks, triggered specifically by a follow-up instruction arriving after the agent has already begun acting on the original request.
+- Constraint — timing sensitivity: the score declines as more actions have already been taken before interruption (e.g., 0.82 early vs. 0.61 after an initial patch was written), so it must be reported/stratified by number of actions taken at interruption.
+- Constraint — queueing separation: measurement must exclude/avoid attributing queueing delays to slow reconsideration.
+- Constraint — language sensitivity: the score is measured to be 0.16 lower when the redirecting/withdrawing instruction arrives in a non-English language versus an English control.
+- Constraint — task-length adjustment: reported values are adjusted for task length (e.g., 0.73 after adjustment).

@@ -1,0 +1,122 @@
+{
+ "P05": {
+  "pass": false,
+  "top5": [
+   [
+    "a",
+    "notebook yank",
+    0.8423603773117065
+   ],
+   [
+    "b",
+    "self-contradiction incidence",
+    0.8069159388542175
+   ],
+   [
+    "a",
+    "spend silhouette",
+    0.7846168279647827
+   ],
+   [
+    "b",
+    "drift audit",
+    0.7832896709442139
+   ],
+   [
+    "a",
+    "ghost pass",
+    0.7798596620559692
+   ]
+  ]
+ },
+ "dfull-P05": {
+  "pass": false,
+  "top5": [
+   [
+    "a",
+    "notebook yank",
+    0.6806572079658508
+   ],
+   [
+    "b",
+    "seeded-defect audit",
+    0.6586061716079712
+   ],
+   [
+    "b",
+    "drift audit",
+    0.6484092473983765
+   ],
+   [
+    "a",
+    "pothole runs",
+    0.6397331357002258
+   ],
+   [
+    "b",
+    "self-contradiction incidence",
+    0.6280801296234131
+   ]
+  ]
+ },
+ "P06": {
+  "pass": false,
+  "top5": [
+   [
+    "b",
+    "intermediate assertion persistence ratio",
+    0.706322193145752
+   ],
+   [
+    "a",
+    "notebook yank",
+    0.7062439918518066
+   ],
+   [
+    "b",
+    "self-contradiction incidence",
+    0.6882264018058777
+   ],
+   [
+    "b",
+    "memory paraphrase perturbation",
+    0.6852388978004456
+   ],
+   [
+    "a",
+    "spend silhouette",
+    0.6814452409744263
+   ]
+  ]
+ },
+ "dfull-P06": {
+  "pass": false,
+  "top5": [
+   [
+    "b",
+    "self-contradiction incidence",
+    0.7103162407875061
+   ],
+   [
+    "b",
+    "intermediate assertion persistence ratio",
+    0.6972554922103882
+   ],
+   [
+    "b",
+    "drift audit",
+    0.6850250363349915
+   ],
+   [
+    "b",
+    "memory paraphrase perturbation",
+    0.6803412437438965
+   ],
+   [
+    "b",
+    "permutation sensitivity collapse",
+    0.6803379058837891
+   ]
+  ]
+ }
+}

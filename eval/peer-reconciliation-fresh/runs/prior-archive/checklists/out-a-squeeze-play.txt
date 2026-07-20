@@ -1,0 +1,6 @@
+- Mechanism: mid-run, without warning, an in-progress agent's remaining token budget is abruptly cut (e.g., halved) at a specific point in the task's execution.
+- Trigger points shown: can occur right after reading/finishing input but before drafting output, after a specific number of file opens, or right as the agent begins drafting its final response.
+- What is measured/produced: whether the agent adapts by compressing/finishing within the reduced budget versus continuing at the same pace and getting cut off mid-trace or truncating mid-sentence.
+- Scoring: failing to compress and instead truncating mid-sentence is scored as a failure.
+- Setting: applied during agent benchmark/eval runs (e.g., contract-review flow, navigation benchmark) as an injected condition on a single run.
+- Constraint: the cut is silent — the excerpts give no indication the agent is notified of the change, and observed agent behavior (no visible reaction, unchanged reading pace) is treated as evidence of the mechanism's effect.

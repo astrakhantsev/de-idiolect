@@ -1,0 +1,13 @@
+kind: codex
+model: gpt-5.6-terra
+cli_version: codex-cli 0.144.1
+prompt_sha256: 13533b6beeebebddae1cb4104fc309217b9e3a7e1469dd59b66c7bbfcc6196f8
+tmp_cwd: fresh mktemp -d, removed after run
+tmp_home_contents_policy: credentials file ONLY (no settings/memory/config)
+cwd_listing_before: [] (must be empty)
+date: 2026-07-19T15:16:27-07:00
+home_listing: [./auth.json ]
+cmd: CODEX_HOME=<fresh> codex exec -s read-only -m gpt-5.6-terra -C <fresh empty cwd>
+out_sha256: b24589996fb6bad89ae5cd591f12350b3c1986b05372a1457055997cef1ff832
+cwd_listing_after: []
+exit: 0

@@ -1,0 +1,6 @@
+- Removes worked examples/demonstrations from a prompt or prompt segment while leaving instructions, step outlines, and formatting hints unchanged.
+- Measures task success rate (e.g., 74%→39%, 74%→58%, ~6-point drop), comparing scores before vs. after the removal.
+- Applied to agent prompts/tasks (support-ticket agent, refactor prompt, schema-validation prompt segment) either ad hoc or as a standing regression test run on every model version bump.
+- Impact varies by task and by how many demonstrations are removed, ranging from a small (~6 point) drop to a large (74%→39%) drop.
+- Only the demonstrations are altered — no other scaffold element (outline, formatting hints, instructions) is changed in the same run.
+- Used specifically to reveal how much a model relies on worked demonstrations versus other prompt components.

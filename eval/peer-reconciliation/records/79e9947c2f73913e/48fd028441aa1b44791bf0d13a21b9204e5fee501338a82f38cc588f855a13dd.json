@@ -1,0 +1,45 @@
+{
+ "pair_key": "79e9947c2f73913e",
+ "pair_id": "P01",
+ "terms": {
+  "a": "shuffle fragility",
+  "b": "permutation sensitivity collapse"
+ },
+ "proposed_relation": "insufficientEvidence",
+ "evidence": {
+  "a2b": {
+   "n": 4,
+   "k": 3,
+   "c": 0,
+   "u": 1,
+   "agg": "covers",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 4,
+   "k": 2,
+   "c": 0,
+   "u": 2,
+   "agg": "abstain",
+   "quote_downgrades": []
+  }
+ },
+ "adjudicated_relation": "exactMatch",
+ "status": "adjudicated",
+ "adjudicator": "synthetic-key-8477e275",
+ "correct": false,
+ "provenance": {
+  "gen_a": "claude-sonnet",
+  "gen_b": "codex-gpt-5.6-terra",
+  "def_a": "claude-opus",
+  "def_b": "codex-gpt-5.6-terra",
+  "verify_a2b": "claude-opus",
+  "verify_b2a": "codex-gpt-5.6-terra"
+ },
+ "derived_from": [],
+ "earliest_found_in_search": {
+  "synthetic": true,
+  "note": "no priority inference licensed"
+ },
+ "version_id": "48fd028441aa1b44791bf0d13a21b9204e5fee501338a82f38cc588f855a13dd"
+}

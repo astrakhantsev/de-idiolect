@@ -1,0 +1,5 @@
+- Mechanism: replace tool-call/output results with syntactically valid but semantically meaningless/corrupted content (e.g., garbled JSON, meaningless fields, plausible-looking but meaningless pass/fail noise) in place of real tool output, then observe the agent's response to it.
+- Measured/produced: whether the agent detects the corruption and explicitly asks for a retry/re-fetch/rerun, versus proceeding as if the corrupted data were valid; scored as a fraction/count of degraded steps caught (e.g., 22/30, 8/30 misses, ~70-80%).
+- Setting/trigger: applied to an agent's session logs or task recordings, targeting tool-call results (including test runner output) that are deliberately swapped for corrupted versions.
+- Constraint: the pass is run per tool call/step, distinguishing caught corruption (flag + request retry) from uncaught corruption (barrels forward treating garbage as gospel).
+- Constraint: used as a standing regression test run on every model version bump, not just ad hoc.

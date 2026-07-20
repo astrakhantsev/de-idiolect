@@ -1,0 +1,7 @@
+- Mechanism: creates paired versions of the same task (identical required action/configuration change) differing only in added irrelevant context (policy excerpts, tickets, decoy URLs, operational text), then compares agent tool traces between the paired versions.
+- Preserves the required action, verification endpoint/validator, and initial system state identical across both paired variants.
+- Measures and produces: counts of additional/exploratory tool calls (e.g., extra pages opened, % increase in exploratory calls), change in direct/validation calls (e.g., % decrease), and delay to first valid tool call (in seconds).
+- Applies to paired task-family sets (e.g., account-management, service-configuration, navigation, document-heavy tasks) where an irrelevant-context variant is compared against a clean variant.
+- Read via navigation-breadth changes (tool-trace exploration) rather than by final answer length or content.
+- Outputs from both paired variants are mixed into blinded grading pools for scoring.
+- Can be produced per replacement/task family, with results (distractor sensitivity) varying by task type.

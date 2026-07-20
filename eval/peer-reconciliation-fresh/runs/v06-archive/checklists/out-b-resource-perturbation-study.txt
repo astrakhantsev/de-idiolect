@@ -1,0 +1,5 @@
+- Mechanism: after the first successful retrieval (or midway through distractor versions), a manipulation alters the remaining token budget and/or lowers the tool-call quota.
+- Measured/produced: agent behavior traces are scored by trace length (shorter vs. longer verification traces) and by rate of redundant/inappropriate tool actions (e.g., page openings, repeated action sequences).
+- Applies when/where: triggered specifically after the first successful retrieval in chained browser-action tasks, or partway through distractor-version test conditions.
+- Constraint: high-performing agents shift to shorter verification traces as quotas fall, while lower-performing agents keep initiating tools until forced termination.
+- Constraint: reduced quotas cut redundant page openings but do not proportionally reduce reuse of recently successful action sequences — shorter traces alone don't eliminate that reuse.

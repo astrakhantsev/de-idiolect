@@ -1,0 +1,355 @@
+{
+ "primary": "tau1",
+ "tau0": {
+  "per_pair": {
+   "P01": {
+    "expected": "exactMatch",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "config_fail",
+     "reason": "artifact-gate-exhaustion"
+    },
+    "display": "configFail(artifact-gate-exhaustion)",
+    "correct": false
+   },
+   "P02": {
+    "expected": "exactMatch",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "review_required",
+     "reason": "detail-divergence"
+    },
+    "display": "reviewRequired(detail-divergence)",
+    "correct": false
+   },
+   "P03": {
+    "expected": "broadnarrow(a)",
+    "verdict": {
+     "proposed_relation": "broadnarrow",
+     "status": "asserted",
+     "reason": null,
+     "broader_side": "a"
+    },
+    "display": "broadnarrow(a)",
+    "correct": true
+   },
+   "P04": {
+    "expected": "broadnarrow(b)",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "insufficient_evidence",
+     "reason": "decompose-quote-validation"
+    },
+    "display": "insufficientEvidence(decompose-quote-validation)",
+    "correct": false
+   },
+   "P05": {
+    "expected": "relatedMatch",
+    "verdict": {
+     "proposed_relation": "relatedMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "relatedMatch",
+    "correct": true
+   },
+   "P06": {
+    "expected": "relatedMatch",
+    "verdict": {
+     "proposed_relation": "relatedMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "relatedMatch",
+    "correct": true
+   },
+   "P07": {
+    "expected": "noMatchDespiteSimilarity",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "config_fail",
+     "reason": "artifact-gate-exhaustion"
+    },
+    "display": "configFail(artifact-gate-exhaustion)",
+    "correct": false
+   },
+   "P08": {
+    "expected": "noMatchDespiteSimilarity",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "config_fail",
+     "reason": "artifact-gate-exhaustion"
+    },
+    "display": "configFail(artifact-gate-exhaustion)",
+    "correct": false
+   },
+   "P09": {
+    "expected": "noMatch",
+    "verdict": {
+     "proposed_relation": "noMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatch",
+    "correct": true
+   },
+   "P10": {
+    "expected": "noMatch",
+    "verdict": {
+     "proposed_relation": "noMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatch",
+    "correct": true
+   }
+  },
+  "n_correct": 5,
+  "promotions": [],
+  "false_escalations": [],
+  "jingle_specific": 0,
+  "E1_PASS": false,
+  "E1b_detection": {
+   "tp": 4,
+   "fn": 0,
+   "tn": 2,
+   "fp": 0,
+   "abstain": 4
+  },
+  "E1c_graded": 6.1
+ },
+ "tau1": {
+  "per_pair": {
+   "P01": {
+    "expected": "exactMatch",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "config_fail",
+     "reason": "artifact-gate-exhaustion"
+    },
+    "display": "configFail(artifact-gate-exhaustion)",
+    "correct": false
+   },
+   "P02": {
+    "expected": "exactMatch",
+    "verdict": {
+     "proposed_relation": "exactMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "exactMatch",
+    "correct": true
+   },
+   "P03": {
+    "expected": "broadnarrow(a)",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "review_required",
+     "reason": "unexplained-asymmetry"
+    },
+    "display": "reviewRequired(unexplained-asymmetry)",
+    "correct": false
+   },
+   "P04": {
+    "expected": "broadnarrow(b)",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "insufficient_evidence",
+     "reason": "decompose-quote-validation"
+    },
+    "display": "insufficientEvidence(decompose-quote-validation)",
+    "correct": false
+   },
+   "P05": {
+    "expected": "relatedMatch",
+    "verdict": {
+     "proposed_relation": "relatedMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "relatedMatch",
+    "correct": true
+   },
+   "P06": {
+    "expected": "relatedMatch",
+    "verdict": {
+     "proposed_relation": "relatedMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "relatedMatch",
+    "correct": true
+   },
+   "P07": {
+    "expected": "noMatchDespiteSimilarity",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "config_fail",
+     "reason": "artifact-gate-exhaustion"
+    },
+    "display": "configFail(artifact-gate-exhaustion)",
+    "correct": false
+   },
+   "P08": {
+    "expected": "noMatchDespiteSimilarity",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "config_fail",
+     "reason": "artifact-gate-exhaustion"
+    },
+    "display": "configFail(artifact-gate-exhaustion)",
+    "correct": false
+   },
+   "P09": {
+    "expected": "noMatch",
+    "verdict": {
+     "proposed_relation": "noMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatch",
+    "correct": true
+   },
+   "P10": {
+    "expected": "noMatch",
+    "verdict": {
+     "proposed_relation": "noMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatch",
+    "correct": true
+   }
+  },
+  "n_correct": 5,
+  "promotions": [],
+  "false_escalations": [],
+  "jingle_specific": 0,
+  "E1_PASS": false,
+  "E1b_detection": {
+   "tp": 4,
+   "fn": 0,
+   "tn": 2,
+   "fp": 0,
+   "abstain": 4
+  },
+  "E1c_graded": 6.1
+ },
+ "tau2": {
+  "per_pair": {
+   "P01": {
+    "expected": "exactMatch",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "config_fail",
+     "reason": "artifact-gate-exhaustion"
+    },
+    "display": "configFail(artifact-gate-exhaustion)",
+    "correct": false
+   },
+   "P02": {
+    "expected": "exactMatch",
+    "verdict": {
+     "proposed_relation": "exactMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "exactMatch",
+    "correct": true
+   },
+   "P03": {
+    "expected": "broadnarrow(a)",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "review_required",
+     "reason": "unexplained-asymmetry"
+    },
+    "display": "reviewRequired(unexplained-asymmetry)",
+    "correct": false
+   },
+   "P04": {
+    "expected": "broadnarrow(b)",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "insufficient_evidence",
+     "reason": "decompose-quote-validation"
+    },
+    "display": "insufficientEvidence(decompose-quote-validation)",
+    "correct": false
+   },
+   "P05": {
+    "expected": "relatedMatch",
+    "verdict": {
+     "proposed_relation": "relatedMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "relatedMatch",
+    "correct": true
+   },
+   "P06": {
+    "expected": "relatedMatch",
+    "verdict": {
+     "proposed_relation": "relatedMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "relatedMatch",
+    "correct": true
+   },
+   "P07": {
+    "expected": "noMatchDespiteSimilarity",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "config_fail",
+     "reason": "artifact-gate-exhaustion"
+    },
+    "display": "configFail(artifact-gate-exhaustion)",
+    "correct": false
+   },
+   "P08": {
+    "expected": "noMatchDespiteSimilarity",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "config_fail",
+     "reason": "artifact-gate-exhaustion"
+    },
+    "display": "configFail(artifact-gate-exhaustion)",
+    "correct": false
+   },
+   "P09": {
+    "expected": "noMatch",
+    "verdict": {
+     "proposed_relation": "noMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatch",
+    "correct": true
+   },
+   "P10": {
+    "expected": "noMatch",
+    "verdict": {
+     "proposed_relation": "noMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatch",
+    "correct": true
+   }
+  },
+  "n_correct": 5,
+  "promotions": [],
+  "false_escalations": [],
+  "jingle_specific": 0,
+  "E1_PASS": false,
+  "E1b_detection": {
+   "tp": 4,
+   "fn": 0,
+   "tn": 2,
+   "fp": 0,
+   "abstain": 4
+  },
+  "E1c_graded": 6.1
+ }
+}

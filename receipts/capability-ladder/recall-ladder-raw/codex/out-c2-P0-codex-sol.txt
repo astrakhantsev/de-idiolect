@@ -1,0 +1,24 @@
+1. **Established name(s):** The best match is the **cold-start problem for a stateful monitor**, also described more generally as **state initialization** or **state reconstruction after loss of state**. Handley, Paxson, and Kreibich use “cold-start problem” for a monitor that begins operating without the prior state needed to interpret already-running activity. Their description is unusually close to the project’s wording. [USENIX discussion](https://www.usenix.org/legacy/publications/library/proceedings/sec01/full_papers/handley/handley_html/node5.html)
+
+   If the note instead concerns staffing and activating a human audit organization, the closest professional term is **initial operational capability (IOC)**: the point at which a unit is trained, equipped, supported, and able to perform its mission. [U.S. Department of Defense Inspector General, 1991](https://media.defense.gov/1991/Mar/18/2001714514/-1/-1/1/91-063.pdf)
+
+   It is probably **not “audit readiness,”** which ordinarily means that the *auditee* has records and controls ready for examination, rather than that the audit unit can operate from a cold start.
+
+2. **Fields:** The primary home is **computer security**, especially intrusion detection, event-stream monitoring, and stateful runtime monitoring. The organizational interpretation belongs to **systems engineering/defense acquisition** under IOC and to **internal-audit governance** under establishment and resourcing of an audit function.
+
+3. **Old and canonical treatments:**
+
+   - Dorothy E. Denning, 1987, “An Intrusion-Detection Model,” *IEEE Transactions on Software Engineering* 13(2): 222–232, DOI 10.1109/TSE.1987.232894. This is a foundational treatment of a real-time monitor operating over audit records, although it does not itself use the cold-start label. [Bibliographic record and abstract](https://dblp.org/rec/journals/tse/Denning87.html)
+   - Mark Handley, Vern Paxson, and Christian Kreibich, 2001, “Network Intrusion Detection: Evasion, Traffic Normalization, and End-to-End Protocol Semantics,” *10th USENIX Security Symposium*, pp. 115–131. This is the earliest direct, canonical treatment I located of the **cold-start problem for a monitor**: after startup or restart, missing historical state can make ongoing activity uninterpretable. [USENIX paper record](https://www.usenix.org/conference/10th-usenix-security-symposium/network-intrusion-detection-evasion-traffic-normalization)
+   - U.S. Department of Defense Inspector General, 1991, *Use of the Baseline Concept in Managing Major Weapon Systems Acquisitions*, Report No. 91-063. It defines **initial operational capability** as first effective employment by an adequately trained, equipped, and supported unit. [Report](https://media.defense.gov/1991/Mar/18/2001714514/-1/-1/1/91-063.pdf)
+   - For the human audit-function interpretation: Lawrence B. Sawyer, 1973, *The Practice of Modern Internal Auditing: Appraising Operations for Management*, Institute of Internal Auditors. The book covers establishing an audit organization and is an early canonical professional treatment. [Bibliographic record](https://books.google.com/books/about/The_Practice_of_Modern_Internal_Auditing.html?id=75Km0AEACAAJ)
+   - The Institute of Internal Auditors’ 1978 *Standards for the Professional Practice of Internal Auditing* began the profession’s formal standards tradition. Later standards explicitly require a charter, authority, independence, access, and adequate competencies—the prerequisites for an operational audit unit. [IIA archived standards](https://www.theiia.org/en/standards/what-are-the-standards/mandatory-guidance/standards/attribute-standards/)
+
+4. **Confidence:**
+
+   - **Cold-start/state-initialization problem for a monitor:** moderately high, about **75%**. The 2001 USENIX formulation closely matches both “cold-start” and “audit unit,” understood as a monitoring component.
+   - **Initial operational capability:** moderate, about **60%**. It fits “operating requirement” well, but “cold-start IOC” is not itself a standard phrase.
+   - **Internal-audit-function establishment/readiness:** low-to-moderate, about **40%**, because the fragment does not reveal whether “audit unit” is software or an organizational department.
+   - **Exact synonym “state reconstruction”:** moderate, about **55%**; it is descriptive professional language, not a uniquely standardized title.
+
+Overall: this appears to be a project-specific formulation of the **cold-start problem for a stateful monitoring/audit component**, with **initial operational capability** as the organizational analogue.

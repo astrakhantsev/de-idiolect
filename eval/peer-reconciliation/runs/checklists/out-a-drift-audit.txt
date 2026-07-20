@@ -1,0 +1,6 @@
+- Run a fixed, frozen suite of 200 tasks against the model on a recurring monthly cycle to check for regressions.
+- Trigger the run specifically when the provider ships a model update, to catch silent changes in behavior.
+- Compare each cycle's scores against the prior cycle's (or baseline) scores to detect drift, including newly added metrics.
+- Produce a numeric score per task/metric (e.g., point-based, since a metric "dropped four points") that can be tallied by a scorer.
+- Keep the task suite unchanged (frozen) across cycles so comparisons are apples-to-apples.
+- Flag any score change (including no change) as a reportable outcome, e.g. "no drift detected" or a detected drop.

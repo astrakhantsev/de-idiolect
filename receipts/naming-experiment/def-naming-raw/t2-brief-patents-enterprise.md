@@ -1,0 +1,12 @@
+You are a research librarian with web access. This is a VERIFICATION pass (candidate names may be used). Tools: WebSearch, and the shell command `safefetch <url>` (bare) for fetching pages. Never WebFetch. Do all work yourself inline — no subagents/background tasks. Open sources and quote from bodies where possible; attribute every quote; never invent quotes. MANDATORY QUERY LEDGER: append an appendix listing every search query you ran, verbatim, in order.
+
+Context: a proposed system (a) detects when a team/community coins a term or uses a common word idiosyncratically, (b) auto-generates a plain-vocabulary definition at that moment — lazily, per team, no global glossary mandated, (c) uses the definition (not the term) as the key to match the same concept across teams/corpora, with typed relations (same / broader / narrower / related). We are checking PATENTS and ENTERPRISE PRODUCTS — two areas prior academic searches did not cover.
+
+Questions:
+
+1. **Patents** (Google Patents, patents.google.com — search and open the closest 3-5): any filed pipeline for detecting jargon/new terminology in an organization's documents and auto-generating definitions/glossaries; any "automatic business glossary construction"; any entity/concept matching across corpora using generated descriptions or definitions as the matching representation. Report patent numbers, assignees, dates, and what each covers of (a)/(b)/(c).
+2. **Enterprise data-catalog / business-glossary products** (Collibra, Alation, Atlan, Microsoft Purview, Informatica, dbt, Secoda, or others you find): do any auto-generate glossary definitions with LLMs? Do any auto-DETECT candidate glossary terms from usage? Do any use definitions/descriptions for cross-team concept matching or duplicate-concept detection? Product documentation and engineering blogs count as sources — quote them.
+3. **Knowledge-management / collaboration tools** (Notion, Confluence/Atlassian, Slack, Glean, or others): any shipped "auto-glossary" or jargon-detection features?
+4. For anything found: does it constrain the definition vocabulary? Does it frame itself as avoiding a global/central glossary (lazy, per-team)?
+
+For each finding: name · owner/assignee + date + link · what it covers of (a)/(b)/(c) and what it does not · quotes · confidence. End with: the closest single artifact overall · what you did NOT search · the query ledger appendix.

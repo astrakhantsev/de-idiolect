@@ -1,0 +1,8 @@
+Looking at the definition, ⟦TERM⟧ is a **token-spend diagnostic curve** tracking spending across task progress. Every excerpt uses ⟦TERM⟧ as a **scoring rubric** applied by judges to transcripts to grant/deny credit — an evaluation instrument, not a spend-over-time curve. These properties are incompatible.
+
+[{"excerpt": 1, "verdict": "contradicts", "quote": "unsupported conflict resolution received no credit unless the cited transcript line contained the relevant retrieved evidence"},
+{"excerpt": 2, "verdict": "contradicts", "quote": "unsupported conflict resolution received no credit unless the cited transcript line contained the relevant retrieved evidence"},
+{"excerpt": 3, "verdict": "contradicts", "quote": "required every scoring decision to point to the transcript line supporting the criterion"},
+{"excerpt": 4, "verdict": "contradicts", "quote": "required every scoring decision to point to the transcript line supporting the criterion"},
+{"excerpt": 5, "verdict": "contradicts", "quote": "exposed that 16% of accepted author merges lacked a transcript line supporting the selected identity"},
+{"excerpt": 6, "verdict": "contradicts", "quote": "exposed that 16% of accepted author merges lacked a transcript line supporting the selected identity"}]

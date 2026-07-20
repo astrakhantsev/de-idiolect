@@ -1,0 +1,25 @@
+Below are usage excerpts from one community's documents, all containing the same term, shown masked as ⟦TERM⟧ (other local jargon is masked as ⟦X⟧).
+
+Write a short, self-contained, operational definition of the concept ⟦TERM⟧ names AS USED in these excerpts: what kind of thing it is (a phenomenon, a procedure, a score, a rule…), its inputs and outputs where applicable, what it asserts, and when it applies.
+
+COMMITMENTS CHECKLIST (extracted from the same excerpts — the definition must state every commitment, including the specific mechanism):
+- Mechanism: run paired task versions (clean vs. distractor-injected prompt/context) that hold constant the required action, verification endpoint/validator, and initial system state, then compare the resulting tool-call traces between the two versions.
+- Measures/produces: tool-trace metrics — number of exploratory/additional tool calls or pages opened, percentage change in exploratory vs. direct validation calls, and time delay to the first valid tool call; navigation breadth is affected more than final answer length.
+- Scoring/reading: reported as quantitative deltas between paired conditions (e.g., +2.1 extra pages, +31% exploratory calls, -18% direct validation calls, +38 second delay), with outputs from both variants later mixed into blinded grading pools.
+- Applies to: agentic tool-use tasks (e.g., account-management, service-configuration) where a prompt variant adds irrelevant policy excerpts, historical tickets, decoy URLs, or other distractor operational context.
+- Constraint: the paired task versions must differ only in the injected distractor context — the required action, validator/verification endpoint, and initial state must remain identical across the pair.
+
+Constraints:
+- Ordinary words and simple notation only.
+- Do NOT use the masked terms or guess at them; do not use names of people, published methods, fields, systems, models, or communities.
+- Base the definition ONLY on what the excerpts support; do not import outside assumptions.
+- Do NOT add generalizing catch-all phrases (such as "or otherwise", "or any similar", "in any way", "or by other means") beyond what the excerpts support — state the specific mechanism, not its genus.
+- 60–160 words. Output ONLY the definition text, nothing else.
+
+EXCERPTS:
+
+1. The benchmark paired each account-management task with a version containing irrelevant policy excerpts, historical tickets, and decoy URLs. ⟦TERM⟧ compared tool traces across the paired versions while preserving the required action and verification endpoint. In ⟦TERM⟧, agents opened 2.1 additional pages under distractor context and delayed the first valid tool call by 38 seconds.
+2. ⟦TERM⟧ compared tool traces across the paired versions while preserving the required action and verification endpoint. In ⟦TERM⟧, agents opened 2.1 additional pages under distractor context and delayed the first valid tool call by 38 seconds.
+3. A paired set of service-configuration tasks differed only in irrelevant operational context appended to the prompt. ⟦TERM⟧ showed that distractor context increased exploratory tool calls by 31% and reduced direct validation calls by 18%. The ⟦TERM⟧ preserved the same required configuration change, validator, and initial system state.
+4. ⟦TERM⟧ showed that distractor context increased exploratory tool calls by 31% and reduced direct validation calls by 18%. The ⟦TERM⟧ preserved the same required configuration change, validator, and initial system state. Outputs from both task variants were then mixed into blinded grading pools.
+5. The tool traces indicated that ⟦TERM⟧ changed navigation breadth more than final answer length.

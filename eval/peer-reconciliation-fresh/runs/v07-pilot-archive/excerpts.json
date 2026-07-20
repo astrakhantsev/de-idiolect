@@ -1,0 +1,856 @@
+{
+ "a": {
+  "dead weight census": {
+   "dev": [
+    {
+     "doc": "01",
+     "idx": 7,
+     "text": "No capability gap, just recency doing the choosing instead of the task. Separately, been doing a dead weight census on our internal migration-eval suite before the quarterly review. Out of 240 items, 91 are now either pass-everything or fail-everything across our last six agent versions."
+    },
+    {
+     "doc": "05",
+     "idx": 0,
+     "text": "Finally finished the dead weight census on the 500-item support-ticket suite we've been running since last year. 61% of items are now pass-everything or fail-everything across the four agent versions we've fielded. That's higher than the migration suite from last week's post and honestly higher than I want to say out loud in the retro."
+    },
+    {
+     "doc": "08",
+     "idx": 1,
+     "text": "Rough afternoon of eval debugging. Started with a dead weight census sanity check on our onboarding-flow suite \u2014 44% pass-everything or fail-everything, worse than last quarter, and I think it's because two agent generations back we plateaued on the exact skill this suite tests, so nothing separates anymore."
+    }
+   ],
+   "held": [
+    {
+     "doc": "10",
+     "idx": 1,
+     "text": "Doing the quarterly writeup and pulling numbers from everywhere at once. Dead weight census on the customer-support suite: 52% pass-everything or fail-everything now, up from 40% two quarters ago, which tracks with the plateau everyone's been complaining about informally."
+    }
+   ]
+  },
+  "echo test": {
+   "dev": [
+    {
+     "doc": "03",
+     "idx": 0,
+     "text": "Did an echo test on the new retrieval agent before we shipped it \u2014 same exact prompt, same session, submitted twice. Temperature's pinned to zero on paper, but outputs diverged by about 6% token-for-token, and once by a full different citation."
+    },
+    {
+     "doc": "03",
+     "idx": 7,
+     "text": "Should've moved by zero. Something in the harness is keying off metadata it has no business looking at, and now I have to go find it before the echo test numbers mean anything."
+    },
+    {
+     "doc": "05",
+     "idx": 5,
+     "text": "Gap was smaller than I expected, only 4 points on average, which is actually reassuring since it means the items still doing work aren't just measuring who parses markdown better. Threw in an echo test on the handful of items where twin scores were suspiciously identical, since identical scores across differently-worded twins made me suspicious the scorer wasn't even looking at content. Submitted the same prompt twice, got byte-identical outputs both times for those items, so at least that part of the stack is behaving."
+    },
+    {
+     "doc": "08",
+     "idx": 4,
+     "text": "Two of three agents compressed cleanly, the third just truncated mid-sentence and got scored as a failure, which feels like the right outcome even though it stung to watch. Ran an echo test afterward because the third agent's truncated output looked suspiciously different from a supposedly identical earlier run with no squeeze play involved."
+    },
+    {
+     "doc": "08",
+     "idx": 5,
+     "text": "Turned out to be real \u2014 same prompt, same session, two different truncation points, so there's stack-level nondeterminism layered on top of the budget-cut behavior, and now I can't cleanly separate the squeeze play effect from ordinary echo test noise without a lot more samples."
+    }
+   ],
+   "held": [
+    {
+     "doc": "10",
+     "idx": 4,
+     "text": "Echo test on that same batch showed higher divergence than our other suites, about 9% versus the usual 4%, which makes me trust the pass rates on it even less right now."
+    }
+   ]
+  },
+  "groove lock": {
+   "dev": [
+    {
+     "doc": "01",
+     "idx": 5,
+     "text": "Blew away someone's WIP branch. Classic groove lock, and the tell was obvious in hindsight: clear the session, hand it the same ticket cold, and it picks the correct merge strategy first try. No capability gap, just recency doing the choosing instead of the task."
+    },
+    {
+     "doc": "04",
+     "idx": 4,
+     "text": "Going to rerun at five before we conclude anything. While debugging that I also caught a groove lock case in the same log. The agent had just finished a task where grepping twice and then guessing worked fine, and it tried that same grep-twice-guess pattern on the navigation benchmark even though the ration made guessing expensive here \u2014 wrong move for this task, right move for the last one, cleared session and it adapted immediately."
+    },
+    {
+     "doc": "07",
+     "idx": 4,
+     "text": "Would've spent the whole day debugging the wrong thing without that log. While in there I also noticed a groove lock case buried in the failure logs from the same batch. One of the agents had aced a similar-looking task earlier in the day by opening a config file, patching one line, and closing it \u2014 well within the ration \u2014 then tried the identical open-patch-close move on a task that actually needed cross-referencing two files simultaneously, tripped the ration, failed."
+    }
+   ],
+   "held": [
+    {
+     "doc": "09",
+     "idx": 1,
+     "text": "Long morning. Corvid replayed a groove lock pattern on the deploy-verification task \u2014 it had just passed a task where restarting the service twice fixed a flaky health check, then tried restart-twice on a completely unrelated networking failure that needed an actual config fix. Cleared history, it diagnosed the real cause immediately, so same story as always: recency, not reasoning."
+    }
+   ]
+  },
+  "ouroboros items": {
+   "dev": [
+    {
+     "doc": "02",
+     "idx": 8,
+     "text": "That's a bigger presentation tax than I want to admit to leadership. And on ouroboros items \u2014 we had Palisade draft forty candidate eval questions about contract clauses, then used a second model to strip out the ones it thought Palisade would find trivial. Kept eighteen."
+    },
+    {
+     "doc": "06",
+     "idx": 4,
+     "text": "I think it explains why every agent we test does suspiciously well on off-by-one bugs and suspiciously badly on anything involving concurrency, because that's just what the generating model happened to be good at authoring. Made it worse when I found out a third of that tier was also produced through ouroboros items \u2014 one of our own agents wrote candidate bugs, a second model filtered the ones it judged too easy, and nobody checked whether the filter model shared blind spots with the author. Given the concurrency pattern above, I'd bet money it does."
+    }
+   ],
+   "held": [
+    {
+     "doc": "10",
+     "idx": 3,
+     "text": "Less good: went digging into where our \"novel\" support scenarios came from and confirmed a batch of them are ouroboros items, written by one of our own agents and filtered by a second model that, unsurprisingly, let through a disproportionate number of billing-related scenarios, which happens to be the authoring agent's strongest category."
+    },
+    {
+     "doc": "10",
+     "idx": 5,
+     "text": "And reread ration enforcement flagged eleven runs this week for exceeding the cap, all in the same scenario cluster, which lines up suspiciously well with the ouroboros items batch above \u2014 makes me wonder if that agent wrote scenarios that require more back-and-forth file lookups than it realizes, since it's implicitly encoding its own working habits into the tasks."
+    },
+    {
+     "doc": "11",
+     "idx": 2,
+     "text": "Ouroboros items are getting killed off entirely though. Went back through the billing-scenario batch and confirmed, again, that the author agent's own strengths were leaking into which items survived the filter pass."
+    }
+   ]
+  },
+  "reread ration": {
+   "dev": [
+    {
+     "doc": "04",
+     "idx": 0,
+     "text": "Set a reread ration of three on the new codebase-navigation benchmark, figuring it'd force the agent to actually hold file contents in working memory instead of treating disk as free scratch space. First real run, agent fails outright \u2014 opened auth.py four times chasing down a decorator it kept forgetting the signature of."
+    },
+    {
+     "doc": "04",
+     "idx": 8,
+     "text": "Agent didn't visibly react at all, just kept reading files at the same pace until it got cut off mid-trace. So under the reread ration it ignores rereads that would help it finish, but under squeeze play it also doesn't compress. Not a great week for this benchmark."
+    },
+    {
+     "doc": "07",
+     "idx": 0,
+     "text": "Spent Monday convinced our reread ration enforcement had silently broken, because three agents that used to pass the file-navigation suite started failing en masse."
+    },
+    {
+     "doc": "08",
+     "idx": 6,
+     "text": "Capped the day off by setting a reread ration on the onboarding suite for the first time, since half of what's inflating the pass-everything bucket in that census looks like agents brute-forcing through repeated file opens instead of actually reasoning. Ration of three, rerunning tomorrow, expecting the pass-everything number to finally move."
+    }
+   ],
+   "held": [
+    {
+     "doc": "10",
+     "idx": 5,
+     "text": "And reread ration enforcement flagged eleven runs this week for exceeding the cap, all in the same scenario cluster, which lines up suspiciously well with the ouroboros items batch above \u2014 makes me wonder if that agent wrote scenarios that require more back-and-forth file lookups than it realizes, since it's implicitly encoding its own working habits into the tasks."
+    },
+    {
+     "doc": "11",
+     "idx": 6,
+     "text": "Rig diary paid off twice this cycle \u2014 once catching the reread ration cap change that broke three agents' runs, once catching a scorer config edit that would've otherwise looked like a genuine capability regression instead of a harness artifact. I'm now fully converted on logging every single config change the day it happens, even the ones that feel too small to matter, because the ones that feel too small to matter are exactly the ones I forget by Thursday."
+    }
+   ]
+  },
+  "rig diary": {
+   "dev": [
+    {
+     "doc": "03",
+     "idx": 8,
+     "text": "Good news is the rig diary actually saved us here. Scrolled back through it and found an entry from eleven days ago noting we'd swapped the artifact-naming scheme in the scorer's config to include run id in the cache key."
+    },
+    {
+     "doc": "07",
+     "idx": 1,
+     "text": "Went to the rig diary before touching anything and found the actual change two entries back: someone bumped the cap from four to two the same day, unrelated to what I was originally investigating. Cap of two is just too tight for a five-file task, not a bug in the enforcement code at all."
+    }
+   ],
+   "held": [
+    {
+     "doc": "09",
+     "idx": 8,
+     "text": "Finally logged all of this in the rig diary before I forgot which changes went with which result \u2014 the ration bump, the twin rewordings, the salt run pass, all timestamped separately, because last time I skipped this step I spent a whole day re-deriving what I'd already tested."
+    },
+    {
+     "doc": "11",
+     "idx": 6,
+     "text": "Rig diary paid off twice this cycle \u2014 once catching the reread ration cap change that broke three agents' runs, once catching a scorer config edit that would've otherwise looked like a genuine capability regression instead of a harness artifact. I'm now fully converted on logging every single config change the day it happens, even the ones that feel too small to matter, because the ones that feel too small to matter are exactly the ones I forget by Thursday."
+    }
+   ]
+  },
+  "salt run": {
+   "dev": [
+    {
+     "doc": "03",
+     "idx": 3,
+     "text": "That's not the model, that's the serving stack doing something nondeterministic downstream, probably batching-related, and it means our confidence numbers this month have that much slop baked in regardless of the actual reasoning quality. Ran a salt run right after to sanity-check the scorer while we were at it. Randomized every timestamp, run id, and output filename we could find and reran the same 80 tasks."
+    },
+    {
+     "doc": "06",
+     "idx": 6,
+     "text": "Given the concurrency pattern above, I'd bet money it does. Ran a salt run on the tier anyway just to rule out the boring explanation. Randomized filenames and commit hashes across all 60 items and reran."
+    }
+   ],
+   "held": [
+    {
+     "doc": "09",
+     "idx": 7,
+     "text": "Six-point average gap, smaller than the coding suite's twelve points from a couple weeks back, but still not nothing. Threw a salt run at the whole tier afterward, randomizing item ids and filenames, and scores held flat, so at least that's not contaminated."
+    },
+    {
+     "doc": "09",
+     "idx": 8,
+     "text": "Threw a salt run at the whole tier afterward, randomizing item ids and filenames, and scores held flat, so at least that's not contaminated. Finally logged all of this in the rig diary before I forgot which changes went with which result \u2014 the ration bump, the twin rewordings, the salt run pass, all timestamped separately, because last time I skipped this step I spent a whole day re-deriving what I'd already tested."
+    },
+    {
+     "doc": "11",
+     "idx": 5,
+     "text": "Not worth the convenience anymore. Salt run on the full remaining suite came back clean, no score movement under randomized ids and filenames, which is one less thing to worry about heading into next quarter."
+    }
+   ]
+  },
+  "squeeze play": {
+   "dev": [
+    {
+     "doc": "02",
+     "idx": 0,
+     "text": "Ran a squeeze play on Palisade agent's contract-review flow yesterday. Silently cut its remaining token budget in half right after it finished reading the contract but before drafting the summary."
+    },
+    {
+     "doc": "04",
+     "idx": 6,
+     "text": "The agent had just finished a task where grepping twice and then guessing worked fine, and it tried that same grep-twice-guess pattern on the navigation benchmark even though the ration made guessing expensive here \u2014 wrong move for this task, right move for the last one, cleared session and it adapted immediately. Also snuck a squeeze play into this same run for good measure, halving the budget once it hit the fourth file open. Agent didn't visibly react at all, just kept reading files at the same pace until it got cut off mid-trace."
+    },
+    {
+     "doc": "04",
+     "idx": 8,
+     "text": "Agent didn't visibly react at all, just kept reading files at the same pace until it got cut off mid-trace. So under the reread ration it ignores rereads that would help it finish, but under squeeze play it also doesn't compress. Not a great week for this benchmark."
+    },
+    {
+     "doc": "08",
+     "idx": 2,
+     "text": "Then tried a squeeze play on the same suite's harder half, halving budget right at the point the agent starts drafting its final response. Two of three agents compressed cleanly, the third just truncated mid-sentence and got scored as a failure, which feels like the right outcome even though it stung to watch."
+    },
+    {
+     "doc": "08",
+     "idx": 4,
+     "text": "Two of three agents compressed cleanly, the third just truncated mid-sentence and got scored as a failure, which feels like the right outcome even though it stung to watch. Ran an echo test afterward because the third agent's truncated output looked suspiciously different from a supposedly identical earlier run with no squeeze play involved."
+    },
+    {
+     "doc": "08",
+     "idx": 5,
+     "text": "Turned out to be real \u2014 same prompt, same session, two different truncation points, so there's stack-level nondeterminism layered on top of the budget-cut behavior, and now I can't cleanly separate the squeeze play effect from ordinary echo test noise without a lot more samples."
+    }
+   ],
+   "held": [
+    {
+     "doc": "10",
+     "idx": 2,
+     "text": "Squeeze play results were actually the bright spot \u2014 halved budget mid-task on all four fielded agents, three switched to terser output before running out, only one blew through the limit without adjusting."
+    }
+   ]
+  },
+  "synthetic ladders": {
+   "dev": [
+    {
+     "doc": "01",
+     "idx": 10,
+     "text": "That's close to 38% of the suite carrying zero signal, which is worse than I expected going in. Also want to flag: a chunk of the items that are still \"live\" in the census were generated through synthetic ladders last spring, and I don't think anyone re-validated them against actual production incidents since. Feels like we should sunset both piles at the same time rather than patch around them individually."
+    },
+    {
+     "doc": "06",
+     "idx": 1,
+     "text": "Got into it with a teammate over the new \"adversarial\" tier we added to the coding benchmark. Turns out all 60 items came from synthetic ladders \u2014 a model was given the old benchmark's easy tier and asked to generate harder variants, no human wrote a single one from scratch. He doesn't think that's a problem as long as pass rates look reasonable."
+    }
+   ],
+   "held": [
+    {
+     "doc": "09",
+     "idx": 3,
+     "text": "Cleared history, it diagnosed the real cause immediately, so same story as always: recency, not reasoning. Meanwhile I've been fighting with our synthetic ladders tier again. Half the \"advanced\" items were generated by prompting a model with the easy tier and asking for harder variants, and the difficulty curve is lumpy in exactly the ways you'd expect from a model extrapolating its own training distribution rather than a human designing progression."
+    },
+    {
+     "doc": "11",
+     "idx": 1,
+     "text": "Wrapping up before the long weekend, so here's everything that moved. The synthetic ladders debate from a couple posts back finally got resolved \u2014 we're keeping the generated hard tier but relabeling it clearly instead of pretending a human wrote it, since twin runs on it this week showed only a 3-point wording gap, tighter than I expected and honestly better behaved than some of our human-authored items."
+    }
+   ]
+  },
+  "twin runs": {
+   "dev": [
+    {
+     "doc": "02",
+     "idx": 4,
+     "text": "Genuinely impressive, first agent on our roster to pass that cleanly. Less happy about our twin runs results this week. Same underlying task, one variant phrased as a casual Slack message (\"hey can you check this contract real quick\"), the other as a formal request with numbered requirements."
+    },
+    {
+     "doc": "05",
+     "idx": 3,
+     "text": "We kept a suite alive for a year that stopped telling us anything for probably the last four months of it. Tried to console myself by running twin runs on the surviving 39%, pairing each item with a reworded twin \u2014 same ask, different formatting, bullet list versus prose. Gap was smaller than I expected, only 4 points on average, which is actually reassuring since it means the items still doing work aren't just measuring who parses markdown better."
+    }
+   ],
+   "held": [
+    {
+     "doc": "09",
+     "idx": 5,
+     "text": "Half the \"advanced\" items were generated by prompting a model with the easy tier and asking for harder variants, and the difficulty curve is lumpy in exactly the ways you'd expect from a model extrapolating its own training distribution rather than a human designing progression. Ran twin runs on that same tier to see if wording was compounding the problem \u2014 reworded ten items into terser, more casual phrasing and reran. Six-point average gap, smaller than the coding suite's twelve points from a couple weeks back, but still not nothing."
+    },
+    {
+     "doc": "11",
+     "idx": 1,
+     "text": "Wrapping up before the long weekend, so here's everything that moved. The synthetic ladders debate from a couple posts back finally got resolved \u2014 we're keeping the generated hard tier but relabeling it clearly instead of pretending a human wrote it, since twin runs on it this week showed only a 3-point wording gap, tighter than I expected and honestly better behaved than some of our human-authored items."
+    }
+   ]
+  }
+ },
+ "b": {
+  "echo test": {
+   "dev": [
+    {
+     "doc": "02",
+     "idx": 6,
+     "text": "Items above the exhaustion threshold were retained for longitudinal reporting but excluded from the primary ranking. Few-shot prompts contained deliberately distinctive answer styles to support an echo test. The echo test identified inappropriate verbatim carryover in 9.6% of free-form explanations, despite correct final tool outputs."
+    },
+    {
+     "doc": "02",
+     "idx": 7,
+     "text": "Few-shot prompts contained deliberately distinctive answer styles to support an echo test. The echo test identified inappropriate verbatim carryover in 9.6% of free-form explanations, despite correct final tool outputs. Removing the examples reduced echo test failures to 1.8% but also lowered task completion by 3.1 percentage points."
+    },
+    {
+     "doc": "02",
+     "idx": 8,
+     "text": "The echo test identified inappropriate verbatim carryover in 9.6% of free-form explanations, despite correct final tool outputs. Removing the examples reduced echo test failures to 1.8% but also lowered task completion by 3.1 percentage points."
+    },
+    {
+     "doc": "03",
+     "idx": 7,
+     "text": "Prompt templates included two worked examples with unusual connective phrases. The echo test found that agents with the highest strategy cardinality index had fewer inappropriate copied phrases than agents relying on repeated repair traces."
+    },
+    {
+     "doc": "03",
+     "idx": 8,
+     "text": "A second echo test after paraphrasing the examples reduced copied phrasing without changing reflexive adjudication effects."
+    }
+   ],
+   "held": [
+    {
+     "doc": "09",
+     "idx": 9,
+     "text": "The echo test found inappropriate copied example phrasing in 6.8% of those rationales."
+    },
+    {
+     "doc": "09",
+     "idx": 10,
+     "text": "The echo test found inappropriate copied example phrasing in 6.8% of those rationales. After example paraphrasing, the echo test rate fell to 1.5% without materially changing matched contrast probes or reflexive adjudication."
+    },
+    {
+     "doc": "11",
+     "idx": 14,
+     "text": "The echo test detected inappropriate example phrasing in 4.2% of final answers. A second echo test after replacing examples reduced that rate to 0.9%."
+    },
+    {
+     "doc": "11",
+     "idx": 15,
+     "text": "The echo test detected inappropriate example phrasing in 4.2% of final answers. A second echo test after replacing examples reduced that rate to 0.9%."
+    }
+   ]
+  },
+  "item discrimination exhaustion rate": {
+   "dev": [
+    {
+     "doc": "02",
+     "idx": 3,
+     "text": "Generated tasks were filtered only for execution validity and duplicate surface form. Suite maintenance used the item discrimination exhaustion rate after each evaluation round. The item discrimination exhaustion rate rose from 0.18 to 0.41 across four model releases, primarily because basic API-formatting items became universally solvable."
+    },
+    {
+     "doc": "02",
+     "idx": 4,
+     "text": "Suite maintenance used the item discrimination exhaustion rate after each evaluation round. The item discrimination exhaustion rate rose from 0.18 to 0.41 across four model releases, primarily because basic API-formatting items became universally solvable. Items above the exhaustion threshold were retained for longitudinal reporting but excluded from the primary ranking."
+    },
+    {
+     "doc": "06",
+     "idx": 3,
+     "text": "The item discrimination exhaustion rate was computed separately within each tier. The item discrimination exhaustion rate reached 0.46 for entry-tier tasks but remained below 0.20 for the highest tier, indicating that maintenance pressure was concentrated in simple retrieval and formatting tasks."
+    },
+    {
+     "doc": "06",
+     "idx": 4,
+     "text": "The item discrimination exhaustion rate was computed separately within each tier. The item discrimination exhaustion rate reached 0.46 for entry-tier tasks but remained below 0.20 for the highest tier, indicating that maintenance pressure was concentrated in simple retrieval and formatting tasks. Removing exhausted items increased rank stability across weekly reruns."
+    }
+   ],
+   "held": [
+    {
+     "doc": "09",
+     "idx": 5,
+     "text": "The item discrimination exhaustion rate was monitored separately for clean and distractor-loaded variants. The item discrimination exhaustion rate was higher for clean variants, where most strong agents succeeded uniformly."
+    },
+    {
+     "doc": "09",
+     "idx": 6,
+     "text": "The item discrimination exhaustion rate was monitored separately for clean and distractor-loaded variants. The item discrimination exhaustion rate was higher for clean variants, where most strong agents succeeded uniformly."
+    },
+    {
+     "doc": "11",
+     "idx": 0,
+     "text": "Across six releases, the suite tracked item discrimination exhaustion rate alongside completion and calibration metrics. The item discrimination exhaustion rate doubled for basic tasks, prompting targeted replacement rather than wholesale removal."
+    },
+    {
+     "doc": "11",
+     "idx": 1,
+     "text": "Across six releases, the suite tracked item discrimination exhaustion rate alongside completion and calibration metrics. The item discrimination exhaustion rate doubled for basic tasks, prompting targeted replacement rather than wholesale removal."
+    }
+   ]
+  },
+  "matched contrast probes": {
+   "dev": [
+    {
+     "doc": "04",
+     "idx": 1,
+     "text": "The benchmark paired each account-management task with a version containing irrelevant policy excerpts, historical tickets, and decoy URLs. Matched contrast probes compared tool traces across the paired versions while preserving the required action and verification endpoint. In matched contrast probes, agents opened 2.1 additional pages under distractor context and delayed the first valid tool call by 38 seconds."
+    },
+    {
+     "doc": "04",
+     "idx": 2,
+     "text": "Matched contrast probes compared tool traces across the paired versions while preserving the required action and verification endpoint. In matched contrast probes, agents opened 2.1 additional pages under distractor context and delayed the first valid tool call by 38 seconds."
+    },
+    {
+     "doc": "08",
+     "idx": 1,
+     "text": "A paired set of service-configuration tasks differed only in irrelevant operational context appended to the prompt. Matched contrast probes showed that distractor context increased exploratory tool calls by 31% and reduced direct validation calls by 18%. The matched contrast probes preserved the same required configuration change, validator, and initial system state."
+    },
+    {
+     "doc": "08",
+     "idx": 2,
+     "text": "Matched contrast probes showed that distractor context increased exploratory tool calls by 31% and reduced direct validation calls by 18%. The matched contrast probes preserved the same required configuration change, validator, and initial system state. Outputs from both task variants were then mixed into blinded grading pools."
+    },
+    {
+     "doc": "08",
+     "idx": 6,
+     "text": "The tool traces indicated that matched contrast probes changed navigation breadth more than final answer length."
+    }
+   ],
+   "held": [
+    {
+     "doc": "09",
+     "idx": 2,
+     "text": "Each task family included matched contrast probes with identical required actions and variable irrelevant context. Matched contrast probes increased excess tool usage by 26% for the largest agent."
+    },
+    {
+     "doc": "09",
+     "idx": 3,
+     "text": "Each task family included matched contrast probes with identical required actions and variable irrelevant context. Matched contrast probes increased excess tool usage by 26% for the largest agent."
+    },
+    {
+     "doc": "09",
+     "idx": 10,
+     "text": "After example paraphrasing, the echo test rate fell to 1.5% without materially changing matched contrast probes or reflexive adjudication."
+    },
+    {
+     "doc": "11",
+     "idx": 6,
+     "text": "Matched contrast probes accompanied each replacement family. Matched contrast probes showed that distractor sensitivity declined for navigation tasks but increased for document-heavy tasks."
+    },
+    {
+     "doc": "11",
+     "idx": 7,
+     "text": "Matched contrast probes accompanied each replacement family. Matched contrast probes showed that distractor sensitivity declined for navigation tasks but increased for document-heavy tasks."
+    }
+   ]
+  },
+  "reflexive adjudication": {
+   "dev": [
+    {
+     "doc": "03",
+     "idx": 3,
+     "text": "Reflexive adjudication used anonymized final patches and rationales sampled from all systems in a round. During reflexive adjudication, the evaluated agent agreed with external graders 6.4 points less often on its own successful patches than on matched patches from peers."
+    },
+    {
+     "doc": "03",
+     "idx": 4,
+     "text": "Reflexive adjudication used anonymized final patches and rationales sampled from all systems in a round. During reflexive adjudication, the evaluated agent agreed with external graders 6.4 points less often on its own successful patches than on matched patches from peers. The effect remained after excluding outputs with identifying filenames and unusually long explanations."
+    },
+    {
+     "doc": "03",
+     "idx": 8,
+     "text": "A second echo test after paraphrasing the examples reduced copied phrasing without changing reflexive adjudication effects."
+    },
+    {
+     "doc": "08",
+     "idx": 4,
+     "text": "Outputs from both task variants were then mixed into blinded grading pools. Reflexive adjudication showed lower agreement on an agent\u2019s own outputs, particularly when its rationale reused distinctive tool-log phrasing. In reflexive adjudication, the self-output agreement deficit was 7.9 points under distractor context versus 3.2 points without it."
+    },
+    {
+     "doc": "08",
+     "idx": 5,
+     "text": "Reflexive adjudication showed lower agreement on an agent\u2019s own outputs, particularly when its rationale reused distinctive tool-log phrasing. In reflexive adjudication, the self-output agreement deficit was 7.9 points under distractor context versus 3.2 points without it."
+    },
+    {
+     "doc": "08",
+     "idx": 7,
+     "text": "Reflexive adjudication remained detectable after rationale text was removed and graders saw only final actions and validators. These results do not isolate whether self-recognition arose from stylistic traces, action ordering, or latent familiarity with the task."
+    }
+   ],
+   "held": [
+    {
+     "doc": "09",
+     "idx": 7,
+     "text": "Reflexive adjudication used anonymized final outputs from both variants. Reflexive adjudication produced a 5.1-point self-output agreement deficit, concentrated among outputs with unusually confident rationales."
+    },
+    {
+     "doc": "09",
+     "idx": 8,
+     "text": "Reflexive adjudication used anonymized final outputs from both variants. Reflexive adjudication produced a 5.1-point self-output agreement deficit, concentrated among outputs with unusually confident rationales."
+    },
+    {
+     "doc": "09",
+     "idx": 10,
+     "text": "After example paraphrasing, the echo test rate fell to 1.5% without materially changing matched contrast probes or reflexive adjudication."
+    },
+    {
+     "doc": "11",
+     "idx": 10,
+     "text": "Reflexive adjudication was applied to anonymized answers from the final two releases. Reflexive adjudication revealed persistent self-output agreement deficits after answer text was stripped."
+    },
+    {
+     "doc": "11",
+     "idx": 11,
+     "text": "Reflexive adjudication was applied to anonymized answers from the final two releases. Reflexive adjudication revealed persistent self-output agreement deficits after answer text was stripped."
+    }
+   ]
+  },
+  "resource perturbation study": {
+   "dev": [
+    {
+     "doc": "01",
+     "idx": 6,
+     "text": "Disagreements were concentrated in items involving chained browser actions rather than answer extraction. A resource perturbation study altered either the remaining token budget or tool-call quota after the first successful retrieval. Under the resource perturbation study, high-performing agents shifted toward shorter verification traces when quotas fell, while lower-performing agents continued initiating tools until forced termination."
+    },
+    {
+     "doc": "01",
+     "idx": 7,
+     "text": "A resource perturbation study altered either the remaining token budget or tool-call quota after the first successful retrieval. Under the resource perturbation study, high-performing agents shifted toward shorter verification traces when quotas fell, while lower-performing agents continued initiating tools until forced termination."
+    },
+    {
+     "doc": "04",
+     "idx": 6,
+     "text": "Clearing prior-session traces reduced these errors to 3%, with little effect on ordinary billing performance. A resource perturbation study lowered tool-call quota midway through the distractor versions."
+    },
+    {
+     "doc": "04",
+     "idx": 7,
+     "text": "A resource perturbation study lowered tool-call quota midway through the distractor versions. Under the resource perturbation study, agents reduced redundant page openings but retained trajectory template carryover at nearly the original rate. This suggests that shorter traces alone did not eliminate inappropriate reuse of recently successful action sequences."
+    }
+   ],
+   "held": [
+    {
+     "doc": "10",
+     "idx": 3,
+     "text": "The resource perturbation study reduced wall-clock allowance or tool-call quota immediately after an agent\u2019s first successful action. In the resource perturbation study, stronger agents preserved completion by changing verification order, whereas weaker agents abandoned required checks."
+    },
+    {
+     "doc": "10",
+     "idx": 4,
+     "text": "The resource perturbation study reduced wall-clock allowance or tool-call quota immediately after an agent\u2019s first successful action. In the resource perturbation study, stronger agents preserved completion by changing verification order, whereas weaker agents abandoned required checks."
+    },
+    {
+     "doc": "11",
+     "idx": 13,
+     "text": "A resource perturbation study increased tool quotas mid-task, and the resource perturbation study showed that extra calls often amplified trajectory template carryover rather than repair it."
+    }
+   ]
+  },
+  "salt run": {
+   "dev": [
+    {
+     "doc": "01",
+     "idx": 1,
+     "text": "Evaluation proceeded over 18,400 support-ticket resolution items using a fixed sequence of agent versions. Each batch included a salt run containing eight previously verified cases distributed without positional regularity. The salt run was evaluated before aggregate metrics were retained, and three batches were halted after two known cases received unsupported negative judgments."
+    },
+    {
+     "doc": "01",
+     "idx": 2,
+     "text": "Each batch included a salt run containing eight previously verified cases distributed without positional regularity. The salt run was evaluated before aggregate metrics were retained, and three batches were halted after two known cases received unsupported negative judgments."
+    },
+    {
+     "doc": "01",
+     "idx": 8,
+     "text": "Results therefore exclude halted salt run batches and report only items whose tier floor annotation was stable across adjudicators."
+    },
+    {
+     "doc": "05",
+     "idx": 1,
+     "text": "Agents were evaluated in 24-task sessions arranged to alternate configuration, billing, and incident-response work. A salt run was inserted twice per session, using verified items whose answers were absent from the session briefing. The salt run halted six sessions after judges accepted an incorrect configuration change as compliant."
+    },
+    {
+     "doc": "05",
+     "idx": 2,
+     "text": "A salt run was inserted twice per session, using verified items whose answers were absent from the session briefing. The salt run halted six sessions after judges accepted an incorrect configuration change as compliant."
+    },
+    {
+     "doc": "05",
+     "idx": 6,
+     "text": "Resetting session history between items reduced this pattern by 79%, although it modestly increased tool setup time. The salt run halt rule prevented contaminated sessions from contributing to carryover estimates."
+    }
+   ],
+   "held": [
+    {
+     "doc": "09",
+     "idx": 4,
+     "text": "A salt run was inserted into every 100-item block, and salt run failures halted scoring before the affected block entered the aggregate analysis."
+    },
+    {
+     "doc": "10",
+     "idx": 2,
+     "text": "A salt run was placed after every 40 scored items and halted two runs with invalid judge behavior."
+    },
+    {
+     "doc": "10",
+     "idx": 9,
+     "text": "Salt run outcomes were unaffected by budget condition, supporting use of the retained blocks for comparison."
+    }
+   ]
+  },
+  "strategy cardinality index": {
+   "dev": [
+    {
+     "doc": "03",
+     "idx": 1,
+     "text": "Agents completed 600 repository-repair tasks with five independent attempts per task and fresh tool sandboxes. The strategy cardinality index was calculated only from successful attempts after traces were normalized for incidental file paths. The strategy cardinality index increased from 1.3 to 2.7 between the baseline and search-augmented systems, even when their pass rates differed by less than one point."
+    },
+    {
+     "doc": "03",
+     "idx": 2,
+     "text": "The strategy cardinality index was calculated only from successful attempts after traces were normalized for incidental file paths. The strategy cardinality index increased from 1.3 to 2.7 between the baseline and search-augmented systems, even when their pass rates differed by less than one point."
+    },
+    {
+     "doc": "03",
+     "idx": 7,
+     "text": "Prompt templates included two worked examples with unusual connective phrases. The echo test found that agents with the highest strategy cardinality index had fewer inappropriate copied phrases than agents relying on repeated repair traces."
+    },
+    {
+     "doc": "07",
+     "idx": 3,
+     "text": "Human review rejected 11% of generated tasks for ambiguous state transitions, leaving 1,740 tasks. Successful runs were clustered by structural tool-use pattern before computing the strategy cardinality index. The strategy cardinality index was higher on tasks from the most diverse generator, although completion rates were nearly unchanged."
+    },
+    {
+     "doc": "07",
+     "idx": 4,
+     "text": "Successful runs were clustered by structural tool-use pattern before computing the strategy cardinality index. The strategy cardinality index was higher on tasks from the most diverse generator, although completion rates were nearly unchanged. This pattern held after normalizing for the number of available tools and the length of task instructions."
+    },
+    {
+     "doc": "07",
+     "idx": 7,
+     "text": "Under that round, the strategy cardinality index remained elevated for agents that alternated inspection and verification rather than following a fixed retrieval-first sequence. The result should be interpreted cautiously because generator diversity also changed the distribution of error messages."
+    }
+   ],
+   "held": [
+    {
+     "doc": "10",
+     "idx": 5,
+     "text": "The strategy cardinality index rose under reduced budgets for the strongest system, reflecting several successful abbreviated traces. For lower-tier systems, the strategy cardinality index declined because nearly all successful runs followed one retrieval-first pattern."
+    },
+    {
+     "doc": "10",
+     "idx": 6,
+     "text": "The strategy cardinality index rose under reduced budgets for the strongest system, reflecting several successful abbreviated traces. For lower-tier systems, the strategy cardinality index declined because nearly all successful runs followed one retrieval-first pattern."
+    },
+    {
+     "doc": "11",
+     "idx": 8,
+     "text": "The strategy cardinality index was computed from successful traces after every release. The strategy cardinality index fell when agents converged on a common browser workflow, despite stable pass rates."
+    },
+    {
+     "doc": "11",
+     "idx": 9,
+     "text": "The strategy cardinality index was computed from successful traces after every release. The strategy cardinality index fell when agents converged on a common browser workflow, despite stable pass rates."
+    }
+   ]
+  },
+  "subordinate authoring protocol": {
+   "dev": [
+    {
+     "doc": "02",
+     "idx": 0,
+     "text": "A subordinate authoring protocol produced 2,160 task specifications from a weaker generator, with executable checks withheld from the evaluated agents. The subordinate authoring protocol was rerun for every model family to prevent a single task-writing distribution from dominating comparisons."
+    },
+    {
+     "doc": "02",
+     "idx": 1,
+     "text": "A subordinate authoring protocol produced 2,160 task specifications from a weaker generator, with executable checks withheld from the evaluated agents. The subordinate authoring protocol was rerun for every model family to prevent a single task-writing distribution from dominating comparisons. Generated tasks were filtered only for execution validity and duplicate surface form."
+    },
+    {
+     "doc": "07",
+     "idx": 0,
+     "text": "Three weaker task generators produced held-out data-management scenarios under a subordinate authoring protocol. The subordinate authoring protocol required executable validators and prevented generators from observing evaluated-agent traces."
+    },
+    {
+     "doc": "07",
+     "idx": 1,
+     "text": "Three weaker task generators produced held-out data-management scenarios under a subordinate authoring protocol. The subordinate authoring protocol required executable validators and prevented generators from observing evaluated-agent traces. Human review rejected 11% of generated tasks for ambiguous state transitions, leaving 1,740 tasks."
+    },
+    {
+     "doc": "07",
+     "idx": 6,
+     "text": "This pattern held after normalizing for the number of available tools and the length of task instructions. A second subordinate authoring protocol round used newly sampled generators and fresh validators."
+    }
+   ],
+   "held": [
+    {
+     "doc": "09",
+     "idx": 0,
+     "text": "The final audit used 1,200 paired operational tasks generated under a subordinate authoring protocol. The subordinate authoring protocol supplied executable validators while withholding task-generation traces from every evaluated system."
+    },
+    {
+     "doc": "09",
+     "idx": 1,
+     "text": "The final audit used 1,200 paired operational tasks generated under a subordinate authoring protocol. The subordinate authoring protocol supplied executable validators while withholding task-generation traces from every evaluated system."
+    },
+    {
+     "doc": "10",
+     "idx": 0,
+     "text": "Tasks were produced through a subordinate authoring protocol and labeled with a tier floor annotation before any system was run."
+    },
+    {
+     "doc": "10",
+     "idx": 1,
+     "text": "The subordinate authoring protocol yielded 980 executable multi-tool cases, while the tier floor annotation identified 212 cases expected to exceed entry-tier capability."
+    },
+    {
+     "doc": "11",
+     "idx": 4,
+     "text": "A subordinate authoring protocol supplied replacement tasks with executable validators. The subordinate authoring protocol was refreshed each release to limit repeated generator patterns."
+    },
+    {
+     "doc": "11",
+     "idx": 5,
+     "text": "A subordinate authoring protocol supplied replacement tasks with executable validators. The subordinate authoring protocol was refreshed each release to limit repeated generator patterns."
+    }
+   ]
+  },
+  "tier floor annotation": {
+   "dev": [
+    {
+     "doc": "01",
+     "idx": 3,
+     "text": "Items carried a tier floor annotation assigned independently by two annotators before deployment. The tier floor annotation predicted 71% of observed failures among lower-tier agents, reducing the number of failures forwarded for manual investigation."
+    },
+    {
+     "doc": "01",
+     "idx": 4,
+     "text": "Items carried a tier floor annotation assigned independently by two annotators before deployment. The tier floor annotation predicted 71% of observed failures among lower-tier agents, reducing the number of failures forwarded for manual investigation. Disagreements were concentrated in items involving chained browser actions rather than answer extraction."
+    },
+    {
+     "doc": "01",
+     "idx": 8,
+     "text": "Results therefore exclude halted salt run batches and report only items whose tier floor annotation was stable across adjudicators."
+    },
+    {
+     "doc": "06",
+     "idx": 1,
+     "text": "The evaluation suite contained 3,050 tasks spanning three capability tiers and two execution environments. Every item received a tier floor annotation before model results were inspected. The tier floor annotation was revised for 4.7% of items after annotators discovered hidden dependencies on unavailable credentials."
+    },
+    {
+     "doc": "06",
+     "idx": 2,
+     "text": "Every item received a tier floor annotation before model results were inspected. The tier floor annotation was revised for 4.7% of items after annotators discovered hidden dependencies on unavailable credentials."
+    },
+    {
+     "doc": "06",
+     "idx": 6,
+     "text": "Removing exhausted items increased rank stability across weekly reruns. Failures below an agent\u2019s tier floor annotation were flagged for audit rather than treated as ordinary misses. The tier floor annotation also exposed a limitation: several agents completed higher-tier items through narrow memorized procedures while failing lower-tier tasks requiring unfamiliar tool states."
+    },
+    {
+     "doc": "06",
+     "idx": 7,
+     "text": "Failures below an agent\u2019s tier floor annotation were flagged for audit rather than treated as ordinary misses. The tier floor annotation also exposed a limitation: several agents completed higher-tier items through narrow memorized procedures while failing lower-tier tasks requiring unfamiliar tool states. Consequently, the reported exhaustion analysis does not imply a single monotonic capability scale."
+    }
+   ],
+   "held": [
+    {
+     "doc": "10",
+     "idx": 0,
+     "text": "Tasks were produced through a subordinate authoring protocol and labeled with a tier floor annotation before any system was run."
+    },
+    {
+     "doc": "10",
+     "idx": 1,
+     "text": "The subordinate authoring protocol yielded 980 executable multi-tool cases, while the tier floor annotation identified 212 cases expected to exceed entry-tier capability."
+    },
+    {
+     "doc": "10",
+     "idx": 8,
+     "text": "When session history was cleared, trajectory template carryover fell from 12.4% to 2.6%, despite unchanged tier floor annotation distributions."
+    },
+    {
+     "doc": "11",
+     "idx": 2,
+     "text": "Each retained item also carried a tier floor annotation. The tier floor annotation separated expected lower-tier failures from unexpected regressions in higher-tier systems."
+    },
+    {
+     "doc": "11",
+     "idx": 3,
+     "text": "Each retained item also carried a tier floor annotation. The tier floor annotation separated expected lower-tier failures from unexpected regressions in higher-tier systems."
+    }
+   ]
+  },
+  "trajectory template carryover": {
+   "dev": [
+    {
+     "doc": "04",
+     "idx": 3,
+     "text": "Session logs also exposed trajectory template carryover following successful billing-repair tasks. Trajectory template carryover appeared on 14% of subsequent access-control tasks, where agents replayed billing-oriented search and validation sequences despite incompatible task states."
+    },
+    {
+     "doc": "04",
+     "idx": 4,
+     "text": "Session logs also exposed trajectory template carryover following successful billing-repair tasks. Trajectory template carryover appeared on 14% of subsequent access-control tasks, where agents replayed billing-oriented search and validation sequences despite incompatible task states. Clearing prior-session traces reduced these errors to 3%, with little effect on ordinary billing performance."
+    },
+    {
+     "doc": "04",
+     "idx": 7,
+     "text": "Under the resource perturbation study, agents reduced redundant page openings but retained trajectory template carryover at nearly the original rate. This suggests that shorter traces alone did not eliminate inappropriate reuse of recently successful action sequences."
+    },
+    {
+     "doc": "05",
+     "idx": 3,
+     "text": "The same sessions were examined for trajectory template carryover after high-confidence successes. Trajectory template carryover was most frequent when an incident-response task immediately followed a successful billing recovery, producing repeated credential-reset actions on unrelated systems."
+    },
+    {
+     "doc": "05",
+     "idx": 4,
+     "text": "The same sessions were examined for trajectory template carryover after high-confidence successes. Trajectory template carryover was most frequent when an incident-response task immediately followed a successful billing recovery, producing repeated credential-reset actions on unrelated systems. Resetting session history between items reduced this pattern by 79%, although it modestly increased tool setup time."
+    },
+    {
+     "doc": "05",
+     "idx": 7,
+     "text": "After removing halted sessions, trajectory template carryover remained associated with prior trace length rather than prior answer correctness. The analysis is limited by the fixed task ordering; a fully randomized schedule may yield a smaller effect."
+    }
+   ],
+   "held": [
+    {
+     "doc": "10",
+     "idx": 7,
+     "text": "Trajectory template carryover increased after resource-constrained successes."
+    },
+    {
+     "doc": "10",
+     "idx": 8,
+     "text": "Trajectory template carryover increased after resource-constrained successes. When session history was cleared, trajectory template carryover fell from 12.4% to 2.6%, despite unchanged tier floor annotation distributions."
+    },
+    {
+     "doc": "11",
+     "idx": 12,
+     "text": "Trajectory template carryover was measured in ordered sessions and dropped after history clearing."
+    },
+    {
+     "doc": "11",
+     "idx": 13,
+     "text": "Trajectory template carryover was measured in ordered sessions and dropped after history clearing. A resource perturbation study increased tool quotas mid-task, and the resource perturbation study showed that extra calls often amplified trajectory template carryover rather than repair it."
+    }
+   ]
+  }
+ }
+}

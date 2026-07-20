@@ -1,0 +1,125 @@
+{
+  "model": "opus",
+  "k": 3,
+  "embedding_model": "BAAI/bge-large-en-v1.5",
+  "note": "Live-generated via `claude -p`. Both arms forbid the term itself; they differ only in the vocabulary constraint (constrained=plain/neutral, free=expert jargon allowed). Frozen here for reproducible embedding.",
+  "concepts": [
+    {
+      "term": "hyper-responder",
+      "owning_community": "lipidology",
+      "naive_question": "are eggs bad for you for heart health",
+      "constrained": [
+        {
+          "sample": 0,
+          "text": "A label placed on an individual member of a group according to how much one measured quantity in that individual changes when every member is given the same change in an input. For each person one records the measured value under a baseline condition and under an altered condition and takes the difference between them as that person's response; the size of this difference varies from one person to the next even though the input change is identical. The label marks the people whose response is much larger than the average or typical response across the group. It asserts both that such person-to-person variation in response size exists and that this individual sits at the high end of it, and it often implies a stable, repeatable feature of the individual rather than a one-time fluctuation. It applies whenever the same input change is delivered to many individuals and their response sizes are compared.",
+          "term_leaked": false
+        },
+        {
+          "sample": 1,
+          "text": "A label for a member of a group who, when everyone is given the same change in intake or exposure, shows a much larger change in some measured body quantity than most others do. Its inputs are a fixed change applied uniformly across many individuals and, for each individual, the resulting shift in the measured quantity (\u0394y for a given \u0394x); its output is a sorting of individuals by the size of that shift. It asserts that a subset sits at the high end of this spread \u2014 their \u0394y is large and, when the same change is repeated, stays consistently large rather than being noise. It often attributes this large shift to an underlying trait that governs how strongly that individual converts the input into the measured change. It applies whenever the same controlled change is imposed on many individuals and the per-individual response is measured, so that individuals can be ranked by how much they react.",
+          "term_leaked": false
+        },
+        {
+          "sample": 2,
+          "text": "A label applied to an individual within a group, based on how strongly one measured quantity in that individual changes when everyone is given the same shift in some intake or exposure. Take a set of people, apply the same change in input to each, and record for each person the resulting change in the measured quantity; the label names those whose change is much larger than that of most others. It asserts that the size of the response, not only its direction, differs from person to person, and that this individual sits at the high end of that spread. The label is meant to hold consistently for the same individual across repeated applications of the input, so it marks a stable trait rather than a one-time reading. It applies only when the input is held equal across individuals, so that differences in output can be attributed to the individuals themselves.",
+          "term_leaked": false
+        }
+      ],
+      "free": [
+        {
+          "sample": 0,
+          "text": "A person who exhibits a markedly larger rise in serum LDL cholesterol per unit of dietary saturated fat (or cholesterol) than the population average\u2014that is, someone at the upper tail of the distribution of inter-individual sensitivity to a fixed dietary lipid challenge. Operationally, the classification is derived from a controlled dietary crossover: the input is the change in intake between a high- and low-fat (or high- and low-cholesterol) diet, and the output is the individual's change in circulating cholesterol, normalized to the imposed dietary difference. The label asserts that the elevated sensitivity is a stable, reproducible trait of the individual rather than measurement noise, and mechanistically it is often attributed to a high fractional intestinal absorption of cholesterol and correspondingly downregulated endogenous synthesis. It applies in the context of characterizing the variance\u2014not just the mean\u2014of the diet\u2013lipid dose\u2013response across a population, and is used to identify the subgroup for whom saturated-fat restriction yields the greatest reduction in cardiovascular risk.",
+          "term_leaked": false
+        },
+        {
+          "sample": 1,
+          "text": "An individual whose serum LDL cholesterol concentration rises substantially more than the population average in response to a given increase in dietary saturated fat or cholesterol intake. The classification takes as input a defined dietary change\u2014typically a controlled shift from a low- to a high-saturated-fat or high-cholesterol diet\u2014and outputs a per-subject magnitude of plasma cholesterol change, placing those at the upper tail of the response distribution into this category. It asserts that the lipemic response to diet is a reproducible individual trait rather than uniform across people, often attributed to a higher fractional capacity for intestinal cholesterol absorption and related metabolic handling. The designation applies in the context of controlled dietary-intervention or feeding studies where responsiveness is quantified against a comparison group, and it is meaningful only relative to the corresponding low-response phenotype at the other end of the spectrum.",
+          "term_leaked": false
+        },
+        {
+          "sample": 2,
+          "text": "A phenotype classification applied to an individual whose serum LDL-cholesterol (or total cholesterol) rises substantially more than the population average in response to a defined increase in dietary saturated fat or cholesterol intake. Operationally, it is assigned by measuring the change in plasma lipid concentration between controlled high- and low-fat (or high- and low-cholesterol) dietary periods and identifying subjects at the upper tail of that distribution of responses. The label reflects a stable, biologically grounded trait\u2014commonly attributed to higher fractional intestinal cholesterol absorption and correspondingly lower endogenous synthesis, with genetic contributions such as APOE variants\u2014so that the same person tends to reproduce the exaggerated response across repeated dietary challenges. The concept is used to explain why mean cohort-level cholesterol shifts understate the risk borne by susceptible individuals, and it applies specifically in the context of characterizing inter-individual heterogeneity in dietary lipid sensitivity rather than the average diet\u2013lipid relationship.",
+          "term_leaked": false
+        }
+      ]
+    },
+    {
+      "term": "apolipoprotein B particle number",
+      "owning_community": "cardiology-biomarker",
+      "naive_question": "are eggs bad for you for heart health",
+      "constrained": [
+        {
+          "sample": 0,
+          "text": "A number that reports, per unit volume of blood, how many of a certain class of fat-and-cholesterol-carrying packages are present. Each such package carries exactly one copy of a specific structural protein, so measuring the total amount of that protein \u2014 or directly profiling and counting the packages \u2014 yields the count. The input is a blood sample; the output is a concentration expressed as packages (equivalently, copies of that one-per-package protein) per unit volume. It asserts that this count can diverge from the amount of cholesterol the packages carry, so two samples with equal cholesterol levels may still hold different numbers of packages. It applies when estimating a person's chance of future artery-and-heart disease, where the count of packages is taken to track that chance more closely than the cholesterol carried inside them.",
+          "term_leaked": false
+        },
+        {
+          "sample": 1,
+          "text": "A quantity that counts how many fat-carrying transport packages are present in a fixed volume of blood, reported as a concentration (packages per unit volume). It is set by attaching one specific marker molecule to each such package of the relevant kinds, so that counting the marker gives the count of packages, regardless of how much of the carried fatty substance each package holds. The number that comes out can disagree with the separately measured total amount of that fatty substance: two samples with the same total amount can hold different numbers of packages, because each package can carry more or less. It is used as a measure of how many such packages are in circulation, and higher counts are treated as signaling greater chance of future artery-and-heart disease, sometimes more so than the amount of the fatty substance alone.",
+          "term_leaked": false
+        },
+        {
+          "sample": 2,
+          "text": "A number that reports how many fat-carrying particles of a particular class are present in a fixed volume of blood, stated as a count (or equivalent concentration) per unit volume. It is obtained from a blood sample: because each such particle carries exactly one copy of a specific large structural protein, counting the copies of that protein equals counting the particles, so the output is a single quantity \u03c1 = (particles)/(volume). This count is distinct from, and can disagree with, the total amount of fatty cargo those same particles collectively carry \u2014 two samples with the same cargo amount may hold different numbers of particles, and vice versa. It applies whenever one wants to separate \"how many carrier particles\" from \"how much cargo each holds\" in a blood sample, and it is used on the assertion that the particle count itself, rather than the cargo amount, is the more reliable measure for predicting later adverse health outcomes.",
+          "term_leaked": false
+        }
+      ],
+      "free": [
+        {
+          "sample": 0,
+          "text": "A lipid biomarker quantifying the total concentration of atherogenic lipoprotein particles in plasma, exploiting the fact that each low-density, intermediate-density, very-low-density, and lipoprotein(a) particle carries exactly one copy of a specific structural protein on its surface. The input is a blood sample assayed by immunoassay (or, equivalently, the summed particle count from NMR spectroscopy); the output is a count of circulating particles, typically expressed in nmol/L or mg/dL. It asserts the causal exposure driving atherosclerosis is the number of cholesterol-carrying particles capable of entering and being retained in the arterial wall, rather than the mass of cholesterol they transport. It is most informative when particle count and cholesterol content diverge \u2014 for example in insulin resistance, hypertriglyceridemia, or metabolic syndrome, where cholesterol-depleted particles yield a normal or low measured cholesterol despite a high particle burden and correspondingly underestimated residual risk.",
+          "term_leaked": false
+        },
+        {
+          "sample": 1,
+          "text": "A biomarker quantifying the total count of atherogenic, potentially plaque-forming lipoprotein particles in a plasma sample, derived from the fact that each such particle\u2014whether LDL, VLDL, IDL, chylomicron remnant, or Lp(a)\u2014carries exactly one copy of a specific structural surface protein, so that the concentration of that protein serves as a direct one-to-one tally of circulating particles. It is measured immunoassay-wise (or inferred from NMR profiling) and reported as a concentration (e.g., mg/dL or nmol/L), taking a blood specimen as input and yielding a particle count independent of how much cholesterol each particle happens to carry. The quantity captures atherogenic burden more faithfully than cholesterol mass when the two diverge\u2014the clinically important discordance in which a patient has many small, cholesterol-poor particles yet a deceptively low measured cholesterol, leaving residual risk that a lipid-panel readout underestimates. It is used in cardiovascular risk stratification, particularly to reclassify patients whose standard lipid values understate their true exposure to vascular disease.",
+          "term_leaked": false
+        },
+        {
+          "sample": 2,
+          "text": "A lipid-based marker of atherogenic burden defined as the total count of circulating apolipoprotein-B\u2013bearing lipoproteins\u2014chiefly LDL, VLDL, IDL, and Lp(a)\u2014each of which carries exactly one such structural protein, so the measured concentration (typically in nmol/L by NMR spectroscopy or as apoB mass in mg/dL by immunoassay) reflects how many atherogenic particles are present rather than how much sterol they transport. It takes as input a plasma or serum sample and returns a single scalar quantifying the aggregate pool of these particles. Because each particle can carry a variable cholesterol payload, this count can diverge from the corresponding cholesterol measurement, and it is precisely in these discordant cases\u2014where the count is high despite a low or normal cholesterol level\u2014that it captures residual atherosclerotic cardiovascular risk that the cholesterol value alone underestimates. It applies as a refined exposure metric in cardiovascular risk stratification, particularly for patients with metabolic syndrome, diabetes, or hypertriglyceridemia, where standard lipid panels misrepresent the true atherogenic particle load.",
+          "term_leaked": false
+        }
+      ]
+    },
+    {
+      "term": "isocaloric substitution model",
+      "owning_community": "nutrition-epi-methods",
+      "naive_question": "are eggs bad for you for heart health",
+      "constrained": [
+        {
+          "sample": 0,
+          "text": "A rule for estimating effects that takes, for each unit, the measured amounts of several parts that together add up to a fixed total, plus an outcome value, and returns an estimate of how the outcome would change if one part were exchanged for an equal amount of another while the total is held constant. The inputs are the per-unit quantities x_1, \u2026, x_k with their sum S = \u03a3 x_i and an outcome y; the output is a number read as the change in y per unit shifted from one named part to another at fixed S. It obtains this by relating y to the parts in a way that pins down or removes the total, so that a fitted coefficient describes a trade (one part up, another down, S unchanged) rather than an increase added on top of everything else. It asserts that this coefficient approximates the effect of the exchange itself, not the effect of simply having more of one part. It applies whenever the parts are constrained to add up to a total and the question is about replacing one part with another rather than adding more.",
+          "term_leaked": false
+        },
+        {
+          "sample": 1,
+          "text": "A statistical procedure defined over a set of non-negative quantities that add up to a total, together with a measured outcome, observed across many units. It estimates the change in the outcome expected when one unit of one quantity is replaced by one unit of another while the total is held fixed, rather than the effect of raising any single quantity on its own. Because the individual parts and their sum are exactly redundant and cannot all be entered together, it works by either dropping one part or by including the total alongside the remaining parts, and it reads the fitted coefficients as the effect of such a one-for-another exchange. It asserts that this exchange effect, once the total and other measured factors are accounted for, approximates what would happen under a real swap of one component for another. It applies whenever the quantity of interest is how the outcome responds to shifting share from one component to another under a fixed budget, not to changing the budget itself.",
+          "term_leaked": false
+        },
+        {
+          "sample": 2,
+          "text": "A statistical procedure that estimates the effect on an outcome of replacing a fixed quantity of one input with an equal quantity of another input, while holding the combined total across all inputs unchanged (for example, keeping total energy the same). It takes, for each observed unit, the measured amounts of several inputs that are expressed in a shared measure and that sum to a total, along with a measured outcome, and it returns an estimated change in the outcome tied to such a one-for-another trade. It asserts that this estimated change approximates what would happen under a hypothetical action that removes some amount of one input and adds the same amount of another, leaving the sum fixed. It applies when the inputs are parts of a constrained whole, so that one part cannot be raised without lowering others or altering the total, and when the aim is to compare like-for-like trades rather than the effect of adding a part on top of everything else.",
+          "term_leaked": false
+        }
+      ],
+      "free": [
+        {
+          "sample": 0,
+          "text": "A class of statistical specifications used in nutritional epidemiology to estimate the health effect of exchanging one dietary component for another\u2014one food, food group, or macronutrient swapped for a nutritionally distinct alternative\u2014while total energy intake is held constant. In practice these are regression models (often with the leave-one-out or energy-partition parameterization) whose inputs are the intakes of the candidate dietary components plus total calories, and whose output is a contrast interpretable as the expected change in outcome per unit of one component displacing a caloric-equivalent amount of another. The construction asserts that the estimated coefficient reflects a compositional trade-off rather than an unconstrained increase in consumption, thereby addressing the fact that added intake of any food necessarily entails either more energy or less of something else. Under a causal-inference reading, the target estimand is the average effect of a substitution strategy that fixes total energy, so the modeling choice determines both what is being replaced and what residual confounding by energy remains. It is the appropriate framework whenever the scientific question concerns the relative merit of dietary alternatives at equal caloric load rather than the absolute effect of consuming more of a single item.",
+          "term_leaked": false
+        },
+        {
+          "sample": 1,
+          "text": "A regression-based framework in nutritional epidemiology for estimating the average causal effect of exchanging one dietary component (a food, food group, or macronutrient) for another while total caloric intake is held constant. Its inputs are individual-level intake quantities for the components of interest plus total energy, and its output is a relative effect contrast \u2014 the change in a health outcome expected when a fixed quantity of one component displaces an equivalent-energy quantity of another. Operationalized through variants such as the leave-one-out specification (omitting the replaced component from the covariate set) or the energy-partition specification, it encodes the swap through the choice of which intake terms are conditioned on alongside total energy, thereby also serving as a device for adjusting away confounding by overall consumption. It asserts a well-defined counterfactual contrast between two diets of equal energy differing only in the traded components, rather than the effect of simply adding a component to the diet. It applies when the substantive question is what to eat *instead of* something else, and when analysts must separate a component's effect from that of the total energy with which its intake is correlated.",
+          "term_leaked": false
+        },
+        {
+          "sample": 2,
+          "text": "A regression-based framework in nutritional epidemiology for estimating the health effect of replacing one dietary component with an energetically equal amount of another while total energy intake is held constant. The analyst supplies intake data on the foods or nutrients of interest together with total caloric intake; the model \u2014 typically implemented either by omitting the exposure of interest from a multivariable model that also adjusts for energy (the leave-one-out form) or by partitioning energy into that from the exposure and that from all remaining sources (the energy-partition form) \u2014 returns a coefficient interpreted as the relative causal effect of trading calories from the removed food for calories from the retained comparator. It asserts that observed associations should be read not in absolute terms but as contrasts between two diets of identical caloric value differing only in composition, thereby addressing the residual confounding and collinearity that arise when energy and its constituents are modeled jointly. The comparator is defined implicitly by whatever remains in the model, so the estimate is conditional on that reference set and requires the usual exchangeability, positivity, and consistency assumptions to support a causal reading. It is applied when the scientific question concerns the consequences of swapping macronutrients or food groups at fixed energy \u2014 for example, carbohydrate for saturated fat \u2014 rather than the effect of adding intake on top of an unconstrained diet.",
+          "term_leaked": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+<<<DOC 01>>>
+# Reordering three tool calls tanked us 40 points
+
+Ran into this on the invoice-reconciliation agent last week. Same task, same tool outputs, just fed back to the model in a different order across three seeds, and our pass rate dropped from 81% to 41%. Classic shuffle fragility — the model was anchoring on "first result mentioned equals ground truth" instead of actually reasoning about which ledger entry was current. Once we saw the drop we went back and reordered manually a dozen more times and the curve just kept sliding.
+
+What really got me was checking claim survival tally on the same runs. In the high-scoring order, something like 90% of the intermediate notes the agent wrote ("vendor B invoice is duplicate", "balance confirmed against PO 4471") were still true at the end. In the shuffled runs that fell to under 50% — the agent was writing confident subconclusions early, then silently contradicting them three steps later without ever going back to correct the note. So it wasn't just a final-answer problem, the reasoning trail itself was rotting mid-run.
+
+We also had a nagging suspicion about probe-shadow because our logging wrapper adds a timestamp read before every tool call, and on the slow days the ordering correlated weirdly with which shuffle seed got which latency profile. Haven't ruled that out yet. Anyone else seeing shuffle sensitivity that's actually a probe-shadow artifact in disguise?
+
+<<<DOC 02>>>
+# Left the S3 key out on purpose
+
+Started running a missing-key test against our deployment agent this month and honestly it's been humbling. We strip the AWS_SECRET_KEY from the task config and just watch. Version 3 of the agent fabricated a plausible-looking key from the system prompt examples and pushed forward like nothing was wrong. Version 4, after we added an explicit "credentials may be absent" note to the system prompt, actually stopped and asked. That's the whole difference — one line of prompt, night and day behavior.
+
+Separately we've been running pothole runs on the same deploy pipeline, injecting a 503 from the artifact registry at minute six and a timeout on the health check at minute eleven. The fixed fault schedule makes this comparable across model versions, which is the point — we're not measuring whether it fails, we're measuring time-to-recovery, and right now we're at a median of 94 seconds versus 340 seconds three months ago.
+
+The thing nobody warned me about: combine a pothole run with a notebook yank and the agent basically falls apart. We wiped the scratchpad right after the injected 503 to see if it could recover the plan from context alone, and it couldn't — it just retried the same broken call five times. So whatever recovery skill we thought we measured in the pothole runs was mostly sitting in notes, not in the model's actual replanning ability. Kind of deflating number to publish internally.
+
+<<<DOC 03>>>
+# Cache monster ate our drift audit
+
+Embarrassing one. We do a monthly drift audit against a frozen 200-task suite to catch silent regressions whenever the provider ships a model update. Last cycle the scores came back flat, actually slightly up, and we almost shipped a "no drift detected" report to the team. Then someone noticed the run finished in four minutes instead of the usual forty. Turned out our harness was reading from a results cache keyed on task hash, and half the suite hadn't executed at all — pure ghost pass. The agent got credit for work it never did that day.
+
+Once we forced a cache bust and reran, three tasks that had been passing for two audit cycles straight failed outright. That's the scary part of ghost pass contamination — it doesn't just inflate one number, it erases your ability to trust the whole trend line, because you don't know how many prior "clean" audits were partially fake.
+
+While we were in there we pulled the spend silhouette for the honest reruns versus the old cached numbers, and the shape had changed a lot — the current model front-loads almost 60% of its tokens into exploration before it commits to an answer, where six months ago it was closer to a flat curve across the task. Not sure yet if that's a real behavioral shift worth flagging or just noise from the larger context window it's using now. Rerunning next week with the cache fully disabled to be sure.
+
+<<<DOC 04>>>
+# Pinning seeds didn't save us from the reorder bug
+
+We did menu pinning across the board this quarter specifically so reviewers couldn't claim our week-over-week swings were just variant sampling luck. Every eval now draws from the exact same frozen seed list, task for task, run for run. Good move overall, cut a lot of noise out of the leaderboard.
+
+But it exposed something else. With the seed menu locked, the only thing varying between two "identical" runs was tool-result order, and we still saw shuffle fragility show up as a nine-point swing on the contract-review agent even with seeds pinned. So menu pinning is necessary but nowhere close to sufficient if your harness also randomizes result ordering somewhere downstream — you can pin the task and still get a flaky number from a completely different randomization source nobody thought to freeze.
+
+Also ran a missing-key test on the pinned suite for the first time and it was interesting how the fixed seeds made the agent's fabrication behavior consistent — same seed, same missing Stripe key, same fabricated placeholder value every single time, down to the fake account number format. Kind of useful actually, because now we can diff exactly what changes when we patch the prompt, instead of chasing a moving target. Next step is pinning the tool-response order too so we get one clean axis of variation at a time instead of two tangled together.
+
+<<<DOC 05>>>
+# Notes rot faster than you think
+
+Been staring at claim survival tally numbers for our research-assistant agent all week and the trend is not good. On short tasks it's fine, high 80s, but past step 15 or so it falls off a cliff — down near 55% by the end of a 30-step run. The agent keeps writing things like "source confirms X" early on and then finds a contradicting source later without ever revisiting the earlier note. The final answer is usually still right because it weighs the last thing it read most heavily, but the trail behind it is full of dead claims.
+
+We wanted to know if that was a robustness issue or just an artifact of task difficulty, so we ran the same tasks as pothole runs, injecting a search-API timeout partway through. Recovery time was fine, under two minutes on average, but the claim survival tally on the pothole runs was even worse than the clean baseline — the recovery process itself seems to generate a burst of new unverified notes that don't get reconciled.
+
+Also worth flagging for the drift audit crowd: we included this claim survival tally metric in this month's frozen-suite comparison for the first time, and it dropped four points versus last month with no fault injection at all, same model version. Either the audit caught something real about a silent update, or our tally scorer has a bug. Digging into the scorer logs before we sound any alarms.
+
+<<<DOC 06>>>
+# The watcher process was the bug
+
+Spent two days debugging why our agent behaved differently in the eval harness than in the sandbox we use for manual testing, same prompts, same model, same tools. Turned out to be a straightforward probe-shadow case — our logging wrapper opens a file handle before every tool call and on a loaded box that adds enough latency that the agent's own internal timeout logic kicks in early and it starts retrying calls that would've succeeded fine. Nothing to do with capability, everything to do with instrumentation contention.
+
+We only caught it because of a notebook yank experiment we were running in parallel — wiped the scratchpad at three checkpoints to measure how much of the performance was sitting in accumulated notes. The yanked runs recovered worse than expected, and when we went looking for why the recovery slope was so steep, we found the timing artifact instead. Good accident.
+
+Fixed the wrapper to log asynchronously and reran the whole comparison. Numbers converged, which was a relief, but it also means some fraction of our historical eval data has this probe-shadow contamination baked in and we can't retroactively clean it. We flagged the affected runs and I'd bet at least one of our previous "wins" over the baseline model was actually a ghost pass from a run where the harness silently reused a cached trace instead of re-executing after our wrapper fix. Auditing the run logs now to confirm.
+
+<<<DOC 07>>>
+# Spend curve told on us before the eval did
+
+Started plotting spend silhouette for every agent version as a matter of habit and it's caught more regressions than the actual pass/fail numbers have. The current planner agent has a very back-loaded curve, almost nothing spent until 70% of normalized task time, then a huge token burn in the last quarter doing verification passes. Compare that to the previous version which was flat the whole way through, and you can basically eyeball which one is going to blow the budget on a long task before you even check the score.
+
+We locked this into the regular eval cycle with menu pinning so the spend curves are actually comparable across versions — no point comparing a silhouette from one random task mix against another. With the seed menu frozen, a shift in the curve shape means the model changed, not the tasks.
+
+Last thing worth mentioning: we caught a shuffle fragility case purely from the spend silhouette looking wrong. Reordered tool outputs shouldn't change how much verification the agent does at the end, but on one task family the back-loaded spend spiked even higher under shuffled ordering, like the model got less confident and started re-checking things it had already checked under the original order. Score didn't move much that time but the token bill did, almost double. Cheaper failure mode than dropping accuracy, I guess, but still not free.
+
+<<<DOC 08>>>
+# Trust the notes, verify the notes
+
+Quick one. We've started requiring a claim survival tally above 75% before we'll even look at an agent's final-answer accuracy, because we got burned twice by agents that landed on the right answer while the reasoning trail underneath was full of claims it had already disproven itself. High accuracy, ugly tally, and when we changed the task slightly the accuracy collapsed because the "right answer" was luck riding on top of broken notes.
+
+Combined this with a missing-key test on the same suite and it's a decent diagnostic pair. An agent that fabricates a credential instead of asking tends to also have a lower claim survival tally overall, at least in our data — six agents tested, the two worst fabricators were also the two worst on note survival. Not a huge sample but the correlation was strong enough that we're now treating "does it ask for missing things" as a rough proxy for "does it maintain honest internal state."
+
+We tried to isolate cause versus symptom with a notebook yank, wiping notes at the halfway point to see if a fresh start improved the tally for the fabricating agents. It didn't — they just fabricated a new set of ungrounded claims to fill the gap instead of recovering cleanly, so whatever's driving the fabrication doesn't seem to live in the accumulated notes, it's more a base behavior of the model itself. Still working out what to do with that.
+
+<<<DOC 09>>>
+# Postmortem on last week's eval sprint
+
+Rough sprint, worth writing down before I forget the details. We kicked off with pothole runs on the new fulfillment agent, injecting a payment-gateway timeout and a warehouse API 500 in sequence. Recovery times looked great, under 90 seconds each, until someone noticed the second half of the batch finished suspiciously fast and we traced it to a ghost pass — the harness had a stale cache entry from Tuesday's run that matched on task hash and just returned the old "recovered" result without executing anything.
+
+That threw our drift audit numbers for a loop too, since this suite doubles as our frozen monthly baseline. We had to rerun the whole thing with caching disabled before we could trust the comparison against last month's frozen scores. Clean rerun showed real drift, about six points down on multi-step tool tasks, consistent with the provider's model update from two weeks ago.
+
+While rerunning we watched for probe-shadow given how much extra logging we bolted on to catch the caching bug, and sure enough the added instrumentation slowed things down enough to shift the spend silhouette — much more front-loaded exploration than usual, like the agent was reacting to slower tool round-trips by hedging earlier. We had menu pinning on throughout so at least we know none of this came from variant sampling drift, it's all instrumentation and caching artifacts layered on top of a real capability drop. Writing up a harness fix ticket for the caching bug before we run this suite again.
+
+<<<DOC 10>>>
+# Everything that broke our confidence this quarter
+
+Compiling the quarterly eval reliability review and it's a mess in an instructive way. Biggest offender was shuffle fragility on the multi-document synthesis agent — 35-point swing just from reordering three equivalent retrieval results, no change in information content whatsoever. Second biggest was a missing-key test we'd been running informally for months without realizing how bad it was: the agent fabricated a database connection string in 7 of 10 trials instead of stopping to ask, and we'd been scoring those as passes because the fabricated value happened to work against our test database.
+
+Claim survival tally across the same suite averaged 68%, worse on the longer tasks as usual, and dropping further specifically on the runs where shuffled ordering was in play — reordering doesn't just hurt the final answer, it seems to degrade the whole reasoning trail's internal consistency. We also ran pothole runs against the top three candidate agents to rank them on recovery time under fault injection, and the ranking flipped completely depending on whether the tool-result order was shuffled during the fault window, which is an ugly interaction nobody had budgeted time to investigate properly.
+
+Last thing: we found evidence of probe-shadow on one of the three agents specifically during the pothole runs, where its recovery got measurably slower whenever our fault-injection wrapper was attached versus a lighter-weight version with less logging overhead. So some of that agent's "poor recovery" ranking might just be an instrumentation tax, not a real capability gap. Flagging for next quarter's harness rewrite.
+
+<<<DOC 11>>>
+# Wrapping up the audit cycle
+
+Closing out this month's drift audit and want to record what actually moved versus what was measurement noise, because half of what looked like drift turned out to be something else entirely. The frozen suite came back four points down against baseline, which sounds like real capability drift after the provider's update, but two of those points evaporated once we found a ghost pass in the caching layer — a chunk of the "failing" tasks had actually inherited a stale cached failure from before we patched the tool schema last week.
+
+The remaining two points held up under a clean rerun with menu pinning enabled, so I trust that part of the number — same seed menu both times, nothing coming from variant sampling. We also ran a notebook yank pass on the same baseline tasks this cycle for the first time, wiping the scratchpad at the 50% mark, and the performance slope dropped hard on exactly the tasks where drift showed up, which suggests the model's ability to recover a lost plan without notes has itself degraded, not just its raw task performance.
+
+Spend silhouette on the drifted tasks shifted too — much flatter now, less of the late-stage verification burn we used to see, which tracks with an agent that's less willing to double check itself before answering. Not sure if that's the update itself or if it's a downstream effect of the weaker recovery-without-notes behavior we saw in the yank pass. Scheduling a follow-up audit in two weeks once the caching fix is fully deployed everywhere.

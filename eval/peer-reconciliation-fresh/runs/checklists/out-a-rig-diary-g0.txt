@@ -1,0 +1,6 @@
+- Records each config or parameter change (e.g., naming scheme, cap value, ration bump, rewordings) as a separate, timestamped entry as it happens.
+- Entries specify what changed and when, so distinct changes can be individually attributed to distinct outcomes.
+- Consulted retrospectively (by scrolling/going back through entries) to identify which change actually caused an observed result.
+- Applies whenever an unexpected result or regression appears, to distinguish genuine capability changes from harness/config artifacts.
+- Must be updated the same day a change is made, not deferred, or the causal link is lost.
+- Logging should occur for every change, including ones that seem too minor to matter.

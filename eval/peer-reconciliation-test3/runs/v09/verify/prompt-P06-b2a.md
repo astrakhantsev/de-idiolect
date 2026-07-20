@@ -1,0 +1,27 @@
+Three DEFINITIONS of the same concept at increasing specificity:
+
+DEFINITION L0 (genus only): A consistency score for automated scoring of completed task answers, used to assess whether the scoring stays stable.
+
+DEFINITION L1 (adds mechanism): A consistency score for automated scoring of completed task answers, used to assess whether the scoring stays stable. The same final answers are submitted again to the same automated scorer on multiple dates, including dates at least 21 days apart in some cases, and the score is estimated from the resulting pairs of numeric scores.
+
+DEFINITION L2 (adds measurement and conditions): A consistency score for automated scoring of completed task answers, used to assess whether the scoring stays stable. It is estimated by resubmitting the same completed final answers to the same automated scorer multiple times, across multiple collection dates; some dates are separated by at least 21 days. The resulting numeric-score pairs are used to calculate the value. It may be reported above 0.90, such as 0.93, or at 0.88, and it can be lower, such as 0.71, depending on task type. It applies to repository-state tasks, executable-task outcomes, open-ended incident reports, and explanatory summaries. Lower values are linked to borderline partial-credit judgments, not answer length.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used (other local jargon masked ⟦X⟧).
+
+For EACH excerpt, and for EACH definition level INDEPENDENTLY, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by THAT definition?
+
+- "instantiates" — the usage is consistent with and exemplifies that definition.
+- "contradicts" — the usage is incompatible with that definition (the referent has a property that definition excludes, or lacks one it requires).
+- "insufficient" — this excerpt alone does not contain enough to decide for that definition.
+
+A usage can instantiate L0 while contradicting L2 — judge each level on its own content. Judge each excerpt on its own text only. For L1 and L2, any decided verdict (instantiates or contradicts) requires a verbatim supporting quote from the excerpt; L0 needs no quote.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "L0": "instantiates|contradicts|insufficient", "L1": {"verdict": "...", "quote": "verbatim or empty for insufficient"}, "L2": {"verdict": "...", "quote": "..."}}, ...]
+
+EXCERPTS:
+
+1. The other 10% just started re-reading the whole repo from scratch like it had amnesia, which cost us real wall clock time. Last thing: we ⟦TERM⟧ every ⟦X⟧ output because we don't trust a single grader pass after a mid-run model change. Reflowed the diffs, resubmitted, and got two different verdicts on 4 of 60 answers even though the content was identical.
+2. Last thing, we ⟦TERM⟧ed a batch of these QA answers after noticing the scorer seemed inconsistent on long-form responses. Reflowed line breaks, changed nothing else, resubmitted through the same grader. 9 out of 80 flipped verdicts.
+3. Third, we caught a grader problem via ⟦TERM⟧ — resubmitted 200 answers with reflowed formatting only, and 14 flipped, concentrated almost entirely in the brain-swapped low-score batch, which makes sense since terser cheap-model output apparently trips something in the scorer's whitespace handling.
+4. ⟦TERM⟧ stayed a nagging problem — 6% of resubmitted answers flip verdict on reflow alone across the whole corpus, and we still haven't root-caused the scorer's whitespace sensitivity, just flagged it as known noise in every report now.

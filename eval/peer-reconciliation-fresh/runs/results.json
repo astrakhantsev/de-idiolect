@@ -1,0 +1,137 @@
+{
+ "per_pair": {
+  "P01": {
+   "expected": "exactMatch",
+   "verdict": {
+    "proposed_relation": null,
+    "status": "review_required",
+    "reason": "containment-unclear",
+    "La": -1,
+    "Lb": 1
+   },
+   "display": "reviewRequired(containment-unclear)",
+   "correct": false
+  },
+  "P02": {
+   "expected": "exactMatch",
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null,
+    "La": 1,
+    "Lb": 0
+   },
+   "display": "noMatch",
+   "correct": false
+  },
+  "P03": {
+   "expected": "broadnarrow(a)",
+   "verdict": {
+    "proposed_relation": null,
+    "status": "insufficient_evidence",
+    "reason": "both-directions-starved",
+    "La": -1,
+    "Lb": -1
+   },
+   "display": "insufficientEvidence(both-directions-starved)",
+   "correct": false
+  },
+  "P04": {
+   "expected": "broadnarrow(b)",
+   "verdict": {
+    "proposed_relation": "relatedMatch",
+    "status": "asserted",
+    "reason": null,
+    "La": 0,
+    "Lb": 1
+   },
+   "display": "relatedMatch",
+   "correct": false
+  },
+  "P05": {
+   "expected": "relatedMatch",
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null,
+    "La": 0,
+    "Lb": -1
+   },
+   "display": "noMatch",
+   "correct": false
+  },
+  "P06": {
+   "expected": "relatedMatch",
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null,
+    "La": -1,
+    "Lb": -1
+   },
+   "display": "noMatch",
+   "correct": false
+  },
+  "P07": {
+   "expected": "noMatchDespiteSimilarity",
+   "verdict": {
+    "proposed_relation": "noMatchDespiteSimilarity",
+    "status": "asserted",
+    "reason": null,
+    "La": -1,
+    "Lb": -1
+   },
+   "display": "noMatchDespiteSimilarity",
+   "correct": true
+  },
+  "P08": {
+   "expected": "noMatchDespiteSimilarity",
+   "verdict": {
+    "proposed_relation": "noMatchDespiteSimilarity",
+    "status": "asserted",
+    "reason": null,
+    "La": -1,
+    "Lb": -1
+   },
+   "display": "noMatchDespiteSimilarity",
+   "correct": true
+  },
+  "P09": {
+   "expected": "noMatch",
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null,
+    "La": -1,
+    "Lb": -1
+   },
+   "display": "noMatch",
+   "correct": true
+  },
+  "P10": {
+   "expected": "noMatch",
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null,
+    "La": -1,
+    "Lb": -1
+   },
+   "display": "noMatch",
+   "correct": true
+  }
+ },
+ "n_correct": 4,
+ "promotions": [],
+ "false_escalations": [],
+ "jingle_specific": 2,
+ "E1_PASS": false,
+ "E1b_detection": {
+  "tp": 2,
+  "fn": 3,
+  "tn": 4,
+  "fp": 0,
+  "abstain": 1
+ },
+ "E1c_graded": 5.1
+}

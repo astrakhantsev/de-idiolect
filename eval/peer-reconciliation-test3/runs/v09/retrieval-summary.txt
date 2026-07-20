@@ -1,0 +1,2 @@
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights:  32%|███▏      | 126/391 [00:00<00:00, 1258.86it/s]Loading weights:  64%|██████▍   | 252/391 [00:00<00:00, 1201.01it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 1517.10it/s]
+determinism check skipped: no baseline (TEST first execution is the record)

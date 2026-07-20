@@ -1,0 +1,5 @@
+- Mechanism: a required field is deliberately withheld from the initial prompt/task input while a repository or archive that could supply it remains accessible, and this withheld condition persists until the agent either requests/queries the source or submits its answer.
+- Measured/produced: the proportion of agents that seek out additional evidence (query the repository/archive) versus the proportion that infer or assign the missing value from contextual/neighboring information, scored as a percentage split.
+- Applies in: form-filling or classification-style tasks with structured fields (e.g., provenance fields, jurisdiction fields) where specific required data is absent from the prompt but retrievable elsewhere.
+- Trigger/endpoint: the condition holds only until the agent takes one of two terminal actions — requesting the missing field from the available source, or completing/submitting its answer without doing so.
+- Constraint: access to the supplying source is preserved/maintained throughout, so failure to retrieve the field is not due to unavailability of the source itself.

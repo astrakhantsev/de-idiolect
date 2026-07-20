@@ -1,0 +1,45 @@
+{
+ "pair_key": "651968d5d1c14b7d",
+ "pair_id": "P04",
+ "terms": {
+  "a": "missing-key test",
+  "b": "specification occlusion"
+ },
+ "proposed_relation": "insufficientEvidence",
+ "evidence": {
+  "a2b": {
+   "n": 4,
+   "k": 0,
+   "c": 2,
+   "u": 2,
+   "agg": "abstain",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 4,
+   "k": 0,
+   "c": 0,
+   "u": 4,
+   "agg": "abstain",
+   "quote_downgrades": []
+  }
+ },
+ "adjudicated_relation": "broadnarrow(b)",
+ "status": "adjudicated",
+ "adjudicator": "synthetic-key-8477e275",
+ "correct": false,
+ "provenance": {
+  "gen_a": "claude-sonnet",
+  "gen_b": "codex-gpt-5.6-terra",
+  "def_a": "claude-opus",
+  "def_b": "codex-gpt-5.6-terra",
+  "verify_a2b": "claude-opus",
+  "verify_b2a": "codex-gpt-5.6-terra"
+ },
+ "derived_from": [],
+ "earliest_found_in_search": {
+  "synthetic": true,
+  "note": "no priority inference licensed"
+ },
+ "version_id": "17ed0b0db59a2cdc6e1cb5b87dff3d0eb42d1212f31422adcdc3e59bb24bbde1"
+}

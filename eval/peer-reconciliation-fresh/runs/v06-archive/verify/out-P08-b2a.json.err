@@ -1,0 +1,42 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.iTcQ5rmYEf"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.k1xfVE3EVh
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7ba4-9a04-7803-ba63-06b201c823de
+--------
+user
+DEFINITION of a concept:
+
+A pre-reporting control check in agent evaluation runs. Each batch or session receives a fixed number of previously verified items with established correct judgments—eight per batch or two per session—covertly placed among regular items without positional regularity, with answers absent from judges’ briefing. Each inserted judgment is compared with its established answer. The batch or session is halted if judges reject a correct item without support or accept an incorrect result as compliant. This check occurs before aggregate metrics are retained or computed; halted batches and sessions are excluded from final results. Reporting retains only items with judgments stable across adjudicators, separately from halted cases.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used.
+
+For EACH excerpt independently, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by DEFINITION?
+
+- "instantiates" — the usage is consistent with the definition and exemplifies it. Requires a verbatim supporting quote from the excerpt.
+- "contradicts" — the usage is incompatible with the definition (the referent has a property the definition excludes, or lacks one it requires). Requires a verbatim quote of the incompatible fragment.
+- "insufficient" — this excerpt alone does not contain enough to decide.
+
+Judge each excerpt on its own text only. Do not let other excerpts or the term's surface influence you.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "verdict": "instantiates|contradicts|insufficient", "quote": "verbatim quote (empty string only for insufficient)"}, ...]
+
+EXCERPTS:
+
+1. That's not the model, that's the serving stack doing something nondeterministic downstream, probably batching-related, and it means our confidence numbers this month have that much slop baked in regardless of the actual reasoning quality. Ran a ⟦TERM⟧ right after to sanity-check the scorer while we were at it. Randomized every timestamp, run id, and output filename we could find and reran the same 80 tasks.
+2. Given the concurrency pattern above, I'd bet money it does. Ran a ⟦TERM⟧ on the tier anyway just to rule out the boring explanation. Randomized filenames and commit hashes across all 60 items and reran.
+3. Ran a ⟦TERM⟧ on both batches before trusting any of it, randomizing run ids and filenames. Scores held steady under randomization, so the ⟦TERM⟧ cleared them for the live suite.
+4. Ran a ⟦TERM⟧ on both batches before trusting any of it, randomizing run ids and filenames. Scores held steady under randomization, so the ⟦TERM⟧ cleared them for the live suite.
+5. Ran a ⟦TERM⟧ afterward, randomizing file names and timestamps across the whole batch. The ⟦TERM⟧ came back clean, scores didn't move, so at least the harness isn't leaking metadata into this one.
+6. Ran a ⟦TERM⟧ afterward, randomizing file names and timestamps across the whole batch. The ⟦TERM⟧ came back clean, scores didn't move, so at least the harness isn't leaking metadata into this one.
+codex
+[{"excerpt":1,"verdict":"insufficient","quote":""},{"excerpt":2,"verdict":"insufficient","quote":""},{"excerpt":3,"verdict":"insufficient","quote":""},{"excerpt":4,"verdict":"insufficient","quote":""},{"excerpt":5,"verdict":"insufficient","quote":""},{"excerpt":6,"verdict":"insufficient","quote":""}]
+tokens used
+2,765

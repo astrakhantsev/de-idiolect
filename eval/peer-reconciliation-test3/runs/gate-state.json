@@ -1,0 +1,481 @@
+{
+ "artifacts": {
+  "chk:a:pivot check": {
+   "kind": "chk",
+   "side": "a",
+   "term": "pivot check",
+   "regens_used": 1,
+   "state": "configFail",
+   "log": [
+    "gate-fail[mechanical] g0: line-over-40-words -> regeneration staged",
+    "gate-fail[mechanical] g1: line-over-40-words -> configFail (budget exhausted)"
+   ],
+   "failed_gate": "mechanical"
+  },
+  "chk:b:goal-revision compliance rate": {
+   "kind": "chk",
+   "side": "b",
+   "term": "goal-revision compliance rate",
+   "regens_used": 1,
+   "state": "passed",
+   "log": [
+    "gate-fail[mechanical] g0: line-over-40-words -> regeneration staged",
+    "passed at g1"
+   ]
+  },
+  "chk:a:garble replay": {
+   "kind": "chk",
+   "side": "a",
+   "term": "garble replay",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:b:corrupted-observation recovery index": {
+   "kind": "chk",
+   "side": "b",
+   "term": "corrupted-observation recovery index",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:a:quit sense": {
+   "kind": "chk",
+   "side": "a",
+   "term": "quit sense",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:b:post-completion action count": {
+   "kind": "chk",
+   "side": "b",
+   "term": "post-completion action count",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:a:example strip": {
+   "kind": "chk",
+   "side": "a",
+   "term": "example strip",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:b:prompt scaffolding dependence measure": {
+   "kind": "chk",
+   "side": "b",
+   "term": "prompt scaffolding dependence measure",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:a:brain swap": {
+   "kind": "chk",
+   "side": "a",
+   "term": "brain swap",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:b:component substitution elasticity": {
+   "kind": "chk",
+   "side": "b",
+   "term": "component substitution elasticity",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:a:double mark": {
+   "kind": "chk",
+   "side": "a",
+   "term": "double mark",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:b:grader temporal stability coefficient": {
+   "kind": "chk",
+   "side": "b",
+   "term": "grader temporal stability coefficient",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:a:cold start": {
+   "kind": "chk",
+   "side": "a",
+   "term": "cold start",
+   "regens_used": 1,
+   "state": "passed",
+   "log": [
+    "gate-fail[mechanical] g0: line-over-40-words -> regeneration staged",
+    "passed at g1"
+   ]
+  },
+  "chk:b:cold start": {
+   "kind": "chk",
+   "side": "b",
+   "term": "cold start",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:a:hot swap": {
+   "kind": "chk",
+   "side": "a",
+   "term": "hot swap",
+   "regens_used": 1,
+   "state": "passed",
+   "log": [
+    "gate-fail[mechanical] g0: line-over-40-words -> regeneration staged",
+    "passed at g1"
+   ]
+  },
+  "chk:b:hot swap": {
+   "kind": "chk",
+   "side": "b",
+   "term": "hot swap",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:a:spray test": {
+   "kind": "chk",
+   "side": "a",
+   "term": "spray test",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:b:reference trajectory alignment score": {
+   "kind": "chk",
+   "side": "b",
+   "term": "reference trajectory alignment score",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:a:budget bleed": {
+   "kind": "chk",
+   "side": "a",
+   "term": "budget bleed",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:b:cross-lingual instruction fidelity": {
+   "kind": "chk",
+   "side": "b",
+   "term": "cross-lingual instruction fidelity",
+   "regens_used": 1,
+   "state": "passed",
+   "log": [
+    "gate-fail[mechanical] g0: line-over-40-words -> regeneration staged",
+    "passed at g1"
+   ]
+  },
+  "lad:a:garble replay": {
+   "kind": "lad",
+   "side": "a",
+   "term": "garble replay",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (a-w1)"
+   ],
+   "cli": "claude",
+   "model": "opus"
+  },
+  "lad:b:corrupted-observation recovery index": {
+   "kind": "lad",
+   "side": "b",
+   "term": "corrupted-observation recovery index",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (b-w1)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  },
+  "lad:a:quit sense": {
+   "kind": "lad",
+   "side": "a",
+   "term": "quit sense",
+   "regens_used": 1,
+   "state": "passed",
+   "log": [
+    "gate-fail[mechanical] g0: L2-words=179-not-60-160 -> regeneration staged",
+    "mech+leak passed at g1",
+    "semantic conformant (a-w1)"
+   ],
+   "cli": "claude",
+   "model": "opus"
+  },
+  "lad:b:post-completion action count": {
+   "kind": "lad",
+   "side": "b",
+   "term": "post-completion action count",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (b-w1)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  },
+  "lad:a:example strip": {
+   "kind": "lad",
+   "side": "a",
+   "term": "example strip",
+   "regens_used": 1,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "gate-fail[semantic] g0: condition 4: L2's application-scope sentence drops the checklist's named examples (support-ticket agent, refactor prompt, schema-validation prompt segment), replacing them with the vaguer 'agent prompts or task segments'. -> regeneration staged",
+    "mech+leak passed at g1",
+    "semantic conformant (a-w2)"
+   ],
+   "cli": "claude",
+   "model": "opus"
+  },
+  "lad:b:prompt scaffolding dependence measure": {
+   "kind": "lad",
+   "side": "b",
+   "term": "prompt scaffolding dependence measure",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (b-w1)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  },
+  "lad:a:brain swap": {
+   "kind": "lad",
+   "side": "a",
+   "term": "brain swap",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (a-w1)"
+   ],
+   "cli": "claude",
+   "model": "opus"
+  },
+  "lad:b:component substitution elasticity": {
+   "kind": "lad",
+   "side": "b",
+   "term": "component substitution elasticity",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (b-w1)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  },
+  "lad:a:double mark": {
+   "kind": "lad",
+   "side": "a",
+   "term": "double mark",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (a-w1)"
+   ],
+   "cli": "claude",
+   "model": "opus"
+  },
+  "lad:b:grader temporal stability coefficient": {
+   "kind": "lad",
+   "side": "b",
+   "term": "grader temporal stability coefficient",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (b-w1)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  },
+  "lad:a:cold start": {
+   "kind": "lad",
+   "side": "a",
+   "term": "cold start",
+   "regens_used": 1,
+   "state": "configFail",
+   "log": [
+    "gate-fail[mechanical] g0: L2-words=164-not-60-160 -> regeneration staged",
+    "gate-fail[mechanical] g1: L2-words=183-not-60-160 -> configFail (budget exhausted)"
+   ],
+   "cli": "claude",
+   "model": "opus",
+   "failed_gate": "mechanical"
+  },
+  "lad:b:cold start": {
+   "kind": "lad",
+   "side": "b",
+   "term": "cold start",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (b-w1)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  },
+  "lad:a:hot swap": {
+   "kind": "lad",
+   "side": "a",
+   "term": "hot swap",
+   "regens_used": 1,
+   "state": "configFail",
+   "log": [
+    "gate-fail[mechanical] g0: L2-words=170-not-60-160 -> regeneration staged",
+    "gate-fail[mechanical] g1: L2-words=187-not-60-160 -> configFail (budget exhausted)"
+   ],
+   "cli": "claude",
+   "model": "opus",
+   "failed_gate": "mechanical"
+  },
+  "lad:b:hot swap": {
+   "kind": "lad",
+   "side": "b",
+   "term": "hot swap",
+   "regens_used": 1,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "gate-fail[semantic] g0: condition 2: L1 states the substitution is \"randomized\" at the item level, but L2 drops this and only says items are replaced \"at the item level,\" losing the randomization commitment. -> regeneration staged",
+    "mech+leak passed at g1",
+    "semantic conformant (b-w2)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  },
+  "lad:a:spray test": {
+   "kind": "lad",
+   "side": "a",
+   "term": "spray test",
+   "regens_used": 1,
+   "state": "passed",
+   "log": [
+    "gate-fail[mechanical] g0: L2-words=165-not-60-160 -> regeneration staged",
+    "mech+leak passed at g1",
+    "semantic conformant (a-w1)"
+   ],
+   "cli": "claude",
+   "model": "opus"
+  },
+  "lad:b:reference trajectory alignment score": {
+   "kind": "lad",
+   "side": "b",
+   "term": "reference trajectory alignment score",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (b-w1)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  },
+  "lad:a:budget bleed": {
+   "kind": "lad",
+   "side": "a",
+   "term": "budget bleed",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (a-w1)"
+   ],
+   "cli": "claude",
+   "model": "opus"
+  },
+  "lad:b:cross-lingual instruction fidelity": {
+   "kind": "lad",
+   "side": "b",
+   "term": "cross-lingual instruction fidelity",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (b-w1)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  }
+ },
+ "conf_batches": {
+  "a-w1": {
+   "reruns_used": 0,
+   "resolved": true
+  },
+  "b-w1": {
+   "reruns_used": 0,
+   "resolved": true
+  },
+  "a-w2": {
+   "reruns_used": 0,
+   "resolved": true
+  },
+  "b-w2": {
+   "reruns_used": 0,
+   "resolved": true
+  }
+ },
+ "polarity": {
+  "a": {
+   "reruns_used": 0,
+   "resolved": true
+  },
+  "b": {
+   "reruns_used": 0,
+   "resolved": true
+  }
+ },
+ "polarity_side_fail": []
+}

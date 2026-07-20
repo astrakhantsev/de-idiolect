@@ -1,0 +1,6 @@
+- Mechanism: a model is prompted with the existing easy-tier benchmark items and asked to generate harder variants; no human writes the new items from scratch.
+- What's produced: new "advanced"/"adversarial" tier benchmark items (e.g., 60 coding-benchmark items) that extend or extrapolate the original item set's difficulty.
+- Scoring/reading: item difficulty is assessed via pass rates and by comparing performance gaps (e.g., a measured wording gap between item sets) against human-authored items.
+- Applies to: benchmark/test-suite construction, specifically for creating harder or advanced/adversarial difficulty tiers from an existing easier tier.
+- Constraint: resulting items must be clearly relabeled as model-generated rather than presented as human-authored.
+- Constraint: the difficulty progression produced this way tends to be uneven/lumpy, reflecting the generating model's own training distribution rather than deliberate human-designed progression.

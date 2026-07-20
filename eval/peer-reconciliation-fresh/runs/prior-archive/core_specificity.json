@@ -1,0 +1,122 @@
+{
+ "P04": {
+  "pass": true,
+  "top5": [
+   [
+    "b",
+    "resource perturbation study",
+    0.7075846195220947
+   ],
+   [
+    "a",
+    "squeeze play",
+    0.6947000026702881
+   ],
+   [
+    "b",
+    "matched contrast probes",
+    0.6644210815429688
+   ],
+   [
+    "b",
+    "reflexive adjudication",
+    0.6569244861602783
+   ],
+   [
+    "b",
+    "trajectory template carryover",
+    0.652183473110199
+   ]
+  ]
+ },
+ "dfull-P05": {
+  "pass": false,
+  "top5": [
+   [
+    "b",
+    "subordinate authoring protocol",
+    0.6838415265083313
+   ],
+   [
+    "b",
+    "reflexive adjudication",
+    0.6786136627197266
+   ],
+   [
+    "b",
+    "strategy cardinality index",
+    0.6686053276062012
+   ],
+   [
+    "b",
+    "matched contrast probes",
+    0.6643484830856323
+   ],
+   [
+    "b",
+    "resource perturbation study",
+    0.6325017213821411
+   ]
+  ]
+ },
+ "P06": {
+  "pass": true,
+  "top5": [
+   [
+    "b",
+    "reflexive adjudication",
+    0.8014062643051147
+   ],
+   [
+    "b",
+    "subordinate authoring protocol",
+    0.760439932346344
+   ],
+   [
+    "a",
+    "ouroboros items",
+    0.7557806968688965
+   ],
+   [
+    "b",
+    "tier floor annotation",
+    0.7474582195281982
+   ],
+   [
+    "b",
+    "strategy cardinality index",
+    0.7442169785499573
+   ]
+  ]
+ },
+ "dfull-P06": {
+  "pass": true,
+  "top5": [
+   [
+    "b",
+    "reflexive adjudication",
+    0.795387864112854
+   ],
+   [
+    "b",
+    "subordinate authoring protocol",
+    0.736655592918396
+   ],
+   [
+    "a",
+    "ouroboros items",
+    0.7267706990242004
+   ],
+   [
+    "b",
+    "echo test",
+    0.7262930870056152
+   ],
+   [
+    "b",
+    "resource perturbation study",
+    0.7206572890281677
+   ]
+  ]
+ }
+}

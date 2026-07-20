@@ -1,0 +1,242 @@
+{
+  "script_sha256": "9e71bbd0153183b5ec9947e87bc3b1325ab2b2632cf3d938111077bb34bf0b36",
+  "rrf_k": 60,
+  "e_key_variant": "full-nobold",
+  "e_sanity_top5_matches_probe": true,
+  "e_full_ranking": [
+    "d09",
+    "d04",
+    "d02",
+    "d18",
+    "d05",
+    "d01",
+    "d12",
+    "d08",
+    "d10",
+    "d15",
+    "d16",
+    "d13",
+    "d06",
+    "d07",
+    "d14",
+    "d03",
+    "d11",
+    "d17"
+  ],
+  "e_sims": {
+    "d09": 0.6954,
+    "d04": 0.6706,
+    "d02": 0.6696,
+    "d18": 0.6517,
+    "d05": 0.6399,
+    "d01": 0.6375,
+    "d12": 0.6331,
+    "d08": 0.6249,
+    "d10": 0.6231,
+    "d15": 0.6223,
+    "d16": 0.6075,
+    "d13": 0.5875,
+    "d06": 0.5812,
+    "d07": 0.564,
+    "d14": 0.5637,
+    "d03": 0.5524,
+    "d11": 0.5398,
+    "d17": 0.5095
+  },
+  "chance": {
+    "P_first_owner_rank1": 0.16666666666666666,
+    "E_hits_at_5": 0.8333333333333334
+  },
+  "singles": {
+    "K1": {
+      "first_owner_rank": 1,
+      "hits_at_5": 2,
+      "fp_top5": {
+        "misroute": 1,
+        "distractor": 2
+      },
+      "top5": [
+        "d02",
+        "d12",
+        "d18",
+        "d04",
+        "d03"
+      ]
+    },
+    "K2": {
+      "first_owner_rank": 5,
+      "hits_at_5": 1,
+      "fp_top5": {
+        "misroute": 3,
+        "distractor": 1
+      },
+      "top5": [
+        "d04",
+        "d05",
+        "d06",
+        "d12",
+        "d02"
+      ]
+    },
+    "N": {
+      "first_owner_rank": 2,
+      "hits_at_5": 2,
+      "fp_top5": {
+        "misroute": 2,
+        "distractor": 1
+      },
+      "top5": [
+        "d04",
+        "d01",
+        "d10",
+        "d05",
+        "d02"
+      ]
+    },
+    "D-sonnet": {
+      "first_owner_rank": 2,
+      "hits_at_5": 2,
+      "fp_top5": {
+        "misroute": 2,
+        "distractor": 1
+      },
+      "top5": [
+        "d04",
+        "d01",
+        "d02",
+        "d05",
+        "d10"
+      ]
+    },
+    "D-opus": {
+      "first_owner_rank": 1,
+      "hits_at_5": 2,
+      "fp_top5": {
+        "misroute": 2,
+        "distractor": 1
+      },
+      "top5": [
+        "d02",
+        "d01",
+        "d04",
+        "d10",
+        "d05"
+      ]
+    },
+    "E": {
+      "first_owner_rank": 3,
+      "hits_at_5": 1,
+      "fp_top5": {
+        "misroute": 3,
+        "distractor": 1
+      },
+      "top5": [
+        "d09",
+        "d04",
+        "d02",
+        "d18",
+        "d05"
+      ]
+    }
+  },
+  "fusions": {
+    "U3s": {
+      "first_owner_rank": 2,
+      "hits_at_5": 2,
+      "fp_top5": {
+        "misroute": 2,
+        "distractor": 1
+      },
+      "top5": [
+        "d04",
+        "d02",
+        "d01",
+        "d05",
+        "d18"
+      ],
+      "constituents": [
+        "K1",
+        "N",
+        "D-sonnet"
+      ],
+      "best_constituent": "K1",
+      "beats_or_ties_best": false,
+      "strictly_better_on_one": false
+    },
+    "U3o": {
+      "first_owner_rank": 1,
+      "hits_at_5": 2,
+      "fp_top5": {
+        "misroute": 2,
+        "distractor": 1
+      },
+      "top5": [
+        "d02",
+        "d04",
+        "d01",
+        "d05",
+        "d10"
+      ],
+      "constituents": [
+        "K1",
+        "N",
+        "D-opus"
+      ],
+      "best_constituent": "K1",
+      "beats_or_ties_best": true,
+      "strictly_better_on_one": false
+    },
+    "U5": {
+      "first_owner_rank": 2,
+      "hits_at_5": 2,
+      "fp_top5": {
+        "misroute": 2,
+        "distractor": 1
+      },
+      "top5": [
+        "d04",
+        "d02",
+        "d05",
+        "d01",
+        "d18"
+      ],
+      "constituents": [
+        "K1",
+        "K2",
+        "N",
+        "D-sonnet",
+        "D-opus"
+      ],
+      "best_constituent": "K1",
+      "beats_or_ties_best": false,
+      "strictly_better_on_one": false
+    },
+    "U6": {
+      "first_owner_rank": 2,
+      "hits_at_5": 2,
+      "fp_top5": {
+        "misroute": 2,
+        "distractor": 1
+      },
+      "top5": [
+        "d04",
+        "d02",
+        "d05",
+        "d01",
+        "d18"
+      ],
+      "constituents": [
+        "K1",
+        "K2",
+        "N",
+        "D-sonnet",
+        "D-opus",
+        "E"
+      ],
+      "best_constituent": "K1",
+      "beats_or_ties_best": false,
+      "strictly_better_on_one": false
+    }
+  },
+  "preregistered_verdict_union_beats_single": false
+}

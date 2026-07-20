@@ -1,0 +1,44 @@
+```json
+[
+  {
+    "excerpt": 1,
+    "L0": "contradicts",
+    "L1": {"verdict": "contradicts", "quote": "Few-shot prompts contained deliberately distinctive answer styles to support an ⟦TERM⟧. The ⟦TERM⟧ identified inappropriate verbatim carryover in 9.6% of free-form explanations, despite correct final tool outputs."},
+    "L2": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ identified inappropriate verbatim carryover in 9.6% of free-form explanations, despite correct final tool outputs."}
+  },
+  {
+    "excerpt": 2,
+    "L0": "contradicts",
+    "L1": {"verdict": "contradicts", "quote": "Few-shot prompts contained deliberately distinctive answer styles to support an ⟦TERM⟧. The ⟦TERM⟧ identified inappropriate verbatim carryover in 9.6% of free-form explanations, despite correct final tool outputs."},
+    "L2": {"verdict": "contradicts", "quote": "Removing the examples reduced ⟦TERM⟧ failures to 1.8% but also lowered task completion by 3.1 percentage points."}
+  },
+  {
+    "excerpt": 3,
+    "L0": "contradicts",
+    "L1": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ identified inappropriate verbatim carryover in 9.6% of free-form explanations, despite correct final tool outputs."},
+    "L2": {"verdict": "contradicts", "quote": "Removing the examples reduced ⟦TERM⟧ failures to 1.8% but also lowered task completion by 3.1 percentage points."}
+  },
+  {
+    "excerpt": 4,
+    "L0": "contradicts",
+    "L1": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ found that agents with the highest ⟦X⟧ had fewer inappropriate copied phrases than agents relying on repeated repair traces."},
+    "L2": {"verdict": "contradicts", "quote": "Prompt templates included two worked examples with unusual connective phrases. The ⟦TERM⟧ found that agents with the highest ⟦X⟧ had fewer inappropriate copied phrases than agents relying on repeated repair traces."}
+  },
+  {
+    "excerpt": 5,
+    "L0": "contradicts",
+    "L1": {"verdict": "contradicts", "quote": "A second ⟦TERM⟧ after paraphrasing the examples reduced copied phrasing without changing ⟦X⟧ effects."},
+    "L2": {"verdict": "contradicts", "quote": "A second ⟦TERM⟧ after paraphrasing the examples reduced copied phrasing without changing ⟦X⟧ effects."}
+  },
+  {
+    "excerpt": 6,
+    "L0": "contradicts",
+    "L1": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ found inappropriate copied example phrasing in 6.8% of those rationales."},
+    "L2": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ found inappropriate copied example phrasing in 6.8% of those rationales."}
+  }
+]
+```
+
+Note: I mistakenly fired an empty `ReportFindings` call before answering — that tool is for code review and was not relevant here. Ignore it; the JSON above is the actual response.
+
+Reasoning summary: across all six excerpts, ⟦TERM⟧ refers to a contamination/carryover check — few-shot examples are seeded with distinctive phrasing so that verbatim copying into model outputs can be detected. That is a different diagnostic from the defined concept, which re-runs one identical prompt twice and diffs the two outputs against each other to measure nondeterminism. The excerpts' referent compares an output against the *example* phrasing, not against a second run, and its failure metric (9.6%, 6.8% copied phrasing) is a contamination rate rather than a divergence rate — so it contradicts at every level, including the bare genus.

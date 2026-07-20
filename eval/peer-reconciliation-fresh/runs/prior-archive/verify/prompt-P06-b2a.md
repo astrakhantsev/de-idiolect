@@ -1,0 +1,24 @@
+DEFINITION of a concept:
+
+A blinded grading procedure that pools and anonymously samples all systems’ final patches and rationales for external grading. It measures an evaluated agent’s agreement with those graders on its own successful patches versus matched peer patches, as a percentage-point self-output agreement gap. It applies when the agent’s outputs are mixed anonymously with peers’ outputs in a grading round. It asserts lower agreement on the agent’s own outputs: 7.9 points with distractor context and 3.2 without. The effect remains after paraphrasing examples, excluding identifying filenames and unusually long explanations, and removing rationales so graders see only final actions and validators. Its source is not isolated among stylistic traces, action ordering, and latent task familiarity.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used.
+
+For EACH excerpt independently, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by DEFINITION?
+
+- "instantiates" — the usage is consistent with the definition and exemplifies it. Requires a verbatim supporting quote from the excerpt.
+- "contradicts" — the usage is incompatible with the definition (the referent has a property the definition excludes, or lacks one it requires). Requires a verbatim quote of the incompatible fragment.
+- "insufficient" — this excerpt alone does not contain enough to decide.
+
+Judge each excerpt on its own text only. Do not let other excerpts or the term's surface influence you.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "verdict": "instantiates|contradicts|insufficient", "quote": "verbatim quote (empty string only for insufficient)"}, ...]
+
+EXCERPTS:
+
+1. That's a bigger presentation tax than I want to admit to leadership. And on ⟦TERM⟧ — we had Palisade draft forty candidate eval questions about contract clauses, then used a second model to strip out the ones it thought Palisade would find trivial. Kept eighteen.
+2. I think it explains why every agent we test does suspiciously well on off-by-one bugs and suspiciously badly on anything involving concurrency, because that's just what the generating model happened to be good at authoring. Made it worse when I found out a third of that tier was also produced through ⟦TERM⟧ — one of our own agents wrote candidate bugs, a second model filtered the ones it judged too easy, and nobody checked whether the filter model shared blind spots with the author. Given the concurrency pattern above, I'd bet money it does.
+3. Less good: went digging into where our "novel" support scenarios came from and confirmed a batch of them are ⟦TERM⟧, written by one of our own agents and filtered by a second model that, unsurprisingly, let through a disproportionate number of billing-related scenarios, which happens to be the authoring agent's strongest category.
+4. And ⟦X⟧ enforcement flagged eleven runs this week for exceeding the cap, all in the same scenario cluster, which lines up suspiciously well with the ⟦TERM⟧ batch above — makes me wonder if that agent wrote scenarios that require more back-and-forth file lookups than it realizes, since it's implicitly encoding its own working habits into the tasks.
+5. ⟦TERM⟧ are getting killed off entirely though. Went back through the billing-scenario batch and confirmed, again, that the author agent's own strengths were leaking into which items survived the filter pass.

@@ -1,0 +1,310 @@
+{
+  "backend": "fixtures",
+  "embedding_model": "BAAI/bge-large-en-v1.5",
+  "keyness": {
+    "lay-public-health": [
+      "eggs",
+      "heart",
+      "eat",
+      "raise",
+      "eat eggs",
+      "heart healthy",
+      "healthy",
+      "heart disease"
+    ],
+    "lipidology": [
+      "fat",
+      "cholesterol",
+      "saturated fat",
+      "variation",
+      "response",
+      "saturated",
+      "hyper",
+      "serum"
+    ],
+    "cardiology-biomarker": [
+      "number",
+      "cardiovascular risk",
+      "particles",
+      "particle",
+      "lipoprotein",
+      "discordant",
+      "lipoprotein particles",
+      "cardiovascular"
+    ],
+    "nutrition-epi-methods": [
+      "substitution",
+      "causal",
+      "energy",
+      "effects",
+      "causal effects",
+      "nutritional",
+      "model",
+      "total energy fixed"
+    ],
+    "distractor": [
+      "assessment offshore",
+      "assessment offshore wind",
+      "bayesian",
+      "bayesian model",
+      "bayesian model forecasting",
+      "benchmarks",
+      "benchmarks seismic",
+      "transformer"
+    ]
+  },
+  "concepts": [
+    {
+      "term": "hyper-responder",
+      "owning_community": "lipidology",
+      "definition": "A person in whom a measured substance in the blood rises much more than most people's does after they eat a food carrying a particular fatty component. Group people by the individual slope of blood level against intake; this names the high-slope tail, the strong reactors, as opposed to those whose blood level barely moves.",
+      "definition_source": "fixture",
+      "retrieval": {
+        "naive_question": {
+          "top3": [
+            [
+              "A1",
+              0.8224
+            ],
+            [
+              "A3",
+              0.7778
+            ],
+            [
+              "A2",
+              0.7445
+            ]
+          ],
+          "owner_best_rank": 5,
+          "owner_mean_rank": 6.0,
+          "owner_ranks": [
+            5,
+            6,
+            7
+          ]
+        },
+        "raw_term": {
+          "top3": [
+            [
+              "B3",
+              0.6368
+            ],
+            [
+              "B1",
+              0.485
+            ],
+            [
+              "B2",
+              0.4706
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 2.0,
+          "owner_ranks": [
+            1,
+            2,
+            3
+          ]
+        },
+        "constrained_definition": {
+          "top3": [
+            [
+              "B2",
+              0.6387
+            ],
+            [
+              "B3",
+              0.6186
+            ],
+            [
+              "C3",
+              0.584
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 2.67,
+          "owner_ranks": [
+            1,
+            2,
+            5
+          ]
+        }
+      },
+      "routing_gain_naive_to_definition": 4,
+      "top_match": {
+        "doc_id": "B2",
+        "skos_relation": "exactMatch",
+        "reason": "the strong-reactor subgroup is exactly the larger-rise individuals described",
+        "source": "fixture"
+      }
+    },
+    {
+      "term": "apolipoprotein B particle number",
+      "owning_community": "cardiology-biomarker",
+      "definition": "A count of the small carrier bodies that ferry a fatty substance through the blood, one marker per carrier, as opposed to the total amount of the substance carried. The number of carriers can disagree with the total amount, and the count may track harm to the blood vessels better than the total does.",
+      "definition_source": "fixture",
+      "retrieval": {
+        "naive_question": {
+          "top3": [
+            [
+              "A1",
+              0.8224
+            ],
+            [
+              "A3",
+              0.7778
+            ],
+            [
+              "A2",
+              0.7445
+            ]
+          ],
+          "owner_best_rank": 4,
+          "owner_mean_rank": 8.67,
+          "owner_ranks": [
+            4,
+            10,
+            12
+          ]
+        },
+        "raw_term": {
+          "top3": [
+            [
+              "C2",
+              0.697
+            ],
+            [
+              "C1",
+              0.6787
+            ],
+            [
+              "C3",
+              0.5944
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 2.0,
+          "owner_ranks": [
+            1,
+            2,
+            3
+          ]
+        },
+        "constrained_definition": {
+          "top3": [
+            [
+              "C1",
+              0.6366
+            ],
+            [
+              "C2",
+              0.6303
+            ],
+            [
+              "C3",
+              0.5918
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 2.0,
+          "owner_ranks": [
+            1,
+            2,
+            3
+          ]
+        }
+      },
+      "routing_gain_naive_to_definition": 3,
+      "top_match": {
+        "doc_id": "C1",
+        "skos_relation": "exactMatch",
+        "reason": "measuring the number of carrier particles for risk is the defined quantity",
+        "source": "fixture"
+      }
+    },
+    {
+      "term": "isocaloric substitution model",
+      "owning_community": "nutrition-epi-methods",
+      "definition": "A way to estimate what happens when one food is swapped for an equal-energy amount of another food, holding total energy fixed, rather than added on top. Read the effect of replacement from a model relating an outcome to how much of each food a person eats.",
+      "definition_source": "fixture",
+      "retrieval": {
+        "naive_question": {
+          "top3": [
+            [
+              "A1",
+              0.8224
+            ],
+            [
+              "A3",
+              0.7778
+            ],
+            [
+              "A2",
+              0.7445
+            ]
+          ],
+          "owner_best_rank": 8,
+          "owner_mean_rank": 9.33,
+          "owner_ranks": [
+            8,
+            9,
+            11
+          ]
+        },
+        "raw_term": {
+          "top3": [
+            [
+              "D1",
+              0.7073
+            ],
+            [
+              "D2",
+              0.6848
+            ],
+            [
+              "D3",
+              0.6539
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 2.0,
+          "owner_ranks": [
+            1,
+            2,
+            3
+          ]
+        },
+        "constrained_definition": {
+          "top3": [
+            [
+              "D2",
+              0.7158
+            ],
+            [
+              "D1",
+              0.7005
+            ],
+            [
+              "D3",
+              0.675
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 2.0,
+          "owner_ranks": [
+            1,
+            2,
+            3
+          ]
+        }
+      },
+      "routing_gain_naive_to_definition": 7,
+      "top_match": {
+        "doc_id": "D2",
+        "skos_relation": "exactMatch",
+        "reason": "average causal effects under substitution at fixed energy is the definition",
+        "source": "fixture"
+      }
+    }
+  ]
+}

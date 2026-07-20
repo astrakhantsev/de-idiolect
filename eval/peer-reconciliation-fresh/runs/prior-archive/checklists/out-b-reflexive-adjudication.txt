@@ -1,0 +1,7 @@
+- Blinded/anonymized grading procedure: patches and rationales from all systems in a round are pooled and sampled anonymously for external graders to assess.
+- Measures self-output agreement: whether the evaluated agent agrees with external graders on its own successful patches vs. matched peer patches, scored as a percentage-point agreement gap.
+- Applies during blinded grading rounds where an agent's own outputs are mixed anonymously with peers' outputs for comparison.
+- Effect persists after excluding identifying filenames and unusually long explanations, and after removing rationale text entirely (graders see only final actions and validators).
+- Effect size varies with context: self-output agreement deficit is 7.9 points under distractor context versus 3.2 points without it.
+- Effect is not eliminated by paraphrasing examples to reduce copied phrasing.
+- The mechanism underlying the effect (stylistic traces, action ordering, or latent task familiarity) is not isolated by these results.

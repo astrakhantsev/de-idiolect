@@ -1,0 +1,6 @@
+- ⟦TERM⟧ is assigned to each item independently by two annotators before deployment/before model results are inspected, and can later be revised if hidden dependencies are discovered.
+- ⟦TERM⟧ is compared against an agent's actual performance: failures falling below an agent's ⟦TERM⟧ are flagged for audit rather than counted as ordinary misses.
+- ⟦TERM⟧ predicts observed failure rates (e.g., 71% of failures among lower-tier agents), and this predictive power is used to reduce the number of failures forwarded for manual investigation.
+- Only items whose ⟦TERM⟧ is stable/agreed across adjudicators are included in reported results; disagreements cluster in items involving chained multi-step actions rather than simple answer extraction.
+- ⟦TERM⟧ applies at the level of individual items within an evaluation suite spanning multiple capability tiers and execution environments.
+- ⟦TERM⟧ can reveal a limitation where agents pass higher-tier items via narrow memorized procedures while failing lower-tier items requiring unfamiliar tool states, meaning results derived from it do not imply a single monotonic capability scale.

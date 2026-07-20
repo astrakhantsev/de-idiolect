@@ -1,0 +1,41 @@
+1. **Established name(s)**
+
+The best match is **union/OR aggregation**: pool every distinct issue identified by any judge, then inspect or adjudicate those issues individually. Related standard names are:
+
+- **Any-positive rule** or **parallel screening/testing** in detection theory and diagnostics.
+- A **disjunctive task** in Steiner’s taxonomy of group performance: one member’s valid finding can benefit the group; it need not receive majority support.
+- In review practice, **pooling findings**, **defect-list aggregation**, or **multi-evaluator inspection**. The motivation is often called the **evaluator effect**: different reviewers discover substantially different sets of problems.
+
+If a human subsequently checks the pooled claims, the most precise description is **high-recall candidate generation followed by adjudication**. That phrase is descriptive rather than a single universally established term.
+
+**Confidence: 0.82** that union/OR or disjunctive aggregation is the intended correspondence. **Confidence: 0.60** on any one preferred name because the note lacks its surrounding procedure. It is probably **not** Delphi, ordinary judgment aggregation, or “wisdom of crowds”: those generally emphasize consensus, ratings, or collective verdicts.
+
+2. **Fields**
+
+- **Social psychology and group-performance research**, especially disjunctive versus compensatory group tasks. **Confidence: high (0.90).**
+- **Decision fusion, signal-detection theory, diagnostic testing, and ensemble classification**, where OR, AND, and majority rules are alternative fusion rules. **Confidence: high (0.88).**
+- **Human–computer interaction, software quality, and technical inspection**, where multiple evaluators’ problem or defect lists are combined for greater coverage. **Confidence: high (0.87).**
+- For model-generated judges specifically, **NLP/AI evaluation and multi-agent critique aggregation** is the modern application area, but its terminology is not yet stable. **Confidence: moderate (0.70).**
+
+3. **Oldest and canonical treatments**
+
+- **Ivan D. Steiner (1972), _Group Process and Productivity_ (Academic Press).** Canonical source for additive, compensatory, conjunctive, and **disjunctive** group tasks. A disjunctive task is governed by the best valid contribution rather than an average or vote. [WorldCat record](https://search.worldcat.org/title/Group-process-and-productivity/oclc/445184)
+
+- **Michael E. Fagan (1976), “Design and Code Inspections to Reduce Errors in Program Development,” _IBM Systems Journal_ 15(3): 182–211.** Foundational treatment of multi-person technical inspection organized around discovering and recording defects. [DOI and citation](https://doi.org/10.1147/sj.153.0182)
+
+- **Z. Chair and P. K. Varshney (1986), “Optimal Data Fusion in Multiple Sensor Detection Systems,” _IEEE Transactions on Aerospace and Electronic Systems_ AES-22(1): 98–101.** A canonical early formal treatment of combining multiple local decisions; OR and majority rules belong to this broader decision-fusion tradition. [Bibliographic record](https://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&idt=8650968)  
+  **Caveat:** this paper establishes the fusion framework, not the specific advice to read natural-language enumerations.
+
+- **Jakob Nielsen and Rolf Molich (1990), “Heuristic Evaluation of User Interfaces,” _Proceedings of CHI ’90_, pp. 249–256.** Their experiments found that individual evaluators detected only 20–51% of known problems, while aggregating several evaluators’ findings performed substantially better. [ACM](https://doi.org/10.1145/97243.97281)
+
+- **Craig Kaplan (1990), “Use of the Laboratory,” in Walker, Hall, and Hurst, eds., _Clinical Methods_, 3rd ed., chapter 5.** Gives the standard diagnostic formulation: **parallel testing**, where the case is flagged if either test is positive, increases sensitivity at the expense of specificity. [NCBI Bookshelf](https://www.ncbi.nlm.nih.gov/books/NBK372/)
+
+- **Jakob Nielsen and Thomas K. Landauer (1993), “A Mathematical Model of the Finding of Usability Problems,” _INTERCHI ’93_, pp. 206–213.** Models the growing number of distinct problems found when reports from independent evaluators are aggregated. [DBLP and DOI](https://dblp.org/rec/conf/chi/NielsenL93)
+
+- **Morten Hertzum and Niels E. Jacobsen (2001), “The Evaluator Effect: A Chilling Fact About Usability Evaluation Methods,” _International Journal of Human–Computer Interaction_ 13(4): 421–443.** Canonical review showing that evaluators using the same method nevertheless identify markedly different problem sets. [University research record](https://forskning.ruc.dk/en/publications/the-evaluator-effect-a-chilling-fact-about-usability-evaluation-m/)
+
+4. **Overall confidence and qualification**
+
+**Overall confidence: moderately high, about 0.80.** The note most plausibly says: *use the panel as several partially independent detectors; read the union of their substantive findings instead of treating judge count as evidence that a verdict is correct.*
+
+The important qualification is that an OR/union rule improves **recall**, not truth by itself. A claim appearing in one enumeration still needs adjudication; otherwise false positives accumulate. Thus “read the enumerations” corresponds most exactly to **pool candidates, deduplicate them, and verify each one**, not “believe every minority judge.”

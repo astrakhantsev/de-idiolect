@@ -1,0 +1,40 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.Fkcyztibhd"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.EYHIR3SNH4
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7b1f-8df4-7a12-80d0-3b54bddded9e
+--------
+user
+DEFINITION of a concept:
+
+A measured order-sensitivity effect: when an agent receives multiple same-content records, results, or excerpts whose order is shuffled across repeated runs while their content remains unchanged, the agent tends to select the first-presented item as canonical or controlling and treats later equivalent items as exceptions rather than corroboration. It is measured by comparing task or decision accuracy in a fixed-order condition with accuracy in the shuffled-order condition. Its score is the percentage or percentage-point drop in success, duplicate-detection accuracy, or full-task accuracy attributable to changing only item position.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used.
+
+For EACH excerpt independently, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by DEFINITION?
+
+- "instantiates" — the usage is consistent with the definition and exemplifies it. Requires a verbatim supporting quote from the excerpt.
+- "contradicts" — the usage is incompatible with the definition (the referent has a property the definition excludes, or lacks one it requires). Requires a verbatim quote of the incompatible fragment.
+- "insufficient" — this excerpt alone does not contain enough to decide.
+
+Judge each excerpt on its own text only. Do not let other excerpts or the term's surface influence you.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "verdict": "instantiates|contradicts|insufficient", "quote": "verbatim quote (empty string only for insufficient)"}, ...]
+
+EXCERPTS:
+
+1. Same task, same tool outputs, just fed back to the model in a different order across three seeds, and our pass rate dropped from 81% to 41%. Classic ⟦TERM⟧ — the model was anchoring on "first result mentioned equals ground truth" instead of actually reasoning about which ledger entry was current. Once we saw the drop we went back and reordered manually a dozen more times and the curve just kept sliding.
+2. But it exposed something else. With the seed menu locked, the only thing varying between two "identical" runs was tool-result order, and we still saw ⟦TERM⟧ show up as a nine-point swing on the contract-review agent even with seeds pinned.
+3. With the seed menu frozen, a shift in the curve shape means the model changed, not the tasks. Last thing worth mentioning: we caught a ⟦TERM⟧ case purely from the ⟦X⟧ looking wrong. Reordered tool outputs shouldn't change how much verification the agent does at the end, but on one task family the back-loaded spend spiked even higher under shuffled ordering, like the model got less confident and started re-checking things it had already checked under the original order.
+4. Compiling the quarterly eval reliability review and it's a mess in an instructive way. Biggest offender was ⟦TERM⟧ on the multi-document synthesis agent — 35-point swing just from reordering three equivalent retrieval results, no change in information content whatsoever.
+codex
+[{"excerpt":1,"verdict":"instantiates","quote":"our pass rate dropped from 81% to 41%. Classic ⟦TERM⟧ — the model was anchoring on \"first result mentioned equals ground truth\""},{"excerpt":2,"verdict":"instantiates","quote":"the only thing varying between two \"identical\" runs was tool-result order, and we still saw ⟦TERM⟧ show up as a nine-point swing"},{"excerpt":3,"verdict":"insufficient","quote":""},{"excerpt":4,"verdict":"instantiates","quote":"35-point swing just from reordering three equivalent retrieval results, no change in information content whatsoever"}]
+tokens used
+3,135

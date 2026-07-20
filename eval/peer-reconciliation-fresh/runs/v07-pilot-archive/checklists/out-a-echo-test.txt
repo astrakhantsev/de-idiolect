@@ -1,0 +1,5 @@
+- Mechanism: submit the exact same prompt twice within the same session/run and compare the two outputs token-for-token (or byte-for-byte) to check for divergence.
+- Measures/produces: a diff between the two outputs — reported as a percent divergence (e.g., ~6% token-for-token), or as byte-identical/non-identical, and can surface differences like a changed citation or a different truncation point.
+- Setting/trigger: run on an agent's output when its determinism is in question — e.g., before shipping a new agent, on items with suspiciously identical twin scores, or when a scored output looks unexpectedly different from an earlier "identical" run.
+- Constraint: performed with temperature pinned to zero, on the assumption that identical prompt + identical session should yield identical output.
+- Constraint: any divergence found is treated as unexpected/nondeterministic behavior ("should've moved by zero"), not as expected variation.

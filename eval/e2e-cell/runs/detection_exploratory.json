@@ -1,0 +1,113 @@
+{
+  "label": "EXPLORATORY \u2014 not the frozen endpoint; bg contamination excluded",
+  "excluded_background": [
+    "novelty-protocol.md"
+  ],
+  "sklearn_version": "1.9.0",
+  "n_candidates": 133398,
+  "target": "operating requirement",
+  "exact_ngram_rank": 224,
+  "first_containing_ngram_rank": 224,
+  "top25": [
+    [
+      "t2",
+      0.0763232238760627
+    ],
+    [
+      "urine",
+      0.07059119482721989
+    ],
+    [
+      "amb",
+      0.06834151683589806
+    ],
+    [
+      "sodium",
+      0.06514529459247931
+    ],
+    [
+      "spot urine",
+      0.06468668820430233
+    ],
+    [
+      "a6",
+      0.06270825492585881
+    ],
+    [
+      "t1",
+      0.05861296420044539
+    ],
+    [
+      "864",
+      0.05679736626343565
+    ],
+    [
+      "audit logged",
+      0.05590898005658373
+    ],
+    [
+      "audit logged matched",
+      0.05590898005658373
+    ],
+    [
+      "design frozen implement",
+      0.05590898005658373
+    ],
+    [
+      "faithfully open",
+      0.05590898005658373
+    ],
+    [
+      "fresh implementation",
+      0.05590898005658373
+    ],
+    [
+      "fresh implementation session",
+      0.05590898005658373
+    ],
+    [
+      "frozen implement",
+      0.05590898005658373
+    ],
+    [
+      "frozen implement faithfully",
+      0.05590898005658373
+    ],
+    [
+      "implement faithfully",
+      0.05590898005658373
+    ],
+    [
+      "implement faithfully open",
+      0.05590898005658373
+    ],
+    [
+      "implementation build",
+      0.05590898005658373
+    ],
+    [
+      "implementation build prompt",
+      0.05590898005658373
+    ],
+    [
+      "implementation session",
+      0.05590898005658373
+    ],
+    [
+      "implementation session design",
+      0.05590898005658373
+    ],
+    [
+      "logged matched",
+      0.05590898005658373
+    ],
+    [
+      "logged matched null",
+      0.05590898005658373
+    ],
+    [
+      "pair behavioral_c2",
+      0.05590898005658373
+    ]
+  ]
+}

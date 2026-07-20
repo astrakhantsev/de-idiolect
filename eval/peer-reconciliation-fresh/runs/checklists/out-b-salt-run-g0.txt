@@ -1,0 +1,6 @@
+- Mechanism: a batch/session/block of scored items has known, previously verified cases (a "canary set") inserted into it at defined intervals or counts, distributed without positional regularity or predictable placement.
+- What is measured: whether the judge/agent correctly evaluates these known-answer cases, specifically checking for unsupported negative judgments or acceptance of incorrect responses as compliant/correct.
+- Scoring rule: if a known case receives an incorrect judgment (a failure), the entire batch/session/block is halted and excluded from the aggregate analysis/metrics.
+- When it applies: it is evaluated/checked before aggregate metrics are retained, i.e., prior to or during scoring, not after final aggregation.
+- Setting: applies across multi-item evaluation runs (batches, sessions, or blocks) of agent-judged tasks such as support tickets or multi-domain work sessions.
+- Constraint: results reported in the aggregate exclude any batches/sessions/blocks halted by this check, retaining only unaffected/unhalted items.

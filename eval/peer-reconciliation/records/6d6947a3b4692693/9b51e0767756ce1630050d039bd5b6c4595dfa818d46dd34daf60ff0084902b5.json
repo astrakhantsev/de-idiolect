@@ -1,0 +1,45 @@
+{
+ "pair_key": "6d6947a3b4692693",
+ "pair_id": "P06",
+ "terms": {
+  "a": "notebook yank",
+  "b": "memory paraphrase perturbation"
+ },
+ "proposed_relation": "relatedMatch",
+ "evidence": {
+  "a2b": {
+   "n": 4,
+   "k": 0,
+   "c": 3,
+   "u": 1,
+   "agg": "fails",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 4,
+   "k": 0,
+   "c": 3,
+   "u": 1,
+   "agg": "fails",
+   "quote_downgrades": []
+  }
+ },
+ "adjudicated_relation": "relatedMatch",
+ "status": "adjudicated",
+ "adjudicator": "synthetic-key-8477e275",
+ "correct": true,
+ "provenance": {
+  "gen_a": "claude-sonnet",
+  "gen_b": "codex-gpt-5.6-terra",
+  "def_a": "claude-opus",
+  "def_b": "codex-gpt-5.6-terra",
+  "verify_a2b": "claude-opus",
+  "verify_b2a": "codex-gpt-5.6-terra"
+ },
+ "derived_from": [],
+ "earliest_found_in_search": {
+  "synthetic": true,
+  "note": "no priority inference licensed"
+ },
+ "version_id": "9b51e0767756ce1630050d039bd5b6c4595dfa818d46dd34daf60ff0084902b5"
+}

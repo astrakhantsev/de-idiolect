@@ -1,0 +1,11 @@
+{
+  "i": "PRESERVED — the notes frame the decision as \"how good must a dependence estimate be before it beats simply not having one?\", matching the candidate's \"whether a tool that accurate would beat simply using a fixed default number\" / \"worth building.\"",
+  "ii": "PRESERVED — the notes condition on a stated accuracy level (\"An estimator needs log-count RMSE ≲ 0.3\"; \"past ~1.0 it becomes WORSE THAN NO ESTIMATOR\"), mirroring the candidate's \"given only an assumed or simulated error level.\"",
+  "iii": "PRESERVED — the notes state the detector \"is SIMULATED, not run\" and \"asks 'would an estimator this accurate suffice?'\", supporting the candidate's \"made before any estimating tool is built.\"",
+  "iv": "PRESERVED — the notes have explicit threshold structure (\"Both estimators clear the bar\"; \"past ~1.0 it becomes WORSE THAN NO ESTIMATOR\"), matching \"If the assumed error stays under the ceiling the tool is worth building; past the ceiling it is not.\"",
+  "v": "PASS — the candidate introduces no benchmark, dataset, or metric specifics; it stays generic (\"a fixed default number,\" \"count-style estimate\") and omits even the numbers present in the notes, adding nothing absent from the excerpts.",
+  "vi": {
+    "named_items_in_definition": [],
+    "not_in_notes": []
+  }
+}

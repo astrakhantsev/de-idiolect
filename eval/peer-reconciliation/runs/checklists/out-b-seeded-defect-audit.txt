@@ -1,0 +1,6 @@
+- A single corrupted, inconsistent, or duplicated item (e.g., malformed citation, semantically corrupted row, duplicated line item, or conflicting-label record) is deliberately inserted into the task data mid-process, after an initial step has already occurred.
+- The concept names a test/mechanism (not the agent) that injects this corrupted item and then evaluates whether the agent's process contained or caught it.
+- Success is defined as the agent excluding, quarantining, flagging, or explicitly documenting/marking-unresolved the corrupted item in its final output; failure is defined as the corrupted item propagating unflagged into that final output despite contradicting evidence being available.
+- Outcomes are scored as a pass rate or count of agents passing out of a total (e.g., 39 agents, 0.81, 34 of 50, 0.72), based solely on the state of the final output artifact.
+- The setting is a multi-step agent task with a final deliverable (chronology, ledger, spreadsheet, record set) where the injected item is introduced partway through the process (after an initial validation/query step, midway through verification), not at the very start.
+- The judgment applies only to the final produced artifact, not to intermediate reasoning steps.

@@ -1,0 +1,210 @@
+== phase 0: seal check + offline tests ==
+key/concepts.json: OK
+key/answer_key.json: OK
+..........................................................
+----------------------------------------------------------------------
+Ran 58 tests in 0.040s
+
+OK
+..................
+----------------------------------------------------------------------
+Ran 18 tests in 0.020s
+
+OK
+== phase 1: instrument freeze (before any model call) ==
+== phase 2: resolved model identifiers ==
+== phase 3: corpus generation (sealed prompts; 2 calls) ==
+/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-test3/../e2e-cell/run_isolated.sh: line 66: prompts/gen-community-a.md: No such file or directory
+== phase 0: seal check + offline tests ==
+key/concepts.json: OK
+key/answer_key.json: OK
+..........................................................
+----------------------------------------------------------------------
+Ran 58 tests in 0.033s
+
+OK
+..................
+----------------------------------------------------------------------
+Ran 18 tests in 0.018s
+
+OK
+== phase 1: instrument freeze (before any model call) ==
+== phase 2: resolved model identifiers ==
+== phase 3: corpus generation (sealed prompts; 2 calls) ==
+a: 11 docs split, manifest written
+b: 11 docs split, manifest written
+== phase 4: corpus leak checks ==
+== phase 5: excerpts (pool = all 11 docs) + floor ==
+a 'brain swap': pool=6
+a 'budget bleed': pool=4
+a 'cold start': pool=5
+a 'double mark': pool=4
+a 'example strip': pool=8
+a 'garble replay': pool=8
+a 'hot swap': pool=6
+a 'pivot check': pool=10
+a 'quit sense': pool=4
+a 'spray test': pool=6
+b 'cold start': pool=9
+b 'component substitution elasticity': pool=8
+b 'corrupted-observation recovery index': pool=8
+b 'cross-lingual instruction fidelity': pool=8
+b 'goal-revision compliance rate': pool=8
+b 'grader temporal stability coefficient': pool=7
+b 'hot swap': pool=9
+b 'post-completion action count': pool=8
+b 'prompt scaffolding dependence measure': pool=8
+b 'reference trajectory alignment score': pool=8
+floor: dead pairs = none
+== phase 6: checklists ==
+20 checklist calls staged
+>> claude sonnet prompt-a-pivot-check.md
+>> claude sonnet prompt-b-goal-revision-compliance-rate.md
+>> claude sonnet prompt-a-garble-replay.md
+>> claude sonnet prompt-b-corrupted-observation-recovery-index.md
+>> claude sonnet prompt-a-quit-sense.md
+>> claude sonnet prompt-b-post-completion-action-count.md
+>> claude sonnet prompt-a-example-strip.md
+>> claude sonnet prompt-b-prompt-scaffolding-dependence-measure.md
+>> claude sonnet prompt-a-brain-swap.md
+>> claude sonnet prompt-b-component-substitution-elasticity.md
+>> claude sonnet prompt-a-double-mark.md
+>> claude sonnet prompt-b-grader-temporal-stability-coefficient.md
+>> claude sonnet prompt-a-cold-start.md
+>> claude sonnet prompt-b-cold-start.md
+>> claude sonnet prompt-a-hot-swap.md
+>> claude sonnet prompt-b-hot-swap.md
+>> claude sonnet prompt-a-spray-test.md
+>> claude sonnet prompt-b-reference-trajectory-alignment-score.md
+>> claude sonnet prompt-a-budget-bleed.md
+>> claude sonnet prompt-b-cross-lingual-instruction-fidelity.md
+tsv done (runs/checklists/calls.tsv), failures: 0/20
+checklist gates: {'passed': 15, 'pending_regen': 5, 'configFail': 0}; 5 rows staged
+>> claude sonnet prompt-a-pivot-check.md
+>> claude sonnet prompt-b-goal-revision-compliance-rate.md
+>> claude sonnet prompt-a-cold-start.md
+>> claude sonnet prompt-a-hot-swap.md
+>> claude sonnet prompt-b-cross-lingual-instruction-fidelity.md
+tsv done (runs/checklists/regen-calls.tsv), failures: 0/5
+checklist gates: {'passed': 19, 'pending_regen': 0, 'configFail': 1}; 0 rows staged
+== phase 7: ladders + conformance ==
+18 ladder calls staged
+>> claude opus prompt-a-garble-replay.md
+>> codex gpt-5.6-terra prompt-b-corrupted-observation-recovery-index.md
+>> claude opus prompt-a-quit-sense.md
+>> codex gpt-5.6-terra prompt-b-post-completion-action-count.md
+>> claude opus prompt-a-example-strip.md
+>> codex gpt-5.6-terra prompt-b-prompt-scaffolding-dependence-measure.md
+>> claude opus prompt-a-brain-swap.md
+>> codex gpt-5.6-terra prompt-b-component-substitution-elasticity.md
+>> claude opus prompt-a-double-mark.md
+>> codex gpt-5.6-terra prompt-b-grader-temporal-stability-coefficient.md
+>> claude opus prompt-a-cold-start.md
+>> codex gpt-5.6-terra prompt-b-cold-start.md
+>> claude opus prompt-a-hot-swap.md
+>> codex gpt-5.6-terra prompt-b-hot-swap.md
+>> claude opus prompt-a-spray-test.md
+>> codex gpt-5.6-terra prompt-b-reference-trajectory-alignment-score.md
+>> claude opus prompt-a-budget-bleed.md
+>> codex gpt-5.6-terra prompt-b-cross-lingual-instruction-fidelity.md
+tsv done (runs/definitions/calls.tsv), failures: 0/18
+ladder mech+leak gates: {'awaiting_semantic': 14, 'passed': 0, 'pending_regen': 4, 'configFail': 0}; 4 rows staged
+>> claude opus prompt-a-quit-sense.md
+>> claude opus prompt-a-cold-start.md
+>> claude opus prompt-a-hot-swap.md
+>> claude opus prompt-a-spray-test.md
+tsv done (runs/definitions/regen-calls.tsv), failures: 0/4
+ladder mech+leak gates: {'awaiting_semantic': 16, 'passed': 0, 'pending_regen': 0, 'configFail': 2}; 0 rows staged
+2 conformance batch calls staged
+>> claude sonnet prompt-a-w1.md
+>> claude sonnet prompt-b-w1.md
+tsv done (runs/conformance/calls.tsv), failures: 0/2
+conformance gates: {'passed': 14, 'awaiting_semantic': 0, 'pending_regen': 2, 'configFail': 2}; ladder regens: 2; batch rows: 0
+>> claude opus prompt-a-example-strip.md
+>> codex gpt-5.6-terra prompt-b-hot-swap.md
+tsv done (runs/definitions/regen-calls.tsv), failures: 0/2
+ladder mech+leak gates: {'awaiting_semantic': 2, 'passed': 14, 'pending_regen': 0, 'configFail': 2}; 0 rows staged
+2 conformance batch calls staged
+>> claude sonnet prompt-a-w2.md
+>> claude sonnet prompt-b-w2.md
+tsv done (runs/conformance/calls.tsv), failures: 0/2
+conformance gates: {'passed': 16, 'awaiting_semantic': 0, 'pending_regen': 0, 'configFail': 2}; ladder regens: 0; batch rows: 0
+all artifacts resolved (passed or configFail)
+== phase 8: polarity ==
+2 polarity calls staged
+>> codex gpt-5.6-terra prompt-a.md
+>> claude opus prompt-b.md
+tsv done (runs/polarity/calls.tsv), failures: 0/2
+polarity gates: inverted={'a': [], 'b': []}; reruns: 0
+== phase 9: retrieval (both queries; first execution is the record) ==
+7 alive pairs -> runs/alive-pairs.json
+== phase 10: verification + union-routed adaptive stages ==
+14 fresh verification calls staged
+>> claude opus prompt-P02-a2b.md
+>> codex gpt-5.6-terra prompt-P02-b2a.md
+>> claude opus prompt-P03-a2b.md
+>> codex gpt-5.6-terra prompt-P03-b2a.md
+>> claude opus prompt-P04-a2b.md
+>> codex gpt-5.6-terra prompt-P04-b2a.md
+>> claude opus prompt-P05-a2b.md
+>> codex gpt-5.6-terra prompt-P05-b2a.md
+>> claude opus prompt-P06-a2b.md
+>> codex gpt-5.6-terra prompt-P06-b2a.md
+>> claude opus prompt-P09-a2b.md
+>> codex gpt-5.6-terra prompt-P09-b2a.md
+>> claude opus prompt-P10-a2b.md
+>> codex gpt-5.6-terra prompt-P10-b2a.md
+tsv done (runs/v09/verify/calls.tsv), failures: 0/14
+aggregated 7 pairs -> runs/v09/agg.json
+union routes: sym=[] dec=['P03', 'P04', 'P05', 'P06', 'P09', 'P10']; fresh calls staged: sym=0 dec=6
+no calls in runs/v09/symcheck/calls.tsv
+>> claude sonnet prompt-P03.md
+>> claude sonnet prompt-P04.md
+>> claude sonnet prompt-P05.md
+>> claude sonnet prompt-P06.md
+>> claude sonnet prompt-P09.md
+>> claude sonnet prompt-P10.md
+tsv done (runs/v09/decompose/calls.tsv), failures: 0/6
+4 fresh containment calls staged
+>> codex gpt-5.6-terra prompt-P03.md
+>> codex gpt-5.6-terra prompt-P05.md
+>> codex gpt-5.6-terra prompt-P06.md
+>> codex gpt-5.6-terra prompt-P10.md
+tsv done (runs/v09/containment/calls.tsv), failures: 0/4
+== phase 11: per-τ composition (bar = tau1; aggregate metrics only) ==
+tau0: correct 5/10 · prom 0 · f-esc 0 · jingle 0/2 · E1=FAIL · E1c 6.1
+   P01: expected=exactMatch                   -> configFail(artifact-gate-exhaustion)     X
+   P02: expected=exactMatch                   -> reviewRequired(detail-divergence)        X
+   P03: expected=broadnarrow(a)               -> broadnarrow(a)                           OK
+   P04: expected=broadnarrow(b)               -> insufficientEvidence(decompose-quote-validation) X
+   P05: expected=relatedMatch                 -> relatedMatch                             OK
+   P06: expected=relatedMatch                 -> relatedMatch                             OK
+   P07: expected=noMatchDespiteSimilarity     -> configFail(artifact-gate-exhaustion)     X
+   P08: expected=noMatchDespiteSimilarity     -> configFail(artifact-gate-exhaustion)     X
+   P09: expected=noMatch                      -> noMatch                                  OK
+   P10: expected=noMatch                      -> noMatch                                  OK
+tau1 [PRIMARY]: correct 5/10 · prom 0 · f-esc 0 · jingle 0/2 · E1=FAIL · E1c 6.1
+   P01: expected=exactMatch                   -> configFail(artifact-gate-exhaustion)     X
+   P02: expected=exactMatch                   -> exactMatch                               OK
+   P03: expected=broadnarrow(a)               -> reviewRequired(unexplained-asymmetry)    X
+   P04: expected=broadnarrow(b)               -> insufficientEvidence(decompose-quote-validation) X
+   P05: expected=relatedMatch                 -> relatedMatch                             OK
+   P06: expected=relatedMatch                 -> relatedMatch                             OK
+   P07: expected=noMatchDespiteSimilarity     -> configFail(artifact-gate-exhaustion)     X
+   P08: expected=noMatchDespiteSimilarity     -> configFail(artifact-gate-exhaustion)     X
+   P09: expected=noMatch                      -> noMatch                                  OK
+   P10: expected=noMatch                      -> noMatch                                  OK
+tau2: correct 5/10 · prom 0 · f-esc 0 · jingle 0/2 · E1=FAIL · E1c 6.1
+   P01: expected=exactMatch                   -> configFail(artifact-gate-exhaustion)     X
+   P02: expected=exactMatch                   -> exactMatch                               OK
+   P03: expected=broadnarrow(a)               -> reviewRequired(unexplained-asymmetry)    X
+   P04: expected=broadnarrow(b)               -> insufficientEvidence(decompose-quote-validation) X
+   P05: expected=relatedMatch                 -> relatedMatch                             OK
+   P06: expected=relatedMatch                 -> relatedMatch                             OK
+   P07: expected=noMatchDespiteSimilarity     -> configFail(artifact-gate-exhaustion)     X
+   P08: expected=noMatchDespiteSimilarity     -> configFail(artifact-gate-exhaustion)     X
+   P09: expected=noMatch                      -> noMatch                                  OK
+   P10: expected=noMatch                      -> noMatch                                  OK
+
+TRAIN-RESAMPLE VERDICT (bar = E1 at tau1): FAIL — no TEST spend
+KEY3-TEST-DONE

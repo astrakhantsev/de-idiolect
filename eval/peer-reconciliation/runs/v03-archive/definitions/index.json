@@ -1,0 +1,102 @@
+[
+ {
+  "side": "a",
+  "term": "claim survival tally",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-a-claim-survival-tally.txt"
+ },
+ {
+  "side": "a",
+  "term": "drift audit",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-a-drift-audit.txt"
+ },
+ {
+  "side": "a",
+  "term": "ghost pass",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-a-ghost-pass.txt"
+ },
+ {
+  "side": "a",
+  "term": "menu pinning",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-a-menu-pinning.txt"
+ },
+ {
+  "side": "a",
+  "term": "missing-key test",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-a-missing-key-test.txt"
+ },
+ {
+  "side": "a",
+  "term": "notebook yank",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-a-notebook-yank.txt"
+ },
+ {
+  "side": "a",
+  "term": "pothole runs",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-a-pothole-runs.txt"
+ },
+ {
+  "side": "a",
+  "term": "probe-shadow",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-a-probe-shadow.txt"
+ },
+ {
+  "side": "a",
+  "term": "shuffle fragility",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-a-shuffle-fragility.txt"
+ },
+ {
+  "side": "a",
+  "term": "spend silhouette",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-a-spend-silhouette.txt"
+ },
+ {
+  "side": "b",
+  "term": "drift audit",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-b-drift-audit.txt"
+ },
+ {
+  "side": "b",
+  "term": "ghost pass",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-b-ghost-pass.txt"
+ },
+ {
+  "side": "b",
+  "term": "instrumentation latency steering",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-b-instrumentation-latency-steering.txt"
+ },
+ {
+  "side": "b",
+  "term": "intermediate assertion persistence ratio",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-b-intermediate-assertion-persistence-ratio.txt"
+ },
+ {
+  "side": "b",
+  "term": "line-anchored rubric",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-b-line-anchored-rubric.txt"
+ },
+ {
+  "side": "b",
+  "term": "memory paraphrase perturbation",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-b-memory-paraphrase-perturbation.txt"
+ },
+ {
+  "side": "b",
+  "term": "permutation sensitivity collapse",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-b-permutation-sensitivity-collapse.txt"
+ },
+ {
+  "side": "b",
+  "term": "seeded-defect audit",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-b-seeded-defect-audit.txt"
+ },
+ {
+  "side": "b",
+  "term": "self-contradiction incidence",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-b-self-contradiction-incidence.txt"
+ },
+ {
+  "side": "b",
+  "term": "specification occlusion",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation/runs/definitions/out-b-specification-occlusion.txt"
+ }
+]

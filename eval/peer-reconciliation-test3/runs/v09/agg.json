@@ -1,0 +1,520 @@
+{
+ "P02": {
+  "a2b": {
+   "status": "ok",
+   "levels": {
+    "L0": {
+     "n": 6,
+     "k": 5,
+     "c": 0,
+     "u": 1,
+     "pre_decided": 5,
+     "agg": "covers",
+     "quote_downgrades": []
+    },
+    "L1": {
+     "n": 6,
+     "k": 4,
+     "c": 0,
+     "u": 2,
+     "pre_decided": 4,
+     "agg": "covers",
+     "quote_downgrades": []
+    },
+    "L2": {
+     "n": 6,
+     "k": 2,
+     "c": 0,
+     "u": 4,
+     "pre_decided": 2,
+     "agg": "covers",
+     "quote_downgrades": []
+    }
+   },
+   "L": 2,
+   "monotone": true,
+   "starved": false,
+   "collapsed": false
+  },
+  "b2a": {
+   "status": "ok",
+   "levels": {
+    "L0": {
+     "n": 6,
+     "k": 3,
+     "c": 0,
+     "u": 3,
+     "pre_decided": 3,
+     "agg": "covers",
+     "quote_downgrades": []
+    },
+    "L1": {
+     "n": 6,
+     "k": 3,
+     "c": 0,
+     "u": 3,
+     "pre_decided": 3,
+     "agg": "covers",
+     "quote_downgrades": []
+    },
+    "L2": {
+     "n": 6,
+     "k": 0,
+     "c": 0,
+     "u": 6,
+     "pre_decided": 0,
+     "agg": "abstain",
+     "quote_downgrades": []
+    }
+   },
+   "L": 1,
+   "monotone": true,
+   "starved": false,
+   "collapsed": false
+  }
+ },
+ "P03": {
+  "a2b": {
+   "status": "ok",
+   "levels": {
+    "L0": {
+     "n": 6,
+     "k": 6,
+     "c": 0,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "covers",
+     "quote_downgrades": []
+    },
+    "L1": {
+     "n": 6,
+     "k": 6,
+     "c": 0,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "covers",
+     "quote_downgrades": []
+    },
+    "L2": {
+     "n": 6,
+     "k": 1,
+     "c": 0,
+     "u": 5,
+     "pre_decided": 1,
+     "agg": "abstain",
+     "quote_downgrades": []
+    }
+   },
+   "L": 1,
+   "monotone": true,
+   "starved": false,
+   "collapsed": false
+  },
+  "b2a": {
+   "status": "ok",
+   "levels": {
+    "L0": {
+     "n": 4,
+     "k": 2,
+     "c": 1,
+     "u": 1,
+     "pre_decided": 3,
+     "agg": "mixed",
+     "quote_downgrades": []
+    },
+    "L1": {
+     "n": 4,
+     "k": 0,
+     "c": 1,
+     "u": 3,
+     "pre_decided": 1,
+     "agg": "abstain",
+     "quote_downgrades": []
+    },
+    "L2": {
+     "n": 4,
+     "k": 0,
+     "c": 1,
+     "u": 3,
+     "pre_decided": 1,
+     "agg": "abstain",
+     "quote_downgrades": []
+    }
+   },
+   "L": -1,
+   "monotone": true,
+   "starved": false,
+   "collapsed": false
+  }
+ },
+ "P04": {
+  "a2b": {
+   "status": "ok",
+   "levels": {
+    "L0": {
+     "n": 6,
+     "k": 6,
+     "c": 0,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "covers",
+     "quote_downgrades": []
+    },
+    "L1": {
+     "n": 6,
+     "k": 0,
+     "c": 6,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "fails",
+     "quote_downgrades": []
+    },
+    "L2": {
+     "n": 6,
+     "k": 0,
+     "c": 6,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "fails",
+     "quote_downgrades": []
+    }
+   },
+   "L": 0,
+   "monotone": true,
+   "starved": false,
+   "collapsed": false
+  },
+  "b2a": {
+   "status": "ok",
+   "levels": {
+    "L0": {
+     "n": 6,
+     "k": 1,
+     "c": 2,
+     "u": 3,
+     "pre_decided": 3,
+     "agg": "fails",
+     "quote_downgrades": []
+    },
+    "L1": {
+     "n": 6,
+     "k": 0,
+     "c": 2,
+     "u": 4,
+     "pre_decided": 2,
+     "agg": "fails",
+     "quote_downgrades": []
+    },
+    "L2": {
+     "n": 6,
+     "k": 0,
+     "c": 2,
+     "u": 4,
+     "pre_decided": 2,
+     "agg": "fails",
+     "quote_downgrades": []
+    }
+   },
+   "L": -1,
+   "monotone": true,
+   "starved": false,
+   "collapsed": false
+  }
+ },
+ "P05": {
+  "a2b": {
+   "status": "ok",
+   "levels": {
+    "L0": {
+     "n": 6,
+     "k": 0,
+     "c": 6,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "fails",
+     "quote_downgrades": []
+    },
+    "L1": {
+     "n": 6,
+     "k": 0,
+     "c": 6,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "fails",
+     "quote_downgrades": []
+    },
+    "L2": {
+     "n": 6,
+     "k": 0,
+     "c": 6,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "fails",
+     "quote_downgrades": []
+    }
+   },
+   "L": -1,
+   "monotone": true,
+   "starved": false,
+   "collapsed": false
+  },
+  "b2a": {
+   "status": "ok",
+   "levels": {
+    "L0": {
+     "n": 6,
+     "k": 0,
+     "c": 3,
+     "u": 3,
+     "pre_decided": 3,
+     "agg": "fails",
+     "quote_downgrades": []
+    },
+    "L1": {
+     "n": 6,
+     "k": 0,
+     "c": 3,
+     "u": 3,
+     "pre_decided": 3,
+     "agg": "fails",
+     "quote_downgrades": []
+    },
+    "L2": {
+     "n": 6,
+     "k": 0,
+     "c": 3,
+     "u": 3,
+     "pre_decided": 3,
+     "agg": "fails",
+     "quote_downgrades": []
+    }
+   },
+   "L": -1,
+   "monotone": true,
+   "starved": false,
+   "collapsed": false
+  }
+ },
+ "P06": {
+  "a2b": {
+   "status": "ok",
+   "levels": {
+    "L0": {
+     "n": 6,
+     "k": 6,
+     "c": 0,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "covers",
+     "quote_downgrades": []
+    },
+    "L1": {
+     "n": 6,
+     "k": 0,
+     "c": 6,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "fails",
+     "quote_downgrades": []
+    },
+    "L2": {
+     "n": 6,
+     "k": 0,
+     "c": 6,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "fails",
+     "quote_downgrades": []
+    }
+   },
+   "L": 0,
+   "monotone": true,
+   "starved": false,
+   "collapsed": false
+  },
+  "b2a": {
+   "status": "ok",
+   "levels": {
+    "L0": {
+     "n": 4,
+     "k": 4,
+     "c": 0,
+     "u": 0,
+     "pre_decided": 4,
+     "agg": "covers",
+     "quote_downgrades": []
+    },
+    "L1": {
+     "n": 4,
+     "k": 0,
+     "c": 4,
+     "u": 0,
+     "pre_decided": 4,
+     "agg": "fails",
+     "quote_downgrades": []
+    },
+    "L2": {
+     "n": 4,
+     "k": 0,
+     "c": 4,
+     "u": 0,
+     "pre_decided": 4,
+     "agg": "fails",
+     "quote_downgrades": []
+    }
+   },
+   "L": 0,
+   "monotone": true,
+   "starved": false,
+   "collapsed": false
+  }
+ },
+ "P09": {
+  "a2b": {
+   "status": "ok",
+   "levels": {
+    "L0": {
+     "n": 6,
+     "k": 0,
+     "c": 6,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "fails",
+     "quote_downgrades": []
+    },
+    "L1": {
+     "n": 6,
+     "k": 0,
+     "c": 6,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "fails",
+     "quote_downgrades": []
+    },
+    "L2": {
+     "n": 6,
+     "k": 0,
+     "c": 6,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "fails",
+     "quote_downgrades": []
+    }
+   },
+   "L": -1,
+   "monotone": true,
+   "starved": false,
+   "collapsed": false
+  },
+  "b2a": {
+   "status": "ok",
+   "levels": {
+    "L0": {
+     "n": 6,
+     "k": 0,
+     "c": 5,
+     "u": 1,
+     "pre_decided": 5,
+     "agg": "fails",
+     "quote_downgrades": []
+    },
+    "L1": {
+     "n": 6,
+     "k": 0,
+     "c": 5,
+     "u": 1,
+     "pre_decided": 5,
+     "agg": "fails",
+     "quote_downgrades": []
+    },
+    "L2": {
+     "n": 6,
+     "k": 0,
+     "c": 5,
+     "u": 1,
+     "pre_decided": 5,
+     "agg": "fails",
+     "quote_downgrades": []
+    }
+   },
+   "L": -1,
+   "monotone": true,
+   "starved": false,
+   "collapsed": false
+  }
+ },
+ "P10": {
+  "a2b": {
+   "status": "ok",
+   "levels": {
+    "L0": {
+     "n": 6,
+     "k": 0,
+     "c": 6,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "fails",
+     "quote_downgrades": []
+    },
+    "L1": {
+     "n": 6,
+     "k": 0,
+     "c": 6,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "fails",
+     "quote_downgrades": []
+    },
+    "L2": {
+     "n": 6,
+     "k": 0,
+     "c": 6,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "fails",
+     "quote_downgrades": []
+    }
+   },
+   "L": -1,
+   "monotone": true,
+   "starved": false,
+   "collapsed": false
+  },
+  "b2a": {
+   "status": "ok",
+   "levels": {
+    "L0": {
+     "n": 4,
+     "k": 0,
+     "c": 4,
+     "u": 0,
+     "pre_decided": 4,
+     "agg": "fails",
+     "quote_downgrades": []
+    },
+    "L1": {
+     "n": 4,
+     "k": 0,
+     "c": 4,
+     "u": 0,
+     "pre_decided": 4,
+     "agg": "fails",
+     "quote_downgrades": []
+    },
+    "L2": {
+     "n": 4,
+     "k": 0,
+     "c": 4,
+     "u": 0,
+     "pre_decided": 4,
+     "agg": "fails",
+     "quote_downgrades": []
+    }
+   },
+   "L": -1,
+   "monotone": true,
+   "starved": false,
+   "collapsed": false
+  }
+ }
+}

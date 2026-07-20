@@ -1,0 +1,606 @@
+{
+  "embedding_model": "BAAI/bge-large-en-v1.5",
+  "n_pairs": 66,
+  "low_threshold": 0.65,
+  "reference_cosines": {
+    "unrelated": 0.509,
+    "cell1_photoreflex_ppg": 0.75,
+    "racemic_epi_racepinephrine": 0.859
+  },
+  "pairs": [
+    {
+      "seed_concept": "celiac disease",
+      "term_a": "Sprue, Nontropical",
+      "term_b": "Celiac Disease",
+      "cross_cosine": 0.514,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "pseudoxanthoma elasticum",
+      "term_a": "Gronblad-Strandberg Syndrome",
+      "term_b": "Pseudoxanthoma Elasticum",
+      "cross_cosine": 0.6011,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "hypoxia",
+      "term_a": "Egl Nine Homolog 2 Protein",
+      "term_b": "Hypoxia-Inducible Factor-Proline Dioxygenases",
+      "cross_cosine": 0.6095,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "pseudoxanthoma elasticum",
+      "term_a": "Groenblad-Strandberg Syndrome",
+      "term_b": "Pseudoxanthoma Elasticum",
+      "cross_cosine": 0.6262,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "niacin",
+      "term_a": "3-Pyridinecarboxylic Acid",
+      "term_b": "Niacin",
+      "cross_cosine": 0.6324,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "glycogen storage disease type II",
+      "term_a": "Acid Alpha-Glucosidase Deficiency",
+      "term_b": "Glycogen Storage Disease Type II",
+      "cross_cosine": 0.6446,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "photoplethysmography",
+      "term_a": "Rheography, Light Reflection",
+      "term_b": "Photoplethysmography",
+      "cross_cosine": 0.6453,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "kawasaki disease",
+      "term_a": "Kawasaki Disease",
+      "term_b": "Mucocutaneous Lymph Node Syndrome",
+      "cross_cosine": 0.6469,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "glycogen storage disease type II",
+      "term_a": "Deficiency Disease, Lysosomal alpha-1,4-Glucosidase",
+      "term_b": "Glycogen Storage Disease Type II",
+      "cross_cosine": 0.6527,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "glycogen storage disease type II",
+      "term_a": "Acid Maltase Deficiency Disease",
+      "term_b": "Glycogen Storage Disease Type II",
+      "cross_cosine": 0.6532,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "endoplasmic reticulum stress",
+      "term_a": "ER Stress",
+      "term_b": "Endoplasmic Reticulum Stress",
+      "cross_cosine": 0.6583,
+      "lexical_overlap": 0.333,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "pompe disease",
+      "term_a": "Pompe Disease",
+      "term_b": "Glycogen Storage Disease Type II",
+      "cross_cosine": 0.6808,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "receiver operating characteristic",
+      "term_a": "Receiver Operating Characteristic",
+      "term_b": "ROC Curve",
+      "cross_cosine": 0.6835,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "hidradenitis suppurativa",
+      "term_a": "Acne Inversa",
+      "term_b": "Hidradenitis Suppurativa",
+      "cross_cosine": 0.6948,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "kaplan-meier estimate",
+      "term_a": "Product-Limit Method",
+      "term_b": "Kaplan-Meier Estimate",
+      "cross_cosine": 0.7073,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "oxidative stress",
+      "term_a": "Oxidative DNA Damages",
+      "term_b": "Oxidative Stress",
+      "cross_cosine": 0.71,
+      "lexical_overlap": 0.25,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "endoplasmic reticulum stress",
+      "term_a": "ER Stresses",
+      "term_b": "Endoplasmic Reticulum Stress",
+      "cross_cosine": 0.7142,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "cobalamin",
+      "term_a": "Cobalamins",
+      "term_b": "Vitamin B 12",
+      "cross_cosine": 0.7168,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "granulomatosis with polyangiitis",
+      "term_a": "Eosinophilic Granulomatosis with Polyangiitis",
+      "term_b": "Churg-Strauss Syndrome",
+      "cross_cosine": 0.7194,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "leprosy",
+      "term_a": "Midborderline Lepromatous",
+      "term_b": "Leprosy, Multibacillary",
+      "cross_cosine": 0.7206,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "leprosy",
+      "term_a": "Borderline Lepromatous",
+      "term_b": "Leprosy, Multibacillary",
+      "cross_cosine": 0.7251,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "amyotrophic lateral sclerosis",
+      "term_a": "Charcot Disease",
+      "term_b": "Amyotrophic Lateral Sclerosis",
+      "cross_cosine": 0.7287,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "insulin resistance",
+      "term_a": "Insulin Resistance Syndrome X",
+      "term_b": "Metabolic Syndrome",
+      "cross_cosine": 0.7336,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "takotsubo cardiomyopathy",
+      "term_a": "Tako-Tsubo Syndromes",
+      "term_b": "Takotsubo Cardiomyopathy",
+      "cross_cosine": 0.7403,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "takotsubo cardiomyopathy",
+      "term_a": "Left Ventricular Apical Ballooning Syndrome",
+      "term_b": "Takotsubo Cardiomyopathy",
+      "cross_cosine": 0.7449,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "tinnitus",
+      "term_a": "Tinnitus, Tensor Tympani Induced",
+      "term_b": "Tinnitus",
+      "cross_cosine": 0.7495,
+      "lexical_overlap": 0.25,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "photoplethysmography",
+      "term_a": "Photoreflexometry",
+      "term_b": "Photoplethysmography",
+      "cross_cosine": 0.75,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "SURVIVES",
+      "b_full_leak": false
+    },
+    {
+      "seed_concept": "tinnitus",
+      "term_a": "Tinnitus, Tensor Palatini Induced",
+      "term_b": "Tinnitus",
+      "cross_cosine": 0.7508,
+      "lexical_overlap": 0.25,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "celiac disease",
+      "term_a": "Gluten-Sensitive Enteropathy",
+      "term_b": "Celiac Disease",
+      "cross_cosine": 0.7523,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "apoptosis",
+      "term_a": "Malformations Secondary to Abnormal Neuronal and Glial Proliferation or Apoptosis",
+      "term_b": "Malformations of Cortical Development, Group I",
+      "cross_cosine": 0.7534,
+      "lexical_overlap": 0.1,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "apoptosis",
+      "term_a": "Malformations Due to Abnormal Neuronal and Glial Proliferation or Apoptosis",
+      "term_b": "Malformations of Cortical Development, Group I",
+      "cross_cosine": 0.7582,
+      "lexical_overlap": 0.1,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "hidradenitis suppurativa",
+      "term_a": "Hidradenitides, Suppurative",
+      "term_b": "Hidradenitis Suppurativa",
+      "cross_cosine": 0.7646,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "epinephrine",
+      "term_a": "Epinephrine Hydrochloride, Racemic Mixture",
+      "term_b": "Racepinephrine",
+      "cross_cosine": 0.7697,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "SURVIVES",
+      "b_full_leak": false
+    },
+    {
+      "seed_concept": "tinnitus",
+      "term_a": "Tinnitus, Spontaneous Oto-Acoustic Emission",
+      "term_b": "Tinnitus",
+      "cross_cosine": 0.77,
+      "lexical_overlap": 0.2,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "hypoxia",
+      "term_a": "HIF Prolyl-4-Hydroxylase",
+      "term_b": "Hypoxia-Inducible Factor-Proline Dioxygenases",
+      "cross_cosine": 0.7738,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "takotsubo cardiomyopathy",
+      "term_a": "Tako-Tsubo Syndrome",
+      "term_b": "Takotsubo Cardiomyopathy",
+      "cross_cosine": 0.7762,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "magnetic resonance imaging",
+      "term_a": "19F MRI",
+      "term_b": "Fluorine-19 Magnetic Resonance Imaging",
+      "cross_cosine": 0.7869,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "epinephrine",
+      "term_a": "Epinephrine, Racemic Mixture",
+      "term_b": "Racepinephrine",
+      "cross_cosine": 0.7892,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "SURVIVES",
+      "b_full_leak": false
+    },
+    {
+      "seed_concept": "autophagy",
+      "term_a": "Autophagocytosis",
+      "term_b": "Autophagy",
+      "cross_cosine": 0.7963,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "niacin",
+      "term_a": "Nicotinic Acid",
+      "term_b": "Niacin",
+      "cross_cosine": 0.8004,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "oxidative stress",
+      "term_a": "Oxidative DNA Damage",
+      "term_b": "Oxidative Stress",
+      "cross_cosine": 0.8011,
+      "lexical_overlap": 0.25,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "amyotrophic lateral sclerosis",
+      "term_a": "Lou Gehrig Disease",
+      "term_b": "Amyotrophic Lateral Sclerosis",
+      "cross_cosine": 0.8013,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "celiac disease",
+      "term_a": "Gluten Enteropathy",
+      "term_b": "Celiac Disease",
+      "cross_cosine": 0.8048,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "acetaminophen",
+      "term_a": "Acetaminophen Sulphotransferase",
+      "term_b": "Arylsulfotransferase",
+      "cross_cosine": 0.81,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "SURVIVES",
+      "b_full_leak": false
+    },
+    {
+      "seed_concept": "hypoxia",
+      "term_a": "HIF Prolyl-4-Hydroxylases",
+      "term_b": "Hypoxia-Inducible Factor-Proline Dioxygenases",
+      "cross_cosine": 0.8129,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "niacin",
+      "term_a": "Nicotinate",
+      "term_b": "Niacin",
+      "cross_cosine": 0.8171,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "logistic models",
+      "term_a": "Logistic Regression",
+      "term_b": "Logistic Models",
+      "cross_cosine": 0.8188,
+      "lexical_overlap": 0.333,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "autophagy",
+      "term_a": "Lipophagy",
+      "term_b": "Autophagy",
+      "cross_cosine": 0.819,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "amyotrophic lateral sclerosis",
+      "term_a": "Gehrig's Disease",
+      "term_b": "Amyotrophic Lateral Sclerosis",
+      "cross_cosine": 0.8203,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "autophagy",
+      "term_a": "Ribophagy",
+      "term_b": "Autophagy",
+      "cross_cosine": 0.8241,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "oxidative stress",
+      "term_a": "Antioxidative Stresses",
+      "term_b": "Oxidative Stress",
+      "cross_cosine": 0.8352,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "positron emission tomography",
+      "term_a": "PET Scan",
+      "term_b": "Positron-Emission Tomography",
+      "cross_cosine": 0.8462,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "hidradenitis suppurativa",
+      "term_a": "Suppurative Hidradenitis",
+      "term_b": "Hidradenitis Suppurativa",
+      "cross_cosine": 0.8581,
+      "lexical_overlap": 0.333,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "epinephrine",
+      "term_a": "Racemic Epinephrine",
+      "term_b": "Racepinephrine",
+      "cross_cosine": 0.8586,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "logistic models",
+      "term_a": "Logit Models",
+      "term_b": "Logistic Models",
+      "cross_cosine": 0.8621,
+      "lexical_overlap": 0.333,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "markov chains",
+      "term_a": "Markov Process",
+      "term_b": "Markov Chains",
+      "cross_cosine": 0.8684,
+      "lexical_overlap": 0.333,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "ascorbic acid",
+      "term_a": "L-Ascorbic Acid Peroxidase",
+      "term_b": "Ascorbate Peroxidases",
+      "cross_cosine": 0.8796,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "cluster analysis",
+      "term_a": "Analyses, Cluster",
+      "term_b": "Cluster Analysis",
+      "cross_cosine": 0.8853,
+      "lexical_overlap": 0.333,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "electroencephalography",
+      "term_a": "Electroencephalography Biofeedback",
+      "term_b": "Neurofeedback",
+      "cross_cosine": 0.8914,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "positron emission tomography",
+      "term_a": "PET Imaging",
+      "term_b": "Positron-Emission Tomography",
+      "cross_cosine": 0.8951,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "cholecalciferol",
+      "term_a": "Receptors, Cholecalciferol",
+      "term_b": "Receptors, Calcitriol",
+      "cross_cosine": 0.9178,
+      "lexical_overlap": 0.333,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "presbycusis",
+      "term_a": "Presbycuses",
+      "term_b": "Presbycusis",
+      "cross_cosine": 0.9248,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "markov chains",
+      "term_a": "Markov Processes",
+      "term_b": "Markov Chains",
+      "cross_cosine": 0.9251,
+      "lexical_overlap": 0.333,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "cluster analysis",
+      "term_a": "Clustering",
+      "term_b": "Cluster Analysis",
+      "cross_cosine": 0.9259,
+      "lexical_overlap": 0.0,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "propensity score",
+      "term_a": "Propensity Scores",
+      "term_b": "Propensity Score",
+      "cross_cosine": 0.9582,
+      "lexical_overlap": 0.333,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    },
+    {
+      "seed_concept": "thiamine",
+      "term_a": "Thiamin Triphosphate",
+      "term_b": "Thiamine Triphosphate",
+      "cross_cosine": 0.9929,
+      "lexical_overlap": 0.333,
+      "screen_verdict": "VOID",
+      "b_full_leak": true
+    }
+  ]
+}

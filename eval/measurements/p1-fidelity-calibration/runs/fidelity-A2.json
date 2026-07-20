@@ -1,0 +1,13 @@
+```json
+{
+  "i": "PRESERVED — the candidate frames it as deciding \"whether to invest in a tool,\" matching the notes' core question \"how good must a dependence estimate be before it beats simply not having one?\"",
+  "ii": "PRESERVED — the candidate conditions the decision on \"a stated level of typical error,\" matching \"An estimator needs log-count RMSE ≲ 0.3 to keep ~85% of that prize; ~0.6 keeps half; past ~1.0 it becomes WORSE THAN NO ESTIMATOR.\"",
+  "iii": "PRESERVED — the candidate says the input is obtained \"by simulating a tool of that accuracy, not by running a finished tool,\" matching \"The detector is SIMULATED, not run... asks 'would an estimator this accurate suffice?'\"",
+  "iv": "PRESERVED — the candidate's \"commit to building the tool only if its expected accuracy clears the bar\" matches the threshold framing \"Both estimators clear the bar on mechanical pools.\"",
+  "v": "PASS — the candidate states the degradation tiers only qualitatively (\"small... moderate... beyond a known level\") and introduces no benchmark, dataset, or metric numbers absent from the excerpts.",
+  "vi": {
+    "named_items": [],
+    "not_in_notes": []
+  }
+}
+```

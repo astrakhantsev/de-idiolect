@@ -1,0 +1,18 @@
+Looking at each item, I need to check only for direction/polarity inversion between excerpts and definition.
+
+Let me work through each:
+
+- **Item 1**: Carryover error pattern; rate drops when history cleared. Definition matches direction.
+- **Item 2**: Exhaustion score rises as items become universally solvable; higher = more saturated. Definition matches.
+- **Item 3**: Adversarial task-generation procedure with held-out executable validators. Definition matches.
+- **Item 4**: Mid-task resource *reduction* after first success. Definition matches.
+- **Item 5**: Distractor sensitivity increases exploratory tool use. Definition matches.
+- **Item 6**: Self-output agreement *deficit* (lower agreement on own outputs). Definition matches.
+- **Item 7**: Detects verbatim phrasing carryover; removing examples lowers rate. Definition matches.
+- **Item 8**: Known-answer probes; halt batch on wrong judgment. Definition matches.
+- **Item 9**: Diversity of tool-use sequences; high = alternating/varied, low = converged. Definition matches.
+- **Item 10**: Difficulty/tier rating predicting failures. Definition matches.
+
+All definitions preserve the direction/polarity of the concept as used in the excerpts.
+
+[{"item": 1, "verdict": "ok"}, {"item": 2, "verdict": "ok"}, {"item": 3, "verdict": "ok"}, {"item": 4, "verdict": "ok"}, {"item": 5, "verdict": "ok"}, {"item": 6, "verdict": "ok"}, {"item": 7, "verdict": "ok"}, {"item": 8, "verdict": "ok"}, {"item": 9, "verdict": "ok"}, {"item": 10, "verdict": "ok"}]

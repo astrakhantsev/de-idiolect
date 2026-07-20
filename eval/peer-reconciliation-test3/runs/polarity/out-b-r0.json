@@ -1,0 +1,11 @@
+Looking at each item, comparing the polarity/direction of the term in the excerpts against the definition.
+
+- **Item 1**: Higher = better handling of degraded feedback (rises with retries, falls with unfamiliarity). Definition matches.
+- **Item 2**: Higher = more excess/needless work after completion. Definition matches.
+- **Item 3**: Larger = bigger ablation effect / more important ingredient. Definition matches.
+- **Item 4**: Negative = fewer actions, positive = more actions from swap. Definition matches.
+- **Item 5**: Higher = more stable/consistent scoring. Definition matches.
+- **Item 6**: Higher = better alignment with reference route (positive corr with pass rate; "low alignment" explicit). Definition matches.
+- **Item 7**: Higher = more constraints satisfied. Definition matches.
+
+[{"item": 1, "verdict": "ok"}, {"item": 2, "verdict": "ok"}, {"item": 3, "verdict": "ok"}, {"item": 4, "verdict": "ok"}, {"item": 5, "verdict": "ok"}, {"item": 6, "verdict": "ok"}, {"item": 7, "verdict": "ok"}]

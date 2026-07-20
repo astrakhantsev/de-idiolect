@@ -1,0 +1,20 @@
+Looking at each item, I need to check only for direction/polarity inversion between the excerpts and the definition.
+
+Let me verify each:
+
+- **Item 1**: Term = check detecting verbatim carryover; definition detects copied phrasing → same direction.
+- **Item 2**: Term rises as items become universally solvable (exhaustion); definition = fraction exhausted, higher in entry-tier → same.
+- **Item 3**: Term = paired comparison measuring distractor effect (more pages, delayed calls, more exploration, less validation); definition matches → same.
+- **Item 4**: Term = self-output agreement *deficit* (lower agreement on own outputs); definition = lower agreement on own → same.
+- **Item 5**: Term = intervention *lowering* budget/quota after first success; definition matches → same.
+- **Item 6**: Term = known-answer probe that halts on wrong judgments; definition matches → same.
+- **Item 7**: Term = diversity among *successful* runs, rises independent of pass rate; definition matches → same.
+- **Item 8**: Term = task generation via weaker generators with withheld validators; definition matches → same.
+- **Item 9**: Term = pre-result difficulty/capability assessment; failures below level audited; definition matches → same.
+- **Item 10**: Term = negative-transfer replay of prior successful sequences; correlates with trace length not correctness; definition matches → same.
+
+None reverse direction, polarity, or valence.
+
+```json
+[{"item": 1, "verdict": "ok"}, {"item": 2, "verdict": "ok"}, {"item": 3, "verdict": "ok"}, {"item": 4, "verdict": "ok"}, {"item": 5, "verdict": "ok"}, {"item": 6, "verdict": "ok"}, {"item": 7, "verdict": "ok"}, {"item": 8, "verdict": "ok"}, {"item": 9, "verdict": "ok"}, {"item": 10, "verdict": "ok"}]
+```

@@ -1,0 +1,23 @@
+{
+  "_note": "The specialist concepts a lay asker's question ('are eggs bad for me?') circles but cannot name. Each is owned by one sub-field community in corpus.json. 'constrained_definition' is the step-2 output: a plain-language, community-neutral description using no proper term, no field name, no author/method name — the matching key. It was authored by the pipeline's author-model (Fable) at build time and frozen here, because the batch LLM backend (claude -p) was quota-blocked; the code's define() interface will regenerate it live when a backend is available (see llm_backend.py).",
+  "concepts": [
+    {
+      "term": "hyper-responder",
+      "owning_community": "lipidology",
+      "naive_question": "are eggs bad for you for heart health",
+      "constrained_definition": "A person in whom a measured substance in the blood rises much more than most people's does after they eat a food carrying a particular fatty component. Group people by the individual slope of blood level against intake; this names the high-slope tail, the strong reactors, as opposed to those whose blood level barely moves."
+    },
+    {
+      "term": "apolipoprotein B particle number",
+      "owning_community": "cardiology-biomarker",
+      "naive_question": "are eggs bad for you for heart health",
+      "constrained_definition": "A count of the small carrier bodies that ferry a fatty substance through the blood, one marker per carrier, as opposed to the total amount of the substance carried. The number of carriers can disagree with the total amount, and the count may track harm to the blood vessels better than the total does."
+    },
+    {
+      "term": "isocaloric substitution model",
+      "owning_community": "nutrition-epi-methods",
+      "naive_question": "are eggs bad for you for heart health",
+      "constrained_definition": "A way to estimate what happens when one food is swapped for an equal-energy amount of another food, holding total energy fixed, rather than added on top. Read the effect of replacement from a model relating an outcome to how much of each food a person eats."
+    }
+  ]
+}

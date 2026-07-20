@@ -1,0 +1,49 @@
+{
+  "amended_primary": "66/100 = 0.660",
+  "S1_eligibility_filtered": "61/91 = 0.670",
+  "S2_strict_primary_receipts": "50/100 = 0.500",
+  "S3_cap_compliant": "58/100 = 0.580",
+  "S4_combined_floor": "43/91 = 0.473",
+  "ineligible_occurrences": {
+    "def-027": "Chow/Schwartz BBN c.1989-90 \u2014 no title, no venue, no year ('exact citation' absent in source)",
+    "def-056": "Murphy 'mid-to-late-1980s MWR paper' \u2014 no year, no title",
+    "def-177": "OLaLa \u2014 nickname only inside cited related-work, no authors/venue/year",
+    "def-185": "Bilac et al. 2004 \u2014 no title, no venue",
+    "def-206": "Neyman & Pearson (1933) \u2014 author+year only",
+    "def-225": "Platt (1999) \u2014 author+year only",
+    "def-257": "'PoLL ~2024, can't give authors' \u2014 explicitly unidentifiable by frozen forms",
+    "def-354": "UMLS \u2014 resource mention, no authors/year in occurrence",
+    "def-377": "Lusicky 2015 \u2014 author+year only"
+  },
+  "eligible_noted": {
+    "def-122": "no authors but stable arXiv ID 2503.20793 \u2014 stable-ID identification",
+    "def-308": "LDOCE 1978 \u2014 corporate author (Longman) + title + year",
+    "def-359": "no authors but stable arXiv ID 1711.06004 \u2014 stable-ID identification"
+  },
+  "secondary_receipt_works": {
+    "w-115": "en.wikipedia (ALPAC)",
+    "w-135": "en.wikipedia (Ogden)",
+    "w-137": "en.wikipedia (LDOCE)",
+    "w-222": "en.wikipedia",
+    "w-258": "en.wikipedia (Ogden)",
+    "w-275": "en.wikipedia (NSM)",
+    "w-284": "en.wikipedia",
+    "w-024": "abebooks bookseller listing",
+    "w-182": "transferlab.ai blog explainer",
+    "w-170": "rdrr.io R-doc citation",
+    "w-173": "rdrr.io R-doc citation",
+    "w-023": "research.ibm.com page, not the IEEE primary",
+    "w-189": "opentext.ku.edu textbook page",
+    "w-114": "beyondintractability.org essay-about",
+    "w-219": "bcu.ac.uk project page"
+  },
+  "over_cap_exists_yes_works": [
+    "w-007",
+    "w-024",
+    "w-036",
+    "w-139",
+    "w-168",
+    "w-170",
+    "w-189"
+  ]
+}

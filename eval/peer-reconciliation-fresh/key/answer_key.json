@@ -1,0 +1,15 @@
+{
+  "note": "FRESH key, v0.5 transfer test. Expected proposed_relation per pair. NEVER readable by pipeline calls.",
+  "pairs": [
+    {"pair_id": "P01", "term_a": "groove lock", "term_b": "trajectory template carryover", "expected": "exactMatch"},
+    {"pair_id": "P02", "term_a": "dead weight census", "term_b": "item discrimination exhaustion rate", "expected": "exactMatch"},
+    {"pair_id": "P03", "term_a": "synthetic ladders", "term_b": "subordinate authoring protocol", "expected": "broadnarrow", "broader_side": "a"},
+    {"pair_id": "P04", "term_a": "squeeze play", "term_b": "resource perturbation study", "expected": "broadnarrow", "broader_side": "b"},
+    {"pair_id": "P05", "term_a": "twin runs", "term_b": "matched contrast probes", "expected": "relatedMatch"},
+    {"pair_id": "P06", "term_a": "ouroboros items", "term_b": "reflexive adjudication", "expected": "relatedMatch"},
+    {"pair_id": "P07", "term_a": "echo test", "term_b": "echo test", "expected": "noMatchDespiteSimilarity"},
+    {"pair_id": "P08", "term_a": "salt run", "term_b": "salt run", "expected": "noMatchDespiteSimilarity"},
+    {"pair_id": "P09", "term_a": "rig diary", "term_b": "strategy cardinality index", "expected": "noMatch"},
+    {"pair_id": "P10", "term_a": "reread ration", "term_b": "tier floor annotation", "expected": "noMatch"}
+  ]
+}

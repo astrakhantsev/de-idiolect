@@ -1,0 +1,46 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.cGWTVLqyVP"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.vOpzjcHacm
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7c97-52ee-78e0-84e7-f09c4da03ae6
+--------
+user
+Three DEFINITIONS of the same concept at increasing specificity:
+
+DEFINITION L0 (genus only): A per-item difficulty and capability-tier rating used to state expected agent performance on an evaluation task.
+
+DEFINITION L1 (adds mechanism): A per-item difficulty and capability-tier rating is used to state expected agent performance on an evaluation task. Two annotators assign it independently for each item before deployment or inspection of system results, and may revise it after finding a hidden dependency such as unavailable credentials. It places tasks relative to expected agent tiers, so failures below an agent’s assigned tier are treated as unexpected regressions rather than ordinary misses.
+
+DEFINITION L2 (adds measurement and conditions): A per-item difficulty and capability-tier rating is used to state expected agent performance on tasks in a multi-tier, multi-environment agent evaluation suite. Before any system is run or its results are inspected, two annotators independently assign the rating to each task; they may revise it when they discover hidden dependencies, including unavailable credentials. The rating identifies cases expected to exceed entry-tier capability and separates expected lower-tier failures from unexpected regressions in higher-tier systems. Failures below an agent’s assigned tier are flagged for audit rather than counted as ordinary misses. Among lower-tier agents, the rating predicted 71% of observed failures, reducing the number sent for manual investigation. Reported results include only items whose rating is stable across adjudicators. The rating is not a single monotonic capability scale: agents can pass higher-tier tasks through narrow memorized procedures while failing lower-tier tasks with unfamiliar tool states.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used (other local jargon masked ⟦X⟧).
+
+For EACH excerpt, and for EACH definition level INDEPENDENTLY, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by THAT definition?
+
+- "instantiates" — the usage is consistent with and exemplifies that definition.
+- "contradicts" — the usage is incompatible with that definition (the referent has a property that definition excludes, or lacks one it requires).
+- "insufficient" — this excerpt alone does not contain enough to decide for that definition.
+
+A usage can instantiate L0 while contradicting L2 — judge each level on its own content. Judge each excerpt on its own text only. For L1 and L2, any decided verdict (instantiates or contradicts) requires a verbatim supporting quote from the excerpt; L0 needs no quote.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "L0": "instantiates|contradicts|insufficient", "L1": {"verdict": "...", "quote": "verbatim or empty for insufficient"}, "L2": {"verdict": "...", "quote": "..."}}, ...]
+
+EXCERPTS:
+
+1. Set a ⟦TERM⟧ of three on the new codebase-navigation benchmark, figuring it'd force the agent to actually hold file contents in working memory instead of treating disk as free scratch space. First real run, agent fails outright — opened auth.py four times chasing down a decorator it kept forgetting the signature of.
+2. Agent didn't visibly react at all, just kept reading files at the same pace until it got cut off mid-trace. So under the ⟦TERM⟧ it ignores rereads that would help it finish, but under ⟦X⟧ it also doesn't compress. Not a great week for this benchmark.
+3. Spent Monday convinced our ⟦TERM⟧ enforcement had silently broken, because three agents that used to pass the file-navigation suite started failing en masse.
+4. Capped the day off by setting a ⟦TERM⟧ on the onboarding suite for the first time, since half of what's inflating the pass-everything bucket in that census looks like agents brute-forcing through repeated file opens instead of actually reasoning. Ration of three, rerunning tomorrow, expecting the pass-everything number to finally move.
+5. And ⟦TERM⟧ enforcement flagged eleven runs this week for exceeding the cap, all in the same scenario cluster, which lines up suspiciously well with the ⟦X⟧ batch above — makes me wonder if that agent wrote scenarios that require more back-and-forth file lookups than it realizes, since it's implicitly encoding its own working habits into the tasks.
+6. ⟦X⟧ paid off twice this cycle — once catching the ⟦TERM⟧ cap change that broke three agents' runs, once catching a scorer config edit that would've otherwise looked like a genuine capability regression instead of a harness artifact. I'm now fully converted on logging every single config change the day it happens, even the ones that feel too small to matter, because the ones that feel too small to matter are exactly the ones I forget by Thursday.
+codex
+[{"excerpt":1,"L0":"contradicts","L1":{"verdict":"contradicts","quote":"force the agent to actually hold file contents in working memory"},"L2":{"verdict":"contradicts","quote":"First real run, agent fails outright"}},{"excerpt":2,"L0":"contradicts","L1":{"verdict":"contradicts","quote":"under the ⟦TERM⟧ it ignores rereads"},"L2":{"verdict":"contradicts","quote":"under the ⟦TERM⟧ it ignores rereads that would help it finish"}},{"excerpt":3,"L0":"insufficient","L1":{"verdict":"insufficient","quote":""},"L2":{"verdict":"insufficient","quote":""}},{"excerpt":4,"L0":"contradicts","L1":{"verdict":"contradicts","quote":"Ration of three"},"L2":{"verdict":"contradicts","quote":"setting a ⟦TERM⟧ on the onboarding suite for the first time"}},{"excerpt":5,"L0":"contradicts","L1":{"verdict":"contradicts","quote":"⟦TERM⟧ enforcement flagged eleven runs this week for exceeding the cap"},"L2":{"verdict":"contradicts","quote":"for exceeding the cap"}},{"excerpt":6,"L0":"contradicts","L1":{"verdict":"contradicts","quote":"catching the ⟦TERM⟧ cap change that broke three agents' runs"},"L2":{"verdict":"contradicts","quote":"a genuine capability regression instead of a harness artifact"}}]
+tokens used
+3,836

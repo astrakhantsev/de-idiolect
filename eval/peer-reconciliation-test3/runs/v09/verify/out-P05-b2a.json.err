@@ -1,0 +1,46 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.jXLb75Q8jn"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.ImAj8Jehxs
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7d4d-0b74-7c13-aed0-2fda09b36594
+--------
+user
+Three DEFINITIONS of the same concept at increasing specificity:
+
+DEFINITION L0 (genus only): It is a comparison measure for showing whether changing a tool-choice component changes how many actions an agent takes.
+
+DEFINITION L1 (adds mechanism): It is a comparison measure for showing whether changing a tool-choice component changes how many actions an agent takes. It is obtained by swapping only that component between two otherwise identical agent setups, keeping every other part fixed, and comparing their total action counts with the original component.
+
+DEFINITION L2 (adds measurement and conditions): It is a comparison measure for showing whether changing a tool-choice component changes how many actions an agent takes. It is obtained by swapping only that component between otherwise identical agent setups, with every other part held constant. The measure is the change in total action count relative to the original component, reported as a percentage change or as an average number of additional actions. It applies to routine and multi-file tasks, interrupted runs involving a reversal, standing and newly authored tasks, and runs with corrupted observations. It is negative when the replacement reduces actions on familiar, routine, or standing tasks, and positive when it increases actions on multi-file, newly authored, post-reversal, or post-corruption conditions. These findings are limited to a fixed set of repositories and one automated checker configuration.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used (other local jargon masked ⟦X⟧).
+
+For EACH excerpt, and for EACH definition level INDEPENDENTLY, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by THAT definition?
+
+- "instantiates" — the usage is consistent with and exemplifies that definition.
+- "contradicts" — the usage is incompatible with that definition (the referent has a property that definition excludes, or lacks one it requires).
+- "insufficient" — this excerpt alone does not contain enough to decide for that definition.
+
+A usage can instantiate L0 while contradicting L2 — judge each level on its own content. Judge each excerpt on its own text only. For L1 and L2, any decided verdict (instantiates or contradicts) requires a verbatim supporting quote from the excerpt; L0 needs no quote.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "L0": "instantiates|contradicts|insufficient", "L1": {"verdict": "...", "quote": "verbatim or empty for insufficient"}, "L2": {"verdict": "...", "quote": "..."}}, ...]
+
+EXCERPTS:
+
+1. While I had the harness open I also tried a ⟦TERM⟧ on the planning step, keeping the small model doing subtask execution but routing the plan generation through our cheapest tier.
+2. Ran a ⟦TERM⟧ on our document-QA agent, keeping the exact same execution model but routing the planning step through a much cheaper backend. Expected a cliff and didn't get one — score held at 81% versus 83% baseline, basically noise.
+3. Rough month. Started with a ⟦TERM⟧ experiment gone sideways — routed planning through a cheaper model while keeping execution untouched, expecting a moderate dip, and instead task success collapsed from 79% to 31%. Turned out our executor was far more dependent on detailed subplans than we assumed, it basically can't improvise.
+4. We hadn't controlled for it, so some of the ⟦TERM⟧ sessions were accidentally comparing a fresh-session first task against a warmed-up session's later task, which inflated the apparent gap. Redid it controlling for position in session and the real ⟦TERM⟧ effect was still large, just not as extreme as our first pass suggested.
+5. We hadn't controlled for it, so some of the ⟦TERM⟧ sessions were accidentally comparing a fresh-session first task against a warmed-up session's later task, which inflated the apparent gap. Redid it controlling for position in session and the real ⟦TERM⟧ effect was still large, just not as extreme as our first pass suggested.
+6. Wrapping up the quarter, here's the scorecard across the six things we tracked most. ⟦TERM⟧ on the planning component: still our biggest single-factor score driver, cheap-planner runs lose 20-40 points depending on task, confirming again that the plan is carrying more than the execution loop gets credit for.
+codex
+[{"excerpt":1,"L0":"insufficient","L1":{"verdict":"insufficient","quote":""},"L2":{"verdict":"insufficient","quote":""}},{"excerpt":2,"L0":"contradicts","L1":{"verdict":"contradicts","quote":"score held at 81% versus 83% baseline"},"L2":{"verdict":"contradicts","quote":"score held at 81% versus 83% baseline"}},{"excerpt":3,"L0":"contradicts","L1":{"verdict":"contradicts","quote":"task success collapsed from 79% to 31%"},"L2":{"verdict":"contradicts","quote":"task success collapsed from 79% to 31%"}},{"excerpt":4,"L0":"insufficient","L1":{"verdict":"insufficient","quote":""},"L2":{"verdict":"insufficient","quote":""}},{"excerpt":5,"L0":"insufficient","L1":{"verdict":"insufficient","quote":""},"L2":{"verdict":"insufficient","quote":""}},{"excerpt":6,"L0":"contradicts","L1":{"verdict":"contradicts","quote":"cheap-planner runs lose 20-40 points depending on task"},"L2":{"verdict":"contradicts","quote":"cheap-planner runs lose 20-40 points depending on task"}}]
+tokens used
+4,131

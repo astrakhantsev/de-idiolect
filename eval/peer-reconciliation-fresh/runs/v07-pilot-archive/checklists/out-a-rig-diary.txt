@@ -1,0 +1,6 @@
+- Maintains a chronological, append-only log of dated entries recording specific changes made to the system (e.g., config or parameter changes).
+- Each entry records what was changed, and can be traced to a specific prior date ("eleven days ago," "two entries back").
+- Entries include concrete details of the change itself (e.g., a cap value bumped from four to two, a naming scheme swapped to include run id in a cache key).
+- Used by scrolling or paging backward through entries to locate the actual cause of a current issue before making further changes.
+- Applies when investigating unexpected behavior, to distinguish a genuine bug from a prior intentional change.
+- Entries are tied to specific dates/times, allowing entries to be ordered and referenced relative to each other.

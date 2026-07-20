@@ -1,0 +1,81 @@
+## Verdict
+
+**MAJOR REVISION**
+
+## Findings
+
+### 1. The “naive lay question” is a leaked ceiling query
+
+- **Where:** RESULTS lines 18, 61, 85, 91; `queries.json` lines 19 and 127.
+- **Problem:** The question is `"What is photoplethysmography?"` in both directions. For A→B it names the held-out far term verbatim and produces the same scores as the far-term ceiling. For B→A it merely repeats the source term. It is not a blind lay-question floor.
+- **Impact:** The central claim that a naive question helps as much as neutrality—and therefore that “any richer key” works—is unsupported. The jargon arm also contradicts “any richer key”: its first-target rank is worse than the raw term, 4 versus 3.
+- **Fix:** Remove this arm from the interpretation, or regenerate direction-specific questions that contain neither community term and are grounded in a genuinely prior lay formulation.
+
+### 2. The reported verdict overrides the frozen preregistration
+
+- **Where:** RESULTS lines 82–86; `prereg.md` lines 45–49 and 67–68.
+- **Problem:** Both raw-term directions satisfy the frozen Verdict-3 criterion (`rank ≤ 3` and `recall@10 ≥ 0.5`). The contract therefore says **PAIR RECONCILED / TOOL REDUNDANT; discard the cell**. The report instead adds a post-hoc chance interpretation and changes the net verdict to INCONCLUSIVE despite the explicit prohibition on changing thresholds after observing results.
+- **Impact:** “Verdict against the frozen prereg” is misleading and erases the actual confirmatory outcome.
+- **Fix:** Report Verdict 3 as the preregistered result. Present “direction-dependent/inconclusive after chance adjustment” separately and explicitly as a post-hoc sensitivity analysis.
+
+### 3. The corrected v2 run is not itself preregistered
+
+- **Where:** RESULTS lines 31, 54 and 76; `prereg.md` lines 3–6 and 64–68.
+- **Problem:** After v1 results were observed, v2 changed context construction, leak handling, and regenerated nondeterministic queries. The current `queries.json` therefore did not exist before any retrieval result was seen, even though the document repeatedly associates v2 with the frozen preregistration.
+- **Impact:** The corrected contrasts are exploratory corrections, not a clean preregistered replication.
+- **Fix:** Label v2 as a post-outcome exploratory rerun. Archive v1 artifacts, then freeze a revised protocol and fresh queries before any v3 scoring.
+
+### 4. “At chance” and “above chance” are unsupported categorical labels
+
+- **Where:** RESULTS lines 17–20, 54–74 and 85–90; `run_cell.py` lines 71–82.
+- **Problem:** The implementation calculates only random-ranking expectations. It provides no null distribution, interval, test, or decision threshold for classifying an observation as “at,” “above,” or “well above” chance.
+- **Impact:** The distinction used to overturn Verdict 3 and establish the direction flip is not operationally defined or reproducible.
+- **Fix:** Compute exact random-ranking distributions for first rank and top-10 target count and define a decision rule. Until then, describe results only as above or below the random expectation, without signal/chance classifications.
+
+### 5. The A→B neutral-versus-jargon contrast is model-confounded
+
+- **Where:** RESULTS lines 54 and 76–80; `results.json` reports three neutral draws versus six jargon draws.
+- **Problem:** All Sonnet neutral draws were dropped, leaving only three Opus neutral outputs, while jargon pools Sonnet and Opus. The contrast therefore mixes arm and model effects. Its CI note also says it covers draws “pooled over 2 fixed models,” which is false for the neutral arm.
+- **Impact:** The claims that neutrality “holds in A→B” and beats jargon cannot be attributed to the vocabulary constraint.
+- **Fix:** Compare Opus neutral only with Opus jargon, or replenish the missing Sonnet arm under a prospectively specified invalid-draw policy. Do not use the current CI as evidence of an arm effect.
+
+### 6. The unresolved length confound is claimed to be reported but is not
+
+- **Where:** RESULTS line 31; build spec line 66; `queries.json` contains per-draw character counts.
+- **Problem:** The document says arm length still differs and “is reported,” but the results provide no length summary or contrast. The build spec required length matching.
+- **Impact:** Readers cannot assess another known confound in the neutral-versus-jargon comparison.
+- **Fix:** Add per-direction, per-model arm length means/ranges and list failure to length-match in the deviation ledger.
+
+### 7. The build-spec accounting is materially stale
+
+- **Where:** RESULTS lines 32, 37 and 94–98; build spec lines 41–48 and 74–81.
+- **Problem:** The results assert that the spec has four guards and four verdicts. The current build spec has six guards and five verdicts. The preregistration omitted the direct-ask verdict, and the direct-ask baseline was not built. In addition, the specified one-hop backward-citation corpus expansion and shared-foundation filtering were not implemented; references were only inspected for reconciliation.
+- **Impact:** “All guards implemented” and “whole pipeline built” misstate completion and conceal protocol deviations affecting validity and corpus depth.
+- **Fix:** Reconcile the spec, preregistration, spec frontmatter, and results with an explicit status table for all six guards, five verdicts, and each pipeline step.
+
+### 8. The corpus does not support the causal “obscure versus common term” interpretation
+
+- **Where:** RESULTS lines 45–50 and 90; `corpus.json` lines 92–99 and 112–119.
+- **Problem:** The A corpus concerns venous-refill photoreflexometry, while the B corpus concerns broad cardiac/wearable photoplethysmography—different applications and physiology. Two B records do not contain the exact B term at all. The document acknowledges this asymmetry but still attributes the flip to term obscurity and calls it “real.”
+- **Impact:** Direction differences may arise from corpus size, application domain, document recency, or concept granularity rather than vocabulary obscurity.
+- **Fix:** Restrict both sides to the same application and enforce the stated community-membership rule, or report only an unexplained direction difference without causal attribution.
+
+### 9. The MeSH descriptor identifier is wrong
+
+- **Where:** RESULTS lines 16 and 45; `prereg.md` lines 72–73; `corpus.json` pair metadata.
+- **Problem:** These files give `D019260`, while `candidate_pairs.json` records NLM ID `68017156`, corresponding to descriptor `D017156`; the cached PubMed records also identify Photoplethysmography as `D017156`.
+- **Impact:** The human-asserted-pair provenance is internally inconsistent and cannot be reliably reproduced from the stated identifier.
+- **Fix:** Correct the identifier consistently across the report, preregistration, corpus metadata, and derived artifacts.
+
+### 10. The central correction is not auditable from the listed artifacts
+
+- **Where:** RESULTS lines 27–33 and 107–109.
+- **Problem:** The cited `scratchpad/codex_doc_review.log` does not exist under either the artifact directory or the document tree, and the overwritten v1 queries/results are not preserved.
+- **Impact:** Readers cannot verify the claimed first-cut leaks, original measurements, review findings, or exact changes that produced v2.
+- **Fix:** Restore and link the review log and preserve versioned `queries-v1.json`/`results-v1.json` alongside v2, preferably with hashes and generation timestamps.
+
+## Next steps
+
+1. Correct the current report without rerunning: state the preregistered Verdict-3 outcome, label v2 exploratory, remove the naive-baseline inference, and suspend the A→B neutral-versus-jargon claim.
+2. Repair the MeSH identifier, artifact links, version history, and complete deviation ledger.
+3. For a new confirmatory run, freeze a revised preregistration before generation, use a non-leaking naive baseline, balance models and lengths, use same-application corpora, implement the direct-ask control, and preregister chance-adjusted decision rules.CODEX V2 EXIT 0

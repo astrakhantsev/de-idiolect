@@ -1,0 +1,13 @@
+```json
+[
+  {"item": 1, "verdict": "conformant", "reason": ""},
+  {"item": 2, "verdict": "conformant", "reason": ""},
+  {"item": 3, "verdict": "conformant", "reason": ""},
+  {"item": 4, "verdict": "conformant", "reason": ""},
+  {"item": 5, "verdict": "conformant", "reason": ""},
+  {"item": 6, "verdict": "nonconformant", "reason": "condition 2: L1 states the substitution is \"randomized\" at the item level, but L2 drops this and only says items are replaced \"at the item level,\" losing the randomization commitment."},
+  {"item": 7, "verdict": "conformant", "reason": ""},
+  {"item": 8, "verdict": "conformant", "reason": ""},
+  {"item": 9, "verdict": "conformant", "reason": ""}
+]
+```

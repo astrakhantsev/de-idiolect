@@ -1,0 +1,25 @@
+{
+ "terms": {
+  "a:pivot check": 6,
+  "b:goal-revision compliance rate": 6,
+  "a:garble replay": 6,
+  "b:corrupted-observation recovery index": 6,
+  "a:quit sense": 4,
+  "b:post-completion action count": 6,
+  "a:example strip": 6,
+  "b:prompt scaffolding dependence measure": 6,
+  "a:brain swap": 6,
+  "b:component substitution elasticity": 6,
+  "a:double mark": 4,
+  "b:grader temporal stability coefficient": 6,
+  "a:cold start": 5,
+  "b:cold start": 6,
+  "a:hot swap": 6,
+  "b:hot swap": 6,
+  "a:spray test": 6,
+  "b:reference trajectory alignment score": 6,
+  "a:budget bleed": 4,
+  "b:cross-lingual instruction fidelity": 6
+ },
+ "dead_pairs": {}
+}

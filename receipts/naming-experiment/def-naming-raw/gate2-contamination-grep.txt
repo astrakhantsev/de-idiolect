@@ -1,0 +1,3 @@
+Contamination grep, re-run 2026-07-17 for the archive (Codex finding 5):
+$ grep -ilE "dashboard|[redacted-employer-term]|_input\.md" out-G2A-opus.md out-G2A-sonnet.md out-G2B-opus.md out-G2B-sonnet.md
+(no matches — CLEAN)

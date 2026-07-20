@@ -1,0 +1,6 @@
+- Two annotators independently assign a ⟦TERM⟧ to each item before deployment/before model results are inspected, and it can later be revised (e.g., 4.7% of items) if hidden issues like unavailable credentials are discovered.
+- ⟦TERM⟧ is used to predict which items an agent will fail, correctly predicting 71% of observed failures among lower-tier agents.
+- Items are scored/read by comparing an agent's actual performance against its assigned ⟦TERM⟧: failures below the ⟦TERM⟧ are flagged for audit rather than counted as ordinary misses.
+- Applies to individual items within an evaluation suite spanning multiple capability tiers and execution environments, assigned prior to deployment/results inspection.
+- Only items whose ⟦TERM⟧ is stable across adjudicators (annotators) are retained for reporting; unstable ones are excluded.
+- The ⟦TERM⟧-based exhaustion analysis does not imply a single monotonic capability scale, since agents can pass higher-tier items via narrow memorized procedures while failing lower-tier ones requiring unfamiliar tool states.

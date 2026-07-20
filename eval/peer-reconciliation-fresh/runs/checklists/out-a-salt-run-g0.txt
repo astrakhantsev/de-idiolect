@@ -1,0 +1,6 @@
+- Rerun the same set of tasks/items after randomizing surface-level identifiers (timestamps, run ids, filenames, commit hashes, or item ids) that should have no bearing on correctness.
+- Applied to an existing evaluation tier or task suite, as a follow-up check after an initial score or result is obtained.
+- Compares scores from the reran, randomized-identifier version against the original scores to see whether they hold flat or diverge.
+- A flat/unchanged score is read as "not contaminated" or "clean"; score movement would indicate contamination.
+- Only superficial/non-semantic fields are randomized — the actual task content and reasoning demands are not altered.
+- The pass and its outcome must be logged with a timestamp, separate from other concurrent changes being tested.

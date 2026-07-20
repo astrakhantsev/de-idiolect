@@ -1,0 +1,44 @@
+{
+ "P02": {
+  "term_a": "garble replay",
+  "term_b": "corrupted-observation recovery index",
+  "L2_a": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-test3/runs/definitions/out-a-garble-replay.json",
+  "L2_b": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-test3/runs/definitions/out-b-corrupted-observation-recovery-index.json"
+ },
+ "P03": {
+  "term_a": "quit sense",
+  "term_b": "post-completion action count",
+  "L2_a": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-test3/runs/definitions/out-a-quit-sense.json",
+  "L2_b": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-test3/runs/definitions/out-b-post-completion-action-count.json"
+ },
+ "P04": {
+  "term_a": "example strip",
+  "term_b": "prompt scaffolding dependence measure",
+  "L2_a": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-test3/runs/definitions/out-a-example-strip.json",
+  "L2_b": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-test3/runs/definitions/out-b-prompt-scaffolding-dependence-measure.json"
+ },
+ "P05": {
+  "term_a": "brain swap",
+  "term_b": "component substitution elasticity",
+  "L2_a": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-test3/runs/definitions/out-a-brain-swap.json",
+  "L2_b": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-test3/runs/definitions/out-b-component-substitution-elasticity.json"
+ },
+ "P06": {
+  "term_a": "double mark",
+  "term_b": "grader temporal stability coefficient",
+  "L2_a": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-test3/runs/definitions/out-a-double-mark.json",
+  "L2_b": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-test3/runs/definitions/out-b-grader-temporal-stability-coefficient.json"
+ },
+ "P09": {
+  "term_a": "spray test",
+  "term_b": "reference trajectory alignment score",
+  "L2_a": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-test3/runs/definitions/out-a-spray-test.json",
+  "L2_b": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-test3/runs/definitions/out-b-reference-trajectory-alignment-score.json"
+ },
+ "P10": {
+  "term_a": "budget bleed",
+  "term_b": "cross-lingual instruction fidelity",
+  "L2_a": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-test3/runs/definitions/out-a-budget-bleed.json",
+  "L2_b": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-test3/runs/definitions/out-b-cross-lingual-instruction-fidelity.json"
+ }
+}

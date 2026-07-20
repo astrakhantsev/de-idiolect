@@ -1,0 +1,186 @@
+{
+ "P01": {
+  "a2b": {
+   "n": 6,
+   "k": 5,
+   "c": 0,
+   "u": 1,
+   "agg": "covers",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 6,
+   "k": 1,
+   "c": 0,
+   "u": 5,
+   "agg": "abstain",
+   "quote_downgrades": [
+    3
+   ]
+  }
+ },
+ "P02": {
+  "a2b": {
+   "n": 4,
+   "k": 4,
+   "c": 0,
+   "u": 0,
+   "agg": "covers",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 6,
+   "k": 0,
+   "c": 5,
+   "u": 1,
+   "agg": "fails",
+   "quote_downgrades": []
+  }
+ },
+ "P03": {
+  "a2b": {
+   "n": 5,
+   "k": 4,
+   "c": 0,
+   "u": 1,
+   "agg": "covers",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 6,
+   "k": 0,
+   "c": 0,
+   "u": 6,
+   "agg": "abstain",
+   "quote_downgrades": []
+  }
+ },
+ "P04": {
+  "a2b": {
+   "n": 4,
+   "k": 0,
+   "c": 2,
+   "u": 2,
+   "agg": "fails",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 6,
+   "k": 3,
+   "c": 0,
+   "u": 3,
+   "agg": "covers",
+   "quote_downgrades": []
+  }
+ },
+ "P05": {
+  "a2b": {
+   "n": 5,
+   "k": 0,
+   "c": 4,
+   "u": 1,
+   "agg": "fails",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 6,
+   "k": 0,
+   "c": 5,
+   "u": 1,
+   "agg": "fails",
+   "quote_downgrades": [
+    1
+   ]
+  }
+ },
+ "P06": {
+  "a2b": {
+   "n": 6,
+   "k": 0,
+   "c": 5,
+   "u": 1,
+   "agg": "fails",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 6,
+   "k": 0,
+   "c": 0,
+   "u": 6,
+   "agg": "abstain",
+   "quote_downgrades": []
+  }
+ },
+ "P07": {
+  "a2b": {
+   "n": 5,
+   "k": 0,
+   "c": 5,
+   "u": 0,
+   "agg": "fails",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 5,
+   "k": 0,
+   "c": 4,
+   "u": 1,
+   "agg": "fails",
+   "quote_downgrades": []
+  }
+ },
+ "P08": {
+  "a2b": {
+   "n": 6,
+   "k": 0,
+   "c": 4,
+   "u": 2,
+   "agg": "fails",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 6,
+   "k": 0,
+   "c": 0,
+   "u": 6,
+   "agg": "abstain",
+   "quote_downgrades": []
+  }
+ },
+ "P09": {
+  "a2b": {
+   "n": 6,
+   "k": 0,
+   "c": 6,
+   "u": 0,
+   "agg": "fails",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 6,
+   "k": 0,
+   "c": 6,
+   "u": 0,
+   "agg": "fails",
+   "quote_downgrades": []
+  }
+ },
+ "P10": {
+  "a2b": {
+   "n": 6,
+   "k": 0,
+   "c": 5,
+   "u": 1,
+   "agg": "fails",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 4,
+   "k": 0,
+   "c": 4,
+   "u": 0,
+   "agg": "fails",
+   "quote_downgrades": []
+  }
+ }
+}

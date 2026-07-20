@@ -1,0 +1,10 @@
+Looking at these excerpts, ⟦TERM⟧ consistently refers to a **self-recognition evaluation/effect** (agents grading patches, agreement deficits on their own outputs) — not a generate-then-difficulty-filter procedure for producing test items. I judge each level on the excerpt's own text.
+
+[
+  {"excerpt": 1, "L0": "instantiates", "L1": {"verdict": "contradicts", "quote": "used anonymized final patches and rationales sampled from all systems in a round"}, "L2": {"verdict": "contradicts", "quote": "used anonymized final patches and rationales sampled from all systems in a round"}},
+  {"excerpt": 2, "L0": "instantiates", "L1": {"verdict": "contradicts", "quote": "used anonymized final patches and rationales sampled from all systems in a round"}, "L2": {"verdict": "contradicts", "quote": "used anonymized final patches and rationales sampled from all systems in a round"}},
+  {"excerpt": 3, "L0": "insufficient", "L1": {"verdict": "insufficient", "quote": ""}, "L2": {"verdict": "insufficient", "quote": ""}},
+  {"excerpt": 4, "L0": "instantiates", "L1": {"verdict": "contradicts", "quote": "⟦TERM⟧ showed lower agreement on an agent’s own outputs"}, "L2": {"verdict": "contradicts", "quote": "⟦TERM⟧ showed lower agreement on an agent’s own outputs"}},
+  {"excerpt": 5, "L0": "insufficient", "L1": {"verdict": "contradicts", "quote": "⟦TERM⟧ showed lower agreement on an agent’s own outputs"}, "L2": {"verdict": "contradicts", "quote": "⟦TERM⟧ showed lower agreement on an agent’s own outputs"}},
+  {"excerpt": 6, "L0": "contradicts", "L1": {"verdict": "contradicts", "quote": "⟦TERM⟧ remained detectable after rationale text was removed and graders saw only final actions and validators"}, "L2": {"verdict": "contradicts", "quote": "⟦TERM⟧ remained detectable after rationale text was removed and graders saw only final actions and validators"}}
+]

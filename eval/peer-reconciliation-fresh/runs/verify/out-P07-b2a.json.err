@@ -1,0 +1,46 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.TmetcRHzLM"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.2RZXOCtigP
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7c92-ddb0-7d00-9beb-fc5feb38b82c
+--------
+user
+Three DEFINITIONS of the same concept at increasing specificity:
+
+DEFINITION L0 (genus only): A quality-control check for identifying phrasing-style failures in agents' written responses.
+
+DEFINITION L1 (adds mechanism): A quality-control check examines agents' free-form explanations, rationales, and final answers after prompts include worked examples with distinctive styles or unusual connective phrases. It detects inappropriate verbatim copying of phrasing from those examples.
+
+DEFINITION L2 (adds measurement and conditions): A quality-control check scans free-form explanations, rationales, and final answers produced after few-shot prompts contain distinctive worked examples or unusual connective phrases. It detects inappropriate verbatim carryover of phrasing from those examples and reports the percentage of outputs containing copied example phrasing, such as 9.6%, 6.8%, or 4.2%. That percentage is read as a failure or detection rate and can rise or fall across conditions. The check can be run again after removing, paraphrasing, or replacing the examples to measure a new copied-phrasing rate, such as 1.8%, 1.5%, or 0.9%. Its findings concern phrasing and style carryover, not whether final tool outputs are correct; failures may occur despite correct final outputs.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used (other local jargon masked ⟦X⟧).
+
+For EACH excerpt, and for EACH definition level INDEPENDENTLY, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by THAT definition?
+
+- "instantiates" — the usage is consistent with and exemplifies that definition.
+- "contradicts" — the usage is incompatible with that definition (the referent has a property that definition excludes, or lacks one it requires).
+- "insufficient" — this excerpt alone does not contain enough to decide for that definition.
+
+A usage can instantiate L0 while contradicting L2 — judge each level on its own content. Judge each excerpt on its own text only. For L1 and L2, any decided verdict (instantiates or contradicts) requires a verbatim supporting quote from the excerpt; L0 needs no quote.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "L0": "instantiates|contradicts|insufficient", "L1": {"verdict": "...", "quote": "verbatim or empty for insufficient"}, "L2": {"verdict": "...", "quote": "..."}}, ...]
+
+EXCERPTS:
+
+1. Did an ⟦TERM⟧ on the new retrieval agent before we shipped it — same exact prompt, same session, submitted twice. Temperature's pinned to zero on paper, but outputs diverged by about 6% token-for-token, and once by a full different citation.
+2. Should've moved by zero. Something in the harness is keying off metadata it has no business looking at, and now I have to go find it before the ⟦TERM⟧ numbers mean anything.
+3. Gap was smaller than I expected, only 4 points on average, which is actually reassuring since it means the items still doing work aren't just measuring who parses markdown better. Threw in an ⟦TERM⟧ on the handful of items where twin scores were suspiciously identical, since identical scores across differently-worded twins made me suspicious the scorer wasn't even looking at content. Submitted the same prompt twice, got byte-identical outputs both times for those items, so at least that part of the stack is behaving.
+4. Two of three agents compressed cleanly, the third just truncated mid-sentence and got scored as a failure, which feels like the right outcome even though it stung to watch. Ran an ⟦TERM⟧ afterward because the third agent's truncated output looked suspiciously different from a supposedly identical earlier run with no ⟦X⟧ involved.
+5. Turned out to be real — same prompt, same session, two different truncation points, so there's stack-level nondeterminism layered on top of the budget-cut behavior, and now I can't cleanly separate the ⟦X⟧ effect from ordinary ⟦TERM⟧ noise without a lot more samples.
+6. ⟦TERM⟧ on that same batch showed higher divergence than our other suites, about 9% versus the usual 4%, which makes me trust the pass rates on it even less right now.
+codex
+[{"excerpt":1,"L0":"contradicts","L1":{"verdict":"contradicts","quote":"same exact prompt, same session, submitted twice. Temperature's pinned to zero on paper, but outputs diverged"},"L2":{"verdict":"contradicts","quote":"outputs diverged by about 6% token-for-token, and once by a full different citation"}},{"excerpt":2,"L0":"insufficient","L1":{"verdict":"insufficient","quote":""},"L2":{"verdict":"insufficient","quote":""}},{"excerpt":3,"L0":"contradicts","L1":{"verdict":"contradicts","quote":"Submitted the same prompt twice, got byte-identical outputs both times"},"L2":{"verdict":"contradicts","quote":"identical scores across differently-worded twins made me suspicious the scorer wasn't even looking at content"}},{"excerpt":4,"L0":"contradicts","L1":{"verdict":"contradicts","quote":"truncated output looked suspiciously different from a supposedly identical earlier run"},"L2":{"verdict":"contradicts","quote":"the third agent's truncated output looked suspiciously different from a supposedly identical earlier run"}},{"excerpt":5,"L0":"contradicts","L1":{"verdict":"contradicts","quote":"same prompt, same session, two different truncation points"},"L2":{"verdict":"contradicts","quote":"stack-level nondeterminism layered on top of the budget-cut behavior"}},{"excerpt":6,"L0":"contradicts","L1":{"verdict":"contradicts","quote":"showed higher divergence than our other suites"},"L2":{"verdict":"contradicts","quote":"about 9% versus the usual 4%"} }]
+tokens used
+3,800

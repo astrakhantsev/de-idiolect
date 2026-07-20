@@ -1,0 +1,6 @@
+- Randomize or scrub superficial identifiers (timestamps, run IDs, filenames, commit hashes) across the task set before rerunning.
+- Rerun the same fixed set of tasks/items (e.g., 80 tasks, 60 items) unchanged except for the randomized identifiers.
+- Applies to a full tier or task batch being evaluated by a scorer, run specifically to sanity-check that scorer.
+- Purpose is to rule out a "boring explanation" (e.g., the scorer keying on superficial metadata) rather than assess actual task-solving quality.
+- Compares scorer output/confidence numbers between the original run and the identifier-randomized rerun to see if they diverge.
+- Must leave the substantive content of each task/item untouched — only cosmetic/identifying fields are altered.

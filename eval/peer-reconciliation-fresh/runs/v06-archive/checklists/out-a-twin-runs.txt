@@ -1,0 +1,6 @@
+- Run the same underlying task in two or more reworded/reformatted variants (e.g., casual vs. formal phrasing, plain-text vs. boilerplate formatting, bullet vs. prose) while holding task content constant.
+- Score each variant and compute the gap (in points) between the paired variants' scores.
+- Apply this to a set of paired/twinned items — either an existing item suite or a batch of newly authored items — before treating results as trustworthy (e.g., before publishing or merging).
+- A smaller gap indicates the items are measuring task capability rather than formatting/parsing ability; a larger gap indicates presentation cost is inflating or depressing scores.
+- The gap should be compared against a baseline (e.g., a hand-authored control set) to judge whether it is larger or smaller than expected.
+- Report the gap as an average point difference (e.g., 4 points, 6 points vs. 2 points).

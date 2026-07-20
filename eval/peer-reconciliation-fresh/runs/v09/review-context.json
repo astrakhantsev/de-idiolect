@@ -1,0 +1,3310 @@
+{
+ "tau0": {
+  "P01": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "review_required",
+    "reason": "detail-divergence"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 2,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "covers"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 5,
+       "c": 0,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 2,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 2,
+       "agg": "covers",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": 1,
+     "base_L": 1,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 4,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 3,
+       "c": 0,
+       "u": 1,
+       "pre_decided": 3,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "an agent that just succeeded on a task tends to repeat that same recent successful action sequence on a new, different task where it no longer fits, and clearing the session history right before the new task removes this tendency and lets it choose correctly",
+    "quote_1": "clear the session, hand it the same ticket cold, and it picks the correct merge strategy first try",
+    "quote_2": "Clearing prior-session traces reduced these errors to 3%, with little effect on ordinary billing performance."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "unclear"
+   },
+   "terminal": null
+  },
+  "P02": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "review_required",
+    "reason": "asymmetry-unconfirmed"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 2,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "covers"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 4,
+       "c": 0,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 2,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 2,
+       "agg": "covers",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 4,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": false,
+   "flag": false,
+   "symcheck": {
+    "status": "ok",
+    "confirms": false,
+    "counts": {
+     "n": 4,
+     "k": 4,
+     "c": 0,
+     "u": 0,
+     "pre_decided": 4,
+     "agg": "covers",
+     "quote_downgrades": []
+    }
+   },
+   "decompose": null,
+   "containment": null,
+   "terminal": null
+  },
+  "P03": {
+   "verdict": {
+    "proposed_relation": "relatedMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "abstain",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 0,
+       "u": 6,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 0,
+       "u": 6,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "abstain",
+      "L1": "abstain",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 1,
+       "c": 0,
+       "u": 3,
+       "pre_decided": 1,
+       "agg": "abstain",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": true,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities produce the items in an evaluation benchmark by having a model (a generator) automatically create the task specifications, rather than having a human author each task by hand.",
+    "quote_1": "a model was given the old benchmark's easy tier and asked to generate harder variants, no human wrote a single one from scratch.",
+    "quote_2": "A \u27e6T2\u27e7 produced 2,160 task specifications from a weaker generator, with executable checks withheld from the evaluated agents."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "partial_overlap"
+   },
+   "terminal": null
+  },
+  "P04": {
+   "verdict": {
+    "proposed_relation": "relatedMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 4,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 4,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": 1,
+     "base_L": 1,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 3,
+       "c": 0,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 2,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 2,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 0,
+       "u": 6,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "an intervention that mid-run cuts an agent's remaining resource budget (tokens or tool-call/action quota) partway through a task, after it has already made some initial progress, to see how the agent adapts its remaining behavior",
+    "quote_1": "Silently cut its remaining token budget in half right after it finished reading the contract but before drafting the summary.",
+    "quote_2": "A \u27e6T2\u27e7 altered either the remaining token budget or tool-call quota after the first successful retrieval."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "partial_overlap"
+   },
+   "terminal": null
+  },
+  "P05": {
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 5,
+       "c": 0,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 3,
+       "u": 1,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": [
+        1
+       ]
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 3,
+       "u": 1,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": [
+        1
+       ]
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": false,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities build matched pairs of the same underlying task where the actual requirements/required action are held constant, but the surface presentation is altered \u2014 reworded/reformatted phrasing in one case, extraneous irrelevant context appended to the prompt in the other \u2014 and then compare agent behavior or output across the two paired versions to see how much that surface-level change alone shifts results, even though the task itself hasn't changed.",
+    "quote_1": "Same underlying task, one variant phrased as a casual Slack message (\"hey can you check this contract real quick\"), the other as a formal request with numbered requirements.",
+    "quote_2": "A paired set of service-configuration tasks differed only in irrelevant operational context appended to the prompt."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "partial_overlap"
+   },
+   "terminal": null
+  },
+  "P06": {
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 5,
+       "k": 0,
+       "c": 5,
+       "u": 0,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 5,
+       "k": 0,
+       "c": 5,
+       "u": 0,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 5,
+       "k": 0,
+       "c": 5,
+       "u": 0,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "In both communities, when one model's output is evaluated or filtered by a second, nominally independent process, traces of the original model's own characteristics (its blind spots, habits, or writing style) leak through and measurably skew the outcome \u2014 a filter model lets through items matching the generating agent's strengths, and blinded graders agree less with an agent's own outputs than with peers' \u2014 showing that independence or blinding doesn't fully prevent an agent's own patterns from influencing how its output is judged.",
+    "quote_1": "one of our own agents wrote candidate bugs, a second model filtered the ones it judged too easy, and nobody checked whether the filter model shared blind spots with the author.",
+    "quote_2": "the evaluated agent agreed with external graders 6.4 points less often on its own successful patches than on matched patches from peers."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "no_relation"
+   },
+   "terminal": null
+  },
+  "P07": {
+   "verdict": {
+    "proposed_relation": "noMatchDespiteSimilarity",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": true,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities run a check that compares a model's text output against another reference text \u2014 either a repeated run of the same prompt or a set of worked few-shot examples \u2014 looking for verbatim, word-for-word overlap that shouldn't be there. Rather than a simple pass/fail, they quantify it: the share of sampled items showing matching or copied phrasing is reported as a percentage, and that rate is used to judge how much of the observed behavior reflects real content generation versus artifacts of repeated or copied text.",
+    "quote_1": "same exact prompt, same session, submitted twice. Temperature's pinned to zero on paper, but outputs diverged by about 6% token-for-token, and once by a full different citation.",
+    "quote_2": "The \u27e6T2\u27e7 identified inappropriate verbatim carryover in 9.6% of free-form explanations, despite correct final tool outputs."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "no_relation"
+   },
+   "terminal": null
+  },
+  "P08": {
+   "verdict": {
+    "proposed_relation": "noMatchDespiteSimilarity",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 4,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 4,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 4,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "abstain",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 5,
+       "k": 0,
+       "c": 0,
+       "u": 5,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 5,
+       "k": 0,
+       "c": 5,
+       "u": 0,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 5,
+       "k": 0,
+       "c": 5,
+       "u": 0,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": true,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities embed a secondary check inside the evaluation run itself, separate from the main content being scored, whose expected outcome is already known beforehand \u2014 purely to catch problems in the evaluation apparatus (scorer or judge) rather than to measure the target agent's actual task performance. In one case this means rerunning the same test items with irrelevant metadata scrambled and confirming scores don't move; in the other it means seeding verified, previously-answered cases into batches and confirming judges score them correctly. When the check fails, the affected results are treated as unreliable and excluded or halted rather than counted toward final metrics.",
+    "quote_1": "Ran a \u27e6T1\u27e7 right after to sanity-check the scorer while we were at it. Randomized every timestamp, run id, and output filename we could find and reran the same 80 tasks.",
+    "quote_2": "Each batch included a \u27e6T2\u27e7 containing eight previously verified cases distributed without positional regularity. The \u27e6T2\u27e7 was evaluated before aggregate metrics were retained, and three batches were halted after two known cases received unsupported negative judgments."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "no_relation"
+   },
+   "terminal": null
+  },
+  "P09": {
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "abstain"
+   },
+   "containment": null,
+   "terminal": null
+  },
+  "P10": {
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities assign a numeric threshold to evaluation items or runs, and when an agent's behavior crosses it \u2014 exceeding a cap, or falling below the threshold \u2014 the case is flagged for further review or audit instead of being silently scored as an ordinary pass or fail. This flagging singles out anomalous cases for closer human attention, distinguishing genuine capability problems from artifacts of the measurement setup itself, rather than folding every crossing directly into an aggregate score.",
+    "quote_1": "\u27e6T1\u27e7 enforcement flagged eleven runs this week for exceeding the cap",
+    "quote_2": "Failures below an agent\u2019s \u27e6T2\u27e7 were flagged for audit rather than treated as ordinary misses."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "no_relation"
+   },
+   "terminal": null
+  }
+ },
+ "tau1": {
+  "P01": {
+   "verdict": {
+    "proposed_relation": "exactMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 2,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "covers"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 5,
+       "c": 0,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 2,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 2,
+       "agg": "covers",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 1,
+     "promoted": true,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 4,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 3,
+       "c": 0,
+       "u": 1,
+       "pre_decided": 3,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "an agent that just succeeded on a task tends to repeat that same recent successful action sequence on a new, different task where it no longer fits, and clearing the session history right before the new task removes this tendency and lets it choose correctly",
+    "quote_1": "clear the session, hand it the same ticket cold, and it picks the correct merge strategy first try",
+    "quote_2": "Clearing prior-session traces reduced these errors to 3%, with little effect on ordinary billing performance."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "unclear"
+   },
+   "terminal": null
+  },
+  "P02": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "review_required",
+    "reason": "asymmetry-unconfirmed"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 2,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "covers"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 4,
+       "c": 0,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 2,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 2,
+       "agg": "covers",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 4,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": false,
+   "flag": false,
+   "symcheck": {
+    "status": "ok",
+    "confirms": false,
+    "counts": {
+     "n": 4,
+     "k": 4,
+     "c": 0,
+     "u": 0,
+     "pre_decided": 4,
+     "agg": "covers",
+     "quote_downgrades": []
+    }
+   },
+   "decompose": null,
+   "containment": null,
+   "terminal": null
+  },
+  "P03": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "review_required",
+    "reason": "unexplained-asymmetry"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 0,
+     "promoted": true,
+     "aggs": {
+      "L0": "covers",
+      "L1": "abstain",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 0,
+       "u": 6,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 0,
+       "u": 6,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "abstain",
+      "L1": "abstain",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 1,
+       "c": 0,
+       "u": 3,
+       "pre_decided": 1,
+       "agg": "abstain",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": true,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities produce the items in an evaluation benchmark by having a model (a generator) automatically create the task specifications, rather than having a human author each task by hand.",
+    "quote_1": "a model was given the old benchmark's easy tier and asked to generate harder variants, no human wrote a single one from scratch.",
+    "quote_2": "A \u27e6T2\u27e7 produced 2,160 task specifications from a weaker generator, with executable checks withheld from the evaluated agents."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "partial_overlap"
+   },
+   "terminal": null
+  },
+  "P04": {
+   "verdict": {
+    "proposed_relation": "broadnarrow",
+    "status": "asserted",
+    "reason": null,
+    "broader_side": "b"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 4,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 4,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 1,
+     "promoted": true,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 3,
+       "c": 0,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 2,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 2,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 0,
+       "u": 6,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": {
+    "status": "ok",
+    "confirms": true,
+    "counts": {
+     "n": 6,
+     "k": 0,
+     "c": 6,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "fails",
+     "quote_downgrades": []
+    }
+   },
+   "decompose": {
+    "status": "ok",
+    "core": "an intervention that mid-run cuts an agent's remaining resource budget (tokens or tool-call/action quota) partway through a task, after it has already made some initial progress, to see how the agent adapts its remaining behavior",
+    "quote_1": "Silently cut its remaining token budget in half right after it finished reading the contract but before drafting the summary.",
+    "quote_2": "A \u27e6T2\u27e7 altered either the remaining token budget or tool-call quota after the first successful retrieval."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "partial_overlap"
+   },
+   "terminal": null
+  },
+  "P05": {
+   "verdict": {
+    "proposed_relation": "relatedMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 5,
+       "c": 0,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 3,
+       "u": 1,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": [
+        1
+       ]
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 3,
+       "u": 1,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": [
+        1
+       ]
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities build matched pairs of the same underlying task where the actual requirements/required action are held constant, but the surface presentation is altered \u2014 reworded/reformatted phrasing in one case, extraneous irrelevant context appended to the prompt in the other \u2014 and then compare agent behavior or output across the two paired versions to see how much that surface-level change alone shifts results, even though the task itself hasn't changed.",
+    "quote_1": "Same underlying task, one variant phrased as a casual Slack message (\"hey can you check this contract real quick\"), the other as a formal request with numbered requirements.",
+    "quote_2": "A paired set of service-configuration tasks differed only in irrelevant operational context appended to the prompt."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "partial_overlap"
+   },
+   "terminal": null
+  },
+  "P06": {
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 5,
+       "k": 0,
+       "c": 5,
+       "u": 0,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 5,
+       "k": 0,
+       "c": 5,
+       "u": 0,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 5,
+       "k": 0,
+       "c": 5,
+       "u": 0,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "In both communities, when one model's output is evaluated or filtered by a second, nominally independent process, traces of the original model's own characteristics (its blind spots, habits, or writing style) leak through and measurably skew the outcome \u2014 a filter model lets through items matching the generating agent's strengths, and blinded graders agree less with an agent's own outputs than with peers' \u2014 showing that independence or blinding doesn't fully prevent an agent's own patterns from influencing how its output is judged.",
+    "quote_1": "one of our own agents wrote candidate bugs, a second model filtered the ones it judged too easy, and nobody checked whether the filter model shared blind spots with the author.",
+    "quote_2": "the evaluated agent agreed with external graders 6.4 points less often on its own successful patches than on matched patches from peers."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "no_relation"
+   },
+   "terminal": null
+  },
+  "P07": {
+   "verdict": {
+    "proposed_relation": "noMatchDespiteSimilarity",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": true,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities run a check that compares a model's text output against another reference text \u2014 either a repeated run of the same prompt or a set of worked few-shot examples \u2014 looking for verbatim, word-for-word overlap that shouldn't be there. Rather than a simple pass/fail, they quantify it: the share of sampled items showing matching or copied phrasing is reported as a percentage, and that rate is used to judge how much of the observed behavior reflects real content generation versus artifacts of repeated or copied text.",
+    "quote_1": "same exact prompt, same session, submitted twice. Temperature's pinned to zero on paper, but outputs diverged by about 6% token-for-token, and once by a full different citation.",
+    "quote_2": "The \u27e6T2\u27e7 identified inappropriate verbatim carryover in 9.6% of free-form explanations, despite correct final tool outputs."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "no_relation"
+   },
+   "terminal": null
+  },
+  "P08": {
+   "verdict": {
+    "proposed_relation": "noMatchDespiteSimilarity",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 4,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 4,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 4,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "abstain",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 5,
+       "k": 0,
+       "c": 0,
+       "u": 5,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 5,
+       "k": 0,
+       "c": 5,
+       "u": 0,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 5,
+       "k": 0,
+       "c": 5,
+       "u": 0,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": true,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities embed a secondary check inside the evaluation run itself, separate from the main content being scored, whose expected outcome is already known beforehand \u2014 purely to catch problems in the evaluation apparatus (scorer or judge) rather than to measure the target agent's actual task performance. In one case this means rerunning the same test items with irrelevant metadata scrambled and confirming scores don't move; in the other it means seeding verified, previously-answered cases into batches and confirming judges score them correctly. When the check fails, the affected results are treated as unreliable and excluded or halted rather than counted toward final metrics.",
+    "quote_1": "Ran a \u27e6T1\u27e7 right after to sanity-check the scorer while we were at it. Randomized every timestamp, run id, and output filename we could find and reran the same 80 tasks.",
+    "quote_2": "Each batch included a \u27e6T2\u27e7 containing eight previously verified cases distributed without positional regularity. The \u27e6T2\u27e7 was evaluated before aggregate metrics were retained, and three batches were halted after two known cases received unsupported negative judgments."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "no_relation"
+   },
+   "terminal": null
+  },
+  "P09": {
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "abstain"
+   },
+   "containment": null,
+   "terminal": null
+  },
+  "P10": {
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities assign a numeric threshold to evaluation items or runs, and when an agent's behavior crosses it \u2014 exceeding a cap, or falling below the threshold \u2014 the case is flagged for further review or audit instead of being silently scored as an ordinary pass or fail. This flagging singles out anomalous cases for closer human attention, distinguishing genuine capability problems from artifacts of the measurement setup itself, rather than folding every crossing directly into an aggregate score.",
+    "quote_1": "\u27e6T1\u27e7 enforcement flagged eleven runs this week for exceeding the cap",
+    "quote_2": "Failures below an agent\u2019s \u27e6T2\u27e7 were flagged for audit rather than treated as ordinary misses."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "no_relation"
+   },
+   "terminal": null
+  }
+ },
+ "tau2": {
+  "P01": {
+   "verdict": {
+    "proposed_relation": "exactMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 2,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "covers"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 5,
+       "c": 0,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 2,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 2,
+       "agg": "covers",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 1,
+     "promoted": true,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 4,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 3,
+       "c": 0,
+       "u": 1,
+       "pre_decided": 3,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "an agent that just succeeded on a task tends to repeat that same recent successful action sequence on a new, different task where it no longer fits, and clearing the session history right before the new task removes this tendency and lets it choose correctly",
+    "quote_1": "clear the session, hand it the same ticket cold, and it picks the correct merge strategy first try",
+    "quote_2": "Clearing prior-session traces reduced these errors to 3%, with little effect on ordinary billing performance."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "unclear"
+   },
+   "terminal": null
+  },
+  "P02": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "review_required",
+    "reason": "asymmetry-unconfirmed"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 2,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "covers"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 4,
+       "c": 0,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 2,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 2,
+       "agg": "covers",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 4,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": false,
+   "flag": false,
+   "symcheck": {
+    "status": "ok",
+    "confirms": false,
+    "counts": {
+     "n": 4,
+     "k": 4,
+     "c": 0,
+     "u": 0,
+     "pre_decided": 4,
+     "agg": "covers",
+     "quote_downgrades": []
+    }
+   },
+   "decompose": null,
+   "containment": null,
+   "terminal": null
+  },
+  "P03": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "review_required",
+    "reason": "unexplained-asymmetry"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 0,
+     "promoted": true,
+     "aggs": {
+      "L0": "covers",
+      "L1": "abstain",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 0,
+       "u": 6,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 0,
+       "u": 6,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "abstain",
+      "L1": "abstain",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 1,
+       "c": 0,
+       "u": 3,
+       "pre_decided": 1,
+       "agg": "abstain",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": true,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities produce the items in an evaluation benchmark by having a model (a generator) automatically create the task specifications, rather than having a human author each task by hand.",
+    "quote_1": "a model was given the old benchmark's easy tier and asked to generate harder variants, no human wrote a single one from scratch.",
+    "quote_2": "A \u27e6T2\u27e7 produced 2,160 task specifications from a weaker generator, with executable checks withheld from the evaluated agents."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "partial_overlap"
+   },
+   "terminal": null
+  },
+  "P04": {
+   "verdict": {
+    "proposed_relation": "broadnarrow",
+    "status": "asserted",
+    "reason": null,
+    "broader_side": "b"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 4,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 4,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 1,
+     "promoted": true,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 3,
+       "c": 0,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 2,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 2,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 0,
+       "u": 6,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": {
+    "status": "ok",
+    "confirms": true,
+    "counts": {
+     "n": 6,
+     "k": 0,
+     "c": 6,
+     "u": 0,
+     "pre_decided": 6,
+     "agg": "fails",
+     "quote_downgrades": []
+    }
+   },
+   "decompose": {
+    "status": "ok",
+    "core": "an intervention that mid-run cuts an agent's remaining resource budget (tokens or tool-call/action quota) partway through a task, after it has already made some initial progress, to see how the agent adapts its remaining behavior",
+    "quote_1": "Silently cut its remaining token budget in half right after it finished reading the contract but before drafting the summary.",
+    "quote_2": "A \u27e6T2\u27e7 altered either the remaining token budget or tool-call quota after the first successful retrieval."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "partial_overlap"
+   },
+   "terminal": null
+  },
+  "P05": {
+   "verdict": {
+    "proposed_relation": "relatedMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 5,
+       "c": 0,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 3,
+       "u": 1,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": [
+        1
+       ]
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 3,
+       "u": 1,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": [
+        1
+       ]
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities build matched pairs of the same underlying task where the actual requirements/required action are held constant, but the surface presentation is altered \u2014 reworded/reformatted phrasing in one case, extraneous irrelevant context appended to the prompt in the other \u2014 and then compare agent behavior or output across the two paired versions to see how much that surface-level change alone shifts results, even though the task itself hasn't changed.",
+    "quote_1": "Same underlying task, one variant phrased as a casual Slack message (\"hey can you check this contract real quick\"), the other as a formal request with numbered requirements.",
+    "quote_2": "A paired set of service-configuration tasks differed only in irrelevant operational context appended to the prompt."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "partial_overlap"
+   },
+   "terminal": null
+  },
+  "P06": {
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 5,
+       "k": 0,
+       "c": 5,
+       "u": 0,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 5,
+       "k": 0,
+       "c": 5,
+       "u": 0,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 5,
+       "k": 0,
+       "c": 5,
+       "u": 0,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "In both communities, when one model's output is evaluated or filtered by a second, nominally independent process, traces of the original model's own characteristics (its blind spots, habits, or writing style) leak through and measurably skew the outcome \u2014 a filter model lets through items matching the generating agent's strengths, and blinded graders agree less with an agent's own outputs than with peers' \u2014 showing that independence or blinding doesn't fully prevent an agent's own patterns from influencing how its output is judged.",
+    "quote_1": "one of our own agents wrote candidate bugs, a second model filtered the ones it judged too easy, and nobody checked whether the filter model shared blind spots with the author.",
+    "quote_2": "the evaluated agent agreed with external graders 6.4 points less often on its own successful patches than on matched patches from peers."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "no_relation"
+   },
+   "terminal": null
+  },
+  "P07": {
+   "verdict": {
+    "proposed_relation": "noMatchDespiteSimilarity",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": true,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities run a check that compares a model's text output against another reference text \u2014 either a repeated run of the same prompt or a set of worked few-shot examples \u2014 looking for verbatim, word-for-word overlap that shouldn't be there. Rather than a simple pass/fail, they quantify it: the share of sampled items showing matching or copied phrasing is reported as a percentage, and that rate is used to judge how much of the observed behavior reflects real content generation versus artifacts of repeated or copied text.",
+    "quote_1": "same exact prompt, same session, submitted twice. Temperature's pinned to zero on paper, but outputs diverged by about 6% token-for-token, and once by a full different citation.",
+    "quote_2": "The \u27e6T2\u27e7 identified inappropriate verbatim carryover in 9.6% of free-form explanations, despite correct final tool outputs."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "no_relation"
+   },
+   "terminal": null
+  },
+  "P08": {
+   "verdict": {
+    "proposed_relation": "noMatchDespiteSimilarity",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 4,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 4,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 4,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "abstain",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 5,
+       "k": 0,
+       "c": 0,
+       "u": 5,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 5,
+       "k": 0,
+       "c": 5,
+       "u": 0,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 5,
+       "k": 0,
+       "c": 5,
+       "u": 0,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": true,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities embed a secondary check inside the evaluation run itself, separate from the main content being scored, whose expected outcome is already known beforehand \u2014 purely to catch problems in the evaluation apparatus (scorer or judge) rather than to measure the target agent's actual task performance. In one case this means rerunning the same test items with irrelevant metadata scrambled and confirming scores don't move; in the other it means seeding verified, previously-answered cases into batches and confirming judges score them correctly. When the check fails, the affected results are treated as unreliable and excluded or halted rather than counted toward final metrics.",
+    "quote_1": "Ran a \u27e6T1\u27e7 right after to sanity-check the scorer while we were at it. Randomized every timestamp, run id, and output filename we could find and reran the same 80 tasks.",
+    "quote_2": "Each batch included a \u27e6T2\u27e7 containing eight previously verified cases distributed without positional regularity. The \u27e6T2\u27e7 was evaluated before aggregate metrics were retained, and three batches were halted after two known cases received unsupported negative judgments."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "no_relation"
+   },
+   "terminal": null
+  },
+  "P09": {
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "abstain"
+   },
+   "containment": null,
+   "terminal": null
+  },
+  "P10": {
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities assign a numeric threshold to evaluation items or runs, and when an agent's behavior crosses it \u2014 exceeding a cap, or falling below the threshold \u2014 the case is flagged for further review or audit instead of being silently scored as an ordinary pass or fail. This flagging singles out anomalous cases for closer human attention, distinguishing genuine capability problems from artifacts of the measurement setup itself, rather than folding every crossing directly into an aggregate score.",
+    "quote_1": "\u27e6T1\u27e7 enforcement flagged eleven runs this week for exceeding the cap",
+    "quote_2": "Failures below an agent\u2019s \u27e6T2\u27e7 were flagged for audit rather than treated as ordinary misses."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "no_relation"
+   },
+   "terminal": null
+  }
+ }
+}

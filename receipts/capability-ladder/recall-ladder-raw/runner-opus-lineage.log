@@ -1,0 +1,24 @@
+=== brief hashes (must match prereg) ===
+7de64ad7f40af8a1cec9bdb38bc59e5690cb91fd2b34c3671252c820a3f732c9  /tmp/claude-1000/-mnt-f-hub/93d71aaf-aae4-4850-b7aa-51b8ddea4778/scratchpad/haiku-ladder/briefs/c2-P0.md
+45cc560d2cde279b0d21c4fd1c14d01145386392e7a85732d11aded53336bd39  /tmp/claude-1000/-mnt-f-hub/93d71aaf-aae4-4850-b7aa-51b8ddea4778/scratchpad/haiku-ladder/briefs/c4-P0.md
+=== Opus lineage P0 draws (6, parallel) ===
+done c4-P0-claude-opus-4-7 exit=0 bytes=6017 rundir_empty=[EMPTY]
+done c2-P0-claude-opus-4-5 exit=0 bytes=5321 rundir_empty=[EMPTY]
+done c2-P0-claude-opus-4-7 exit=0 bytes=6357 rundir_empty=[EMPTY]
+done c2-P0-claude-opus-4-1 exit=0 bytes=8250 rundir_empty=[EMPTY]
+done c4-P0-claude-opus-4-5 exit=0 bytes=7298 rundir_empty=[EMPTY]
+done c4-P0-claude-opus-4-1 exit=0 bytes=8329 rundir_empty=[EMPTY]
+OPUS_LINEAGE_DONE
+=== output sizes ===
+out-c2-P0-claude-opus-4-1.md          8250
+out-c2-P0-claude-opus-4-5.md          5321
+out-c2-P0-claude-opus-4-7.md          6357
+out-c4-P0-claude-opus-4-1.md          8329
+out-c4-P0-claude-opus-4-5.md          7298
+out-c4-P0-claude-opus-4-7.md          6017
+=== nonempty stderr ===
+--- out-c2-P0-claude-opus-4-1.err ---
+⚠ claude-opus-4-1 is automatically remapped to Opus 4.8 (the latest Opus). Set CLAUDE_CODE_DISABLE_LEGACY_MODEL_REMAP=1 to keep the requested model.
+--- out-c4-P0-claude-opus-4-1.err ---
+⚠ claude-opus-4-1 is automatically remapped to Opus 4.8 (the latest Opus). Set CLAUDE_CODE_DISABLE_LEGACY_MODEL_REMAP=1 to keep the requested model.
+SCRIPT_EXIT_OK

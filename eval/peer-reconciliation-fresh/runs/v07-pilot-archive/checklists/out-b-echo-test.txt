@@ -1,0 +1,6 @@
+- Mechanism: analyzes free-form explanations/outputs to detect inappropriate verbatim carryover of phrasing from few-shot example prompts into agent responses.
+- Measures/scores: rate of inappropriate verbatim/copied phrasing, expressed as a percentage of free-form explanations (e.g., 9.6%, reduced to 1.8%).
+- Applies when: few-shot prompts with distinctive or unusual worked-example answer styles/connective phrases are used, independent of whether final tool outputs are correct.
+- Can be reapplied after modifying the examples (e.g., paraphrasing) to re-check whether copied phrasing was reduced.
+- Constraint: detects copying even when final tool outputs are correct, showing surface-level phrasing carryover is tracked separately from task correctness.
+- Constraint: its results are tied to example design — removing or paraphrasing examples changes the measured failure rate, and removing examples also affects task completion rate.

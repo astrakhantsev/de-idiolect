@@ -1,0 +1,7 @@
+- Mechanism: an artificial response-time delay (e.g., 750ms–1.2s) is added to a specific tool/interface/service while its returned content and error behavior are held constant, creating an asymmetry versus uninstrumented alternatives.
+- Effect measured: rate/probability of selecting or consulting the delayed interface, expressed as a percentage or percentage-point shift relative to a non-delayed baseline or paired run.
+- Effect measured: downstream behavioral consequences of avoiding the delayed interface (e.g., increased manual arithmetic, increased unsupported classifications).
+- Setting/trigger: applies in multi-interface agent tasks (search/query selection, parsing, citation/service consolidation) where an agent chooses among tools or archives, and can be triggered from the start or introduced partway through a task (e.g., only after the first ambiguous excerpt).
+- Constraint: the shift toward the non-delayed option occurs even when the delayed option has equal or superior relevance/utility (more relevant fields, higher probability of resolving ambiguity), showing the effect is not explained by content quality.
+- Constraint: the magnitude of the effect varies with agent design factors such as tool-selection horizon length (larger effect for short horizons).
+- Constraint: the delay-based design cannot by itself distinguish avoidance of delay per se from use of delay as a cue about interface usefulness.

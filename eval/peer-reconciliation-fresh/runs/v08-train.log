@@ -1,0 +1,171 @@
+== phase 0: offline tests (no model calls) ==
+.........................................................
+----------------------------------------------------------------------
+Ran 57 tests in 0.034s
+
+OK
+== phase 1: archive v0.7 pilot -> runs/v07-pilot-archive ==
+== phase 2: corpus manifests -> exactly docs 01-11 (§8) ==
+corpora/a/manifest.json: exactly 11 docs (01-11), hashes verified
+corpora/b/manifest.json: exactly 11 docs (01-11), hashes verified
+== phase 3: freeze (§8: all hashes before any model call) ==
+frozen (appended to freeze-manifest.txt)
+== phase 4: resolved model identifiers at run start (§7) ==
+== phase 5: excerpts (pool = all 11 docs, no reserved split — §9-F3/B1; floor check) ==
+a 'dead weight census': pool=4
+a 'echo test': pool=6
+a 'groove lock': pool=4
+a 'ouroboros items': pool=5
+a 'reread ration': pool=6
+a 'rig diary': pool=4
+a 'salt run': pool=5
+a 'squeeze play': pool=7
+a 'synthetic ladders': pool=4
+a 'twin runs': pool=4
+b 'echo test': pool=9
+b 'item discrimination exhaustion rate': pool=8
+b 'matched contrast probes': pool=10
+b 'reflexive adjudication': pool=11
+b 'resource perturbation study': pool=7
+b 'salt run': pool=9
+b 'strategy cardinality index': pool=10
+b 'subordinate authoring protocol': pool=11
+b 'tier floor annotation': pool=12
+b 'trajectory template carryover': pool=10
+floor: dead pairs = none
+== phase 6: checklists (§2.2; gates §1/§9-F5) ==
+20 checklist calls staged
+>> claude sonnet prompt-a-groove-lock.md
+>> claude sonnet prompt-b-trajectory-template-carryover.md
+>> claude sonnet prompt-a-dead-weight-census.md
+>> claude sonnet prompt-b-item-discrimination-exhaustion-rate.md
+>> claude sonnet prompt-a-synthetic-ladders.md
+>> claude sonnet prompt-b-subordinate-authoring-protocol.md
+>> claude sonnet prompt-a-squeeze-play.md
+>> claude sonnet prompt-b-resource-perturbation-study.md
+>> claude sonnet prompt-a-twin-runs.md
+>> claude sonnet prompt-b-matched-contrast-probes.md
+>> claude sonnet prompt-a-ouroboros-items.md
+>> claude sonnet prompt-b-reflexive-adjudication.md
+>> claude sonnet prompt-a-echo-test.md
+>> claude sonnet prompt-b-echo-test.md
+>> claude sonnet prompt-a-salt-run.md
+>> claude sonnet prompt-b-salt-run.md
+>> claude sonnet prompt-a-rig-diary.md
+>> claude sonnet prompt-b-strategy-cardinality-index.md
+>> claude sonnet prompt-a-reread-ration.md
+>> claude sonnet prompt-b-tier-floor-annotation.md
+tsv done (runs/checklists/calls.tsv), failures: 0
+checklist gates: {'passed': 19, 'pending_regen': 1, 'configFail': 0}; 1 rows staged
+>> claude sonnet prompt-a-groove-lock.md
+tsv done (runs/checklists/regen-calls.tsv), failures: 0
+checklist gates: {'passed': 20, 'pending_regen': 0, 'configFail': 0}; 0 rows staged
+== phase 7: ladders (§2.3) + conformance (§2.4) ==
+20 ladder calls staged
+>> claude opus prompt-a-groove-lock.md
+>> codex gpt-5.6-terra prompt-b-trajectory-template-carryover.md
+>> claude opus prompt-a-dead-weight-census.md
+>> codex gpt-5.6-terra prompt-b-item-discrimination-exhaustion-rate.md
+>> claude opus prompt-a-synthetic-ladders.md
+>> codex gpt-5.6-terra prompt-b-subordinate-authoring-protocol.md
+>> claude opus prompt-a-squeeze-play.md
+>> codex gpt-5.6-terra prompt-b-resource-perturbation-study.md
+>> claude opus prompt-a-twin-runs.md
+>> codex gpt-5.6-terra prompt-b-matched-contrast-probes.md
+>> claude opus prompt-a-ouroboros-items.md
+>> codex gpt-5.6-terra prompt-b-reflexive-adjudication.md
+>> claude opus prompt-a-echo-test.md
+>> codex gpt-5.6-terra prompt-b-echo-test.md
+>> claude opus prompt-a-salt-run.md
+>> codex gpt-5.6-terra prompt-b-salt-run.md
+>> claude opus prompt-a-rig-diary.md
+>> codex gpt-5.6-terra prompt-b-strategy-cardinality-index.md
+>> claude opus prompt-a-reread-ration.md
+>> codex gpt-5.6-terra prompt-b-tier-floor-annotation.md
+tsv done (runs/definitions/calls.tsv), failures: 0
+ladder mech+leak gates: {'awaiting_semantic': 20, 'passed': 0, 'pending_regen': 0, 'configFail': 0}; 0 rows staged
+2 conformance batch calls staged
+>> claude sonnet prompt-a-w1.md
+>> claude sonnet prompt-b-w1.md
+tsv done (runs/conformance/calls.tsv), failures: 0
+conformance gates: {'passed': 18, 'awaiting_semantic': 0, 'pending_regen': 2, 'configFail': 0}; ladder regens: 2; batch rows: 0
+>> claude opus prompt-a-salt-run.md
+>> codex gpt-5.6-terra prompt-b-resource-perturbation-study.md
+tsv done (runs/definitions/regen-calls.tsv), failures: 0
+ladder mech+leak gates: {'awaiting_semantic': 2, 'passed': 18, 'pending_regen': 0, 'configFail': 0}; 0 rows staged
+2 conformance batch calls staged
+>> claude sonnet prompt-a-w2.md
+>> claude sonnet prompt-b-w2.md
+tsv done (runs/conformance/calls.tsv), failures: 0
+conformance gates: {'passed': 20, 'awaiting_semantic': 0, 'pending_regen': 0, 'configFail': 0}; ladder regens: 0; batch rows: 0
+all artifacts resolved (passed or configFail)
+== phase 8: polarity (§2.5; §9-F4 one re-run then side-scoped configFail) ==
+2 polarity calls staged
+>> codex gpt-5.6-terra prompt-a.md
+>> claude opus prompt-b.md
+tsv done (runs/polarity/calls.tsv), failures: 0
+polarity gates: inverted={'a': [], 'b': []}; reruns: 0
+== phase 9: retrieval (§2.6; run-scoped fault on failure) ==
+10 alive pairs -> runs/alive-pairs.json
+      2 "mutual": false
+      8 "mutual": true
+== phase 10: matrix verification (§2.7; failures -> §4, no retry) ==
+20 verify calls staged
+>> claude opus prompt-P01-a2b.md
+>> codex gpt-5.6-terra prompt-P01-b2a.md
+>> claude opus prompt-P02-a2b.md
+>> codex gpt-5.6-terra prompt-P02-b2a.md
+>> claude opus prompt-P03-a2b.md
+>> codex gpt-5.6-terra prompt-P03-b2a.md
+>> claude opus prompt-P04-a2b.md
+>> codex gpt-5.6-terra prompt-P04-b2a.md
+>> claude opus prompt-P05-a2b.md
+>> codex gpt-5.6-terra prompt-P05-b2a.md
+>> claude opus prompt-P06-a2b.md
+>> codex gpt-5.6-terra prompt-P06-b2a.md
+>> claude opus prompt-P07-a2b.md
+>> codex gpt-5.6-terra prompt-P07-b2a.md
+>> claude opus prompt-P08-a2b.md
+>> codex gpt-5.6-terra prompt-P08-b2a.md
+>> claude opus prompt-P09-a2b.md
+>> codex gpt-5.6-terra prompt-P09-b2a.md
+>> claude opus prompt-P10-a2b.md
+>> codex gpt-5.6-terra prompt-P10-b2a.md
+tsv done (runs/verify/calls.tsv), failures: 0
+== phase 11: aggregate + symcheck + decompose + containment ==
+aggregated 10 pairs -> runs/agg.json
+0 symcheck calls staged
+no calls in runs/symcheck/calls.tsv
+7 decompose calls staged
+>> claude sonnet prompt-P01.md
+>> claude sonnet prompt-P04.md
+>> claude sonnet prompt-P06.md
+>> claude sonnet prompt-P07.md
+>> claude sonnet prompt-P08.md
+>> claude sonnet prompt-P09.md
+>> claude sonnet prompt-P10.md
+tsv done (runs/decompose/calls.tsv), failures: 0
+6 containment calls staged
+>> codex gpt-5.6-terra prompt-P01.md
+>> codex gpt-5.6-terra prompt-P04.md
+>> codex gpt-5.6-terra prompt-P06.md
+>> codex gpt-5.6-terra prompt-P07.md
+>> codex gpt-5.6-terra prompt-P08.md
+>> codex gpt-5.6-terra prompt-P10.md
+tsv done (runs/containment/calls.tsv), failures: 0
+== phase 12: compose (§4 terminals -> §5 table -> §6 endpoints) ==
+P01: expected=exactMatch                     proposed=reviewRequired(containment-unclear)      [La=-1 Lb=1] X
+P02: expected=exactMatch                     proposed=noMatch                                  [La=1 Lb=0] X
+P03: expected=broadnarrow(a)                 proposed=insufficientEvidence(both-directions-starved) [La=-1 Lb=-1] X
+P04: expected=broadnarrow(b)                 proposed=relatedMatch                             [La=0 Lb=1] X
+P05: expected=relatedMatch                   proposed=noMatch                                  [La=0 Lb=-1] X
+P06: expected=relatedMatch                   proposed=noMatch                                  [La=-1 Lb=-1] X
+P07: expected=noMatchDespiteSimilarity       proposed=noMatchDespiteSimilarity                 [La=-1 Lb=-1] OK
+P08: expected=noMatchDespiteSimilarity       proposed=noMatchDespiteSimilarity                 [La=-1 Lb=-1] OK
+P09: expected=noMatch                        proposed=noMatch                                  [La=-1 Lb=-1] OK
+P10: expected=noMatch                        proposed=noMatch                                  [La=-1 Lb=-1] OK
+
+E1: correct 4/10 · promotions: none · false-escalations: none · jingle 2/2 · PASS=False
+E1b detection: {'tp': 2, 'fn': 3, 'tn': 4, 'fp': 0, 'abstain': 1}
+E1c graded: 5.1/10
+V08-RUN-DONE

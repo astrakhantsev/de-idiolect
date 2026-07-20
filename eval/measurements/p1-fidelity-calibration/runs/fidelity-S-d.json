@@ -1,0 +1,34 @@
+{
+  "i": {
+    "verdict": "PRESERVED",
+    "justification": "The definition frames a decision about whether a tool is 'worth producing at all,' matching the notes' question 'how good must a dependence estimate be before it beats simply not having one?'"
+  },
+  "ii": {
+    "verdict": "PRESERVED",
+    "justification": "The definition conditions on 'an assumed or simulated error level for the would-be tool,' matching the notes' 'it takes the true planted count and corrupts it with the measured C0* error distribution ... this tests an error level' and 'log-count RMSE ≲ 0.3.'"
+  },
+  "iii": {
+    "verdict": "PRESERVED",
+    "justification": "The definition says the decision 'is made before any estimating tool is built,' matching the notes' 'The detector is SIMULATED, not run' and 'asks would an estimator this accurate suffice?'"
+  },
+  "iv": {
+    "verdict": "PRESERVED",
+    "justification": "The definition's 'If the assumed error stays under the ceiling the tool is worth building; past the ceiling it is not' matches the notes' 'Both estimators clear the bar' and 'past ~1.0 it becomes WORSE THAN NO ESTIMATOR.'"
+  },
+  "v": {
+    "verdict": "PASS",
+    "justification": "The definition introduces no benchmark, dataset, or metric specifics (no RMSE/Brier numbers, pools, or datasets) that are absent from the excerpts; its extra material ('Neyman–Pearson,' 'signal detection literature') is framework/discipline labeling, not benchmark/dataset/metric specifics."
+  },
+  "vi": {
+    "named_items": [
+      "Neyman–Pearson (method / authors Neyman and Pearson)",
+      "acceptance test (method)",
+      "signal detection literature / classical signal detection (discipline/field)"
+    ],
+    "not_in_notes": [
+      "Neyman–Pearson",
+      "acceptance test",
+      "signal detection literature / classical signal detection"
+    ]
+  }
+}

@@ -1,0 +1,5 @@
+- Mechanism: sets a hard cap (a "ration") on the number of times an agent may reopen/reread the same file during a run, expressed as a fixed integer (e.g., "three").
+- What's measured/scored: counts repeated file opens/rereads per run; a run that exceeds the cap is flagged/fails ("exceeding the cap"), while staying within it is a pass condition for that check.
+- Applies to: agentic coding-benchmark runs (e.g., codebase-navigation, file-navigation, onboarding suites) where an agent reads files from disk during task execution.
+- Constraint: once the cap is reached, further rereads that would help the agent finish are ignored/not permitted — the agent cannot fall back on unlimited disk access as free scratch space.
+- Constraint: enforcement is a configurable setting (a "cap") that can itself be changed, and changing it can alter which agents pass or fail, so cap changes must be distinguished from real capability regressions.

@@ -1,0 +1,6 @@
+- Mid-run, unannounced halving of the agent's remaining token/response budget, triggered at a specific point in the task (e.g., after reading, at file-open count, at drafting start).
+- Applies during an active agent task/benchmark run, mid-trace, without prior warning to the agent.
+- Agent's response to the cut is measured: whether it compresses/adapts its output cleanly versus continues at the same pace and gets cut off or truncates mid-sentence.
+- Scoring reads truncated/incomplete output as a failure outcome.
+- The budget cut is silent — the agent shows no visible reaction or behavioral adjustment upon the cut itself.
+- Must be distinguishable from ordinary stack-level nondeterminism (e.g., differing truncation points across otherwise identical runs) — the effect cannot be cleanly isolated without repeated sampling.

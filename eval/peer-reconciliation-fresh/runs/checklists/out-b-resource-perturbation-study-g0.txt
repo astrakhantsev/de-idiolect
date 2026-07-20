@@ -1,0 +1,6 @@
+- Mechanism: after an agent's first successful action/retrieval, the intervention changes the remaining resource allowance — either reducing (or in one variant increasing) the token budget, wall-clock allowance, or tool-call quota mid-task.
+- Setting/trigger: applies mid-task in agent evaluation runs, triggered specifically at or after the first successful tool action/retrieval (including "midway through" distractor-version tasks).
+- What is measured: verification trace length/order and tool-call (page-opening) behavior after the quota change, read by comparing high-performing vs. lower-performing (or stronger vs. weaker) agents' responses.
+- Scoring/outcome pattern: stronger/high-performing agents adapt by shortening or reordering verification traces while preserving task completion; weaker/lower-performing agents either keep initiating tools until forced termination or abandon required checks.
+- Constraint: a reduced quota does not necessarily eliminate inappropriate reuse of prior successful action sequences, even when redundant actions decrease.
+- Constraint: an increased quota can amplify existing errors rather than correct them, rather than uniformly improving performance.

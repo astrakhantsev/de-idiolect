@@ -1,0 +1,7 @@
+- Resubmit the same grader-scored output after only reflowing/reformatting line breaks or whitespace, with no content changes, to test grader consistency
+- Compare the verdict/score from the original submission against the verdict from the reformatted resubmission
+- Read the result as a "flip" when the verdict differs between the two otherwise-identical submissions
+- Applies to grader/scorer passes on QA or model-output answers, especially after a mid-run model change or when scorer inconsistency is suspected on long-form responses
+- Requires resubmitting through the same grader used originally
+- Constraint: only formatting/line-break/whitespace is altered between submissions — content must remain identical
+- Track the flip rate (e.g., number of flipped verdicts out of total resubmitted) as the output metric

@@ -1,0 +1,6 @@
+- Compares agent tool-call traces between two paired task versions that are identical except one contains added irrelevant/distractor context (policy excerpts, tickets, decoy URLs, or appended operational context).
+- Preserves the same required action/configuration change, verification/validator endpoint, and initial system state across both paired versions.
+- Measures changes in navigation/exploration behavior: number of additional pages opened, delay (in seconds) before the first valid tool call, percentage increase in exploratory tool calls, and percentage decrease in direct validation calls.
+- Applies specifically to paired benchmark tasks (e.g., account-management, service-configuration) where one variant is augmented with distractor context.
+- Outputs/traces from both paired variants are mixed into blinded grading pools for evaluation.
+- Reflects change in navigation breadth rather than final answer length.

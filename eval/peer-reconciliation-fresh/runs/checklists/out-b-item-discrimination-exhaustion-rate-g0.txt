@@ -1,0 +1,7 @@
+- Mechanism: a per-item "exhaustion" metric is computed after each evaluation round to identify tasks that have become universally solvable (saturated) by models, driving suite maintenance (retiring or replacing exhausted items).
+- Measurement/scoring: expressed as a score between 0 and 1 (e.g., rising from 0.18 to 0.41, or reaching 0.46), where higher values indicate greater exhaustion/saturation of an item or item set.
+- Computed at multiple granularities: overall across model releases, separately within each difficulty tier, and separately for clean vs. distractor-loaded task variants.
+- Setting/trigger: applied after each evaluation round as part of ongoing suite maintenance across successive model releases (used longitudinally, e.g., across four to six releases).
+- Constraint: items exceeding an exhaustion threshold are retained for longitudinal reporting but excluded from the primary ranking.
+- Constraint: exhaustion is concentrated in simple/basic tasks (entry-tier, retrieval/formatting, clean variants), remaining low for the highest-difficulty tier and distractor-loaded variants.
+- Effect/use: removing or replacing exhausted items increases rank stability across reruns, and rising exhaustion prompts targeted item replacement rather than wholesale suite removal.

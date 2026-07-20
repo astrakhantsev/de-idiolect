@@ -1,0 +1,6 @@
+- Computed per evaluation round (and separately within each task tier) by comparing solve rates or item status across successive model releases/reruns to identify items that have become universally solvable ("exhausted").
+- Produces a single numeric score between 0 and 1, read as the fraction/proportion of items exhausted (e.g., 0.18, 0.41, 0.46, below 0.20).
+- Applies during suite maintenance, triggered after each evaluation round, to decide which items to retain or drop from the task suite.
+- Items scoring above an exhaustion threshold are retained for longitudinal reporting but excluded from the primary ranking.
+- Removing exhausted items increases rank stability across weekly reruns.
+- The measure is tier-sensitive: it concentrates at higher values for entry-tier tasks and lower values for the highest tier, reflecting where maintenance pressure (mostly simple retrieval/formatting tasks) is concentrated.

@@ -1,0 +1,7 @@
+- Applies when a coding agent is mid-trajectory and receives a follow-up instruction that redirects or withdraws the originally requested change, interrupting an in-progress task.
+- The agent must switch from executing the original request to correctly implementing the revised/updated instruction.
+- Success is judged by an objective checker run after every executable action, which marks the earliest point at which the revised task is fully satisfied.
+- Scored as a proportion/rate (0–1) of interrupted trajectories in which the agent successfully completes the revised task.
+- Common failure mode: the agent retains a correct implementation of the original request and appends an incomplete revision instead of fully switching.
+- The rate declines the more actions the agent has already taken before the interruption arrives (e.g., after an initial patch has been written), and drops when the reversal instruction is delivered in a non-English language.
+- Stale diffs (leftover artifacts of the original, superseded request) account for most cases of unsuccessful switching.

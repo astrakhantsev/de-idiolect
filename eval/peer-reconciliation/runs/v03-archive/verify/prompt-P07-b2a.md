@@ -1,0 +1,23 @@
+DEFINITION of a concept:
+
+A post-action checking procedure applied after each tool or service call and relevant table revision. It takes the agent’s most recently stated plan, including rules, sequence, priorities, and dependencies, together with the next action actually taken. It determines whether that action follows the stated plan. When they differ, it flags the deviation and can identify the first point at which the trajectory stopped matching the plan. It applies continuously during a task, especially when the agent changes search scope, bypasses a source, changes stages of work, or acts before completing a stated prerequisite.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used.
+
+For EACH excerpt independently, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by DEFINITION?
+
+- "instantiates" — the usage is consistent with the definition and exemplifies it. Requires a verbatim supporting quote from the excerpt.
+- "contradicts" — the usage is incompatible with the definition (the referent has a property the definition excludes, or lacks one it requires). Requires a verbatim quote of the incompatible fragment.
+- "insufficient" — this excerpt alone does not contain enough to decide.
+
+Judge each excerpt on its own text only. Do not let other excerpts or the term's surface influence you.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "verdict": "instantiates|contradicts|insufficient", "quote": "verbatim quote (empty string only for insufficient)"}, ...]
+
+EXCERPTS:
+
+1. Embarrassing one. We do a monthly ⟦TERM⟧ against a frozen 200-task suite to catch silent regressions whenever the provider ships a model update. Last cycle the scores came back flat, actually slightly up, and we almost shipped a "no drift detected" report to the team.
+2. Recovery time was fine, under two minutes on average, but the claim survival tally on the pothole runs was even worse than the clean baseline — the recovery process itself seems to generate a burst of new unverified notes that don't get reconciled. Also worth flagging for the ⟦TERM⟧ crowd: we included this claim survival tally metric in this month's frozen-suite comparison for the first time, and it dropped four points versus last month with no fault injection at all, same model version. Either the audit caught something real about a silent update, or our tally scorer has a bug.
+3. Recovery times looked great, under 90 seconds each, until someone noticed the second half of the batch finished suspiciously fast and we traced it to a ghost pass — the harness had a stale cache entry from Tuesday's run that matched on task hash and just returned the old "recovered" result without executing anything. That threw our ⟦TERM⟧ numbers for a loop too, since this suite doubles as our frozen monthly baseline. We had to rerun the whole thing with caching disabled before we could trust the comparison against last month's frozen scores.
+4. Closing out this month's ⟦TERM⟧ and want to record what actually moved versus what was measurement noise, because half of what looked like drift turned out to be something else entirely. The frozen suite came back four points down against baseline, which sounds like real capability drift after the provider's update, but two of those points evaporated once we found a ghost pass in the caching layer — a chunk of the "failing" tasks had actually inherited a stale cached failure from before we patched the tool schema last week.

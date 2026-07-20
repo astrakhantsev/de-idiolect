@@ -1,0 +1,45 @@
+{
+ "pair_key": "3f98f48b644fa612",
+ "pair_id": "P09",
+ "terms": {
+  "a": "spend silhouette",
+  "b": "line-anchored rubric"
+ },
+ "proposed_relation": "insufficientEvidence",
+ "evidence": {
+  "a2b": {
+   "n": 6,
+   "k": 0,
+   "c": 5,
+   "u": 1,
+   "agg": "fails",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 5,
+   "k": 0,
+   "c": 3,
+   "u": 2,
+   "agg": "abstain",
+   "quote_downgrades": []
+  }
+ },
+ "adjudicated_relation": "noMatch",
+ "status": "adjudicated",
+ "adjudicator": "synthetic-key-8477e275",
+ "correct": false,
+ "provenance": {
+  "gen_a": "claude-sonnet",
+  "gen_b": "codex-gpt-5.6-terra",
+  "def_a": "claude-opus",
+  "def_b": "codex-gpt-5.6-terra",
+  "verify_a2b": "claude-opus",
+  "verify_b2a": "codex-gpt-5.6-terra"
+ },
+ "derived_from": [],
+ "earliest_found_in_search": {
+  "synthetic": true,
+  "note": "no priority inference licensed"
+ },
+ "version_id": "877703f05ab867d833543d2fff51c32dee3f6dd399125ebfa081d9bb82bede61"
+}

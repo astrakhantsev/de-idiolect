@@ -1,0 +1,40 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.4nKpdlkAP2"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.gB9UWSg8oM
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7b03-25b8-78b1-8c39-4d8d1e289ff6
+--------
+user
+DEFINITION of a concept:
+
+An experimental information condition in which selected record fields are withheld from agents while a supplied repository remains available to provide them. It applies during a task requiring those fields or a related answer. The condition lasts until an agent either requests the missing field from the repository or submits an answer. It asserts that agents may respond by seeking direct evidence from the repository or by inferring the withheld value from neighboring records or contextual cues; outcomes can be reported as the share taking each action.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used.
+
+For EACH excerpt independently, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by DEFINITION?
+
+- "instantiates" — the usage is consistent with the definition and exemplifies it. Requires a verbatim supporting quote from the excerpt.
+- "contradicts" — the usage is incompatible with the definition (the referent has a property the definition excludes, or lacks one it requires). Requires a verbatim quote of the incompatible fragment.
+- "insufficient" — this excerpt alone does not contain enough to decide.
+
+Judge each excerpt on its own text only. Do not let other excerpts or the term's surface influence you.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "verdict": "instantiates|contradicts|insufficient", "quote": "verbatim quote (empty string only for insufficient)"}, ...]
+
+EXCERPTS:
+
+1. Started running a ⟦TERM⟧ against our deployment agent this month and honestly it's been humbling. We strip the AWS_SECRET_KEY from the task config and just watch.
+2. So menu pinning is necessary but nowhere close to sufficient if your harness also randomizes result ordering somewhere downstream — you can pin the task and still get a flaky number from a completely different randomization source nobody thought to freeze. Also ran a ⟦TERM⟧ on the pinned suite for the first time and it was interesting how the fixed seeds made the agent's fabrication behavior consistent — same seed, same missing Stripe key, same fabricated placeholder value every single time, down to the fake account number format. Kind of useful actually, because now we can diff exactly what changes when we patch the prompt, instead of chasing a moving target.
+3. High accuracy, ugly tally, and when we changed the task slightly the accuracy collapsed because the "right answer" was luck riding on top of broken notes. Combined this with a ⟦TERM⟧ on the same suite and it's a decent diagnostic pair. An agent that fabricates a credential instead of asking tends to also have a lower claim survival tally overall, at least in our data — six agents tested, the two worst fabricators were also the two worst on note survival.
+4. Biggest offender was shuffle fragility on the multi-document synthesis agent — 35-point swing just from reordering three equivalent retrieval results, no change in information content whatsoever. Second biggest was a ⟦TERM⟧ we'd been running informally for months without realizing how bad it was: the agent fabricated a database connection string in 7 of 10 trials instead of stopping to ask, and we'd been scoring those as passes because the fabricated value happened to work against our test database. Claim survival tally across the same suite averaged 68%, worse on the longer tasks as usual, and dropping further specifically on the runs where shuffled ordering was in play — reordering doesn't just hurt the final answer, it seems to degrade the whole reasoning trail's internal consistency.
+codex
+[{"excerpt":1,"verdict":"insufficient","quote":""},{"excerpt":2,"verdict":"insufficient","quote":""},{"excerpt":3,"verdict":"insufficient","quote":""},{"excerpt":4,"verdict":"insufficient","quote":""}]
+tokens used
+3,073

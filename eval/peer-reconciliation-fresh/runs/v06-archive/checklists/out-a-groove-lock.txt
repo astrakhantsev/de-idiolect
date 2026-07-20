@@ -1,0 +1,6 @@
+- Mechanism: the agent carries over a pattern/strategy that worked on its immediately preceding task(s) and misapplies it to a new task with different requirements, without any change in model weights or capability.
+- Setting/trigger: occurs mid-session, after the agent has just completed one or more similar tasks, when the next task in the same session actually needs a different approach.
+- Diagnostic test: clearing/resetting the session history and rerunning the same task causes the erroneous behavior to disappear (or the agent picks correctly on a cold retry).
+- Scope: applies across varied task types (merge strategy choice, grep-then-guess search, file editing vs. relocation, summarizing vs. direct-answering), not one specific domain.
+- Constraint: it is not a capability failure — same weights, same prompt — so it must be distinguished from genuine task-competence errors.
+- What is produced/read: identified by comparing the task the agent just finished against the task it failed, and confirmed via a before/after reset comparison (fails before reset, succeeds after).

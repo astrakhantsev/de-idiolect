@@ -1,0 +1,6 @@
+- Rewrite the same underlying task/item into two phrasing variants (e.g., casual vs. formal, or terser/more casual vs. original) while keeping the ask identical.
+- Run both variants (original and reworded twin) through the same evaluation and compare outcomes on the identical underlying task.
+- Measure the average point gap in score between the original phrasing and the reworded phrasing.
+- Applies to existing test/eval suites or item tiers, including ones already in use or newly generated (e.g., a generated "hard" tier), to check whether wording rather than task difficulty is driving results.
+- A smaller average gap is read as reassuring (items are measuring substance, not surface formatting); a larger gap indicates wording is compounding/confounding the measured difficulty.
+- The comparison is item-paired: each original item is matched to its own reworded twin, not compared against unrelated items.

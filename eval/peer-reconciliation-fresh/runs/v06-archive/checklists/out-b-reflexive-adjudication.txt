@@ -1,0 +1,6 @@
+- Blinded grading procedure: anonymized final patches and rationales from all systems in a round are pooled and graders assess agreement/grading on these mixed, anonymized outputs.
+- Measures/produces a self-output agreement rate: the evaluated agent's grading agreement with external graders on its own successful patches versus on matched peer patches, scored as a percentage-point gap (e.g., 6.4 points, 7.9 vs 3.2 points).
+- Applies when an evaluated agent's own outputs are blindly mixed into a grading pool alongside peer outputs from the same round/task, including under distractor-context conditions.
+- The deficit persists after excluding outputs with identifying filenames or unusually long explanations, and after removing rationale text entirely (graders seeing only final actions/validators).
+- The effect is sensitive to distinctive tool-log phrasing reuse in rationales, with the gap larger under distractor context (7.9 points) than without (3.2 points).
+- Paraphrasing examples to reduce copied phrasing does not eliminate the effect, indicating it is not solely attributable to surface wording.

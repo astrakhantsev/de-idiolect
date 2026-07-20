@@ -1,0 +1,6 @@
+- Mechanism: after the first successful retrieval, the intervention alters the agent's remaining token budget or tool-call quota, sometimes specifically lowering the tool-call quota partway through a task.
+- Applies during multi-step agentic tasks involving chained browser/tool actions (e.g., web retrieval tasks), triggered once quotas are reduced mid-session.
+- Measured/produced output: verification trace length (shorter vs. longer) and tool-initiation behavior (continuing to call tools until forced termination vs. stopping early).
+- Scoring/reading: compares high-performing vs. lower-performing agents by whether they shorten verification traces as quotas fall, or keep initiating tools regardless.
+- Constraint: does not fully eliminate inappropriate reuse of recently successful action sequences, even when redundant page openings decrease.
+- Constraint: effect is on tool/budget-quota dynamics specifically, distinct from ordinary billing performance, which is largely unaffected.

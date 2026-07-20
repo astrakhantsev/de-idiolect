@@ -1,0 +1,6 @@
+- Insert a fixed number of previously verified known-answer cases (e.g., eight per batch, or twice per session) into the evaluation stream, placed without positional regularity or with answers absent from the briefing.
+- Evaluate/score the ⟦TERM⟧ cases before aggregate metrics are retained or computed, checking whether judges/agents return the correct (supported) judgment on these known cases.
+- Applies within batches or multi-task sessions of agent/judge evaluation work (e.g., support-ticket resolution, configuration/billing/incident-response sessions).
+- Trigger a halt of the batch or session when known cases receive unsupported negative judgments or an incorrect result is accepted as compliant.
+- Exclude halted batches/sessions from final reported results and aggregate metrics.
+- Resetting session history between items reduces the contamination pattern that the halt rule is designed to catch.

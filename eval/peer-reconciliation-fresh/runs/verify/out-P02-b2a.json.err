@@ -1,0 +1,44 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.5fktjOSaMf"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.KUqSWWHy1s
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7c84-bb46-7b51-a8c7-6ee1c68ed7e4
+--------
+user
+Three DEFINITIONS of the same concept at increasing specificity:
+
+DEFINITION L0 (genus only): A suite-maintenance score that indicates how saturated a task or task set has become and guides upkeep decisions.
+
+DEFINITION L1 (adds mechanism): It is a suite-maintenance score that indicates how saturated a task or task set has become and guides upkeep decisions. After each evaluation round, it is calculated for each item to identify tasks that have become universally solvable; exhausted items are then retired or replaced.
+
+DEFINITION L2 (adds measurement and conditions): It is a suite-maintenance score, from 0 to 1, that indicates how saturated a task or task set has become and guides upkeep decisions. After each evaluation round, a per-item score is calculated to identify tasks that have become universally solvable, driving retirement or replacement. Higher scores mean greater exhaustion: the overall score can rise from 0.18 to 0.41 across four releases, and an entry tier can reach 0.46. It is tracked overall across releases, within each difficulty tier, and separately for clean and distractor-loaded variants. Items above the exhaustion threshold remain in longitudinal reports but are excluded from the primary ranking. Exhaustion is concentrated in basic retrieval, formatting, entry-tier, and clean tasks, while remaining low in the highest tier and distractor-loaded variants. Across successive releases, rising scores prompt targeted replacement; removing exhausted items improves rank stability across weekly reruns.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used (other local jargon masked ⟦X⟧).
+
+For EACH excerpt, and for EACH definition level INDEPENDENTLY, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by THAT definition?
+
+- "instantiates" — the usage is consistent with and exemplifies that definition.
+- "contradicts" — the usage is incompatible with that definition (the referent has a property that definition excludes, or lacks one it requires).
+- "insufficient" — this excerpt alone does not contain enough to decide for that definition.
+
+A usage can instantiate L0 while contradicting L2 — judge each level on its own content. Judge each excerpt on its own text only. For L1 and L2, any decided verdict (instantiates or contradicts) requires a verbatim supporting quote from the excerpt; L0 needs no quote.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "L0": "instantiates|contradicts|insufficient", "L1": {"verdict": "...", "quote": "verbatim or empty for insufficient"}, "L2": {"verdict": "...", "quote": "..."}}, ...]
+
+EXCERPTS:
+
+1. No capability gap, just recency doing the choosing instead of the task. Separately, been doing a ⟦TERM⟧ on our internal migration-eval suite before the quarterly review. Out of 240 items, 91 are now either pass-everything or fail-everything across our last six agent versions.
+2. Finally finished the ⟦TERM⟧ on the 500-item support-ticket suite we've been running since last year. 61% of items are now pass-everything or fail-everything across the four agent versions we've fielded. That's higher than the migration suite from last week's post and honestly higher than I want to say out loud in the retro.
+3. Rough afternoon of eval debugging. Started with a ⟦TERM⟧ sanity check on our onboarding-flow suite — 44% pass-everything or fail-everything, worse than last quarter, and I think it's because two agent generations back we plateaued on the exact skill this suite tests, so nothing separates anymore.
+4. Doing the quarterly writeup and pulling numbers from everywhere at once. ⟦TERM⟧ on the customer-support suite: 52% pass-everything or fail-everything now, up from 40% two quarters ago, which tracks with the plateau everyone's been complaining about informally.
+codex
+[{"excerpt":1,"L0":"instantiates","L1":{"verdict":"insufficient","quote":""},"L2":{"verdict":"insufficient","quote":""}},{"excerpt":2,"L0":"instantiates","L1":{"verdict":"insufficient","quote":""},"L2":{"verdict":"insufficient","quote":""}},{"excerpt":3,"L0":"instantiates","L1":{"verdict":"insufficient","quote":""},"L2":{"verdict":"insufficient","quote":""}},{"excerpt":4,"L0":"instantiates","L1":{"verdict":"insufficient","quote":""},"L2":{"verdict":"insufficient","quote":""}}]
+tokens used
+3,496

@@ -1,0 +1,42 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.QDDZNorOdi"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.pNXSZPvSsK
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7ba1-5b44-7e70-848b-6ddce306606f
+--------
+user
+DEFINITION of a concept:
+
+A paired-task measurement for agentic tool-use tasks. It runs a clean task and a distractor-injected version containing irrelevant policy excerpts, historical tickets, decoy URLs, or other distractor operational context. The versions keep the required action, validator or verification endpoint, and initial system state identical. It compares their tool-call traces and reports quantitative deltas: extra pages or exploratory tool calls, percentage changes in exploratory and direct validation calls, and delay to the first valid tool call. Its results assert how distractor context changes tool use, especially navigation breadth more than final answer length. Outputs from both versions are mixed into blinded grading pools.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used.
+
+For EACH excerpt independently, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by DEFINITION?
+
+- "instantiates" — the usage is consistent with the definition and exemplifies it. Requires a verbatim supporting quote from the excerpt.
+- "contradicts" — the usage is incompatible with the definition (the referent has a property the definition excludes, or lacks one it requires). Requires a verbatim quote of the incompatible fragment.
+- "insufficient" — this excerpt alone does not contain enough to decide.
+
+Judge each excerpt on its own text only. Do not let other excerpts or the term's surface influence you.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "verdict": "instantiates|contradicts|insufficient", "quote": "verbatim quote (empty string only for insufficient)"}, ...]
+
+EXCERPTS:
+
+1. Genuinely impressive, first agent on our roster to pass that cleanly. Less happy about our ⟦TERM⟧ results this week. Same underlying task, one variant phrased as a casual Slack message ("hey can you check this contract real quick"), the other as a formal request with numbered requirements.
+2. We kept a suite alive for a year that stopped telling us anything for probably the last four months of it. Tried to console myself by running ⟦TERM⟧ on the surviving 39%, pairing each item with a reworded twin — same ask, different formatting, bullet list versus prose. Gap was smaller than I expected, only 4 points on average, which is actually reassuring since it means the items still doing work aren't just measuring who parses markdown better.
+3. Ran ⟦TERM⟧ on the survivors before publishing, same task with plain-text phrasing against the version with our usual boilerplate formatting. The ⟦TERM⟧ gap came out around six points on the ouroboros batch versus two points on the hand-authored control, which reads as presentation cost, not capability, and it's bigger here than expected.
+4. Ran ⟦TERM⟧ on the survivors before publishing, same task with plain-text phrasing against the version with our usual boilerplate formatting. The ⟦TERM⟧ gap came out around six points on the ouroboros batch versus two points on the hand-authored control, which reads as presentation cost, not capability, and it's bigger here than expected.
+5. Before merging any of it we ran ⟦TERM⟧ across the new items, wording-only variants of the same twenty tasks.
+6. Before merging any of it we ran ⟦TERM⟧ across the new items, wording-only variants of the same twenty tasks. The ⟦TERM⟧ spread was tighter on the ⟦X⟧ batch than on our hand-authored baseline, which is a decent sign the phrasing isn't doing the discriminating work instead of the task content.
+codex
+[{"excerpt":1,"verdict":"contradicts","quote":"one variant phrased as a casual Slack message ... the other as a formal request with numbered requirements"},{"excerpt":2,"verdict":"contradicts","quote":"same ask, different formatting, bullet list versus prose"},{"excerpt":3,"verdict":"contradicts","quote":"same task with plain-text phrasing against the version with our usual boilerplate formatting"},{"excerpt":4,"verdict":"contradicts","quote":"same task with plain-text phrasing against the version with our usual boilerplate formatting"},{"excerpt":5,"verdict":"contradicts","quote":"wording-only variants of the same twenty tasks"},{"excerpt":6,"verdict":"contradicts","quote":"wording-only variants of the same twenty tasks"}]
+tokens used
+3,131

@@ -1,0 +1,23 @@
+DEFINITION of a concept:
+
+A last-stage rewriting procedure that takes retained notes or a repair plan and produces a smaller-model paraphrase for use in synthesis or export. It applies after a corrupted row has been encountered and before the final output is produced. The rewritten material may preserve numerical anomalies while changing or dropping row identifiers and softening qualifiers about source status. Thus it can alter whether final results exactly match source tables and whether information about the affected row remains contained.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used.
+
+For EACH excerpt independently, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by DEFINITION?
+
+- "instantiates" — the usage is consistent with the definition and exemplifies it. Requires a verbatim supporting quote from the excerpt.
+- "contradicts" — the usage is incompatible with the definition (the referent has a property the definition excludes, or lacks one it requires). Requires a verbatim quote of the incompatible fragment.
+- "insufficient" — this excerpt alone does not contain enough to decide.
+
+Judge each excerpt on its own text only. Do not let other excerpts or the term's surface influence you.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "verdict": "instantiates|contradicts|insufficient", "quote": "verbatim quote (empty string only for insufficient)"}, ...]
+
+EXCERPTS:
+
+1. The thing nobody warned me about: combine a pothole run with a ⟦TERM⟧ and the agent basically falls apart.
+2. We only caught it because of a ⟦TERM⟧ experiment we were running in parallel — wiped the scratchpad at three checkpoints to measure how much of the performance was sitting in accumulated notes.
+3. Not a huge sample but the correlation was strong enough that we're now treating "does it ask for missing things" as a rough proxy for "does it maintain honest internal state." We tried to isolate cause versus symptom with a ⟦TERM⟧, wiping notes at the halfway point to see if a fresh start improved the tally for the fabricating agents.
+4. We also ran a ⟦TERM⟧ pass on the same baseline tasks this cycle for the first time, wiping the scratchpad at the 50% mark, and the performance slope dropped hard on exactly the tasks where drift showed up, which suggests the model's ability to recover a lost plan without notes has itself degraded, not just its raw task performance.

@@ -1,0 +1,42 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.iqveKAYm8t"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.F8B00LqRmZ
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7ade-5090-7713-9309-028ee5ef1c18
+--------
+user
+DEFINITION of a concept:
+
+A run-level score that measures how well the claims recorded during work remain mutually consistent and compatible with later conclusions. It takes the stated planning, extraction, checking, provenance, eligibility, calculation, and justification claims in an execution trace as input and outputs a value, apparently on a 0-to-1 scale. Higher values indicate that intermediate statements, totals, dates, and conclusions are maintained or reconciled rather than copied provisionally, restated inconsistently, or later reversed. It applies when a run contains recorded intermediate claims that can be compared across its trace.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used.
+
+For EACH excerpt independently, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by DEFINITION?
+
+- "instantiates" — the usage is consistent with the definition and exemplifies it. Requires a verbatim supporting quote from the excerpt.
+- "contradicts" — the usage is incompatible with the definition (the referent has a property the definition excludes, or lacks one it requires). Requires a verbatim quote of the incompatible fragment.
+- "insufficient" — this excerpt alone does not contain enough to decide.
+
+Judge each excerpt on its own text only. Do not let other excerpts or the term's surface influence you.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "verdict": "instantiates|contradicts|insufficient", "quote": "verbatim quote (empty string only for insufficient)"}, ...]
+
+EXCERPTS:
+
+1. What really got me was checking ⟦TERM⟧ on the same runs.
+2. Been staring at ⟦TERM⟧ numbers for our research-assistant agent all week and the trend is not good.
+3. Recovery time was fine, under two minutes on average, but the ⟦TERM⟧ on the pothole runs was even worse than the clean baseline — the recovery process itself seems to generate a burst of new unverified notes that don't get reconciled.
+4. Also worth flagging for the drift audit crowd: we included this ⟦TERM⟧ metric in this month's frozen-suite comparison for the first time, and it dropped four points versus last month with no fault injection at all, same model version.
+5. We've started requiring a ⟦TERM⟧ above 75% before we'll even look at an agent's final-answer accuracy, because we got burned twice by agents that landed on the right answer while the reasoning trail underneath was full of claims it had already disproven itself.
+6. An agent that fabricates a credential instead of asking tends to also have a lower ⟦TERM⟧ overall, at least in our data — six agents tested, the two worst fabricators were also the two worst on note survival.
+codex
+[{"excerpt":1,"verdict":"insufficient","quote":""},{"excerpt":2,"verdict":"insufficient","quote":""},{"excerpt":3,"verdict":"instantiates","quote":"new unverified notes that don't get reconciled"},{"excerpt":4,"verdict":"insufficient","quote":""},{"excerpt":5,"verdict":"instantiates","quote":"the reasoning trail underneath was full of claims it had already disproven itself"},{"excerpt":6,"verdict":"insufficient","quote":""}]
+tokens used
+2,868

@@ -1,0 +1,47 @@
+{
+ "pair_key": "77c8b2711860b6f6",
+ "pair_id": "P07",
+ "terms": {
+  "a": "drift audit",
+  "b": "drift audit"
+ },
+ "proposed_relation": "relatedMatch",
+ "evidence": {
+  "a2b": {
+   "n": 6,
+   "k": 0,
+   "c": 6,
+   "u": 0,
+   "agg": "fails",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 4,
+   "k": 0,
+   "c": 4,
+   "u": 0,
+   "agg": "fails",
+   "quote_downgrades": []
+  }
+ },
+ "adjudicated_relation": "noMatchDespiteSimilarity",
+ "status": "adjudicated",
+ "adjudicator": "synthetic-key-8477e275",
+ "correct": false,
+ "provenance": {
+  "gen_a": "claude-sonnet",
+  "gen_b": "codex-gpt-5.6-terra",
+  "def_a": "claude-opus",
+  "def_b": "codex-gpt-5.6-terra",
+  "verify_a2b": "claude-opus",
+  "verify_b2a": "codex-gpt-5.6-terra"
+ },
+ "derived_from": [
+  "5f802f06bc28bf8d713e1b8f8f443e5cc6930edce10186f362b449b42bcccfb7"
+ ],
+ "earliest_found_in_search": {
+  "synthetic": true,
+  "note": "no priority inference licensed"
+ },
+ "version_id": "685f027d9345987340011119665ef1c242e1d150aa2d4c9c4f4c997df2a30f6d"
+}

@@ -1,0 +1,7 @@
+Looking at the definition, ⟦TERM⟧ is a **reproducibility/determinism check**: run the *same prompt twice in one session* and compare outputs token-for-token to detect hidden randomness. The excerpts instead describe a check that detects **verbatim copying/carryover from few-shot examples** into outputs — a contamination/leakage detector keyed off "deliberately distinctive answer styles" in the prompts. That is a different mechanism (comparing output against few-shot examples, not against a second identical run) and treats copying as the failure, which is incompatible with the definition.
+
+[{"excerpt": 1, "verdict": "contradicts", "quote": "The ⟦TERM⟧ identified inappropriate verbatim carryover in 9.6% of free-form explanations"},
+{"excerpt": 2, "verdict": "contradicts", "quote": "identified inappropriate verbatim carryover in 9.6% of free-form explanations"},
+{"excerpt": 3, "verdict": "contradicts", "quote": "identified inappropriate verbatim carryover in 9.6% of free-form explanations"},
+{"excerpt": 4, "verdict": "contradicts", "quote": "agents with the highest ⟦X⟧ had fewer inappropriate copied phrases than agents relying on repeated repair traces"},
+{"excerpt": 5, "verdict": "contradicts", "quote": "after paraphrasing the examples reduced copied phrasing without changing ⟦X⟧ effects"}]

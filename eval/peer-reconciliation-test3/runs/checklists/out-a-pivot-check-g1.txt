@@ -1,0 +1,7 @@
+- Mechanism: mid-task pivot occurs when the user issues a changed/updated instruction partway through (e.g., at turn 4), requiring the agent to abandon its in-progress work on the original request and switch to the new one.
+- Mechanism: scoring requires checking the final answer for leftover/stale content from the abandoned branch (e.g., discarded CSV work bleeding into a requested JSON summary).
+- What is measured: a binary pass/fail (or percentage) on whether the final answer is clean of stale/abandoned-branch content — i.e., whether the pivot was fully executed with no scar tissue from the dropped task.
+- Scoring method: verification is done by snapshotting the full working state at the moment of reversal and programmatically checking that nothing from the stale branch made it into the final answer (not by token/cost accounting, and not reliably by manual transcript skimming, which produced false passes).
+- Setting/trigger: applies specifically to agent trials involving a mid-task instruction change (a "pivot"), as distinct from trials with no such change.
+- Constraint: the metric evaluates only the endpoint/final answer, not the path — it does not account for wasted work or discarded tokens spent before the pivot was completed.
+- Constraint: batched/parallel trial execution (e.g., shared temp directories across workers) can contaminate results with cross-trial artifacts, so infrastructure isolation must be verified before trusting the score.

@@ -1,0 +1,37 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.ywe0IL015S"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.tGmFtqE8OY
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7b2e-c472-7bc2-acea-bef434f5f7fb
+--------
+user
+DEFINITION of a concept:
+
+Both communities run an intervention that deliberately alters an agent's retained intermediate notes or scratchpad at a specific point mid-task, then measure how downstream outcomes (recovery time, fabrication rate, table accuracy, containment) change, in order to isolate how much of the agent's performance depends on the content of the retained notes versus other factors such as base model behavior or retrieval count.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used.
+
+For EACH excerpt independently, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by DEFINITION?
+
+- "instantiates" — the usage is consistent with the definition and exemplifies it. Requires a verbatim supporting quote from the excerpt.
+- "contradicts" — the usage is incompatible with the definition (the referent has a property the definition excludes, or lacks one it requires). Requires a verbatim quote of the incompatible fragment.
+- "insufficient" — this excerpt alone does not contain enough to decide.
+
+Judge each excerpt on its own text only. Do not let other excerpts or the term's surface influence you.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "verdict": "instantiates|contradicts|insufficient", "quote": "verbatim quote (empty string only for insufficient)"}, ...]
+
+EXCERPTS:
+
+1. We also ran a ⟦TERM⟧ pass on the same baseline tasks this cycle for the first time, wiping the scratchpad at the 50% mark, and the performance slope dropped hard on exactly the tasks where drift showed up, which suggests the model's ability to recover a lost plan without notes has itself degraded, not just its raw task performance.
+codex
+[{"excerpt":1,"verdict":"instantiates","quote":"wiping the scratchpad at the 50% mark"}]
+tokens used
+2,450

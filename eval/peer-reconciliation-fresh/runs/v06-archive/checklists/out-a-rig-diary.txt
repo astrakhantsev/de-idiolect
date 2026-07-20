@@ -1,0 +1,6 @@
+- Maintains a chronological, appended log of individual entries recording specific configuration/parameter changes (e.g., artifact-naming scheme, cap value, timeout, retry-count, prompt-template edits) as they happen.
+- Is searched/scrolled back through to find a specific prior entry when investigating a score drop or anomaly.
+- Each entry records what changed and (implicitly) when, so a change can be matched against a later timing discrepancy (e.g., a metric dip or score drop).
+- Produces a record used to attribute a score change (e.g., a four-point drop) to a specific prior change, distinguishing the true cause from a plausible but incorrect one (e.g., model update vs. timeout bump).
+- Is kept open in a side window continuously (e.g., over the course of a week) for ongoing monitoring, not just consulted once.
+- Used to catch/prevent false alarms by cross-checking timing of anomalies against logged changes before escalating or misattributing a cause.

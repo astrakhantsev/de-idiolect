@@ -1,0 +1,20 @@
+{
+ "a": {
+  "garble replay": "ok",
+  "quit sense": "ok",
+  "example strip": "ok",
+  "brain swap": "ok",
+  "double mark": "ok",
+  "spray test": "ok",
+  "budget bleed": "ok"
+ },
+ "b": {
+  "corrupted-observation recovery index": "ok",
+  "post-completion action count": "ok",
+  "prompt scaffolding dependence measure": "ok",
+  "component substitution elasticity": "ok",
+  "grader temporal stability coefficient": "ok",
+  "reference trajectory alignment score": "ok",
+  "cross-lingual instruction fidelity": "ok"
+ }
+}

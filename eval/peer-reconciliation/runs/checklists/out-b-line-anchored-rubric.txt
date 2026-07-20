@@ -1,0 +1,6 @@
+- Applies to the full transcript (not just the final response), scoring each judged decision against specific transcript lines.
+- Requires every scoring decision/credited criterion to point to (cite) the transcript line containing the supporting evidence.
+- Withholds credit for a claim, inference, or resolution when no transcript line shows the retrieved evidence or an explicit unresolved-field statement.
+- Applies at judge-scoring time, triggered whenever an answer, table, or completion output is being evaluated against source/requested-field criteria.
+- Produces a lower "apparent accuracy" score than unconstrained judging, measured as a drop in accepted outputs (e.g., percentage-point or percentage decrease) once untraceable items are excluded.
+- Is read/applied per output unit (per answer, per merged field, or per record) rather than as a single aggregate judgment.

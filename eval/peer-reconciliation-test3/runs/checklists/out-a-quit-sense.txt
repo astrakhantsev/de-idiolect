@@ -1,0 +1,6 @@
+- Injects corrupted/garbled tool output (e.g., a broken schema-validation pass) mid-task to see whether the agent halts and questions it or continues on the corrupted foundation.
+- Also probes whether the agent stops exactly when a revised objective is achieved, rather than continuing extra unnecessary tool calls or verification passes after the task is already finished.
+- Scored as counts of misses/failures out of total steps or trials (e.g., 8 misses out of 30 steps), tracked as separate probe numbers rather than one unified score.
+- Applies to individual agent steps/trials within a task, specifically at points where a tool's output could be bad/corrupted or where an objective has just been met.
+- Distinguishes "abandoning bad outputs" (acting on bad results) from "detecting bad inputs," treating the former as the weaker capability.
+- Currently lacks a single unified scoring method combining the premature-stopping probe and the looping-past-completion probe into one coherent measure.

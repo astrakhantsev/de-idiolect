@@ -1,0 +1,647 @@
+{
+ "P01-a2b": {
+  "n": 4,
+  "encroached": true,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "02",
+    "idx": 8,
+    "text": "Permutation sensitivity collapse reduced end-to-end success from 68% in the fixed-order condition to 43% in the shuffled condition."
+   },
+   {
+    "doc": "06",
+    "idx": 8,
+    "text": "Permutation sensitivity collapse reduced correct duplicate detection from 76% to 49%, despite unchanged invoice content."
+   },
+   {
+    "doc": "08",
+    "idx": 6,
+    "text": "Permutation sensitivity collapse reduced full-task accuracy by 25 percentage points, primarily through different choices of which rule to treat as controlling."
+   },
+   {
+    "doc": "10",
+    "idx": 6,
+    "text": "Permutation sensitivity collapse lowered exact export success from 64% to 41%, with the largest losses among agents that committed to the first presented schema."
+   }
+  ],
+  "term": "permutation sensitivity collapse"
+ },
+ "P01-b2a": {
+  "n": 4,
+  "encroached": true,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "01",
+    "idx": 2,
+    "text": "Classic shuffle fragility \u2014 the model was anchoring on \"first result mentioned equals ground truth\" instead of actually reasoning about which ledger entry was current."
+   },
+   {
+    "doc": "04",
+    "idx": 4,
+    "text": "With the seed menu locked, the only thing varying between two \"identical\" runs was tool-result order, and we still saw shuffle fragility show up as a nine-point swing on the contract-review agent even with seeds pinned."
+   },
+   {
+    "doc": "07",
+    "idx": 5,
+    "text": "Last thing worth mentioning: we caught a shuffle fragility case purely from the spend silhouette looking wrong."
+   },
+   {
+    "doc": "10",
+    "idx": 1,
+    "text": "Biggest offender was shuffle fragility on the multi-document synthesis agent \u2014 35-point swing just from reordering three equivalent retrieval results, no change in information content whatsoever."
+   }
+  ],
+  "term": "shuffle fragility"
+ },
+ "P02-a2b": {
+  "n": 6,
+  "encroached": false,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "01",
+    "idx": 3,
+    "text": "Intermediate assertion persistence ratio was computed over all scratchpad claims retained in the execution trace."
+   },
+   {
+    "doc": "01",
+    "idx": 4,
+    "text": "The median intermediate assertion persistence ratio was 0.74, with lower values concentrated in runs that copied provisional dates into the final table."
+   },
+   {
+    "doc": "03",
+    "idx": 5,
+    "text": "Intermediate assertion persistence ratio was calculated from planning notes, extraction notes, and draft justifications."
+   },
+   {
+    "doc": "03",
+    "idx": 6,
+    "text": "The intermediate assertion persistence ratio averaged 0.69 in successful retrieval-first runs and 0.38 in inference-first runs."
+   },
+   {
+    "doc": "06",
+    "idx": 1,
+    "text": "Intermediate assertion persistence ratio was estimated over all stated subtotal checks and provenance notes."
+   },
+   {
+    "doc": "06",
+    "idx": 2,
+    "text": "The intermediate assertion persistence ratio was 0.77 for runs that maintained a single reconciliation table, compared with 0.46 for runs that restated totals in prose."
+   }
+  ],
+  "term": "intermediate assertion persistence ratio"
+ },
+ "P02-b2a": {
+  "n": 6,
+  "encroached": false,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "01",
+    "idx": 4,
+    "text": "What really got me was checking claim survival tally on the same runs."
+   },
+   {
+    "doc": "05",
+    "idx": 0,
+    "text": "Been staring at claim survival tally numbers for our research-assistant agent all week and the trend is not good."
+   },
+   {
+    "doc": "05",
+    "idx": 5,
+    "text": "Recovery time was fine, under two minutes on average, but the claim survival tally on the pothole runs was even worse than the clean baseline \u2014 the recovery process itself seems to generate a burst of new unverified notes that don't get reconciled."
+   },
+   {
+    "doc": "05",
+    "idx": 6,
+    "text": "Also worth flagging for the drift audit crowd: we included this claim survival tally metric in this month's frozen-suite comparison for the first time, and it dropped four points versus last month with no fault injection at all, same model version."
+   },
+   {
+    "doc": "08",
+    "idx": 1,
+    "text": "We've started requiring a claim survival tally above 75% before we'll even look at an agent's final-answer accuracy, because we got burned twice by agents that landed on the right answer while the reasoning trail underneath was full of claims it had already disproven itself."
+   },
+   {
+    "doc": "08",
+    "idx": 4,
+    "text": "An agent that fabricates a credential instead of asking tends to also have a lower claim survival tally overall, at least in our data \u2014 six agents tested, the two worst fabricators were also the two worst on note survival."
+   }
+  ],
+  "term": "claim survival tally"
+ },
+ "P03-a2b": {
+  "n": 6,
+  "encroached": false,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "03",
+    "idx": 8,
+    "text": "Instrumentation latency steering shifted query selection toward the uninstrumented archive, even when that archive contained fewer relevant fields."
+   },
+   {
+    "doc": "03",
+    "idx": 9,
+    "text": "The magnitude of instrumentation latency steering was largest for agents using short tool-selection horizons, where a 900 ms delay changed the preferred first query in 27% of paired runs."
+   },
+   {
+    "doc": "04",
+    "idx": 6,
+    "text": "Instrumentation latency steering reduced parser use by 19% and increased reliance on manual arithmetic."
+   },
+   {
+    "doc": "05",
+    "idx": 1,
+    "text": "Instrumentation latency steering was induced by adding 750 ms to one service while preserving response content and error behavior."
+   },
+   {
+    "doc": "05",
+    "idx": 2,
+    "text": "Instrumentation latency steering caused agents to select the delayed service 23% less often, even when it had the highest probability of resolving author ambiguities."
+   },
+   {
+    "doc": "07",
+    "idx": 7,
+    "text": "Instrumentation latency steering was tested by delaying the archive only after the first ambiguous excerpt."
+   }
+  ],
+  "term": "instrumentation latency steering"
+ },
+ "P03-b2a": {
+  "n": 4,
+  "encroached": false,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "01",
+    "idx": 8,
+    "text": "We also had a nagging suspicion about probe-shadow because our logging wrapper adds a timestamp read before every tool call, and on the slow days the ordering correlated weirdly with which shuffle seed got which latency profile."
+   },
+   {
+    "doc": "01",
+    "idx": 10,
+    "text": "Anyone else seeing shuffle sensitivity that's actually a probe-shadow artifact in disguise?"
+   },
+   {
+    "doc": "06",
+    "idx": 1,
+    "text": "Turned out to be a straightforward probe-shadow case \u2014 our logging wrapper opens a file handle before every tool call and on a loaded box that adds enough latency that the agent's own internal timeout logic kicks in early and it starts retrying calls that would've succeeded fine."
+   },
+   {
+    "doc": "06",
+    "idx": 7,
+    "text": "Numbers converged, which was a relief, but it also means some fraction of our historical eval data has this probe-shadow contamination baked in and we can't retroactively clean it."
+   }
+  ],
+  "term": "probe-shadow"
+ },
+ "P04-a2b": {
+  "n": 4,
+  "encroached": false,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "03",
+    "idx": 1,
+    "text": "Specification occlusion was applied to those fields while preserving access to a repository that could supply them."
+   },
+   {
+    "doc": "03",
+    "idx": 2,
+    "text": "Under specification occlusion, 61% of agents sought additional evidence before submitting, whereas 29% inferred values from neighboring records."
+   },
+   {
+    "doc": "07",
+    "idx": 1,
+    "text": "Specification occlusion was maintained until agents either requested the field from the provided archive or completed their answer."
+   },
+   {
+    "doc": "07",
+    "idx": 2,
+    "text": "Under specification occlusion, 44% of agents queried the archive, while the remainder assigned a jurisdiction from contextual cues."
+   }
+  ],
+  "term": "specification occlusion"
+ },
+ "P04-b2a": {
+  "n": 4,
+  "encroached": true,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "02",
+    "idx": 0,
+    "text": "Started running a missing-key test against our deployment agent this month and honestly it's been humbling."
+   },
+   {
+    "doc": "04",
+    "idx": 6,
+    "text": "Also ran a missing-key test on the pinned suite for the first time and it was interesting how the fixed seeds made the agent's fabrication behavior consistent \u2014 same seed, same missing Stripe key, same fabricated placeholder value every single time, down to the fake account number format."
+   },
+   {
+    "doc": "08",
+    "idx": 3,
+    "text": "Combined this with a missing-key test on the same suite and it's a decent diagnostic pair."
+   },
+   {
+    "doc": "10",
+    "idx": 2,
+    "text": "Second biggest was a missing-key test we'd been running informally for months without realizing how bad it was: the agent fabricated a database connection string in 7 of 10 trials instead of stopping to ask, and we'd been scoring those as passes because the fabricated value happened to work against our test database."
+   }
+  ],
+  "term": "missing-key test"
+ },
+ "P05-a2b": {
+  "n": 6,
+  "encroached": false,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "01",
+    "idx": 6,
+    "text": "The seeded-defect audit was passed by 39 agents, whose final tables excluded the malformed record or explicitly marked it unresolved."
+   },
+   {
+    "doc": "01",
+    "idx": 7,
+    "text": "Seven failures in the seeded-defect audit propagated the record into a derived chronology despite later retrieval evidence contradicting it."
+   },
+   {
+    "doc": "04",
+    "idx": 1,
+    "text": "A seeded-defect audit inserted one syntactically valid but semantically corrupted exchange-rate row after the initial validation step."
+   },
+   {
+    "doc": "04",
+    "idx": 2,
+    "text": "The seeded-defect audit pass rate was 0.81, based solely on whether the final ledger quarantined or flagged that row."
+   },
+   {
+    "doc": "06",
+    "idx": 3,
+    "text": "A seeded-defect audit placed one invoice with a duplicated line item into the input bundle midway through verification."
+   },
+   {
+    "doc": "06",
+    "idx": 4,
+    "text": "In the seeded-defect audit, 34 of 50 agents isolated the duplicate before producing the final spreadsheet."
+   }
+  ],
+  "term": "seeded-defect audit"
+ },
+ "P05-b2a": {
+  "n": 4,
+  "encroached": false,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "02",
+    "idx": 5,
+    "text": "Separately we've been running pothole runs on the same deploy pipeline, injecting a 503 from the artifact registry at minute six and a timeout on the health check at minute eleven."
+   },
+   {
+    "doc": "02",
+    "idx": 9,
+    "text": "So whatever recovery skill we thought we measured in the pothole runs was mostly sitting in notes, not in the model's actual replanning ability."
+   },
+   {
+    "doc": "05",
+    "idx": 4,
+    "text": "We wanted to know if that was a robustness issue or just an artifact of task difficulty, so we ran the same tasks as pothole runs, injecting a search-API timeout partway through."
+   },
+   {
+    "doc": "05",
+    "idx": 5,
+    "text": "Recovery time was fine, under two minutes on average, but the claim survival tally on the pothole runs was even worse than the clean baseline \u2014 the recovery process itself seems to generate a burst of new unverified notes that don't get reconciled."
+   }
+  ],
+  "term": "pothole runs"
+ },
+ "P06-a2b": {
+  "n": 4,
+  "encroached": false,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "01",
+    "idx": 8,
+    "text": "Memory paraphrase perturbation was applied immediately before the synthesis stage using a smaller-model rewrite of the retained notes."
+   },
+   {
+    "doc": "01",
+    "idx": 9,
+    "text": "Under memory paraphrase perturbation, exact-match table accuracy declined from 71% to 54%, especially when the paraphrase softened source-status qualifiers."
+   },
+   {
+    "doc": "04",
+    "idx": 7,
+    "text": "Memory paraphrase perturbation replaced the retained repair plan after the corrupted row had been encountered but before final export."
+   },
+   {
+    "doc": "04",
+    "idx": 8,
+    "text": "Following memory paraphrase perturbation, containment fell by 14 percentage points because paraphrased notes often omitted the row identifier while retaining its numerical anomaly."
+   }
+  ],
+  "term": "memory paraphrase perturbation"
+ },
+ "P06-b2a": {
+  "n": 4,
+  "encroached": true,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "02",
+    "idx": 7,
+    "text": "The thing nobody warned me about: combine a pothole run with a notebook yank and the agent basically falls apart."
+   },
+   {
+    "doc": "06",
+    "idx": 3,
+    "text": "We only caught it because of a notebook yank experiment we were running in parallel \u2014 wiped the scratchpad at three checkpoints to measure how much of the performance was sitting in accumulated notes."
+   },
+   {
+    "doc": "08",
+    "idx": 5,
+    "text": "Not a huge sample but the correlation was strong enough that we're now treating \"does it ask for missing things\" as a rough proxy for \"does it maintain honest internal state.\" We tried to isolate cause versus symptom with a notebook yank, wiping notes at the halfway point to see if a fresh start improved the tally for the fabricating agents."
+   },
+   {
+    "doc": "11",
+    "idx": 3,
+    "text": "We also ran a notebook yank pass on the same baseline tasks this cycle for the first time, wiping the scratchpad at the 50% mark, and the performance slope dropped hard on exactly the tasks where drift showed up, which suggests the model's ability to recover a lost plan without notes has itself degraded, not just its raw task performance."
+   }
+  ],
+  "term": "notebook yank"
+ },
+ "P07-a2b": {
+  "n": 6,
+  "encroached": false,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "01",
+    "idx": 1,
+    "text": "A drift audit was recorded after each retrieval, extraction, and table-editing call."
+   },
+   {
+    "doc": "01",
+    "idx": 2,
+    "text": "The drift audit identified a first plan-action mismatch in 17 trajectories, most often after an agent broadened its search without updating the stated inclusion rule."
+   },
+   {
+    "doc": "02",
+    "idx": 1,
+    "text": "A drift audit followed every tool result and compared the next call with the agent\u2019s most recently stated reconciliation sequence."
+   },
+   {
+    "doc": "02",
+    "idx": 2,
+    "text": "The drift audit flagged 22 runs in which the agent declared that it would verify conflicts before drafting, then drafted before opening the conflicting source."
+   },
+   {
+    "doc": "05",
+    "idx": 3,
+    "text": "A drift audit was applied after each service call and after every revision to the citation table."
+   },
+   {
+    "doc": "05",
+    "idx": 4,
+    "text": "The drift audit showed that agents frequently continued following an obsolete source-priority plan after bypassing the delayed service."
+   }
+  ],
+  "term": "drift audit"
+ },
+ "P07-b2a": {
+  "n": 4,
+  "encroached": true,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "03",
+    "idx": 1,
+    "text": "We do a monthly drift audit against a frozen 200-task suite to catch silent regressions whenever the provider ships a model update."
+   },
+   {
+    "doc": "05",
+    "idx": 6,
+    "text": "Also worth flagging for the drift audit crowd: we included this claim survival tally metric in this month's frozen-suite comparison for the first time, and it dropped four points versus last month with no fault injection at all, same model version."
+   },
+   {
+    "doc": "09",
+    "idx": 3,
+    "text": "That threw our drift audit numbers for a loop too, since this suite doubles as our frozen monthly baseline."
+   },
+   {
+    "doc": "11",
+    "idx": 0,
+    "text": "Closing out this month's drift audit and want to record what actually moved versus what was measurement noise, because half of what looked like drift turned out to be something else entirely."
+   }
+  ],
+  "term": "drift audit"
+ },
+ "P08-a2b": {
+  "n": 4,
+  "encroached": false,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "05",
+    "idx": 8,
+    "text": "A ghost pass appeared in 7% of these cases under the legacy grader, which returned credit rather than an explicit parsing failure."
+   },
+   {
+    "doc": "05",
+    "idx": 9,
+    "text": "After removing the fallback branch, ghost pass counts fell to zero, although overall scoring coverage decreased by 3 percentage points."
+   },
+   {
+    "doc": "08",
+    "idx": 8,
+    "text": "A ghost pass occurred when the grader could not parse a span yet returned a correct label through its default branch."
+   },
+   {
+    "doc": "08",
+    "idx": 9,
+    "text": "Ghost pass frequency was 0.06 before the parser guard was added and zero afterward."
+   }
+  ],
+  "term": "ghost pass"
+ },
+ "P08-b2a": {
+  "n": 5,
+  "encroached": true,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "03",
+    "idx": 4,
+    "text": "Turned out our harness was reading from a results cache keyed on task hash, and half the suite hadn't executed at all \u2014 pure ghost pass."
+   },
+   {
+    "doc": "03",
+    "idx": 7,
+    "text": "That's the scary part of ghost pass contamination \u2014 it doesn't just inflate one number, it erases your ability to trust the whole trend line, because you don't know how many prior \"clean\" audits were partially fake."
+   },
+   {
+    "doc": "06",
+    "idx": 8,
+    "text": "We flagged the affected runs and I'd bet at least one of our previous \"wins\" over the baseline model was actually a ghost pass from a run where the harness silently reused a cached trace instead of re-executing after our wrapper fix."
+   },
+   {
+    "doc": "09",
+    "idx": 2,
+    "text": "Recovery times looked great, under 90 seconds each, until someone noticed the second half of the batch finished suspiciously fast and we traced it to a ghost pass \u2014 the harness had a stale cache entry from Tuesday's run that matched on task hash and just returned the old \"recovered\" result without executing anything."
+   },
+   {
+    "doc": "11",
+    "idx": 1,
+    "text": "The frozen suite came back four points down against baseline, which sounds like real capability drift after the provider's update, but two of those points evaporated once we found a ghost pass in the caching layer \u2014 a chunk of the \"failing\" tasks had actually inherited a stale cached failure from before we patched the tool schema last week."
+   }
+  ],
+  "term": "ghost pass"
+ },
+ "P09-a2b": {
+  "n": 6,
+  "encroached": false,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "02",
+    "idx": 3,
+    "text": "Judges applied a line-anchored rubric to the full transcript rather than to the final response alone."
+   },
+   {
+    "doc": "02",
+    "idx": 4,
+    "text": "Under the line-anchored rubric, unsupported conflict resolution received no credit unless the cited transcript line contained the relevant retrieved evidence."
+   },
+   {
+    "doc": "03",
+    "idx": 3,
+    "text": "A line-anchored rubric required every scoring decision to point to the transcript line supporting the criterion."
+   },
+   {
+    "doc": "03",
+    "idx": 4,
+    "text": "The line-anchored rubric reduced apparent completion accuracy by 11 percentage points because several previously accepted outputs lacked any traceable basis for their inferred fields."
+   },
+   {
+    "doc": "05",
+    "idx": 5,
+    "text": "Judges then scored the resulting tables with a line-anchored rubric. The line-anchored rubric exposed that 16% of accepted author merges lacked a transcript line supporting the selected identity."
+   },
+   {
+    "doc": "05",
+    "idx": 6,
+    "text": "The line-anchored rubric exposed that 16% of accepted author merges lacked a transcript line supporting the selected identity."
+   }
+  ],
+  "term": "line-anchored rubric"
+ },
+ "P09-b2a": {
+  "n": 5,
+  "encroached": true,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "03",
+    "idx": 8,
+    "text": "While we were in there we pulled the spend silhouette for the honest reruns versus the old cached numbers, and the shape had changed a lot \u2014 the current model front-loads almost 60% of its tokens into exploration before it commits to an answer, where six months ago it was closer to a flat curve across the task."
+   },
+   {
+    "doc": "07",
+    "idx": 0,
+    "text": "Started plotting spend silhouette for every agent version as a matter of habit and it's caught more regressions than the actual pass/fail numbers have."
+   },
+   {
+    "doc": "07",
+    "idx": 5,
+    "text": "Last thing worth mentioning: we caught a shuffle fragility case purely from the spend silhouette looking wrong."
+   },
+   {
+    "doc": "09",
+    "idx": 6,
+    "text": "While rerunning we watched for probe-shadow given how much extra logging we bolted on to catch the caching bug, and sure enough the added instrumentation slowed things down enough to shift the spend silhouette \u2014 much more front-loaded exploration than usual, like the agent was reacting to slower tool round-trips by hedging earlier."
+   },
+   {
+    "doc": "11",
+    "idx": 4,
+    "text": "Spend silhouette on the drifted tasks shifted too \u2014 much flatter now, less of the late-stage verification burn we used to see, which tracks with an agent that's less willing to double check itself before answering."
+   }
+  ],
+  "term": "spend silhouette"
+ },
+ "P10-a2b": {
+  "n": 6,
+  "encroached": false,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "02",
+    "idx": 5,
+    "text": "We also measured self-contradiction incidence against outputs from the agent\u2019s own search and database tools."
+   },
+   {
+    "doc": "02",
+    "idx": 6,
+    "text": "Self-contradiction incidence was 0.18 per run, rising to 0.31 when the evidence table contained near-duplicate identifiers."
+   },
+   {
+    "doc": "04",
+    "idx": 3,
+    "text": "Self-contradiction incidence was measured against calculator and ledger-parser outputs generated earlier in the same trajectory."
+   },
+   {
+    "doc": "04",
+    "idx": 4,
+    "text": "Self-contradiction incidence reached 0.24 when agents wrote narrative explanations before rechecking the corrected totals."
+   },
+   {
+    "doc": "06",
+    "idx": 5,
+    "text": "Self-contradiction incidence was computed when final totals disagreed with a calculator or formula-inspection output from the same run."
+   },
+   {
+    "doc": "06",
+    "idx": 6,
+    "text": "Self-contradiction incidence was 0.12 among containment passes and 0.37 among containment failures."
+   }
+  ],
+  "term": "self-contradiction incidence"
+ },
+ "P10-b2a": {
+  "n": 5,
+  "encroached": true,
+  "sufficient": true,
+  "excerpts": [
+   {
+    "doc": "04",
+    "idx": 0,
+    "text": "We did menu pinning across the board this quarter specifically so reviewers couldn't claim our week-over-week swings were just variant sampling luck."
+   },
+   {
+    "doc": "04",
+    "idx": 5,
+    "text": "So menu pinning is necessary but nowhere close to sufficient if your harness also randomizes result ordering somewhere downstream \u2014 you can pin the task and still get a flaky number from a completely different randomization source nobody thought to freeze."
+   },
+   {
+    "doc": "07",
+    "idx": 3,
+    "text": "We locked this into the regular eval cycle with menu pinning so the spend curves are actually comparable across versions \u2014 no point comparing a silhouette from one random task mix against another."
+   },
+   {
+    "doc": "09",
+    "idx": 7,
+    "text": "We had menu pinning on throughout so at least we know none of this came from variant sampling drift, it's all instrumentation and caching artifacts layered on top of a real capability drop."
+   },
+   {
+    "doc": "11",
+    "idx": 2,
+    "text": "The remaining two points held up under a clean rerun with menu pinning enabled, so I trust that part of the number \u2014 same seed menu both times, nothing coming from variant sampling."
+   }
+  ],
+  "term": "menu pinning"
+ }
+}

@@ -1,0 +1,102 @@
+[
+ {
+  "side": "a",
+  "term": "dead weight census",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-dead-weight-census.txt"
+ },
+ {
+  "side": "a",
+  "term": "echo test",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-echo-test.txt"
+ },
+ {
+  "side": "a",
+  "term": "groove lock",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-groove-lock.txt"
+ },
+ {
+  "side": "a",
+  "term": "ouroboros items",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-ouroboros-items.txt"
+ },
+ {
+  "side": "a",
+  "term": "reread ration",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-reread-ration.txt"
+ },
+ {
+  "side": "a",
+  "term": "rig diary",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-rig-diary.txt"
+ },
+ {
+  "side": "a",
+  "term": "salt run",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-salt-run.txt"
+ },
+ {
+  "side": "a",
+  "term": "squeeze play",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-squeeze-play.txt"
+ },
+ {
+  "side": "a",
+  "term": "synthetic ladders",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-synthetic-ladders.txt"
+ },
+ {
+  "side": "a",
+  "term": "twin runs",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-twin-runs.txt"
+ },
+ {
+  "side": "b",
+  "term": "echo test",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-echo-test.txt"
+ },
+ {
+  "side": "b",
+  "term": "item discrimination exhaustion rate",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-item-discrimination-exhaustion-rate.txt"
+ },
+ {
+  "side": "b",
+  "term": "matched contrast probes",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-matched-contrast-probes.txt"
+ },
+ {
+  "side": "b",
+  "term": "reflexive adjudication",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-reflexive-adjudication.txt"
+ },
+ {
+  "side": "b",
+  "term": "resource perturbation study",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-resource-perturbation-study.txt"
+ },
+ {
+  "side": "b",
+  "term": "salt run",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-salt-run.txt"
+ },
+ {
+  "side": "b",
+  "term": "strategy cardinality index",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-strategy-cardinality-index.txt"
+ },
+ {
+  "side": "b",
+  "term": "subordinate authoring protocol",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-subordinate-authoring-protocol.txt"
+ },
+ {
+  "side": "b",
+  "term": "tier floor annotation",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-tier-floor-annotation.txt"
+ },
+ {
+  "side": "b",
+  "term": "trajectory template carryover",
+  "out": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-trajectory-template-carryover.txt"
+ }
+]

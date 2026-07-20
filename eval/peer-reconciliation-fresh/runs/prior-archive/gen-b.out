@@ -1,0 +1,100 @@
+<<<DOC 01>>>
+# Budgeted Judge Monitoring
+
+Evaluation proceeded over 18,400 support-ticket resolution items using a fixed sequence of agent versions. Each batch included a salt run containing eight previously verified cases distributed without positional regularity. The salt run was evaluated before aggregate metrics were retained, and three batches were halted after two known cases received unsupported negative judgments.
+
+Items carried a tier floor annotation assigned independently by two annotators before deployment. The tier floor annotation predicted 71% of observed failures among lower-tier agents, reducing the number of failures forwarded for manual investigation. Disagreements were concentrated in items involving chained browser actions rather than answer extraction.
+
+A resource perturbation study altered either the remaining token budget or tool-call quota after the first successful retrieval. Under the resource perturbation study, high-performing agents shifted toward shorter verification traces when quotas fell, while lower-performing agents continued initiating tools until forced termination. Results therefore exclude halted salt run batches and report only items whose tier floor annotation was stable across adjudicators.
+
+<<<DOC 02>>>
+# Generated Task Holdout
+
+A subordinate authoring protocol produced 2,160 task specifications from a weaker generator, with executable checks withheld from the evaluated agents. The subordinate authoring protocol was rerun for every model family to prevent a single task-writing distribution from dominating comparisons. Generated tasks were filtered only for execution validity and duplicate surface form.
+
+Suite maintenance used the item discrimination exhaustion rate after each evaluation round. The item discrimination exhaustion rate rose from 0.18 to 0.41 across four model releases, primarily because basic API-formatting items became universally solvable. Items above the exhaustion threshold were retained for longitudinal reporting but excluded from the primary ranking.
+
+Few-shot prompts contained deliberately distinctive answer styles to support an echo test. The echo test identified inappropriate verbatim carryover in 9.6% of free-form explanations, despite correct final tool outputs. Removing the examples reduced echo test failures to 1.8% but also lowered task completion by 3.1 percentage points.
+
+<<<DOC 03>>>
+# Diversity Under Repeated Attempts
+
+Agents completed 600 repository-repair tasks with five independent attempts per task and fresh tool sandboxes. The strategy cardinality index was calculated only from successful attempts after traces were normalized for incidental file paths. The strategy cardinality index increased from 1.3 to 2.7 between the baseline and search-augmented systems, even when their pass rates differed by less than one point.
+
+Reflexive adjudication used anonymized final patches and rationales sampled from all systems in a round. During reflexive adjudication, the evaluated agent agreed with external graders 6.4 points less often on its own successful patches than on matched patches from peers. The effect remained after excluding outputs with identifying filenames and unusually long explanations.
+
+Prompt templates included two worked examples with unusual connective phrases. The echo test found that agents with the highest strategy cardinality index had fewer inappropriate copied phrases than agents relying on repeated repair traces. A second echo test after paraphrasing the examples reduced copied phrasing without changing reflexive adjudication effects.
+
+<<<DOC 04>>>
+# Distractor-Loaded Navigation
+
+The benchmark paired each account-management task with a version containing irrelevant policy excerpts, historical tickets, and decoy URLs. Matched contrast probes compared tool traces across the paired versions while preserving the required action and verification endpoint. In matched contrast probes, agents opened 2.1 additional pages under distractor context and delayed the first valid tool call by 38 seconds.
+
+Session logs also exposed trajectory template carryover following successful billing-repair tasks. Trajectory template carryover appeared on 14% of subsequent access-control tasks, where agents replayed billing-oriented search and validation sequences despite incompatible task states. Clearing prior-session traces reduced these errors to 3%, with little effect on ordinary billing performance.
+
+A resource perturbation study lowered tool-call quota midway through the distractor versions. Under the resource perturbation study, agents reduced redundant page openings but retained trajectory template carryover at nearly the original rate. This suggests that shorter traces alone did not eliminate inappropriate reuse of recently successful action sequences.
+
+<<<DOC 05>>>
+# Session-State Ablation
+
+Agents were evaluated in 24-task sessions arranged to alternate configuration, billing, and incident-response work. A salt run was inserted twice per session, using verified items whose answers were absent from the session briefing. The salt run halted six sessions after judges accepted an incorrect configuration change as compliant.
+
+The same sessions were examined for trajectory template carryover after high-confidence successes. Trajectory template carryover was most frequent when an incident-response task immediately followed a successful billing recovery, producing repeated credential-reset actions on unrelated systems. Resetting session history between items reduced this pattern by 79%, although it modestly increased tool setup time.
+
+The salt run halt rule prevented contaminated sessions from contributing to carryover estimates. After removing halted sessions, trajectory template carryover remained associated with prior trace length rather than prior answer correctness. The analysis is limited by the fixed task ordering; a fully randomized schedule may yield a smaller effect.
+
+<<<DOC 06>>>
+# Capability-Calibrated Retention
+
+The evaluation suite contained 3,050 tasks spanning three capability tiers and two execution environments. Every item received a tier floor annotation before model results were inspected. The tier floor annotation was revised for 4.7% of items after annotators discovered hidden dependencies on unavailable credentials.
+
+The item discrimination exhaustion rate was computed separately within each tier. The item discrimination exhaustion rate reached 0.46 for entry-tier tasks but remained below 0.20 for the highest tier, indicating that maintenance pressure was concentrated in simple retrieval and formatting tasks. Removing exhausted items increased rank stability across weekly reruns.
+
+Failures below an agent’s tier floor annotation were flagged for audit rather than treated as ordinary misses. The tier floor annotation also exposed a limitation: several agents completed higher-tier items through narrow memorized procedures while failing lower-tier tasks requiring unfamiliar tool states. Consequently, the reported exhaustion analysis does not imply a single monotonic capability scale.
+
+<<<DOC 07>>>
+# Independent Task Generation
+
+Three weaker task generators produced held-out data-management scenarios under a subordinate authoring protocol. The subordinate authoring protocol required executable validators and prevented generators from observing evaluated-agent traces. Human review rejected 11% of generated tasks for ambiguous state transitions, leaving 1,740 tasks.
+
+Successful runs were clustered by structural tool-use pattern before computing the strategy cardinality index. The strategy cardinality index was higher on tasks from the most diverse generator, although completion rates were nearly unchanged. This pattern held after normalizing for the number of available tools and the length of task instructions.
+
+A second subordinate authoring protocol round used newly sampled generators and fresh validators. Under that round, the strategy cardinality index remained elevated for agents that alternated inspection and verification rather than following a fixed retrieval-first sequence. The result should be interpreted cautiously because generator diversity also changed the distribution of error messages.
+
+<<<DOC 08>>>
+# Self-Grading Under Context Noise
+
+A paired set of service-configuration tasks differed only in irrelevant operational context appended to the prompt. Matched contrast probes showed that distractor context increased exploratory tool calls by 31% and reduced direct validation calls by 18%. The matched contrast probes preserved the same required configuration change, validator, and initial system state.
+
+Outputs from both task variants were then mixed into blinded grading pools. Reflexive adjudication showed lower agreement on an agent’s own outputs, particularly when its rationale reused distinctive tool-log phrasing. In reflexive adjudication, the self-output agreement deficit was 7.9 points under distractor context versus 3.2 points without it.
+
+The tool traces indicated that matched contrast probes changed navigation breadth more than final answer length. Reflexive adjudication remained detectable after rationale text was removed and graders saw only final actions and validators. These results do not isolate whether self-recognition arose from stylistic traces, action ordering, or latent familiarity with the task.
+
+<<<DOC 09>>>
+# Integrated Contamination Audit
+
+The final audit used 1,200 paired operational tasks generated under a subordinate authoring protocol. The subordinate authoring protocol supplied executable validators while withholding task-generation traces from every evaluated system. Each task family included matched contrast probes with identical required actions and variable irrelevant context.
+
+Matched contrast probes increased excess tool usage by 26% for the largest agent. A salt run was inserted into every 100-item block, and salt run failures halted scoring before the affected block entered the aggregate analysis. The item discrimination exhaustion rate was monitored separately for clean and distractor-loaded variants. The item discrimination exhaustion rate was higher for clean variants, where most strong agents succeeded uniformly.
+
+Reflexive adjudication used anonymized final outputs from both variants. Reflexive adjudication produced a 5.1-point self-output agreement deficit, concentrated among outputs with unusually confident rationales. The echo test found inappropriate copied example phrasing in 6.8% of those rationales. After example paraphrasing, the echo test rate fell to 1.5% without materially changing matched contrast probes or reflexive adjudication.
+
+<<<DOC 10>>>
+# Adaptive Resource Stress Test
+
+Tasks were produced through a subordinate authoring protocol and labeled with a tier floor annotation before any system was run. The subordinate authoring protocol yielded 980 executable multi-tool cases, while the tier floor annotation identified 212 cases expected to exceed entry-tier capability. A salt run was placed after every 40 scored items and halted two runs with invalid judge behavior.
+
+The resource perturbation study reduced wall-clock allowance or tool-call quota immediately after an agent’s first successful action. In the resource perturbation study, stronger agents preserved completion by changing verification order, whereas weaker agents abandoned required checks. The strategy cardinality index rose under reduced budgets for the strongest system, reflecting several successful abbreviated traces. For lower-tier systems, the strategy cardinality index declined because nearly all successful runs followed one retrieval-first pattern.
+
+Trajectory template carryover increased after resource-constrained successes. When session history was cleared, trajectory template carryover fell from 12.4% to 2.6%, despite unchanged tier floor annotation distributions. Salt run outcomes were unaffected by budget condition, supporting use of the retained blocks for comparison.
+
+<<<DOC 11>>>
+# Longitudinal Suite Health
+
+Across six releases, the suite tracked item discrimination exhaustion rate alongside completion and calibration metrics. The item discrimination exhaustion rate doubled for basic tasks, prompting targeted replacement rather than wholesale removal. Each retained item also carried a tier floor annotation. The tier floor annotation separated expected lower-tier failures from unexpected regressions in higher-tier systems.
+
+A subordinate authoring protocol supplied replacement tasks with executable validators. The subordinate authoring protocol was refreshed each release to limit repeated generator patterns. Matched contrast probes accompanied each replacement family. Matched contrast probes showed that distractor sensitivity declined for navigation tasks but increased for document-heavy tasks.
+
+The strategy cardinality index was computed from successful traces after every release. The strategy cardinality index fell when agents converged on a common browser workflow, despite stable pass rates. Reflexive adjudication was applied to anonymized answers from the final two releases. Reflexive adjudication revealed persistent self-output agreement deficits after answer text was stripped.
+
+Trajectory template carryover was measured in ordered sessions and dropped after history clearing. A resource perturbation study increased tool quotas mid-task, and the resource perturbation study showed that extra calls often amplified trajectory template carryover rather than repair it. The echo test detected inappropriate example phrasing in 4.2% of final answers. A second echo test after replacing examples reduced that rate to 0.9%.

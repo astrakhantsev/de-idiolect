@@ -1,0 +1,329 @@
+[
+  {
+    "work_id": "w-006",
+    "cited": {
+      "t": "",
+      "a": "Ranjan",
+      "y": 2010
+    },
+    "crossref_match": null
+  },
+  {
+    "work_id": "w-016",
+    "cited": {
+      "t": "What Exactly Is Fitness for Purpose in Analytical Measuremen",
+      "a": "Thompson",
+      "y": 1996
+    },
+    "crossref_match": {
+      "doi": "10.1039/an9962100275",
+      "title": "What exactly is fitness for purpose in analytical measurement?",
+      "year": 1996,
+      "container": "The Analyst",
+      "author_ok": true
+    }
+  },
+  {
+    "work_id": "w-050",
+    "cited": {
+      "t": "Verification of forecasts expressed in terms of probability",
+      "a": "Brier",
+      "y": 1950
+    },
+    "crossref_match": {
+      "doi": "10.1175/1520-0493(1950)078<0001:vofeit>2.0.co;2",
+      "title": "VERIFICATION OF FORECASTS EXPRESSED IN TERMS OF PROBABILITY",
+      "year": 1950,
+      "container": "Monthly Weather Review",
+      "author_ok": true
+    }
+  },
+  {
+    "work_id": "w-061",
+    "cited": {
+      "t": "A decision-making theory of visual detection",
+      "a": "Tanner",
+      "y": 1954
+    },
+    "crossref_match": {
+      "doi": "10.1037/h0058700",
+      "title": "A decision-making theory of visual detection.",
+      "year": 1954,
+      "container": "Psychological Review",
+      "author_ok": true
+    }
+  },
+  {
+    "work_id": "w-062",
+    "cited": {
+      "t": "An optimum character recognition system using decision funct",
+      "a": "Chow",
+      "y": 1957
+    },
+    "crossref_match": {
+      "doi": "10.1109/tec.1957.5222035",
+      "title": "An optimum character recognition system using decision functions",
+      "year": 1957,
+      "container": "IRE Transactions on Electronic Computers",
+      "author_ok": true
+    }
+  },
+  {
+    "work_id": "w-085",
+    "cited": {
+      "t": "The Knowledge Reengineering Bottleneck",
+      "a": "Hoekstra",
+      "y": 2010
+    },
+    "crossref_match": {
+      "doi": "10.3233/sw-2010-0004",
+      "title": "The knowledge reengineering bottleneck",
+      "year": 2010,
+      "container": "Semantic Web",
+      "author_ok": true
+    }
+  },
+  {
+    "work_id": "w-100",
+    "cited": {
+      "t": "Commonsense Reasoning and Commonsense Knowledge in Artificia",
+      "a": "Marcus",
+      "y": 2015
+    },
+    "crossref_match": {
+      "doi": "10.1145/2701413",
+      "title": "Commonsense reasoning and commonsense knowledge in artificial intelligence",
+      "year": 2015,
+      "container": "Communications of the ACM",
+      "author_ok": false
+    }
+  },
+  {
+    "work_id": "w-108",
+    "cited": {
+      "t": "Institutional Ecology, 'Translations' and Boundary Objects",
+      "a": "Star",
+      "y": 1989
+    },
+    "crossref_match": {
+      "doi": "10.1177/030631289019003001",
+      "title": "Institutional Ecology, `Translations' and Boundary Objects: Amateurs and Profess",
+      "year": 1989,
+      "container": "Social Studies of Science",
+      "author_ok": true
+    }
+  },
+  {
+    "work_id": "w-111",
+    "cited": {
+      "t": "Knowledge Engineering: The Applied Side of Artificial Intell",
+      "a": "Feigenbaum",
+      "y": 1984
+    },
+    "crossref_match": {
+      "doi": "10.1111/j.1749-6632.1984.tb16513.x",
+      "title": "Knowledge Engineering",
+      "year": 1984,
+      "container": "Annals of the New York Academy of Sciences",
+      "author_ok": true
+    }
+  },
+  {
+    "work_id": "w-151",
+    "cited": {
+      "t": "",
+      "a": "Bilac",
+      "y": 2004
+    },
+    "crossref_match": null
+  },
+  {
+    "work_id": "w-207",
+    "cited": {
+      "t": "The vocabulary problem in human-system communication",
+      "a": "Furnas",
+      "y": 1987
+    },
+    "crossref_match": {
+      "doi": "10.1145/32206.32212",
+      "title": "The vocabulary problem in human-system communication",
+      "year": 1987,
+      "container": "Communications of the ACM",
+      "author_ok": true
+    }
+  },
+  {
+    "work_id": "w-225",
+    "cited": {
+      "t": "Development of an Integrated Energy Vocabulary",
+      "a": "Niehoff",
+      "y": 1976
+    },
+    "crossref_match": {
+      "doi": "10.1002/asi.4630270102",
+      "title": "Development of an Integrated Energy Vocabulary and the Possibilities for On\u2010line",
+      "year": 1976,
+      "container": "Journal of the American Society for Information Sc",
+      "author_ok": true
+    }
+  },
+  {
+    "work_id": "w-228",
+    "cited": {
+      "t": "GLUE",
+      "a": "Doan",
+      "y": 2002
+    },
+    "crossref_match": {
+      "doi": "10.1038/news020624-3",
+      "title": "Tunable glue",
+      "year": 2002,
+      "container": "Nature",
+      "author_ok": false
+    }
+  },
+  {
+    "work_id": "w-242",
+    "cited": {
+      "t": "Essai de S\u00e9mantique",
+      "a": "Br\u00e9al",
+      "y": 1897
+    },
+    "crossref_match": {
+      "doi": "10.70675/da7ecbddzd8a4z4ebdza277z82499fd49910",
+      "title": "Polys\u00e9mie et noms de sentiments : essai de s\u00e9mantique g\u00e9n\u00e9rale",
+      "year": null,
+      "container": "",
+      "author_ok": true
+    }
+  },
+  {
+    "work_id": "w-253",
+    "cited": {
+      "t": "Data Integration: A Theoretical Perspective",
+      "a": "Lenzerini",
+      "y": 2002
+    },
+    "crossref_match": {
+      "doi": "10.1145/543613.543644",
+      "title": "Data integration",
+      "year": 2002,
+      "container": "Proceedings of the twenty-first ACM SIGMOD-SIGACT-",
+      "author_ok": true
+    }
+  },
+  {
+    "work_id": "w-259",
+    "cited": {
+      "t": "A comparative analysis of methodologies for database schema ",
+      "a": "Batini",
+      "y": 1986
+    },
+    "crossref_match": {
+      "doi": "10.1145/27633.27634",
+      "title": "A comparative analysis of methodologies for database schema integration",
+      "year": 1986,
+      "container": "ACM Computing Surveys",
+      "author_ok": true
+    }
+  },
+  {
+    "work_id": "w-338",
+    "cited": {
+      "t": "The comparison and evaluation of forecasters.",
+      "a": "DeGroot",
+      "y": 1983
+    },
+    "crossref_match": {
+      "doi": "10.2307/2987588",
+      "title": "The Comparison and Evaluation of Forecasters",
+      "year": 1983,
+      "container": "The Statistician",
+      "author_ok": true
+    }
+  },
+  {
+    "work_id": "w-343",
+    "cited": {
+      "t": "",
+      "a": "Brier",
+      "y": 1950
+    },
+    "crossref_match": null
+  },
+  {
+    "work_id": "w-372",
+    "cited": {
+      "t": "Combination of multiple classifiers using local accuracy est",
+      "a": "Woods",
+      "y": 1997
+    },
+    "crossref_match": {
+      "doi": "10.1109/34.588027",
+      "title": "Combination of multiple classifiers using local accuracy estimates",
+      "year": 1997,
+      "container": "IEEE Transactions on Pattern Analysis and Machine ",
+      "author_ok": true
+    }
+  },
+  {
+    "work_id": "w-382",
+    "cited": {
+      "t": "The Evaluator Effect: A Chilling Fact About Usability Evalua",
+      "a": "Hertzum",
+      "y": 2001
+    },
+    "crossref_match": {
+      "doi": "10.1207/s15327590ijhc1304_05",
+      "title": "The Evaluator Effect: A Chilling Fact About Usability Evaluation Methods",
+      "year": 2001,
+      "container": "International Journal of Human-Computer Interactio",
+      "author_ok": true
+    }
+  },
+  {
+    "work_id": "w-388",
+    "cited": {
+      "t": "Common Voting Rules as Maximum Likelihood Estimators",
+      "a": "Conitzer",
+      "y": 2005
+    },
+    "crossref_match": {
+      "doi": "10.1145/1064009.1064018",
+      "title": "Communication complexity of common voting rules",
+      "year": 2005,
+      "container": "Proceedings of the 6th ACM conference on Electroni",
+      "author_ok": true
+    }
+  },
+  {
+    "work_id": "w-390",
+    "cited": {
+      "t": "On the use of objective examinations.",
+      "a": "Coombs",
+      "y": 1953
+    },
+    "crossref_match": {
+      "doi": "10.1177/001316445301300214",
+      "title": "On the Use of Objective Examinations",
+      "year": 1953,
+      "container": "Educational and Psychological Measurement",
+      "author_ok": true
+    }
+  },
+  {
+    "work_id": "w-398",
+    "cited": {
+      "t": "The Sources and Modes of Infection",
+      "a": "Chapin",
+      "y": 1910
+    },
+    "crossref_match": {
+      "doi": "10.1016/s0033-3506(10)80058-7",
+      "title": "The sources and modes of infection",
+      "year": 1910,
+      "container": "Public Health",
+      "author_ok": true
+    }
+  }
+]

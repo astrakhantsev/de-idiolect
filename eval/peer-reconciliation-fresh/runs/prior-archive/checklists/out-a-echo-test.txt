@@ -1,0 +1,5 @@
+- Mechanism: submit the exact same prompt twice within the same session and compare the two outputs token-for-token to detect nondeterminism.
+- Measures/produces: divergence between the two identical-prompt runs — e.g., percentage of token-for-token mismatch, or a difference in citation/truncation point between the two outputs.
+- Applies when: temperature is nominally pinned to zero (deterministic setting expected), used to sanity-check whether scoring/harness anomalies (e.g., suspiciously identical twin scores, unexpected truncation) stem from real model/stack nondeterminism rather than another cause.
+- Constraint: requires holding the prompt and session constant between the two runs so any difference observed is attributable only to inherent nondeterminism, not to changed inputs.
+- Constraint: a byte-identical result across the two runs is treated as evidence the stack is behaving correctly for that item.

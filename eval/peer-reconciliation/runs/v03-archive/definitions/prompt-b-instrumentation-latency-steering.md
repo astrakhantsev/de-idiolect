@@ -1,0 +1,19 @@
+Below are usage excerpts from one community's documents, all containing the same term, shown masked as ⟦TERM⟧.
+
+Write a short, self-contained, operational definition of the concept ⟦TERM⟧ names AS USED in these excerpts: what kind of thing it is (a phenomenon, a procedure, a score, a rule…), its inputs and outputs where applicable, what it asserts, and when it applies.
+
+Constraints:
+- Ordinary words and simple notation only.
+- Do NOT use the masked term or guess at it; do not use names of people, published methods, fields, systems, models, or communities.
+- Base the definition ONLY on what the excerpts support; do not import outside assumptions.
+- 60–140 words. Output ONLY the definition text, nothing else.
+
+EXCERPTS:
+
+1. ⟦TERM⟧ shifted query selection toward the uninstrumented archive, even when that archive contained fewer relevant fields.
+2. The magnitude of ⟦TERM⟧ was largest for agents using short tool-selection horizons, where a 900 ms delay changed the preferred first query in 27% of paired runs.
+3. ⟦TERM⟧ reduced parser use by 19% and increased reliance on manual arithmetic.
+4. ⟦TERM⟧ was induced by adding 750 ms to one service while preserving response content and error behavior.
+5. ⟦TERM⟧ caused agents to select the delayed service 23% less often, even when it had the highest probability of resolving author ambiguities.
+6. ⟦TERM⟧ was tested by delaying the archive only after the first ambiguous excerpt.
+7. ⟦TERM⟧ lowered archive consultation by 16 percentage points and increased unsupported classifications accordingly.

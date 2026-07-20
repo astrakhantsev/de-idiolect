@@ -1,0 +1,26 @@
+Looking at the DEFINITION, the core concept is the **observer/probe effect**: a recording or monitoring tool adds per-action overhead (delay) that changes the observed system's behavior, so results reflect the act of watching rather than true performance — making a truly-better option appear worse.
+
+I'll judge each excerpt independently.
+
+**Excerpt 1** — "uninstrumented archive" directly references instrumentation; TERM shifts selection *away* from the instrumented source toward a worse one ("fewer relevant fields"). This is distortion caused by monitoring → instantiates.
+
+**Excerpt 2** — An added delay changing the preferred query is exactly the overhead-distorts-behavior mechanism → instantiates.
+
+**Excerpt 3** — No mention of delay, instrumentation, or recording; a reduction in parser use could have any cause → insufficient.
+
+**Excerpt 4** — TERM is induced by injecting delay while holding content/errors constant, isolating timing overhead as the cause → instantiates.
+
+**Excerpt 5** — The delay causes the *best* service to be selected less, distorting the assessment → instantiates.
+
+**Excerpt 6** — TERM is tested by injecting delay into the data source being read → instantiates.
+
+```json
+[
+  {"excerpt": 1, "verdict": "instantiates", "quote": "shifted query selection toward the uninstrumented archive, even when that archive contained fewer relevant fields"},
+  {"excerpt": 2, "verdict": "instantiates", "quote": "a 900 ms delay changed the preferred first query in 27% of paired runs"},
+  {"excerpt": 3, "verdict": "insufficient", "quote": ""},
+  {"excerpt": 4, "verdict": "instantiates", "quote": "was induced by adding 750 ms to one service while preserving response content and error behavior"},
+  {"excerpt": 5, "verdict": "instantiates", "quote": "caused agents to select the delayed service 23% less often, even when it had the highest probability of resolving author ambiguities"},
+  {"excerpt": 6, "verdict": "instantiates", "quote": "was tested by delaying the archive only after the first ambiguous excerpt"}
+]
+```

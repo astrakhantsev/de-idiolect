@@ -1,0 +1,1 @@
+[{"excerpt":1,"verdict":"insufficient","quote":""},{"excerpt":2,"verdict":"insufficient","quote":""},{"excerpt":3,"verdict":"contradicts","quote":"the agent's own internal timeout logic kicks in early and it starts retrying calls that would've succeeded fine"},{"excerpt":4,"verdict":"insufficient","quote":""}]

@@ -1,0 +1,6 @@
+- ⟦TERM⟧ is assigned independently by two annotators per item, before deployment/before model results are inspected, and can be revised if hidden dependencies (e.g., unavailable credentials) are later discovered.
+- ⟦TERM⟧ is a difficulty/capability-tier rating tied to expected performance, scored such that failures falling below an agent's assigned ⟦TERM⟧ are read as unexpected regressions rather than ordinary misses.
+- ⟦TERM⟧ applies at the level of individual evaluation items/tasks within a multi-tier, multi-environment agent evaluation suite, assigned prior to running any system on the task.
+- ⟦TERM⟧ predicts observed failure rates among lower-tier agents (e.g., accounting for 71% of observed failures), which is used to reduce the volume of failures forwarded for manual investigation.
+- ⟦TERM⟧ must remain stable across independent adjudicators/annotators for an item to be included in reported results; items with unstable ⟦TERM⟧ are excluded.
+- ⟦TERM⟧ can diverge from actual outcomes in specific ways (e.g., agents passing higher-tier items via narrow memorized procedures while failing lower-tier items), meaning it does not imply a single monotonic capability scale.

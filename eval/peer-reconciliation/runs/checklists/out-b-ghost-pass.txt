@@ -1,0 +1,6 @@
+- Mechanism: occurs when the grader/parser fails to parse the answer span (or malformed output) but the fallback/default branch still returns a correct label or credit instead of an explicit parsing failure.
+- What is measured: frequency/count of such mislabeled-credit cases, scored as a rate (e.g., 0.06 or 7%) or raw count across replayed/injected transcripts.
+- Setting/trigger: arises specifically when replaying or injecting malformed/unparseable answer spans or parser outputs into the grading pipeline.
+- Constraint: removing the fallback branch (adding a parser guard) drives the rate to zero, confirming the fallback branch is the direct cause.
+- Constraint: eliminating this fallback credit reduces overall scoring coverage (observed 3 percentage point drop) as a tradeoff.
+- Constraint: correcting for it lowers reported accuracy/success across all models, showing prior rankings partly reflected unjudged rather than verified outputs.

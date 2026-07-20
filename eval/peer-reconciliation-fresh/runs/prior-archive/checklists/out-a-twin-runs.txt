@@ -1,0 +1,6 @@
+- Presents the same underlying task/item to a model in two rephrased variants (e.g., casual vs. formal phrasing, bullet list vs. prose) while keeping the underlying ask identical.
+- Only the surface formatting/wording differs between the paired variants; the core content and requirements stay the same.
+- Measures the gap/difference in outcome (e.g., pass rate or score) between the two phrasings of each paired item.
+- Score is expressed as a point-difference (e.g., an average gap of N points) between the reworded twin pair.
+- Applied across a set/suite of items, each paired with its reworded twin, and an average gap is computed over that set.
+- A smaller average gap is treated as reassuring evidence that the surviving items are still measuring substantive task performance rather than formatting/parsing sensitivity.

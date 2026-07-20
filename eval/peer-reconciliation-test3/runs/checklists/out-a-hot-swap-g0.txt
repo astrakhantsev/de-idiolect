@@ -1,0 +1,6 @@
+- Mechanism: mid-task, the underlying model is swapped to a different/newer version while the task is still in progress (files already modified, decisions already made, tests already partially passing).
+- What's measured: the "coherent continuation rate" — the percentage of runs that pick up the existing thread cleanly, respect prior file structure, and don't contradict earlier naming/design decisions vs. those that treat existing work as suspicious and start rewriting or restarting from scratch.
+- Scoring/reading: expressed as a percentage of sessions/runs exhibiting coherent continuation (e.g., 84%, up from 71%), with the complement being failed continuation (amnesia-like restarts or unwarranted rewrites).
+- When/where it applies: triggered by a model/version change occurring mid-task or mid-batch — either deliberately attempted or forced by a vendor's deprecation notice — during live, in-progress work such as refactors with partially edited files and passing tests.
+- Constraint: outputs must be double-checked/graded more than once rather than trusted from a single pass, since a mid-run model change can cause inconsistent verdicts on identical content.
+- Constraint: file-edit history must be explicitly preserved across the swap boundary rather than relying on the new model to infer prior context, which improves the coherent continuation rate.

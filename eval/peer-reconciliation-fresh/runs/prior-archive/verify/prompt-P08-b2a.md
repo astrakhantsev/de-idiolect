@@ -1,0 +1,24 @@
+DEFINITION of a concept:
+
+A quality-control procedure for batches or multi-task evaluation sessions. It inserts a fixed number of previously verified known-answer cases—eight per batch or twice per session—into the work stream without positional regularity or with their answers absent from the briefing. Before retaining or computing aggregate metrics, it scores these cases by checking whether judges or agents give the correct supported judgment. It asserts that unsupported negative judgments on known cases, or acceptance of an incorrect result as compliant, signal contamination. Either event halts the batch or session; halted work is excluded from final reported results and aggregate metrics. Resetting session history between items reduces the contamination pattern targeted by this halt rule.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used.
+
+For EACH excerpt independently, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by DEFINITION?
+
+- "instantiates" — the usage is consistent with the definition and exemplifies it. Requires a verbatim supporting quote from the excerpt.
+- "contradicts" — the usage is incompatible with the definition (the referent has a property the definition excludes, or lacks one it requires). Requires a verbatim quote of the incompatible fragment.
+- "insufficient" — this excerpt alone does not contain enough to decide.
+
+Judge each excerpt on its own text only. Do not let other excerpts or the term's surface influence you.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "verdict": "instantiates|contradicts|insufficient", "quote": "verbatim quote (empty string only for insufficient)"}, ...]
+
+EXCERPTS:
+
+1. That's not the model, that's the serving stack doing something nondeterministic downstream, probably batching-related, and it means our confidence numbers this month have that much slop baked in regardless of the actual reasoning quality. Ran a ⟦TERM⟧ right after to sanity-check the scorer while we were at it. Randomized every timestamp, run id, and output filename we could find and reran the same 80 tasks.
+2. Given the concurrency pattern above, I'd bet money it does. Ran a ⟦TERM⟧ on the tier anyway just to rule out the boring explanation. Randomized filenames and commit hashes across all 60 items and reran.
+3. Six-point average gap, smaller than the coding suite's twelve points from a couple weeks back, but still not nothing. Threw a ⟦TERM⟧ at the whole tier afterward, randomizing item ids and filenames, and scores held flat, so at least that's not contaminated.
+4. Threw a ⟦TERM⟧ at the whole tier afterward, randomizing item ids and filenames, and scores held flat, so at least that's not contaminated. Finally logged all of this in the ⟦X⟧ before I forgot which changes went with which result — the ration bump, the twin rewordings, the ⟦TERM⟧ pass, all timestamped separately, because last time I skipped this step I spent a whole day re-deriving what I'd already tested.
+5. Not worth the convenience anymore. ⟦TERM⟧ on the full remaining suite came back clean, no score movement under randomized ids and filenames, which is one less thing to worry about heading into next quarter.

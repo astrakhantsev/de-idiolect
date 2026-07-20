@@ -1,0 +1,24 @@
+DEFINITION of a concept:
+
+A scoring procedure for evaluating an answer against its full working record, not just its final text. For each requested field, classification, merge, or resolution, it requires a link to the exact record line that contains relevant retrieved evidence or an explicit statement that the field remains unresolved. It awards credit only when each scoring decision has such traceable support; plausible but unsupported inferences receive no credit. It produces evidence-linked scores and can reveal or reduce previously accepted completion accuracy when accepted outputs lack a documented basis.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used.
+
+For EACH excerpt independently, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by DEFINITION?
+
+- "instantiates" — the usage is consistent with the definition and exemplifies it. Requires a verbatim supporting quote from the excerpt.
+- "contradicts" — the usage is incompatible with the definition (the referent has a property the definition excludes, or lacks one it requires). Requires a verbatim quote of the incompatible fragment.
+- "insufficient" — this excerpt alone does not contain enough to decide.
+
+Judge each excerpt on its own text only. Do not let other excerpts or the term's surface influence you.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "verdict": "instantiates|contradicts|insufficient", "quote": "verbatim quote (empty string only for insufficient)"}, ...]
+
+EXCERPTS:
+
+1. While we were in there we pulled the ⟦TERM⟧ for the honest reruns versus the old cached numbers, and the shape had changed a lot — the current model front-loads almost 60% of its tokens into exploration before it commits to an answer, where six months ago it was closer to a flat curve across the task.
+2. Started plotting ⟦TERM⟧ for every agent version as a matter of habit and it's caught more regressions than the actual pass/fail numbers have.
+3. Last thing worth mentioning: we caught a shuffle fragility case purely from the ⟦TERM⟧ looking wrong.
+4. While rerunning we watched for probe-shadow given how much extra logging we bolted on to catch the caching bug, and sure enough the added instrumentation slowed things down enough to shift the ⟦TERM⟧ — much more front-loaded exploration than usual, like the agent was reacting to slower tool round-trips by hedging earlier.
+5. ⟦TERM⟧ on the drifted tasks shifted too — much flatter now, less of the late-stage verification burn we used to see, which tracks with an agent that's less willing to double check itself before answering.

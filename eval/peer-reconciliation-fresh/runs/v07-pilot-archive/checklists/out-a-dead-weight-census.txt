@@ -1,0 +1,6 @@
+Run across multiple agent versions on a fixed suite of items, checking whether each item's outcome is identical (pass-everything or fail-everything) across all versions
+Produces a percentage/share of items that are pass-everything or fail-everything, computed over the total item count in the suite
+Applied to eval suites (e.g. migration, support-ticket, onboarding-flow) run repeatedly across successive agent versions, typically ahead of a review
+Requires at least three (four or more observed) agent versions' results on the same item set to classify each item
+A higher percentage indicates less differentiation between agent versions (items no longer separate outcomes across versions)
+Comparable across different suites and time periods, since results are reported and compared against prior runs (e.g. "higher than the migration suite from last week")

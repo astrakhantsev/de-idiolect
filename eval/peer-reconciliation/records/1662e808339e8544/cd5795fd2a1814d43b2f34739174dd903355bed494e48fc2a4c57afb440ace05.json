@@ -1,0 +1,45 @@
+{
+ "pair_key": "1662e808339e8544",
+ "pair_id": "P10",
+ "terms": {
+  "a": "menu pinning",
+  "b": "self-contradiction incidence"
+ },
+ "proposed_relation": "noMatch",
+ "evidence": {
+  "a2b": {
+   "n": 6,
+   "k": 0,
+   "c": 6,
+   "u": 0,
+   "agg": "fails",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 5,
+   "k": 0,
+   "c": 5,
+   "u": 0,
+   "agg": "fails",
+   "quote_downgrades": []
+  }
+ },
+ "adjudicated_relation": "noMatch",
+ "status": "adjudicated",
+ "adjudicator": "synthetic-key-8477e275",
+ "correct": true,
+ "provenance": {
+  "gen_a": "claude-sonnet",
+  "gen_b": "codex-gpt-5.6-terra",
+  "def_a": "claude-opus",
+  "def_b": "codex-gpt-5.6-terra",
+  "verify_a2b": "claude-opus",
+  "verify_b2a": "codex-gpt-5.6-terra"
+ },
+ "derived_from": [],
+ "earliest_found_in_search": {
+  "synthetic": true,
+  "note": "no priority inference licensed"
+ },
+ "version_id": "cd5795fd2a1814d43b2f34739174dd903355bed494e48fc2a4c57afb440ace05"
+}

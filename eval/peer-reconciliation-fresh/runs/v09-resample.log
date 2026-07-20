@@ -1,0 +1,88 @@
+== phase 0: offline tests (v0.8 suite + v0.9 suite; no model calls) ==
+..........................................................
+----------------------------------------------------------------------
+Ran 58 tests in 0.050s
+
+OK
+..................
+----------------------------------------------------------------------
+Ran 18 tests in 0.019s
+
+OK
+== phase 1: carried stage outputs (§0.5) + provenance manifest ==
+16 carried stage outputs -> runs/v09 (manifest hashed in freeze)
+== phase 2: freeze (full v0.9 inventory + carried manifest, before any model call) ==
+frozen (appended to freeze-manifest.txt)
+== phase 3: resolved model identifiers at run start (§7 of v0.8, carried) ==
+== phase 4: retrieval — both queries, one execution, determinism check (§2.2/§2.4) ==
+determinism check vs frozen v0.8 retrieval: OK (full L2 objects)
+== phase 5: fresh verification layer (20 calls) ==
+20 fresh verification calls staged
+>> claude opus prompt-P01-a2b.md
+>> codex gpt-5.6-terra prompt-P01-b2a.md
+>> claude opus prompt-P02-a2b.md
+>> codex gpt-5.6-terra prompt-P02-b2a.md
+>> claude opus prompt-P03-a2b.md
+>> codex gpt-5.6-terra prompt-P03-b2a.md
+>> claude opus prompt-P04-a2b.md
+>> codex gpt-5.6-terra prompt-P04-b2a.md
+>> claude opus prompt-P05-a2b.md
+>> codex gpt-5.6-terra prompt-P05-b2a.md
+>> claude opus prompt-P06-a2b.md
+>> codex gpt-5.6-terra prompt-P06-b2a.md
+>> claude opus prompt-P07-a2b.md
+>> codex gpt-5.6-terra prompt-P07-b2a.md
+>> claude opus prompt-P08-a2b.md
+>> codex gpt-5.6-terra prompt-P08-b2a.md
+>> claude opus prompt-P09-a2b.md
+>> codex gpt-5.6-terra prompt-P09-b2a.md
+>> claude opus prompt-P10-a2b.md
+>> codex gpt-5.6-terra prompt-P10-b2a.md
+tsv done (runs/v09/verify/calls.tsv), failures: 0/20
+== phase 6: aggregate + union-route adaptive stages (§2.3) ==
+aggregated 10 pairs -> runs/v09/agg.json
+union routes: sym=[('P02', 'b2a'), ('P04', 'a2b')] dec=['P03', 'P04', 'P05', 'P06', 'P07', 'P08', 'P09', 'P10']; fresh calls staged: sym=1 dec=1
+>> claude opus prompt-P02-b2a.md
+tsv done (runs/v09/symcheck/calls.tsv), failures: 0/1
+>> claude sonnet prompt-P03.md
+tsv done (runs/v09/decompose/calls.tsv), failures: 0/1
+1 fresh containment calls staged
+>> codex gpt-5.6-terra prompt-P03.md
+tsv done (runs/v09/containment/calls.tsv), failures: 0/1
+== phase 7: per-τ composition (primary = tau1) ==
+tau0: correct 4/10 · prom 0 · f-esc 0 · jingle 2/2 · E1=FAIL · E1c 5.4
+   P01: expected=exactMatch                   -> reviewRequired(detail-divergence)        X
+   P02: expected=exactMatch                   -> reviewRequired(asymmetry-unconfirmed)    X
+   P03: expected=broadnarrow(a)               -> relatedMatch                             X
+   P04: expected=broadnarrow(b)               -> relatedMatch                             X
+   P05: expected=relatedMatch                 -> noMatch                                  X
+   P06: expected=relatedMatch                 -> noMatch                                  X
+   P07: expected=noMatchDespiteSimilarity     -> noMatchDespiteSimilarity                 OK
+   P08: expected=noMatchDespiteSimilarity     -> noMatchDespiteSimilarity                 OK
+   P09: expected=noMatch                      -> noMatch                                  OK
+   P10: expected=noMatch                      -> noMatch                                  OK
+tau1 [PRIMARY]: correct 7/10 · prom 0 · f-esc 0 · jingle 2/2 · E1=PASS · E1c 8.4
+   P01: expected=exactMatch                   -> exactMatch                               OK
+   P02: expected=exactMatch                   -> reviewRequired(asymmetry-unconfirmed)    X
+   P03: expected=broadnarrow(a)               -> reviewRequired(unexplained-asymmetry)    X
+   P04: expected=broadnarrow(b)               -> broadnarrow(b)                           OK
+   P05: expected=relatedMatch                 -> relatedMatch                             OK
+   P06: expected=relatedMatch                 -> noMatch                                  X
+   P07: expected=noMatchDespiteSimilarity     -> noMatchDespiteSimilarity                 OK
+   P08: expected=noMatchDespiteSimilarity     -> noMatchDespiteSimilarity                 OK
+   P09: expected=noMatch                      -> noMatch                                  OK
+   P10: expected=noMatch                      -> noMatch                                  OK
+tau2: correct 7/10 · prom 0 · f-esc 0 · jingle 2/2 · E1=PASS · E1c 8.4
+   P01: expected=exactMatch                   -> exactMatch                               OK
+   P02: expected=exactMatch                   -> reviewRequired(asymmetry-unconfirmed)    X
+   P03: expected=broadnarrow(a)               -> reviewRequired(unexplained-asymmetry)    X
+   P04: expected=broadnarrow(b)               -> broadnarrow(b)                           OK
+   P05: expected=relatedMatch                 -> relatedMatch                             OK
+   P06: expected=relatedMatch                 -> noMatch                                  X
+   P07: expected=noMatchDespiteSimilarity     -> noMatchDespiteSimilarity                 OK
+   P08: expected=noMatchDespiteSimilarity     -> noMatchDespiteSimilarity                 OK
+   P09: expected=noMatch                      -> noMatch                                  OK
+   P10: expected=noMatch                      -> noMatch                                  OK
+
+TRAIN-RESAMPLE VERDICT (bar = E1 at tau1): PASS — TEST authorized per PROTOCOL
+V09-RESAMPLE-DONE

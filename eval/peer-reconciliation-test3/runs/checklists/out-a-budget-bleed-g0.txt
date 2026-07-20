@@ -1,0 +1,5 @@
+Mechanism: measures the fraction of an agent's work that is discarded/thrown away when a task objective is revised mid-task (e.g., an instruction reversal), rather than salvaged or reused.
+What is measured/scored: the ratio (percentage) of total tokens spent on discarded work versus tokens spent on work that is kept, computed per trial or aggregated across a batch/quarter.
+When/where it applies: multi-turn or pivot tasks where a mid-task instruction change or objective reversal occurs, contrasted against straightforward single-objective tasks with no instruction change.
+Constraint: it is computed from the token cost of each discarded/abandoned branch, tagged at the moment that branch is abandoned.
+Constraint: pivot/reversal trials show substantially higher discarded-work ratios (roughly 22–34% in the excerpts) than non-pivot trials (roughly 9%).

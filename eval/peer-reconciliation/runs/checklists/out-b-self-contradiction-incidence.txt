@@ -1,0 +1,6 @@
+- Compares an agent's final output/totals against an authoritative in-trajectory tool output (e.g., calculator, ledger-parser, formula-inspection, search/database results) generated earlier in the same run.
+- Triggered specifically when the agent's stated result disagrees or is checked against that tool-derived value, i.e., it applies to instances of discrepancy or contradiction with the tool's output.
+- Produced as a numeric rate/score (e.g., 0.12–0.37 range across conditions), read as a proportion of runs/cases exhibiting the phenomenon.
+- Applies within agentic task trajectories where an external tool (search, database, calculator, ledger-parser) has already produced a result prior to the measurement point.
+- Rate varies systematically with evidence properties, notably rising when near-duplicate or equivalent records/identifiers are present in the evidence set.
+- Measurement requires controlling for order/identity effects by shuffling or randomizing equivalent records across multiple harness repetitions.

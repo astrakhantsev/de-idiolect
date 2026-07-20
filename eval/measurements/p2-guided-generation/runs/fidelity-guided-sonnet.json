@@ -1,0 +1,13 @@
+```json
+{
+  "i": "PRESERVED — the definition is built around whether an estimate is worth having: it 'outputs how much of a fixed decision-value prize the estimate keeps compared with using no estimate at all,' matching the notes' framing 'how good must a dependence estimate be before it beats simply not having one?'",
+  "ii": "PRESERVED — it 'takes an estimate's typical error size' as its input condition, mirroring the notes' quality condition 'An estimator needs log-count RMSE ≲ 0.3 to keep ~85% of that prize.'",
+  "iii": "PRESERVED — the threshold and fractions are 'fixed in advance, independent of any particular candidate, so a new estimate can be checked against them without needing to know how it was built,' matching the notes' pre-build question 'would an estimator this accurate suffice?' and 'how good must a dependence estimate be before it beats simply not having one?'",
+  "iv": "PRESERVED — it states 'one particular error size where the share crosses below the no-estimate baseline; beyond that point the estimate ... actively costs more,' matching 'past ~1.0 it becomes WORSE THAN NO ESTIMATOR' and 'clear the bar.'",
+  "v": "PASS — the definition is fully abstract and introduces no benchmark, dataset, or metric specifics (no RMSE/Brier/count values or pool names) beyond what the excerpts contain.",
+  "vi": {
+    "named_items_in_definition": [],
+    "not_in_notes": []
+  }
+}
+```

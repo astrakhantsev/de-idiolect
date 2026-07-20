@@ -1,0 +1,7 @@
+Instrumentation (e.g., logging/wrapper code) adds measurable latency by executing synchronously before each tool call.
+This added latency triggers the agent's own internal timeout logic to fire prematurely.
+Premature timeouts cause the agent to retry tool calls that would have otherwise succeeded.
+Occurs specifically when comparing behavior across environments (e.g., eval harness vs. sandbox) with identical prompts, model, and tools.
+The effect is measured by observed behavioral divergence between environments despite identical inputs, and resolved when metrics converge after fixing the instrumentation (e.g., making logging asynchronous).
+The artifact reflects instrumentation contention, not model capability differences.
+Past data collected before the fix may be contaminated by this artifact and cannot be retroactively corrected.

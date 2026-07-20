@@ -1,0 +1,5 @@
+- Mechanism: the ⟦TERM⟧ is a check/analysis applied to free-form explanations produced alongside tool outputs, specifically to detect verbatim carryover of phrasing from the few-shot prompt examples into the agent's own explanation text.
+- What is measured/scored: it produces a failure rate — the percentage of free-form explanations containing inappropriate copied phrasing (e.g., 9.6%, reduced to 1.8% after removing examples).
+- Setting/trigger: it applies when few-shot prompts with distinctive/unusual worked examples or connective phrases are used, and is run against the resulting free-form explanations even when the final tool output is correct.
+- Constraint: it can be run repeatedly (e.g., a second pass after paraphrasing the examples) and its detected copied-phrasing rate is distinct from and does not by itself change other measured effects (e.g., ⟦X⟧ effects).
+- Constraint: the phenomenon it flags (copied phrasing) is not simply eliminated by improving task completion — removing examples lowers the failure rate but also lowers task completion, showing the two are separately tracked outcomes.

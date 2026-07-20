@@ -1,0 +1,5 @@
+- Mechanism: ⟦TERM⟧ is measured by swapping only the tool-selection module between two otherwise identical agent stacks while holding the rest of the stack constant.
+- Measured/produced: ⟦TERM⟧ is the change in total actions (action count) taken relative to the original/unswapped selector, expressed as a percentage change or an average additional-action count.
+- Setting/trigger: applies across varied task conditions — routine vs. multi-file tasks, interrupted runs involving a reversal, standing vs. newly authored tasks, and runs with corrupted observations.
+- Directionality constraint: ⟦TERM⟧ can be positive or negative depending on task familiarity — reducing actions on familiar/routine/standing tasks, increasing actions on multi-file, newly authored, post-reversal, or post-corruption conditions.
+- Constraint: findings are limited to a fixed set of repositories and a single automated checker configuration.

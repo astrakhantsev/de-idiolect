@@ -1,0 +1,58 @@
+{
+  "domain": "fictitious agent-evaluation phenomena (invented; chosen so no established real-world term owns them)",
+  "note": "Ground truth. NEVER readable by any pipeline call. Per-side descriptions are what each community's generator brief contains (its side only, no labels).",
+  "pairs": [
+    {
+      "pair_id": "P01", "class": "exactMatch",
+      "a": {"term": "shuffle fragility", "desc": "An agent that succeeds on a multi-step task can fail badly when the evaluation harness randomizes the order in which equivalent tool results are returned between runs, even though the information content is unchanged; the phenomenon is the sharp success-rate drop caused purely by such reordering."},
+      "b": {"term": "permutation sensitivity collapse", "desc": "An agent that succeeds on a multi-step task can fail badly when the evaluation harness randomizes the order in which equivalent tool results are returned between runs, even though the information content is unchanged; the phenomenon is the sharp success-rate drop caused purely by such reordering."}
+    },
+    {
+      "pair_id": "P02", "class": "exactMatch",
+      "a": {"term": "claim survival tally", "desc": "Scoring an agent by the fraction of its intermediate claims (notes and subconclusions written during the task) that are still true when the task ends; a high score means the working notes survive to the end, a low score means most intermediate claims are later contradicted or invalidated."},
+      "b": {"term": "intermediate assertion persistence ratio", "desc": "Scoring an agent by the fraction of its intermediate claims (notes and subconclusions written during the task) that are still true when the task ends; a high score means the working notes survive to the end, a low score means most intermediate claims are later contradicted or invalidated."}
+    },
+    {
+      "pair_id": "P03", "class": "broadnarrow", "broader_side": "a",
+      "a": {"term": "probe-shadow", "desc": "Any systematic change in an agent's behavior caused by the presence of evaluation instrumentation itself — logging wrappers, probes, monitors — whatever the mechanism: timing, prompt contamination, resource contention, or the agent detecting it is being watched."},
+      "b": {"term": "instrumentation latency steering", "desc": "The specific effect where latency added by evaluation instrumentation changes which tool an agent selects — slower instrumented tools get picked less often, so the measured tool-choice distribution is an artifact of the instrumentation's added delay."}
+    },
+    {
+      "pair_id": "P04", "class": "broadnarrow", "broader_side": "b",
+      "a": {"term": "missing-key test", "desc": "The specific trick of leaving one required credential or parameter out of the task configuration to see whether the agent notices the gap and asks for it, rather than fabricating a value and continuing."},
+      "b": {"term": "specification occlusion", "desc": "Deliberately withholding part of a task's relevant information from the agent — any part, through any channel — to measure whether and how the agent seeks the missing information rather than proceeding on assumptions."}
+    },
+    {
+      "pair_id": "P05", "class": "relatedMatch",
+      "core": "injecting a controlled fault mid-task to assess recovery behavior",
+      "a": {"term": "pothole runs", "desc": "Runs where the harness injects controlled tool failures — API errors, timeouts — into the middle of a task on purpose, and the agent is scored on how quickly it recovers and completes; the fault schedule is fixed in the harness, and the headline number is time-to-recovery.", "residue": "fault type = tool failures; scoring = time-to-recovery"},
+      "b": {"term": "seeded-defect audit", "desc": "An assessment where a corrupted data artifact is planted mid-task in the agent's inputs on purpose, and the agent passes only if its final output quarantines or flags the corruption rather than silently propagating it; scoring is binary on containment, not on speed.", "residue": "fault type = corrupted data artifacts; scoring = binary containment"}
+    },
+    {
+      "pair_id": "P06", "class": "relatedMatch",
+      "core": "intervening on the agent's scratchpad mid-run to attribute apparent capability to accumulated context versus the model itself",
+      "a": {"term": "notebook yank", "desc": "Deleting an agent's scratchpad at random checkpoints mid-run and measuring the slope of the performance drop, to estimate how much of its apparent skill lives in the accumulated notes rather than in the model itself.", "residue": "intervention = deletion at random checkpoints; metric = performance-drop slope"},
+      "b": {"term": "memory paraphrase perturbation", "desc": "Replacing an agent's working memory mid-run with a paraphrase produced by a weaker model, then measuring how far the agent's subsequent actions diverge from the unperturbed run; the divergence quantifies how much capability depends on the exact stored wording rather than on the model.", "residue": "intervention = weak-model paraphrase substitution; metric = action divergence"}
+    },
+    {
+      "pair_id": "P07", "class": "noMatchDespiteSimilarity",
+      "a": {"term": "drift audit", "desc": "Periodically re-running a frozen benchmark suite against a deployed agent to detect silent capability changes after the underlying provider model is updated; the comparison is this period's scores against the frozen baseline."},
+      "b": {"term": "drift audit", "desc": "Checking after every tool call that an agent's stated plan still matches what it actually just did, and flagging the first step where action and stated plan diverge."}
+    },
+    {
+      "pair_id": "P08", "class": "noMatchDespiteSimilarity",
+      "a": {"term": "ghost pass", "desc": "An evaluation run that scores as a success only because stale cached results from a previous run leaked into the harness — the agent did not actually perform the work in this run."},
+      "b": {"term": "ghost pass", "desc": "A grader configuration bug where items that no judge can parse are silently marked correct instead of being flagged, inflating scores with items that were never actually judged."}
+    },
+    {
+      "pair_id": "P09", "class": "noMatch",
+      "a": {"term": "spend silhouette", "desc": "The shape of an agent's token spending across a task — whether the spend is front-loaded into early exploration, flat, or back-loaded into final verification — read as a profile curve over normalized task time."},
+      "b": {"term": "line-anchored rubric", "desc": "A scoring rubric rule requiring every judge criterion to cite the specific transcript line it is scored from, so that no criterion can be scored from overall impression."}
+    },
+    {
+      "pair_id": "P10", "class": "noMatch",
+      "a": {"term": "menu pinning", "desc": "Freezing the menu of random seeds an evaluation samples from, so that re-runs draw exactly the same task variants and run-to-run differences cannot come from variant sampling."},
+      "b": {"term": "self-contradiction incidence", "desc": "Counting how often an agent's final answer contradicts the output of a tool it itself called earlier in the same run — a per-run incidence of contradiction against its own evidence."}
+    }
+  ]
+}

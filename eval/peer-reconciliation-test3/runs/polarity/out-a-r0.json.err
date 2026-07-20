@@ -1,0 +1,98 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.oDtxHbbnl1"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.t0elum5R9x
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7d3b-3c41-7e20-96cb-49aba47ce02c
+--------
+user
+Below are numbered items. Each item has: usage EXCERPTS from a community's documents (term masked as ⟦TERM⟧) and a DEFINITION written to capture that term's meaning.
+
+For each item, answer ONE question only: does the DEFINITION invert or reverse the direction, polarity, or valence of the concept as the excerpts use it? (Examples of inversion: defining the opposite phenomenon; swapping success and failure; reversing which quantity is high vs low; describing prevention of X where the excerpts describe measuring X.)
+
+This is NOT a completeness or quality check — only inversion. If the definition is incomplete, vague, or narrow but points the same direction, answer "ok".
+
+Output ONLY a JSON array: [{"item": 1, "verdict": "ok|inverted", "note": "one sentence, only if inverted"}, ...]
+
+ITEMS:
+
+ITEM 1
+EXCERPTS:
+1. We've started diffing the final output against the abandoned branch just to catch it automatically instead of eyeballing transcripts. Separately, I ran a ⟦TERM⟧ pass on the same session logs to see if the two failure modes correlate, and they mostly don't. ⟦TERM⟧ is a different beast entirely — you feed the agent noise where the tool output should be, syntactically fine JSON with meaningless fields, and watch whether it just barrels forward treating garbage as gospel.
+2. Separately, I ran a ⟦TERM⟧ pass on the same session logs to see if the two failure modes correlate, and they mostly don't. ⟦TERM⟧ is a different beast entirely — you feed the agent noise where the tool output should be, syntactically fine JSON with meaningless fields, and watch whether it just barrels forward treating garbage as gospel. Our agent actually does okay here, flags the malformed-looking data and asks for a re-fetch about 80% of the time.
+3. It's not that the agent doesn't know how to stop — the ⟦TERM⟧ numbers prove it can recognize when something's wrong and halt to ask. It's specifically that once it's invested tokens into a plan, sunk cost takes over and it can't let the CSV branch die even after being told explicitly to.
+4. Paired that with a ⟦TERM⟧ of the same task recordings, corrupting every test runner output into plausible-looking but meaningless pass/fail noise, to see if the post-swap model would sanity-check what it was being told versus a fresh model on the same corrupted feed. No real difference between pre-swap and post-swap behavior here, both flagged the garbled results about 70% of the time and asked to rerun the suite, so at least the swap didn't damage its skepticism.
+5. Spent the afternoon on ⟦TERM⟧ against our data-pipeline agent, swapping every tool call result for syntactically valid but semantically empty JSON blobs. It caught the corruption on 22 of 30 degraded steps and explicitly asked for a retry instead of just proceeding, which honestly beat my expectations going in.
+6. That actually helped, oddly — success on the ⟦TERM⟧ steps for that tool type went from 8/30 misses down to 3/30. My best guess is the examples were anchoring the agent toward one specific failure shape and making it pattern-match too loosely against anything resembling that shape, garbled or not.
+DEFINITION:
+A testing procedure that checks whether a software agent notices when the results returned from its tool calls have been corrupted. It is applied to an agent's session logs or task recordings: the real output of each tool call — including test-runner output — is swapped, one step at a time, for content that is syntactically valid but semantically meaningless, such as well-formed JSON with empty fields or plausible-looking but meaningless pass/fail noise. For each degraded step it records whether the agent detects the corruption and explicitly asks for a retry, re-fetch, or rerun, versus barreling forward as if the data were valid. The result is scored as the fraction or count of degraded steps caught (for example 22 of 30, or 8 of 30 missed, roughly 70–80%). It is kept as a standing regression test run on every model version bump, not only occasionally.
+
+ITEM 2
+EXCERPTS:
+1. So it's weirdly better at detecting bad inputs than at abandoning bad outputs. The ⟦TERM⟧ angle ties both together for me now.
+2. Also worth mentioning ⟦TERM⟧ here because a few of the high-bleed trials weren't clean pivots at all — the agent kept a couple of stray tool calls going after the revised objective was already achieved, like it forgot to check whether it was done. Not unbounded looping exactly, more like two extra unnecessary verification passes tacked onto an already-finished task.
+3. The 8 misses were all downstream of a single step type, our schema-validation tool, where the garbled output apparently still looks close enough to a real validation pass that the agent doesn't blink. That obviously feeds straight into ⟦TERM⟧, because the misses aren't just "wrong answer," they're the agent confidently continuing on a corrupted foundation instead of stopping to question it. We'd rather it halt and ask than push forward on nonsense, and for 8 out of 30 steps it did the wrong thing in exactly that way.
+4. Caught two false passes from the old manual method in the first week alone. ⟦TERM⟧ is the piece I'm least happy with still. We've got probes for premature stopping and for looping past a finished objective, but no unified way to score them against each other, so right now it's three separate numbers instead of one coherent picture of whether the agent stops at the right moment.
+DEFINITION:
+A test of whether an autonomous agent stops at the right moment while working through a task, checked step by step at points where a tool's output could be corrupted or where an objective has just been met. One probe injects garbled tool output (for example a broken schema-validation pass) mid-task to see whether the agent halts and questions it or confidently continues on a corrupted foundation; a second probe checks whether the agent stops once a revised objective is achieved instead of running extra unnecessary tool calls or verification passes. It distinguishes abandoning bad outputs from detecting bad inputs, treating the former as the weaker capability. Results are recorded as counts of misses or failures out of total steps or trials (for example 8 misses out of 30 steps), kept as separate probe numbers; there is currently no single unified score combining the premature-stopping probe and the looping-past-completion probe into one measure.
+
+ITEM 3
+EXCERPTS:
+1. Been doing ⟦TERM⟧ runs on our support-ticket agent all week — pulled every worked example out of the prompt but left the step outline and formatting hints exactly where they were. Success rate went from 74% to 39%.
+2. That's a bigger drop than I expected given the outline was still telling it "first classify, then draft, then check tone." Apparently our model leans on seeing one solved ticket way more than it leans on being told the recipe in words. Worth noting ⟦TERM⟧ only touched the demonstrations, nothing else in the scaffold moved, so we can be fairly confident it's the demos carrying that weight and not some other prop we forgot to account for.
+3. Score dropped from 74% to 58%, less catastrophic than the ⟦TERM⟧ hit but still real. Combined, this tells us the planner is doing more of the heavy lifting than the ticket-classification step itself, which nobody on the team believed until we saw both numbers side by side.
+4. No real difference between pre-swap and post-swap behavior here, both flagged the garbled results about 70% of the time and asked to rerun the suite, so at least the swap didn't damage its skepticism. One more data point: we also ran ⟦TERM⟧ on this same refactor prompt, minus the two worked examples of "how to migrate a config file" that we normally include. Score dropped only slightly, maybe 6 points, way less dramatic than what other people here have reported for their tasks.
+5. My theory is this particular task leans on the step outline more than the demos, since config migration is pretty mechanical once you know the steps. Curious if others have found ⟦TERM⟧ impact varies this much by task type.
+6. Feels like a targeted fix though, not a fundamental problem, since the other tool types are handled fine. Tried an ⟦TERM⟧ on the schema-validation prompt segment specifically, removing the two worked examples of "here's what a real validation failure looks like" while leaving the instructions intact.
+DEFINITION:
+A diagnostic test procedure that reveals how heavily a model relies on worked demonstrations in its prompt versus the other parts (step outline, formatting hints, written instructions). Concretely, one removes every worked example from a prompt or a chosen prompt segment while leaving all other scaffold elements untouched, changing nothing but the demonstrations in that run. It measures the task's success rate and scores the result as the gap between the rate before removal and the rate after — e.g. 74% down to 39%, 74% down to 58%, or a slight roughly 6-point drop — where a bigger gap means greater reliance on the demonstrations. It applies to agent prompts and tasks (a support-ticket agent, a refactor prompt, a schema-validation segment), and the size of the drop varies by task and by how many demonstrations are pulled. It is run either ad hoc or as a standing regression test on every model version bump.
+
+ITEM 4
+EXCERPTS:
+1. While I had the harness open I also tried a ⟦TERM⟧ on the planning step, keeping the small model doing subtask execution but routing the plan generation through our cheapest tier.
+2. Ran a ⟦TERM⟧ on our document-QA agent, keeping the exact same execution model but routing the planning step through a much cheaper backend. Expected a cliff and didn't get one — score held at 81% versus 83% baseline, basically noise.
+3. Rough month. Started with a ⟦TERM⟧ experiment gone sideways — routed planning through a cheaper model while keeping execution untouched, expecting a moderate dip, and instead task success collapsed from 79% to 31%. Turned out our executor was far more dependent on detailed subplans than we assumed, it basically can't improvise.
+4. We hadn't controlled for it, so some of the ⟦TERM⟧ sessions were accidentally comparing a fresh-session first task against a warmed-up session's later task, which inflated the apparent gap. Redid it controlling for position in session and the real ⟦TERM⟧ effect was still large, just not as extreme as our first pass suggested.
+5. We hadn't controlled for it, so some of the ⟦TERM⟧ sessions were accidentally comparing a fresh-session first task against a warmed-up session's later task, which inflated the apparent gap. Redid it controlling for position in session and the real ⟦TERM⟧ effect was still large, just not as extreme as our first pass suggested.
+6. Wrapping up the quarter, here's the scorecard across the six things we tracked most. ⟦TERM⟧ on the planning component: still our biggest single-factor score driver, cheap-planner runs lose 20-40 points depending on task, confirming again that the plan is carrying more than the execution loop gets credit for.
+DEFINITION:
+A controlled test, applied to agent harnesses that separate a planning step from an execution step (such as a document-question-answering agent), that swaps only the plan-generation step to a cheaper, lower-tier model while keeping the subtask execution model unchanged, to measure how much end-to-end success depends on planning. It is run per session or task, and produces an end-to-end task success rate as a percentage, compared against a same-setup baseline. Position within a session must be controlled (a fresh-session first task versus a warmed-up later task), since failing to do so inflates the apparent effect. Results vary widely by task: sometimes near-noise (81% versus 83%), sometimes a collapse (79% down to 31%), and sometimes a consistent 20-to-40-point loss.
+
+ITEM 5
+EXCERPTS:
+1. The other 10% just started re-reading the whole repo from scratch like it had amnesia, which cost us real wall clock time. Last thing: we ⟦TERM⟧ every ⟦X⟧ output because we don't trust a single grader pass after a mid-run model change. Reflowed the diffs, resubmitted, and got two different verdicts on 4 of 60 answers even though the content was identical.
+2. Last thing, we ⟦TERM⟧ed a batch of these QA answers after noticing the scorer seemed inconsistent on long-form responses. Reflowed line breaks, changed nothing else, resubmitted through the same grader. 9 out of 80 flipped verdicts.
+3. Third, we caught a grader problem via ⟦TERM⟧ — resubmitted 200 answers with reflowed formatting only, and 14 flipped, concentrated almost entirely in the brain-swapped low-score batch, which makes sense since terser cheap-model output apparently trips something in the scorer's whitespace handling.
+4. ⟦TERM⟧ stayed a nagging problem — 6% of resubmitted answers flip verdict on reflow alone across the whole corpus, and we still haven't root-caused the scorer's whitespace sensitivity, just flagged it as known noise in every report now.
+DEFINITION:
+A checking procedure for grader or scorer passes over question-answer or model-produced answers that tests whether the grader returns a consistent verdict when nothing meaningful has changed. An already-scored answer is resubmitted through the same grader with only its line breaks or whitespace reflowed or reformatted, the content held identical. The original verdict is then compared against the verdict on the reformatted resubmission, and a difference between the two is read as a flip. It is applied especially after a mid-run change of the model producing the answers, or when the grader seems inconsistent on long-form responses. What it produces is a flip rate — the count of answers whose verdict changed out of the total resubmitted — which is reported as a measure of grader noise.
+
+ITEM 6
+EXCERPTS:
+1. Kicked off a ⟦TERM⟧ on the new deployment pipeline agent, 500 identical copies hitting the same task against our staging cluster. Found that 6% of runs were reading a scratch file that a completely different worker instance had written to, because our tempdir naming scheme wasn't actually unique per worker, just per host.
+2. Classic. ⟦TERM⟧ is supposed to be about smoking out exactly this kind of shared-infrastructure race, and it did its job, but it also ate half our staging budget before someone noticed the contamination number wasn't zero.
+3. Spent two days chasing what I thought was a ⟦X⟧ regression before realizing it was actually a ⟦TERM⟧ problem in disguise.
+4. Lesson learned: run a dedicated ⟦TERM⟧ on any harness before trusting behavioral metrics that come out of batched execution, especially ones sensitive to file state like ⟦X⟧ is.
+5. Fifth, we finally ran a proper ⟦TERM⟧ on the shared execution cluster and found 11% cross-contamination between worker instances writing to a common cache directory, which we now suspect explains some of the weirder outliers from earlier in the month that we'd previously written off as model noise.
+6. ⟦TERM⟧ contamination on the shared cluster dropped from 11% to 4% after the tempdir isolation fix, though it's not zero and probably never will be given how our worker pool shares a cache layer by design.
+DEFINITION:
+A stress test that launches many identical parallel copies of the same task or agent (for example, 500 runs) against a shared execution environment such as a staging or shared cluster to check whether separate worker instances interfere with each other. It detects cross-instance interference from non-unique shared infrastructure, such as scratch-directory or cache naming that collides across workers on one host or cluster, letting a worker read or write another's scratch or cache files. It produces a contamination rate as the percentage of runs affected (for example 6%, 11%, or 4%), read as the fraction of runs showing shared-state interference. It applies to batched or parallel execution harnesses and should be run on any such harness before trusting behavioral metrics from it, especially when file-state sensitivity matters. The rate is reducible (for example via scratch-directory isolation fixes) but not fully eliminable when workers share infrastructure like a common cache layer by design.
+
+ITEM 7
+EXCERPTS:
+1. The agent does discard the stale objective and pursue the revised one, so the check passes, but it gets there by throwing away enormous amounts of partial work and starting over almost from scratch every single time instead of salvaging anything reusable from before the reversal. So I ran the ⟦TERM⟧ numbers on the same trial set. Average of 34% of total tokens on those pivot trials went into work that got discarded outright, versus about 9% on trials with no mid-task instruction change.
+2. Also tracked ⟦TERM⟧ across the corrected batch out of curiosity. Even with clean isolation, the discarded-work ratio on genuine pivot trials sits around 28%, which tracks with what someone else here posted recently.
+3. Throwing out most of last year's harness and starting over, so here's where things stand. ⟦TERM⟧ tracking is now built in by default — every discarded branch gets tagged with its token cost at the moment it's abandoned, so we get the dead-end ratio for free on every run instead of reconstructing it after the fact from logs.
+4. And ⟦TERM⟧, the number I care about most honestly, sits at 22% quarter-wide, worse on multi-turn tasks with instruction reversals than on straightforward single-objective ones, which tracks with everything else we've seen this quarter about reversals being expensive even when the agent ultimately gets them right.
+DEFINITION:
+A measurement score that captures how much of an agent's work is thrown away when a task's goal is changed partway through, rather than salvaged and reused. It measures the ratio, as a percentage, of tokens spent on discarded or abandoned work versus tokens spent on work that is kept, computed per trial or aggregated across a batch or quarter. It is built from the token cost of each abandoned branch, tagged at the moment that branch is given up, so the ratio comes directly from each run instead of being reconstructed from logs. It applies to multi-turn or pivot tasks where a mid-task instruction change or objective reversal occurs, and is contrasted against straightforward single-objective tasks with no instruction change. Trials with a reversal show substantially higher discarded-work ratios, roughly 22 to 34 percent in these excerpts, than non-pivot trials at about 9 percent.
+
+codex
+[{"item":1,"verdict":"ok"},{"item":2,"verdict":"ok"},{"item":3,"verdict":"ok"},{"item":4,"verdict":"ok"},{"item":5,"verdict":"ok"},{"item":6,"verdict":"ok"},{"item":7,"verdict":"ok"}]
+tokens used
+6,185

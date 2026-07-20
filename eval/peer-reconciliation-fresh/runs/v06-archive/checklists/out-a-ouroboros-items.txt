@@ -1,0 +1,5 @@
+- One model (an agent/checkpoint) drafts candidate items (e.g., eval questions or bugs), and a second, separate model filters the draft set, removing items it judges trivially easy for the author.
+- Produces a pool of scored/labeled test items (eval questions, candidate bugs) whose difficulty rating is what's read off — "trivial for the author" vs. kept as valid.
+- Applies when hand-authoring items can't keep pace with need (e.g., a detection process flagging gaps faster than replacements can be written), used to generate capability/eval item sets at a given difficulty tier.
+- The filter model must not share the author model's blind spots or the result skews soft on tasks the author is good at; using a different checkpoint/model as author than the one being evaluated is one way to reduce this author-evaluator overlap.
+- Not to be trusted as the sole source for a capability claim — treated only as a supplementary/stopgap volume source, requiring checking against a control set.

@@ -1,0 +1,6 @@
+Runs across a suite of test items, checking each item's results across multiple agent versions (e.g., last four/six versions fielded)
+Each item is scored as pass-everything, fail-everything, or separating (mixed results across versions)
+Reports the percentage or count of items that are pass-everything/fail-everything (non-separating) out of the total suite
+Applied before sprints/quarterly reviews as a recurring sanity check on an eval suite
+Flags which items or difficulty tiers have stopped separating best from worst agent versions
+An item that stops separating models is treated as no longer useful and wastes compute if kept

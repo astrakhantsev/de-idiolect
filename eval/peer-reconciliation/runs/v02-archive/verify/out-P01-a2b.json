@@ -1,0 +1,3 @@
+Looking at each excerpt against the definition (a bias in which input order/position sways the answer, treating whatever is first or incidentally arranged as authoritative rather than judging fit):
+
+[{"excerpt": 1, "verdict": "instantiates", "quote": "from 68% in the fixed-order condition to 43% in the shuffled condition"}, {"excerpt": 2, "verdict": "insufficient", "quote": ""}, {"excerpt": 3, "verdict": "instantiates", "quote": "different choices of which rule to treat as controlling"}, {"excerpt": 4, "verdict": "instantiates", "quote": "the largest losses among agents that committed to the first presented schema"}]

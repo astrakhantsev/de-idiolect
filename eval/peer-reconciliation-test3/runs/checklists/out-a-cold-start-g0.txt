@@ -1,0 +1,6 @@
+- Mechanism: the first task/ticket completed in a fresh agent session scores measurably worse than later tasks in that same session, an effect termed a "ramp-up penalty," attributed to the agent not yet having inferred/recalled which internal tool or retrieval index is correct/authoritative for the task.
+- Measurement: scored as points below the session mean (a per-session average score), with the gap for the first task quantified as a specific point deficit (e.g., 11–15 points).
+- Setting/trigger: applies specifically to the first task or ticket of a session on a given agent; does not manifest on later tasks within the same session.
+- Constraint: the gap is not explained by task difficulty (this was explicitly controlled for).
+- Constraint: the effect is distinct from and separately tracked alongside planning-step performance/execution quality, not conflated with it.
+- Constraint: the penalty is mitigated (but not eliminated) by seeding session memory with the disambiguating tool/index information up front.

@@ -1,0 +1,5 @@
+- Mechanism: ⟦TERM⟧ is a check/scan run over agents' free-form explanations, rationales, or final answers to detect inappropriate verbatim carryover of phrasing from the few-shot worked examples embedded in the prompt.
+- What is measured/produced: a rate (percentage) of outputs containing inappropriate copied example phrasing (e.g., 9.6%, 6.8%, 4.2%), read as a failure/detection rate that can rise or fall across conditions.
+- Setting/trigger: applies when few-shot prompts contain distinctive worked examples or connective phrases, and is run against the resulting free-form explanations/rationales/final answers produced by agents.
+- Constraint: can be applied repeatedly (a "second" ⟦TERM⟧) after interventions like removing, paraphrasing, or replacing the examples, to re-measure the copied-phrasing rate.
+- Constraint: the excerpts tie ⟦TERM⟧ findings specifically to phrasing/style carryover, not to correctness of final tool outputs — failures can occur despite correct final outputs.

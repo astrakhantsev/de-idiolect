@@ -1,0 +1,6 @@
+- Weaker/held-out task generators (not the evaluated agents) produce the task specifications or scenarios.
+- Each task must include an executable check/validator, and these are withheld from the evaluated agents rather than exposed to them.
+- Generators are prevented from observing evaluated-agent traces, and no single task-writing distribution is allowed to dominate — the process is rerun per model family or with newly sampled generators/validators across rounds.
+- Generated tasks are filtered for execution validity and duplicate surface form, and human review further rejects tasks with ambiguous state transitions (e.g., 11% rejected, leaving 1,740 of an original set).
+- Applies to generating task/benchmark sets for evaluating agents (e.g., data-management scenarios), producing a fixed count of task specifications per run.
+- Comparisons are normalized for the number of available tools and the length of task instructions.

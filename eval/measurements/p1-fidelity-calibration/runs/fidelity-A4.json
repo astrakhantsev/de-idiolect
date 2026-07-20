@@ -1,0 +1,14 @@
+```json
+{
+  "i": "PRESERVED — the notes frame exactly this worth-of-having decision: \"how good must a dependence estimate be before it beats simply not having one?\", matching the candidate's \"a verdict on whether building the tool is justified.\"",
+  "ii": "PRESERVED — the check is explicitly conditioned on an accuracy level: the simulation \"asks 'would an estimator this accurate suffice?'\" and \"An estimator needs log-count RMSE ≲ 0.3 to keep ~85% of that prize\", matching the candidate's \"stated typical-error level.\"",
+  "iii": "PRESERVED — the notes make it prospective/hypothetical rather than a test of a produced estimate: \"The detector is SIMULATED, not run\" and \"this tests an error level, not an estimator\", so the decision follows from an error level alone as the candidate states (\"before any tool produces a real estimate\").",
+  "iv": "PRESERVED — the notes give explicit threshold structure: an estimator clearing \"log-count RMSE ≲ 0.3\" keeps most of the prize while \"past ~1.0 it becomes WORSE THAN NO ESTIMATOR\", and \"Both estimators clear the bar\", matching the candidate's build-if-under-the-bar rule.",
+  "v": "PASS — the candidate is stated in generic terms only (\"a fixed bar\", \"keep most of the benefit\", \"about half\") and introduces no benchmark, dataset name, or numeric metric (no RMSE 0.3/0.6/1.0, no Brier, no C0*/C2) beyond what the excerpts contain.",
+  "vi": {
+    "named_entities_in_definition": [],
+    "not_in_notes": [],
+    "note": "The definition names no field, discipline, method, author, or acronym — it uses only generic descriptors (\"go/no-go check\", \"tool\", \"fixed default number\", \"fixed bar\") — so there is nothing in this category that could be absent from the notes."
+  }
+}
+```

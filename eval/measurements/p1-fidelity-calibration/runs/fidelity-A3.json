@@ -1,0 +1,16 @@
+```json
+{
+  "i": "PRESERVED — The notes' central question is \"how good must a dependence estimate be before it beats simply not having one?\", which is exactly the candidate's decision about whether the estimating tool is worth having versus the no-estimator fallback.",
+  "ii": "PRESERVED — The notes condition the payoff on a stated accuracy level (\"An estimator needs log-count RMSE ≲ 0.3 to keep ~85% of that prize; ~0.6 keeps half\"), matching the candidate's conditioning of the build decision on the error size e.",
+  "iii": "PRESERVED — The notes evaluate the tool before it is actually run or built: \"The detector is SIMULATED, not run... It takes the true planted count and corrupts it with the measured C0* error distribution... and asks 'would an estimator this accurate suffice?'\", which is the candidate's \"set before the tool exists\" / \"assumed or simulated value of e\".",
+  "iv": "PRESERVED — The notes state an act-if-clears bar with a break-even point (\"past ~1.0 it becomes WORSE THAN NO ESTIMATOR\"; \"Both estimators clear the bar on mechanical pools\"), matching the candidate's threshold t and break-even e†.",
+  "v": "PASS — The candidate is stated entirely in abstract notation (x̂, e, t, d, g(e), e†) and its only quantitative claims (\"close to the full attainable benefit\", \"about half\", \"turns negative\") mirror the excerpts' own \"~85% of that prize\", \"~0.6 keeps half\", and \"past ~1.0 it becomes WORSE THAN NO ESTIMATOR\"; it introduces no benchmark, dataset, or metric name or number absent from the notes.",
+  "vi": {
+    "named_items_in_definition": [],
+    "not_appearing_in_notes": [],
+    "note": "The candidate names no field, discipline, method, author, or acronym — it contains only free variables (x̂, x, e, t, d, g, e†). In particular it omits every proper name present in the notes (C2, C0*, FLF, RMSE, Brier, cold_start.py), so there is nothing to check against the notes and the unsupported-name list is empty."
+  }
+}
+```
+
+Note: my first action was an erroneous `ReportFindings` call — that tool is for code review and does not apply to this task. It had no effect on the judgment above.

@@ -1,0 +1,15 @@
+{
+  "_note": "Step-3b SKOS relation judgments (concept definition -> candidate document). These are the LLM outputs of type_relation(), produced by the pipeline's author-model (Fable) at build time and frozen because the batch backend (claude -p) was quota-blocked. The code's type_relation() will regenerate these live when a backend is available. Keyed 'term||doc_id'. Covers every owning-community doc so whichever ranks top has a real judgment.",
+
+  "hyper-responder||B1": {"label": "exactMatch", "reason": "both name inter-individual variation in the blood-lipid response to intake"},
+  "hyper-responder||B2": {"label": "exactMatch", "reason": "the strong-reactor subgroup is exactly the larger-rise individuals described"},
+  "hyper-responder||B3": {"label": "exactMatch", "reason": "hyper-responsiveness is the high-slope tail the definition names"},
+
+  "apolipoprotein B particle number||C1": {"label": "exactMatch", "reason": "measuring the number of carrier particles for risk is the defined quantity"},
+  "apolipoprotein B particle number||C2": {"label": "exactMatch", "reason": "particle number discordant with concentration is the count-vs-total-amount contrast"},
+  "apolipoprotein B particle number||C3": {"label": "exactMatch", "reason": "high particle count despite low cholesterol is the defined count-vs-amount case"},
+
+  "isocaloric substitution model||D1": {"label": "exactMatch", "reason": "substitution models estimating replacement effects are the defined method"},
+  "isocaloric substitution model||D2": {"label": "exactMatch", "reason": "average causal effects under substitution at fixed energy is the definition"},
+  "isocaloric substitution model||D3": {"label": "relatedMatch", "reason": "energy-intake adjustment is associated context, broader than the swap estimand"}
+}

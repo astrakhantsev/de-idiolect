@@ -1,0 +1,30 @@
+{
+  "preregistered": {
+    "occurrence_survival": "66/100 = 0.660",
+    "occurrence_survival_wilson95": [
+      0.563,
+      0.745
+    ],
+    "work_validity": "60/92 = 0.652",
+    "occurrence_failure_taxonomy": {
+      "unverifiable": 24,
+      "claim_not_locatable": 10
+    },
+    "work_failure_taxonomy": {
+      "unverifiable/None": 23,
+      "yes/minor": 3,
+      "yes/full": 6
+    }
+  },
+  "exploratory": {
+    "by_hedged": {
+      "hedged=False": "42/61 = 0.69",
+      "hedged=True": "24/39 = 0.62"
+    },
+    "by_experiment": {
+      "def-naming": "52/77 = 0.68",
+      "recall-backtest": "14/23 = 0.61"
+    }
+  },
+  "missing_work_verdicts": []
+}

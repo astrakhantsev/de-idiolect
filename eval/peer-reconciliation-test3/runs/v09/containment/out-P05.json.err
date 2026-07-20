@@ -1,0 +1,50 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.v1TKVFP7pF"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.EgO5o3MXst
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7d56-bba8-7c33-81ac-7dd09c4b8e63
+--------
+user
+Two communities each use their own term for practices that may or may not be related. Below are usage excerpts from community 1 (term masked ⟦T1⟧) and community 2 (term masked ⟦T2⟧). Other local jargon is masked as ⟦X⟧.
+
+Question: comparing the SETS of situations the two communities' excerpts describe —
+
+- "t1_within_t2": everything ⟦T1⟧'s excerpts describe is also an instance of what ⟦T2⟧'s excerpts describe, and ⟦T2⟧ additionally covers situations ⟦T1⟧'s excerpts do not (⟦T1⟧ is a special case of ⟦T2⟧).
+- "t2_within_t1": the mirror case (⟦T2⟧ is a special case of ⟦T1⟧).
+- "partial_overlap": the two share a specific common core, but EACH side also covers situations the other side's excerpts do not.
+- "no_relation": the two practices are not variants of one another — there is no specific common core beyond generic evaluation practice.
+- "unclear": the excerpts do not decisively support any of the above.
+
+Judge only from the excerpts. Do not assume the terms are related. A shared purpose is not containment — attend to the concrete mechanisms and conditions each side commits to.
+
+For every answer EXCEPT "unclear", give one verbatim quote from EACH community's excerpts carrying the decisive evidence: "quote_1" copied exactly from community 1's excerpts, "quote_2" copied exactly from community 2's excerpts. For "unclear", leave both quotes as empty strings.
+
+Output ONLY JSON:
+{"relation": "t1_within_t2" | "t2_within_t1" | "partial_overlap" | "no_relation" | "unclear", "quote_1": "...", "quote_2": "...", "justification": "one or two sentences citing the decisive evidence"}
+
+COMMUNITY 1 EXCERPTS:
+1. While I had the harness open I also tried a ⟦T1⟧ on the planning step, keeping the small model doing subtask execution but routing the plan generation through our cheapest tier.
+2. Ran a ⟦T1⟧ on our document-QA agent, keeping the exact same execution model but routing the planning step through a much cheaper backend. Expected a cliff and didn't get one — score held at 81% versus 83% baseline, basically noise.
+3. Rough month. Started with a ⟦T1⟧ experiment gone sideways — routed planning through a cheaper model while keeping execution untouched, expecting a moderate dip, and instead task success collapsed from 79% to 31%. Turned out our executor was far more dependent on detailed subplans than we assumed, it basically can't improvise.
+4. We hadn't controlled for it, so some of the ⟦T1⟧ sessions were accidentally comparing a fresh-session first task against a warmed-up session's later task, which inflated the apparent gap. Redid it controlling for position in session and the real ⟦T1⟧ effect was still large, just not as extreme as our first pass suggested.
+5. We hadn't controlled for it, so some of the ⟦T1⟧ sessions were accidentally comparing a fresh-session first task against a warmed-up session's later task, which inflated the apparent gap. Redid it controlling for position in session and the real ⟦T1⟧ effect was still large, just not as extreme as our first pass suggested.
+6. Wrapping up the quarter, here's the scorecard across the six things we tracked most. ⟦T1⟧ on the planning component: still our biggest single-factor score driver, cheap-planner runs lose 20-40 points depending on task, confirming again that the plan is carrying more than the execution loop gets credit for.
+
+COMMUNITY 2 EXCERPTS:
+1. The tool-selection module was then exchanged between two otherwise identical agent stacks. ⟦T2⟧ was reported as the change in total actions relative to the original selector. ⟦T2⟧ favored the compact selector on routine tasks, reducing action use by 18%, while increasing action use by 9% on multi-file tasks.
+2. ⟦T2⟧ was reported as the change in total actions relative to the original selector. ⟦T2⟧ favored the compact selector on routine tasks, reducing action use by 18%, while increasing action use by 9% on multi-file tasks. The substituted selector made fewer redundant searches but issued more premature edits.
+3. Agents that failed commonly retained a correct implementation of the original request and appended an incomplete revision. ⟦T2⟧ was measured by replacing only the tool-selection module during the same interrupted runs. ⟦T2⟧ was positive for the replacement selector, which consumed 4.3 additional actions on average after a reversal.
+4. ⟦T2⟧ was measured by replacing only the tool-selection module during the same interrupted runs. ⟦T2⟧ was positive for the replacement selector, which consumed 4.3 additional actions on average after a reversal. The added actions were primarily repository searches used to re-establish context.
+5. ⟦T2⟧ was negative on standing tasks, reducing total actions by 12%, but positive on newly authored tasks by 5%. ⟦T2⟧ therefore depended on whether the selector encountered familiar task structure.
+6. ⟦T2⟧ was negative on standing tasks, reducing total actions by 12%, but positive on newly authored tasks by 5%. ⟦T2⟧ therefore depended on whether the selector encountered familiar task structure.
+
+codex
+{"relation":"partial_overlap","quote_1":"Ran a ⟦T1⟧ on our document-QA agent, keeping the exact same execution model but routing the planning step through a much cheaper backend.","quote_2":"⟦T2⟧ was measured by replacing only the tool-selection module during the same interrupted runs.","justification":"Both describe controlled substitution of one agent component while holding other components fixed. ⟦T1⟧ specifically changes the planning backend and evaluates task success, whereas ⟦T2⟧ changes tool selection and measures action use under task conditions."}
+tokens used
+3,462

@@ -1,0 +1,6 @@
+- Mechanism: mid-task, the user issues a revised instruction (a pivot) that supersedes an in-progress goal (e.g., switching from CSV export to JSON summary), and the agent must drop the now-stale work and not include it in the final answer.
+- Measured/produced: a pass/fail (or percentage) score on whether the final answer is free of leftover content from the abandoned branch, verified by snapshotting full working state at the moment of reversal and programmatically checking nothing from the stale branch made it into the final answer.
+- Setting/trigger: applies specifically to trials where a mid-task instruction change occurs (a pivot trial), as opposed to trials with no such change.
+- Constraint: the final answer must not contain any remnants (e.g., half-finished prior-approach artifacts) of the pre-pivot work.
+- Constraint: the score reflects only the endpoint (whether stale work was excluded from the final answer), not the cost or efficiency of getting there (e.g., discarded token spend is not captured).
+- Constraint: scoring must be based on genuine per-trial working state, not contaminated by artifacts from other trials sharing infrastructure (e.g., batched worker execution sharing temp directories can corrupt results).

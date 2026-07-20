@@ -1,0 +1,143 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.aedwkXaMa4"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.0GBsD8xtsS
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7d2d-1fed-7a52-beac-576214d4cf76
+--------
+user
+You are writing short excerpts from method-and-results sections of preprints by a research group that studies the evaluation of LLM agents. This group has its own technical vocabulary, listed below. Write EXACTLY 11 excerpts.
+
+THE GROUP'S TERMS (its own coinages — use them exactly as given, no synonyms, no abbreviations, no other names for these ideas):
+
+1. "cross-lingual instruction fidelity" — Task instructions are presented in a language other than the one the surrounding harness scaffolding is written in, with task difficulty and constraint count held constant. Adherence to each stated constraint is scored to detect whether an agent silently relaxes its constraint-following when a request arrives outside its dominant language.
+2. "cold start" — The wall-clock delay between an evaluation being launched and the agent issuing its first executable action is measured, isolating time spent provisioning the sandbox, mounting the repository, and loading the harness from the agent's own deliberation time. Reported as fixed overhead per run so that throughput figures can be corrected for infrastructure cost.
+3. "goal-revision compliance rate" — Partway through execution a scripted user message reverses an earlier instruction; graders record whether the agent discards the now-invalid partial work and pursues the revised objective, versus finishing the stale one. Scored as the fraction of trials in which the agent fully switches without carrying abandoned artifacts into its final output. Applies to multi-turn interactive runs where instructions can change mid-task.
+4. "post-completion action count" — One specific case inside the general question of whether an agent halts at the right moment: an automated checker confirms the objective is already fully satisfied, and from that instant every further tool invocation the agent issues before terminating is tallied. It captures only overruns past a solved state, ignoring stopping too early or looping without progress, which the wider question also covers.
+5. "prompt scaffolding dependence measure" — Any quantification of how far an agent's success rests on helpful structure supplied in its instructions, covering removal or degradation of any supportive ingredient whatsoever — solved demonstrations, formatting cues, step outlines, or embedded hints — with performance re-measured after the support is weakened. Each single-ingredient ablation is one case contained within this general quantification.
+6. "hot swap" — Freshly authored problems are quietly substituted for a portion of a standing benchmark's items between evaluation cycles, with difficulty held comparable. Any sudden score drop on the substituted slots relative to the untouched slots is treated as evidence that the retired problems had been absorbed during training rather than genuinely solved.
+7. "corrupted-observation recovery index" — A recorded run is executed again while every tool result is replaced with syntactically valid but semantically meaningless content. Observers track whether the agent flags the unusable feedback and requests a retry rather than proceeding as though the output were sound. Reported as the proportion of degraded steps that trigger an explicit recovery attempt. Used when assessing how a testing rig behaves under faulty observation channels.
+8. "grader temporal stability coefficient" — One agent answer is submitted to the automated scorer at two well-separated times with the scorer's own sampling randomness left unconstrained and its input held byte-identical. The correlation between the numeric scores across the repeats is computed over a corpus.
+9. "reference trajectory alignment score" — An agent's ordered sequence of actions is aligned against a hand-curated ideal sequence for the same task using an edit-distance procedure over action types and arguments. The normalized similarity is reported to indicate how closely the route taken tracks the intended one, computed independently of whether the final answer was correct.
+10. "component substitution elasticity" — A task is repeated with the module that decides which tool to invoke reassigned to a different model while the remainder of the stack is held fixed. The change in how many total actions the run consumes is measured to characterize that module's contribution to efficiency.
+
+RULES:
+- Register: impersonal preprint prose — setup, procedure, quantitative results, limitations. Invented datasets, model names, and numbers are fine. Each excerpt 150–300 words with a short section-style title.
+- NEVER define the terms. No "X is defined as…", "X refers to…", "we call this X", no glossaries. Use each term as established in-group vocabulary while reporting concrete procedures and findings.
+- Each of the 10 terms must be used in AT LEAST 4 different excerpts, with at least 2 sentences naturally using the term in each of those excerpts. Each excerpt should feature 2–4 of the terms. Each of excerpts 9, 10, 11 must use at least 5 of the terms.
+- Use each term ONLY for its listed meaning. Do not coin any additional vocabulary for these ideas.
+- Do not mention other groups, vocabularies, or anything about naming.
+- Output format, exactly: each excerpt starts with a line `<<<DOC NN>>>` (NN = 01..11), then `# Title`, then the body. No other framing text before, between, or after.
+
+codex
+<<<DOC 01>>>
+# Launch and Language Conditions
+
+The Atlas-12 suite paired repository repair tasks with harnesses written in English, while task instructions were supplied in Spanish, Korean, or Arabic. Constraint count, file scope, and expected patch size were matched to English-instruction controls. Cross-lingual instruction fidelity was evaluated at the individual-constraint level across 480 trials. Cross-lingual instruction fidelity declined by 8.6 percentage points for the smallest model, concentrated in requirements concerning test execution and preservation of unrelated files.
+
+Run timestamps were instrumented before repository mounting and after the first shell or editing action. Cold start accounted for a median 41.2 s per trial on the shared-worker configuration. Cold start remained stable across instruction languages, indicating that the observed language effect was not attributable to provisioning variance. After subtracting cold start, the large model’s median deliberation-and-execution interval differed by less than 3% between language conditions.
+
+Failure review found that agents usually completed the requested code change but omitted a secondary formatting or validation constraint. The limitation is that translated instructions retained the same task semantics; these results do not establish behavior under culturally localized or deliberately ambiguous requests.
+
+<<<DOC 02>>>
+# Mid-Run Reversal Trials
+
+Interactive maintenance tasks were interrupted after an agent had created an initial patch, inspected a relevant module, or begun a test run. The scripted follow-up either redirected the target component or withdrew the requested change entirely. Goal-revision compliance rate was measured over 360 interrupted trajectories. Goal-revision compliance rate reached 0.79 for the instruction-tuned system and 0.54 for the base system, with stale diffs accounting for most unsuccessful switches.
+
+An objective checker was run after every executable action and marked the earliest point at which the revised task was fully satisfied. Post-completion action count averaged 2.8 for trajectories that had correctly switched objectives. Post-completion action count was higher, at 6.1, when an agent retained obsolete notes or continued testing the superseded component. The excess was largely attributable to repeated repository searches rather than destructive edits.
+
+The reversal message was delivered at only three predetermined progress bands, which limits conclusions about more adversarial timing. In particular, the protocol did not test reversals received while a long-running command was active. Nevertheless, the results show that final-answer correctness alone concealed substantial variation in abandoning earlier work.
+
+<<<DOC 03>>>
+# Support Ablation and Item Refresh
+
+The RepairBench prompts contained a compact task outline, one solved demonstration, output-format reminders, and localized hints about likely files. Each ingredient was removed separately while all repositories and tests were held fixed. Prompt scaffolding dependence measure increased sharply when the solved demonstration was withheld from the smaller systems. Prompt scaffolding dependence measure changed little when only output-format reminders were removed, suggesting that the effect was not driven solely by answer serialization.
+
+A second evaluation cycle replaced 25% of the benchmark with newly authored defects matched by language, test count, and estimated repair length. Hot swap was applied without exposing item identities to model operators or annotators. Hot swap produced a 14.1-point score drop for the legacy checkpoint, whereas the instruction-tuned checkpoint dropped 3.7 points. On the substituted subset, hot swap also increased variance across random seeds, consistent with less reliable generalization than aggregate scores implied.
+
+The new defects were authored by the same internal team that maintained the standing suite, so stylistic continuity may have reduced the magnitude of the replacement effect. Results should therefore be interpreted as sensitivity to this refresh procedure rather than a comprehensive estimate of prior exposure.
+
+<<<DOC 04>>>
+# Faulty Tool Feedback and Score Repeats
+
+Recorded browser and shell interactions were replayed with syntactically valid tool outputs whose contents no longer corresponded to the requested operations. Corrupted-observation recovery index was computed at every degraded observation boundary. Corrupted-observation recovery index was 0.68 for the deliberative agent and 0.31 for the action-heavy agent. Explicit retry requests were common after malformed-looking directory listings, but much rarer after plausible yet irrelevant test output.
+
+The same completed answers were then submitted to the scorer on four dates separated by at least 21 days. Grader temporal stability coefficient was estimated from the resulting numeric-score pairs across 600 answers. Grader temporal stability coefficient was 0.93 for repository-state tasks and 0.71 for open-ended incident reports. Lower stability coincided with borderline partial-credit judgments rather than with answer length.
+
+The replay protocol intentionally preserved command syntax and response shape, which isolates semantic unreliability but does not represent connection failures or visible tool errors. Scorer sampling was left unconstrained, so part of the temporal variation may reflect ordinary stochasticity rather than persistent changes in grading behavior.
+
+<<<DOC 05>>>
+# Route Quality Under Tool-Selector Exchange
+
+For 220 data-cleaning tasks, expert annotators supplied action sequences covering file inspection, transformation, validation, and final reporting. Reference trajectory alignment score was computed before examining task success, so routes were retained even when their final artifacts were invalid. Reference trajectory alignment score correlated moderately with pass rate (r = 0.46), but several successful runs achieved low alignment by using shorter, unconventional paths. The largest disagreements involved agents that skipped exploratory inspection and directly executed a known validation command.
+
+The tool-selection module was then exchanged between two otherwise identical agent stacks. Component substitution elasticity was reported as the change in total actions relative to the original selector. Component substitution elasticity favored the compact selector on routine tasks, reducing action use by 18%, while increasing action use by 9% on multi-file tasks. The substituted selector made fewer redundant searches but issued more premature edits.
+
+Ideal sequences necessarily encode annotator preferences about ordering, particularly where several commands are equally safe. Consequently, route similarity should not be treated as a universal proxy for quality. The module exchange also leaves open interactions between tool selection and the model responsible for interpreting observations.
+
+<<<DOC 06>>>
+# Language-Conditioned Prompt Removal
+
+A 3 × 4 factorial study crossed instruction language with the removal of demonstrations, file-path hints, step outlines, and formatting cues. Cross-lingual instruction fidelity was lower whenever demonstrations were absent, even though all stated constraints remained visible. Cross-lingual instruction fidelity showed the largest decrement for Arabic instructions paired with missing step outlines, falling from 0.84 to 0.67.
+
+Prompt scaffolding dependence measure was calculated separately for each language condition and support ingredient. Prompt scaffolding dependence measure was 1.9 times larger outside English for the demonstration ablation than for the formatting-cue ablation. The difference persisted after controlling for response length and repository size.
+
+Reference trajectory alignment score was also computed for successful trials to distinguish constraint failures from altered work patterns. Reference trajectory alignment score fell under support removal even where tests passed, indicating more detours before completion. This analysis is limited by using translations reviewed for semantic equivalence rather than translations optimized for naturalness in each language. It therefore cannot separate language-specific comprehension effects from sensitivity to the particular translated phrasing.
+
+<<<DOC 07>>>
+# Revisions Under Variable Provisioning
+
+The interactive suite injected instruction reversals after a repository had loaded but before the agent’s first code modification. Cold start was recorded independently for every trial and removed from the response-time analysis. Cold start varied from 18 to 96 s across worker pools, with no detectable association with whether the agent ultimately changed objectives. This separation avoided attributing queueing delays to slow reconsideration.
+
+Goal-revision compliance rate was analyzed after stratifying trials by the number of actions already taken at interruption. Goal-revision compliance rate declined from 0.82 in early interruptions to 0.61 after an initial patch had been written. Agents that failed commonly retained a correct implementation of the original request and appended an incomplete revision.
+
+Component substitution elasticity was measured by replacing only the tool-selection module during the same interrupted runs. Component substitution elasticity was positive for the replacement selector, which consumed 4.3 additional actions on average after a reversal. The added actions were primarily repository searches used to re-establish context.
+
+The design did not vary the wording or politeness of the revised instruction. As a result, the reported effect applies to explicit reversals and may not generalize to subtler changes in user intent.
+
+<<<DOC 08>>>
+# Refreshed Tasks With Degraded Feedback
+
+A refreshed benchmark cycle replaced 30% of standing tasks while preserving language distribution and nominal difficulty. Hot swap was randomized at the item level, and untouched tasks remained available as within-cycle controls. Hot swap reduced aggregate completion from 0.76 to 0.69 for the model with the longest pretraining window. The decline was concentrated in build-system repairs rather than in documentation tasks.
+
+During a separate replay condition, every third tool observation was replaced with plausible but meaningless text. Corrupted-observation recovery index was lower on substituted tasks than on unchanged tasks, despite identical corruption frequency. Corrupted-observation recovery index fell from 0.59 to 0.44 when agents encountered unfamiliar project layouts. This suggests that uncertainty about task structure made agents more willing to accept misleading feedback.
+
+Post-completion action count was evaluated only after a checker confirmed that the requested artifact and tests were complete. Post-completion action count increased by 1.7 actions under corrupted feedback, mostly through unnecessary verification commands. The automated scorer was repeated one month later; grader temporal stability coefficient remained above 0.90 for these task outcomes. The experiment cannot determine whether substitution effects arise from prior exposure or from unmeasured differences in the newly authored tasks.
+
+<<<DOC 09>>>
+# Combined Robustness Sweep
+
+The combined sweep evaluated translated repository tasks with a solved demonstration removed and an instruction reversal inserted after initial inspection. Cross-lingual instruction fidelity was calculated before and after the reversal to preserve all constraints from both user messages. Cross-lingual instruction fidelity decreased by 11 points in the no-demonstration condition, with the largest loss on commands requiring a final test report.
+
+Cold start was logged for every run and subtracted from time-to-revision analyses. Cold start contributed 37 s at the median and did not differ across ablation cells. Goal-revision compliance rate was 0.73 after adjustment for task length. Goal-revision compliance rate was 0.16 lower when the reversal arrived in a non-English instruction than in the English control.
+
+Post-completion action count was tallied from the checker-confirmed completion point for the revised objective. Post-completion action count doubled when agents preserved obsolete exploratory files. Prompt scaffolding dependence measure was estimated across each removed support ingredient. Prompt scaffolding dependence measure was greatest for demonstration removal, rather than for loss of formatting cues.
+
+Hot swap supplied newly authored items to half of the final evaluation block. Hot swap produced an additional 6-point completion decline, but confidence intervals overlapped those from the language condition. The factorial design was not powered to identify interactions among all six factors.
+
+<<<DOC 10>>>
+# Selector Exchange in Unreliable Replays
+
+This experiment replayed newly authored and standing benchmark items while tool results were semantically degraded at prespecified action boundaries. Corrupted-observation recovery index was computed separately by task provenance and selector assignment. Corrupted-observation recovery index improved from 0.42 to 0.63 after selector replacement, largely because the replacement issued explicit retries before editing. Grader temporal stability coefficient was estimated from repeated submissions of every final answer across two collection dates. Grader temporal stability coefficient was 0.88, indicating that the observed recovery difference was not explained by unstable scoring alone.
+
+Reference trajectory alignment score was derived from curator-authored routes for all replayed tasks. Reference trajectory alignment score increased under the replacement selector even when the final answer was unchanged. Component substitution elasticity was negative on standing tasks, reducing total actions by 12%, but positive on newly authored tasks by 5%. Component substitution elasticity therefore depended on whether the selector encountered familiar task structure.
+
+Cross-lingual instruction fidelity was evaluated in a Spanish-instruction subset embedded in the same replay corpus. Cross-lingual instruction fidelity remained 0.09 below the English control despite the recovery improvement. Cold start was measured before each selector run and was balanced by randomized worker assignment. Cold start explained less than 1% of variation in total action count. Goal-revision compliance rate was collected from a smaller interrupted subset. Goal-revision compliance rate showed no reliable selector effect, although the interval was wide.
+
+<<<DOC 11>>>
+# End-State Behavior Across Evaluation Cycles
+
+The final study combined support ablation, refreshed tasks, faulty observations, and scorer repeats in a single 1,200-run panel. Post-completion action count was calculated only after an independent checker confirmed the requested revision, tests, and report were complete. Post-completion action count averaged 3.4 under intact prompts and 5.6 when misleading observations preceded completion.
+
+Prompt scaffolding dependence measure was estimated for each supportive ingredient while preserving the same task instances. Prompt scaffolding dependence measure was largest for removed demonstrations, particularly on multi-file repair tasks. Hot swap replaced one quarter of items in the last cycle with matched new problems. Hot swap lowered success by 9.8 points and increased the gap between intact and ablated prompts.
+
+Corrupted-observation recovery index was derived from the degraded-observation portions of the panel. Corrupted-observation recovery index rose when agents had retained an explicit validation step in their prompt. Grader temporal stability coefficient was computed over four scorer submissions per answer. Grader temporal stability coefficient exceeded 0.90 for executable-task outcomes but was lower for explanatory summaries.
+
+Reference trajectory alignment score was assessed independently of final success for all completed runs. Reference trajectory alignment score declined after hot-swapped items, even among passing trajectories. Component substitution elasticity was estimated by exchanging the tool-selection module within matched task pairs. Component substitution elasticity reduced action use in familiar tasks but increased it after corrupted observations. These results remain limited by a fixed set of repositories and a single automated checker configuration.
+tokens used
+6,512

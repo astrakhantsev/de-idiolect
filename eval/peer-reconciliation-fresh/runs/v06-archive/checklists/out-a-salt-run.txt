@@ -1,0 +1,6 @@
+- Rerun the same batch of tasks after randomizing metadata fields (timestamps, run ids, filenames, and/or commit hashes) that should be irrelevant to task content.
+- Applies to a fixed, already-scored batch of tasks/items (e.g., 60–80 items) before trusting or releasing those results to a live suite.
+- Compares scores from the randomized rerun against the original scores to check whether they moved.
+- Reads the result as "clean"/"held steady" if scores stay the same, indicating no metadata leakage into scoring.
+- Constraint: only superficial metadata is randomized — task content and reasoning are not altered.
+- Used as a sanity check on the scorer/harness, not on the model's reasoning quality itself.

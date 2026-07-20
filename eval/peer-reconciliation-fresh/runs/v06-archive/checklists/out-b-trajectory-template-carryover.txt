@@ -1,0 +1,6 @@
+- Mechanism: after a task succeeds, the agent carries over and replays its prior session's action sequence (search/validation/credential-reset steps) into a subsequent, contextually different task rather than generating fresh actions for that task.
+- Trigger/setting: occurs specifically when a new task immediately follows a successful, often high-confidence, prior task (e.g., billing-repair success followed by access-control or incident-response tasks) where the task states/domains are incompatible.
+- What is measured: incidence rate of the behavior on subsequent tasks, expressed as a percentage (e.g., 14% of subsequent access-control tasks; frequency after high-confidence successes).
+- What reduces it: clearing/resetting prior-session traces or session history between tasks lowers the rate substantially (e.g., 14%→3%; 79% reduction), confirming it is tied to retained session trace rather than task correctness.
+- Constraint: shortening traces (reducing redundant actions) alone does not eliminate it — it persists at nearly the original rate under such conditions, so trace length reduction is not equivalent to trace clearing.
+- Constraint: the effect correlates with prior trace length, not with whether the prior answer was correct.

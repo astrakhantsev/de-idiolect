@@ -1,0 +1,7 @@
+- Mechanism: a set of previously verified cases (known-answer items) with pre-established correct judgments is embedded within a batch/session of otherwise real, unverified work items.
+- Placement is non-obvious: verified cases are distributed without positional regularity (or inserted at fixed multiplicity, e.g. twice per session) so they are not distinguishable from regular items.
+- What is measured: whether agents/judges correctly identify or score the known cases, specifically whether they produce unsupported negative judgments or accept incorrect outputs (e.g., an incorrect configuration change) as compliant.
+- Trigger/setting: applies during evaluation runs of agent performance over sequences of tasks (e.g., support-ticket resolution batches or multi-task sessions spanning different work types).
+- Constraint: a batch or session is halted once a threshold of known cases receives incorrect judgments (e.g., two known cases misjudged, or one incorrect acceptance).
+- Constraint: results/aggregate metrics exclude halted batches/sessions, and the check is evaluated before aggregate metrics are retained.
+- Constraint: resetting session history between items reduces the failure pattern it detects, indicating it is used to catch cross-item contamination/carryover effects.

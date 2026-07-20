@@ -1,0 +1,6 @@
+Same prompt, same session, submitted twice (a repeat-submission test).
+Compares outputs for exact/byte-for-byte match to detect nondeterminism.
+Divergence is measured as token-for-token difference (e.g., ~6% mismatch) or full differences in discrete outputs (e.g., citation, truncation point).
+Applies at temperature pinned to zero, where outputs are expected to be identical.
+Used to isolate stack-level randomness from other effects (e.g., harness/metadata bugs, truncation/budget-cut behavior).
+Triggered when results look suspicious (e.g., identical scores across differently-worded items, or an unexpectedly divergent output).

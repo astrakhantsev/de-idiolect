@@ -1,0 +1,6 @@
+- Mechanism: the agent applies whatever approach/pattern worked on its immediately preceding task, carrying it over to the current, different task rather than reasoning fresh about the current task's requirements.
+- Diagnostic test: clearing the session/history and re-presenting the same task causes the agent to pick the correct approach immediately, confirming the failure was recency-driven, not a capability gap.
+- What's measured: whether the carried-over action or strategy matches what the current task actually requires (correct vs. mismatched approach), read off agent logs/traces after the fact.
+- Setting/trigger: arises across consecutive tasks handled in the same session/history, where task N's successful action is reused on task N+1 despite differing conditions (e.g., resource constraints, required inputs, or failure type).
+- Constraint: the prior task's solution was appropriate for its own context (worked correctly there) but is misapplied to the new task's different context, producing a wrong outcome or failure.
+- Constraint: occurs regardless of the specific domain (branch merges, file greps, config patches, service restarts), consistently traceable to recency rather than reasoning.

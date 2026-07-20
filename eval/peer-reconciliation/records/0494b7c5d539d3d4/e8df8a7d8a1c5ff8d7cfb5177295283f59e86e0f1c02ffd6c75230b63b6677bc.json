@@ -1,0 +1,47 @@
+{
+ "pair_key": "0494b7c5d539d3d4",
+ "pair_id": "P08",
+ "terms": {
+  "a": "ghost pass",
+  "b": "ghost pass"
+ },
+ "proposed_relation": "broadnarrow(broader_side=a)",
+ "evidence": {
+  "a2b": {
+   "n": 4,
+   "k": 4,
+   "c": 0,
+   "u": 0,
+   "agg": "covers",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 5,
+   "k": 0,
+   "c": 5,
+   "u": 0,
+   "agg": "fails",
+   "quote_downgrades": []
+  }
+ },
+ "adjudicated_relation": "noMatchDespiteSimilarity",
+ "status": "adjudicated",
+ "adjudicator": "synthetic-key-8477e275",
+ "correct": false,
+ "provenance": {
+  "gen_a": "claude-sonnet",
+  "gen_b": "codex-gpt-5.6-terra",
+  "def_a": "claude-opus",
+  "def_b": "codex-gpt-5.6-terra",
+  "verify_a2b": "claude-opus",
+  "verify_b2a": "codex-gpt-5.6-terra"
+ },
+ "derived_from": [
+  "69a41d317d9ab4b2022b15282310d90c0640746d207601547cb64ab5793e8b28"
+ ],
+ "earliest_found_in_search": {
+  "synthetic": true,
+  "note": "no priority inference licensed"
+ },
+ "version_id": "e8df8a7d8a1c5ff8d7cfb5177295283f59e86e0f1c02ffd6c75230b63b6677bc"
+}

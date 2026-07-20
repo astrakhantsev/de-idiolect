@@ -1,0 +1,49 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.peX2fCA5cA"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.oslZfPOOho
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7d33-0c5e-7bf3-8fa8-c41e63f107d9
+--------
+user
+Below are usage excerpts from one community's documents, all containing the same term, shown masked as ⟦TERM⟧ (other local jargon is masked as ⟦X⟧).
+
+Write THREE cumulative operational definitions of the concept ⟦TERM⟧ names AS USED in these excerpts, at three levels of specificity:
+
+- "L0" — ONE sentence: what kind of thing it is (a phenomenon, a procedure, a score, a rule…) and its immediate purpose. Genus only, no mechanism.
+- "L1" — L0's content PLUS the specific mechanism or process (what concretely happens). 2–4 sentences.
+- "L2" — L1's content PLUS what is measured or produced and how it is scored or read, and when/where it applies. 60–160 words.
+
+COMMITMENTS CHECKLIST (extracted from the same excerpts; L2 must state every commitment, L1 must state the mechanism commitments):
+- The same completed/final answers are resubmitted to the same automated scorer multiple times (repeated submissions/scorings of identical answers, not new answers).
+- Resubmissions occur on multiple dates, separated by at least 21 days in some cases, to test scoring consistency over time.
+- ⟦TERM⟧ is estimated from the resulting numeric-score pairs produced across these repeated submissions.
+- It is reported as a value that can exceed 0.90 (e.g., 0.93, 0.88) or drop lower (e.g., 0.71) depending on task type.
+- It applies to scored task outcomes such as repository-state tasks, executable-task outcomes, open-ended incident reports, and explanatory summaries.
+- Lower values are associated with borderline partial-credit judgments rather than with answer length.
+
+Constraints for ALL levels:
+- Ordinary words and simple notation only; do NOT use the masked terms or guess at them; no names of people, published methods, fields, systems, models, or communities.
+- Base everything ONLY on what the excerpts support; no generalizing catch-all phrases ("or otherwise", "or any similar", "in any way").
+- Each level must be self-contained (do not reference the other levels).
+
+Output ONLY JSON: {"L0": "...", "L1": "...", "L2": "..."}
+
+EXCERPTS:
+
+1. The same completed answers were then submitted to the scorer on four dates separated by at least 21 days. ⟦TERM⟧ was estimated from the resulting numeric-score pairs across 600 answers. ⟦TERM⟧ was 0.93 for repository-state tasks and 0.71 for open-ended incident reports.
+2. ⟦TERM⟧ was estimated from the resulting numeric-score pairs across 600 answers. ⟦TERM⟧ was 0.93 for repository-state tasks and 0.71 for open-ended incident reports. Lower stability coincided with borderline partial-credit judgments rather than with answer length.
+3. The automated scorer was repeated one month later; ⟦TERM⟧ remained above 0.90 for these task outcomes. The experiment cannot determine whether substitution effects arise from prior exposure or from unmeasured differences in the newly authored tasks.
+4. ⟦TERM⟧ was estimated from repeated submissions of every final answer across two collection dates. ⟦TERM⟧ was 0.88, indicating that the observed recovery difference was not explained by unstable scoring alone.
+5. ⟦TERM⟧ was estimated from repeated submissions of every final answer across two collection dates. ⟦TERM⟧ was 0.88, indicating that the observed recovery difference was not explained by unstable scoring alone.
+6. ⟦TERM⟧ was computed over four scorer submissions per answer. ⟦TERM⟧ exceeded 0.90 for executable-task outcomes but was lower for explanatory summaries.
+7. ⟦TERM⟧ was computed over four scorer submissions per answer. ⟦TERM⟧ exceeded 0.90 for executable-task outcomes but was lower for explanatory summaries.
+codex
+{"L0":"A consistency score for automated scoring of completed task answers, used to assess whether the scoring stays stable.","L1":"A consistency score for automated scoring of completed task answers, used to assess whether the scoring stays stable. The same final answers are submitted again to the same automated scorer on multiple dates, including dates at least 21 days apart in some cases, and the score is estimated from the resulting pairs of numeric scores.","L2":"A consistency score for automated scoring of completed task answers, used to assess whether the scoring stays stable. It is estimated by resubmitting the same completed final answers to the same automated scorer multiple times, across multiple collection dates; some dates are separated by at least 21 days. The resulting numeric-score pairs are used to calculate the value. It may be reported above 0.90, such as 0.93, or at 0.88, and it can be lower, such as 0.71, depending on task type. It applies to repository-state tasks, executable-task outcomes, open-ended incident reports, and explanatory summaries. Lower values are linked to borderline partial-credit judgments, not answer length."}
+tokens used
+3,257

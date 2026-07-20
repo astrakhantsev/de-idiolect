@@ -1,0 +1,6 @@
+- Mechanism: ⟦TERM⟧ measures a "ramp-up penalty" occurring specifically on the first task/ticket of a fresh agent session, caused by the agent not yet having inferred which internal tool/index is authoritative or holds needed data.
+- What is measured/scored: it is scored as a point gap between the first-task score and the session mean score (e.g., 12, 15, 11 points below/under the mean).
+- When/where it applies: applies only at session start — the first ticket or task of a new session, not to later tasks in the same session.
+- Constraint: the gap is not tied to task difficulty (this was explicitly controlled for).
+- Constraint: the gap can be reduced by seeding session memory with the relevant tool/index information upfront (evidenced by quarter-over-quarter improvement from 15 to 11 points after a session-seeding change).
+- What is produced: a quarterly-tracked average penalty value that can be compared period-over-period (e.g., 15 points one quarter, 11 the next).

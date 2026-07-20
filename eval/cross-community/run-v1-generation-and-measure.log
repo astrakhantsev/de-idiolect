@@ -1,0 +1,77 @@
+  [A_to_B] jargon   sonnet s0:  862 chars
+  [A_to_B] jargon   sonnet s1:  912 chars
+  [A_to_B] jargon   sonnet s2:  836 chars
+  [A_to_B] jargon   opus   s0: 1300 chars
+  [A_to_B] jargon   opus   s1: 1424 chars
+  [A_to_B] jargon   opus   s2: 1384 chars
+  [A_to_B] neutral  sonnet s0:  683 chars
+  [A_to_B] neutral  sonnet s1:  848 chars **LEAKS OWN TERM**
+  [A_to_B] neutral  sonnet s2:  709 chars **LEAKS OWN TERM**
+  [A_to_B] neutral  opus   s0: 1076 chars
+  [A_to_B] neutral  opus   s1: 1163 chars
+  [A_to_B] neutral  opus   s2: 1200 chars
+  [B_to_A] jargon   sonnet s0:  827 chars
+  [B_to_A] jargon   sonnet s1:  941 chars
+  [B_to_A] jargon   sonnet s2:  749 chars
+  [B_to_A] jargon   opus   s0: 1295 chars
+  [B_to_A] jargon   opus   s1: 1140 chars
+  [B_to_A] jargon   opus   s2: 1166 chars
+  [B_to_A] neutral  sonnet s0:  643 chars
+  [B_to_A] neutral  sonnet s1:  823 chars
+  [B_to_A] neutral  sonnet s2:  650 chars
+  [B_to_A] neutral  opus   s0:  844 chars
+  [B_to_A] neutral  opus   s1: 1022 chars
+  [B_to_A] neutral  opus   s2:  865 chars
+
+[frozen] /mnt/f/src/minelit/flf-epistack/eval/cross-community/queries.json
+[load] BAAI/bge-large-en-v1.5
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights:  34%|███▎      | 131/391 [00:00<00:00, 1307.21it/s]Loading weights:  67%|██████▋   | 262/391 [00:00<00:00, 1275.10it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 1767.63it/s]
+
+==== CROSS-COMMUNITY CELL - retrieval report ====
+pair: A='Photoreflexometry'  B='Photoplethysmography'
+
+--- A_to_B  (far target docs: 10 inclusive / 10 clean) ---
+  arm                    cond       rank1st  rec@5  rec@10  #top10  ownRk
+  raw_term               inclusive        4    0.2     0.5       5      1
+  raw_term               clean            3    0.3     0.6       6      1
+  naive_question         inclusive        1    0.5     0.8       8      6
+  naive_question         clean            1    0.5     0.9       9      8
+  raw_term_far_CEILING   inclusive        2    0.3     0.6       6      1
+  raw_term_far_CEILING   clean            1    0.4     0.7       7      2
+  jargon                 inclusive        5    0.1     0.6       6      1
+  jargon                 clean            4    0.2     0.7       7      1
+  neutral                inclusive    3.667   0.15     0.6       6      1
+  neutral                clean        2.667  0.217     0.7       7      1
+  contrasts (neutral - base; rank: negative=neutral better; recall: positive=better):
+    neutral_minus_raw_term.rank_first_target.inclusive Δ=-0.333 [-0.833,+0.167]
+    neutral_minus_raw_term.recall_at_10.inclusive    Δ=+0.100 [+0.100,+0.100]  *excl0*
+    neutral_minus_jargon.rank_first_target.inclusive Δ=-1.333 [-1.833,-0.833]  *excl0*
+    neutral_minus_jargon.recall_at_10.inclusive      Δ=+0.000 [+0.000,+0.000]
+    neutral_minus_raw_term.rank_first_target.clean   Δ=-0.333 [-0.833,+0.167]
+    neutral_minus_raw_term.recall_at_10.clean        Δ=+0.100 [+0.100,+0.100]  *excl0*
+    neutral_minus_jargon.rank_first_target.clean     Δ=-1.333 [-1.833,-0.833]  *excl0*
+    neutral_minus_jargon.recall_at_10.clean          Δ=+0.000 [+0.000,+0.000]
+
+--- B_to_A  (far target docs: 4 inclusive / 3 clean) ---
+  arm                    cond       rank1st  rec@5  rec@10  #top10  ownRk
+  raw_term               inclusive        1    0.5     1.0       4      2
+  raw_term               clean            2  0.333     1.0       3      1
+  naive_question         inclusive        6    0.0     0.5       2      1
+  naive_question         clean            8    0.0   0.333       1      1
+  raw_term_far_CEILING   inclusive        1   0.75     1.0       4      4
+  raw_term_far_CEILING   clean            1  0.667     1.0       3      3
+  jargon                 inclusive    4.667  0.167   0.625     2.5      1
+  jargon                 clean        7.833    0.0   0.667       2      1
+  neutral                inclusive    1.333  0.458   0.708   2.833  1.667
+  neutral                clean        4.333  0.333   0.889   2.667      1
+  contrasts (neutral - base; rank: negative=neutral better; recall: positive=better):
+    neutral_minus_raw_term.rank_first_target.inclusive Δ=+0.333 [+0.000,+0.667]
+    neutral_minus_raw_term.recall_at_10.inclusive    Δ=-0.292 [-0.375,-0.250]  *excl0*
+    neutral_minus_jargon.rank_first_target.inclusive Δ=-3.333 [-4.333,-2.333]  *excl0*
+    neutral_minus_jargon.recall_at_10.inclusive      Δ=+0.083 [-0.042,+0.167]
+    neutral_minus_raw_term.rank_first_target.clean   Δ=+2.333 [+1.333,+3.667]  *excl0*
+    neutral_minus_raw_term.recall_at_10.clean        Δ=-0.111 [-0.222,+0.000]
+    neutral_minus_jargon.rank_first_target.clean     Δ=-3.500 [-4.833,-2.000]  *excl0*
+    neutral_minus_jargon.recall_at_10.clean          Δ=+0.222 [+0.111,+0.333]  *excl0*
+
+GEN EXIT 0

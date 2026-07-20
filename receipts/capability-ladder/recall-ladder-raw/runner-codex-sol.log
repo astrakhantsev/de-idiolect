@@ -1,0 +1,8 @@
+=== codex brief hashes ===
+92e246122467911e6a7175eca3cdcbd1897d2f6ce29d82621577028f83eda671  /tmp/claude-1000/-mnt-f-hub/93d71aaf-aae4-4850-b7aa-51b8ddea4778/scratchpad/haiku-ladder/briefs-codex/c2-P0-codex.md
+db5a50da3a8246d174d47081340e4c358a8be6d15ef4ba31e3a3604387c387e5  /tmp/claude-1000/-mnt-f-hub/93d71aaf-aae4-4850-b7aa-51b8ddea4778/scratchpad/haiku-ladder/briefs-codex/c4-P0-codex.md
+done c2-P0-codex-sol exit=0 bytes=4661 rundir_empty=[]
+done c4-P0-codex-sol exit=0 bytes=5459 rundir_empty=[]
+SOL_DONE
+out-c2-P0-codex-sol.txt          4661
+out-c4-P0-codex-sol.txt          5459

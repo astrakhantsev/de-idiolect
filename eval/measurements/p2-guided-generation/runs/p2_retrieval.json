@@ -1,0 +1,109 @@
+{
+  "label": "EXPLORATORY (spec P2): retrieval of gate-passing guided definitions; chance rank-1 p=0.167, E[hits@5]=0.83",
+  "results": {
+    "G-sonnet": {
+      "query_sha256": "e9936d69a764420eda9757d6571980b88e2437029bc6b4db70b65d780c3712c4",
+      "first_owner_rank": 2,
+      "hits_at_5": 2,
+      "top5": [
+        [
+          "d04",
+          "misroute",
+          0.6336
+        ],
+        [
+          "d02",
+          "owner",
+          0.6121
+        ],
+        [
+          "d10",
+          "distractor",
+          0.6092
+        ],
+        [
+          "d01",
+          "owner",
+          0.5969
+        ],
+        [
+          "d09",
+          "misroute",
+          0.5801
+        ]
+      ],
+      "ranked": [
+        "d04",
+        "d02",
+        "d10",
+        "d01",
+        "d09",
+        "d05",
+        "d18",
+        "d15",
+        "d12",
+        "d08",
+        "d16",
+        "d06",
+        "d13",
+        "d14",
+        "d03",
+        "d11",
+        "d17",
+        "d07"
+      ]
+    },
+    "G-opus": {
+      "query_sha256": "deaa42ab492b9a45df7990531b7c56779e9510965d0d867c85b95d5432db4389",
+      "first_owner_rank": 3,
+      "hits_at_5": 2,
+      "top5": [
+        [
+          "d04",
+          "misroute",
+          0.6422
+        ],
+        [
+          "d10",
+          "distractor",
+          0.6018
+        ],
+        [
+          "d02",
+          "owner",
+          0.6008
+        ],
+        [
+          "d01",
+          "owner",
+          0.5791
+        ],
+        [
+          "d09",
+          "misroute",
+          0.5704
+        ]
+      ],
+      "ranked": [
+        "d04",
+        "d10",
+        "d02",
+        "d01",
+        "d09",
+        "d05",
+        "d18",
+        "d16",
+        "d06",
+        "d15",
+        "d08",
+        "d12",
+        "d03",
+        "d07",
+        "d14",
+        "d11",
+        "d17",
+        "d13"
+      ]
+    }
+  }
+}

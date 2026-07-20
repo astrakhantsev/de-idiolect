@@ -1,0 +1,1190 @@
+{
+  "max_overlap": 0.34,
+  "n_seed": 48,
+  "pairs": [
+    {
+      "seed_concept": "takotsubo cardiomyopathy",
+      "mesh_uid": "68054549",
+      "descriptor": "Takotsubo Cardiomyopathy",
+      "entry_term": "Tako-Tsubo Syndrome",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "1. **What it names**: Takotsubo syndrome (also spelled tako-tsubo) is an acute, usually transient form of heart failure/cardiomyopathy characterized by sudden weakening (ballooning) of the left ventricle's apex, typically triggered by severe emotional or physical stress. It mimics acute myocardial infarction (chest pain, ECG changes, elevated cardiac enzymes) but occurs without significant obstructive coronary artery disease. The name comes from the Japanese word for an octopus trap (tako-tsubo), because the left ventricle's characteristic systolic ballooning shape resembles the pot's round bottom and narrow neck.\n\n2. **Fields/communities**: Cardiology (primarily), emergency medicine, psychosomatic/behavioral medicine (given the stress-trigger link), and neurocardiology (research into the brain-heart axis, catecholamine surge mechanisms). It's also studied in geriatrics/women's health, since it disproportionately affects postmenopausal women.\n\n3. **Synonyms/alternative names**:\n   - Takotsubo cardiomyopathy\n   - Stress cardiomyopathy / stress-induced cardiomyopathy\n   - Broken heart syndrome\n   - Apical ballooning syndrome (or \"transient left ventricular apical ballooning\")\n   - Ampulla cardiomyopathy\n   - Gebrochenes-Herz-Syndrome (German equivalent term sometimes seen in literature)\n   - Neurogenic stunned myocardium (overlapping/related concept, not always treated as fully synonymous)",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "cardiomyopathy",
+        "takotsubo"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7762,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "takotsubo cardiomyopathy",
+      "mesh_uid": "68054549",
+      "descriptor": "Takotsubo Cardiomyopathy",
+      "entry_term": "Tako-Tsubo Syndromes",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:** Takotsubo syndrome (also written Tako-Tsubo) is an acute, usually transient form of heart dysfunction (cardiomyopathy) in which the left ventricle balloons into a shape resembling a Japanese octopus trap (\"tako-tsubo\") \u2014 narrow neck, wide rounded base. It typically presents like a heart attack (chest pain, ECG changes, elevated cardiac enzymes) but without significant coronary artery blockage, and is classically triggered by acute physical or emotional stress. It's usually reversible over days to weeks, though it carries real acute risk (arrhythmia, cardiogenic shock, death in a minority of cases). The plural \"Syndromes\" suggests the source is treating it as a family of related presentations/subtypes (e.g., apical, mid-ventricular, basal, focal ballooning variants) rather than one uniform entity \u2014 that's an accepted framing in the cardiology literature.\n\n**2. Fields/communities that study it:** Cardiology (especially heart-failure and interventional/imaging subspecialties), emergency medicine, and increasingly psychosomatic medicine/psychoneurocardiology given its stress-triggered nature. It also gets attention in behavioral neuroscience and endocrinology (catecholamine surge mechanisms) and geriatrics (it disproportionately affects postmenopausal women).\n\n**3. Other names/synonyms:**\n- Takotsubo cardiomyopathy\n- Stress-induced cardiomyopathy / stress cardiomyopathy\n- Apical ballooning syndrome (or \"transient apical ballooning\")\n- Broken heart syndrome\n- Gebrochenes-Herz-Syndrom (German equivalent, seen in some literature)\n- Ampulla cardiomyopathy (older/rarer term, referencing the ballooning shape)\n- Neurogenic stunned myocardium (related/overlapping concept, especially in acute neurological illness contexts)",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "cardiomyopathy",
+        "takotsubo"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7403,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "takotsubo cardiomyopathy",
+      "mesh_uid": "68054549",
+      "descriptor": "Takotsubo Cardiomyopathy",
+      "entry_term": "Left Ventricular Apical Ballooning Syndrome",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "1. **What it names**: A reversible acute cardiac condition in which the left ventricle's apex transiently balloons outward (akinesis/dyskinesis of the apical and mid-ventricular segments) while the base contracts normally, producing an octopus-pot-like shape on ventriculography. It mimics acute MI clinically (chest pain, ST changes, troponin rise) but occurs without obstructive coronary artery disease, is typically triggered by acute emotional or physical stress, and usually resolves within days to weeks.\n\n2. **Fields/communities**: Cardiology (especially interventional/echocardiography and heart-failure subspecialties), emergency medicine, and psychosomatic/behavioral medicine (given the stress-trigger link). Also studied in catecholamine/neurocardiology research.\n\n3. **Synonyms/alternative names**:\n   - Takotsubo cardiomyopathy / Takotsubo syndrome (most common name; named for the Japanese octopus trap it resembles)\n   - Stress-induced cardiomyopathy\n   - Stress cardiomyopathy\n   - \"Broken heart syndrome\"\n   - Transient apical ballooning syndrome\n   - Ampulla cardiomyopathy\n   - Gebrochenes-Herz-Syndrom (German equivalent, occasionally seen in literature)",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "cardiomyopathy",
+        "takotsubo"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7449,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "granulomatosis with polyangiitis",
+      "mesh_uid": "68015267",
+      "descriptor": "Churg-Strauss Syndrome",
+      "entry_term": "Eosinophilic Granulomatosis with Polyangiitis",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "1. **Eosinophilic Granulomatosis with Polyangiitis (EGPA)** is a rare autoimmune disease: a form of ANCA-associated vasculitis marked by inflammation of small-to-medium blood vessels, tissue eosinophilia, necrotizing granulomas, and typically preceded by severe asthma and allergic rhinitis/sinusitis. It can affect lungs, skin, nerves, heart, and kidneys.\n\n2. Studied primarily in **rheumatology**, **pulmonology/respiratory medicine**, **clinical immunology**, and **nephrology**; it also appears in **pathology** research (granuloma/vasculitis histology) and in ANCA-associated vasculitis registries/clinical trial networks.\n\n3. Most common alternative name: **Churg-Strauss syndrome** (the original eponym, still widely used). Also seen as: **Churg-Strauss vasculitis**, **allergic granulomatosis and angiitis**, and it's classified under the broader category **ANCA-associated vasculitis (AAV)**.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "churg",
+        "straus"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7194,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "amyotrophic lateral sclerosis",
+      "mesh_uid": "68000690",
+      "descriptor": "Amyotrophic Lateral Sclerosis",
+      "entry_term": "Gehrig's Disease",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "Gehrig's Disease is amyotrophic lateral sclerosis (ALS) \u2014 a progressive neurodegenerative disease that destroys motor neurons in the brain and spinal cord, leading to muscle weakness, paralysis, and eventually respiratory failure.\n\n1. **What it names**: ALS, a fatal motor neuron disease. Named after baseball player Lou Gehrig, who was diagnosed with it in 1939.\n\n2. **Fields/communities**: Neurology (specifically neuromuscular/motor neuron disease specialists), neuroscience research, genetics (familial ALS research, e.g. SOD1, C9orf72 genes), clinical trial/pharma research, and patient advocacy/clinical care communities.\n\n3. **Synonyms/alternative names**:\n   - Amyotrophic Lateral Sclerosis (ALS) \u2014 the standard clinical name\n   - Motor Neuron Disease (MND) \u2014 common in UK/Commonwealth usage, sometimes used as a broader umbrella term\n   - Charcot's Disease / Maladie de Charcot \u2014 after Jean-Martin Charcot, who first described it (common in French-speaking contexts)",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "amyotrophic",
+        "lateral",
+        "sclerosi"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8203,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "amyotrophic lateral sclerosis",
+      "mesh_uid": "68000690",
+      "descriptor": "Amyotrophic Lateral Sclerosis",
+      "entry_term": "Lou Gehrig Disease",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "1. **Lou Gehrig's Disease** is the common U.S. name for **Amyotrophic Lateral Sclerosis (ALS)** \u2014 a progressive neurodegenerative disease that destroys motor neurons in the brain and spinal cord, leading to muscle weakness, paralysis, and eventually death (typically from respiratory failure). Named after the New York Yankees baseball player who was diagnosed with it in 1939.\n\n2. Studied primarily in **neurology**, **neurodegeneration/neuroscience research**, **genetics** (familial ALS forms, e.g. SOD1, C9orf72 mutations), and **clinical/translational medicine**. Also relevant to **rehabilitation medicine** and **palliative/hospice care**.\n\n3. Synonyms/alternative names:\n   - **ALS** (Amyotrophic Lateral Sclerosis) \u2014 the standard clinical name\n   - **Motor Neuron Disease (MND)** \u2014 common term especially in the UK/Commonwealth (sometimes used as a broader umbrella term)\n   - **Charcot's disease** (or Charcot disease) \u2014 after Jean-Martin Charcot, who first described it in 1869",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "amyotrophic",
+        "lateral",
+        "sclerosi"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8013,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "amyotrophic lateral sclerosis",
+      "mesh_uid": "68000690",
+      "descriptor": "Amyotrophic Lateral Sclerosis",
+      "entry_term": "Charcot Disease",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:** Most commonly, \"Charcot disease\" refers to **amyotrophic lateral sclerosis (ALS)** \u2014 a progressive neurodegenerative disease that destroys motor neurons in the brain and spinal cord, leading to muscle weakness, paralysis, and eventually respiratory failure. It's named for Jean-Martin Charcot, the French neurologist who first characterized and named the disease in the 1860s\u20131870s.\n\n(Note: Charcot's name is attached to a few other conditions too \u2014 Charcot joint / neuropathic arthropathy (joint destruction from loss of sensation, e.g., in diabetes) and Charcot-Marie-Tooth disease (a hereditary peripheral neuropathy, a distinct entity from ALS). Absent other context, \"Charcot disease\" unqualified almost always means ALS.)\n\n**2. Field(s):** Neurology, specifically motor neuron disease / neurodegenerative disease research; also clinical genetics and neuromuscular medicine for the related conditions above.\n\n**3. Synonyms/alternative names:**\n- Amyotrophic lateral sclerosis (ALS) \u2014 the standard clinical name\n- Lou Gehrig's disease \u2014 common US usage\n- Maladie de Charcot \u2014 French usage (very common there; this is the dominant name for ALS in French)\n- Motor neuron disease (MND) \u2014 used in the UK, sometimes synonymously with ALS, though technically MND is a broader category of which ALS is the most common form",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "amyotrophic",
+        "lateral",
+        "sclerosi"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7287,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "leprosy",
+      "mesh_uid": "68056006",
+      "descriptor": "Leprosy, Multibacillary",
+      "entry_term": "Borderline Lepromatous",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**Borderline Lepromatous (BL)** is a clinical classification in leprosy (Hansen's disease), one of the five categories in the Ridley-Jopling classification system.\n\n**1. What it means:** It denotes a point on the immunological/clinical spectrum of leprosy, between the \"borderline\" (BB) and pure \"lepromatous\" (LL) poles. Patients present with numerous, less symmetrical skin lesions than pure LL, higher bacterial load than tuberculoid forms, and a moderate-to-weak host cell-mediated immune response to *Mycobacterium leprae*. It's clinically and immunologically unstable \u2014 patients can \"downgrade\" toward LL (worsening immunity) or \"upgrade\" (reversal reaction) toward BB/BT if treated, sometimes triggering type 1 (reversal) reactions.\n\n**2. Fields/communities that study it:**\n- Dermatology (especially tropical/infectious dermatology)\n- Infectious disease medicine / tropical medicine\n- Leprosy/Hansen's disease research specifically (WHO leprosy programs, leprosy-endemic-country clinical research)\n- Immunology (as a model of the Th1/Th2 spectrum in mycobacterial disease)\n- Histopathology (skin biopsy grading)\n\n**3. Synonyms / alternative names:**\n- Often abbreviated **BL**\n- Part of the **Ridley-Jopling spectrum** (TT \u2013 BT \u2013 BB \u2013 BL \u2013 LL)\n- Under the simpler **WHO operational classification**, BL falls within **multibacillary (MB) leprosy**\n- Occasionally referenced in older literature as \"lepromatous-type borderline leprosy\" or \"subpolar lepromatous,\" though \"subpolar lepromatous\" more precisely refers to a state near-but-not-quite pure LL \u2014 sometimes used loosely as a near-synonym for BL in less rigorous sources.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "leprosy",
+        "multibacillary"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7251,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "leprosy",
+      "mesh_uid": "68056006",
+      "descriptor": "Leprosy, Multibacillary",
+      "entry_term": "Midborderline Lepromatous",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "I recognize this term.\n\n1. **What it names**: \"Midborderline\" isn't a standard term \u2014 this is almost certainly a slight garbling of **\"Borderline Lepromatous\" (BL)**, one of the five classifications in the Ridley-Jopling clinical/immunological spectrum for leprosy (Hansen's disease): TT (Tuberculoid) \u2014 BT (Borderline Tuberculoid) \u2014 BB (Mid-Borderline / Borderline-Borderline) \u2014 BL (Borderline Lepromatous) \u2014 LL (Lepromatous). Note that \"Mid-Borderline\" (BB) and \"Borderline Lepromatous\" (BL) are actually two *different, adjacent* points on that spectrum, not the same thing \u2014 so \"Midborderline Lepromatous\" conflates two distinct classes. BB (mid-borderline) is the most immunologically unstable point, midway between the tuberculoid and lepromatous poles; BL sits closer to the lepromatous pole, with more bacilli and weaker cell-mediated immunity than BB or BT.\n\n2. **Field(s)**: Dermatology, infectious disease/microbiology (mycobacteriology \u2014 *Mycobacterium leprae*), leprology, and clinical immunology/pathology.\n\n3. **Synonyms/alternative names**:\n   - Ridley-Jopling spectrum classification (the system this term belongs to)\n   - BB = \"Mid-Borderline,\" \"Borderline-Borderline,\" \"Dimorphous leprosy\" (mid-borderline)\n   - BL = \"Borderline Lepromatous leprosy\"\n   - Under the WHO's simplified operational classification, both would generally fall under \"Multibacillary (MB) leprosy\"\n   - \"Hansen's disease\" is the overarching disease name for leprosy in general\n\nIf you meant something else entirely by \"Midborderline Lepromatous\" \u2014 e.g., a term from a different field where \"lepromatous\" is used metaphorically, or a mistranscription of something else \u2014 let me know and I can look closer.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "leprosy",
+        "multibacillary"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7206,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "pompe disease",
+      "mesh_uid": "68006009",
+      "descriptor": "Glycogen Storage Disease Type II",
+      "entry_term": "Pompe Disease",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**Pompe Disease**\n\n1. A rare inherited metabolic disorder caused by deficiency of the enzyme acid alpha-glucosidase (GAA), which normally breaks down glycogen inside lysosomes. Without it, glycogen accumulates abnormally in cells, especially in cardiac, skeletal, and smooth muscle, causing progressive muscle weakness and (in the infantile form) heart failure.\n\n2. Studied primarily in: medical genetics, metabolic/biochemical genetics, neuromuscular medicine, pediatrics (infantile-onset form), pulmonology and physical medicine/rehabilitation (late-onset form, due to respiratory muscle involvement), and enzyme replacement therapy / biopharmaceutical research (it's a target for ERT drugs like alglucosidase alfa and avalglucosidase alfa, and for gene therapy research).\n\n3. Also known as:\n   - Glycogen storage disease type II (GSD II / GSD-II)\n   - Acid maltase deficiency (AMD)\n   - Alpha-1,4-glucosidase deficiency\n   - Lysosomal glycogenosis / lysosomal storage disease (as a subtype, since it's classified among lysosomal storage disorders)",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "glycogen",
+        "storage"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.6808,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "celiac disease",
+      "mesh_uid": "68002446",
+      "descriptor": "Celiac Disease",
+      "entry_term": "Gluten Enteropathy",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "1. **Gluten Enteropathy** names a chronic autoimmune condition of the small intestine triggered by dietary gluten (a protein in wheat, barley, and rye) in genetically susceptible people. It's the older/formal clinical name for what's almost always just called **celiac disease** today \u2014 gluten exposure damages the small intestinal villi, causing malabsorption, GI symptoms, and a range of systemic effects (nutritional deficiencies, dermatitis herpetiformis, neurological and other extraintestinal manifestations).\n\n2. Studied primarily in **gastroenterology** and **immunology**, with contributions from **pediatrics**, **pathology** (villous atrophy histology), **genetics** (HLA-DQ2/DQ8 association), **allergy/clinical nutrition**, and **epidemiology**. Diagnostic and management guidelines come from bodies like the American Gastroenterological Association, ESPGHAN, and celiac disease societies/registries.\n\n3. Alternative names/synonyms:\n   - **Celiac disease** (coeliac disease \u2014 the dominant modern term)\n   - **Celiac sprue**\n   - **Nontropical sprue** (distinguishing it from tropical sprue)\n   - **Gluten-sensitive enteropathy**\n   - **Idiopathic steatorrhea** (archaic)",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "celiac"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8048,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "celiac disease",
+      "mesh_uid": "68002446",
+      "descriptor": "Celiac Disease",
+      "entry_term": "Gluten-Sensitive Enteropathy",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**Gluten-Sensitive Enteropathy**\n\n1. **What it names**: This is a formal/clinical synonym for **celiac disease** \u2014 a chronic immune-mediated disorder in which ingestion of gluten (a protein in wheat, barley, and rye) triggers an autoimmune attack on the small intestinal mucosa in genetically susceptible people (strongly associated with HLA-DQ2/DQ8). It causes villous atrophy, crypt hyperplasia, and intraepithelial lymphocytosis, leading to malabsorption and a range of GI and systemic symptoms.\n\n2. **Fields/communities**: Gastroenterology, immunology, pediatrics, internal medicine, and pathology (histologic diagnosis via duodenal biopsy) are the core clinical fields. Also studied in genetics (HLA typing, GWAS), nutrition science, and autoimmune-disease research more broadly.\n\n3. **Other names for the same thing**:\n   - Celiac disease (or Coeliac disease, British spelling)\n   - Celiac sprue\n   - Non-tropical sprue\n   - Gluten enteropathy\n   - Gluten intolerance (looser, sometimes lay/imprecise usage \u2014 sometimes conflated with non-celiac gluten sensitivity, which is a distinct, less-defined condition)",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "celiac"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7523,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "celiac disease",
+      "mesh_uid": "68002446",
+      "descriptor": "Celiac Disease",
+      "entry_term": "Sprue, Nontropical",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it means:** \"Nontropical sprue\" is an older clinical name for **celiac disease** (celiac sprue / gluten-sensitive enteropathy) \u2014 a chronic autoimmune small-intestinal disorder triggered by dietary gluten (in wheat, barley, rye), causing villous atrophy, malabsorption, and related symptoms (diarrhea, weight loss, nutrient deficiencies). The \"nontropical\" qualifier distinguishes it from **tropical sprue**, a different malabsorptive disease of uncertain (likely infectious) etiology seen in tropical regions, which is not gluten-related and responds to antibiotics/folate rather than diet.\n\n**2. Fields/communities:** Gastroenterology, internal medicine, clinical immunology/autoimmunity research, pediatrics (celiac often presents in childhood), and nutrition science. It also shows up as a formal indexing term in medical vocabularies (e.g., MeSH), which is likely where you encountered this exact phrasing \u2014 \"Sprue, Nontropical\" is MeSH's inverted heading style for \"Nontropical Sprue.\"\n\n**3. Synonyms / alternative names:**\n- Celiac disease (celiac sprue) \u2014 the standard modern term\n- Coeliac disease (British spelling)\n- Gluten-sensitive enteropathy\n- Gluten enteropathy\n- Celiac sprue\n- Idiopathic steatorrhea (older, less specific historical term)\n\nIt is *not* the same as tropical sprue, despite the shared \"sprue\" name \u2014 that's a separate, geographically-linked malabsorption syndrome.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "celiac"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.514,
+      "guard0": "pass"
+    },
+    {
+      "seed_concept": "kawasaki disease",
+      "mesh_uid": "68009080",
+      "descriptor": "Mucocutaneous Lymph Node Syndrome",
+      "entry_term": "Kawasaki Disease",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "1. **What it names:** Kawasaki disease is an acute, self-limited vasculitis (inflammation of blood vessels, especially medium-sized arteries) that primarily affects children under 5. It presents with prolonged high fever, rash, conjunctival injection, oral mucosal changes (strawberry tongue, cracked lips), extremity swelling/peeling, and cervical lymphadenopathy. Its most serious complication is coronary artery aneurysm formation.\n\n2. **Fields/communities:** Pediatrics, pediatric cardiology, rheumatology, immunology, and infectious disease research (etiology is unknown but suspected to involve an infectious trigger with genetic susceptibility, particularly studied in East Asian populations). Also studied in epidemiology given geographic/ethnic incidence clustering (Japan, Korea highest rates).\n\n3. **Synonyms/alternative names:** Mucocutaneous lymph node syndrome (MCLS) \u2014 the original/formal name; Kawasaki syndrome. Note: this is distinct from (though sometimes confused/discussed alongside in recent literature) Multisystem Inflammatory Syndrome in Children (MIS-C), a related-but-separate post-COVID condition with overlapping features.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "lymph",
+        "mucocutaneou",
+        "node"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.6469,
+      "guard0": "pass"
+    },
+    {
+      "seed_concept": "hidradenitis suppurativa",
+      "mesh_uid": "68017497",
+      "descriptor": "Hidradenitis Suppurativa",
+      "entry_term": "Acne Inversa",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "1. **What it names**: \"Acne Inversa\" is an older/alternative name for **Hidradenitis Suppurativa (HS)**, a chronic inflammatory skin disease. It causes painful, recurrent nodules, abscesses, and draining sinus tracts in apocrine gland-bearing areas (armpits, groin, under breasts, buttocks). It's now understood as a chronic auto-inflammatory follicular occlusion disorder rather than true acne, which is why \"acne inversa\" is considered a misnomer by most current dermatology literature.\n\n2. **Fields/communities**: Dermatology (primary), immunology (given its autoinflammatory/cytokine-driven pathophysiology \u2014 TNF-\u03b1, IL-17, IL-1 pathways are active drug targets), surgery (for excision of chronic lesions/sinus tracts), and increasingly rheumatology/internal medicine given comorbidity links to metabolic syndrome, Crohn's disease, and spondyloarthropathies.\n\n3. **Synonyms/alternative names**:\n- **Hidradenitis Suppurativa (HS)** \u2014 the dominant modern name\n- Verneuil's disease / Verneuil disease (historical, especially in French/European literature)\n- Apocrine acne (older term)\n- Sometimes abbreviated **HS/AI** in literature bridging both naming conventions",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "hidradeniti",
+        "suppurativa"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.6948,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "hidradenitis suppurativa",
+      "mesh_uid": "68017497",
+      "descriptor": "Hidradenitis Suppurativa",
+      "entry_term": "Hidradenitides, Suppurative",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:** This is the MeSH-style inverted/pluralized form of \"Hidradenitis Suppurativa\" (also called acne inversa) \u2014 a chronic, recurrent inflammatory skin disease of apocrine-gland-bearing skin (axillae, groin, perianal/perineal area, inframammary folds). It presents as painful nodules, abscesses, sinus tracts, and scarring, and is now understood as a disorder of follicular occlusion rather than a primary sweat-gland infection.\n\n**2. Fields/communities that study it:** Dermatology (primary), immunology/rheumatology (given overlap with autoinflammatory syndromes like PASH/PAPASH), surgery (wide excision, deroofing procedures), and increasingly genetics (familial forms linked to \u03b3-secretase/NCSTN mutations) and pharma/clinical trials (biologics \u2014 adalimumab, and newer IL-17/IL-1 inhibitors).\n\n**3. Synonyms/alternative names:**\n- Hidradenitis suppurativa (singular, standard form)\n- Acne inversa\n- Verneuil's disease (Verneuil disease)\n- Apocrinitis (older/rare term)\n- Fox-den disease (colloquial term, less common)\n\nNote on the odd phrasing: \"Hidradenitides, Suppurative\" (plural noun, inverted adjective) is the classic NLM/MeSH catalog entry-term style rather than how the condition is normally written in prose.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "hidradeniti",
+        "suppurativa"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7646,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "hidradenitis suppurativa",
+      "mesh_uid": "68017497",
+      "descriptor": "Hidradenitis Suppurativa",
+      "entry_term": "Suppurative Hidradenitis",
+      "lexical_overlap": 0.333,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "1. **What it names**: A chronic, relapsing inflammatory skin disease (usually written \"Hidradenitis Suppurativa,\" HS) affecting apocrine-gland-bearing skin \u2014 armpits, groin, buttocks, under the breasts. It causes painful nodules, abscesses, and draining sinus tracts that can lead to scarring and fistula formation. Despite the name, it's now understood as a disorder of follicular occlusion (hair follicles becoming blocked and inflamed) rather than a primary sweat-gland infection.\n\n2. **Fields/communities**: Primarily dermatology (clinical and research). Also intersects with immunology/rheumatology (it's linked to autoinflammatory and autoimmune conditions like Crohn's disease, and TNF-\u03b1 pathways are a treatment target), surgery (for excision of chronic sinus tracts), and increasingly genetics/microbiome research.\n\n3. **Other names/synonyms**:\n   - Hidradenitis Suppurativa (HS) \u2014 the standard/preferred ordering of this exact term\n   - Acne Inversa\n   - Verneuil's Disease (older, especially in European literature)\n   - Apocrine Acne (older, now considered a misnomer since it's not truly apocrine-driven)",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "hidradeniti",
+        "suppurativa"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8581,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "pseudoxanthoma elasticum",
+      "mesh_uid": "68011561",
+      "descriptor": "Pseudoxanthoma Elasticum",
+      "entry_term": "Gronblad-Strandberg Syndrome",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:** Gr\u00f6nblad\u2013Strandberg syndrome is an older eponym for a rare inherited connective-tissue disorder in which elastic fibers progressively calcify and fragment, causing skin laxity/yellowish papules, angioid streaks and other retinal changes in the eyes, and vascular complications (arterial calcification, GI bleeding risk). It's caused by mutations in the *ABCC6* gene.\n\n**2. Fields/communities:** Medical genetics, dermatology, ophthalmology, and cardiovascular/vascular medicine \u2014 it's studied as a genetic connective-tissue/elastic-fiber disease with multi-organ manifestations.\n\n**3. Other names:** Most commonly called **pseudoxanthoma elasticum (PXE)** today \u2014 that's the standard modern term. Also historically referred to as **systemic elastorrhexis**.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "elasticum",
+        "pseudoxanthoma"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.6011,
+      "guard0": "pass"
+    },
+    {
+      "seed_concept": "pseudoxanthoma elasticum",
+      "mesh_uid": "68011561",
+      "descriptor": "Pseudoxanthoma Elasticum",
+      "entry_term": "Groenblad-Strandberg Syndrome",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**Gr\u00f6nblad\u2013Strandberg syndrome**\n\n1. **What it names:** A rare inherited connective tissue disorder caused by mutations in the *ABCC6* gene, leading to progressive calcification and fragmentation of elastic fibers in the skin, eyes, and blood vessels. Clinically it presents with yellowish \"plucked-chicken skin\" papules/laxity (especially neck, axillae, flexural areas), angioid streaks in the retina (with risk of vision loss), and vascular complications (peripheral arterial disease, GI bleeding, increased cardiovascular risk).\n\n2. **Fields/communities:** Dermatology, ophthalmology (retina), medical genetics, vascular medicine. Named after Swedish dermatologist Esbj\u00f6rn Gr\u00f6nblad and Swedish ophthalmologist Jules Strandberg, who described the skin\u2013eye combination in the 1920s.\n\n3. **Synonyms/alternative names:**\n   - **Pseudoxanthoma elasticum (PXE)** \u2014 by far the standard modern name\n   - **Gr\u00f6nblad\u2013Strandberg\u2013Touraine syndrome** (sometimes with Touraine added)\n   - **Elastorrhexis systematisata** (older term)\n   - **Systemic elastorrhexis**\n\nNot something I recognize as connected to your current FLF/epistack work \u2014 flagging in case this was meant for a different context.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "elasticum",
+        "pseudoxanthoma"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.6262,
+      "guard0": "pass"
+    },
+    {
+      "seed_concept": "glycogen storage disease type II",
+      "mesh_uid": "68006009",
+      "descriptor": "Glycogen Storage Disease Type II",
+      "entry_term": "Acid Alpha-Glucosidase Deficiency",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "1. **What it names**: A genetic metabolic disorder caused by deficiency of the lysosomal enzyme acid alpha-glucosidase (GAA), which normally breaks down glycogen into glucose inside lysosomes. Its absence or reduced activity causes glycogen to accumulate abnormally in lysosomes, particularly damaging cardiac, skeletal, and smooth muscle tissue. It's caused by mutations in the *GAA* gene (chromosome 17), inherited autosomal recessively, and presents on a severity spectrum from a rapidly fatal infantile-onset form (severe cardiomyopathy, hypotonia, death often within the first year if untreated) to a milder late-onset form (progressive skeletal and respiratory muscle weakness).\n\n2. **Fields/communities**: Medical genetics, biochemical/metabolic genetics, pediatrics, neurology (neuromuscular disease), cardiology (for infantile form), enzyme replacement therapy research, newborn screening programs, and glycogen storage disease research more broadly.\n\n3. **Synonyms/alternative names**:\n   - **Pompe disease** (most common name, after Joannes Pompe who first described it in 1932)\n   - **Glycogen storage disease type II (GSD II / GSD-2)**\n   - **Acid maltase deficiency (AMD)**\n   - **Lysosomal glycogen storage disease type II**\n   - **GAA deficiency**",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "glycogen",
+        "storage"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.6446,
+      "guard0": "pass"
+    },
+    {
+      "seed_concept": "glycogen storage disease type II",
+      "mesh_uid": "68006009",
+      "descriptor": "Glycogen Storage Disease Type II",
+      "entry_term": "Acid Maltase Deficiency Disease",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:** A rare genetic metabolic disorder caused by deficiency of the lysosomal enzyme acid alpha-glucosidase (acid maltase), which normally breaks down glycogen inside lysosomes. Without it, glycogen accumulates abnormally in lysosomes, primarily damaging skeletal and cardiac muscle tissue. It's an autosomal recessive disorder caused by mutations in the GAA gene.\n\n**2. Fields/communities:** Medical genetics, lysosomal storage disease research, neuromuscular medicine, pediatric metabolic disease, and enzyme replacement therapy (ERT) research \u2014 it's a well-studied target for ERT drugs.\n\n**3. Synonyms/alternative names:**\n- **Pompe disease** (the most common name today, especially in clinical/patient contexts)\n- Glycogen Storage Disease Type II (GSD-II, GSD2)\n- Glycogenosis Type II\n- Acid alpha-glucosidase deficiency (AAGD)\n- Lysosomal alpha-glucosidase deficiency\n- Alpha-1,4-glucosidase deficiency\n\nNote: this term appears unrelated to your current project context \u2014 flagging in case it was meant for a different session.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "glycogen",
+        "storage"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.6532,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "glycogen storage disease type II",
+      "mesh_uid": "68006009",
+      "descriptor": "Glycogen Storage Disease Type II",
+      "entry_term": "Deficiency Disease, Lysosomal alpha-1,4-Glucosidase",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:** A deficiency of the lysosomal enzyme acid alpha-glucosidase (GAA, also called acid maltase), which normally breaks down glycogen inside lysosomes. Its absence or malfunction causes glycogen to accumulate abnormally in lysosomes, primarily in cardiac, skeletal, and smooth muscle. This is the disease commonly known as **Pompe disease**.\n\n**2. Fields/communities that study it:**\n- Medical genetics / inherited metabolic disease\n- Pediatrics and neuromuscular medicine (infantile-onset form is a classic pediatric emergency; late-onset form presents in adults with muscle weakness)\n- Lysosomal storage disease research (grouped with Gaucher, Fabry, MPS disorders, etc.)\n- Enzyme replacement therapy / biotech development (this is one of the flagship diseases for ERT \u2014 alglucosidase alfa, and newer agents like avalglucosidase alfa)\n- Newborn screening programs (Pompe is on many expanded newborn screening panels)\n- Gene therapy research (AAV-based GAA gene therapy is an active area)\n\n**3. Synonyms / alternative names:**\n- **Pompe disease**\n- **Glycogen storage disease type II (GSD II / GSD-II)**\n- **Acid maltase deficiency (AMD)**\n- **Acid alpha-glucosidase deficiency**\n- **GAA deficiency**\n- Older/less common: **Cardiomegalia glycogenica diffusa** (used historically for the severe infantile form)\n\nThe MeSH phrasing you gave (\"Deficiency Disease, Lysosomal alpha-1,4-Glucosidase\") is essentially the formal/indexing name for GAA deficiency = Pompe disease.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "glycogen",
+        "storage"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.6527,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "tinnitus",
+      "mesh_uid": "68014012",
+      "descriptor": "Tinnitus",
+      "entry_term": "Tinnitus, Spontaneous Oto-Acoustic Emission",
+      "lexical_overlap": 0.2,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:** Spontaneous otoacoustic emissions (SOAEs) are faint sounds generated by the cochlea itself \u2014 measurable with a sensitive microphone in the ear canal even with no external sound stimulus \u2014 believed to arise from active amplification by outer hair cells. In a small subset of people, an SOAE is loud/coherent enough to be perceived as a phantom tone, i.e., a form of tinnitus (this SOAE-linked subtype is thought to account for only a minority of tinnitus cases overall; most tinnitus has no measurable SOAE correlate).\n\n**2. Fields:** Audiology, otolaryngology (ENT/hearing science), auditory/psychoacoustic neuroscience, bioacoustics \u2014 SOAEs are a standard research and clinical tool in cochlear physiology.\n\n**3. Alternative names/related terms:**\n- SOAE (standard abbreviation)\n- \"Objective tinnitus\" (when the emission is loud enough to be recorded by an external microphone \u2014 though this broader clinical term also covers non-cochlear causes like vascular or muscular sounds)\n- Cochlear echo / \"Kemp echo\" (older terms, from David Kemp's 1978 discovery of otoacoustic emissions generally)\n- Sits within the broader OAE family: evoked OAEs (EOAE), transient-evoked (TEOAE), distortion-product (DPOAE), stimulus-frequency (SFOAE) \u2014 SOAE is the subtype with no external stimulus",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "tinnitu"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.77,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "tinnitus",
+      "mesh_uid": "68014012",
+      "descriptor": "Tinnitus",
+      "entry_term": "Tinnitus, Tensor Palatini Induced",
+      "lexical_overlap": 0.25,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "I recognize the underlying clinical concept this phrase points to, but not \"Tinnitus, Tensor Palatini Induced\" as a standard, independently indexed term \u2014 I want to flag that distinction rather than imply it's a fixed entity with its own literature.\n\n**1. What it names:** Objective (or subjective) tinnitus caused by rhythmic spasm/contraction of the tensor veli palatini muscle \u2014 one of the paired muscles of the soft palate (innervated by the mandibular branch of CN V). When this muscle (alone or along with the levator veli palatini and other palatal muscles) contracts rhythmically, it produces an audible clicking or clicking-like sound near the eustachian tube opening, which the patient perceives as tinnitus and which an examiner can sometimes also hear (making it \"objective\"). This sits within the broader category of middle-ear/palatal myoclonus as a cause of tinnitus, distinct from the more commonly discussed tensor tympani muscle spasm (which acts on the eardrum itself rather than the palate/eustachian tube).\n\n**2. Fields that study it:** Otolaryngology (ENT), neurotology/audiology, and neurology (movement disorders) \u2014 because palatal myoclonus/tremor is often classified as a neurological tremor disorder that happens to produce an otologic symptom.\n\n**3. Other names I know for the same underlying phenomenon:**\n- Palatal myoclonus (or palatal tremor) with tinnitus\n- Essential palatal tremor / symptomatic palatal tremor (when caused by brainstem/olivary pathway lesions, e.g., hypertrophic olivary degeneration)\n- Objective tinnitus (as the broader diagnostic category it falls under, alongside tensor tympani syndrome and other muscular/vascular causes)\n\nI'm not confident there's a widely cited, distinct synonym list specifically for the \"tensor-palatini-only\" variant as opposed to the general palatal myoclonus literature \u2014 I don't want to invent names I can't back. If you have a source using this exact phrase (e.g., an ontology, ICD listing, or textbook), sharing it would let me confirm whether it's treating this as its own coded entity or just an index-style rephrasing of palatal myoclonus tinnitus.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "tinnitu"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7508,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "tinnitus",
+      "mesh_uid": "68014012",
+      "descriptor": "Tinnitus",
+      "entry_term": "Tinnitus, Tensor Tympani Induced",
+      "lexical_overlap": 0.25,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:** A form of objective/somatic tinnitus caused by abnormal contraction (spasm, tremor, or sustained tonic contraction) of the tensor tympani muscle \u2014 the small middle-ear muscle attached to the malleus, innervated by the trigeminal nerve (V3). Instead of the usual perceived-only \"ringing,\" patients report a fluttering, thumping, buzzing, or low-frequency pulsatile sound, sometimes audible to an examiner or on recording, often with associated ear fullness/pain and hyperacusis. It's considered a subtype of middle-ear myoclonus (the other main subtype being stapedius-muscle myoclonus).\n\n**2. Fields/communities:** Otolaryngology (ENT), otology/neurotology, audiology, and to a lesser extent neurology (myoclonus/movement-disorder angle) and psychiatry (given ties to anxiety-driven hyperacusis). It's a niche topic even within tinnitus research.\n\n**3. Other names / related terms:**\n- Tensor tympani syndrome\n- Tonic Tensor Tympani Syndrome (TTTS) \u2014 term associated with Bernard Ross's writings linking it to anxiety/hyperacusis\n- Middle ear myoclonus (broader umbrella term covering both tensor tympani and stapedius myoclonus)\n- Tensor tympani myoclonus\n- Objective (middle-ear myogenic) tinnitus\n\nNote this is distinct from **palatal myoclonus tinnitus**, which involves the tensor veli palatini/levator veli palatini muscles of the soft palate rather than the tensor tympani \u2014 the two are sometimes confused because both produce clicking/fluttering objective tinnitus.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "tinnitu"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7495,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "presbycusis",
+      "mesh_uid": "68011304",
+      "descriptor": "Presbycusis",
+      "entry_term": "Presbycuses",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "I recognize this as the plural form of **presbycusis** (age-related hearing loss), not a term in its own right.\n\n**1. Meaning:** Presbycusis is the progressive, typically bilateral sensorineural hearing loss associated with aging \u2014 usually starting with high-frequency sounds and worsening gradually. \"Presbycuses\" would be the (rarely used) Greek-style plural, as in referring to multiple cases/subtypes of the condition, analogous to prosthesis\u2192prostheses.\n\n**2. Fields/communities:** Audiology, otolaryngology (ENT), geriatric medicine, auditory neuroscience, and gerontology. It's also studied in public health (hearing loss epidemiology) and hearing-aid/assistive-technology research.\n\n**3. Synonyms/alternative names:**\n- Age-related hearing loss (ARHL) \u2014 the most common alternative term in clinical/research literature\n- Age-related hearing impairment\n- Senile deafness / senile hearing loss (older, now largely disfavored terminology)\n- Sensorineural presbycusis (when specifying the mechanism)\n\nIf you meant a different, unrelated term that happens to be spelled \"Presbycuses,\" let me know \u2014 I don't have another meaning for it on file.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "presbycusi"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.9248,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "ascorbic acid",
+      "mesh_uid": "68060387",
+      "descriptor": "Ascorbate Peroxidases",
+      "entry_term": "L-Ascorbic Acid Peroxidase",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:** An enzyme \u2014 more commonly called **ascorbate peroxidase (APX)**, EC 1.11.1.11. It catalyzes the reduction of hydrogen peroxide (H\u2082O\u2082) to water using L-ascorbic acid (vitamin C) as the electron donor, producing monodehydroascorbate as the oxidized product. It's a heme-containing peroxidase, part of the ascorbate-glutathione (Foyer-Halliwell-Asada) cycle that plants and other organisms use to detoxify reactive oxygen species.\n\n**2. Fields/communities:** Plant physiology and plant biochemistry (it's central to chloroplast/cytosolic ROS scavenging), redox biology/oxidative stress research, and enzymology. Heavily studied in stress-tolerance and antioxidant-defense literature (drought, salinity, heavy metal, pathogen stress in crops), and in structural biology of heme peroxidases (it's a member of the class I peroxidase superfamily, related to cytochrome c peroxidase and catalase-peroxidases).\n\n**3. Synonyms/alternative names:**\n- Ascorbate peroxidase (APX) \u2014 the standard/dominant name\n- Ascorbic acid peroxidase\n- L-Ascorbate peroxidase\n- Sometimes abbreviated AAP or AsPOX in older literature (less common)\n- Systematic/enzyme name: L-ascorbate:hydrogen-peroxide oxidoreductase\n\nNo connection to your current FLF/judge-dependence work as far as I can tell \u2014 this looks like a standalone factual question.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "ascorbate",
+        "peroxidas"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8796,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "cholecalciferol",
+      "mesh_uid": "68018167",
+      "descriptor": "Receptors, Calcitriol",
+      "entry_term": "Receptors, Cholecalciferol",
+      "lexical_overlap": 0.333,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "\"Receptors, Cholecalciferol\" is a MeSH (Medical Subject Headings) term.\n\n1. **What it names**: This is the MeSH heading for the **vitamin D receptor (VDR)** \u2014 the nuclear hormone receptor that binds the active form of vitamin D (1,25-dihydroxyvitamin D3 / calcitriol) and mediates its genomic effects (regulating gene transcription related to calcium/phosphate homeostasis, bone metabolism, and numerous non-classical effects like immune modulation and cell differentiation).\n\n2. **Fields/communities**: Endocrinology, bone/mineral metabolism research, molecular biology (nuclear receptor superfamily research), nutrition science, immunology (VDR's role in immune regulation), oncology (VDR in cell differentiation/cancer research), and genetics (VDR polymorphism studies).\n\n3. **Synonyms/alternative names**:\n   - Vitamin D receptor (VDR) \u2014 the standard modern name\n   - Calcitriol receptor\n   - 1,25-dihydroxyvitamin D3 receptor\n   - 1,25(OH)2D3 receptor\n\n\"Cholecalciferol\" is the chemical name for vitamin D3, so this MeSH term is essentially the older/formal library-cataloging way of saying \"vitamin D receptor.\"",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "calcitriol",
+        "receptor"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.9178,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "acetaminophen",
+      "mesh_uid": "68015239",
+      "descriptor": "Arylsulfotransferase",
+      "entry_term": "Acetaminophen Sulphotransferase",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:** A sulfotransferase enzyme (or enzymatic activity) that catalyzes phase II conjugation of acetaminophen (paracetamol/APAP) \u2014 transferring a sulfonate group from the cofactor PAPS (3\u2032-phosphoadenosine-5\u2032-phosphosulfate) to acetaminophen's phenolic \u2013OH group, forming acetaminophen sulfate. This is one of the two major elimination pathways for acetaminophen (the other being glucuronidation via UGTs); a small remaining fraction goes through CYP-mediated oxidation to the toxic metabolite NAPQI.\n\n**2. Fields/communities:** Pharmacology and toxicology (drug metabolism/ADME), clinical pharmacology (especially acetaminophen overdose and pediatric dosing, since sulfation predominates over glucuronidation in neonates/infants), biochemistry/enzymology, and pharmacogenomics (SULT gene polymorphism studies).\n\n**3. Other names it goes by:**\n- **SULT1A1** (and to a lesser extent SULT1A3) \u2014 the specific human sulfotransferase isoforms responsible for this activity in standard nomenclature\n- **Phenol sulfotransferase (PST)**\n- **Aryl sulfotransferase**\n- Older functional split: **P-PST / TS PST** (thermostable phenol sulfotransferase, ~SULT1A1) vs **TL PST** (thermolabile, catechol-preferring, ~SULT1A3)\n- Sometimes loosely called **APAP-ST** or just referred to as \"acetaminophen sulfation\" / \"acetaminophen sulfotransferase activity\" rather than a distinct named enzyme",
+      "b_full_leak": false,
+      "b_stem_hits": [],
+      "screen_verdict": "SURVIVES",
+      "cross_cosine": 0.81,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "epinephrine",
+      "mesh_uid": "68064705",
+      "descriptor": "Racepinephrine",
+      "entry_term": "Racemic Epinephrine",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:** A 1:1 racemic mixture of the two epinephrine enantiomers (levo- and dextro-epinephrine), typically delivered as a nebulized inhalant. It's used medically for croup, post-extubation/post-intubation stridor, and upper airway edema \u2014 the vasoconstriction reduces airway swelling. Only the L-enantiomer is pharmacologically active; the D-enantiomer is largely inert but was historically left in because isolating the pure active form was more expensive to manufacture.\n\n**2. Fields/communities:** Pharmacology, medicinal chemistry (stereochemistry of enantiomers), emergency medicine, pediatrics/pediatric emergency medicine, respiratory therapy, anesthesiology/airway management, otolaryngology.\n\n**3. Other names:**\n- Racepinephrine (INN)\n- Racemic adrenaline (adrenaline being the UK/international term for epinephrine)\n- Vaponefrin, microNefrin, AsthmaNefrin (older/brand trade names)\n- \"RA\" \u2014 common clinical shorthand in croup/ED settings",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "racepinephrine"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8586,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "epinephrine",
+      "mesh_uid": "68064705",
+      "descriptor": "Racepinephrine",
+      "entry_term": "Epinephrine, Racemic Mixture",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:**\nRacemic epinephrine is a 1:1 mixture of the two enantiomers (stereoisomers) of epinephrine (adrenaline) \u2014 the naturally-occurring, pharmacologically active L-(\u2013)-form and the largely inactive D-(+)-form. It's most commonly encountered as a nebulized/inhaled formulation (typically 2.25% solution) used clinically for its alpha-adrenergic vasoconstrictive effect on inflamed upper-airway mucosa \u2014 classic uses are pediatric croup (laryngotracheobronchitis), post-extubation stridor, and sometimes topical hemostasis/decongestion.\n\n**2. Fields/communities:**\n- Pediatrics and pediatric emergency medicine (croup is the flagship use case)\n- Emergency medicine / respiratory therapy\n- Anesthesiology (post-extubation airway edema)\n- Otolaryngology\n- Pharmacology/medicinal chemistry (as a case study in enantiomer potency differences \u2014 the D-isomer's presence is mostly historical/manufacturing, not clinical benefit)\n\n**3. Other names/synonyms:**\n- Racemic adrenaline\n- DL-epinephrine, (\u00b1)-epinephrine, (RS)-adrenaline (chemical/stereochemical naming)\n- Brand names: Vaponefrin, microNefrin, AsthmaNefrin (S2), Nephron",
+      "b_full_leak": false,
+      "b_stem_hits": [],
+      "screen_verdict": "SURVIVES",
+      "cross_cosine": 0.7892,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "epinephrine",
+      "mesh_uid": "68064705",
+      "descriptor": "Racepinephrine",
+      "entry_term": "Epinephrine Hydrochloride, Racemic Mixture",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "I don't recognize this as a distinct technical term I can verify \u2014 but I can answer plainly from what's in it.\n\n1. **What it names**: \"Racemic epinephrine\" (racemic adrenaline) is a real pharmaceutical \u2014 a 1:1 mixture of the two enantiomers (L- and D-epinephrine) of the hormone/drug epinephrine, typically formulated as the hydrochloride salt. Only the L-enantiomer is pharmacologically active at target receptors; the racemic mix is historically used because it's cheaper to manufacture than isolating the L-form alone. Clinically it's best known as an inhaled nebulizer treatment for croup and post-extubation stridor, and as a topical vasoconstrictor.\n\n2. **Fields/communities**: Pharmacology, emergency medicine, pediatrics/respiratory therapy (croup treatment), and pharmaceutical chemistry (stereochemistry/enantiomer synthesis).\n\n3. **Other names/synonyms**: Racemic adrenaline; Vaponefrin and Asthmanefrin (brand names); \"epinephrine, racemic\" or \"adrenalin racemic\" in older pharmacopeia listings. Not to be confused with plain \"epinephrine HCl\" (the single L-enantiomer used in EpiPens, anaphylaxis treatment, cardiac arrest, etc.) \u2014 the \"racemic\" qualifier is the key distinguishing word.\n\nI'm reasonably confident on the racemic-epinephrine identification since it's a well-established clinical term; I'm less certain the exact phrasing \"Epinephrine Hydrochloride, Racemic Mixture\" maps to one specific named product versus being a generic/descriptive label \u2014 flagging that uncertainty rather than asserting a specific product match.",
+      "b_full_leak": false,
+      "b_stem_hits": [],
+      "screen_verdict": "SURVIVES",
+      "cross_cosine": 0.7697,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "thiamine",
+      "mesh_uid": "68013838",
+      "descriptor": "Thiamine Triphosphate",
+      "entry_term": "Thiamin Triphosphate",
+      "lexical_overlap": 0.333,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**Thiamin(e) Triphosphate (ThTP)**\n\n1. **What it is:** A phosphorylated derivative of thiamine (vitamin B1) bearing three phosphate groups on the hydroxyethyl side chain (vs. one for thiamine monophosphate, two for thiamine pyrophosphate/diphosphate \u2014 the well-known cofactor form). Long assumed to be a minor metabolic byproduct, but research (notably by Lucien Bettendorff's group) has shown it acts as a signaling molecule: in *E. coli* it accumulates under amino-acid starvation as a stress signal, and in animal nerve tissue it's implicated in modulating neuronal excitability/ion channel activity, separate from thiamine's classical coenzyme role in carbohydrate metabolism.\n\n2. **Fields/communities:** Biochemistry and enzymology (vitamin/cofactor metabolism), microbiology (bacterial stress-response signaling), and neuroscience/neurochemistry (nerve conduction, ion channels). It's a niche topic within vitamin B1 research rather than a mainstream field of its own.\n\n3. **Other names:** Abbreviated **ThTP**; sometimes written \"thiamine triphosphate\" (US spelling) vs. \"thiamin triphosphate\" (UK/IUPAC-adjacent). Occasionally called the \"thiamine triphosphoric ester.\" Note: the abbreviation \"TTP\" is ambiguous and more commonly refers to thymidine triphosphate, so ThTP is the disambiguated form used in the literature.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "thiamine",
+        "triphosphate"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.9929,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "niacin",
+      "mesh_uid": "68009525",
+      "descriptor": "Niacin",
+      "entry_term": "3-Pyridinecarboxylic Acid",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "3-Pyridinecarboxylic Acid is niacin (vitamin B3) \u2014 pyridine with a carboxylic acid group at the 3-position, molecular formula C\u2086H\u2085NO\u2082.\n\n1. **What it names**: A single well-defined organic compound, IUPAC systematic name for niacin. It's an essential nutrient/vitamin and a precursor to NAD\u207a/NADP\u207a (coenzymes central to redox metabolism).\n\n2. **Fields that study it**: Biochemistry/nutrition science (vitamin metabolism, NAD\u207a pathway), pharmacology and medicine (used clinically to treat dyslipidemia/high cholesterol, historically for pellagra prevention/treatment), organic/synthetic chemistry (as a building block), and food science (fortification, RDAs).\n\n3. **Synonyms/alternative names**:\n   - Niacin\n   - Nicotinic acid\n   - Vitamin B3\n   - Pyridine-3-carboxylic acid\n   - Vitamin PP (pellagra-preventing factor)\n   - Apo-nicotinic acid (less common)\n   - CAS 59-67-6\n\nThis is unrelated to any of the FLF/judge-dependence work in this repo \u2014 just a straightforward chemistry/nutrition identification.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "niacin"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.6324,
+      "guard0": "pass"
+    },
+    {
+      "seed_concept": "niacin",
+      "mesh_uid": "68009525",
+      "descriptor": "Niacin",
+      "entry_term": "Nicotinic Acid",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "1. **What it names**: Nicotinic acid is the IUPAC/chemical name for pyridine-3-carboxylic acid \u2014 a carboxylic acid derivative of pyridine. It is one of the two chemical forms of vitamin B3 (the other being nicotinamide/niacinamide). In the body it's a precursor for NAD\u207a/NADP\u207a, essential coenzymes in redox metabolism. At pharmacological (high, gram-scale) doses it's also used clinically as a lipid-lowering agent (raises HDL, lowers LDL/triglycerides), though this use has declined due to flushing side effects and mixed outcomes data.\n\n2. **Fields/communities**: biochemistry, nutrition science, clinical medicine/cardiology (lipid management), pharmacology, and organic chemistry.\n\n3. **Synonyms/alternative names**: \n   - Niacin (most common name, especially in nutrition/US usage)\n   - Vitamin B3\n   - Pyridine-3-carboxylic acid (systematic name)\n   - 3-Pyridinecarboxylic acid\n   - Vitamin PP (older term, \"pellagra-preventive\")\n\nNote: nicotinic acid and nicotinamide (niacinamide) are related but distinct \u2014 both count as \"niacin\"/vitamin B3, but nicotinamide is the amide form and doesn't share nicotinic acid's lipid effects or flushing side effect.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "niacin"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8004,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "niacin",
+      "mesh_uid": "68009525",
+      "descriptor": "Niacin",
+      "entry_term": "Nicotinate",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**Nicotinate**\n\n1. **Meaning**: The salt or ester of nicotinic acid (pyridine-3-carboxylic acid). E.g., \"sodium nicotinate\" is a salt; \"methyl nicotinate\" or \"tocopheryl nicotinate\" are esters. Nicotinic acid itself is vitamin B3/niacin.\n\n2. **Fields**: Biochemistry, nutrition science/vitamin research, pharmacology (nicotinic acid is used clinically to treat dyslipidemia \u2014 lowers LDL/triglycerides, raises HDL), medicinal/organic chemistry, and cosmetic/dermatological chemistry (nicotinate esters like tocopheryl nicotinate or methyl/hexyl nicotinate are used as vasodilating or rubefacient agents in topical products).\n\n3. **Also called**: Niacinate; 3-pyridinecarboxylate / pyridine-3-carboxylate (the systematic anion/ester name). The parent acid, nicotinic acid, is itself also called niacin or (historically) vitamin PP (pellagra-preventive factor).\n\nNote: this is unrelated to your current repo/session context \u2014 flagging in case you meant a different, project-specific sense of the term.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "niacin"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8171,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "cobalamin",
+      "mesh_uid": "68014805",
+      "descriptor": "Vitamin B 12",
+      "entry_term": "Cobalamins",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**Cobalamins**\n\n1. **What it names:** Cobalamins are a family of cobalt-containing corrinoid compounds \u2014 the chemical class that includes vitamin B12. The core structure is a corrin ring chelating a central cobalt ion, with different upper axial ligands defining the specific forms: methylcobalamin, adenosylcobalamin (the active coenzyme forms in humans), hydroxocobalamin, and cyanocobalamin (the synthetic/supplement form). They're essential cofactors for enzymes involved in methylation reactions (e.g., methionine synthase) and intramolecular rearrangements (e.g., methylmalonyl-CoA mutase).\n\n2. **Fields/communities:** Biochemistry, nutritional science, clinical medicine/hematology (B12 deficiency, pernicious anemia, megaloblastic anemia), microbiology (only certain bacteria/archaea synthesize cobalamin de novo \u2014 no plants, fungi, or animals can), and enzymology/structural biology (corrinoid enzyme mechanisms).\n\n3. **Also called:** Vitamin B12 (or vitamin B-12); \"the anti-pernicious anemia factor\" (historical name from its discovery); \"extrinsic factor\" (older term from the Castle intrinsic-factor/extrinsic-factor model of B12 absorption); specific subtypes are named separately \u2014 cyanocobalamin, hydroxocobalamin, methylcobalamin, adenosylcobalamin (also called cobamamide); corrinoids is the broader chemical class name that cobalamins belong to.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "vitamin"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7168,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "logistic models",
+      "mesh_uid": "68016015",
+      "descriptor": "Logistic Models",
+      "entry_term": "Logistic Regression",
+      "lexical_overlap": 0.333,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "Logistic Regression\n\n1. A statistical model for binary (or multinomial) classification that predicts the probability of an outcome by applying the logistic (sigmoid) function to a linear combination of input features. It's a generalized linear model with a logit link function, trained typically via maximum likelihood estimation.\n\n2. Statistics, machine learning, biostatistics/epidemiology, econometrics, and social sciences (psychometrics) are the main fields. It's a foundational method taught across all of these.\n\n3. Alternative names/synonyms:\n- Logit model / logit regression\n- Maximum entropy classifier (in NLP, especially older literature \u2014 \"MaxEnt\")\n- Log-linear model (closely related term, especially in categorical data analysis)\n- Logistic model\n- (In its multinomial form) softmax regression / multinomial logistic regression",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "logistic",
+        "model"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8188,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "logistic models",
+      "mesh_uid": "68016015",
+      "descriptor": "Logistic Models",
+      "entry_term": "Logit Models",
+      "lexical_overlap": 0.333,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**Logit Models**\n\n1. **What it names:** A class of statistical/econometric models for discrete-choice or binary/categorical outcome data. The core form uses the logistic function to map a linear combination of predictors to a probability (or, for multi-category outcomes, to a set of choice probabilities). The canonical case is binary logistic regression: P(y=1|x) = 1/(1+exp(\u2212(\u03b2\u2080+\u03b2x))). Extensions include multinomial logit, ordered logit, conditional logit, nested logit, and mixed/random-parameters logit.\n\n2. **Fields that study/use it:**\n   - Statistics / biostatistics (regression theory, generalized linear models)\n   - Econometrics (McFadden's discrete choice theory, especially conditional/multinomial logit for consumer/travel-mode choice)\n   - Machine learning (as \"logistic regression,\" a baseline classifier)\n   - Epidemiology (odds ratios, case-control studies)\n   - Marketing/transportation research (choice modeling, conjoint analysis)\n   - Political science/sociology (binary/ordinal outcome modeling)\n\n3. **Synonyms / alternative names:**\n   - Logistic regression (most common ML/stats term for the binary case)\n   - Logit regression\n   - Discrete choice model (broader family, especially in econometrics)\n   - Multinomial logit (MNL) \u2014 for >2 unordered categories\n   - Conditional logit \u2014 McFadden's choice-specific-attributes variant\n   - Ordered logit / proportional odds model \u2014 for ordinal outcomes\n   - Softmax regression / maximum entropy classifier \u2014 ML/NLP terms for the multinomial case\n   - Log-linear model \u2014 sometimes used interchangeably in categorical data analysis contexts (though technically a related but distinct GLM family)",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "logistic",
+        "model"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8621,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "propensity score",
+      "mesh_uid": "68057216",
+      "descriptor": "Propensity Score",
+      "entry_term": "Propensity Scores",
+      "lexical_overlap": 0.333,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**Propensity Scores**\n\n1. **What it means**: The propensity score is the probability that a unit (person, patient, subject) receives a particular treatment/exposure, conditional on their observed covariates: e(X) = P(T=1 | X). Introduced by Rosenbaum & Rubin (1983). It's used to balance observed confounders between treated and control groups in observational (non-randomized) studies, via matching, stratification, inverse-probability weighting, or as a covariate in regression \u2014 the goal is to approximate the balance a randomized experiment would give, so causal effects can be estimated from observational data.\n\n2. **Fields/communities**: Causal inference / biostatistics / epidemiology (most classically, comparing treatments in medical observational studies), econometrics (policy evaluation, labor economics \u2014 Heckman, Imbens, Rubin lineage), statistics more broadly, and increasingly social science, political science, and machine learning (causal ML, uplift modeling, off-policy evaluation).\n\n3. **Other names / closely related terms**:\n   - Propensity score matching (PSM) \u2014 the matching application specifically\n   - Inverse probability of treatment weighting (IPTW) / IPW \u2014 the weighting application\n   - Propensity function\n   - Treatment probability / selection probability\n   - Balancing score (a more general term Rosenbaum & Rubin used \u2014 propensity score is the *coarsest* balancing score)\n   - In the broader causal-inference literature it's sometimes discussed alongside/contrasted with the **generalized propensity score** (for continuous treatments) and **doubly robust estimators** (which combine propensity weighting with outcome regression, e.g. AIPW/TMLE)",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "propensity",
+        "score"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.9582,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "receiver operating characteristic",
+      "mesh_uid": "68012372",
+      "descriptor": "ROC Curve",
+      "entry_term": "Receiver Operating Characteristic",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "1. **Receiver Operating Characteristic (ROC)** names a curve/analysis method that plots the true positive rate (sensitivity) against the false positive rate (1 \u2212 specificity) at varying discrimination thresholds for a binary classifier or diagnostic test. The **area under the curve (AUC-ROC)** is the standard summary statistic derived from it, measuring overall discriminative ability independent of a chosen threshold.\n\n2. Fields/communities: signal detection theory (its origin, from WWII radar operator analysis), statistics, machine learning/data science (classifier evaluation), medicine/biostatistics (diagnostic test evaluation), psychology (signal detection theory experiments), epidemiology, and radiology.\n\n3. Other names/related terms:\n   - ROC curve / ROC analysis\n   - AUC or AUROC (Area Under the ROC Curve) \u2014 the summary metric, sometimes used loosely as a stand-in name for the whole analysis\n   - Relative operating characteristic (an older alternate expansion of the same acronym)\n   - Sensitivity/specificity curve (informal descriptive name)\n   - In signal detection theory, closely tied to the concept of the isosensitivity curve",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "curve",
+        "roc"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.6835,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "kaplan-meier estimate",
+      "mesh_uid": "68053208",
+      "descriptor": "Kaplan-Meier Estimate",
+      "entry_term": "Product-Limit Method",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it means:** A nonparametric method for estimating the survival function S(t) \u2014 the probability of \"surviving\" (not experiencing an event) past time t \u2014 from time-to-event data that includes censored observations. It works by multiplying together a sequence of conditional survival probabilities estimated at each observed event time (hence \"product\" of \"limit\" estimates), producing a step-function estimate of survival over time.\n\n**2. Fields/communities:** Biostatistics and survival analysis (clinical trials, epidemiology), reliability engineering (time-to-failure analysis), actuarial science, and more broadly any field doing time-to-event/duration modeling (economics for unemployment duration, sociology for event history analysis, etc.).\n\n**3. Other names:** This is the original 1958 name from Kaplan & Meier's paper. It is now almost universally called the **Kaplan-Meier estimator** (or **Kaplan-Meier method**, **KM estimator**). \"Product-limit estimator/method\" is still used, especially in older or more formal statistical texts, and is the term SAS's `PROC LIFETEST` and some software documentation still use.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "estimate",
+        "kaplan",
+        "meier"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7073,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "cluster analysis",
+      "mesh_uid": "68016000",
+      "descriptor": "Cluster Analysis",
+      "entry_term": "Clustering",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "1. **Clustering** is the task of grouping a set of objects so that items in the same group (cluster) are more similar to each other than to items in other groups, based on some similarity/distance measure \u2014 with no predefined labels (unsupervised).\n\n2. Studied primarily in **machine learning / data mining / statistics** (unsupervised learning, e.g., k-means, hierarchical, DBSCAN, Gaussian mixture models), and applied across many fields: **bioinformatics** (gene expression clustering), **pattern recognition / computer vision** (image segmentation), **NLP/IR** (document/topic clustering), **social network analysis** (community detection), **marketing** (customer segmentation), and **geography/spatial analysis**.\n\n3. Other names/related terms:\n   - Unsupervised classification\n   - Cluster analysis\n   - Numerical taxonomy (older statistics/biology term)\n   - Community detection (graph/network context)\n   - Segmentation (customer segmentation, image segmentation \u2014 domain-specific usage)\n   - Vector quantization (signal processing context, related but distinct)\n   - Q-analysis / typology construction (older social-science usage)",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "analysi",
+        "cluster"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.9259,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "cluster analysis",
+      "mesh_uid": "68016000",
+      "descriptor": "Cluster Analysis",
+      "entry_term": "Analyses, Cluster",
+      "lexical_overlap": 0.333,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**\"Analyses, Cluster\"** is an inverted-form index heading (the kind used in library/thesaurus systems like MeSH, where headings are alphabetized by the noun) for **Cluster Analysis**.\n\n1. **What it names**: A family of statistical/multivariate methods that groups a set of objects or observations into subsets (\"clusters\") such that items within a cluster are more similar to each other than to items in other clusters, based on some similarity/distance measure. It's unsupervised \u2014 no predefined labels.\n\n2. **Fields/communities**: Statistics, machine learning/data mining, pattern recognition, bioinformatics/genomics (e.g., gene expression clustering), biology/numerical taxonomy, psychology and social sciences (e.g., typologies), marketing/market research (segmentation), epidemiology and medicine (MeSH indexes it heavily), and image processing/computer vision.\n\n3. **Other names/synonyms**:\n   - Cluster analysis (the standard, non-inverted form)\n   - Data clustering / clustering\n   - Numerical taxonomy (classic biology usage)\n   - Unsupervised classification\n   - Q-analysis (older statistics usage)\n   - Segmentation (common in marketing contexts, e.g. \"customer segmentation\")\n   - Taxometric analysis (in psychology, sometimes loosely conflated)\n\nIf you meant a different, more specific \"Analyses, Cluster\" (e.g., a specific tool, dataset field, or paper title), let me know \u2014 as a bare term it maps cleanly onto MeSH's inverted heading for cluster analysis.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "analysi",
+        "cluster"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8853,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "markov chains",
+      "mesh_uid": "68008390",
+      "descriptor": "Markov Chains",
+      "entry_term": "Markov Process",
+      "lexical_overlap": 0.333,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**Markov Process**\n\n1. **What it means:** A stochastic (random) process that satisfies the *Markov property* \u2014 the future state depends only on the present state, not on the sequence of events that preceded it (\"memorylessness\"). Formally, for a process X_t: P(X_{t+1} | X_t, X_{t-1}, ..., X_0) = P(X_{t+1} | X_t). Can be discrete-time or continuous-time, and defined over discrete or continuous state spaces. A **Markov chain** is the discrete-state (often discrete-time) special case.\n\n2. **Fields/communities that study it:** Probability theory and stochastic processes (mathematics/statistics), applied probability, operations research (queueing theory), physics (statistical mechanics, diffusion), computer science / machine learning (reinforcement learning \u2014 MDPs, HMMs, Bayesian networks), economics/finance (stochastic models of prices, credit ratings), biology/genetics (population genetics, molecular evolution models), and engineering (control theory, signal processing).\n\n3. **Other names / closely related terms:**\n   - Markov chain (discrete-state case)\n   - Markovian process / Markovian dynamics\n   - Memoryless process\n   - Markov random process\n   - Continuous-time Markov chain (CTMC) / Discrete-time Markov chain (DTMC) \u2014 subtypes\n   - Diffusion process, Wiener process, Brownian motion \u2014 continuous-state/continuous-time special cases\n   - Markov Decision Process (MDP) \u2014 the controlled/decision-theoretic extension\n   - Hidden Markov Model (HMM) \u2014 extension with unobserved states\n   - Markov field / Markov random field \u2014 spatial generalization (not temporal)",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "chain",
+        "markov"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8684,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "markov chains",
+      "mesh_uid": "68008390",
+      "descriptor": "Markov Chains",
+      "entry_term": "Markov Processes",
+      "lexical_overlap": 0.333,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "1. **Markov Processes**: Stochastic processes with the *Markov property* \u2014 the future state depends only on the present state, not on the sequence of past states that led to it (\"memorylessness\"). Covers both discrete-state (Markov chains) and continuous-state, and both discrete-time and continuous-time variants (e.g., continuous-time Markov chains, diffusion processes).\n\n2. **Fields/communities**: Probability theory and stochastic processes (mathematics/statistics), operations research, statistical physics, queueing theory, control theory, machine learning/AI (reinforcement learning, HMMs, Bayesian filtering), bioinformatics (sequence models), econometrics/finance (stochastic calculus, option pricing), and computer science (algorithms, PageRank, MCMC).\n\n3. **Other names / closely related terms**:\n   - Markov chains (usually discrete-time/discrete-state case)\n   - Markov property / memoryless processes\n   - Markov dynamics\n   - Continuous-time Markov chains (CTMCs) / Markov jump processes\n   - Diffusion processes (continuous-state, continuous-time case, e.g., via SDEs)\n   - Random walks (a special case)\n   - Markov random fields (spatial/multi-dimensional generalization)\n   - Hidden Markov Models (HMMs) \u2014 Markov process with unobserved states\n   - Markov Decision Processes (MDPs) \u2014 Markov process with actions/rewards, used in RL",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "chain",
+        "markov"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.9251,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "apoptosis",
+      "mesh_uid": "68065703",
+      "descriptor": "Malformations of Cortical Development, Group I",
+      "entry_term": "Malformations Secondary to Abnormal Neuronal and Glial Proliferation or Apoptosis",
+      "lexical_overlap": 0.1,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:**\nThis is **Group/Category I** in the Barkovich et al. classification scheme for **Malformations of Cortical Development (MCD)**. It covers structural brain malformations arising from defects in the *proliferation* phase of corticogenesis (too few or too many neural/glial progenitor cells being generated) or from dysregulated *apoptosis* during that phase. It includes conditions like microcephaly (proliferation failure), megalencephaly/hemimegalencephaly (proliferation excess), and cortical dysplasias with abnormal/dysmorphic cell types \u2014 e.g. focal cortical dysplasia type II, and the cortical tubers of tuberous sclerosis complex.\n\n**2. Field(s)/communities:**\n- Pediatric/developmental **neuropathology**\n- **Neuroradiology** (MRI-based classification of cortical malformations)\n- **Pediatric epileptology** (these lesions are a major cause of drug-resistant childhood epilepsy)\n- **Medical genetics** (many have known mTOR-pathway or other single-gene causes)\n- **Developmental neurobiology** (basic science on neural progenitor proliferation/apoptosis)\n\n**3. Other names for it:**\n- \"**Group I**\" or \"**Class I**\" malformations in the Barkovich MCD classification (Barkovich et al., *Neurology* 2005; updated in *Brain* 2012, \"A developmental and genetic classification for malformations of cortical development: update 2012\")\n- Loosely called \"**proliferation disorders**\" of cortical development\n- Sits under the broader umbrella term \"**Malformations of Cortical Development (MCD)**,\" alongside the other two Barkovich categories: malformations due to abnormal neuronal migration, and malformations due to abnormal post-migrational cortical organization\n\nI recognize this term specifically as part of the Barkovich MCD taxonomy \u2014 I'm not aware of a distinct, unrelated usage elsewhere.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "cortical",
+        "development",
+        "group",
+        "malformation"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7534,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "apoptosis",
+      "mesh_uid": "68065703",
+      "descriptor": "Malformations of Cortical Development, Group I",
+      "entry_term": "Malformations Due to Abnormal Neuronal and Glial Proliferation or Apoptosis",
+      "lexical_overlap": 0.1,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "This is a real, recognized term \u2014 not something I need to guess at.\n\n**1. What it names:** It's one of the three top-level categories in the Barkovich classification of **Malformations of Cortical Development (MCD)** \u2014 the neuroradiology/neuropathology system used to organize congenital brain malformations by the developmental stage at which they arise. This category covers malformations arising from disrupted **cell proliferation, differentiation, or programmed cell death (apoptosis)** of neuronal and glial progenitors \u2014 i.e., problems in generating the right number/type of cells, as opposed to problems with those cells migrating (category 2) or organizing into cortical layers afterward (category 3). It includes things like microcephaly/megalencephaly, focal cortical dysplasia type II, hemimegalencephaly, cortical tubers in tuberous sclerosis complex, and related low-grade neuroepithelial tumors (e.g., ganglioglioma, DNET).\n\n**2. Fields/communities:** Pediatric neuroradiology, neuropathology, pediatric neurology/epileptology (this classification is heavily used in epilepsy surgery workup), and developmental neurobiology. The classification itself comes out of work by A. James Barkovich and colleagues, published/updated in *Neurology* and related journals (versions from ~2001, 2005, 2012).\n\n**3. Other names for the same thing:**\n- Commonly shortened to **\"Group I\"** or **\"Group 1\"** malformations in the Barkovich MCD scheme\n- Sometimes referred to as **\"disorders/abnormalities of proliferation and apoptosis\"**\n- Falls under the broader umbrella term **\"Malformations of Cortical Development\" (MCD)**, alongside \"disorders of neuronal migration\" and \"disorders of post-migrational development/cortical organization\"\n\nNote: this is unrelated to anything in the current FLF-epistack project context \u2014 flagging in case it was meant for a different session.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "cortical",
+        "development",
+        "group",
+        "malformation"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7582,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "autophagy",
+      "mesh_uid": "68001343",
+      "descriptor": "Autophagy",
+      "entry_term": "Autophagocytosis",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**\"Autophagocytosis\"**\n\n1. **Meaning**: The cellular process in which a cell degrades its own components (organelles, proteins, cytoplasmic material) by enclosing them in a double-membrane vesicle (autophagosome) that then fuses with a lysosome for breakdown and recycling. It's essentially synonymous with what's now almost universally called \"autophagy\" \u2014 literally \"self-eating.\"\n\n2. **Fields/communities**: Cell biology, molecular biology, biochemistry; also studied heavily in oncology, neurodegeneration research (Alzheimer's, Parkinson's), immunology, aging/senescence research, and pharmacology (autophagy modulation as a drug target). Yoshinori Ohsumi won the 2016 Nobel Prize in Physiology or Medicine for elucidating the mechanisms of autophagy in yeast.\n\n3. **Synonyms/alternative names**:\n   - **Autophagy** (by far the dominant modern term \u2014 \"autophagocytosis\" is a largely older/less common variant)\n   - **Cellular self-digestion**\n   - **Type II programmed cell death** (when referring to autophagy-associated cell death specifically, distinct from apoptosis/Type I)\n   - Related but distinct sub-terms sometimes conflated in casual usage: **macroautophagy**, **microautophagy**, **chaperone-mediated autophagy** (these are subtypes, not strict synonyms)\n\nI recognize this term confidently \u2014 it's not obscure, just an older phrasing of \"autophagy.\"",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "autophagy"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7963,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "autophagy",
+      "mesh_uid": "68001343",
+      "descriptor": "Autophagy",
+      "entry_term": "Lipophagy",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "Lipophagy\n\n1. **What it names:** A selective form of autophagy in which lipid droplets are engulfed by autophagosomes and delivered to lysosomes for hydrolytic breakdown, releasing free fatty acids. It's the process by which cells mobilize stored triglycerides via the autophagy-lysosome pathway rather than (or alongside) cytosolic lipase action.\n\n2. **Fields/communities:** Cell biology, biochemistry, hepatology/liver metabolism research (it was first characterized in hepatocytes, ~2009, Singh et al.), obesity/metabolic disease research, aging biology, neurodegeneration research (lipid droplet accumulation in glia/neurons), and cancer metabolism.\n\n3. **Other names/related terms:**\n   - \"Autophagic lipolysis\" (emphasizing the lipolytic outcome)\n   - \"Lipid droplet autophagy\"\n   - Contrasted with/alternative pathway: \"cytosolic lipolysis\" or \"neutral lipolysis\" (the non-autophagic route via ATGL/HSL) \u2014 not a synonym but the term it's often paired against in the literature\n   - In some contexts also discussed under the broader umbrella \"macrolipophagy\" (canonical, macroautophagy-mediated) vs. \"microlipophagy\" (direct lysosomal/vacuolar engulfment of lipid droplets, well-studied in yeast)",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "autophagy"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.819,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "autophagy",
+      "mesh_uid": "68001343",
+      "descriptor": "Autophagy",
+      "entry_term": "Ribophagy",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**Ribophagy** is the selective autophagic degradation of ribosomes (both the large and small subunits, or specific pools of them) by the lysosome/vacuole.\n\n**1. What it names:** A form of selective autophagy in which cells target ribosomes (rRNA + ribosomal proteins) for turnover, typically under nutrient starvation or stress, to recycle nucleotides/amino acids and reduce translational capacity. It's distinguished from bulk/non-selective autophagy by requiring specific receptors/adaptors that tag ribosomes for engulfment.\n\n**2. Fields/communities:**\n- Cell biology / molecular biology \u2014 autophagy research broadly (the field built around Ohsumi-lineage yeast autophagy work)\n- Yeast genetics \u2014 much of the founding work (e.g., characterization of Ubp3/Bre5 deubiquitination complex regulating ribophagy) was done in *Saccharomyces cerevisiae*\n- Neurodegeneration / cancer biology \u2014 downstream interest because ribosome quality control and selective autophagy pathways are implicated in disease\n- More recently, plant biology and mammalian cell biology have picked up the term as selective-autophagy receptor work (e.g., NUFIP1 in mammals) expanded\n\n**3. Synonyms/alternative names:**\n- \"Ribosomal autophagy\" (a more descriptive, less jargon-y phrasing sometimes used interchangeably)\n- Related but not identical terms you may see nearby: \"rRNA autophagy,\" or discussions folded into the broader \"ribosome quality control (RQC)\" literature \u2014 RQC is a distinct, non-autophagic pathway, so don't treat it as a true synonym, just a neighboring concept.\n- I'm not aware of a widely-used alternate name beyond \"ribosomal autophagy\" \u2014 it's usually just called ribophagy in the literature.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "autophagy"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8241,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "hypoxia",
+      "mesh_uid": "68064799",
+      "descriptor": "Hypoxia-Inducible Factor-Proline Dioxygenases",
+      "entry_term": "HIF Prolyl-4-Hydroxylase",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:** An enzyme (family) that hydroxylates specific proline residues on the alpha subunit of Hypoxia-Inducible Factor (HIF-\u03b1) when oxygen is present. This hydroxylation is the signal that marks HIF-\u03b1 for recognition by the von Hippel-Lindau protein (VHL), leading to ubiquitination and proteasomal degradation. It's a Fe(II)/2-oxoglutarate-dependent dioxygenase that uses molecular O\u2082 as a co-substrate, so its activity directly tracks cellular oxygen levels \u2014 when O\u2082 drops, the enzyme can't function, HIF-\u03b1 escapes degradation, accumulates, and drives transcription of hypoxia-response genes (EPO, VEGF, glycolytic enzymes, etc.). It is the core molecular oxygen sensor in this pathway (the discovery earned the 2019 Nobel Prize in Physiology or Medicine, to Kaelin, Ratcliffe, and Semenza).\n\n**2. Fields/communities:** Cell and molecular biology, biochemistry (oxygen sensing, dioxygenase enzymology), cancer biology (tumor hypoxia), nephrology/hematology (anemia drug development), pharmacology, and physiology (altitude/ischemia adaptation).\n\n**3. Other names you'll see for it:**\n- **PHD** (Prolyl Hydroxylase Domain-containing protein) \u2014 the common shorthand\n- **PHD1, PHD2, PHD3** \u2014 the three human isoforms (PHD2 is considered the main physiological sensor)\n- **EGLN1, EGLN2, EGLN3** \u2014 the gene names for PHD2, PHD1, PHD3 respectively (from *C. elegans* \"egg-laying defective nine\")\n- **HIF-PH** or **HIF-PHD**\n- Broadly classed as a member of the **2-oxoglutarate/Fe(II)-dependent dioxygenase** superfamily\n\nNote: don't confuse it with **collagen prolyl 4-hydroxylase (C-P4H)** \u2014 a completely different enzyme (works on collagen, involved in connective tissue synthesis) that happens to share the \"prolyl-4-hydroxylase\" chemistry name.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "dioxygenas",
+        "factor",
+        "hypoxia",
+        "inducible",
+        "proline"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7738,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "hypoxia",
+      "mesh_uid": "68064799",
+      "descriptor": "Hypoxia-Inducible Factor-Proline Dioxygenases",
+      "entry_term": "HIF Prolyl-4-Hydroxylases",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:**\nA family of enzymes (EC 1.14.11.29) that hydroxylate specific proline residues (Pro402 and Pro564 in human HIF-1\u03b1) on the alpha subunit of Hypoxia-Inducible Factor. They are Fe(II)- and 2-oxoglutarate (\u03b1-ketoglutarate)-dependent dioxygenases that consume molecular O2 as a co-substrate, producing succinate and CO2 as byproducts. Because they require O2 directly, their activity falls as cellular oxygen falls, making them the cell's primary oxygen sensors. When active (normoxia), hydroxylated HIF-\u03b1 is recognized by the von Hippel-Lindau (VHL) protein, ubiquitinated, and degraded by the proteasome. Under hypoxia, hydroxylation stops, HIF-\u03b1 accumulates, dimerizes with HIF-1\u03b2, and activates transcription of hypoxia-response genes (EPO, VEGF, glycolytic enzymes, etc.).\n\n**2. Fields/communities:**\nCell and molecular biology, biochemistry (dioxygenase enzymology), oncology (tumor hypoxia and angiogenesis), nephrology (renal anemia/erythropoietin regulation), vascular biology, and pharmacology/drug development (HIF-PH inhibitors as therapeutics).\n\n**3. Synonyms / alternative names:**\n- PHD (Prolyl Hydroxylase Domain) proteins \u2014 PHD1, PHD2, PHD3\n- EGLN1, EGLN2, EGLN3 (Egl-Nine homolog genes encoding PHD2, PHD1, PHD3 respectively)\n- HIF-P4H (HIF-prolyl 4-hydroxylase), sometimes numbered HIF-P4H-1/2/3\n- HPH (HIF prolyl hydroxylase)\n- Occasionally referred to generically as \"cellular oxygen sensors\"\n\nPHD2/EGLN1 is the dominant isoform physiologically and the main pharmacological target (e.g., roxadustat and related \"HIF-PH inhibitors\" for renal anemia).",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "dioxygenas",
+        "factor",
+        "hypoxia",
+        "inducible",
+        "proline"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8129,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "hypoxia",
+      "mesh_uid": "68064799",
+      "descriptor": "Hypoxia-Inducible Factor-Proline Dioxygenases",
+      "entry_term": "Egl Nine Homolog 2 Protein",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:** EGLN2 is a human gene/protein \u2014 one of three paralogs (EGLN1, EGLN2, EGLN3) of the *C. elegans* gene *egl-9* (\"egg-laying defective 9\"). It encodes a prolyl hydroxylase enzyme that, in the presence of oxygen, hydroxylates specific proline residues on HIF-\u03b1 (hypoxia-inducible factor alpha) subunits. That hydroxylation marks HIF-\u03b1 for recognition by the VHL protein and subsequent ubiquitin-mediated degradation. Under low oxygen, EGLN2's activity drops, HIF-\u03b1 escapes degradation, and it drives transcription of hypoxia-response genes (angiogenesis, erythropoiesis, glycolysis shift, etc.). So functionally it's a cellular oxygen sensor.\n\n**2. Fields/communities:** Molecular/cell biology, biochemistry (enzymology of 2-oxoglutarate/Fe(II)-dependent dioxygenases), cancer biology (HIF pathway is heavily studied in tumor hypoxia), and physiology/oxygen-sensing research \u2014 the broader HIF pathway was the subject of the 2019 Nobel Prize in Physiology or Medicine (Kaelin, Ratcliffe, Semenza).\n\n**3. Synonyms/alternative names:**\n- PHD1 (prolyl hydroxylase domain-containing protein 1)\n- HPH3 (HIF prolyl hydroxylase 3)\n- EGLN2 (the standard gene symbol)\n- Sometimes referenced simply as \"PHD1\" in HIF-pathway literature (distinguish from unrelated \"PHD\" = plant homeodomain, a different acronym collision)\n\nFor contrast: EGLN1 = PHD2/HPH2 (the dominant hydroxylase in most tissues), EGLN3 = PHD3/HPH1/SM-20.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "dioxygenas",
+        "factor",
+        "hypoxia",
+        "inducible",
+        "proline"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.6095,
+      "guard0": "pass"
+    },
+    {
+      "seed_concept": "oxidative stress",
+      "mesh_uid": "68018384",
+      "descriptor": "Oxidative Stress",
+      "entry_term": "Antioxidative Stresses",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:**\n\"Antioxidative Stresses\" is not a single crisply standardized term the way \"oxidative stress\" is \u2014 I don't have high confidence there's one canonical definition. It shows up in the literature in a couple of related but distinct senses:\n\n- **As a loose synonym/variant of \"oxidative stress\"** \u2014 the imbalance between reactive oxygen species (ROS) production and antioxidant defenses that damages lipids, proteins, and DNA. Some non-native-English papers use \"antioxidative stress\" interchangeably with this, describing it from the defense-system side rather than the damage side.\n- **In plant/environmental stress physiology** \u2014 stresses (drought, salinity, heavy metals, UV, cold) that trigger the *antioxidative defense response* (SOD, catalase, peroxidase, glutathione cycle). Here \"antioxidative\" describes the counter-mechanism the stress provokes, not the stress itself.\n- **Less commonly, as a synonym for \"reductive stress\"** \u2014 the opposite pathology, where excess reducing capacity (too much GSH, NADH/NADPH) disrupts redox homeostasis.\n\n**2. Fields/communities:**\nRedox biology, biochemistry/cell biology, plant physiology & agronomy (abiotic stress research), food science (postharvest/storage physiology), nutrition science, toxicology, exercise physiology, dermatology/cosmetics science.\n\n**3. Alternative names/synonyms:**\n- \"Oxidative stress\" (the standard, dominant related term)\n- \"Redox stress\" / \"redox imbalance\"\n- \"Reductive stress\" (if that opposite meaning is intended)\n- \"Oxidant\u2013antioxidant imbalance\"\n- \"Antioxidative defense response\" (when referring to the plant-stress usage)\n\nIf you have a source document or field where you encountered this exact phrase, sharing it would let me narrow down which of these senses is actually meant \u2014 the term is ambiguous enough on its own that I'd rather flag that than guess.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "oxidative",
+        "stres"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8352,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "oxidative stress",
+      "mesh_uid": "68018384",
+      "descriptor": "Oxidative Stress",
+      "entry_term": "Oxidative DNA Damage",
+      "lexical_overlap": 0.25,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:** DNA damage caused by reactive oxygen species (ROS) \u2014 hydroxyl radicals, superoxide, hydrogen peroxide, singlet oxygen, etc. Manifests as base modifications (most famously 8-oxoguanine/8-oxo-dG from guanine oxidation), abasic sites, single- and double-strand breaks, and DNA-protein crosslinks. Arises from normal cellular metabolism (mitochondrial respiration byproducts), inflammation, UV/ionizing radiation, and xenobiotic exposure; repaired mainly via base excision repair (BER), with OGG1 as the key glycosylase for 8-oxoG.\n\n**2. Fields/communities:** Molecular biology and biochemistry (DNA repair, redox biology); toxicology and genetic toxicology (genotoxicity testing); cancer biology/oncology (mutagenesis, carcinogenesis); aging/gerontology research (oxidative theory of aging); radiation biology; environmental and occupational health; nutrition science (antioxidant/oxidative-stress biomarker studies); epidemiology (urinary 8-oxo-dG as a biomarker).\n\n**3. Synonyms/alternative names:**\n- Oxidative DNA lesions / oxidatively-generated DNA damage\n- ROS-induced (or free-radical-induced) DNA damage\n- Oxidative genotoxicity / oxidative genomic damage\n- 8-oxoG (or 8-oxo-dG) damage \u2014 when referring specifically to the guanine-oxidation marker\n- Oxidative stress-induced DNA damage",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "oxidative",
+        "stres"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8011,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "oxidative stress",
+      "mesh_uid": "68018384",
+      "descriptor": "Oxidative Stress",
+      "entry_term": "Oxidative DNA Damages",
+      "lexical_overlap": 0.25,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:**\nDamage to DNA caused by reactive oxygen species (ROS) \u2014 e.g., hydroxyl radicals, hydrogen peroxide, singlet oxygen \u2014 attacking DNA bases, the sugar-phosphate backbone, or causing strand breaks. Canonical lesions include 8-oxo-7,8-dihydroguanine (8-oxoG/8-OHdG), thymine glycol, abasic (AP) sites, and single/double-strand breaks. ROS arise from normal metabolism (mitochondrial respiration), inflammation, radiation, and environmental toxins/xenobiotics.\n\n**2. Fields/communities:**\n- Molecular biology & biochemistry (DNA repair, especially base excision repair/BER)\n- Genetics & genomics (mutagenesis studies)\n- Free-radical/redox biology\n- Toxicology & environmental health (biomarker of oxidative stress exposure)\n- Oncology/carcinogenesis research\n- Aging research (free-radical theory of aging)\n- Epidemiology (using 8-OHdG as a urinary/blood biomarker)\n\n**3. Synonyms / alternative names:**\n- Oxidative DNA lesions\n- Oxidatively induced DNA damage (the more formal phrasing used by researchers like Jean Cadet)\n- ROS-induced DNA damage\n- Oxidative DNA base modifications/damage\n- Free radical\u2013induced DNA damage\n- DNA oxidation products\n\nSpecific lesion types are often referenced by their own names as stand-ins for the general category: 8-oxodG/8-OHdG, thymine glycol, AP sites, oxidative strand breaks.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "oxidative",
+        "stres"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.71,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "insulin resistance",
+      "mesh_uid": "68024821",
+      "descriptor": "Metabolic Syndrome",
+      "entry_term": "Insulin Resistance Syndrome X",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:** A cluster of co-occurring metabolic abnormalities \u2014 insulin resistance/hyperinsulinemia, impaired glucose tolerance, dyslipidemia (high triglycerides, low HDL), hypertension, and central/abdominal obesity \u2014 that together elevate risk for type 2 diabetes and cardiovascular disease. The clustering (rather than any single marker) is the clinical point: it suggests a shared underlying pathophysiology (insulin resistance) driving multiple risk factors at once. Coined/popularized by Gerald Reaven in his 1988 Banting Lecture.\n\n**2. Fields that study it:** Endocrinology, diabetology, cardiology, clinical/metabolic epidemiology, and internal medicine; also nutrition science and pharmacology (drug targets for insulin sensitization).\n\n**3. Synonyms / alternative names:**\n- Syndrome X\n- Reaven's Syndrome\n- Metabolic Syndrome (the now-standard term, per WHO/NCEP-ATP III/IDF criteria)\n- Insulin Resistance Syndrome\n- Dysmetabolic Syndrome\n- \"The Deadly Quartet\" (Kaplan's related, narrower formulation: central obesity, hypertension, hypertriglyceridemia, glucose intolerance)\n\n**Caveat:** Don't confuse this with **Cardiac Syndrome X**, an unrelated condition (angina with chest-pain symptoms but angiographically normal coronary arteries). Same \"Syndrome X\" name, different disease entirely \u2014 the term is genuinely overloaded in the literature.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "metabolic"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7336,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "endoplasmic reticulum stress",
+      "mesh_uid": "68059865",
+      "descriptor": "Endoplasmic Reticulum Stress",
+      "entry_term": "ER Stresses",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**ER Stress(es)** = a cellular condition in which unfolded or misfolded proteins accumulate in the lumen of the **endoplasmic reticulum**, overwhelming its protein-folding capacity. This triggers the **Unfolded Protein Response (UPR)** \u2014 a signaling cascade (via sensors like IRE1, PERK, and ATF6) that tries to restore homeostasis by upregulating chaperones, slowing translation, and increasing ER-associated degradation; if unresolved, it can trigger apoptosis.\n\n**1. What it names:** A state of ER protein-folding overload/dysfunction, and by extension the cascade of adaptive/apoptotic signaling it provokes.\n\n**2. Fields/communities:**\n- Cell biology / molecular biology (protein folding, secretory pathway)\n- Biochemistry (chaperone biology, proteostasis)\n- Neuroscience (Alzheimer's, Parkinson's, ALS \u2014 misfolded protein aggregation)\n- Diabetes/metabolic disease research (\u03b2-cell dysfunction, insulin resistance)\n- Cancer biology (tumor microenvironment adaptation)\n- Immunology (plasma cell biology, inflammation \u2014 UPR-inflammation crosstalk)\n\n**3. Alternative names/synonyms:**\n- \"Endoplasmic reticulum stress\" (full form)\n- \"UPR activation\" / \"unfolded protein response\" (the downstream program, often used near-interchangeably with the triggering condition)\n- \"ER protein-folding stress\"\n- \"Proteotoxic ER stress\"\n- Related but not identical: \"proteostasis stress\" or \"protein misfolding stress\" (broader terms not specific to the ER compartment)\n\nIf you meant a different \"ER\" (e.g., Estrogen Receptor stress, Endoplasmic-Reticulum-adjacent term in a specific paper you're reading, or something from an unrelated field), let me know \u2014 the biology sense above is by far the dominant usage.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "endoplasmic",
+        "reticulum",
+        "stres"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7142,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "endoplasmic reticulum stress",
+      "mesh_uid": "68059865",
+      "descriptor": "Endoplasmic Reticulum Stress",
+      "entry_term": "ER Stress",
+      "lexical_overlap": 0.333,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "1. **ER stress** (endoplasmic reticulum stress) names the cellular condition where unfolded or misfolded proteins accumulate in the ER lumen, overwhelming its protein-folding capacity \u2014 typically triggered by increased secretory demand, nutrient/redox imbalance, calcium dysregulation, viral infection, or genetic mutations affecting protein folding. It activates the **unfolded protein response (UPR)**, signaling through three ER transmembrane sensors \u2014 IRE1, PERK, and ATF6 \u2014 which attempt to restore homeostasis (via reduced translation, increased chaperone expression, ERAD) or, if unresolved, trigger apoptosis.\n\n2. Studied primarily in **cell biology** and **biochemistry** (protein folding, organelle stress), with major activity in **molecular medicine/pathology** for its roles in diabetes (beta-cell failure), neurodegeneration (Alzheimer's, Parkinson's, ALS), cancer biology, cardiovascular disease, and inflammatory/metabolic disorders. Also central to **immunology** (plasma cell biology, given high secretory load) and **pharmacology/drug discovery** (UPR modulators as therapeutic targets).\n\n3. Synonyms/related terms:\n   - **Unfolded protein response (UPR)** \u2014 the signaling program ER stress triggers (often used near-interchangeably in casual usage, though technically the response, not the stress itself)\n   - **Proteotoxic stress** (broader term, ER stress is a subtype/related concept)\n   - **ER overload response** \u2014 an older/alternate name for a related signaling branch\n   - Sometimes described via its downstream sensor pathways: **IRE1/XBP1 pathway**, **PERK/eIF2\u03b1 pathway**, **ATF6 pathway**\n   - Chronic/pathological ER stress is sometimes called **ER stress\u2013induced apoptosis** or discussed under **CHOP-mediated cell death** when referring to its terminal outcome",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "endoplasmic",
+        "reticulum",
+        "stres"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.6583,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "magnetic resonance imaging",
+      "mesh_uid": "68066235",
+      "descriptor": "Fluorine-19 Magnetic Resonance Imaging",
+      "entry_term": "19F MRI",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "19F MRI (fluorine-19 magnetic resonance imaging):\n\n1. **What it is**: An MRI technique that detects the \u00b9\u2079F nucleus instead of the \u00b9H (proton) nucleus normally imaged in clinical MRI. \u00b9\u2079F is 100% naturally abundant, has high gyromagnetic ratio/sensitivity (~83% of \u00b9H), and \u2014 critically \u2014 has essentially zero background signal in the body (endogenous fluorine is bound in bone/teeth and not MR-visible), so exogenous fluorinated tracers (e.g., perfluorocarbon nanoemulsions) show up with very high contrast and no background subtraction needed. It's used to track injected cells (immune cells, stem cells), quantify inflammation, or image fluorinated drugs/probes with \"hot-spot\" imaging, often overlaid on a conventional \u00b9H anatomical scan.\n\n2. **Fields/communities**: Molecular/preclinical imaging, biomedical/radiology research, immunology (cell tracking \u2014 e.g., CAR-T or dendritic cell trafficking), oncology (tumor/inflammation imaging), MR physics/pulse-sequence development, and pharmaceutical/drug-delivery research (tracking fluorinated compounds).\n\n3. **Other names/synonyms**: Fluorine MRI, fluorine-19 MRI, F-19 MRI, \u00b9\u2079F-MRI cell tracking (when used for cell labeling), \"hot-spot imaging\" (informal term for the tracer-only images), and it's closely related to/sometimes discussed alongside \u00b9\u2079F MRS (fluorine magnetic resonance spectroscopy).",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "fluorine",
+        "imaging",
+        "magnetic",
+        "resonance"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.7869,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "positron emission tomography",
+      "mesh_uid": "68049268",
+      "descriptor": "Positron-Emission Tomography",
+      "entry_term": "PET Imaging",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**PET Imaging** (Positron Emission Tomography)\n\n**1. What it names:** A nuclear medicine imaging technique that detects gamma rays emitted indirectly by a positron-emitting radioactive tracer (radionuclide) injected into the body. The tracer is typically attached to a biologically active molecule (most commonly a glucose analog, FDG). A computer reconstructs 3D images showing tracer concentration, which reflects metabolic or physiological activity rather than just anatomy.\n\n**2. Fields/communities that study it:**\n- Nuclear medicine / radiology\n- Medical physics\n- Oncology (tumor detection/staging)\n- Neurology/neuroscience (brain metabolism, dementia research)\n- Cardiology (myocardial viability)\n- Radiochemistry / radiopharmacy (tracer synthesis)\n- Biomedical engineering (scanner/reconstruction algorithm design)\n- Pharmacokinetics (drug distribution studies)\n\n**3. Other names/synonyms:**\n- Positron Emission Tomography (full form)\n- PET scan / PET-CT (when fused with CT) / PET-MRI (when fused with MRI)\n- FDG-PET (when specifically using the fluorodeoxyglucose tracer, the most common variant)\n- Nuclear imaging / functional imaging (broader umbrella terms it falls under, not strict synonyms)",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "emission",
+        "positron",
+        "tomography"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8951,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "positron emission tomography",
+      "mesh_uid": "68049268",
+      "descriptor": "Positron-Emission Tomography",
+      "entry_term": "PET Scan",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "1. **PET scan (Positron Emission Tomography)** \u2014 a nuclear medicine imaging technique that detects gamma rays emitted indirectly by a radioactive tracer (radiotracer), usually injected into the body. The tracer (commonly a glucose analog, FDG) accumulates in tissues based on metabolic activity; a scanner detects the paired photons from positron-electron annihilation events and reconstructs a 3D image of tracer concentration, revealing functional/metabolic activity (e.g., tumor metabolism, brain activity) rather than just anatomy.\n\n2. Studied/used in: nuclear medicine, radiology, medical physics, oncology, neurology/neuroscience, cardiology, biomedical engineering, and radiochemistry/radiopharmacy (tracer development).\n\n3. Other names/related terms:\n   - Positron emission tomography (full form)\n   - PET/CT (combined with CT for anatomical co-registration)\n   - PET/MRI (combined with MRI)\n   - FDG-PET or FDG-PET scan (when using the fluorodeoxyglucose tracer specifically)\n   - Nuclear imaging / nuclear medicine scan (broader category it falls under)",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "emission",
+        "positron",
+        "tomography"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8462,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "electroencephalography",
+      "mesh_uid": "68058765",
+      "descriptor": "Neurofeedback",
+      "entry_term": "Electroencephalography Biofeedback",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**1. What it names:** A biofeedback technique in which a person's real-time EEG (electrical brain activity, measured via scalp electrodes) is processed and fed back to them \u2014 usually as visual or auditory signals (e.g., a game, tone, or graph) \u2014 so they can learn to volitionally alter specific brainwave patterns (e.g., increase alpha, suppress theta/beta ratios). The person uses operant-conditioning-like trial and error to shape their own neural activity toward a target pattern.\n\n**2. Fields/communities:**\n- Clinical/behavioral neuroscience and psychophysiology\n- Applied psychophysiology (the field's main professional body is AAPB \u2014 Association for Applied Psychophysiology and Biofeedback)\n- Psychiatry/clinical psychology, especially ADHD, epilepsy, anxiety, and PTSD treatment research\n- Cognitive/affective neuroscience (attention, self-regulation studies)\n- Sports psychology and peak-performance training\n- Human-computer interaction / BCI (brain-computer interface) research, where it overlaps with adaptive-interface work\n\n**3. Synonyms / alternative names:**\n- **Neurofeedback** (by far the most common alternative term, often used interchangeably)\n- **EEG biofeedback** (common abbreviation, same thing)\n- **EEG operant conditioning**\n- **Neurotherapy**\n- **Neurobiofeedback**\n- **Brainwave training** / **brainwave biofeedback** (more informal/popular usage)\n- **Cortical/quantitative EEG-guided feedback** or **QEEG-guided neurofeedback** (a variant emphasizing quantitative EEG mapping to guide protocol selection)\n\nNote: \"neurofeedback\" is sometimes used slightly more broadly to include feedback from other neuroimaging modalities (e.g., real-time fMRI neurofeedback), while \"EEG biofeedback\" specifically anchors to the EEG signal \u2014 but in practice the two terms are used near-synonymously in most literature.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "neurofeedback"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.8914,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "photoplethysmography",
+      "mesh_uid": "68017156",
+      "descriptor": "Photoplethysmography",
+      "entry_term": "Photoreflexometry",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "I have only partial, low-confidence recognition of this term \u2014 flagging that upfront rather than presenting it as solid.\n\n**1. What it names:** By etymology (photo- + reflex + -ometry), it denotes the quantitative measurement of the pupillary light reflex \u2014 i.e., instrumented assessment of how the pupil constricts/dilates in response to a light stimulus (amplitude, latency, velocity of the response). I've seen this specific term surface mainly in Russian/Soviet-tradition ophthalmology, forensic medicine, and some neurology/anesthesiology literature, where \"photoreflex\" is used as a name for the pupillary light reflex itself. I don't have a confident grasp of it as a term with a single canonical definition in the mainstream English-language literature.\n\n**2. Fields/communities:** Ophthalmology, neurology (pupillary/autonomic function testing), forensic medicine (pupillary reflex in death/coma assessment), and anesthesiology/neurocritical care (pupillometry for depth-of-sedation or brain injury monitoring) are the plausible communities \u2014 but I can't confirm which of these actually use the specific word \"photoreflexometry\" versus just describing the same measurement under other names.\n\n**3. Likely synonyms/related terms** (higher confidence than the term itself): **pupillometry**, **pupillography**, **pupillary light reflex (PLR) testing**, **automated infrared pupillometry**. \"Photoreflexometer\" would be the corresponding instrument name in the same tradition.\n\nGiven the low confidence, I'd treat this as a niche/regional term rather than a standard indexed keyword \u2014 if you have a source document using it, sharing that context would let me pin down the intended meaning more precisely.",
+      "b_full_leak": false,
+      "b_stem_hits": [],
+      "screen_verdict": "SURVIVES",
+      "cross_cosine": 0.75,
+      "guard0": "fail"
+    },
+    {
+      "seed_concept": "photoplethysmography",
+      "mesh_uid": "68017156",
+      "descriptor": "Photoplethysmography",
+      "entry_term": "Rheography, Light Reflection",
+      "lexical_overlap": 0.0,
+      "scope_note": "",
+      "screen_model": "sonnet",
+      "screen_response": "**\"Light Reflection Rheography\" (LRR)** \u2014 also written as one term, not two separate concepts.\n\n**1. What it names:** A non-invasive optical technique for assessing venous function in the legs. An infrared light source/photodetector is taped to the skin (typically medial lower leg above the ankle); reflected light intensity changes track blood volume changes in the subpapillary venous plexus as the patient flexes the ankle/calf muscle and then stops. The key output is the **venous refilling time (RT)** \u2014 how long it takes venous blood volume to return to baseline after muscle-pump emptying. Short refilling times indicate venous reflux/insufficiency; normal/long times indicate competent valves.\n\n**2. Fields/communities:** Phlebology, angiology, vascular surgery/medicine, and biomedical engineering (optical sensing for hemodynamics). It's used clinically alongside or as a screening alternative to venous duplex ultrasound for chronic venous insufficiency and varicose vein workups. Term and technique originate largely from German medical/engineering literature (Rheographie = German for \"flow writing/recording\").\n\n**3. Other names for the same thing:**\n- Photoplethysmography (PPG) \u2014 the broader/more common umbrella term; LRR is essentially PPG applied to venous refilling assessment\n- Digital photoplethysmography (D-PPG)\n- Venous photoplethysmography\n- Lichtreflexionsrheographie (German original)\n- Sometimes just \"reflection rheography\"\n\nIt's distinct from *impedance* rheography/plethysmography (which measures blood volume via electrical impedance rather than light reflectance) \u2014 both fall under the general \"rheography/plethysmography\" family of flow-recording techniques, but LRR specifically is the optical variant.",
+      "b_full_leak": true,
+      "b_stem_hits": [
+        "photoplethysmography"
+      ],
+      "screen_verdict": "VOID",
+      "cross_cosine": 0.6453,
+      "guard0": "pass"
+    }
+  ],
+  "guard0_threshold": 0.65,
+  "embedding_model": "BAAI/bge-large-en-v1.5"
+}

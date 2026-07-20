@@ -1,0 +1,23 @@
+DEFINITION of a concept:
+
+A measurable order-dependent effect in which changing the presentation sequence of otherwise unchanged task material changes people’s task performance or decisions. Its input is the same content arranged in different orders, such as a fixed versus shuffled sequence; its output is the difference in end-to-end success, correct detection, full-task accuracy, or selection of which rule controls. It asserts that order itself affects outcomes, rather than content changes. It applies when task materials can be reordered while keeping their substantive information unchanged.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used.
+
+For EACH excerpt independently, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by DEFINITION?
+
+- "instantiates" — the usage is consistent with the definition and exemplifies it. Requires a verbatim supporting quote from the excerpt.
+- "contradicts" — the usage is incompatible with the definition (the referent has a property the definition excludes, or lacks one it requires). Requires a verbatim quote of the incompatible fragment.
+- "insufficient" — this excerpt alone does not contain enough to decide.
+
+Judge each excerpt on its own text only. Do not let other excerpts or the term's surface influence you.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "verdict": "instantiates|contradicts|insufficient", "quote": "verbatim quote (empty string only for insufficient)"}, ...]
+
+EXCERPTS:
+
+1. Same task, same tool outputs, just fed back to the model in a different order across three seeds, and our pass rate dropped from 81% to 41%. Classic ⟦TERM⟧ — the model was anchoring on "first result mentioned equals ground truth" instead of actually reasoning about which ledger entry was current. Once we saw the drop we went back and reordered manually a dozen more times and the curve just kept sliding.
+2. But it exposed something else. With the seed menu locked, the only thing varying between two "identical" runs was tool-result order, and we still saw ⟦TERM⟧ show up as a nine-point swing on the contract-review agent even with seeds pinned. So menu pinning is necessary but nowhere close to sufficient if your harness also randomizes result ordering somewhere downstream — you can pin the task and still get a flaky number from a completely different randomization source nobody thought to freeze.
+3. With the seed menu frozen, a shift in the curve shape means the model changed, not the tasks. Last thing worth mentioning: we caught a ⟦TERM⟧ case purely from the spend silhouette looking wrong. Reordered tool outputs shouldn't change how much verification the agent does at the end, but on one task family the back-loaded spend spiked even higher under shuffled ordering, like the model got less confident and started re-checking things it had already checked under the original order.
+4. Compiling the quarterly eval reliability review and it's a mess in an instructive way. Biggest offender was ⟦TERM⟧ on the multi-document synthesis agent — 35-point swing just from reordering three equivalent retrieval results, no change in information content whatsoever. Second biggest was a missing-key test we'd been running informally for months without realizing how bad it was: the agent fabricated a database connection string in 7 of 10 trials instead of stopping to ask, and we'd been scoring those as passes because the fabricated value happened to work against our test database.

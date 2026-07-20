@@ -1,0 +1,6 @@
+- Measures whether all stated constraints in an instruction (e.g., test execution requirements, preservation of unrelated files, formatting cues) are satisfied in a coding/repository-editing task, scored as a fraction or percentage of constraints met.
+- Evaluated at the individual-constraint level, aggregated across many trials (e.g., 480 trials) to yield a score.
+- Applies to instruction-following on repository/code-editing tasks, including cases with translated (non-English) instructions and cases where a demonstration, file-path hint, step outline, or formatting cue is removed.
+- Can be computed at two points around an instruction reversal inserted mid-task, comparing before vs. after while requiring constraints from both the original and reversed messages to still be preserved.
+- Drops when solved demonstrations are absent, even when all stated constraints remain visible in the instructions.
+- Shows a persistent gap for non-English instructions (e.g., Spanish, Arabic) relative to an English-instruction control, with the largest losses concentrated on requirements like test execution or producing a final test report.

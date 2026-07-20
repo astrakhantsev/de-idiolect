@@ -1,0 +1,18 @@
+Looking at each item, I need to check only for direction/polarity/valence inversion between the excerpts and the definition.
+
+Let me work through them:
+
+- **Item 1**: Excerpts = a check detecting copied verbatim phrasing (9.6% → 1.8%). Definition = checking procedure spotting copied wording. Same direction.
+- **Item 2**: Score rises as items become universally solvable (exhaustion); higher = more exhausted. Definition = proportion exhausted, higher entry-tier. Same.
+- **Item 3**: Measures how distractor context increases exploration. Definition matches (+pages, +time, +exploratory). Same.
+- **Item 4**: Agent agrees *less* on own outputs than peers (deficit). Definition = self-output agreement deficit. Same.
+- **Item 5**: Quota/budget manipulation; high-performers shorten traces, low-performers continue. Definition matches. Same.
+- **Item 6**: Embedded known cases; halts when known cases misjudged; detects carryover. Definition matches. Same.
+- **Item 7**: Diversity score of successful patterns rises 1.3→2.7; higher = more diverse; fewer copied phrases. Definition matches. Same.
+- **Item 8**: Weaker held-out generators produce tasks, validators withheld. Definition matches. Same.
+- **Item 9**: Per-item capability boundary predicting failures; failures below it audited. Definition matches. Same.
+- **Item 10**: Session carryover reuse error. Definition matches. Same.
+
+None reverse the direction, polarity, or valence.
+
+[{"item": 1, "verdict": "ok"}, {"item": 2, "verdict": "ok"}, {"item": 3, "verdict": "ok"}, {"item": 4, "verdict": "ok"}, {"item": 5, "verdict": "ok"}, {"item": 6, "verdict": "ok"}, {"item": 7, "verdict": "ok"}, {"item": 8, "verdict": "ok"}, {"item": 9, "verdict": "ok"}, {"item": 10, "verdict": "ok"}]

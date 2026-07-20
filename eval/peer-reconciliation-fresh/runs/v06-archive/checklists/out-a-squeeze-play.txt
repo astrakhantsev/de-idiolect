@@ -1,0 +1,6 @@
+- Mechanism: mid-run, ⟦TERM⟧ silently cuts the agent's remaining token budget in half at a specific trigger point during the task (e.g., after reading finishes, after a fixed number of file opens, or right as final response drafting begins).
+- What's measured/scored: whether the agent compresses its output cleanly to fit the reduced budget versus truncating mid-sentence; clean compression is scored a pass, mid-sentence truncation is scored a failure.
+- Applies when/where: during in-progress agent task runs (contract-review flow, navigation benchmark, multi-agent benchmark suites), triggered at a specific mid-task point rather than at the start.
+- Constraint: the budget cut is silent/unannounced — the agent is not explicitly told the cut occurred and may or may not visibly react or adapt its behavior.
+- Constraint: the cut is applied exactly once per run, halving whatever budget remains at the trigger moment.
+- Constraint: effects of ⟦TERM⟧ must be distinguished from ordinary stack-level nondeterminism (e.g., differing truncation points across otherwise identical runs), requiring multiple samples to isolate.

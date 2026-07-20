@@ -1,0 +1,45 @@
+{
+ "pair_key": "fe8becf6c88a3941",
+ "pair_id": "P02",
+ "terms": {
+  "a": "claim survival tally",
+  "b": "intermediate assertion persistence ratio"
+ },
+ "proposed_relation": "insufficientEvidence",
+ "evidence": {
+  "a2b": {
+   "n": 6,
+   "k": 2,
+   "c": 0,
+   "u": 4,
+   "agg": "abstain",
+   "quote_downgrades": []
+  },
+  "b2a": {
+   "n": 6,
+   "k": 2,
+   "c": 0,
+   "u": 4,
+   "agg": "abstain",
+   "quote_downgrades": []
+  }
+ },
+ "adjudicated_relation": "exactMatch",
+ "status": "adjudicated",
+ "adjudicator": "synthetic-key-8477e275",
+ "correct": false,
+ "provenance": {
+  "gen_a": "claude-sonnet",
+  "gen_b": "codex-gpt-5.6-terra",
+  "def_a": "claude-opus",
+  "def_b": "codex-gpt-5.6-terra",
+  "verify_a2b": "claude-opus",
+  "verify_b2a": "codex-gpt-5.6-terra"
+ },
+ "derived_from": [],
+ "earliest_found_in_search": {
+  "synthetic": true,
+  "note": "no priority inference licensed"
+ },
+ "version_id": "5645490c3fb54fdd5f68134840763c4a067cfdc26779e018655bedab6aa21981"
+}

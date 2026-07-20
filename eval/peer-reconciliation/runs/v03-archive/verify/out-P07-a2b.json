@@ -1,0 +1,10 @@
+Looking at the definition, the concept requires a *recurring, whole-suite* evaluation: a frozen task set run against the system, producing per-run scores compared **side by side with prior runs** to detect drift over time.
+
+In every excerpt, ⟦TERM⟧ is instead a per-action check fired *after each individual tool call* within a single trajectory, diagnosing plan–action consistency in that run. That granularity and purpose are incompatible with a recurring frozen-task-set benchmark compared across runs.
+
+[{"excerpt": 1, "verdict": "contradicts", "quote": "A ⟦TERM⟧ was recorded after each retrieval, extraction, and table-editing call."},
+{"excerpt": 2, "verdict": "contradicts", "quote": "A ⟦TERM⟧ was recorded after each retrieval, extraction, and table-editing call."},
+{"excerpt": 3, "verdict": "contradicts", "quote": "A ⟦TERM⟧ followed every tool result and compared the next call with the agent’s most recently stated reconciliation sequence."},
+{"excerpt": 4, "verdict": "contradicts", "quote": "A ⟦TERM⟧ followed every tool result and compared the next call with the agent’s most recently stated reconciliation sequence."},
+{"excerpt": 5, "verdict": "contradicts", "quote": "A ⟦TERM⟧ was applied after each service call and after every revision to the citation table."},
+{"excerpt": 6, "verdict": "contradicts", "quote": "A ⟦TERM⟧ was applied after each service call and after every revision to the citation table."}]

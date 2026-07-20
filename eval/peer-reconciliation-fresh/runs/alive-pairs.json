@@ -1,0 +1,62 @@
+{
+ "P01": {
+  "term_a": "groove lock",
+  "term_b": "trajectory template carryover",
+  "L2_a": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-groove-lock.json",
+  "L2_b": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-trajectory-template-carryover.json"
+ },
+ "P02": {
+  "term_a": "dead weight census",
+  "term_b": "item discrimination exhaustion rate",
+  "L2_a": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-dead-weight-census.json",
+  "L2_b": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-item-discrimination-exhaustion-rate.json"
+ },
+ "P03": {
+  "term_a": "synthetic ladders",
+  "term_b": "subordinate authoring protocol",
+  "L2_a": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-synthetic-ladders.json",
+  "L2_b": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-subordinate-authoring-protocol.json"
+ },
+ "P04": {
+  "term_a": "squeeze play",
+  "term_b": "resource perturbation study",
+  "L2_a": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-squeeze-play.json",
+  "L2_b": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-resource-perturbation-study.json"
+ },
+ "P05": {
+  "term_a": "twin runs",
+  "term_b": "matched contrast probes",
+  "L2_a": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-twin-runs.json",
+  "L2_b": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-matched-contrast-probes.json"
+ },
+ "P06": {
+  "term_a": "ouroboros items",
+  "term_b": "reflexive adjudication",
+  "L2_a": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-ouroboros-items.json",
+  "L2_b": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-reflexive-adjudication.json"
+ },
+ "P07": {
+  "term_a": "echo test",
+  "term_b": "echo test",
+  "L2_a": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-echo-test.json",
+  "L2_b": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-echo-test.json"
+ },
+ "P08": {
+  "term_a": "salt run",
+  "term_b": "salt run",
+  "L2_a": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-salt-run.json",
+  "L2_b": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-salt-run.json"
+ },
+ "P09": {
+  "term_a": "rig diary",
+  "term_b": "strategy cardinality index",
+  "L2_a": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-rig-diary.json",
+  "L2_b": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-strategy-cardinality-index.json"
+ },
+ "P10": {
+  "term_a": "reread ration",
+  "term_b": "tier floor annotation",
+  "L2_a": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-a-reread-ration.json",
+  "L2_b": "/mnt/f/src/minelit/flf-epistack/eval/peer-reconciliation-fresh/runs/definitions/out-b-tier-floor-annotation.json"
+ }
+}

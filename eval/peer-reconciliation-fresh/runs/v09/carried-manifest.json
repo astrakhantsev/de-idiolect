@@ -1,0 +1,98 @@
+[
+ {
+  "dst": "v09/decompose/out-P01.json",
+  "src": "decompose/out-P01.json",
+  "sha256": "769b17fa79ccc70f8d565b6322b603b468c26990dddb489c42331a0675de5e06",
+  "provenance": "v0.8 TRAIN decompose (frozen prompts/judge sonnet)"
+ },
+ {
+  "dst": "v09/decompose/out-P04.json",
+  "src": "decompose/out-P04.json",
+  "sha256": "9685f14450536905e02c416d9f02f081f5fb3ab68dca3cb437f0a6eb33c6b411",
+  "provenance": "v0.8 TRAIN decompose (frozen prompts/judge sonnet)"
+ },
+ {
+  "dst": "v09/decompose/out-P06.json",
+  "src": "decompose/out-P06.json",
+  "sha256": "9882c9956f6beddaf68dfbe25c2da413d71c3544b76b2da94d45789084e16cc3",
+  "provenance": "v0.8 TRAIN decompose (frozen prompts/judge sonnet)"
+ },
+ {
+  "dst": "v09/decompose/out-P07.json",
+  "src": "decompose/out-P07.json",
+  "sha256": "5dfb2635bfecfc32d0210b78910558e7d5ad1d69cd52c754b7bfe82659488ea7",
+  "provenance": "v0.8 TRAIN decompose (frozen prompts/judge sonnet)"
+ },
+ {
+  "dst": "v09/decompose/out-P08.json",
+  "src": "decompose/out-P08.json",
+  "sha256": "d2e88745c43e6830c1e33d2e5c4e866e101963af72d0d825231462d52a136cde",
+  "provenance": "v0.8 TRAIN decompose (frozen prompts/judge sonnet)"
+ },
+ {
+  "dst": "v09/decompose/out-P09.json",
+  "src": "decompose/out-P09.json",
+  "sha256": "c540cd2bafd1fb52d1a83575f58a4042ef5bcc533727f6f6425d4bae8e714b03",
+  "provenance": "v0.8 TRAIN decompose (frozen prompts/judge sonnet)"
+ },
+ {
+  "dst": "v09/decompose/out-P10.json",
+  "src": "decompose/out-P10.json",
+  "sha256": "4bec362e361611583a332c5bea517434b70aa5bd7d719808ab7d7d8a8e88df77",
+  "provenance": "v0.8 TRAIN decompose (frozen prompts/judge sonnet)"
+ },
+ {
+  "dst": "v09/containment/out-P01.json",
+  "src": "containment/out-P01.json",
+  "sha256": "b58d8e79fe2c00524a1dadf6926fedb47fc134bfb608084b9929cfd39380c075",
+  "provenance": "v0.8 TRAIN containment (frozen prompt/judge codex terra)"
+ },
+ {
+  "dst": "v09/containment/out-P04.json",
+  "src": "containment/out-P04.json",
+  "sha256": "3c7556afb86151a1063cbe655edde1ebf965e7cbf732bdca629b113f4a289a0f",
+  "provenance": "v0.8 TRAIN containment (frozen prompt/judge codex terra)"
+ },
+ {
+  "dst": "v09/containment/out-P06.json",
+  "src": "containment/out-P06.json",
+  "sha256": "bcbf7f2df6ee7b4053a44d6fa3c523e2d048313adb439bee75c0867b36d36e71",
+  "provenance": "v0.8 TRAIN containment (frozen prompt/judge codex terra)"
+ },
+ {
+  "dst": "v09/containment/out-P07.json",
+  "src": "containment/out-P07.json",
+  "sha256": "5cec45d041ac68e015866b27f1c975de1b7eaccf4bc3abec71f19647de0b42c9",
+  "provenance": "v0.8 TRAIN containment (frozen prompt/judge codex terra)"
+ },
+ {
+  "dst": "v09/containment/out-P08.json",
+  "src": "containment/out-P08.json",
+  "sha256": "0a83b0d923449eb4ae126184c0270a7f152d02417a2173e3d1ffc28beae73c52",
+  "provenance": "v0.8 TRAIN containment (frozen prompt/judge codex terra)"
+ },
+ {
+  "dst": "v09/containment/out-P10.json",
+  "src": "containment/out-P10.json",
+  "sha256": "f7a8403045670b3b05e969e735b59aa2293c60d05c79e3885a60ca9bf1c1272f",
+  "provenance": "v0.8 TRAIN containment (frozen prompt/judge codex terra)"
+ },
+ {
+  "dst": "v09/decompose/out-P05.json",
+  "src": "cf-diagnostic/out-dec-P05.json",
+  "sha256": "006d94f43db1e677450904b08501c677799b737ef7337667b650a7d6db499278",
+  "provenance": "2026-07-19 diagnostic decompose P05 (frozen prompt/judge sonnet)"
+ },
+ {
+  "dst": "v09/containment/out-P05.json",
+  "src": "cf-diagnostic/out-cont-P05.json",
+  "sha256": "156e4d8f31a032fe38df0e9b844df3e09710fbccd49d9f2d1e186a3a125908eb",
+  "provenance": "2026-07-19 diagnostic containment P05 (frozen prompt/judge codex terra)"
+ },
+ {
+  "dst": "v09/symcheck/out-P04-a2b.json",
+  "src": "cf-diagnostic/out-P04-a2b.json",
+  "sha256": "6be25cd03a9c277a70e5223d67ec0b66d4729c7dbc9e3bae8c65b3d7cb1f4077",
+  "provenance": "2026-07-19 diagnostic symcheck P04-a2b (frozen template/judge codex terra)"
+ }
+]

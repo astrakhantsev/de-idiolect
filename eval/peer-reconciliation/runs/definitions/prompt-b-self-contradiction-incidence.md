@@ -1,0 +1,27 @@
+Below are usage excerpts from one community's documents, all containing the same term, shown masked as ⟦TERM⟧ (other local jargon is masked as ⟦X⟧).
+
+Write a short, self-contained, operational definition of the concept ⟦TERM⟧ names AS USED in these excerpts: what kind of thing it is (a phenomenon, a procedure, a score, a rule…), its inputs and outputs where applicable, what it asserts, and when it applies.
+
+COMMITMENTS CHECKLIST (extracted from the same excerpts — the definition must state every commitment, including the specific mechanism):
+- Compares an agent's final output/totals against an authoritative in-trajectory tool output (e.g., calculator, ledger-parser, formula-inspection, search/database results) generated earlier in the same run.
+- Triggered specifically when the agent's stated result disagrees or is checked against that tool-derived value, i.e., it applies to instances of discrepancy or contradiction with the tool's output.
+- Produced as a numeric rate/score (e.g., 0.12–0.37 range across conditions), read as a proportion of runs/cases exhibiting the phenomenon.
+- Applies within agentic task trajectories where an external tool (search, database, calculator, ledger-parser) has already produced a result prior to the measurement point.
+- Rate varies systematically with evidence properties, notably rising when near-duplicate or equivalent records/identifiers are present in the evidence set.
+- Measurement requires controlling for order/identity effects by shuffling or randomizing equivalent records across multiple harness repetitions.
+
+Constraints:
+- Ordinary words and simple notation only.
+- Do NOT use the masked terms or guess at them; do not use names of people, published methods, fields, systems, models, or communities.
+- Base the definition ONLY on what the excerpts support; do not import outside assumptions.
+- Do NOT add generalizing catch-all phrases (such as "or otherwise", "or any similar", "in any way", "or by other means") beyond what the excerpts support — state the specific mechanism, not its genus.
+- 60–160 words. Output ONLY the definition text, nothing else.
+
+EXCERPTS:
+
+1. We also measured ⟦TERM⟧ against outputs from the agent’s own search and database tools. ⟦TERM⟧ was 0.18 per run, rising to 0.31 when the evidence table contained near-duplicate identifiers.
+2. We also measured ⟦TERM⟧ against outputs from the agent’s own search and database tools. ⟦TERM⟧ was 0.18 per run, rising to 0.31 when the evidence table contained near-duplicate identifiers. Equivalent records were shuffled across three harness repetitions.
+3. ⟦TERM⟧ was measured against calculator and ledger-parser outputs generated earlier in the same trajectory. ⟦TERM⟧ reached 0.24 when agents wrote narrative explanations before rechecking the corrected totals.
+4. ⟦TERM⟧ was measured against calculator and ledger-parser outputs generated earlier in the same trajectory. ⟦TERM⟧ reached 0.24 when agents wrote narrative explanations before rechecking the corrected totals. To examine interface effects, the parser was delayed by 1.2 seconds in a matched condition.
+5. ⟦TERM⟧ was computed when final totals disagreed with a calculator or formula-inspection output from the same run. ⟦TERM⟧ was 0.12 among containment passes and 0.37 among containment failures.
+6. ⟦TERM⟧ was computed when final totals disagreed with a calculator or formula-inspection output from the same run. ⟦TERM⟧ was 0.12 among containment passes and 0.37 among containment failures. We randomized the order of otherwise equivalent invoice-search results across five repetitions.

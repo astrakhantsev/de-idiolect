@@ -1,0 +1,5 @@
+- Mechanism: create paired/twin versions of the same underlying task or item, differing only in surface phrasing/formatting (e.g., casual vs. formal wording, bullet list vs. prose), and run both through the agent under test.
+- Measured/produced: the performance gap (score difference) between an item and its reworded twin, expressed as an average point difference.
+- Setting/trigger: applied when evaluating agent results on a suite/roster of tasks, including on a reduced surviving subset of items.
+- Constraint: the two paired versions must preserve the same underlying task/ask while varying only formatting or phrasing.
+- Constraint: a smaller measured gap is interpreted as reassurance that surviving items are testing substance rather than formatting/parsing ability.

@@ -1,0 +1,10 @@
+Looking at the DEFINITION, the concept is a *procedure that fixes item selection* so every run draws the same items — its output is "a pinned, identical item set reused across runs," removing only item-selection variation.
+
+In every excerpt, ⟦TERM⟧ is instead a *measured error/consistency quantity* (a rate compared against tool outputs, varying per run and by condition) — incompatible with a selection-fixing procedure.
+
+[{"excerpt": 1, "verdict": "contradicts", "quote": "We also measured ⟦TERM⟧ against outputs from the agent’s own search and database tools."},
+{"excerpt": 2, "verdict": "contradicts", "quote": "⟦TERM⟧ was 0.18 per run, rising to 0.31 when the evidence table contained near-duplicate identifiers."},
+{"excerpt": 3, "verdict": "contradicts", "quote": "⟦TERM⟧ was measured against calculator and ledger-parser outputs generated earlier in the same trajectory."},
+{"excerpt": 4, "verdict": "contradicts", "quote": "⟦TERM⟧ reached 0.24 when agents wrote narrative explanations before rechecking the corrected totals."},
+{"excerpt": 5, "verdict": "contradicts", "quote": "⟦TERM⟧ was computed when final totals disagreed with a calculator or formula-inspection output from the same run."},
+{"excerpt": 6, "verdict": "contradicts", "quote": "⟦TERM⟧ was 0.12 among containment passes and 0.37 among containment failures."}]

@@ -1,0 +1,6 @@
+Runs the suite across multiple agent versions and tags each item as either pass-everything or fail-everything across all of them
+Computes the percentage (or count) of items that are pass-everything/fail-everything out of the total suite size
+Applied to a fixed eval suite with a set number of items, run across multiple fielded agent versions
+Requires at least two (and typically several) distinct agent versions to compare across
+Result is expressed as a single percentage or fraction of the suite that shows no separation between versions
+A higher percentage indicates less discrimination between agent versions (items no longer distinguish capability across versions)

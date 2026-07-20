@@ -1,0 +1,6 @@
+[{"excerpt": 1, "verdict": "instantiates", "quote": "agents replayed billing-oriented search and validation sequences despite incompatible task states"},
+{"excerpt": 2, "verdict": "instantiates", "quote": "Clearing prior-session traces reduced these errors to 3%, with little effect on ordinary billing performance"},
+{"excerpt": 3, "verdict": "instantiates", "quote": "inappropriate reuse of recently successful action sequences"},
+{"excerpt": 4, "verdict": "instantiates", "quote": "an incident-response task immediately followed a successful billing recovery, producing repeated credential-reset actions on unrelated systems"},
+{"excerpt": 5, "verdict": "instantiates", "quote": "Resetting session history between items reduced this pattern by 79%"},
+{"excerpt": 6, "verdict": "insufficient", "quote": ""}]

@@ -1,0 +1,6 @@
+- Computed only from successful/completed attempts on repository-repair (or similar) tasks, after traces are normalized for incidental file paths, number of available tools, and instruction length.
+- Successful runs are first clustered by structural tool-use pattern (and/or by task) before the metric is computed.
+- Measures diversity/variety across multiple independent attempts or runs on the same task, not correctness or pass rate — it rose (e.g., 1.3→2.7) even when pass rates were nearly identical between systems.
+- Applies in settings with multiple independent attempts per task using fresh tool sandboxes, over large task sets (hundreds to thousands of tasks).
+- Higher when agents alternate between different actions (e.g., inspection and verification) rather than following a fixed, repeated sequence.
+- Higher for tasks drawn from more diverse task generators, and higher-scoring agents show fewer inappropriate copied phrases from prompt examples.

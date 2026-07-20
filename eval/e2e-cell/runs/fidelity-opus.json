@@ -1,0 +1,28 @@
+```json
+{
+  "i": {
+    "verdict": "PRESERVED",
+    "justification": "The candidate frames it as \"deciding whether a produced estimate is worth using at all, judged against the simpler option of just assuming one standard value,\" matching the notes' \"how good must a dependence estimate be before it beats simply not having one?\""
+  },
+  "ii": {
+    "verdict": "PRESERVED",
+    "justification": "The candidate is \"A stated accuracy threshold\" that \"takes as input a measure of how far the guesses tend to land from the truth,\" matching the notes' \"An estimator needs log-count RMSE ≲ 0.3.\""
+  },
+  "iii": {
+    "verdict": "NOT-PRESERVED",
+    "justification": "The candidate speaks only of \"a produced estimate\" being \"worth using at all\" and never states the decision is made before the instrument exists, whereas the notes are explicitly prospective: \"The detector is SIMULATED, not run... asks 'would an estimator this accurate suffice?'\""
+  },
+  "iv": {
+    "verdict": "PRESERVED",
+    "justification": "The candidate asserts \"there is a break-even point — an error level past which a guess actively hurts by making you more sure than you should be,\" matching the notes' \"past ~1.0 it becomes WORSE THAN NO ESTIMATOR\" and \"clear the bar.\""
+  },
+  "v": {
+    "verdict": "PASS",
+    "justification": "The candidate adds no benchmark, dataset, or metric specifics; its \"small error keeps almost all... middling error keeps about half... large error flips the sign\" generically mirrors the notes' \"≲ 0.3 to keep ~85%... ~0.6 keeps half... past ~1.0 it becomes WORSE\" without introducing new numbers or datasets."
+  },
+  "vi": {
+    "named_items": [],
+    "not_in_notes": []
+  }
+}
+```

@@ -1,0 +1,6 @@
+- Measures whether all stated task constraints (from coding-agent instructions, e.g. file scope, test execution, preservation of unrelated files, final test reports) are satisfied, scored at the individual-constraint level and aggregated as a percentage/proportion (e.g. percentage points or a 0–1 score).
+- Applies to agentic coding tasks driven by multi-language (English, Arabic, Spanish, translated) instructions, including replayed/reversed instruction sequences and repository-based trials.
+- Is computed per trial across large batches (e.g. 480 trials) and can be calculated at two points (before/after an instruction reversal) within the same task.
+- Depends on presence of supporting scaffolding such as demonstrations, file-path hints, step outlines, and formatting cues — removing these lowers the score even when constraints remain visible.
+- Must preserve/account for all constraints stated across multiple user messages when computing the score.
+- Is sensitive to model size and instruction language, with measurable, reproducible point-magnitude changes (e.g. 8.6 pp, 11 points, 0.09, 0.84→0.67) under specific ablation conditions.

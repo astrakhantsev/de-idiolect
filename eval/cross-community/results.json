@@ -1,0 +1,340 @@
+{
+  "embedding_model": "BAAI/bge-large-en-v1.5",
+  "term_a": "Photoreflexometry",
+  "term_b": "Photoplethysmography",
+  "seed_concept": "photoplethysmography",
+  "conditions": [
+    "inclusive",
+    "clean"
+  ],
+  "directions": {
+    "A_to_B": {
+      "far_target_docs_inclusive": 10,
+      "far_target_docs_clean": 10,
+      "n_jargon_draws": 6,
+      "jargon_draws_dropped_leak": 0,
+      "n_neutral_draws": 3,
+      "neutral_draws_dropped_leak": 3,
+      "chance_baseline": {
+        "inclusive": {
+          "n_docs": 22,
+          "n_targets": 10,
+          "exp_first_target_rank": 2.091,
+          "exp_recall_at_5": 0.227,
+          "exp_recall_at_10": 0.455
+        },
+        "clean": {
+          "n_docs": 21,
+          "n_targets": 10,
+          "exp_first_target_rank": 2.0,
+          "exp_recall_at_5": 0.238,
+          "exp_recall_at_10": 0.476
+        }
+      },
+      "arms": {
+        "raw_term": {
+          "inclusive": {
+            "rank_first_target": 4,
+            "recall_at_5": 0.2,
+            "recall_at_10": 0.5,
+            "count_target_top10": 5,
+            "rank_first_own": 1
+          },
+          "clean": {
+            "rank_first_target": 3,
+            "recall_at_5": 0.3,
+            "recall_at_10": 0.6,
+            "count_target_top10": 6,
+            "rank_first_own": 1
+          }
+        },
+        "naive_question": {
+          "inclusive": {
+            "rank_first_target": 2,
+            "recall_at_5": 0.2,
+            "recall_at_10": 0.6,
+            "count_target_top10": 6,
+            "rank_first_own": 1
+          },
+          "clean": {
+            "rank_first_target": 1,
+            "recall_at_5": 0.3,
+            "recall_at_10": 0.7,
+            "count_target_top10": 7,
+            "rank_first_own": 2
+          }
+        },
+        "raw_term_far_CEILING": {
+          "inclusive": {
+            "rank_first_target": 2,
+            "recall_at_5": 0.3,
+            "recall_at_10": 0.6,
+            "count_target_top10": 6,
+            "rank_first_own": 1
+          },
+          "clean": {
+            "rank_first_target": 1,
+            "recall_at_5": 0.4,
+            "recall_at_10": 0.7,
+            "count_target_top10": 7,
+            "rank_first_own": 2
+          }
+        },
+        "jargon": {
+          "inclusive": {
+            "rank_first_target": 5,
+            "recall_at_5": 0.1,
+            "recall_at_10": 0.6,
+            "count_target_top10": 6,
+            "rank_first_own": 1
+          },
+          "clean": {
+            "rank_first_target": 4,
+            "recall_at_5": 0.2,
+            "recall_at_10": 0.7,
+            "count_target_top10": 7,
+            "rank_first_own": 1
+          }
+        },
+        "neutral": {
+          "inclusive": {
+            "rank_first_target": 3.333,
+            "recall_at_5": 0.167,
+            "recall_at_10": 0.633,
+            "count_target_top10": 6.333,
+            "rank_first_own": 1
+          },
+          "clean": {
+            "rank_first_target": 2.333,
+            "recall_at_5": 0.267,
+            "recall_at_10": 0.733,
+            "count_target_top10": 7.333,
+            "rank_first_own": 1
+          }
+        }
+      },
+      "contrasts": {
+        "neutral_minus_raw_term.rank_first_target.inclusive": {
+          "delta_mean": -0.667,
+          "ci5": -1.0,
+          "ci95": -0.333,
+          "excludes_0": true,
+          "note": "descriptive resampling-stability of THESE k draws pooled over 2 fixed models; NOT population/cross-pair/cross-model uncertainty"
+        },
+        "neutral_minus_raw_term.recall_at_10.inclusive": {
+          "delta_mean": 0.133,
+          "ci5": 0.1,
+          "ci95": 0.167,
+          "excludes_0": true,
+          "note": "descriptive resampling-stability of THESE k draws pooled over 2 fixed models; NOT population/cross-pair/cross-model uncertainty"
+        },
+        "neutral_minus_jargon.rank_first_target.inclusive": {
+          "delta_mean": -1.667,
+          "ci5": -2.0,
+          "ci95": -1.333,
+          "excludes_0": true,
+          "note": "descriptive resampling-stability of THESE k draws pooled over 2 fixed models; NOT population/cross-pair/cross-model uncertainty"
+        },
+        "neutral_minus_jargon.recall_at_10.inclusive": {
+          "delta_mean": 0.033,
+          "ci5": 0.0,
+          "ci95": 0.067,
+          "excludes_0": false,
+          "note": "descriptive resampling-stability of THESE k draws pooled over 2 fixed models; NOT population/cross-pair/cross-model uncertainty"
+        },
+        "neutral_minus_raw_term.rank_first_target.clean": {
+          "delta_mean": -0.667,
+          "ci5": -1.0,
+          "ci95": -0.333,
+          "excludes_0": true,
+          "note": "descriptive resampling-stability of THESE k draws pooled over 2 fixed models; NOT population/cross-pair/cross-model uncertainty"
+        },
+        "neutral_minus_raw_term.recall_at_10.clean": {
+          "delta_mean": 0.133,
+          "ci5": 0.1,
+          "ci95": 0.167,
+          "excludes_0": true,
+          "note": "descriptive resampling-stability of THESE k draws pooled over 2 fixed models; NOT population/cross-pair/cross-model uncertainty"
+        },
+        "neutral_minus_jargon.rank_first_target.clean": {
+          "delta_mean": -1.667,
+          "ci5": -2.0,
+          "ci95": -1.333,
+          "excludes_0": true,
+          "note": "descriptive resampling-stability of THESE k draws pooled over 2 fixed models; NOT population/cross-pair/cross-model uncertainty"
+        },
+        "neutral_minus_jargon.recall_at_10.clean": {
+          "delta_mean": 0.033,
+          "ci5": -0.0,
+          "ci95": 0.067,
+          "excludes_0": false,
+          "note": "descriptive resampling-stability of THESE k draws pooled over 2 fixed models; NOT population/cross-pair/cross-model uncertainty"
+        }
+      }
+    },
+    "B_to_A": {
+      "far_target_docs_inclusive": 4,
+      "far_target_docs_clean": 3,
+      "n_jargon_draws": 6,
+      "jargon_draws_dropped_leak": 0,
+      "n_neutral_draws": 6,
+      "neutral_draws_dropped_leak": 0,
+      "chance_baseline": {
+        "inclusive": {
+          "n_docs": 22,
+          "n_targets": 4,
+          "exp_first_target_rank": 4.6,
+          "exp_recall_at_5": 0.227,
+          "exp_recall_at_10": 0.455
+        },
+        "clean": {
+          "n_docs": 21,
+          "n_targets": 3,
+          "exp_first_target_rank": 5.5,
+          "exp_recall_at_5": 0.238,
+          "exp_recall_at_10": 0.476
+        }
+      },
+      "arms": {
+        "raw_term": {
+          "inclusive": {
+            "rank_first_target": 1,
+            "recall_at_5": 0.5,
+            "recall_at_10": 1.0,
+            "count_target_top10": 4,
+            "rank_first_own": 2
+          },
+          "clean": {
+            "rank_first_target": 2,
+            "recall_at_5": 0.333,
+            "recall_at_10": 1.0,
+            "count_target_top10": 3,
+            "rank_first_own": 1
+          }
+        },
+        "naive_question": {
+          "inclusive": {
+            "rank_first_target": 1,
+            "recall_at_5": 0.75,
+            "recall_at_10": 1.0,
+            "count_target_top10": 4,
+            "rank_first_own": 2
+          },
+          "clean": {
+            "rank_first_target": 2,
+            "recall_at_5": 0.667,
+            "recall_at_10": 1.0,
+            "count_target_top10": 3,
+            "rank_first_own": 1
+          }
+        },
+        "raw_term_far_CEILING": {
+          "inclusive": {
+            "rank_first_target": 1,
+            "recall_at_5": 0.75,
+            "recall_at_10": 1.0,
+            "count_target_top10": 4,
+            "rank_first_own": 4
+          },
+          "clean": {
+            "rank_first_target": 1,
+            "recall_at_5": 0.667,
+            "recall_at_10": 1.0,
+            "count_target_top10": 3,
+            "rank_first_own": 3
+          }
+        },
+        "jargon": {
+          "inclusive": {
+            "rank_first_target": 2,
+            "recall_at_5": 0.417,
+            "recall_at_10": 0.667,
+            "count_target_top10": 2.667,
+            "rank_first_own": 1
+          },
+          "clean": {
+            "rank_first_target": 4.167,
+            "recall_at_5": 0.222,
+            "recall_at_10": 0.667,
+            "count_target_top10": 2,
+            "rank_first_own": 1
+          }
+        },
+        "neutral": {
+          "inclusive": {
+            "rank_first_target": 1.667,
+            "recall_at_5": 0.458,
+            "recall_at_10": 0.75,
+            "count_target_top10": 3,
+            "rank_first_own": 1.333
+          },
+          "clean": {
+            "rank_first_target": 3.833,
+            "recall_at_5": 0.389,
+            "recall_at_10": 0.723,
+            "count_target_top10": 2.167,
+            "rank_first_own": 1
+          }
+        }
+      },
+      "contrasts": {
+        "neutral_minus_raw_term.rank_first_target.inclusive": {
+          "delta_mean": 0.667,
+          "ci5": 0.333,
+          "ci95": 1.0,
+          "excludes_0": true,
+          "note": "descriptive resampling-stability of THESE k draws pooled over 2 fixed models; NOT population/cross-pair/cross-model uncertainty"
+        },
+        "neutral_minus_raw_term.recall_at_10.inclusive": {
+          "delta_mean": -0.25,
+          "ci5": -0.25,
+          "ci95": -0.25,
+          "excludes_0": true,
+          "note": "descriptive resampling-stability of THESE k draws pooled over 2 fixed models; NOT population/cross-pair/cross-model uncertainty"
+        },
+        "neutral_minus_jargon.rank_first_target.inclusive": {
+          "delta_mean": -0.333,
+          "ci5": -0.667,
+          "ci95": 0.0,
+          "excludes_0": false,
+          "note": "descriptive resampling-stability of THESE k draws pooled over 2 fixed models; NOT population/cross-pair/cross-model uncertainty"
+        },
+        "neutral_minus_jargon.recall_at_10.inclusive": {
+          "delta_mean": 0.083,
+          "ci5": 0.0,
+          "ci95": 0.167,
+          "excludes_0": false,
+          "note": "descriptive resampling-stability of THESE k draws pooled over 2 fixed models; NOT population/cross-pair/cross-model uncertainty"
+        },
+        "neutral_minus_raw_term.rank_first_target.clean": {
+          "delta_mean": 1.833,
+          "ci5": 1.167,
+          "ci95": 2.5,
+          "excludes_0": true,
+          "note": "descriptive resampling-stability of THESE k draws pooled over 2 fixed models; NOT population/cross-pair/cross-model uncertainty"
+        },
+        "neutral_minus_raw_term.recall_at_10.clean": {
+          "delta_mean": -0.277,
+          "ci5": -0.333,
+          "ci95": -0.167,
+          "excludes_0": true,
+          "note": "descriptive resampling-stability of THESE k draws pooled over 2 fixed models; NOT population/cross-pair/cross-model uncertainty"
+        },
+        "neutral_minus_jargon.rank_first_target.clean": {
+          "delta_mean": -0.333,
+          "ci5": -1.833,
+          "ci95": 1.0,
+          "excludes_0": false,
+          "note": "descriptive resampling-stability of THESE k draws pooled over 2 fixed models; NOT population/cross-pair/cross-model uncertainty"
+        },
+        "neutral_minus_jargon.recall_at_10.clean": {
+          "delta_mean": 0.056,
+          "ci5": 0.0,
+          "ci95": 0.166,
+          "excludes_0": false,
+          "note": "descriptive resampling-stability of THESE k draws pooled over 2 fixed models; NOT population/cross-pair/cross-model uncertainty"
+        }
+      }
+    }
+  }
+}

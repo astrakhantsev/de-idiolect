@@ -1,0 +1,6 @@
+- Mechanism: ⟦TERM⟧ is computed by clustering successful attempts by structural tool-use pattern (e.g., alternating inspection/verification vs. fixed retrieval-first sequence) and measuring diversity/count of distinct patterns among successes.
+- What is measured/produced: a numeric score (e.g., 1.3 to 2.7) reflecting the variety of successful solution patterns, not the success rate itself, since pass rates can stay flat while the score changes.
+- Input restriction: only successful attempts are included in the calculation; failed attempts are excluded.
+- Normalization constraint: traces are normalized for incidental file paths, number of available tools, and task instruction length before/when computing the score.
+- Setting/trigger: applies to repository-repair tasks run with multiple independent attempts per task in fresh tool sandboxes, after human review filters out ambiguous tasks.
+- Constraint: higher values correlate with fewer inappropriate copied phrases from prompt examples and are sensitive to generator diversity, which can confound interpretation via shifts in error message distribution.

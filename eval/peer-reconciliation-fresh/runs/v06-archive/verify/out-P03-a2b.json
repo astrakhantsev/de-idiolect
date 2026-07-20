@@ -1,0 +1,5 @@
+[{"excerpt": 1, "verdict": "instantiates", "quote": "A ⟦TERM⟧ produced 2,160 task specifications from a weaker generator"},
+{"excerpt": 2, "verdict": "instantiates", "quote": "A ⟦TERM⟧ produced 2,160 task specifications from a weaker generator, with executable checks withheld from the evaluated agents"},
+{"excerpt": 3, "verdict": "instantiates", "quote": "Three weaker task generators produced held-out data-management scenarios under a ⟦TERM⟧"},
+{"excerpt": 4, "verdict": "instantiates", "quote": "Three weaker task generators produced held-out data-management scenarios under a ⟦TERM⟧"},
+{"excerpt": 5, "verdict": "insufficient", "quote": ""}]

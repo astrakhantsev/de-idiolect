@@ -1,0 +1,307 @@
+{
+  "embedding_model": "BAAI/bge-large-en-v1.5",
+  "gen_model": "sonnet",
+  "k": 3,
+  "metric_note": "owner_best_rank lower=better (1=top); margin>0 => owner above all distractors. Anchors: naive_question=floor, raw_term=ceiling.",
+  "concepts": [
+    {
+      "term": "hyper-responder",
+      "owning_community": "lipidology",
+      "arms": {
+        "constrained": {
+          "best_rank": {
+            "mean": 1,
+            "min": 1,
+            "max": 1,
+            "values": [
+              1,
+              1,
+              1
+            ]
+          },
+          "mean_rank": {
+            "mean": 2.111,
+            "min": 2.0,
+            "max": 2.333,
+            "values": [
+              2.333,
+              2.0,
+              2.0
+            ]
+          },
+          "margin": {
+            "mean": 0.081,
+            "min": 0.062,
+            "max": 0.109,
+            "values": [
+              0.071,
+              0.062,
+              0.109
+            ]
+          },
+          "term_leaked_count": 0,
+          "definitions": [
+            "A term for an individual whose measured level of a substance in the blood rises unusually far, compared to most people, after receiving the same amount of a substance in food or treatment. The label is applied to a person (the thing that goes in is a record of that person's before-and-after measurements under a fixed intake), and what comes out is a yes/no classification, made by comparing their change to the range or average change seen across a group given the same intake. It implies that the size of the change is a stable trait of that person, not random noise, so the same person tends to show a large change again if retested under the same conditions. It applies whenever a group receiving an identical, controlled intake shows a wide spread in outcome sizes, and researchers want to separate individuals who react strongly from those who react weakly or not at all.",
+            "A person whose measured level of a bodily substance rises much more, on average, than most people's when exposed to a specific dietary or environmental input, compared to a matched baseline condition without that input. The category is defined by comparing repeated measurements within the same individual across two or more conditions, rather than by a single reading, so it captures a stable trait rather than a one-time fluctuation. It applies when a population shows wide spread in how much their measured value shifts for the same exposure, and a subgroup consistently falls at the high end of that spread across repeated trials. The underlying cause is usually an unobserved difference in how the body processes, takes up, or clears the substance in question, which is inferred indirectly from the size of the response rather than measured directly.",
+            "A term used to describe a person, or a group of people sharing a trait, whose measured level of a substance in the blood rises unusually far after exposure to a specific dietary or environmental input, compared with how much it rises in most other people given the same exposure. The label is assigned by comparing the size of the change under a higher-exposure condition against the change under a lower-exposure condition, for the same individual, and applies when that difference is consistently large across repeated tests. It is used to sort individuals into groups by degree of sensitivity to the input, and is often linked to an underlying difference in how much of the input the body takes up or processes internally. It applies whenever people are compared under matched exposure conditions and some show a markedly stronger measured reaction than others."
+          ]
+        },
+        "free": {
+          "best_rank": {
+            "mean": 1,
+            "min": 1,
+            "max": 1,
+            "values": [
+              1,
+              1,
+              1
+            ]
+          },
+          "mean_rank": {
+            "mean": 2.0,
+            "min": 2.0,
+            "max": 2.0,
+            "values": [
+              2.0,
+              2.0,
+              2.0
+            ]
+          },
+          "margin": {
+            "mean": 0.123,
+            "min": 0.107,
+            "max": 0.14,
+            "values": [
+              0.122,
+              0.14,
+              0.107
+            ]
+          },
+          "term_leaked_count": 0,
+          "definitions": [
+            "A person whose serum LDL cholesterol rises disproportionately when dietary intake of saturated fat and/or cholesterol is increased, relative to the population average or to less reactive individuals fed the same challenge. The phenotype is defined by the magnitude of change in a lipid biomarker between controlled low- and high-intake dietary periods, typically within a crossover or feeding-trial design, rather than by absolute cholesterol level at baseline. It is thought to reflect underlying physiological variation, such as intestinal cholesterol absorption efficiency or bile acid and lipoprotein metabolism, and tends to be a reproducible trait within an individual across repeated challenges. The concept is invoked when interpreting heterogeneity in diet-cholesterol trial outcomes and when arguing that population-averaged dietary guidance may obscure clinically meaningful subgroup effects.",
+            "A person whose serum LDL cholesterol rises markedly when dietary saturated fat or cholesterol intake increases, relative to others fed the same diet who show little or no change. The term denotes an individual phenotype in a controlled feeding or dietary intervention study, applying to the person (or their cholesterol-metabolism response) rather than to the diet itself, and is typically established by comparing within-subject LDL-C values across high- versus low-fat or high- versus low-cholesterol diet periods. It reflects underlying physiological variation\u2014for dietary cholesterol, differences in intestinal absorption efficiency and compensatory hepatic regulation of endogenous synthesis\u2014rather than any property of the food consumed. The designation is most reliable when the elevated response is reproducible across repeated challenges in the same individual, distinguishing a stable trait from random within-person fluctuation.",
+            "A person whose serum LDL cholesterol rises disproportionately when dietary saturated fat or cholesterol intake is increased, relative to the population-average rise seen under the same dietary challenge. The classification is a phenotype assigned to an individual (or consistently reproduced across repeated feeding trials in that individual) based on paired lipid measurements taken before and after a controlled change in diet, typically expressed as the delta in plasma or LDL cholesterol between a high- and low-fat/cholesterol diet. Mechanistically it is thought to reflect greater intestinal cholesterol absorption efficiency and/or feedback regulation of hepatic synthesis and LDL-receptor activity, distinguishing such individuals from hypo-responsive counterparts who show little or no shift. The concept applies in controlled dietary-intervention and metabolic-ward studies used to characterize inter-individual heterogeneity in cholesterolemic response, and underlies arguments that population-level dietary fat guidance obscures substantial variation in individual risk."
+          ]
+        }
+      },
+      "anchors": {
+        "naive_question": {
+          "best_rank": 5,
+          "mean_rank": 6.0,
+          "margin": -0.2446
+        },
+        "raw_term": {
+          "best_rank": 1,
+          "mean_rank": 2.0,
+          "margin": 0.1936
+        }
+      }
+    },
+    {
+      "term": "apolipoprotein B particle number",
+      "owning_community": "cardiology-biomarker",
+      "arms": {
+        "constrained": {
+          "best_rank": {
+            "mean": 1,
+            "min": 1,
+            "max": 1,
+            "values": [
+              1,
+              1,
+              1
+            ]
+          },
+          "mean_rank": {
+            "mean": 2.111,
+            "min": 2.0,
+            "max": 2.333,
+            "values": [
+              2.0,
+              2.0,
+              2.333
+            ]
+          },
+          "margin": {
+            "mean": 0.064,
+            "min": 0.041,
+            "max": 0.105,
+            "values": [
+              0.047,
+              0.105,
+              0.041
+            ]
+          },
+          "term_leaked_count": 0,
+          "definitions": [
+            "A count of how many particles of a certain kind are present in a fixed volume of a bodily fluid, where each particle can carry varying amounts of a fatty substance, so this count can differ from a measurement of the total amount of that substance across all particles combined. A higher count than expected for a given amount of substance indicates that the substance is spread across more, typically smaller, carriers. This measure is used to judge risk of a circulatory disease, particularly in cases where it disagrees with the simpler total-substance measurement. It applies whenever many small carriers could be missed by a measurement that only sums up cargo mass rather than counting individual carriers.",
+            "A count of a specific kind of small particle circulating in a fluid, where each particle carries one copy of a marker protein on its surface, so the count of the marker equals the count of particles. This number can be measured directly, separately from the total amount of a fatty substance carried inside those particles. The two measures often move together but can disagree: a person can have a low total amount of the carried substance while still having a high count of particles, or the reverse. Because it is the particles themselves, not the substance they carry, that are thought to cause harm when they cross into vessel walls, the count is used to estimate future risk of vessel disease, and it applies whenever someone wants a risk estimate that does not rely solely on the total-substance measurement.",
+            "A measure of how many carrier packages are circulating in the blood, where each package holds one copy of a specific surface-tag protein and may transport a variable amount of fat-like cargo. It is estimated by counting the tag protein directly, rather than by measuring the total mass of cargo the packages contain. Because the amount of cargo per package can vary, this count can disagree with cargo-mass-based estimates, and a person can show a high count alongside a normal or low cargo-mass reading. It applies whenever someone wants to know the actual number of these circulating packages, particularly for judging risk of vessel blockage, in cases where cargo-mass measures alone may understate that risk."
+          ]
+        },
+        "free": {
+          "best_rank": {
+            "mean": 1,
+            "min": 1,
+            "max": 1,
+            "values": [
+              1,
+              1,
+              1
+            ]
+          },
+          "mean_rank": {
+            "mean": 2.0,
+            "min": 2.0,
+            "max": 2.0,
+            "values": [
+              2.0,
+              2.0,
+              2.0
+            ]
+          },
+          "margin": {
+            "mean": 0.13,
+            "min": 0.113,
+            "max": 0.143,
+            "values": [
+              0.135,
+              0.113,
+              0.143
+            ]
+          },
+          "term_leaked_count": 0,
+          "definitions": [
+            "A quantitative laboratory measure reflecting the total number of circulating atherogenic lipoprotein particles\u2014chiefly LDL but also VLDL and their remnants\u2014each of which carries exactly one copy of the relevant apolipoprotein, so the assay directly counts particles rather than the cholesterol they transport. It is typically reported in nmol/L, derived from immunoassay of the apolipoprotein itself or inferred from NMR-based lipoprotein profiling, and is used clinically to gauge atherogenic burden. Because particles vary in cholesterol content, this count can run high even when standard cholesterol concentrations appear normal, revealing a discordance that leaves risk underestimated by lipid panels alone. It is applied in cardiovascular risk stratification, particularly in patients with metabolic syndrome, diabetes, or other conditions producing small, cholesterol-depleted particles, where it improves on conventional lipid measures for predicting atherosclerotic events.",
+            "A quantitative laboratory measurement, typically derived from NMR spectroscopy, direct immunoassay, or apoB genotype-adjacent assays, that estimates the total count of circulating atherogenic lipoprotein particles\u2014LDL, IDL, and VLDL remnants\u2014each of which carries exactly one copy of the relevant structural protein and thus serves as a per-particle proxy independent of how much cholesterol each particle happens to carry. It is reported as a concentration (e.g., nmol/L or mg/dL) rather than a mass of cholesterol, and is used to stratify atherosclerotic cardiovascular disease risk, particularly in patients whose lipid panels show discordance between conventional cholesterol-based estimates and true particle burden. Elevated values indicate a greater number of potentially arterial-wall-penetrating particles even when standard lipid concentrations appear normal or well-controlled, flagging risk that cholesterol-only panels would miss. It applies most usefully in populations prone to such discordance\u2014diabetes, metabolic syndrome, hypertriglyceridemia\u2014where it refines risk classification and treatment decisions beyond what cholesterol mass concentration alone provides.",
+            "A quantitative measure derived from nuclear magnetic resonance spectroscopy or immunoassay that estimates the total concentration of atherogenic lipoprotein particles\u2014chiefly LDL, along with VLDL and IDL\u2014in circulation, rather than the mass of cholesterol they carry. It is expressed as particles per liter of plasma and serves as an index of cardiovascular risk that can diverge from standard lipid-panel cholesterol values when particles are small and cholesterol-depleted. A patient whose count is elevated despite a normal or low cholesterol reading is said to show discordance, and such discordance is associated with residual risk not captured by conventional lipid measurement. It is used clinically to refine risk stratification, particularly in patients with metabolic syndrome, diabetes, or hypertriglyceridemia where particle number and cholesterol content commonly diverge."
+          ]
+        }
+      },
+      "anchors": {
+        "naive_question": {
+          "best_rank": 4,
+          "mean_rank": 8.667,
+          "margin": -0.2349
+        },
+        "raw_term": {
+          "best_rank": 1,
+          "mean_rank": 2.0,
+          "margin": 0.1419
+        }
+      }
+    },
+    {
+      "term": "isocaloric substitution model",
+      "owning_community": "nutrition-epi-methods",
+      "arms": {
+        "constrained": {
+          "best_rank": {
+            "mean": 1,
+            "min": 1,
+            "max": 1,
+            "values": [
+              1,
+              1,
+              1
+            ]
+          },
+          "mean_rank": {
+            "mean": 2.0,
+            "min": 2.0,
+            "max": 2.0,
+            "values": [
+              2.0,
+              2.0,
+              2.0
+            ]
+          },
+          "margin": {
+            "mean": 0.088,
+            "min": 0.077,
+            "max": 0.094,
+            "values": [
+              0.094,
+              0.094,
+              0.077
+            ]
+          },
+          "term_leaked_count": 0,
+          "definitions": [
+            "A model that estimates what happens to an outcome when one part of a fixed total intake is replaced by another, while keeping the total amount unchanged. It takes as input an outcome, a set of components whose amounts sum to a constant total, and a specified swap of a fixed amount from one component to another; it produces an estimate of the resulting change in the outcome. To achieve this it treats the components as jointly constrained (so that increasing one necessarily decreases another by the same amount) rather than allowing them to vary freely, and it separates the effect of changing composition from the effect of changing the total. It applies whenever the quantity of interest is not the level of one component alone but the consequence of trading part of it for part of another, with the sum of all parts held at a fixed value.",
+            "A model that estimates what happens to an outcome when one part of a fixed total intake is replaced by another part, with the total held constant. It takes as input an amount removed from one component and an equal amount added to another component of the same total, so the sum of components never changes, and it takes as input observed cases together with measures of each component and the outcome. It outputs an estimated change in the outcome, or in the risk of the outcome, attributable to this swap rather than to a change in the overall total. It applies whenever the quantity of interest is a like-for-like exchange within a bounded whole, and the goal is to separate the effect of composition from the effect of scale, typically while trying to account for other unmeasured or measured differences between cases that could distort the estimate.",
+            "A statistical model used to estimate what would happen, on average, if a fixed-size portion of one input in a person's daily intake were swapped for an equal-sized portion of another input, while the total daily amount consumed stays exactly the same. It takes as input records of how much of each candidate input a person consumes and an outcome measured later, and it produces an estimated change in that outcome attributable to trading one unit of one input for one unit of another. Because the total stays fixed, one of the inputs must be left out of the statistical adjustment (or the amounts must be split into shares of the fixed total) so the swap can be represented without contradiction. It applies whenever the quantity of interest is not how much of a single input a person consumes in isolation, but the effect of shifting consumption from one input to another under a constraint that the sum of all inputs does not change."
+          ]
+        },
+        "free": {
+          "best_rank": {
+            "mean": 1,
+            "min": 1,
+            "max": 1,
+            "values": [
+              1,
+              1,
+              1
+            ]
+          },
+          "mean_rank": {
+            "mean": 2.0,
+            "min": 2.0,
+            "max": 2.0,
+            "values": [
+              2.0,
+              2.0,
+              2.0
+            ]
+          },
+          "margin": {
+            "mean": 0.128,
+            "min": 0.107,
+            "max": 0.144,
+            "values": [
+              0.144,
+              0.133,
+              0.107
+            ]
+          },
+          "term_leaked_count": 0,
+          "definitions": [
+            "A causal-inference framework for dietary exposure data in which the effect of replacing a fixed quantity of one nutrient or food component with an equal amount of another is estimated while total caloric intake is held constant, so that the comparison isolates compositional change from any change in overall energy balance. It requires specifying the replaced (excluded) component explicitly, either by omitting one term from a model that includes all other intake variables (forcing its coefficient to be absorbed into the intercept) or by adding an energy-partition term for the non-substituted components, so that the exposure coefficients represent replacement effects rather than additive independent effects. The estimand is the mean difference in outcome risk or level under a hypothetical intervention that swaps one unit of energy from the reference component for one unit from the substituted component, all else in the diet unchanged. It applies whenever unadjusted intake associations would be confounded by total energy consumption, and its validity depends on correctly identifying which component absorbs the substituted calories and on the exchangeability of that substitution across individuals.",
+            "A design in which one dietary component is replaced by another at a fixed level of intake, so that the reference food, nutrient, or macronutrient is exchanged gram-for-gram or kilocalorie-for-kilocalorie with the comparator while total daily caloric intake is held constant across the compared exposures. It takes as input a set of correlated dietary exposures (which are otherwise collinear because they jointly compose finite energy intake) and a specification of which component is displaced, and it targets a contrast between two counterfactual diets that differ only in composition, not in total energy consumed. The estimand it recovers is the causal effect of swapping the increment of intake from one source to another, thereby removing overall energy intake as a confounder or mediator and isolating compositional effects from caloric ones. It underlies related estimation strategies such as leaving one component out of the model as the implicit referent or partitioning total energy into its constituent contributions, and it applies whenever the scientific question concerns the health consequences of shifting the mix of intake sources rather than of increasing or decreasing overall consumption.",
+            "A statistical estimand and modeling framework used in dietary exposure analysis to quantify the effect of replacing one unit of a specific food, nutrient, or macronutrient with an equal caloric amount of another, while holding total energy intake constant. It is typically operationalized through nutrient-density or energy-partition specifications in a regression model, where the coefficient for the replaced component is interpreted as the effect of the exchange rather than of either component in isolation. This approach addresses the collinearity and interpretive ambiguity that arise when dietary components are analyzed without accounting for their shared contribution to total caloric intake. It applies whenever the research question concerns the comparative health effects of dietary composition rather than absolute intake, and it requires explicit specification of which component is being displaced (or an implicit \"leave-out\" remainder) to yield a causally interpretable contrast."
+          ]
+        }
+      },
+      "anchors": {
+        "naive_question": {
+          "best_rank": 8,
+          "mean_rank": 9.333,
+          "margin": -0.2901
+        },
+        "raw_term": {
+          "best_rank": 1,
+          "mean_rank": 2.0,
+          "margin": 0.165
+        }
+      }
+    }
+  ],
+  "headline": {
+    "constrained": {
+      "best_rank_mean": 1,
+      "mean_rank_mean": 2.074,
+      "margin_mean": 0.0777
+    },
+    "free": {
+      "best_rank_mean": 1,
+      "mean_rank_mean": 2.0,
+      "margin_mean": 0.1272
+    },
+    "delta_free_minus_constrained": {
+      "best_rank": 0,
+      "mean_rank": -0.074,
+      "margin": 0.0495
+    }
+  }
+}

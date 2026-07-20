@@ -1,0 +1,6 @@
+- Mechanism: mid-task swap of the underlying model (to a newer/different release) while a session is already in progress, with files already edited and decisions already baked into the transcript.
+- Applies when a model change is forced mid-run (e.g., vendor deprecation notice) or deliberately triggered mid-task on a live, in-progress task such as a partial refactor.
+- What is measured: whether the continuation after the swap respects existing file structure, prior naming decisions, and the existing diff, versus discarding/rewriting already-correct work or re-reading the repo from scratch.
+- Scored as a coherent-continuation rate (e.g., 84%, up from 71%), i.e., the proportion of runs that pick up the thread cleanly without contradicting prior work.
+- Constraint: outputs must be graded by more than one pass, since a single grader pass is not trusted after a mid-run model change, and repeated grading of identical content can yield differing verdicts.
+- Constraint: coherent continuation is improved by explicitly preserving file-edit history across the swap boundary rather than relying on the new model to infer prior state.

@@ -1,0 +1,6 @@
+- A weaker (or held-out/third-party) task generator produces task specifications/scenarios, run separately per model family or generator pool, with executable checks/validators created for each task and withheld from the evaluated agents.
+- Task-generation traces (and evaluated-agent traces) are withheld/kept hidden from the other side, preventing generators from observing evaluated-agent behavior.
+- Output is measured as a count of executable task specifications (e.g., 2,160; 1,740; 1,200; 980), scored via executable validators/checks rather than human judgment.
+- Applies to generating benchmark/evaluation task sets (e.g., data-management or operational tasks) before any system is run against them.
+- Tasks are filtered/reviewed only for execution validity and duplicate surface form (or human-reviewed and rejected for ambiguous state transitions), reducing the final task count.
+- The process is rerun or refreshed (new generators/validators) across model families or releases to prevent one task-writing distribution from dominating comparisons.

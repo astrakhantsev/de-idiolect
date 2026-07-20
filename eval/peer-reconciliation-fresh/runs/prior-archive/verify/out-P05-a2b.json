@@ -1,0 +1,5 @@
+Looking at the definition, the key requirements are: paired items differ **only in surface wording or formatting** while the ask/requirements stay identical, and the procedure measures the **outcome gap** (pass rate/score), averaging it, with a smaller gap treated as reassuring.
+
+The excerpts describe a fundamentally different manipulation: adding **distractor/irrelevant content** (policy excerpts, tickets, decoy URLs, operational context) — a content-level robustness test, not a paraphrase/formatting-invariance check.
+
+[{"excerpt": 1, "verdict": "contradicts", "quote": "paired each account-management task with a version containing irrelevant policy excerpts, historical tickets, and decoy URLs"}, {"excerpt": 2, "verdict": "contradicts", "quote": "agents opened 2.1 additional pages under distractor context"}, {"excerpt": 3, "verdict": "contradicts", "quote": "differed only in irrelevant operational context appended to the prompt"}, {"excerpt": 4, "verdict": "contradicts", "quote": "distractor context increased exploratory tool calls by 31% and reduced direct validation calls by 18%"}, {"excerpt": 5, "verdict": "insufficient", "quote": ""}]

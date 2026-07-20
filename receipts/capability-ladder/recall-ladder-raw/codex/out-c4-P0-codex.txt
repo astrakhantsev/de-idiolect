@@ -1,0 +1,13 @@
+1. **Closest established concept: deliberation / reason-giving, contrasted with preference aggregation (vote counting).** The maxim means that panel outputs should be treated as articulated reasons, criteria, counterexamples, or diagnoses—not merely reduced to final yes/no choices and tallied. In an LLM setting, the operational names are **rubric-based / multidimensional evaluation** and **explanation- or rationale-aware evaluation**. **Confidence: 0.70.** The word *“enumerations”* is not standard terminology, so this is an interpretation of the description, not a discovered exact term.
+
+2. **Fields:** political theory and democratic theory (the deliberation-versus-aggregation distinction); social choice / collective decision-making; qualitative evaluation and expert-elicitation methods. In the specific “panel judge outputs” AI context: NLP and LLM evaluation. **Confidence: 0.85** for the first three; **0.75** for the LLM-evaluation mapping.
+
+3. **Canonical treatments:**
+
+   - Bernard Manin (1987), “On Legitimacy and Political Deliberation,” *Political Theory* 15(3): 338–368. An early modern canonical statement of deliberation as distinct from mere aggregation. **Confidence: 0.95.**
+   - Joshua Cohen (1989), “Deliberation and Democratic Legitimacy,” in Alan Hamlin & Philip Pettit (eds.), *The Good Polity: Normative Analysis of the State*, Basil Blackwell, pp. 17–34. It is a standard foundational source for the idea that decisions should be justified through public reasoning, not simply counted preferences. [Bibliographic confirmation](https://watermark02.silverchair.com/oso-9780192848925-chapter-2.pdf). **Confidence: 0.98.**
+   - Jürgen Habermas (1981), *The Theory of Communicative Action*, 2 vols., Suhrkamp. Foundational for the associated “force of the better argument” tradition. **Confidence: 0.90** on its canonical relevance; it is broader than panel-evaluation practice.
+   - Lianmin Zheng et al. (2023), “Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena,” *NeurIPS 2023*, 36: 46595–46623. This is the relevant modern LLM-judge treatment, though it does not coin the maxim. [Paper](https://proceedings.neurips.cc/paper_files/paper/2023/file/91f18a1287b398d378ef22505bf41832-Paper-Datasets_and_Benchmarks.pdf). **Confidence: 0.95** for citation and relevance.
+   - Faeze Brahman et al. (2024), “Using Natural Language Explanations to Rescale Human Judgments,” *COLM 2024*. Directly relevant to retaining judges’ explanations alongside ratings, rather than using ratings alone. [Paper record](https://openreview.net/forum?id=Qmq4zqdnWh). **Confidence: 0.85.**
+
+I would **not** call this simply “ensemble voting” or “majority voting”: those describe the practice the note rejects.

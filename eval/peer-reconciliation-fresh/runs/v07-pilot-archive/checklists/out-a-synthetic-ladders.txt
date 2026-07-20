@@ -1,0 +1,6 @@
+- Mechanism: an existing model is given easier/prior benchmark items and prompted to generate new, harder variants of them, with no human authoring items from scratch.
+- Output: produces new benchmark/test items (e.g., "adversarial" tier questions, census entries) added to a suite.
+- Setting/trigger: used to expand or create tiers of an evaluation/benchmark suite (e.g., a coding benchmark's harder tier).
+- Constraint: items generated this way are not validated against real-world/production outcomes after creation.
+- Constraint: such items can persist in the suite/census over time without re-validation, risking "zero signal" or staleness.
+- Scoring: item quality/acceptance is judged informally by whether resulting pass rates "look reasonable," not by rigorous validation.

@@ -1,0 +1,6 @@
+- Mechanism: after each tool call/action (retrieval, extraction, edit, service call), a check is run that compares the agent's most recently stated plan/sequence against the next actual call it executes.
+- Measured/produced: it detects and flags/records the first (or each) mismatch between stated plan and executed action, e.g. counted as flagged runs or trajectories with a plan-action mismatch.
+- Setting/trigger: applies in multi-step agent trajectories performing sequential tool-using tasks (retrieval, extraction, table-editing, service calls) where the agent states a plan or ordering before acting.
+- Constraint: the comparison is made against the plan as most recently stated by the agent, not an original or ideal plan.
+- Constraint: it identifies the first point of divergence (e.g., "first plan-action mismatch") rather than only aggregate/final outcomes.
+- Constraint: mismatches specifically involve the agent proceeding to a new action/stage without updating or revising its previously stated plan (e.g., inclusion rule, reconciliation sequence, source-priority plan, dependency order).

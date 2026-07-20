@@ -1,0 +1,6 @@
+- Mechanism: anonymized final patches and rationales from all systems in a round are pooled and graded blind, then the evaluated agent's agreement with external graders is compared between its own successful patches and matched peer patches.
+- Measurement: self-output agreement deficit, scored in percentage points (e.g., 6.4 points lower on own patches; 7.9 points under distractor context vs. 3.2 points without it).
+- Setting/trigger: applies during blinded grading pools mixing outputs from multiple task variants/systems within a round, triggered whenever an agent's own outputs are included among those being graded.
+- Constraint: the effect persists after excluding outputs with identifying filenames or unusually long explanations, and after paraphrasing examples to reduce copied phrasing.
+- Constraint: the effect remains detectable even when rationale text is removed and graders see only final actions and validators.
+- Constraint: the deficit is larger when the rationale reuses distinctive tool-log phrasing and under distractor context.

@@ -1,0 +1,6 @@
+- Mechanism: measured as the count of extra actions an agent takes AFTER an objective checker has already confirmed the (revised) task/artifact/tests are complete — i.e., wasted actions taken past the true completion point.
+- What is measured/produced: a number of excess actions (e.g., averaging 2.8, 3.4, 6.1, or increasing by 1.7, or doubling), driven by things like repeated repository searches, unnecessary verification commands, or retaining/testing obsolete files rather than destructive edits.
+- Scoring/reading: computed only from the checker-confirmed completion point onward, tallying actions taken after that point as the excess/overage.
+- When/where it applies: applies in agentic task-execution trajectories where objectives can be switched/revised mid-task, and is triggered by conditions such as corrupted/misleading feedback or observations, or an agent retaining obsolete notes/files after a switch.
+- Constraint: requires an independent/objective checker to confirm completion of the (revised) task, tests, and any required artifact/report before the metric can be evaluated at all.
+- Constraint: the excess is attributable to non-destructive, redundant behavior (extra searches/verification/preserved files) rather than harmful edits.

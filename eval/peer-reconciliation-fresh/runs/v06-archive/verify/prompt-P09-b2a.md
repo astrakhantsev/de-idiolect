@@ -1,0 +1,25 @@
+DEFINITION of a concept:
+
+A numeric score computed from successful repository-repair attempts, not from pass or completion rate. For each task, five independent attempts are run in fresh tool sandboxes; only successful traces are retained, normalized for incidental file paths, and clustered by structural tool-use pattern. The score is then derived from those traces and compared only after normalization for the number of available tools and instruction length. It applies to tool-using agents on the 600 tasks, or the 1,740 tasks remaining after filtering. Values observed were about 1.3 to 2.7. Higher values can occur despite nearly identical completion rates, are associated with fewer inappropriate copied phrases and alternating inspection with verification, and must be interpreted cautiously because generator diversity can change error-message distributions.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used.
+
+For EACH excerpt independently, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by DEFINITION?
+
+- "instantiates" — the usage is consistent with the definition and exemplifies it. Requires a verbatim supporting quote from the excerpt.
+- "contradicts" — the usage is incompatible with the definition (the referent has a property the definition excludes, or lacks one it requires). Requires a verbatim quote of the incompatible fragment.
+- "insufficient" — this excerpt alone does not contain enough to decide.
+
+Judge each excerpt on its own text only. Do not let other excerpts or the term's surface influence you.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "verdict": "instantiates|contradicts|insufficient", "quote": "verbatim quote (empty string only for insufficient)"}, ...]
+
+EXCERPTS:
+
+1. Good news is the ⟦TERM⟧ actually saved us here. Scrolled back through it and found an entry from eleven days ago noting we'd swapped the artifact-naming scheme in the scorer's config to include run id in the cache key.
+2. Went to the ⟦TERM⟧ before touching anything and found the actual change two entries back: someone bumped the cap from four to two the same day, unrelated to what I was originally investigating. Cap of two is just too tight for a five-file task, not a bug in the enforcement code at all.
+3. Cross-checked the timing against the ⟦TERM⟧ and neither dip lines up with last week's timeout bump, so that's a separate ticket. Kept the ⟦TERM⟧ open in a side window most of the week and it already saved us one false alarm.
+4. Cross-checked the timing against the ⟦TERM⟧ and neither dip lines up with last week's timeout bump, so that's a separate ticket. Kept the ⟦TERM⟧ open in a side window most of the week and it already saved us one false alarm.
+5. Title: The ⟦TERM⟧ Earned Its Keep Score dropped four points Tuesday and the first instinct was to blame the model update, but the ⟦TERM⟧ showed we'd bumped the tool-call timeout that same afternoon, which lined up better than the model swap did. Kept the ⟦TERM⟧ open in a side window the rest of the week and it caught two more false alarms before Friday, one traced to a retry-count change and one to a prompt-template edit nobody had mentioned in standup.
+6. Title: The ⟦TERM⟧ Earned Its Keep Score dropped four points Tuesday and the first instinct was to blame the model update, but the ⟦TERM⟧ showed we'd bumped the tool-call timeout that same afternoon, which lined up better than the model swap did. Kept the ⟦TERM⟧ open in a side window the rest of the week and it caught two more false alarms before Friday, one traced to a retry-count change and one to a prompt-template edit nobody had mentioned in standup.

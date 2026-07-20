@@ -1,0 +1,25 @@
+=== brief hash (must be d798686f...) ===
+d798686fe19850caf5a69a1e9ca3548b4c42da30ed36a38ad94ffa4fe1da8f71  /mnt/f/hub/10_projects/minelit/idiolect/recall-ladder-raw/briefs/c2-S-immersed.md
+=== run cwd is OUTSIDE the vault: /tmp/claude-1000/-mnt-f-hub/93d71aaf-aae4-4850-b7aa-51b8ddea4778/scratchpad/socialization-clean/runs ===
+done c2-S-haiku-a exit=0 bytes=3415 rundir_empty=[:-EMPTY]
+done c2-S-sonnet-a exit=0 bytes=9173 rundir_empty=[:-EMPTY]
+done c2-S-opus-a exit=0 bytes=12289 rundir_empty=[:-EMPTY]
+done c2-S-fable-a exit=0 bytes=11638 rundir_empty=[:-EMPTY]
+done c2-S-haiku-b exit=0 bytes=4245 rundir_empty=[:-EMPTY]
+done c2-S-sonnet-b exit=0 bytes=8316 rundir_empty=[:-EMPTY]
+done c2-S-fable-b exit=0 bytes=10752 rundir_empty=[:-EMPTY]
+done c2-S-opus-b exit=0 bytes=12502 rundir_empty=[:-EMPTY]
+CLEAN_SOCIALIZATION_DONE
+=== LEAK CHECK: grep new outputs for project-context markers (must be NONE) ===
+/tmp/claude-1000/-mnt-f-hub/93d71aaf-aae4-4850-b7aa-51b8ddea4778/scratchpad/socialization-clean/out/out-c2-S-fable-a.md
+/tmp/claude-1000/-mnt-f-hub/93d71aaf-aae4-4850-b7aa-51b8ddea4778/scratchpad/socialization-clean/out/out-c2-S-opus-a.md
+/tmp/claude-1000/-mnt-f-hub/93d71aaf-aae4-4850-b7aa-51b8ddea4778/scratchpad/socialization-clean/out/out-c2-S-opus-b.md
+=== sizes ===
+out-c2-S-fable-a.md       11638
+out-c2-S-fable-b.md       10752
+out-c2-S-haiku-a.md        3415
+out-c2-S-haiku-b.md        4245
+out-c2-S-opus-a.md        12289
+out-c2-S-opus-b.md        12502
+out-c2-S-sonnet-a.md       9173
+out-c2-S-sonnet-b.md       8316

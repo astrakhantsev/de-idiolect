@@ -1,0 +1,66 @@
+
+== key-3 TEST FREEZE 2026-07-19T18:35:53-07:00 (v0.9 instrument; key sealed separately in SEALED-manifest.txt) ==
+88ed0a62367b0613bcaf54a9f8974298fe7023b5200ddbb98e307e07596b201a  prereg-v08.md
+26e669e11e9029d27c5eaf2787511a89fe7e4bf8bdabfc0798c4b35bbb102fce  prereg-v09.md
+c2a86ce0448436bfcd279d49f0be6875aeb6d29fd6ca079325f4162e13c607e7  smoke.py
+2d57eac65535be20f01e3d4dd34c42eaeae3fbdf300e78e83e9b26388ab7deb0  v09.py
+b7b52332ffaf9b6ed282d687535810ccd327042a3f5b74a6dd118ffaec64d7fe  test_v08.py
+f33c186973c1554ee4b63810ff99e036eab2e33b387976138ad51288e123b0e3  test_v09.py
+2f5a97dd2f37bc9b93c5d60aa0d42ef90032a7d827c8b1db95d78e72430c3d90  retrieve_xc.py
+26df54fb8524df7b7e64d95696c9505d6152c9419b9301fc5e195b81b9df639b  run_calls.sh
+5cfd8651b5ae23d8f7b66abe21a5786771abd892e135c76f4f86bbef55c5ea99  run_test_v09.sh
+e240fbd46d374459cce1b649b2784795d37079c0645fd6c29fb782a80530684b  split_corpus.py
+00e0395b59f95402f07882f3ef2f39cd141972026c50eee315bf671cedafdc13  leakcheck_peer.sh
+2347ec7e76d02341afef791710040b802d41343b2d9f8866131d0462cd9e013e  ../peer-reconciliation-harness/gen_leakcheck.py
+c232ba1f35265569d875b440ef2a7d1594ba2f74e93f569b4f935ed24bcef24d  ../e2e-cell/run_isolated.sh
+a5681c47a3a89b1c689931b1e80492f1958debc12716a27c0efaf15f734b77e3  ../peer-reconciliation-harness/PROTOCOL.md
+a45c8096a647c0977906273fea6f768fd95d2af72e7f57ac0a69045159f15f80  prompts/checklist-extract.md
+9f4cf9ad7e109445657375e4e68bfb9bbb15b12da57116b271f62894f56a9fa2  prompts/gen-definition-v07.md
+627b70750213b6f4d98b97be0ca7e9effa82c862d656e5252615d13f1f6bb5bd  prompts/ladder-conformance.md
+16f5eb8435d8e1b6ce1f8be8c4434c3f72f641cdd1328cede83edcc34dfe171e  prompts/polarity-check.md
+e4dc0663dbeaf51e35860219aeea1a2bf54580ec23c40b539c2972dabb2975af  prompts/verify-matrix.md
+d8087475f2469c6246cf3de443f0581f9ddc9d4a08668cae2ea10083f7bb24d7  prompts/verify-pair.md
+f9763b1be37463c813e0f526e728e8711abb121e60251f25a123abf967be2415  prompts/decompose.md
+6e4d0726a01bcc1fa45b2680fa429260f23ff1cf1e8757ae446183050a08d4a0  prompts/containment-v2.md
+967b3e1002875101559f4501e35ebef8903f53529a0e95f36c74efcb47e465f0  prompts/gen-community-a.md
+22e9f5b405e3a3ff8a943ed67a44970073782a83a2dd4f1072ab9725fbb08977  prompts/gen-community-b.md
+fcfb2eebfa5e57101d8098dc5849039db96d436955895433f3bdead126de78f5  key/concepts.json
+9b39e95e804504500a963890c5049ff07bdd7163bbd1a10056ea5cfbbc250ec5  key/answer_key.json
+37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570  runs/v09/carried-manifest.json
+bge_snapshot_path: /home/nik/.cache/huggingface/hub/models--BAAI--bge-large-en-v1.5/snapshots/d4aa6901d3a41ba39fb536a557fa166f842b0e09
+bge_snapshot_tree_sha256: 0dc1cb99320412acf5a4828de2ad971ed88cd78d0067f14b4b990b4857600463
+-- key-3 TEST resolved models 2026-07-19T18:35:56-07:00 --
+resolved_model[sonnet]: claude-haiku-4-5-20251001,claude-sonnet-5
+resolved_model[opus]: claude-haiku-4-5-20251001,claude-opus-4-8
+codex_model: gpt-5.6-terra (pinned id)
+claude_cli_version: 2.1.215 (Claude Code)
+codex_cli_version: codex-cli 0.144.1
+
+== HARNESS FIX 2026-07-19T18:36:59-07:00 (run-scoped fault, fixed toward the frozen spec, logged) ==
+first launch aborted at phase 3 BEFORE any model invocation: relative prompt/output paths break inside run_isolated's fresh temp cwd; fixed to absolute; no model output produced, no key exposure; superseding driver hash:
+3ff11fbdd49180d1e500bec1001d2949f83edc401d95fa09e396bf8accd9d5e9  run_test_v09.sh
+-- key-3 TEST corpus hashes (outputs of the frozen gen prompts) --
+0b8adfd1ee7a941a03498624b927460293802e7f91821a1cd91ff46fc8c038af  corpora/a/manifest.json
+aa2cd23d05cb0e44bed60937898e1b87a1ec884cf0d57c9b60c83143029b514c  corpora/b/manifest.json
+1386e72fb8527ba862fa9addbfac396e9341f68af484f9bec2d6de002d5cef21  corpora/a/01.md
+f908635dae4b191f77aada6f737a5fc4abbe5b24a7019913f7a30677d14bdd4d  corpora/a/02.md
+f89986d26a3be0ba1c8c5b7ef9b8a5eeaa35899ed5bfdfd4d29f6816671ed88f  corpora/a/03.md
+8a9d121b3481cdd5b6309ec99e3008c49b71feeafb59f8c68575409916bcc428  corpora/a/04.md
+3b5c0e4dfe567fab3a428fd45a2fe1688353756535094810c6d75bb3fe14937b  corpora/a/05.md
+1492b54544a50689ffeee281df0c8896752a647d09a09bbe79505f21d43a7077  corpora/a/06.md
+c06b6df97e1368394c8dc214ffbcd7ecaaa0d0e67471032dd050fbeacbeb93d5  corpora/a/07.md
+5fbe3b94e19bfcfc342f58224fd73ed32384ab11361a75865a8fff8880e942c3  corpora/a/08.md
+0d644b27ecef071540a7d17ea71c02ad9b31ee638bdbb74107ef7d6870061dee  corpora/a/09.md
+773ad8252699296c7eb75869ac68d082db729dff86cf3415d6c045f60de2284f  corpora/a/10.md
+f13357129d673ca071ca620e4f626f84594e3ffe2e16dbc7a1c2e6f140781448  corpora/a/11.md
+ac44cec562e0dfbd0b123be2e24ee6ae5b6aa0699adf4f754c8b5015f9927470  corpora/b/01.md
+4fe1f679236a7c81ea43a25eacf1d83dc6b7163d95d9188c7eec96faeae6ad05  corpora/b/02.md
+b2d768b8c9db684d883b65bab3873d54ae28f21db5d4d0e24b03748cec7f9feb  corpora/b/03.md
+d4a7817eebc14900cf076b43a6d0f71333d3bd43439d70d326faa91b907c1a12  corpora/b/04.md
+665d33bf1e21a1be2acbd1219ade7759b2b8dc34ec840fdf429486f18234edd3  corpora/b/05.md
+238d792faf85584d7ebd991505d668a62f1326732c6c4e94b47a4e831f94ecdf  corpora/b/06.md
+604bb16ae47bdce99aafe672b9274862ff938c0b36f6687199fd849693416387  corpora/b/07.md
+ec3175097e75f3cec1f0ab3d7957cfb9dcbdcc6ac14d644412140d2c8f1afe48  corpora/b/08.md
+c5a5ac5439813c86de2afc113c2ed22fa502db00cc7a90dbe961f1743dbd95d9  corpora/b/09.md
+cd3ea60ecd353b15bea2488315f868a290206a655a154517b3ed159c80ac4379  corpora/b/10.md
+f6d9a3971e4b4957ca28d3b3f187915f1222104151674dea912a07953c0eafbb  corpora/b/11.md

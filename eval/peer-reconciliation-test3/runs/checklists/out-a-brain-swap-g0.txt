@@ -1,0 +1,5 @@
+- Swap only the planning/plan-generation step to a cheaper/lower-tier model while keeping the subtask execution model unchanged.
+- Measures end-to-end task success rate, expressed as a percentage score, compared against a same-setup baseline.
+- Applies to agent harnesses that separate a planning step from an execution step (e.g., a document-QA agent), tested per session/task run.
+- Must control for position within a session (fresh-session first task vs. warmed-up later task), since failing to do so inflates the apparent effect size.
+- Results vary widely by task: sometimes near-noise (81% vs 83%), sometimes a collapse (79% to 31%), sometimes a consistent 20-40 point loss.

@@ -1,0 +1,5 @@
+- Run many identical parallel copies (e.g., 500 runs) of the same task/agent against a shared execution environment (staging or shared cluster) to test for cross-contamination between worker instances.
+- Detects cross-instance interference caused by non-unique shared infrastructure, such as tempdir/cache naming that collides across workers on the same host or cluster.
+- Produces a contamination rate as a percentage of runs affected (e.g., 6%, 11%, 4%), which is scored/read as the fraction of runs showing shared-state interference (like reading/writing another worker's scratch or cache files).
+- Applies specifically to batched/parallel execution harnesses, and should be run on any such harness before trusting behavioral metrics derived from it, especially when file state sensitivity is involved.
+- Contamination is expected to be reducible (e.g., via tempdir isolation fixes) but not fully eliminable when workers share underlying infrastructure like a common cache layer by design.

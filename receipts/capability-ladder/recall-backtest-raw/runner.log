@@ -1,0 +1,73 @@
+=== brief hashes ===
+72d610f7bf2a168ac19ddc54ffc0c33523ee7e3d480f9e084e2e5f0613ba8f81  c2-P.md
+4beef81745aa99da2683615d93b51dc5a07b4d0650b3f0d70262d05b181ad700  c2-R.md
+45060402daf00a110112200a276d0bde6b18902cc79d77debb9323ff27dbf6d2  c4-P.md
+fdfef940ee9317e1b6b2529e2d6c579c91fa9882e5761be4bd3f79c93d1aa1b5  c4-R.md
+cb6bc9ba1961aea2fc05e485badf889a55a35a2b7764d58b01e7d9c6ac1c1626  covid-P.md
+f400307cf1b01a705c544b8d4197b3afb7ff73a8239362e3305f3efe48b9d062  covid-R.md
+=== WAVE 1: opus ===
+done out-covid-R-opus exit=1  bytes=250
+done out-covid-P-opus exit=0  bytes=10218
+done out-c4-R-opus exit=0  bytes=7694
+done out-c4-P-opus exit=0  bytes=9890
+done out-c2-R-opus exit=0  bytes=11289
+done out-c2-P-opus exit=0  bytes=9494
+=== WAVE 2: sonnet ===
+done out-covid-R-sonnet exit=1  bytes=250
+done out-covid-P-sonnet exit=0  bytes=8493
+done out-c2-P-sonnet exit=0  bytes=5478
+done out-c4-P-sonnet exit=0  bytes=8959
+done out-c4-R-sonnet exit=0  bytes=6190
+done out-c2-R-sonnet exit=0  bytes=5077
+ALL_DONE
+=== output sizes ===
+  9494 out-c2-P-opus.md
+  5478 out-c2-P-sonnet.md
+  7531 out-c2-P0-opus.md
+  5297 out-c2-P0-sonnet.md
+ 11289 out-c2-R-opus.md
+  5077 out-c2-R-sonnet.md
+  9890 out-c4-P-opus.md
+  8959 out-c4-P-sonnet.md
+  7495 out-c4-P0-opus.md
+     0 out-c4-P0-sonnet.md
+  7694 out-c4-R-opus.md
+  6190 out-c4-R-sonnet.md
+ 10218 out-covid-P-opus.md
+  8493 out-covid-P-sonnet.md
+   250 out-covid-R-opus.md
+   250 out-covid-R-sonnet.md
+103605 total
+=== nonempty stderr (transient errors?) ===
+--- out-c2-P-opus.err ---
+Permission allow rule (/home/nik/.claude/settings.json): Write(//tmp/**) is not matched by file permission checks — only Edit(path) rules are. Use Edit(//tmp/**) instead (Edit rules cover all file-editing tools).
+--- out-c2-P-sonnet.err ---
+Permission allow rule (/home/nik/.claude/settings.json): Write(//tmp/**) is not matched by file permission checks — only Edit(path) rules are. Use Edit(//tmp/**) instead (Edit rules cover all file-editing tools).
+--- out-c2-P0-opus.err ---
+Permission allow rule (/home/nik/.claude/settings.json): Write(//tmp/**) is not matched by file permission checks — only Edit(path) rules are. Use Edit(//tmp/**) instead (Edit rules cover all file-editing tools).
+--- out-c2-P0-sonnet.err ---
+Permission allow rule (/home/nik/.claude/settings.json): Write(//tmp/**) is not matched by file permission checks — only Edit(path) rules are. Use Edit(//tmp/**) instead (Edit rules cover all file-editing tools).
+--- out-c2-R-opus.err ---
+Permission allow rule (/home/nik/.claude/settings.json): Write(//tmp/**) is not matched by file permission checks — only Edit(path) rules are. Use Edit(//tmp/**) instead (Edit rules cover all file-editing tools).
+--- out-c2-R-sonnet.err ---
+Permission allow rule (/home/nik/.claude/settings.json): Write(//tmp/**) is not matched by file permission checks — only Edit(path) rules are. Use Edit(//tmp/**) instead (Edit rules cover all file-editing tools).
+--- out-c4-P-opus.err ---
+Permission allow rule (/home/nik/.claude/settings.json): Write(//tmp/**) is not matched by file permission checks — only Edit(path) rules are. Use Edit(//tmp/**) instead (Edit rules cover all file-editing tools).
+--- out-c4-P-sonnet.err ---
+Permission allow rule (/home/nik/.claude/settings.json): Write(//tmp/**) is not matched by file permission checks — only Edit(path) rules are. Use Edit(//tmp/**) instead (Edit rules cover all file-editing tools).
+--- out-c4-P0-opus.err ---
+Permission allow rule (/home/nik/.claude/settings.json): Write(//tmp/**) is not matched by file permission checks — only Edit(path) rules are. Use Edit(//tmp/**) instead (Edit rules cover all file-editing tools).
+--- out-c4-P0-sonnet.err ---
+Permission allow rule (/home/nik/.claude/settings.json): Write(//tmp/**) is not matched by file permission checks — only Edit(path) rules are. Use Edit(//tmp/**) instead (Edit rules cover all file-editing tools).
+--- out-c4-R-opus.err ---
+Permission allow rule (/home/nik/.claude/settings.json): Write(//tmp/**) is not matched by file permission checks — only Edit(path) rules are. Use Edit(//tmp/**) instead (Edit rules cover all file-editing tools).
+--- out-c4-R-sonnet.err ---
+Permission allow rule (/home/nik/.claude/settings.json): Write(//tmp/**) is not matched by file permission checks — only Edit(path) rules are. Use Edit(//tmp/**) instead (Edit rules cover all file-editing tools).
+--- out-covid-P-opus.err ---
+Permission allow rule (/home/nik/.claude/settings.json): Write(//tmp/**) is not matched by file permission checks — only Edit(path) rules are. Use Edit(//tmp/**) instead (Edit rules cover all file-editing tools).
+--- out-covid-P-sonnet.err ---
+Permission allow rule (/home/nik/.claude/settings.json): Write(//tmp/**) is not matched by file permission checks — only Edit(path) rules are. Use Edit(//tmp/**) instead (Edit rules cover all file-editing tools).
+--- out-covid-R-opus.err ---
+Permission allow rule (/home/nik/.claude/settings.json): Write(//tmp/**) is not matched by file permission checks — only Edit(path) rules are. Use Edit(//tmp/**) instead (Edit rules cover all file-editing tools).
+--- out-covid-R-sonnet.err ---
+Permission allow rule (/home/nik/.claude/settings.json): Write(//tmp/**) is not matched by file permission checks — only Edit(path) rules are. Use Edit(//tmp/**) instead (Edit rules cover all file-editing tools).

@@ -1,0 +1,6 @@
+- Mechanism: reordering the same tool/ledger outputs fed to the model (identical content, different sequence, seeds pinned) causes measurable output variation.
+- Measured/produced: task pass rate (e.g., 81%→41% swing) and agent performance metrics (e.g., a nine-point swing on a contract-review agent) across repeated runs.
+- Setting/trigger: multi-run comparisons where seeds/task menu are fixed but the order of tool results presented to the model varies between "identical" runs.
+- Constraint: with seeds frozen, any shift in the result curve must be attributable to the model/ordering, not to task variation.
+- Constraint: the model can anchor on position (e.g., treating the first-mentioned result as ground truth) rather than reasoning over content.
+- Additional symptom: reordering can also alter downstream behavior like verification/re-checking effort (back-loaded spend spiking) even when the underlying facts are unchanged.

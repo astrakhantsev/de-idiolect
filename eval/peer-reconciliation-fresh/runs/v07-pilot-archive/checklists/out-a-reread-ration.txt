@@ -1,0 +1,6 @@
+- Enforces a fixed numeric limit ("ration") on how many times an agent may open/reread the same file's contents during a run.
+- Set as a count of allowed file-open/reread actions (e.g., a ⟦TERM⟧ of three), applied per file or per target resource.
+- Applies during agent benchmark runs (e.g., codebase-navigation, file-navigation, onboarding suites) where an agent reads files while working.
+- Once the limit is reached, further rereads that would help the agent finish are ignored/blocked rather than granted.
+- Triggers agent failure or task cutoff when the agent exceeds the ration and cannot proceed without additional rereads.
+- Does not cause the agent to compress or otherwise adapt its behavior in response to the limit—it simply keeps failing or gets cut off.

@@ -1,0 +1,5 @@
+- Mechanism: one agent (model) generates candidate items (eval questions, bugs, or scenarios), and a second, separate model filters/reviews them to remove ones it judges too easy or trivial.
+- Output/measurement: a filtered set of surviving candidate items (e.g., eighteen of forty eval questions) that pass the second model's judgment of difficulty/novelty.
+- Setting/trigger: used to generate test material such as eval questions, candidate bugs, or "novel" scenarios for agent evaluation or training batches.
+- Constraint: no check is made on whether the filtering model shares blind spots or biases with the authoring model.
+- Constraint: the authoring agent's own strengths and habits (e.g., preferred bug categories, working patterns) disproportionately survive the filter, skewing the resulting batch.

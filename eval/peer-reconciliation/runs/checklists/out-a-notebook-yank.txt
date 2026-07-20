@@ -1,0 +1,6 @@
+- Mechanism: the scratchpad/accumulated notes are deliberately wiped (cleared) at a defined checkpoint (mid-run or multiple checkpoints) during an agent run.
+- Purpose: this wiping is used to test whether the agent can recover its plan or performance from context alone, versus relying on accumulated notes.
+- What is measured: post-wipe outcomes are compared against pre-wipe/expected behavior — e.g., recovery quality, performance tally, or rate of fabricated/ungrounded claims.
+- Applies during active agent runs, often layered alongside other running tests (e.g., a fault-injection run or a parallel instrumentation experiment).
+- Can be applied at a single checkpoint or at multiple checkpoints within one run.
+- Constraint: it isolates cause from symptom by checking whether a fresh start (post-wipe) changes the observed behavior — if the behavior persists unchanged, the excerpts treat this as evidence the behavior is a base property of the model rather than something stored in accumulated notes.

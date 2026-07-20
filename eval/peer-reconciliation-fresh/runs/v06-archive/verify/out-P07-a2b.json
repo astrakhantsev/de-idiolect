@@ -1,0 +1,5 @@
+Looking at the definition: ⟦TERM⟧ is a **determinism/randomness check** — same prompt submitted twice, outputs compared byte-for-byte to detect hidden randomness at temperature zero.
+
+The excerpts describe something entirely different: a check for **verbatim carryover / copied phrasing from few-shot examples** (contamination/leakage detection). That is a distinct, incompatible diagnostic.
+
+[{"excerpt": 1, "verdict": "contradicts", "quote": "The ⟦TERM⟧ identified inappropriate verbatim carryover in 9.6% of free-form explanations"}, {"excerpt": 2, "verdict": "contradicts", "quote": "identified inappropriate verbatim carryover in 9.6% of free-form explanations, despite correct final tool outputs. Removing the examples reduced ⟦TERM⟧ failures to 1.8%"}, {"excerpt": 3, "verdict": "contradicts", "quote": "identified inappropriate verbatim carryover in 9.6% of free-form explanations"}, {"excerpt": 4, "verdict": "contradicts", "quote": "had fewer inappropriate copied phrases than agents relying on repeated repair traces"}, {"excerpt": 5, "verdict": "contradicts", "quote": "after paraphrasing the examples reduced copied phrasing"}]

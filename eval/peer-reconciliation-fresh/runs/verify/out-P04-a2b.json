@@ -1,0 +1,12 @@
+Looking at each excerpt, the key discriminators are: L0 = any working-resource reduction mid-task; L1/L2 = specifically the **token budget** halved (silently, once). Excerpts naming a non-token resource (tool-call quota, wall-clock) as *the* thing reduced contradict L1/L2; those that list token budget as one possibility are ambiguous on the halving/silent/once specifics.
+
+```json
+[
+  {"excerpt": 1, "L0": "instantiates", "L1": {"verdict": "insufficient", "quote": ""}, "L2": {"verdict": "insufficient", "quote": ""}},
+  {"excerpt": 2, "L0": "instantiates", "L1": {"verdict": "insufficient", "quote": ""}, "L2": {"verdict": "insufficient", "quote": ""}},
+  {"excerpt": 3, "L0": "instantiates", "L1": {"verdict": "contradicts", "quote": "A ⟦TERM⟧ lowered tool-call quota midway through the distractor versions."}, "L2": {"verdict": "contradicts", "quote": "A ⟦TERM⟧ lowered tool-call quota midway through the distractor versions."}},
+  {"excerpt": 4, "L0": "instantiates", "L1": {"verdict": "contradicts", "quote": "A ⟦TERM⟧ lowered tool-call quota midway through the distractor versions."}, "L2": {"verdict": "contradicts", "quote": "A ⟦TERM⟧ lowered tool-call quota midway through the distractor versions."}},
+  {"excerpt": 5, "L0": "instantiates", "L1": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ reduced wall-clock allowance or tool-call quota immediately after an agent’s first successful action."}, "L2": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ reduced wall-clock allowance or tool-call quota immediately after an agent’s first successful action."}},
+  {"excerpt": 6, "L0": "instantiates", "L1": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ reduced wall-clock allowance or tool-call quota immediately after an agent’s first successful action."}, "L2": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ reduced wall-clock allowance or tool-call quota immediately after an agent’s first successful action."}}
+]
+```

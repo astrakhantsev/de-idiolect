@@ -1,0 +1,5 @@
+- Mechanism: compares agent tool-call traces between two paired task versions (one plain, one with irrelevant/distractor context added) while holding the required action, verification endpoint/validator, and initial state constant.
+- Measures: number of exploratory/extra tool calls or pages opened, time-to-first-valid-tool-call, rate of direct validation calls, and navigation breadth — scored as differences/deltas between the paired variants (e.g., +2.1 pages, +38 seconds, +31% exploratory calls, -18% direct validation calls).
+- Applies to: agent task benchmarks (e.g., account-management, service-configuration tasks) where a distractor-laden prompt variant is paired against a clean variant of the same task.
+- Constraint: the required action/configuration change and the verification/validator endpoint must remain identical across paired versions — only irrelevant context differs.
+- Constraint: primarily reflects changes in navigation/exploration behavior rather than final answer length.

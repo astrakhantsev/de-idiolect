@@ -1,0 +1,6 @@
+- Agents replay/reuse action sequences (search, validation, credential-reset, tool-call patterns) from a prior successful task onto a new, subsequent task with an incompatible or unrelated state.
+- Occurs specifically when the prior task ended in a high-confidence or resource-constrained success immediately preceding the new task (e.g., billing-repair before access-control or incident-response tasks).
+- Measured as a percentage rate of occurrence across subsequent tasks (e.g., 14%, 12.4%), which drops sharply (e.g., to 3%, 2.6%, or by 79%) when prior-session/history traces are cleared between tasks.
+- Applies within ordered, multi-task sessions where task order is fixed and session history/state persists across tasks.
+- Is tied to prior trace length rather than prior answer correctness, and persists even when redundant page openings are reduced or tool quotas are increased.
+- Clearing session history between tasks is the constraint shown to reduce it, though this may modestly increase tool setup time and does not meaningfully change ordinary same-domain task performance.

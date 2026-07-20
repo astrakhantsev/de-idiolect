@@ -1,0 +1,37 @@
+Below are usage excerpts from one community's documents, all containing the same term, shown masked as ⟦TERM⟧ (other local jargon is masked as ⟦X⟧).
+
+Write THREE cumulative operational definitions of the concept ⟦TERM⟧ names AS USED in these excerpts, at three levels of specificity:
+
+- "L0" — ONE sentence: what kind of thing it is (a phenomenon, a procedure, a score, a rule…) and its immediate purpose. Genus only, no mechanism.
+- "L1" — L0's content PLUS the specific mechanism or process (what concretely happens). 2–4 sentences.
+- "L2" — L1's content PLUS what is measured or produced and how it is scored or read, and when/where it applies. 60–160 words.
+
+COMMITMENTS CHECKLIST (extracted from the same excerpts; L2 must state every commitment, L1 must state the mechanism commitments):
+- ⟦TERM⟧ is assigned independently by two annotators per item, before deployment/before model results are inspected, and can be revised if hidden dependencies (e.g., unavailable credentials) are later discovered.
+- ⟦TERM⟧ is a difficulty/capability-tier rating tied to expected performance, scored such that failures falling below an agent's assigned ⟦TERM⟧ are read as unexpected regressions rather than ordinary misses.
+- ⟦TERM⟧ applies at the level of individual evaluation items/tasks within a multi-tier, multi-environment agent evaluation suite, assigned prior to running any system on the task.
+- ⟦TERM⟧ predicts observed failure rates among lower-tier agents (e.g., accounting for 71% of observed failures), which is used to reduce the volume of failures forwarded for manual investigation.
+- ⟦TERM⟧ must remain stable across independent adjudicators/annotators for an item to be included in reported results; items with unstable ⟦TERM⟧ are excluded.
+- ⟦TERM⟧ can diverge from actual outcomes in specific ways (e.g., agents passing higher-tier items via narrow memorized procedures while failing lower-tier items), meaning it does not imply a single monotonic capability scale.
+
+Constraints for ALL levels:
+- Ordinary words and simple notation only; do NOT use the masked terms or guess at them; no names of people, published methods, fields, systems, models, or communities.
+- Base everything ONLY on what the excerpts support; no generalizing catch-all phrases ("or otherwise", "or any similar", "in any way").
+- Each level must be self-contained (do not reference the other levels).
+
+Output ONLY JSON: {"L0": "...", "L1": "...", "L2": "..."}
+
+EXCERPTS:
+
+1. Items carried a ⟦TERM⟧ assigned independently by two annotators before deployment. The ⟦TERM⟧ predicted 71% of observed failures among lower-tier agents, reducing the number of failures forwarded for manual investigation.
+2. Items carried a ⟦TERM⟧ assigned independently by two annotators before deployment. The ⟦TERM⟧ predicted 71% of observed failures among lower-tier agents, reducing the number of failures forwarded for manual investigation. Disagreements were concentrated in items involving chained browser actions rather than answer extraction.
+3. Results therefore exclude halted ⟦X⟧ batches and report only items whose ⟦TERM⟧ was stable across adjudicators.
+4. The evaluation suite contained 3,050 tasks spanning three capability tiers and two execution environments. Every item received a ⟦TERM⟧ before model results were inspected. The ⟦TERM⟧ was revised for 4.7% of items after annotators discovered hidden dependencies on unavailable credentials.
+5. Every item received a ⟦TERM⟧ before model results were inspected. The ⟦TERM⟧ was revised for 4.7% of items after annotators discovered hidden dependencies on unavailable credentials.
+6. Removing exhausted items increased rank stability across weekly reruns. Failures below an agent’s ⟦TERM⟧ were flagged for audit rather than treated as ordinary misses. The ⟦TERM⟧ also exposed a limitation: several agents completed higher-tier items through narrow memorized procedures while failing lower-tier tasks requiring unfamiliar tool states.
+7. Failures below an agent’s ⟦TERM⟧ were flagged for audit rather than treated as ordinary misses. The ⟦TERM⟧ also exposed a limitation: several agents completed higher-tier items through narrow memorized procedures while failing lower-tier tasks requiring unfamiliar tool states. Consequently, the reported exhaustion analysis does not imply a single monotonic capability scale.
+8. Tasks were produced through a ⟦X⟧ and labeled with a ⟦TERM⟧ before any system was run.
+9. The ⟦X⟧ yielded 980 executable multi-tool cases, while the ⟦TERM⟧ identified 212 cases expected to exceed entry-tier capability.
+10. When session history was cleared, ⟦X⟧ fell from 12.4% to 2.6%, despite unchanged ⟦TERM⟧ distributions.
+11. Each retained item also carried a ⟦TERM⟧. The ⟦TERM⟧ separated expected lower-tier failures from unexpected regressions in higher-tier systems.
+12. Each retained item also carried a ⟦TERM⟧. The ⟦TERM⟧ separated expected lower-tier failures from unexpected regressions in higher-tier systems.

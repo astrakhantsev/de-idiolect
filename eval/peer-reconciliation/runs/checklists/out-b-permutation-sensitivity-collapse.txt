@@ -1,0 +1,6 @@
+- Mechanism: shuffling/permuting the order of otherwise-equivalent records, results, or excerpts across repeated runs while keeping their content unchanged.
+- Effect: agents disproportionately select or commit to the first-presented item as canonical/controlling, treating subsequent equivalent items as exceptions rather than corroborating evidence.
+- What is measured: task/decision accuracy (e.g., end-to-end success rate, duplicate-detection accuracy, full-task accuracy), compared between a fixed-order condition and a shuffled/randomized-order condition.
+- How it is scored: as a drop or reduction in accuracy/success rate (percentage or percentage-point decrease) attributable to reordering content-equivalent items.
+- Setting/trigger: applies when multiple equivalent (same-content) records, search results, or excerpts are presented to an agent and their presentation order is varied across repetitions.
+- Constraint: the underlying content of the compared items must remain unchanged — only their order/position varies.

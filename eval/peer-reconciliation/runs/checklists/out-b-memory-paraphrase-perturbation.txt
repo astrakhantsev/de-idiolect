@@ -1,0 +1,6 @@
+- Mechanism: ⟦TERM⟧ is a smaller-model paraphrase/rewrite of retained notes (or the retained repair plan) that replaces the original text at a specific point in the pipeline (immediately before synthesis, or after a corrupted row was encountered but before final export).
+- Produced/measured: exact-match table accuracy (dropped 71%→54%) and containment (fell 14 percentage points), both read by comparing paired runs with vs. without the rewrite.
+- Setting/trigger: applied in a pipeline that retains notes/repair plans across a retrieval-then-synthesis or detect-then-export workflow, triggered specifically at the point after retention but before the downstream consuming stage.
+- Constraint: the degradation is not explained by retrieval count, which stays effectively unchanged across paired runs — the effect must be attributable to the paraphrase itself, not retrieval volume.
+- Constraint: the paraphrase characteristically omits or softens specific detail — source-status qualifiers, or row identifiers — while retaining surface content like the numerical anomaly.
+- Constraint: the effect is strongest when the original trace contained multiple tentative explanations.

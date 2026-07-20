@@ -1,0 +1,11 @@
+Looking at each excerpt against the definition's core: a diagnostic that withholds a required value an agent needs, then watches whether the agent fabricates/makes up a value instead of handling the absence honestly.
+
+**Excerpt 1** — States a required value was withheld ("two required provenance fields were unavailable") and measures whether agents make up a value vs. seek it out. Matches the concept.
+
+**Excerpt 2** — Truncation drops the setup sentence; "those fields" is dangling and the excerpt never establishes that a required value was withheld as the diagnostic manipulation. Withholding is only weakly implied.
+
+**Excerpt 3** — Explicitly states a needed value was withheld ("withheld a jurisdiction field needed to classify") and watches make-up-vs-seek behavior. Matches.
+
+**Excerpt 4** — Truncation removes the "withheld ... needed" setup; the excerpt alone doesn't establish that a required value was withheld before the run.
+
+[{"excerpt": 1, "verdict": "instantiates", "quote": "two required provenance fields were unavailable in the initial prompt. \u27e6TERM\u27e7 was applied to those fields while preserving access to a repository that could supply them"}, {"excerpt": 2, "verdict": "insufficient", "quote": ""}, {"excerpt": 3, "verdict": "instantiates", "quote": "The benchmark withheld a jurisdiction field needed to classify policy excerpts."}, {"excerpt": 4, "verdict": "insufficient", "quote": ""}]

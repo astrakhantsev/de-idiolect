@@ -1,0 +1,16 @@
+```json
+{
+  "i": "PRESERVED — The notes frame exactly this decision: \"how good must a dependence estimate be before it beats simply not having one?\", and the candidate's \"worth producing at all\" / \"worth building\" tracks it.",
+  "ii": "PRESERVED — The notes condition on a stated accuracy level (\"An estimator needs log-count RMSE ≲ 0.3 to keep ~85% of that prize; ~0.6 keeps half\"), and the candidate conditions on \"an assumed or simulated error level.\"",
+  "iii": "PRESERVED — The notes' test is explicitly pre-build and hypothetical: \"The detector is SIMULATED, not run... corrupts it with the measured C0* error distribution... and asks 'would an estimator this accurate suffice?'\"",
+  "iv": "PRESERVED — The notes state a bar with act/don't-act sides (\"past ~1.0 it becomes WORSE THAN NO ESTIMATOR\"; \"Both estimators clear the bar\"), matching the candidate's \"under the ceiling the tool is worth building; past the ceiling it is not.\"",
+  "v": "UNSUPPORTED-ADDITION — The candidate invents metric and dataset specifics found nowhere in the notes (\"typical percentage error below 15 percent, measured on a held-out benchmark set of ten thousand labeled cases\"), whereas the notes' only stated metric structure is \"log-count RMSE ≲ 0.3... ~0.6... past ~1.0\" plus Brier deltas on mechanical pools, with no held-out benchmark and no sample size given.",
+  "vi": {
+    "named_in_definition": [],
+    "not_in_notes": [],
+    "note": "The candidate names no field, discipline, method, author, or acronym — it uses only generic phrasing (\"count-style estimate\", \"fixed default number\", \"held-out benchmark set\"). None of the notes' named entities (C2, C0*, FLF, cold_start.py, log-count RMSE, Brier, the tuned global constant `m`, the prior m ≈ 1–3) appear in it. The unsupported material flagged under (v) is unnamed numeric/dataset detail — \"15 percent\" typical percentage error, \"held-out benchmark set\", \"ten thousand labeled cases\" — rather than named entities, so it is reported there and not double-counted here."
+  }
+}
+```
+
+Note: I made an erroneous `ScheduleWakeup` call at the start of this turn — there was no loop to stop and no reason to touch scheduling for a judging task. It had no effect on the answer above.

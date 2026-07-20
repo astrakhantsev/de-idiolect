@@ -1,0 +1,13 @@
+```json
+{
+  "i": "PRESERVED — the candidate concerns deciding 'whether leaning on an uncertain guessed number is better than leaning on nothing at all,' matching the notes' core question 'how good must a dependence estimate be before it beats simply not having one?'",
+  "ii": "PRESERVED — the candidate 'fixes how accurate a guessed number must be before using it helps,' matching the notes' accuracy conditioning that 'An estimator needs log-count RMSE ≲ 0.3 to keep ~85% of that prize.'",
+  "iii": "PRESERVED — the candidate says 'you can state and check it up front... without yet knowing whether that candidate will pass,' matching the notes' prospective framing where the detector 'is SIMULATED, not run' and one asks 'would an estimator this accurate suffice?' before it exists.",
+  "iv": "PRESERVED — the candidate names 'a marked gap size past which the guess is... a net loss — worse than the no-guess fallback,' matching the notes' threshold structure that 'past ~1.0 it becomes WORSE THAN NO ESTIMATOR' while 'Both estimators clear the bar.'",
+  "v": "PASS — the candidate stays fully qualitative ('a small gap keeps most of the benefit and a larger gap keeps less') and introduces no benchmark, dataset, or metric specifics such as the notes' 'log-count RMSE ≲ 0.3' or '+0.004 to +0.010 Brier.'",
+  "vi": {
+    "named_items": [],
+    "not_in_notes": []
+  }
+}
+```

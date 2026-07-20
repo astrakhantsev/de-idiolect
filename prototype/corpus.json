@@ -1,0 +1,24 @@
+{
+  "_note": "Small demonstration corpus for the recall-extender prototype. Each document is a short paraphrase of a REAL source (title + one representative snippet) retrieved 2026-07-17; source URLs are in the vault archive 10_projects/minelit/idiolect/def-naming-raw/eggs-routing-raw.md. Communities model the FLF eggs case: a lay/public-health asker (A) vs three specialist sub-fields (B lipidology, C cardiology biomarkers, D nutrition-epi methods) that answer facets of the same question under their own local vocabulary, plus off-topic distractors (E).",
+  "documents": [
+    {"id": "A1", "community": "lay-public-health", "text": "Are eggs bad for your heart? For most healthy people, eating up to seven eggs a week does not raise the risk of heart disease. If you have high cholesterol you may need to watch how many you eat."},
+    {"id": "A2", "community": "lay-public-health", "text": "How many eggs can you eat on a heart-healthy diet? One large egg has about 186 mg of cholesterol, all in the yolk, but eggs are also rich in choline and vitamins."},
+    {"id": "A3", "community": "lay-public-health", "text": "Should I stop eating eggs? The foods people eat with eggs, like bacon and sausage, may do more to raise heart-disease risk than eggs themselves."},
+
+    {"id": "B1", "community": "lipidology", "text": "Saturated fat and cardiovascular disease: the importance of inter-individual variation in the response of serum low-density lipoprotein cholesterol."},
+    {"id": "B2", "community": "lipidology", "text": "Individual variation in plasma cholesterol response to dietary saturated fat. Some people show a much larger rise in blood cholesterol than others after the same intake."},
+    {"id": "B3", "community": "lipidology", "text": "Hyper- and hypo-responsiveness in serum LDL cholesterol to dietary cholesterol reflects a variable capacity to absorb cholesterol in the gut; consistent hyper-responders show large mean differences between high- and low-fat diets."},
+
+    {"id": "C1", "community": "cardiology-biomarker", "text": "The benefits of measuring the size and number of lipoprotein particles for cardiovascular risk prediction: a systematic review and meta-analysis."},
+    {"id": "C2", "community": "cardiology-biomarker", "text": "Clinical relevance of nuclear magnetic resonance lipoprotein particle profiling; particle number can be discordant with cholesterol concentration."},
+    {"id": "C3", "community": "cardiology-biomarker", "text": "Patients with a discordant high number of low-density lipoprotein particles despite low cholesterol levels carry underestimated cardiovascular risk."},
+
+    {"id": "D1", "community": "nutrition-epi-methods", "text": "Food substitution models for nutritional epidemiology: the leave-one-out model and the energy partition model estimate relative causal effects."},
+    {"id": "D2", "community": "nutrition-epi-methods", "text": "Identification and estimation of average causal effects under dietary substitution strategies, holding total energy fixed."},
+    {"id": "D3", "community": "nutrition-epi-methods", "text": "Adjustment for energy intake in nutritional research: a causal-inference perspective on substitution effects and residual confounding."},
+
+    {"id": "E1", "community": "distractor", "text": "A hierarchical Bayesian model for forecasting quarterly retail sales under promotional interventions."},
+    {"id": "E2", "community": "distractor", "text": "Comparative performance of transformer architectures on long-context document retrieval benchmarks."},
+    {"id": "E3", "community": "distractor", "text": "Seismic hazard assessment for offshore wind turbine foundations in the North Sea."}
+  ]
+}

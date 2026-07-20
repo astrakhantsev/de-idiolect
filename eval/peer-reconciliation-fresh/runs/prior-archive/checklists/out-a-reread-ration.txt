@@ -1,0 +1,6 @@
+- Sets a numeric ⟦TERM⟧ limit (e.g., three) on how many times a file/resource may be reopened or reread by the agent.
+- The mechanism enforces this cap during agent execution, causing failure (or a cut-off mid-trace) once the limit is exceeded rather than allowing further rereads.
+- It applies to file-navigation-style benchmarks/suites where an agent repeatedly opens the same file (e.g., rechecking a function signature) instead of retaining that content in working memory.
+- Exceeding the ⟦TERM⟧ is scored/read as a failure (or forced stop) on that benchmark run, and can be re-run after adjusting or re-verifying the setting.
+- The constraint targets rereads specifically — it does not address or enforce any compression of held content (compression is governed separately, under ⟦X⟧).
+- Applying or tightening the ⟦TERM⟧ is expected to change aggregate pass-rate metrics (e.g., reduce a "pass-everything" bucket) by failing agents that were succeeding via brute-force repeated file opens.

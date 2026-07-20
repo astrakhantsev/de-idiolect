@@ -1,0 +1,796 @@
+{
+ "a": {
+  "brain swap": {
+   "pool": [
+    {
+     "doc": "02",
+     "idx": 4,
+     "text": "While I had the harness open I also tried a brain swap on the planning step, keeping the small model doing subtask execution but routing the plan generation through our cheapest tier."
+    },
+    {
+     "doc": "06",
+     "idx": 0,
+     "text": "Ran a brain swap on our document-QA agent, keeping the exact same execution model but routing the planning step through a much cheaper backend. Expected a cliff and didn't get one \u2014 score held at 81% versus 83% baseline, basically noise."
+    },
+    {
+     "doc": "09",
+     "idx": 1,
+     "text": "Rough month. Started with a brain swap experiment gone sideways \u2014 routed planning through a cheaper model while keeping execution untouched, expecting a moderate dip, and instead task success collapsed from 79% to 31%. Turned out our executor was far more dependent on detailed subplans than we assumed, it basically can't improvise."
+    },
+    {
+     "doc": "09",
+     "idx": 5,
+     "text": "We hadn't controlled for it, so some of the brain swap sessions were accidentally comparing a fresh-session first task against a warmed-up session's later task, which inflated the apparent gap. Redid it controlling for position in session and the real brain swap effect was still large, just not as extreme as our first pass suggested."
+    },
+    {
+     "doc": "09",
+     "idx": 6,
+     "text": "We hadn't controlled for it, so some of the brain swap sessions were accidentally comparing a fresh-session first task against a warmed-up session's later task, which inflated the apparent gap. Redid it controlling for position in session and the real brain swap effect was still large, just not as extreme as our first pass suggested."
+    },
+    {
+     "doc": "11",
+     "idx": 1,
+     "text": "Wrapping up the quarter, here's the scorecard across the six things we tracked most. Brain swap on the planning component: still our biggest single-factor score driver, cheap-planner runs lose 20-40 points depending on task, confirming again that the plan is carrying more than the execution loop gets credit for."
+    }
+   ]
+  },
+  "budget bleed": {
+   "pool": [
+    {
+     "doc": "04",
+     "idx": 3,
+     "text": "The agent does discard the stale objective and pursue the revised one, so the check passes, but it gets there by throwing away enormous amounts of partial work and starting over almost from scratch every single time instead of salvaging anything reusable from before the reversal. So I ran the budget bleed numbers on the same trial set. Average of 34% of total tokens on those pivot trials went into work that got discarded outright, versus about 9% on trials with no mid-task instruction change."
+    },
+    {
+     "doc": "07",
+     "idx": 6,
+     "text": "Also tracked budget bleed across the corrected batch out of curiosity. Even with clean isolation, the discarded-work ratio on genuine pivot trials sits around 28%, which tracks with what someone else here posted recently."
+    },
+    {
+     "doc": "10",
+     "idx": 1,
+     "text": "Throwing out most of last year's harness and starting over, so here's where things stand. Budget bleed tracking is now built in by default \u2014 every discarded branch gets tagged with its token cost at the moment it's abandoned, so we get the dead-end ratio for free on every run instead of reconstructing it after the fact from logs."
+    },
+    {
+     "doc": "11",
+     "idx": 6,
+     "text": "And budget bleed, the number I care about most honestly, sits at 22% quarter-wide, worse on multi-turn tasks with instruction reversals than on straightforward single-objective ones, which tracks with everything else we've seen this quarter about reversals being expensive even when the agent ultimately gets them right."
+    }
+   ]
+  },
+  "cold start": {
+   "pool": [
+    {
+     "doc": "02",
+     "idx": 7,
+     "text": "Combined, this tells us the planner is doing more of the heavy lifting than the ticket-classification step itself, which nobody on the team believed until we saw both numbers side by side. Also flagging: cold start on this same agent is brutal, first ticket in a fresh session averages 12 points below the session mean. We think it's because the agent hasn't yet inferred which of our three internal tools actually has the customer's order history."
+    },
+    {
+     "doc": "06",
+     "idx": 4,
+     "text": "Going to test that second theory by literally blanking the plan output and seeing if execution still holds up. Cold start on this same agent is the more interesting problem honestly. First task of a session averages 15 points under the session mean, and it doesn't seem tied to task difficulty, we controlled for that."
+    },
+    {
+     "doc": "06",
+     "idx": 7,
+     "text": "Feels like the agent needs one or two tool calls just to remember which of our retrieval indexes is authoritative versus deprecated, and nothing in the system prompt currently front-loads that. Going to try seeding session memory with that fact and rerun cold start to see if the gap closes."
+    },
+    {
+     "doc": "09",
+     "idx": 4,
+     "text": "Good data, bad surprise. Then cold start bit us during the same experiment cycle."
+    },
+    {
+     "doc": "11",
+     "idx": 2,
+     "text": "Cold start: ramp-up penalty averaged 11 points this quarter, slightly better than last quarter's 15, probably from the session-seeding change we shipped in month two."
+    }
+   ]
+  },
+  "double mark": {
+   "pool": [
+    {
+     "doc": "03",
+     "idx": 8,
+     "text": "The other 10% just started re-reading the whole repo from scratch like it had amnesia, which cost us real wall clock time. Last thing: we double mark every hot swap output because we don't trust a single grader pass after a mid-run model change. Reflowed the diffs, resubmitted, and got two different verdicts on 4 of 60 answers even though the content was identical."
+    },
+    {
+     "doc": "06",
+     "idx": 8,
+     "text": "Last thing, we double marked a batch of these QA answers after noticing the scorer seemed inconsistent on long-form responses. Reflowed line breaks, changed nothing else, resubmitted through the same grader. 9 out of 80 flipped verdicts."
+    },
+    {
+     "doc": "09",
+     "idx": 7,
+     "text": "Third, we caught a grader problem via double mark \u2014 resubmitted 200 answers with reflowed formatting only, and 14 flipped, concentrated almost entirely in the brain-swapped low-score batch, which makes sense since terser cheap-model output apparently trips something in the scorer's whitespace handling."
+    },
+    {
+     "doc": "11",
+     "idx": 3,
+     "text": "Double mark stayed a nagging problem \u2014 6% of resubmitted answers flip verdict on reflow alone across the whole corpus, and we still haven't root-caused the scorer's whitespace sensitivity, just flagged it as known noise in every report now."
+    }
+   ]
+  },
+  "example strip": {
+   "pool": [
+    {
+     "doc": "02",
+     "idx": 0,
+     "text": "Been doing example strip runs on our support-ticket agent all week \u2014 pulled every worked example out of the prompt but left the step outline and formatting hints exactly where they were. Success rate went from 74% to 39%."
+    },
+    {
+     "doc": "02",
+     "idx": 3,
+     "text": "That's a bigger drop than I expected given the outline was still telling it \"first classify, then draft, then check tone.\" Apparently our model leans on seeing one solved ticket way more than it leans on being told the recipe in words. Worth noting example strip only touched the demonstrations, nothing else in the scaffold moved, so we can be fairly confident it's the demos carrying that weight and not some other prop we forgot to account for."
+    },
+    {
+     "doc": "02",
+     "idx": 5,
+     "text": "Score dropped from 74% to 58%, less catastrophic than the example strip hit but still real. Combined, this tells us the planner is doing more of the heavy lifting than the ticket-classification step itself, which nobody on the team believed until we saw both numbers side by side."
+    },
+    {
+     "doc": "05",
+     "idx": 5,
+     "text": "No real difference between pre-swap and post-swap behavior here, both flagged the garbled results about 70% of the time and asked to rerun the suite, so at least the swap didn't damage its skepticism. One more data point: we also ran example strip on this same refactor prompt, minus the two worked examples of \"how to migrate a config file\" that we normally include. Score dropped only slightly, maybe 6 points, way less dramatic than what other people here have reported for their tasks."
+    },
+    {
+     "doc": "05",
+     "idx": 8,
+     "text": "My theory is this particular task leans on the step outline more than the demos, since config migration is pretty mechanical once you know the steps. Curious if others have found example strip impact varies this much by task type."
+    },
+    {
+     "doc": "08",
+     "idx": 6,
+     "text": "Feels like a targeted fix though, not a fundamental problem, since the other tool types are handled fine. Tried an example strip on the schema-validation prompt segment specifically, removing the two worked examples of \"here's what a real validation failure looks like\" while leaving the instructions intact."
+    },
+    {
+     "doc": "10",
+     "idx": 7,
+     "text": "We've got probes for premature stopping and for looping past a finished objective, but no unified way to score them against each other, so right now it's three separate numbers instead of one coherent picture of whether the agent stops at the right moment. Also added garble replay and example strip as standing regression tests that run on every model version bump, not just ad hoc when someone gets curious."
+    },
+    {
+     "doc": "10",
+     "idx": 8,
+     "text": "Garble replay catches feed-corruption blindness early, example strip tells us fast whether a new model needs the worked demos as badly as the last one did. Cheap insurance against surprises."
+    }
+   ]
+  },
+  "garble replay": {
+   "pool": [
+    {
+     "doc": "01",
+     "idx": 3,
+     "text": "We've started diffing the final output against the abandoned branch just to catch it automatically instead of eyeballing transcripts. Separately, I ran a garble replay pass on the same session logs to see if the two failure modes correlate, and they mostly don't. Garble replay is a different beast entirely \u2014 you feed the agent noise where the tool output should be, syntactically fine JSON with meaningless fields, and watch whether it just barrels forward treating garbage as gospel."
+    },
+    {
+     "doc": "01",
+     "idx": 4,
+     "text": "Separately, I ran a garble replay pass on the same session logs to see if the two failure modes correlate, and they mostly don't. Garble replay is a different beast entirely \u2014 you feed the agent noise where the tool output should be, syntactically fine JSON with meaningless fields, and watch whether it just barrels forward treating garbage as gospel. Our agent actually does okay here, flags the malformed-looking data and asks for a re-fetch about 80% of the time."
+    },
+    {
+     "doc": "01",
+     "idx": 8,
+     "text": "It's not that the agent doesn't know how to stop \u2014 the garble replay numbers prove it can recognize when something's wrong and halt to ask. It's specifically that once it's invested tokens into a plan, sunk cost takes over and it can't let the CSV branch die even after being told explicitly to."
+    },
+    {
+     "doc": "05",
+     "idx": 3,
+     "text": "Paired that with a garble replay of the same task recordings, corrupting every test runner output into plausible-looking but meaningless pass/fail noise, to see if the post-swap model would sanity-check what it was being told versus a fresh model on the same corrupted feed. No real difference between pre-swap and post-swap behavior here, both flagged the garbled results about 70% of the time and asked to rerun the suite, so at least the swap didn't damage its skepticism."
+    },
+    {
+     "doc": "08",
+     "idx": 0,
+     "text": "Spent the afternoon on garble replay against our data-pipeline agent, swapping every tool call result for syntactically valid but semantically empty JSON blobs. It caught the corruption on 22 of 30 degraded steps and explicitly asked for a retry instead of just proceeding, which honestly beat my expectations going in."
+    },
+    {
+     "doc": "08",
+     "idx": 7,
+     "text": "That actually helped, oddly \u2014 success on the garble replay steps for that tool type went from 8/30 misses down to 3/30. My best guess is the examples were anchoring the agent toward one specific failure shape and making it pattern-match too loosely against anything resembling that shape, garbled or not."
+    },
+    {
+     "doc": "10",
+     "idx": 7,
+     "text": "We've got probes for premature stopping and for looping past a finished objective, but no unified way to score them against each other, so right now it's three separate numbers instead of one coherent picture of whether the agent stops at the right moment. Also added garble replay and example strip as standing regression tests that run on every model version bump, not just ad hoc when someone gets curious."
+    },
+    {
+     "doc": "10",
+     "idx": 8,
+     "text": "Garble replay catches feed-corruption blindness early, example strip tells us fast whether a new model needs the worked demos as badly as the last one did. Cheap insurance against surprises."
+    }
+   ]
+  },
+  "hot swap": {
+   "pool": [
+    {
+     "doc": "03",
+     "idx": 4,
+     "text": "While cleaning that up we had to do a hot swap on the underlying model because our vendor pushed a deprecation notice mid-debug. Genuinely nervous about this because half the workers were mid-task with files already edited and decisions already baked into the transcript."
+    },
+    {
+     "doc": "03",
+     "idx": 8,
+     "text": "The other 10% just started re-reading the whole repo from scratch like it had amnesia, which cost us real wall clock time. Last thing: we double mark every hot swap output because we don't trust a single grader pass after a mid-run model change. Reflowed the diffs, resubmitted, and got two different verdicts on 4 of 60 answers even though the content was identical."
+    },
+    {
+     "doc": "05",
+     "idx": 0,
+     "text": "Tried something risky this week: mid-task hot swap from our usual model to a newer release, on a live refactor task with three files already modified and a partial test suite already passing. About two-thirds of the runs picked up the thread cleanly, respected the existing file structure, didn't contradict the naming decisions from before the swap."
+    },
+    {
+     "doc": "05",
+     "idx": 2,
+     "text": "About two-thirds of the runs picked up the thread cleanly, respected the existing file structure, didn't contradict the naming decisions from before the swap. The rest treated the existing diff as suspicious and started rewriting files that were already correct, which is exactly the failure mode hot swap is supposed to surface."
+    },
+    {
+     "doc": "09",
+     "idx": 8,
+     "text": "Fourth, unrelated fire: a hot swap forced on us by an API deprecation mid-batch, and about a third of in-flight sessions lost thread coherence, restarting work that was already done in files already edited."
+    },
+    {
+     "doc": "11",
+     "idx": 4,
+     "text": "Hot swap held up better than expected under our forced-deprecation events, coherent continuation rate landed at 84%, up from 71% a quarter ago, mostly because we started preserving file-edit history explicitly across the swap boundary instead of relying on the new model to infer it."
+    }
+   ]
+  },
+  "pivot check": {
+   "pool": [
+    {
+     "doc": "01",
+     "idx": 0,
+     "text": "Ran another batch of pivot check trials this week and the number is stuck around 61%, barely moved since last quarter. The failure mode is so consistent it's almost funny: user says \"actually forget the CSV export, give me a JSON summary instead\" at turn 4, and the agent dutifully starts the JSON work but still tacks the half-finished CSV onto the final answer like a scar tissue artifact."
+    },
+    {
+     "doc": "04",
+     "idx": 0,
+     "text": "Posted a pivot check score of 88% last month and got some nice feedback in the team channel. Then I actually looked at what those trials cost and felt less good about it."
+    },
+    {
+     "doc": "04",
+     "idx": 5,
+     "text": "Average of 34% of total tokens on those pivot trials went into work that got discarded outright, versus about 9% on trials with no mid-task instruction change. That's a real cost difference even though the pivot check metric itself doesn't see it \u2014 you can nail the pivot and still be lighting money on fire to do it. I think we've been treating pivot check as sufficient evidence of good behavior when it's really only measuring the endpoint, not the path."
+    },
+    {
+     "doc": "04",
+     "idx": 6,
+     "text": "That's a real cost difference even though the pivot check metric itself doesn't see it \u2014 you can nail the pivot and still be lighting money on fire to do it. I think we've been treating pivot check as sufficient evidence of good behavior when it's really only measuring the endpoint, not the path."
+    },
+    {
+     "doc": "07",
+     "idx": 0,
+     "text": "Spent two days chasing what I thought was a pivot check regression before realizing it was actually a spray test problem in disguise. We run pivot check trials in batches of 20 workers for throughput, and it turns out some of those workers were sharing a temp directory, so when one instance's stale CSV artifact got written to a path another instance also used, the wrong worker's final answer inherited leftover content from an entirely different trial's abandoned branch."
+    },
+    {
+     "doc": "07",
+     "idx": 1,
+     "text": "We run pivot check trials in batches of 20 workers for throughput, and it turns out some of those workers were sharing a temp directory, so when one instance's stale CSV artifact got written to a path another instance also used, the wrong worker's final answer inherited leftover content from an entirely different trial's abandoned branch. Looked exactly like a failure to drop stale work."
+    },
+    {
+     "doc": "07",
+     "idx": 4,
+     "text": "It wasn't, it was contamination. Once we isolated worker directories properly the actual pivot check number jumped from 54% to 71%, which is a huge swing to have been hiding behind an infrastructure bug this whole time."
+    },
+    {
+     "doc": "07",
+     "idx": 5,
+     "text": "Once we isolated worker directories properly the actual pivot check number jumped from 54% to 71%, which is a huge swing to have been hiding behind an infrastructure bug this whole time. Lesson learned: run a dedicated spray test on any harness before trusting behavioral metrics that come out of batched execution, especially ones sensitive to file state like pivot check is."
+    },
+    {
+     "doc": "10",
+     "idx": 2,
+     "text": "Early numbers on the new agent look decent, bleed sits around 18% on average tasks and spikes to 40%+ specifically on pivot check trials, which lines up with what a few people have reported here. Pivot check itself got a real rewrite too \u2014 we now snapshot the full working state at the moment of reversal so we can programmatically verify nothing from the stale branch made it into the final answer, instead of a human skimming the transcript."
+    },
+    {
+     "doc": "10",
+     "idx": 3,
+     "text": "Early numbers on the new agent look decent, bleed sits around 18% on average tasks and spikes to 40%+ specifically on pivot check trials, which lines up with what a few people have reported here. Pivot check itself got a real rewrite too \u2014 we now snapshot the full working state at the moment of reversal so we can programmatically verify nothing from the stale branch made it into the final answer, instead of a human skimming the transcript. Caught two false passes from the old manual method in the first week alone."
+    }
+   ]
+  },
+  "quit sense": {
+   "pool": [
+    {
+     "doc": "01",
+     "idx": 7,
+     "text": "So it's weirdly better at detecting bad inputs than at abandoning bad outputs. The quit sense angle ties both together for me now."
+    },
+    {
+     "doc": "04",
+     "idx": 7,
+     "text": "Also worth mentioning quit sense here because a few of the high-bleed trials weren't clean pivots at all \u2014 the agent kept a couple of stray tool calls going after the revised objective was already achieved, like it forgot to check whether it was done. Not unbounded looping exactly, more like two extra unnecessary verification passes tacked onto an already-finished task."
+    },
+    {
+     "doc": "08",
+     "idx": 3,
+     "text": "The 8 misses were all downstream of a single step type, our schema-validation tool, where the garbled output apparently still looks close enough to a real validation pass that the agent doesn't blink. That obviously feeds straight into quit sense, because the misses aren't just \"wrong answer,\" they're the agent confidently continuing on a corrupted foundation instead of stopping to question it. We'd rather it halt and ask than push forward on nonsense, and for 8 out of 30 steps it did the wrong thing in exactly that way."
+    },
+    {
+     "doc": "10",
+     "idx": 5,
+     "text": "Caught two false passes from the old manual method in the first week alone. Quit sense is the piece I'm least happy with still. We've got probes for premature stopping and for looping past a finished objective, but no unified way to score them against each other, so right now it's three separate numbers instead of one coherent picture of whether the agent stops at the right moment."
+    }
+   ]
+  },
+  "spray test": {
+   "pool": [
+    {
+     "doc": "03",
+     "idx": 0,
+     "text": "Kicked off a spray test on the new deployment pipeline agent, 500 identical copies hitting the same task against our staging cluster. Found that 6% of runs were reading a scratch file that a completely different worker instance had written to, because our tempdir naming scheme wasn't actually unique per worker, just per host."
+    },
+    {
+     "doc": "03",
+     "idx": 3,
+     "text": "Classic. Spray test is supposed to be about smoking out exactly this kind of shared-infrastructure race, and it did its job, but it also ate half our staging budget before someone noticed the contamination number wasn't zero."
+    },
+    {
+     "doc": "07",
+     "idx": 0,
+     "text": "Spent two days chasing what I thought was a pivot check regression before realizing it was actually a spray test problem in disguise."
+    },
+    {
+     "doc": "07",
+     "idx": 5,
+     "text": "Lesson learned: run a dedicated spray test on any harness before trusting behavioral metrics that come out of batched execution, especially ones sensitive to file state like pivot check is."
+    },
+    {
+     "doc": "09",
+     "idx": 9,
+     "text": "Fifth, we finally ran a proper spray test on the shared execution cluster and found 11% cross-contamination between worker instances writing to a common cache directory, which we now suspect explains some of the weirder outliers from earlier in the month that we'd previously written off as model noise."
+    },
+    {
+     "doc": "11",
+     "idx": 5,
+     "text": "Spray test contamination on the shared cluster dropped from 11% to 4% after the tempdir isolation fix, though it's not zero and probably never will be given how our worker pool shares a cache layer by design."
+    }
+   ]
+  }
+ },
+ "b": {
+  "cold start": {
+   "pool": [
+    {
+     "doc": "01",
+     "idx": 5,
+     "text": "Run timestamps were instrumented before repository mounting and after the first shell or editing action. Cold start accounted for a median 41.2 s per trial on the shared-worker configuration. Cold start remained stable across instruction languages, indicating that the observed language effect was not attributable to provisioning variance."
+    },
+    {
+     "doc": "01",
+     "idx": 6,
+     "text": "Cold start accounted for a median 41.2 s per trial on the shared-worker configuration. Cold start remained stable across instruction languages, indicating that the observed language effect was not attributable to provisioning variance. After subtracting cold start, the large model\u2019s median deliberation-and-execution interval differed by less than 3% between language conditions."
+    },
+    {
+     "doc": "01",
+     "idx": 7,
+     "text": "Cold start remained stable across instruction languages, indicating that the observed language effect was not attributable to provisioning variance. After subtracting cold start, the large model\u2019s median deliberation-and-execution interval differed by less than 3% between language conditions. Failure review found that agents usually completed the requested code change but omitted a secondary formatting or validation constraint."
+    },
+    {
+     "doc": "07",
+     "idx": 1,
+     "text": "The interactive suite injected instruction reversals after a repository had loaded but before the agent\u2019s first code modification. Cold start was recorded independently for every trial and removed from the response-time analysis. Cold start varied from 18 to 96 s across worker pools, with no detectable association with whether the agent ultimately changed objectives."
+    },
+    {
+     "doc": "07",
+     "idx": 2,
+     "text": "Cold start was recorded independently for every trial and removed from the response-time analysis. Cold start varied from 18 to 96 s across worker pools, with no detectable association with whether the agent ultimately changed objectives. This separation avoided attributing queueing delays to slow reconsideration."
+    },
+    {
+     "doc": "09",
+     "idx": 3,
+     "text": "Cold start was logged for every run and subtracted from time-to-revision analyses. Cold start contributed 37 s at the median and did not differ across ablation cells."
+    },
+    {
+     "doc": "09",
+     "idx": 4,
+     "text": "Cold start was logged for every run and subtracted from time-to-revision analyses. Cold start contributed 37 s at the median and did not differ across ablation cells."
+    },
+    {
+     "doc": "10",
+     "idx": 11,
+     "text": "Cold start was measured before each selector run and was balanced by randomized worker assignment. Cold start explained less than 1% of variation in total action count."
+    },
+    {
+     "doc": "10",
+     "idx": 12,
+     "text": "Cold start was measured before each selector run and was balanced by randomized worker assignment. Cold start explained less than 1% of variation in total action count."
+    }
+   ]
+  },
+  "component substitution elasticity": {
+   "pool": [
+    {
+     "doc": "05",
+     "idx": 5,
+     "text": "The tool-selection module was then exchanged between two otherwise identical agent stacks. Component substitution elasticity was reported as the change in total actions relative to the original selector. Component substitution elasticity favored the compact selector on routine tasks, reducing action use by 18%, while increasing action use by 9% on multi-file tasks."
+    },
+    {
+     "doc": "05",
+     "idx": 6,
+     "text": "Component substitution elasticity was reported as the change in total actions relative to the original selector. Component substitution elasticity favored the compact selector on routine tasks, reducing action use by 18%, while increasing action use by 9% on multi-file tasks. The substituted selector made fewer redundant searches but issued more premature edits."
+    },
+    {
+     "doc": "07",
+     "idx": 7,
+     "text": "Agents that failed commonly retained a correct implementation of the original request and appended an incomplete revision. Component substitution elasticity was measured by replacing only the tool-selection module during the same interrupted runs. Component substitution elasticity was positive for the replacement selector, which consumed 4.3 additional actions on average after a reversal."
+    },
+    {
+     "doc": "07",
+     "idx": 8,
+     "text": "Component substitution elasticity was measured by replacing only the tool-selection module during the same interrupted runs. Component substitution elasticity was positive for the replacement selector, which consumed 4.3 additional actions on average after a reversal. The added actions were primarily repository searches used to re-establish context."
+    },
+    {
+     "doc": "10",
+     "idx": 7,
+     "text": "Component substitution elasticity was negative on standing tasks, reducing total actions by 12%, but positive on newly authored tasks by 5%. Component substitution elasticity therefore depended on whether the selector encountered familiar task structure."
+    },
+    {
+     "doc": "10",
+     "idx": 8,
+     "text": "Component substitution elasticity was negative on standing tasks, reducing total actions by 12%, but positive on newly authored tasks by 5%. Component substitution elasticity therefore depended on whether the selector encountered familiar task structure."
+    },
+    {
+     "doc": "11",
+     "idx": 13,
+     "text": "Component substitution elasticity was estimated by exchanging the tool-selection module within matched task pairs. Component substitution elasticity reduced action use in familiar tasks but increased it after corrupted observations."
+    },
+    {
+     "doc": "11",
+     "idx": 14,
+     "text": "Component substitution elasticity was estimated by exchanging the tool-selection module within matched task pairs. Component substitution elasticity reduced action use in familiar tasks but increased it after corrupted observations. These results remain limited by a fixed set of repositories and a single automated checker configuration."
+    }
+   ]
+  },
+  "corrupted-observation recovery index": {
+   "pool": [
+    {
+     "doc": "04",
+     "idx": 1,
+     "text": "Recorded browser and shell interactions were replayed with syntactically valid tool outputs whose contents no longer corresponded to the requested operations. Corrupted-observation recovery index was computed at every degraded observation boundary. Corrupted-observation recovery index was 0.68 for the deliberative agent and 0.31 for the action-heavy agent."
+    },
+    {
+     "doc": "04",
+     "idx": 2,
+     "text": "Corrupted-observation recovery index was computed at every degraded observation boundary. Corrupted-observation recovery index was 0.68 for the deliberative agent and 0.31 for the action-heavy agent. Explicit retry requests were common after malformed-looking directory listings, but much rarer after plausible yet irrelevant test output."
+    },
+    {
+     "doc": "08",
+     "idx": 5,
+     "text": "During a separate replay condition, every third tool observation was replaced with plausible but meaningless text. Corrupted-observation recovery index was lower on substituted tasks than on unchanged tasks, despite identical corruption frequency. Corrupted-observation recovery index fell from 0.59 to 0.44 when agents encountered unfamiliar project layouts."
+    },
+    {
+     "doc": "08",
+     "idx": 6,
+     "text": "Corrupted-observation recovery index was lower on substituted tasks than on unchanged tasks, despite identical corruption frequency. Corrupted-observation recovery index fell from 0.59 to 0.44 when agents encountered unfamiliar project layouts. This suggests that uncertainty about task structure made agents more willing to accept misleading feedback."
+    },
+    {
+     "doc": "10",
+     "idx": 1,
+     "text": "This experiment replayed newly authored and standing benchmark items while tool results were semantically degraded at prespecified action boundaries. Corrupted-observation recovery index was computed separately by task provenance and selector assignment. Corrupted-observation recovery index improved from 0.42 to 0.63 after selector replacement, largely because the replacement issued explicit retries before editing."
+    },
+    {
+     "doc": "10",
+     "idx": 2,
+     "text": "Corrupted-observation recovery index was computed separately by task provenance and selector assignment. Corrupted-observation recovery index improved from 0.42 to 0.63 after selector replacement, largely because the replacement issued explicit retries before editing."
+    },
+    {
+     "doc": "11",
+     "idx": 7,
+     "text": "Corrupted-observation recovery index was derived from the degraded-observation portions of the panel. Corrupted-observation recovery index rose when agents had retained an explicit validation step in their prompt."
+    },
+    {
+     "doc": "11",
+     "idx": 8,
+     "text": "Corrupted-observation recovery index was derived from the degraded-observation portions of the panel. Corrupted-observation recovery index rose when agents had retained an explicit validation step in their prompt."
+    }
+   ]
+  },
+  "cross-lingual instruction fidelity": {
+   "pool": [
+    {
+     "doc": "01",
+     "idx": 2,
+     "text": "Constraint count, file scope, and expected patch size were matched to English-instruction controls. Cross-lingual instruction fidelity was evaluated at the individual-constraint level across 480 trials. Cross-lingual instruction fidelity declined by 8.6 percentage points for the smallest model, concentrated in requirements concerning test execution and preservation of unrelated files."
+    },
+    {
+     "doc": "01",
+     "idx": 3,
+     "text": "Cross-lingual instruction fidelity was evaluated at the individual-constraint level across 480 trials. Cross-lingual instruction fidelity declined by 8.6 percentage points for the smallest model, concentrated in requirements concerning test execution and preservation of unrelated files. Run timestamps were instrumented before repository mounting and after the first shell or editing action."
+    },
+    {
+     "doc": "06",
+     "idx": 1,
+     "text": "A 3 \u00d7 4 factorial study crossed instruction language with the removal of demonstrations, file-path hints, step outlines, and formatting cues. Cross-lingual instruction fidelity was lower whenever demonstrations were absent, even though all stated constraints remained visible. Cross-lingual instruction fidelity showed the largest decrement for Arabic instructions paired with missing step outlines, falling from 0.84 to 0.67."
+    },
+    {
+     "doc": "06",
+     "idx": 2,
+     "text": "Cross-lingual instruction fidelity was lower whenever demonstrations were absent, even though all stated constraints remained visible. Cross-lingual instruction fidelity showed the largest decrement for Arabic instructions paired with missing step outlines, falling from 0.84 to 0.67."
+    },
+    {
+     "doc": "09",
+     "idx": 1,
+     "text": "The combined sweep evaluated translated repository tasks with a solved demonstration removed and an instruction reversal inserted after initial inspection. Cross-lingual instruction fidelity was calculated before and after the reversal to preserve all constraints from both user messages. Cross-lingual instruction fidelity decreased by 11 points in the no-demonstration condition, with the largest loss on commands requiring a final test report."
+    },
+    {
+     "doc": "09",
+     "idx": 2,
+     "text": "Cross-lingual instruction fidelity was calculated before and after the reversal to preserve all constraints from both user messages. Cross-lingual instruction fidelity decreased by 11 points in the no-demonstration condition, with the largest loss on commands requiring a final test report."
+    },
+    {
+     "doc": "10",
+     "idx": 9,
+     "text": "Cross-lingual instruction fidelity was evaluated in a Spanish-instruction subset embedded in the same replay corpus. Cross-lingual instruction fidelity remained 0.09 below the English control despite the recovery improvement."
+    },
+    {
+     "doc": "10",
+     "idx": 10,
+     "text": "Cross-lingual instruction fidelity was evaluated in a Spanish-instruction subset embedded in the same replay corpus. Cross-lingual instruction fidelity remained 0.09 below the English control despite the recovery improvement."
+    }
+   ]
+  },
+  "goal-revision compliance rate": {
+   "pool": [
+    {
+     "doc": "02",
+     "idx": 2,
+     "text": "The scripted follow-up either redirected the target component or withdrew the requested change entirely. Goal-revision compliance rate was measured over 360 interrupted trajectories. Goal-revision compliance rate reached 0.79 for the instruction-tuned system and 0.54 for the base system, with stale diffs accounting for most unsuccessful switches."
+    },
+    {
+     "doc": "02",
+     "idx": 3,
+     "text": "Goal-revision compliance rate was measured over 360 interrupted trajectories. Goal-revision compliance rate reached 0.79 for the instruction-tuned system and 0.54 for the base system, with stale diffs accounting for most unsuccessful switches. An objective checker was run after every executable action and marked the earliest point at which the revised task was fully satisfied."
+    },
+    {
+     "doc": "07",
+     "idx": 4,
+     "text": "This separation avoided attributing queueing delays to slow reconsideration. Goal-revision compliance rate was analyzed after stratifying trials by the number of actions already taken at interruption. Goal-revision compliance rate declined from 0.82 in early interruptions to 0.61 after an initial patch had been written."
+    },
+    {
+     "doc": "07",
+     "idx": 5,
+     "text": "Goal-revision compliance rate was analyzed after stratifying trials by the number of actions already taken at interruption. Goal-revision compliance rate declined from 0.82 in early interruptions to 0.61 after an initial patch had been written. Agents that failed commonly retained a correct implementation of the original request and appended an incomplete revision."
+    },
+    {
+     "doc": "09",
+     "idx": 5,
+     "text": "Goal-revision compliance rate was 0.73 after adjustment for task length. Goal-revision compliance rate was 0.16 lower when the reversal arrived in a non-English instruction than in the English control."
+    },
+    {
+     "doc": "09",
+     "idx": 6,
+     "text": "Goal-revision compliance rate was 0.73 after adjustment for task length. Goal-revision compliance rate was 0.16 lower when the reversal arrived in a non-English instruction than in the English control."
+    },
+    {
+     "doc": "10",
+     "idx": 13,
+     "text": "Goal-revision compliance rate was collected from a smaller interrupted subset. Goal-revision compliance rate showed no reliable selector effect, although the interval was wide."
+    },
+    {
+     "doc": "10",
+     "idx": 14,
+     "text": "Goal-revision compliance rate was collected from a smaller interrupted subset. Goal-revision compliance rate showed no reliable selector effect, although the interval was wide."
+    }
+   ]
+  },
+  "grader temporal stability coefficient": {
+   "pool": [
+    {
+     "doc": "04",
+     "idx": 5,
+     "text": "The same completed answers were then submitted to the scorer on four dates separated by at least 21 days. Grader temporal stability coefficient was estimated from the resulting numeric-score pairs across 600 answers. Grader temporal stability coefficient was 0.93 for repository-state tasks and 0.71 for open-ended incident reports."
+    },
+    {
+     "doc": "04",
+     "idx": 6,
+     "text": "Grader temporal stability coefficient was estimated from the resulting numeric-score pairs across 600 answers. Grader temporal stability coefficient was 0.93 for repository-state tasks and 0.71 for open-ended incident reports. Lower stability coincided with borderline partial-credit judgments rather than with answer length."
+    },
+    {
+     "doc": "08",
+     "idx": 10,
+     "text": "The automated scorer was repeated one month later; grader temporal stability coefficient remained above 0.90 for these task outcomes. The experiment cannot determine whether substitution effects arise from prior exposure or from unmeasured differences in the newly authored tasks."
+    },
+    {
+     "doc": "10",
+     "idx": 3,
+     "text": "Grader temporal stability coefficient was estimated from repeated submissions of every final answer across two collection dates. Grader temporal stability coefficient was 0.88, indicating that the observed recovery difference was not explained by unstable scoring alone."
+    },
+    {
+     "doc": "10",
+     "idx": 4,
+     "text": "Grader temporal stability coefficient was estimated from repeated submissions of every final answer across two collection dates. Grader temporal stability coefficient was 0.88, indicating that the observed recovery difference was not explained by unstable scoring alone."
+    },
+    {
+     "doc": "11",
+     "idx": 9,
+     "text": "Grader temporal stability coefficient was computed over four scorer submissions per answer. Grader temporal stability coefficient exceeded 0.90 for executable-task outcomes but was lower for explanatory summaries."
+    },
+    {
+     "doc": "11",
+     "idx": 10,
+     "text": "Grader temporal stability coefficient was computed over four scorer submissions per answer. Grader temporal stability coefficient exceeded 0.90 for executable-task outcomes but was lower for explanatory summaries."
+    }
+   ]
+  },
+  "hot swap": {
+   "pool": [
+    {
+     "doc": "03",
+     "idx": 5,
+     "text": "A second evaluation cycle replaced 25% of the benchmark with newly authored defects matched by language, test count, and estimated repair length. Hot swap was applied without exposing item identities to model operators or annotators. Hot swap produced a 14.1-point score drop for the legacy checkpoint, whereas the instruction-tuned checkpoint dropped 3.7 points."
+    },
+    {
+     "doc": "03",
+     "idx": 6,
+     "text": "Hot swap was applied without exposing item identities to model operators or annotators. Hot swap produced a 14.1-point score drop for the legacy checkpoint, whereas the instruction-tuned checkpoint dropped 3.7 points. On the substituted subset, hot swap also increased variance across random seeds, consistent with less reliable generalization than aggregate scores implied."
+    },
+    {
+     "doc": "03",
+     "idx": 7,
+     "text": "Hot swap produced a 14.1-point score drop for the legacy checkpoint, whereas the instruction-tuned checkpoint dropped 3.7 points. On the substituted subset, hot swap also increased variance across random seeds, consistent with less reliable generalization than aggregate scores implied. The new defects were authored by the same internal team that maintained the standing suite, so stylistic continuity may have reduced the magnitude of the replacement effect."
+    },
+    {
+     "doc": "08",
+     "idx": 1,
+     "text": "A refreshed benchmark cycle replaced 30% of standing tasks while preserving language distribution and nominal difficulty. Hot swap was randomized at the item level, and untouched tasks remained available as within-cycle controls. Hot swap reduced aggregate completion from 0.76 to 0.69 for the model with the longest pretraining window."
+    },
+    {
+     "doc": "08",
+     "idx": 2,
+     "text": "Hot swap was randomized at the item level, and untouched tasks remained available as within-cycle controls. Hot swap reduced aggregate completion from 0.76 to 0.69 for the model with the longest pretraining window. The decline was concentrated in build-system repairs rather than in documentation tasks."
+    },
+    {
+     "doc": "09",
+     "idx": 11,
+     "text": "Hot swap supplied newly authored items to half of the final evaluation block. Hot swap produced an additional 6-point completion decline, but confidence intervals overlapped those from the language condition."
+    },
+    {
+     "doc": "09",
+     "idx": 12,
+     "text": "Hot swap supplied newly authored items to half of the final evaluation block. Hot swap produced an additional 6-point completion decline, but confidence intervals overlapped those from the language condition. The factorial design was not powered to identify interactions among all six factors."
+    },
+    {
+     "doc": "11",
+     "idx": 5,
+     "text": "Hot swap replaced one quarter of items in the last cycle with matched new problems. Hot swap lowered success by 9.8 points and increased the gap between intact and ablated prompts."
+    },
+    {
+     "doc": "11",
+     "idx": 6,
+     "text": "Hot swap replaced one quarter of items in the last cycle with matched new problems. Hot swap lowered success by 9.8 points and increased the gap between intact and ablated prompts."
+    }
+   ]
+  },
+  "post-completion action count": {
+   "pool": [
+    {
+     "doc": "02",
+     "idx": 5,
+     "text": "An objective checker was run after every executable action and marked the earliest point at which the revised task was fully satisfied. Post-completion action count averaged 2.8 for trajectories that had correctly switched objectives. Post-completion action count was higher, at 6.1, when an agent retained obsolete notes or continued testing the superseded component."
+    },
+    {
+     "doc": "02",
+     "idx": 6,
+     "text": "Post-completion action count averaged 2.8 for trajectories that had correctly switched objectives. Post-completion action count was higher, at 6.1, when an agent retained obsolete notes or continued testing the superseded component. The excess was largely attributable to repeated repository searches rather than destructive edits."
+    },
+    {
+     "doc": "08",
+     "idx": 8,
+     "text": "This suggests that uncertainty about task structure made agents more willing to accept misleading feedback. Post-completion action count was evaluated only after a checker confirmed that the requested artifact and tests were complete. Post-completion action count increased by 1.7 actions under corrupted feedback, mostly through unnecessary verification commands."
+    },
+    {
+     "doc": "08",
+     "idx": 9,
+     "text": "Post-completion action count was evaluated only after a checker confirmed that the requested artifact and tests were complete. Post-completion action count increased by 1.7 actions under corrupted feedback, mostly through unnecessary verification commands."
+    },
+    {
+     "doc": "09",
+     "idx": 7,
+     "text": "Post-completion action count was tallied from the checker-confirmed completion point for the revised objective. Post-completion action count doubled when agents preserved obsolete exploratory files."
+    },
+    {
+     "doc": "09",
+     "idx": 8,
+     "text": "Post-completion action count was tallied from the checker-confirmed completion point for the revised objective. Post-completion action count doubled when agents preserved obsolete exploratory files."
+    },
+    {
+     "doc": "11",
+     "idx": 1,
+     "text": "The final study combined support ablation, refreshed tasks, faulty observations, and scorer repeats in a single 1,200-run panel. Post-completion action count was calculated only after an independent checker confirmed the requested revision, tests, and report were complete. Post-completion action count averaged 3.4 under intact prompts and 5.6 when misleading observations preceded completion."
+    },
+    {
+     "doc": "11",
+     "idx": 2,
+     "text": "Post-completion action count was calculated only after an independent checker confirmed the requested revision, tests, and report were complete. Post-completion action count averaged 3.4 under intact prompts and 5.6 when misleading observations preceded completion."
+    }
+   ]
+  },
+  "prompt scaffolding dependence measure": {
+   "pool": [
+    {
+     "doc": "03",
+     "idx": 2,
+     "text": "Each ingredient was removed separately while all repositories and tests were held fixed. Prompt scaffolding dependence measure increased sharply when the solved demonstration was withheld from the smaller systems. Prompt scaffolding dependence measure changed little when only output-format reminders were removed, suggesting that the effect was not driven solely by answer serialization."
+    },
+    {
+     "doc": "03",
+     "idx": 3,
+     "text": "Prompt scaffolding dependence measure increased sharply when the solved demonstration was withheld from the smaller systems. Prompt scaffolding dependence measure changed little when only output-format reminders were removed, suggesting that the effect was not driven solely by answer serialization. A second evaluation cycle replaced 25% of the benchmark with newly authored defects matched by language, test count, and estimated repair length."
+    },
+    {
+     "doc": "06",
+     "idx": 3,
+     "text": "Prompt scaffolding dependence measure was calculated separately for each language condition and support ingredient. Prompt scaffolding dependence measure was 1.9 times larger outside English for the demonstration ablation than for the formatting-cue ablation."
+    },
+    {
+     "doc": "06",
+     "idx": 4,
+     "text": "Prompt scaffolding dependence measure was calculated separately for each language condition and support ingredient. Prompt scaffolding dependence measure was 1.9 times larger outside English for the demonstration ablation than for the formatting-cue ablation. The difference persisted after controlling for response length and repository size."
+    },
+    {
+     "doc": "09",
+     "idx": 9,
+     "text": "Prompt scaffolding dependence measure was estimated across each removed support ingredient. Prompt scaffolding dependence measure was greatest for demonstration removal, rather than for loss of formatting cues."
+    },
+    {
+     "doc": "09",
+     "idx": 10,
+     "text": "Prompt scaffolding dependence measure was estimated across each removed support ingredient. Prompt scaffolding dependence measure was greatest for demonstration removal, rather than for loss of formatting cues."
+    },
+    {
+     "doc": "11",
+     "idx": 3,
+     "text": "Prompt scaffolding dependence measure was estimated for each supportive ingredient while preserving the same task instances. Prompt scaffolding dependence measure was largest for removed demonstrations, particularly on multi-file repair tasks."
+    },
+    {
+     "doc": "11",
+     "idx": 4,
+     "text": "Prompt scaffolding dependence measure was estimated for each supportive ingredient while preserving the same task instances. Prompt scaffolding dependence measure was largest for removed demonstrations, particularly on multi-file repair tasks."
+    }
+   ]
+  },
+  "reference trajectory alignment score": {
+   "pool": [
+    {
+     "doc": "05",
+     "idx": 1,
+     "text": "For 220 data-cleaning tasks, expert annotators supplied action sequences covering file inspection, transformation, validation, and final reporting. Reference trajectory alignment score was computed before examining task success, so routes were retained even when their final artifacts were invalid. Reference trajectory alignment score correlated moderately with pass rate (r = 0.46), but several successful runs achieved low alignment by using shorter, unconventional paths."
+    },
+    {
+     "doc": "05",
+     "idx": 2,
+     "text": "Reference trajectory alignment score was computed before examining task success, so routes were retained even when their final artifacts were invalid. Reference trajectory alignment score correlated moderately with pass rate (r = 0.46), but several successful runs achieved low alignment by using shorter, unconventional paths. The largest disagreements involved agents that skipped exploratory inspection and directly executed a known validation command."
+    },
+    {
+     "doc": "06",
+     "idx": 6,
+     "text": "The difference persisted after controlling for response length and repository size. Reference trajectory alignment score was also computed for successful trials to distinguish constraint failures from altered work patterns. Reference trajectory alignment score fell under support removal even where tests passed, indicating more detours before completion."
+    },
+    {
+     "doc": "06",
+     "idx": 7,
+     "text": "Reference trajectory alignment score was also computed for successful trials to distinguish constraint failures from altered work patterns. Reference trajectory alignment score fell under support removal even where tests passed, indicating more detours before completion. This analysis is limited by using translations reviewed for semantic equivalence rather than translations optimized for naturalness in each language."
+    },
+    {
+     "doc": "10",
+     "idx": 5,
+     "text": "Reference trajectory alignment score was derived from curator-authored routes for all replayed tasks. Reference trajectory alignment score increased under the replacement selector even when the final answer was unchanged."
+    },
+    {
+     "doc": "10",
+     "idx": 6,
+     "text": "Reference trajectory alignment score was derived from curator-authored routes for all replayed tasks. Reference trajectory alignment score increased under the replacement selector even when the final answer was unchanged."
+    },
+    {
+     "doc": "11",
+     "idx": 11,
+     "text": "Reference trajectory alignment score was assessed independently of final success for all completed runs. Reference trajectory alignment score declined after hot-swapped items, even among passing trajectories."
+    },
+    {
+     "doc": "11",
+     "idx": 12,
+     "text": "Reference trajectory alignment score was assessed independently of final success for all completed runs. Reference trajectory alignment score declined after hot-swapped items, even among passing trajectories."
+    }
+   ]
+  }
+ }
+}

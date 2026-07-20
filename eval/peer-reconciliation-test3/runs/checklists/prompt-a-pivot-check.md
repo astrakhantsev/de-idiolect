@@ -1,0 +1,22 @@
+Below are usage excerpts from one community's documents. The term under study is masked as ⟦TERM⟧; other local jargon is masked as ⟦X⟧.
+
+Extract a checklist of 4–7 concrete commitments that ANY faithful definition of ⟦TERM⟧'s concept must state, based ONLY on these excerpts:
+- the SPECIFIC mechanism or process involved (what concretely happens — this item is mandatory),
+- what is measured or produced, and how it is scored or read,
+- when/where it applies (the setting and trigger),
+- any constraint the excerpts clearly commit to.
+
+Rules: each item is one line, concrete, supported by the excerpts; do NOT generalize beyond what the excerpts support; do not include ⟦X⟧ concepts. Output ONLY the checklist lines, one per line, no preamble.
+
+EXCERPTS:
+
+1. Ran another batch of ⟦TERM⟧ trials this week and the number is stuck around 61%, barely moved since last quarter. The failure mode is so consistent it's almost funny: user says "actually forget the CSV export, give me a JSON summary instead" at turn 4, and the agent dutifully starts the JSON work but still tacks the half-finished CSV onto the final answer like a scar tissue artifact.
+2. Posted a ⟦TERM⟧ score of 88% last month and got some nice feedback in the team channel. Then I actually looked at what those trials cost and felt less good about it.
+3. Average of 34% of total tokens on those pivot trials went into work that got discarded outright, versus about 9% on trials with no mid-task instruction change. That's a real cost difference even though the ⟦TERM⟧ metric itself doesn't see it — you can nail the pivot and still be lighting money on fire to do it. I think we've been treating ⟦TERM⟧ as sufficient evidence of good behavior when it's really only measuring the endpoint, not the path.
+4. That's a real cost difference even though the ⟦TERM⟧ metric itself doesn't see it — you can nail the pivot and still be lighting money on fire to do it. I think we've been treating ⟦TERM⟧ as sufficient evidence of good behavior when it's really only measuring the endpoint, not the path.
+5. Spent two days chasing what I thought was a ⟦TERM⟧ regression before realizing it was actually a ⟦X⟧ problem in disguise. We run ⟦TERM⟧ trials in batches of 20 workers for throughput, and it turns out some of those workers were sharing a temp directory, so when one instance's stale CSV artifact got written to a path another instance also used, the wrong worker's final answer inherited leftover content from an entirely different trial's abandoned branch.
+6. We run ⟦TERM⟧ trials in batches of 20 workers for throughput, and it turns out some of those workers were sharing a temp directory, so when one instance's stale CSV artifact got written to a path another instance also used, the wrong worker's final answer inherited leftover content from an entirely different trial's abandoned branch. Looked exactly like a failure to drop stale work.
+7. It wasn't, it was contamination. Once we isolated worker directories properly the actual ⟦TERM⟧ number jumped from 54% to 71%, which is a huge swing to have been hiding behind an infrastructure bug this whole time.
+8. Once we isolated worker directories properly the actual ⟦TERM⟧ number jumped from 54% to 71%, which is a huge swing to have been hiding behind an infrastructure bug this whole time. Lesson learned: run a dedicated ⟦X⟧ on any harness before trusting behavioral metrics that come out of batched execution, especially ones sensitive to file state like ⟦TERM⟧ is.
+9. Early numbers on the new agent look decent, bleed sits around 18% on average tasks and spikes to 40%+ specifically on ⟦TERM⟧ trials, which lines up with what a few people have reported here. ⟦TERM⟧ itself got a real rewrite too — we now snapshot the full working state at the moment of reversal so we can programmatically verify nothing from the stale branch made it into the final answer, instead of a human skimming the transcript.
+10. Early numbers on the new agent look decent, bleed sits around 18% on average tasks and spikes to 40%+ specifically on ⟦TERM⟧ trials, which lines up with what a few people have reported here. ⟦TERM⟧ itself got a real rewrite too — we now snapshot the full working state at the moment of reversal so we can programmatically verify nothing from the stale branch made it into the final answer, instead of a human skimming the transcript. Caught two false passes from the old manual method in the first week alone.

@@ -1,0 +1,6 @@
+- Mechanism: an audit/check that compares free-form model explanations against the distinctive wording of few-shot examples in the prompt to detect inappropriate verbatim/copied carryover of phrasing.
+- What is measured: the rate of inappropriate verbatim carryover in free-form explanations, expressed as a percentage of explanations flagged (e.g., 9.6%, reduced to 1.8%).
+- Applies to: settings using few-shot prompts with worked examples containing deliberately distinctive or unusual connective phrases, checked against the agent's free-form explanatory text (not the final tool output).
+- Constraint: flags copied phrasing even when the final tool output is correct — correctness of the answer does not exempt an explanation from being flagged.
+- Constraint: can be rerun after paraphrasing the examples, and doing so reduces copied phrasing without altering other unrelated effects.
+- Constraint: results are used to compare conditions (e.g., with vs. without examples, or across agents) via the resulting failure/flag rate, trading off against task completion rate.

@@ -1,0 +1,498 @@
+{
+ "artifacts": {
+  "chk:a:groove lock": {
+   "kind": "chk",
+   "side": "a",
+   "term": "groove lock",
+   "regens_used": 1,
+   "state": "passed",
+   "log": [
+    "gate-fail[mechanical] g0: line-over-40-words -> regeneration staged",
+    "passed at g1"
+   ]
+  },
+  "chk:b:trajectory template carryover": {
+   "kind": "chk",
+   "side": "b",
+   "term": "trajectory template carryover",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:a:dead weight census": {
+   "kind": "chk",
+   "side": "a",
+   "term": "dead weight census",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:b:item discrimination exhaustion rate": {
+   "kind": "chk",
+   "side": "b",
+   "term": "item discrimination exhaustion rate",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:a:synthetic ladders": {
+   "kind": "chk",
+   "side": "a",
+   "term": "synthetic ladders",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:b:subordinate authoring protocol": {
+   "kind": "chk",
+   "side": "b",
+   "term": "subordinate authoring protocol",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:a:squeeze play": {
+   "kind": "chk",
+   "side": "a",
+   "term": "squeeze play",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:b:resource perturbation study": {
+   "kind": "chk",
+   "side": "b",
+   "term": "resource perturbation study",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:a:twin runs": {
+   "kind": "chk",
+   "side": "a",
+   "term": "twin runs",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:b:matched contrast probes": {
+   "kind": "chk",
+   "side": "b",
+   "term": "matched contrast probes",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:a:ouroboros items": {
+   "kind": "chk",
+   "side": "a",
+   "term": "ouroboros items",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:b:reflexive adjudication": {
+   "kind": "chk",
+   "side": "b",
+   "term": "reflexive adjudication",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:a:echo test": {
+   "kind": "chk",
+   "side": "a",
+   "term": "echo test",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:b:echo test": {
+   "kind": "chk",
+   "side": "b",
+   "term": "echo test",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:a:salt run": {
+   "kind": "chk",
+   "side": "a",
+   "term": "salt run",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:b:salt run": {
+   "kind": "chk",
+   "side": "b",
+   "term": "salt run",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:a:rig diary": {
+   "kind": "chk",
+   "side": "a",
+   "term": "rig diary",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:b:strategy cardinality index": {
+   "kind": "chk",
+   "side": "b",
+   "term": "strategy cardinality index",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:a:reread ration": {
+   "kind": "chk",
+   "side": "a",
+   "term": "reread ration",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "chk:b:tier floor annotation": {
+   "kind": "chk",
+   "side": "b",
+   "term": "tier floor annotation",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "passed at g0"
+   ]
+  },
+  "lad:a:groove lock": {
+   "kind": "lad",
+   "side": "a",
+   "term": "groove lock",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (a-w1)"
+   ],
+   "cli": "claude",
+   "model": "opus"
+  },
+  "lad:b:trajectory template carryover": {
+   "kind": "lad",
+   "side": "b",
+   "term": "trajectory template carryover",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (b-w1)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  },
+  "lad:a:dead weight census": {
+   "kind": "lad",
+   "side": "a",
+   "term": "dead weight census",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (a-w1)"
+   ],
+   "cli": "claude",
+   "model": "opus"
+  },
+  "lad:b:item discrimination exhaustion rate": {
+   "kind": "lad",
+   "side": "b",
+   "term": "item discrimination exhaustion rate",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (b-w1)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  },
+  "lad:a:synthetic ladders": {
+   "kind": "lad",
+   "side": "a",
+   "term": "synthetic ladders",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (a-w1)"
+   ],
+   "cli": "claude",
+   "model": "opus"
+  },
+  "lad:b:subordinate authoring protocol": {
+   "kind": "lad",
+   "side": "b",
+   "term": "subordinate authoring protocol",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (b-w1)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  },
+  "lad:a:squeeze play": {
+   "kind": "lad",
+   "side": "a",
+   "term": "squeeze play",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (a-w1)"
+   ],
+   "cli": "claude",
+   "model": "opus"
+  },
+  "lad:b:resource perturbation study": {
+   "kind": "lad",
+   "side": "b",
+   "term": "resource perturbation study",
+   "regens_used": 1,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "gate-fail[semantic] g0: condition 1: L0 commits to the intervention 'assessing how agents adjust verification work under changing resource limits,' but L1 states only the trigger and mechanism of changing the resource quota mid-task, with no statement that it assesses or measures agent adjustment behavior \u2014 that purpose only reappears in L2. -> regeneration staged",
+    "mech+leak passed at g1",
+    "semantic conformant (b-w2)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  },
+  "lad:a:twin runs": {
+   "kind": "lad",
+   "side": "a",
+   "term": "twin runs",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (a-w1)"
+   ],
+   "cli": "claude",
+   "model": "opus"
+  },
+  "lad:b:matched contrast probes": {
+   "kind": "lad",
+   "side": "b",
+   "term": "matched contrast probes",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (b-w1)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  },
+  "lad:a:ouroboros items": {
+   "kind": "lad",
+   "side": "a",
+   "term": "ouroboros items",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (a-w1)"
+   ],
+   "cli": "claude",
+   "model": "opus"
+  },
+  "lad:b:reflexive adjudication": {
+   "kind": "lad",
+   "side": "b",
+   "term": "reflexive adjudication",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (b-w1)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  },
+  "lad:a:echo test": {
+   "kind": "lad",
+   "side": "a",
+   "term": "echo test",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (a-w1)"
+   ],
+   "cli": "claude",
+   "model": "opus"
+  },
+  "lad:b:echo test": {
+   "kind": "lad",
+   "side": "b",
+   "term": "echo test",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (b-w1)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  },
+  "lad:a:salt run": {
+   "kind": "lad",
+   "side": "a",
+   "term": "salt run",
+   "regens_used": 1,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "gate-fail[semantic] g0: condition 1: L0 states the procedure's purpose is 'to detect whether its results were contaminated,' but L1 only describes rerunning with randomized identifiers and comparing scores without ever mentioning contamination or what the comparison is meant to reveal, dropping that purpose (it only reappears at L2). -> regeneration staged",
+    "mech+leak passed at g1",
+    "semantic conformant (a-w2)"
+   ],
+   "cli": "claude",
+   "model": "opus"
+  },
+  "lad:b:salt run": {
+   "kind": "lad",
+   "side": "b",
+   "term": "salt run",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (b-w1)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  },
+  "lad:a:rig diary": {
+   "kind": "lad",
+   "side": "a",
+   "term": "rig diary",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (a-w1)"
+   ],
+   "cli": "claude",
+   "model": "opus"
+  },
+  "lad:b:strategy cardinality index": {
+   "kind": "lad",
+   "side": "b",
+   "term": "strategy cardinality index",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (b-w1)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  },
+  "lad:a:reread ration": {
+   "kind": "lad",
+   "side": "a",
+   "term": "reread ration",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (a-w1)"
+   ],
+   "cli": "claude",
+   "model": "opus"
+  },
+  "lad:b:tier floor annotation": {
+   "kind": "lad",
+   "side": "b",
+   "term": "tier floor annotation",
+   "regens_used": 0,
+   "state": "passed",
+   "log": [
+    "mech+leak passed at g0",
+    "semantic conformant (b-w1)"
+   ],
+   "cli": "codex",
+   "model": "gpt-5.6-terra"
+  }
+ },
+ "conf_batches": {
+  "a-w1": {
+   "reruns_used": 0,
+   "resolved": true
+  },
+  "b-w1": {
+   "reruns_used": 0,
+   "resolved": true
+  },
+  "a-w2": {
+   "reruns_used": 0,
+   "resolved": true
+  },
+  "b-w2": {
+   "reruns_used": 0,
+   "resolved": true
+  }
+ },
+ "polarity": {
+  "a": {
+   "reruns_used": 0,
+   "resolved": true
+  },
+  "b": {
+   "reruns_used": 0,
+   "resolved": true
+  }
+ },
+ "polarity_side_fail": []
+}

@@ -1,0 +1,7 @@
+- Mechanism: compute ⟦TERM⟧ only from successful attempts, after normalizing/clustering traces (by incidental file paths and by structural tool-use pattern) across multiple independent attempts per task (five per task, fresh sandboxes).
+- What is measured/scored: a numeric score derived from repository-repair task traces (observed values ranging ~1.3 to 2.7), computed independently of pass/completion rate.
+- Setting/trigger: applied to repository-repair tasks (600 tasks, later 1,740 after filtering) run by agents with tool access, evaluated per successful run.
+- Constraint: ⟦TERM⟧ must be normalized for number of available tools and length of task instructions before comparison.
+- Constraint: ⟦TERM⟧ can vary (e.g., across baseline vs. search-augmented systems, or generator diversity) even when pass/completion rates are nearly identical, so it is distinct from success rate.
+- Constraint: higher ⟦TERM⟧ is associated with fewer inappropriate copied phrases and with alternating inspection/verification behavior rather than a fixed retrieval-first sequence.
+- Constraint: interpretation must account for confounds — generator diversity can also shift the distribution of error messages.

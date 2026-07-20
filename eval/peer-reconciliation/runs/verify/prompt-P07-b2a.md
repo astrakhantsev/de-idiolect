@@ -1,0 +1,23 @@
+DEFINITION of a concept:
+
+A check run after each retrieval, extraction, table edit, service call, or other stated action in a multi-step tool-using task. It compares the next executed call with the agent’s most recently stated plan, inclusion rule, reconciliation sequence, source priority, or dependency order. It records or flags the first point at which the agent takes a new action or stage without revising that stated plan, such as broadening a search, drafting before checking a conflicting source, bypassing a service, or calculating before eligibility checking. Its output is the identified mismatch point and counts or rates of runs or trajectories containing such a mismatch.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used.
+
+For EACH excerpt independently, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by DEFINITION?
+
+- "instantiates" — the usage is consistent with the definition and exemplifies it. Requires a verbatim supporting quote from the excerpt.
+- "contradicts" — the usage is incompatible with the definition (the referent has a property the definition excludes, or lacks one it requires). Requires a verbatim quote of the incompatible fragment.
+- "insufficient" — this excerpt alone does not contain enough to decide.
+
+Judge each excerpt on its own text only. Do not let other excerpts or the term's surface influence you.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "verdict": "instantiates|contradicts|insufficient", "quote": "verbatim quote (empty string only for insufficient)"}, ...]
+
+EXCERPTS:
+
+1. Embarrassing one. We do a monthly ⟦TERM⟧ against a frozen 200-task suite to catch silent regressions whenever the provider ships a model update. Last cycle the scores came back flat, actually slightly up, and we almost shipped a "no drift detected" report to the team.
+2. Also worth flagging for the ⟦TERM⟧ crowd: we included this ⟦X⟧ metric in this month's frozen-suite comparison for the first time, and it dropped four points versus last month with no fault injection at all, same model version. Either the audit caught something real about a silent update, or our tally scorer has a bug.
+3. That threw our ⟦TERM⟧ numbers for a loop too, since this suite doubles as our frozen monthly baseline. We had to rerun the whole thing with caching disabled before we could trust the comparison against last month's frozen scores.
+4. Closing out this month's ⟦TERM⟧ and want to record what actually moved versus what was measurement noise, because half of what looked like drift turned out to be something else entirely.

@@ -1,0 +1,12 @@
+{
+ "pair_key": "e028de523c7137c1",
+ "record_type": "dispute",
+ "dispute_of": "66ec349541bde2289afece2ac6ad02dce2622102fc59fa41fb584b6e0ef91124",
+ "claimant": "community-b-demo",
+ "claim_type": "rejects_relation",
+ "evidence_quotes": [
+  "scoring is binary on containment, not on speed"
+ ],
+ "note": "fork-coexistence demo",
+ "version_id": "1e298e003fecc11c6f676eb69a6a2fdf01a05f6d00ecdb274ba3075d0e889122"
+}

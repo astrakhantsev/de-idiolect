@@ -1,0 +1,5 @@
+{
+ "L0": "A consistency score for automated scoring of completed task answers, used to assess whether the scoring stays stable.",
+ "L1": "A consistency score for automated scoring of completed task answers, used to assess whether the scoring stays stable. The same final answers are submitted again to the same automated scorer on multiple dates, including dates at least 21 days apart in some cases, and the score is estimated from the resulting pairs of numeric scores.",
+ "L2": "A consistency score for automated scoring of completed task answers, used to assess whether the scoring stays stable. It is estimated by resubmitting the same completed final answers to the same automated scorer multiple times, across multiple collection dates; some dates are separated by at least 21 days. The resulting numeric-score pairs are used to calculate the value. It may be reported above 0.90, such as 0.93, or at 0.88, and it can be lower, such as 0.71, depending on task type. It applies to repository-state tasks, executable-task outcomes, open-ended incident reports, and explanatory summaries. Lower values are linked to borderline partial-credit judgments, not answer length."
+}

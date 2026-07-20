@@ -1,0 +1,310 @@
+{
+  "backend": "claude",
+  "embedding_model": "BAAI/bge-large-en-v1.5",
+  "keyness": {
+    "lay-public-health": [
+      "eggs",
+      "heart",
+      "eat",
+      "raise",
+      "eat eggs",
+      "heart healthy",
+      "healthy",
+      "heart disease"
+    ],
+    "lipidology": [
+      "fat",
+      "cholesterol",
+      "saturated fat",
+      "variation",
+      "response",
+      "saturated",
+      "hyper",
+      "serum"
+    ],
+    "cardiology-biomarker": [
+      "number",
+      "cardiovascular risk",
+      "particles",
+      "particle",
+      "lipoprotein",
+      "discordant",
+      "lipoprotein particles",
+      "cardiovascular"
+    ],
+    "nutrition-epi-methods": [
+      "substitution",
+      "causal",
+      "energy",
+      "effects",
+      "causal effects",
+      "nutritional",
+      "model",
+      "total energy fixed"
+    ],
+    "distractor": [
+      "assessment offshore",
+      "assessment offshore wind",
+      "bayesian",
+      "bayesian model",
+      "bayesian model forecasting",
+      "benchmarks",
+      "benchmarks seismic",
+      "transformer"
+    ]
+  },
+  "concepts": [
+    {
+      "term": "hyper-responder",
+      "owning_community": "lipidology",
+      "definition": "A term for a person or subject who reacts to a fixed change in intake or dose with a substantially larger shift in a measured internal marker than most others exposed to the same change, where the reaction is repeatable across separate testing occasions in the same subject. Inputs are the controlled exposure and the marker value before and after; the output is the size of the marker's change, which is then compared to the distribution of changes across a group given the same exposure. It applies when identical exposures produce a wide spread of outcomes across subjects, and this label marks those whose measured change sits well above the typical or average change, pointing to a difference in some internal processing step rather than in the exposure itself.",
+      "definition_source": "live",
+      "retrieval": {
+        "naive_question": {
+          "top3": [
+            [
+              "A1",
+              0.8224
+            ],
+            [
+              "A3",
+              0.7778
+            ],
+            [
+              "A2",
+              0.7445
+            ]
+          ],
+          "owner_best_rank": 5,
+          "owner_mean_rank": 6.0,
+          "owner_ranks": [
+            5,
+            6,
+            7
+          ]
+        },
+        "raw_term": {
+          "top3": [
+            [
+              "B3",
+              0.6368
+            ],
+            [
+              "B1",
+              0.485
+            ],
+            [
+              "B2",
+              0.4706
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 2.0,
+          "owner_ranks": [
+            1,
+            2,
+            3
+          ]
+        },
+        "constrained_definition": {
+          "top3": [
+            [
+              "B2",
+              0.6028
+            ],
+            [
+              "B3",
+              0.5923
+            ],
+            [
+              "D2",
+              0.5747
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 2.67,
+          "owner_ranks": [
+            1,
+            2,
+            5
+          ]
+        }
+      },
+      "routing_gain_naive_to_definition": 4,
+      "top_match": {
+        "doc_id": "B2",
+        "skos_relation": "narrowMatch",
+        "reason": "document is a specific case (saturated-fat/cholesterol) of the general hyper-responder concept.",
+        "source": "live"
+      }
+    },
+    {
+      "term": "apolipoprotein B particle number",
+      "owning_community": "cardiology-biomarker",
+      "definition": "A measured amount of a specific carrier protein found on the outer surface of blood-borne fat-and-cholesterol transport packages, with one such protein molecule present on each package; counting the protein therefore gives the count of packages themselves, independent of how much fat or cholesterol each package happens to carry inside it. It is measured from a blood sample and reported as a concentration (mass or molar amount per volume). It applies when the amount of cargo inside the packages is known or suspected to vary independently of how many packages there are, so that a measurement of cargo alone would misstate how many packages are actually present.",
+      "definition_source": "live",
+      "retrieval": {
+        "naive_question": {
+          "top3": [
+            [
+              "A1",
+              0.8224
+            ],
+            [
+              "A3",
+              0.7778
+            ],
+            [
+              "A2",
+              0.7445
+            ]
+          ],
+          "owner_best_rank": 4,
+          "owner_mean_rank": 8.67,
+          "owner_ranks": [
+            4,
+            10,
+            12
+          ]
+        },
+        "raw_term": {
+          "top3": [
+            [
+              "C2",
+              0.697
+            ],
+            [
+              "C1",
+              0.6787
+            ],
+            [
+              "C3",
+              0.5944
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 2.0,
+          "owner_ranks": [
+            1,
+            2,
+            3
+          ]
+        },
+        "constrained_definition": {
+          "top3": [
+            [
+              "C2",
+              0.6438
+            ],
+            [
+              "C1",
+              0.6286
+            ],
+            [
+              "B3",
+              0.5902
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 2.67,
+          "owner_ranks": [
+            1,
+            2,
+            5
+          ]
+        }
+      },
+      "routing_gain_naive_to_definition": 3,
+      "top_match": {
+        "doc_id": "C2",
+        "skos_relation": "relatedMatch",
+        "reason": "both address particle-vs-cholesterol discordance, but NMR particle count \u2260 protein-based (apoB) measurement.",
+        "source": "live"
+      }
+    },
+    {
+      "term": "isocaloric substitution model",
+      "owning_community": "nutrition-epi-methods",
+      "definition": "A model that estimates what happens to an outcome when one part of a fixed daily intake budget is swapped for another part, with the total amount held constant, so any change in outcome can be attributed to the composition of the swap rather than to a change in overall quantity. It takes as input a shared total made of several components, a chosen unit amount moved from one component to another (leaving the sum unchanged), and observed outcomes together with other measured factors that might explain those outcomes; it outputs an estimate of the expected change in outcome per unit swapped, adjusted for those other factors. It applies whenever the researcher wants to isolate the effect of trading one component of a fixed total for another, as opposed to simply adding or removing that component, because raising one part necessarily lowers the others to keep the total unchanged.",
+      "definition_source": "live",
+      "retrieval": {
+        "naive_question": {
+          "top3": [
+            [
+              "A1",
+              0.8224
+            ],
+            [
+              "A3",
+              0.7778
+            ],
+            [
+              "A2",
+              0.7445
+            ]
+          ],
+          "owner_best_rank": 8,
+          "owner_mean_rank": 9.33,
+          "owner_ranks": [
+            8,
+            9,
+            11
+          ]
+        },
+        "raw_term": {
+          "top3": [
+            [
+              "D1",
+              0.7073
+            ],
+            [
+              "D2",
+              0.6848
+            ],
+            [
+              "D3",
+              0.6539
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 2.0,
+          "owner_ranks": [
+            1,
+            2,
+            3
+          ]
+        },
+        "constrained_definition": {
+          "top3": [
+            [
+              "D2",
+              0.6656
+            ],
+            [
+              "D1",
+              0.655
+            ],
+            [
+              "D3",
+              0.6525
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 2.0,
+          "owner_ranks": [
+            1,
+            2,
+            3
+          ]
+        }
+      },
+      "routing_gain_naive_to_definition": 7,
+      "top_match": {
+        "doc_id": "D2",
+        "skos_relation": "narrowMatch",
+        "reason": "document specifies substitution among diet components under a fixed-total constraint, a specific case of the general model.",
+        "source": "live"
+      }
+    }
+  ]
+}

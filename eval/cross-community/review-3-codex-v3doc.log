@@ -1,0 +1,55 @@
+## Verdict
+
+**MAJOR REVISION**
+
+## Findings
+
+### 1. The procedural verdict is still presented as a substantive conclusion
+
+- **Where:** Title/frontmatter and headline, especially lines 2, 5, 7, 14, and 17; contradicted by lines 25, 42, 47, and 70.
+- **Problem:** Raw-term retrieval triggered a frozen but chance-level threshold. That does not establish that the communities are reconciled or that the tool is redundant: citation reconciliation is unestablished, the direct-ask control is missing, and the embedder may simply bridge the terms.
+- **Impact:** Downstream readers may cite “RECONCILED/REDUNDANT” as an empirical finding despite the document’s later statement that no reconciliation claim is supported.
+- **Fix:** Consistently report only that “the frozen Verdict-3 rule triggered.” Explicitly state that its reconciliation/redundancy label is not a supported interpretation of this cell.
+
+### 2. “Validated, reusable pipeline” and “built the whole pipeline” contradict the deviation ledger
+
+- **Where:** Lines 5, 7, 14, and 37 versus lines 42–50.
+- **Problem:** The citation expansion, temporal holdout, direct-ask baseline, retrieval-grounded term recovery, two-model memorization screen, and required length matching were not completed. The candidate-screen implementation also retains the detector known to produce false survivors.
+- **Impact:** An implementor could reuse this as a valid evaluation pipeline even though it lacks several validity gates and still reproduces the central screening defect.
+- **Fix:** Call it a partial prototype or retrieval/rescoring harness. Reserve “validated pipeline” for a version implementing the full guards, controls, artifact validation, and acceptance tests.
+
+### 3. The sole surviving Step-0 finding is overgeneralized
+
+- **Where:** Lines 16 and 53–55; Guard 3 status at line 43; `candidate_pairs.json`.
+- **Problem:** “Robust, portable” and “over-counts survivors ~4×” derive from one Sonnet-only run and manual adjudication of four nominal records. Two records are variants of the same Racepinephrine concept, so these are not four independent cases, and no adjudication criteria or independent review are recorded.
+- **Impact:** The document presents a pipeline-specific diagnostic as a transferable error-rate result, leaving its claimed durable value unsupported.
+- **Fix:** Scope it to: “In this 66-record Sonnet sweep, four automatic survivor flags became one after manual review.” Group results by concept, document adjudication criteria, and repeat across models/prompts before claiming portability.
+
+### 4. The ledger incorrectly says Verdicts 1–4 were evaluated
+
+- **Where:** Lines 26, 28, and 48; exploratory section at lines 59–70.
+- **Problem:** Verdicts 1 and 2 depend on generated-arm contrasts, but the available v2 run is post-outcome and the A→B comparison is model-confounded after leak drops. Those verdicts were not validly evaluated under the frozen protocol. Only Verdict 3 can be mechanically read from raw-term scores; Verdict 4 can be checked from the ceiling.
+- **Impact:** The completion table overstates protocol coverage and obscures which conclusions are confirmatory, exploratory, or unevaluable.
+- **Fix:** Give every verdict its own status: Verdict 1/2 unevaluable, Verdict 3 mechanically triggered, Verdict 4 did not trigger, and Verdict 5 not implemented.
+
+### 5. The claimed frozen and reproducible audit trail is incomplete
+
+- **Where:** Lines 6, 26, 32–33, 37, and 82; `prereg.md` lines 3 and 72–74; the two run logs.
+- **Problem:** The “frozen” preregistration was edited post-freeze, v1 query/result JSON files were overwritten, and the v1 log preserves scores and lengths but not the generated query texts. The reproduction command only rescores current v2 artifacts; it does not reproduce selection, corpus construction, generation, or the v1→v2 changes.
+- **Impact:** A reviewer cannot independently verify the original freeze, inspect all reported v1 leaks, or reconstruct the exact experimental history.
+- **Fix:** Preserve immutable, versioned preregistration and v1/v2 artifacts with hashes, timestamps, code revision, model identifiers, and exact commands. Relabel the current command as “rescore frozen v2.”
+
+### 6. Project status conflicts with the remaining-work section
+
+- **Where:** Status line 5 versus “What a valid cell needs (funded / post-deadline)” at lines 72–78.
+- **Problem:** The document says `DONE (not pursued to v3)` while presenting five substantial requirements under a heading implying funded future work. It does not identify whether these are abandoned recommendations, deferred work, or an active successor.
+- **Impact:** Readers cannot tell whether the listed work is actionable, owned, or intentionally closed.
+- **Fix:** Mark the section explicitly as `DEFERRED/NOT PLANNED` or link it to an active successor artifact with owner/status.
+
+## Next steps
+
+1. Reframe Verdict 3 everywhere as a procedural trigger, not evidence of reconciliation or tool redundancy.
+2. Downgrade the pipeline and Step-0 claims to the scope actually demonstrated.
+3. Correct the per-verdict completion ledger.
+4. Version and hash the preregistration and all v1/v2 artifacts; distinguish rescoring from full reproduction.
+5. Resolve whether the valid-cell requirements are closed recommendations or active follow-up work.CODEX V3 EXIT 0

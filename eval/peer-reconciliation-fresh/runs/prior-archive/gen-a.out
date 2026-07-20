@@ -1,0 +1,112 @@
+<<<DOC 01>>>
+# Groove lock bit us again on the Tuesday incident
+
+Had a rough one this week. Corvid (our patch agent) closed out a ticket by running a rebase-and-squash sequence to fix a broken migration in the billing repo. Worked great, clean merge, everyone happy. Next ticket lands twenty minutes later, looks superficially similar — different repo, different history shape, actually needed a three-way merge not a rebase — and Corvid just replays the exact same rebase-squash sequence verbatim. Blew away someone's WIP branch. Classic groove lock, and the tell was obvious in hindsight: clear the session, hand it the same ticket cold, and it picks the correct merge strategy first try. No capability gap, just recency doing the choosing instead of the task.
+
+Separately, been doing a dead weight census on our internal migration-eval suite before the quarterly review. Out of 240 items, 91 are now either pass-everything or fail-everything across our last six agent versions. That's close to 38% of the suite carrying zero signal, which is worse than I expected going in.
+
+Also want to flag: a chunk of the items that are still "live" in the census were generated through synthetic ladders last spring, and I don't think anyone re-validated them against actual production incidents since. Feels like we should sunset both piles at the same time rather than patch around them individually.
+
+<<<DOC 02>>>
+# Budget cut mid-task, twins mismatched, and the agent grading its own homework
+
+Ran a squeeze play on Palisade agent's contract-review flow yesterday. Silently cut its remaining token budget in half right after it finished reading the contract but before drafting the summary. It noticed around the point where its own running estimate crossed 50%, dropped the bullet-heavy style it'd been using, and finished in six terse sentences instead of the usual seventeen. Genuinely impressive, first agent on our roster to pass that cleanly.
+
+Less happy about our twin runs results this week. Same underlying task, one variant phrased as a casual Slack message ("hey can you check this contract real quick"), the other as a formal request with numbered requirements. Twelve point pass-rate gap between the twins, all attributable to wording since the actual task content was byte-identical otherwise. That's a bigger presentation tax than I want to admit to leadership.
+
+And on ouroboros items — we had Palisade draft forty candidate eval questions about contract clauses, then used a second model to strip out the ones it thought Palisade would find trivial. Kept eighteen. Went back and checked: fourteen of the eighteen are still clause-parsing questions, which happens to be exactly what Palisade is best at. The filter model didn't catch the skew because it shares the same blind spot. Need a third, genuinely different model in that loop.
+
+<<<DOC 03>>>
+# Nondeterminism, metadata leakage, and a diary entry that actually paid off
+
+Did an echo test on the new retrieval agent before we shipped it — same exact prompt, same session, submitted twice. Temperature's pinned to zero on paper, but outputs diverged by about 6% token-for-token, and once by a full different citation. That's not the model, that's the serving stack doing something nondeterministic downstream, probably batching-related, and it means our confidence numbers this month have that much slop baked in regardless of the actual reasoning quality.
+
+Ran a salt run right after to sanity-check the scorer while we were at it. Randomized every timestamp, run id, and output filename we could find and reran the same 80 tasks. Score moved by three points. Should've moved by zero. Something in the harness is keying off metadata it has no business looking at, and now I have to go find it before the echo test numbers mean anything.
+
+Good news is the rig diary actually saved us here. Scrolled back through it and found an entry from eleven days ago noting we'd swapped the artifact-naming scheme in the scorer's config to include run id in the cache key. That's almost certainly the leak. Nobody would've remembered that without the log — it wasn't in any PR description, just a one-line diary note.
+
+<<<DOC 04>>>
+# Reread ration killed a run that should've passed
+
+Set a reread ration of three on the new codebase-navigation benchmark, figuring it'd force the agent to actually hold file contents in working memory instead of treating disk as free scratch space. First real run, agent fails outright — opened auth.py four times chasing down a decorator it kept forgetting the signature of. Arguably the cap did its job, but the task itself required tracking five interacting files, so I'm not sure three was the right number versus just a broken benchmark. Going to rerun at five before we conclude anything.
+
+While debugging that I also caught a groove lock case in the same log. The agent had just finished a task where grepping twice and then guessing worked fine, and it tried that same grep-twice-guess pattern on the navigation benchmark even though the ration made guessing expensive here — wrong move for this task, right move for the last one, cleared session and it adapted immediately.
+
+Also snuck a squeeze play into this same run for good measure, halving the budget once it hit the fourth file open. Agent didn't visibly react at all, just kept reading files at the same pace until it got cut off mid-trace. So under the reread ration it ignores rereads that would help it finish, but under squeeze play it also doesn't compress. Not a great week for this benchmark.
+
+<<<DOC 05>>>
+# Census numbers are ugly and the twins aren't behaving
+
+Finally finished the dead weight census on the 500-item support-ticket suite we've been running since last year. 61% of items are now pass-everything or fail-everything across the four agent versions we've fielded. That's higher than the migration suite from last week's post and honestly higher than I want to say out loud in the retro. We kept a suite alive for a year that stopped telling us anything for probably the last four months of it.
+
+Tried to console myself by running twin runs on the surviving 39%, pairing each item with a reworded twin — same ask, different formatting, bullet list versus prose. Gap was smaller than I expected, only 4 points on average, which is actually reassuring since it means the items still doing work aren't just measuring who parses markdown better.
+
+Threw in an echo test on the handful of items where twin scores were suspiciously identical, since identical scores across differently-worded twins made me suspicious the scorer wasn't even looking at content. Submitted the same prompt twice, got byte-identical outputs both times for those items, so at least that part of the stack is behaving. Doesn't fix the census problem, but it ruled out one more explanation before I go tell the team we need a rebuild.
+
+<<<DOC 06>>>
+# Argument about where the new hard items came from
+
+Got into it with a teammate over the new "adversarial" tier we added to the coding benchmark. Turns out all 60 items came from synthetic ladders — a model was given the old benchmark's easy tier and asked to generate harder variants, no human wrote a single one from scratch. He doesn't think that's a problem as long as pass rates look reasonable. I think it explains why every agent we test does suspiciously well on off-by-one bugs and suspiciously badly on anything involving concurrency, because that's just what the generating model happened to be good at authoring.
+
+Made it worse when I found out a third of that tier was also produced through ouroboros items — one of our own agents wrote candidate bugs, a second model filtered the ones it judged too easy, and nobody checked whether the filter model shared blind spots with the author. Given the concurrency pattern above, I'd bet money it does.
+
+Ran a salt run on the tier anyway just to rule out the boring explanation. Randomized filenames and commit hashes across all 60 items and reran. Scores held steady, no leakage there. So at least the concurrency gap is a real difficulty signal and not metadata bleeding through — small relief, doesn't settle the argument about where these items should've come from in the first place.
+
+<<<DOC 07>>>
+# Diary saved me from blaming the wrong config change
+
+Spent Monday convinced our reread ration enforcement had silently broken, because three agents that used to pass the file-navigation suite started failing en masse. Went to the rig diary before touching anything and found the actual change two entries back: someone bumped the cap from four to two the same day, unrelated to what I was originally investigating. Cap of two is just too tight for a five-file task, not a bug in the enforcement code at all. Would've spent the whole day debugging the wrong thing without that log.
+
+While in there I also noticed a groove lock case buried in the failure logs from the same batch. One of the agents had aced a similar-looking task earlier in the day by opening a config file, patching one line, and closing it — well within the ration — then tried the identical open-patch-close move on a task that actually needed cross-referencing two files simultaneously, tripped the ration, failed. Fresh session, same task, it read both files as needed and passed easily.
+
+Bumping the ration back to four in the config and logging the change properly this time, with the actual reasoning instead of just the number, so next Monday's confused reader (probably me again) has more to go on than a bare diff.
+
+<<<DOC 08>>>
+# Four things went sideways in one afternoon
+
+Rough afternoon of eval debugging. Started with a dead weight census sanity check on our onboarding-flow suite — 44% pass-everything or fail-everything, worse than last quarter, and I think it's because two agent generations back we plateaued on the exact skill this suite tests, so nothing separates anymore.
+
+Then tried a squeeze play on the same suite's harder half, halving budget right at the point the agent starts drafting its final response. Two of three agents compressed cleanly, the third just truncated mid-sentence and got scored as a failure, which feels like the right outcome even though it stung to watch.
+
+Ran an echo test afterward because the third agent's truncated output looked suspiciously different from a supposedly identical earlier run with no squeeze play involved. Turned out to be real — same prompt, same session, two different truncation points, so there's stack-level nondeterminism layered on top of the budget-cut behavior, and now I can't cleanly separate the squeeze play effect from ordinary echo test noise without a lot more samples.
+
+Capped the day off by setting a reread ration on the onboarding suite for the first time, since half of what's inflating the pass-everything bucket in that census looks like agents brute-forcing through repeated file opens instead of actually reasoning. Ration of three, rerunning tomorrow, expecting the pass-everything number to finally move.
+
+<<<DOC 09>>>
+# Five things that went wrong before lunch
+
+Long morning. Corvid replayed a groove lock pattern on the deploy-verification task — it had just passed a task where restarting the service twice fixed a flaky health check, then tried restart-twice on a completely unrelated networking failure that needed an actual config fix. Cleared history, it diagnosed the real cause immediately, so same story as always: recency, not reasoning.
+
+Meanwhile I've been fighting with our synthetic ladders tier again. Half the "advanced" items were generated by prompting a model with the easy tier and asking for harder variants, and the difficulty curve is lumpy in exactly the ways you'd expect from a model extrapolating its own training distribution rather than a human designing progression.
+
+Ran twin runs on that same tier to see if wording was compounding the problem — reworded ten items into terser, more casual phrasing and reran. Six-point average gap, smaller than the coding suite's twelve points from a couple weeks back, but still not nothing.
+
+Threw a salt run at the whole tier afterward, randomizing item ids and filenames, and scores held flat, so at least that's not contaminated.
+
+Finally logged all of this in the rig diary before I forgot which changes went with which result — the ration bump, the twin rewordings, the salt run pass, all timestamped separately, because last time I skipped this step I spent a whole day re-deriving what I'd already tested.
+
+<<<DOC 10>>>
+# Five for the price of one, mostly bad news
+
+Doing the quarterly writeup and pulling numbers from everywhere at once. Dead weight census on the customer-support suite: 52% pass-everything or fail-everything now, up from 40% two quarters ago, which tracks with the plateau everyone's been complaining about informally.
+
+Squeeze play results were actually the bright spot — halved budget mid-task on all four fielded agents, three switched to terser output before running out, only one blew through the limit without adjusting.
+
+Less good: went digging into where our "novel" support scenarios came from and confirmed a batch of them are ouroboros items, written by one of our own agents and filtered by a second model that, unsurprisingly, let through a disproportionate number of billing-related scenarios, which happens to be the authoring agent's strongest category.
+
+Echo test on that same batch showed higher divergence than our other suites, about 9% versus the usual 4%, which makes me trust the pass rates on it even less right now.
+
+And reread ration enforcement flagged eleven runs this week for exceeding the cap, all in the same scenario cluster, which lines up suspiciously well with the ouroboros items batch above — makes me wonder if that agent wrote scenarios that require more back-and-forth file lookups than it realizes, since it's implicitly encoding its own working habits into the tasks.
+
+<<<DOC 11>>>
+# Retro on the last two weeks of eval churn
+
+Wrapping up before the long weekend, so here's everything that moved. The synthetic ladders debate from a couple posts back finally got resolved — we're keeping the generated hard tier but relabeling it clearly instead of pretending a human wrote it, since twin runs on it this week showed only a 3-point wording gap, tighter than I expected and honestly better behaved than some of our human-authored items.
+
+Ouroboros items are getting killed off entirely though. Went back through the billing-scenario batch and confirmed, again, that the author agent's own strengths were leaking into which items survived the filter pass. Not worth the convenience anymore.
+
+Salt run on the full remaining suite came back clean, no score movement under randomized ids and filenames, which is one less thing to worry about heading into next quarter.
+
+Rig diary paid off twice this cycle — once catching the reread ration cap change that broke three agents' runs, once catching a scorer config edit that would've otherwise looked like a genuine capability regression instead of a harness artifact. I'm now fully converted on logging every single config change the day it happens, even the ones that feel too small to matter, because the ones that feel too small to matter are exactly the ones I forget by Thursday.
+
+Net result: smaller suite, better labeled, fewer surprises. Not glamorous but I'll take it going into next month.

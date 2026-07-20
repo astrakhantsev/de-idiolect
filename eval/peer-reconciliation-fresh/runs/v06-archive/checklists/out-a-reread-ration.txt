@@ -1,0 +1,5 @@
+- Mechanism: limits an agent to a fixed number (a "ration") of file reopens/rereads — e.g., set to three — so the agent must retain file contents in working memory instead of freely rereading from disk.
+- Trigger/setting: applied per benchmark/suite (e.g., codebase-navigation benchmark, file-navigation suite, onboarding suite) as an enforced cap on a run.
+- What's measured: whether the agent passes or fails the suite once the reread cap is exhausted — exceeding the ration causes an outright fail.
+- Scoring effect: enforcement can flip previously-passing agents to failing once applied, and is expected to move aggregate pass-rate metrics (e.g., a "pass-everything" bucket) when applied to a new suite.
+- Constraint: the cap counts rereads only — it does not credit or reward compression/summarization behavior, and an agent that fails to react (no compression, steady rereading) is not exempted by the mechanism.

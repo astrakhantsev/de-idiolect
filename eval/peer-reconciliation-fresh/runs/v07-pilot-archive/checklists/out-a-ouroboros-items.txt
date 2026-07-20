@@ -1,0 +1,4 @@
+- Mechanism: one model (an agent) generates candidate items (eval questions or bugs), then a second, different model filters/strips out the ones it judges "too easy" or "trivial," leaving the remaining subset as the final set.
+- Produced/measured: a filtered set of candidate items (e.g., eval questions or bugs) reduced from a larger generated pool (e.g., forty down to eighteen) via this filtering step.
+- Applies when: generating evaluation content or test material (e.g., contract-clause eval questions, candidate bugs) where a curated subset is needed for testing agents.
+- Constraint: no check is made on whether the filtering model shares blind spots or biases with the generating model, so the resulting set can inherit correlated skew (e.g., systematically easy/hard along the same dimensions the generator was strong/weak in).

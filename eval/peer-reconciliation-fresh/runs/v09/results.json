@@ -1,0 +1,356 @@
+{
+ "primary": "tau1",
+ "tau0": {
+  "per_pair": {
+   "P01": {
+    "expected": "exactMatch",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "review_required",
+     "reason": "detail-divergence"
+    },
+    "display": "reviewRequired(detail-divergence)",
+    "correct": false
+   },
+   "P02": {
+    "expected": "exactMatch",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "review_required",
+     "reason": "asymmetry-unconfirmed"
+    },
+    "display": "reviewRequired(asymmetry-unconfirmed)",
+    "correct": false
+   },
+   "P03": {
+    "expected": "broadnarrow(a)",
+    "verdict": {
+     "proposed_relation": "relatedMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "relatedMatch",
+    "correct": false
+   },
+   "P04": {
+    "expected": "broadnarrow(b)",
+    "verdict": {
+     "proposed_relation": "relatedMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "relatedMatch",
+    "correct": false
+   },
+   "P05": {
+    "expected": "relatedMatch",
+    "verdict": {
+     "proposed_relation": "noMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatch",
+    "correct": false
+   },
+   "P06": {
+    "expected": "relatedMatch",
+    "verdict": {
+     "proposed_relation": "noMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatch",
+    "correct": false
+   },
+   "P07": {
+    "expected": "noMatchDespiteSimilarity",
+    "verdict": {
+     "proposed_relation": "noMatchDespiteSimilarity",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatchDespiteSimilarity",
+    "correct": true
+   },
+   "P08": {
+    "expected": "noMatchDespiteSimilarity",
+    "verdict": {
+     "proposed_relation": "noMatchDespiteSimilarity",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatchDespiteSimilarity",
+    "correct": true
+   },
+   "P09": {
+    "expected": "noMatch",
+    "verdict": {
+     "proposed_relation": "noMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatch",
+    "correct": true
+   },
+   "P10": {
+    "expected": "noMatch",
+    "verdict": {
+     "proposed_relation": "noMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatch",
+    "correct": true
+   }
+  },
+  "n_correct": 4,
+  "promotions": [],
+  "false_escalations": [],
+  "jingle_specific": 2,
+  "E1_PASS": false,
+  "E1b_detection": {
+   "tp": 4,
+   "fn": 2,
+   "tn": 4,
+   "fp": 0,
+   "abstain": 0
+  },
+  "E1c_graded": 5.4
+ },
+ "tau1": {
+  "per_pair": {
+   "P01": {
+    "expected": "exactMatch",
+    "verdict": {
+     "proposed_relation": "exactMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "exactMatch",
+    "correct": true
+   },
+   "P02": {
+    "expected": "exactMatch",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "review_required",
+     "reason": "asymmetry-unconfirmed"
+    },
+    "display": "reviewRequired(asymmetry-unconfirmed)",
+    "correct": false
+   },
+   "P03": {
+    "expected": "broadnarrow(a)",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "review_required",
+     "reason": "unexplained-asymmetry"
+    },
+    "display": "reviewRequired(unexplained-asymmetry)",
+    "correct": false
+   },
+   "P04": {
+    "expected": "broadnarrow(b)",
+    "verdict": {
+     "proposed_relation": "broadnarrow",
+     "status": "asserted",
+     "reason": null,
+     "broader_side": "b"
+    },
+    "display": "broadnarrow(b)",
+    "correct": true
+   },
+   "P05": {
+    "expected": "relatedMatch",
+    "verdict": {
+     "proposed_relation": "relatedMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "relatedMatch",
+    "correct": true
+   },
+   "P06": {
+    "expected": "relatedMatch",
+    "verdict": {
+     "proposed_relation": "noMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatch",
+    "correct": false
+   },
+   "P07": {
+    "expected": "noMatchDespiteSimilarity",
+    "verdict": {
+     "proposed_relation": "noMatchDespiteSimilarity",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatchDespiteSimilarity",
+    "correct": true
+   },
+   "P08": {
+    "expected": "noMatchDespiteSimilarity",
+    "verdict": {
+     "proposed_relation": "noMatchDespiteSimilarity",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatchDespiteSimilarity",
+    "correct": true
+   },
+   "P09": {
+    "expected": "noMatch",
+    "verdict": {
+     "proposed_relation": "noMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatch",
+    "correct": true
+   },
+   "P10": {
+    "expected": "noMatch",
+    "verdict": {
+     "proposed_relation": "noMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatch",
+    "correct": true
+   }
+  },
+  "n_correct": 7,
+  "promotions": [],
+  "false_escalations": [],
+  "jingle_specific": 2,
+  "E1_PASS": true,
+  "E1b_detection": {
+   "tp": 5,
+   "fn": 1,
+   "tn": 4,
+   "fp": 0,
+   "abstain": 0
+  },
+  "E1c_graded": 8.4
+ },
+ "tau2": {
+  "per_pair": {
+   "P01": {
+    "expected": "exactMatch",
+    "verdict": {
+     "proposed_relation": "exactMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "exactMatch",
+    "correct": true
+   },
+   "P02": {
+    "expected": "exactMatch",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "review_required",
+     "reason": "asymmetry-unconfirmed"
+    },
+    "display": "reviewRequired(asymmetry-unconfirmed)",
+    "correct": false
+   },
+   "P03": {
+    "expected": "broadnarrow(a)",
+    "verdict": {
+     "proposed_relation": null,
+     "status": "review_required",
+     "reason": "unexplained-asymmetry"
+    },
+    "display": "reviewRequired(unexplained-asymmetry)",
+    "correct": false
+   },
+   "P04": {
+    "expected": "broadnarrow(b)",
+    "verdict": {
+     "proposed_relation": "broadnarrow",
+     "status": "asserted",
+     "reason": null,
+     "broader_side": "b"
+    },
+    "display": "broadnarrow(b)",
+    "correct": true
+   },
+   "P05": {
+    "expected": "relatedMatch",
+    "verdict": {
+     "proposed_relation": "relatedMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "relatedMatch",
+    "correct": true
+   },
+   "P06": {
+    "expected": "relatedMatch",
+    "verdict": {
+     "proposed_relation": "noMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatch",
+    "correct": false
+   },
+   "P07": {
+    "expected": "noMatchDespiteSimilarity",
+    "verdict": {
+     "proposed_relation": "noMatchDespiteSimilarity",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatchDespiteSimilarity",
+    "correct": true
+   },
+   "P08": {
+    "expected": "noMatchDespiteSimilarity",
+    "verdict": {
+     "proposed_relation": "noMatchDespiteSimilarity",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatchDespiteSimilarity",
+    "correct": true
+   },
+   "P09": {
+    "expected": "noMatch",
+    "verdict": {
+     "proposed_relation": "noMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatch",
+    "correct": true
+   },
+   "P10": {
+    "expected": "noMatch",
+    "verdict": {
+     "proposed_relation": "noMatch",
+     "status": "asserted",
+     "reason": null
+    },
+    "display": "noMatch",
+    "correct": true
+   }
+  },
+  "n_correct": 7,
+  "promotions": [],
+  "false_escalations": [],
+  "jingle_specific": 2,
+  "E1_PASS": true,
+  "E1b_detection": {
+   "tp": 5,
+   "fn": 1,
+   "tn": 4,
+   "fp": 0,
+   "abstain": 0
+  },
+  "E1c_graded": 8.4
+ }
+}

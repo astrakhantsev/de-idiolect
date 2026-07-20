@@ -1,0 +1,29 @@
+Three DEFINITIONS of the same concept at increasing specificity:
+
+DEFINITION L0 (genus only): A pre-aggregation quality-control check for multi-item agent-judged runs, used to prevent unreliable judgments from contributing to reported results.
+
+DEFINITION L1 (adds mechanism): A pre-aggregation quality-control check for multi-item agent-judged runs, used to prevent unreliable judgments from contributing to reported results. It inserts previously verified, known-answer cases into each batch, session, or block at defined counts or intervals, with no regular or predictable positions.
+
+DEFINITION L2 (adds measurement and conditions): A pre-aggregation quality-control check for multi-item agent-judged runs, used to prevent unreliable judgments from contributing to reported results. It inserts a set of previously verified, known-answer cases into a batch, session, or block at defined counts or intervals, such as several cases in a batch, twice in a session, every 100 items, or after 40 scored items; their positions are distributed without regularity or predictable placement. During scoring and before aggregate metrics are retained, it measures whether the judge or agent evaluates these cases correctly, including unsupported negative judgments and acceptance of incorrect responses as compliant or correct. Any incorrect judgment of a known case is a failure: the entire affected batch, session, or block is halted and excluded from aggregate analysis and metrics. It applies to agent-judged support-ticket batches and multi-domain work sessions, and reported aggregates retain only unaffected, unhalted items.
+
+Below are numbered excerpts from one community's documents in which one term — masked as ⟦TERM⟧ — is used (other local jargon masked ⟦X⟧). All excerpts use the SAME term from the SAME community.
+
+For EACH definition level INDEPENDENTLY, judge whether the excerpts TAKEN TOGETHER support that the referent of ⟦TERM⟧, as used across these excerpts, is an instance of that level's concept:
+
+- "covers" — the combined excerpts collectively instantiate the definition: each element that level commits to (kind; mechanism; measurement and conditions, as applicable) is evidenced SOMEWHERE in the set, and no excerpt contradicts it. Requires 2-4 verbatim quotes, each copied exactly from one numbered excerpt and prefixed with its number ("3: quoted text"), jointly carrying the evidence. Different quotes may come from different excerpts — evidence may accumulate across the set.
+- "contradicts" — at least one excerpt is incompatible with that level's definition (the referent has a property the definition excludes, or lacks one it requires). Requires the verbatim quote of the incompatible fragment, number-prefixed.
+- "insufficient" — even taken together, the excerpts do not decide for that level.
+
+Do not infer beyond what is written; a level's extra commitments need actual textual evidence, not plausibility.
+
+Output ONLY JSON:
+[{"level": "L0", "verdict": "covers|contradicts|insufficient", "quotes": ["1: ...", "5: ..."]},
+ {"level": "L1", "verdict": "...", "quotes": ["..."]},
+ {"level": "L2", "verdict": "...", "quotes": ["..."]}]
+
+EXCERPTS:
+1. That's not the model, that's the serving stack doing something nondeterministic downstream, probably batching-related, and it means our confidence numbers this month have that much slop baked in regardless of the actual reasoning quality. Ran a ⟦TERM⟧ right after to sanity-check the scorer while we were at it. Randomized every timestamp, run id, and output filename we could find and reran the same 80 tasks.
+2. Given the concurrency pattern above, I'd bet money it does. Ran a ⟦TERM⟧ on the tier anyway just to rule out the boring explanation. Randomized filenames and commit hashes across all 60 items and reran.
+3. Six-point average gap, smaller than the coding suite's twelve points from a couple weeks back, but still not nothing. Threw a ⟦TERM⟧ at the whole tier afterward, randomizing item ids and filenames, and scores held flat, so at least that's not contaminated.
+4. Threw a ⟦TERM⟧ at the whole tier afterward, randomizing item ids and filenames, and scores held flat, so at least that's not contaminated. Finally logged all of this in the ⟦X⟧ before I forgot which changes went with which result — the ration bump, the twin rewordings, the ⟦TERM⟧ pass, all timestamped separately, because last time I skipped this step I spent a whole day re-deriving what I'd already tested.
+5. Not worth the convenience anymore. ⟦TERM⟧ on the full remaining suite came back clean, no score movement under randomized ids and filenames, which is one less thing to worry about heading into next quarter.

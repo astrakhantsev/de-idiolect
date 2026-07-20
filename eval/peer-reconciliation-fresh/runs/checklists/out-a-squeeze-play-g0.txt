@@ -1,0 +1,5 @@
+- Mechanism: mid-run, silently cuts the agent's remaining token budget in half at a specific trigger point during the task (e.g., after reading/before drafting, at a file-open count, or at final-response drafting).
+- Measures/produces: whether the agent adapts (e.g., switches to terser/compressed output) versus fails to adjust (truncates mid-sentence, gets cut off mid-trace, or blows through the limit); scored as success/failure based on this reaction.
+- Setting/trigger: applied during live agent task runs on benchmark suites (e.g., contract-review, navigation, multi-agent tasks), triggered at a chosen point mid-task rather than at the start.
+- Constraint: the cut is silent/unannounced to the agent — no explicit warning is given before the budget is halved.
+- Constraint: the reduction is a halving of the remaining budget, applied once per run at the chosen trigger point.

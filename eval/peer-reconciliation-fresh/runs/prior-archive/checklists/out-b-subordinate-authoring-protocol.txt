@@ -1,0 +1,6 @@
+- Weaker/held-out task generators (not the evaluated agents) produce the task specifications or scenarios under this protocol.
+- Executable checks/validators are required and are withheld from the evaluated agents being tested.
+- Generators are prevented from observing evaluated-agent traces during task creation.
+- The protocol is rerun (with newly sampled generators and fresh validators) across model families/rounds to prevent one task-writing distribution from dominating results.
+- Generated tasks are filtered for execution validity and duplicate surface form, and further reviewed by humans to reject ambiguous cases (e.g., 11% rejected for ambiguous state transitions).
+- Applies to producing large batches of task specifications (e.g., 2,160 or 1,740 tasks) for evaluating agents, including data-management scenarios.

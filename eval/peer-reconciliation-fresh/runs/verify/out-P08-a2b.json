@@ -1,0 +1,12 @@
+Looking at the excerpts, the ⟦TERM⟧ referent is consistently a set of *previously verified / known-answer cases embedded into each batch or session*, evaluated inline and used to *halt* batches when known cases receive wrong judgments. This is a gold/canary-set mechanism — not a follow-up rerun with randomized non-semantic identifiers compared against original scores. So where the mechanism is spelled out, it contradicts the defined concept; where only a passing mention appears, there is too little to decide.
+
+```json
+[
+  {"excerpt": 1, "L0": "contradicts", "L1": {"verdict": "contradicts", "quote": "Each batch included a ⟦TERM⟧ containing eight previously verified cases distributed without positional regularity."}, "L2": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ was evaluated before aggregate metrics were retained, and three batches were halted after two known cases received unsupported negative judgments."}},
+  {"excerpt": 2, "L0": "contradicts", "L1": {"verdict": "contradicts", "quote": "Each batch included a ⟦TERM⟧ containing eight previously verified cases distributed without positional regularity."}, "L2": {"verdict": "contradicts", "quote": "three batches were halted after two known cases received unsupported negative judgments"}},
+  {"excerpt": 3, "L0": "insufficient", "L1": {"verdict": "insufficient", "quote": ""}, "L2": {"verdict": "insufficient", "quote": ""}},
+  {"excerpt": 4, "L0": "contradicts", "L1": {"verdict": "contradicts", "quote": "A ⟦TERM⟧ was inserted twice per session, using verified items whose answers were absent from the session briefing."}, "L2": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ halted six sessions after judges accepted an incorrect configuration change as compliant."}},
+  {"excerpt": 5, "L0": "contradicts", "L1": {"verdict": "contradicts", "quote": "A ⟦TERM⟧ was inserted twice per session, using verified items whose answers were absent from the session briefing."}, "L2": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ halted six sessions after judges accepted an incorrect configuration change as compliant."}},
+  {"excerpt": 6, "L0": "insufficient", "L1": {"verdict": "insufficient", "quote": ""}, "L2": {"verdict": "insufficient", "quote": ""}}
+]
+```

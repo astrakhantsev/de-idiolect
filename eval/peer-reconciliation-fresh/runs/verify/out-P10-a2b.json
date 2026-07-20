@@ -1,0 +1,12 @@
+Looking at each excerpt, ⟦TERM⟧ is consistently an item-level, annotator/adjudicator-assigned label that predicts failures and can be revised — a difficulty/failure-prediction annotation. This is a fundamentally different kind of thing from a configurable enforcement cap on file reopens (which is a global config setting, an enforcement mechanism, not a per-item human annotation).
+
+```json
+[
+  {"excerpt": 1, "L0": "contradicts", "L1": {"verdict": "contradicts", "quote": "Items carried a ⟦TERM⟧ assigned independently by two annotators before deployment."}, "L2": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ predicted 71% of observed failures among lower-tier agents"}},
+  {"excerpt": 2, "L0": "contradicts", "L1": {"verdict": "contradicts", "quote": "Items carried a ⟦TERM⟧ assigned independently by two annotators before deployment."}, "L2": {"verdict": "contradicts", "quote": "Disagreements were concentrated in items involving chained browser actions rather than answer extraction."}},
+  {"excerpt": 3, "L0": "contradicts", "L1": {"verdict": "contradicts", "quote": "report only items whose ⟦TERM⟧ was stable across adjudicators"}, "L2": {"verdict": "contradicts", "quote": "report only items whose ⟦TERM⟧ was stable across adjudicators"}},
+  {"excerpt": 4, "L0": "contradicts", "L1": {"verdict": "contradicts", "quote": "Every item received a ⟦TERM⟧ before model results were inspected."}, "L2": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ was revised for 4.7% of items after annotators discovered hidden dependencies on unavailable credentials."}},
+  {"excerpt": 5, "L0": "contradicts", "L1": {"verdict": "contradicts", "quote": "Every item received a ⟦TERM⟧ before model results were inspected."}, "L2": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ was revised for 4.7% of items after annotators discovered hidden dependencies on unavailable credentials."}},
+  {"excerpt": 6, "L0": "contradicts", "L1": {"verdict": "contradicts", "quote": "Failures below an agent's ⟦TERM⟧ were flagged for audit rather than treated as ordinary misses."}, "L2": {"verdict": "contradicts", "quote": "several agents completed higher-tier items through narrow memorized procedures while failing lower-tier tasks requiring unfamiliar tool states."}}
+]
+```

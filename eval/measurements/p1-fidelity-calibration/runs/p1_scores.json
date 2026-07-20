@@ -1,0 +1,130 @@
+{
+  "per_config": {
+    "A1": {
+      "status": "PASS",
+      "failed_items": [],
+      "detail": {
+        "i": "PRESERVED \u2014 the notes frame the decision as \"how good must a dependence estimate be before it beats simply not having on",
+        "ii": "PRESERVED \u2014 the notes condition on a stated accuracy level (\"An estimator needs log-count RMSE \u2272 0.3\"; \"past ~1.0 it bec",
+        "iii": "PRESERVED \u2014 the notes state the detector \"is SIMULATED, not run\" and \"asks 'would an estimator this accurate suffice?'\",",
+        "iv": "PRESERVED \u2014 the notes have explicit threshold structure (\"Both estimators clear the bar\"; \"past ~1.0 it becomes WORSE TH",
+        "v": "PASS \u2014 the candidate introduces no benchmark, dataset, or metric specifics; it stays generic (\"a fixed default number,\" ",
+        "vi": "[]"
+      }
+    },
+    "A2": {
+      "status": "PASS",
+      "failed_items": [],
+      "detail": {
+        "i": "PRESERVED \u2014 the candidate frames it as deciding \"whether to invest in a tool,\" matching the notes' core question \"how go",
+        "ii": "PRESERVED \u2014 the candidate conditions the decision on \"a stated level of typical error,\" matching \"An estimator needs log",
+        "iii": "PRESERVED \u2014 the candidate says the input is obtained \"by simulating a tool of that accuracy, not by running a finished t",
+        "iv": "PRESERVED \u2014 the candidate's \"commit to building the tool only if its expected accuracy clears the bar\" matches the thres",
+        "v": "PASS \u2014 the candidate states the degradation tiers only qualitatively (\"small... moderate... beyond a known level\") and i",
+        "vi": "[]"
+      }
+    },
+    "A3": {
+      "status": "PASS",
+      "failed_items": [],
+      "detail": {
+        "i": "PRESERVED \u2014 The notes' central question is \"how good must a dependence estimate be before it beats simply not having one",
+        "ii": "PRESERVED \u2014 The notes condition the payoff on a stated accuracy level (\"An estimator needs log-count RMSE \u2272 0.3 to keep ",
+        "iii": "PRESERVED \u2014 The notes evaluate the tool before it is actually run or built: \"The detector is SIMULATED, not run... It ta",
+        "iv": "PRESERVED \u2014 The notes state an act-if-clears bar with a break-even point (\"past ~1.0 it becomes WORSE THAN NO ESTIMATOR\"",
+        "v": "PASS \u2014 The candidate is stated entirely in abstract notation (x\u0302, e, t, d, g(e), e\u2020) and its only quantitative claims (\"",
+        "vi": "[]"
+      }
+    },
+    "A4": {
+      "status": "PASS",
+      "failed_items": [],
+      "detail": {
+        "i": "PRESERVED \u2014 the notes frame exactly this worth-of-having decision: \"how good must a dependence estimate be before it bea",
+        "ii": "PRESERVED \u2014 the check is explicitly conditioned on an accuracy level: the simulation \"asks 'would an estimator this accu",
+        "iii": "PRESERVED \u2014 the notes make it prospective/hypothetical rather than a test of a produced estimate: \"The detector is SIMUL",
+        "iv": "PRESERVED \u2014 the notes give explicit threshold structure: an estimator clearing \"log-count RMSE \u2272 0.3\" keeps most of the ",
+        "v": "PASS \u2014 the candidate is stated in generic terms only (\"a fixed bar\", \"keep most of the benefit\", \"about half\") and intro",
+        "vi": "[]"
+      }
+    },
+    "S-a": {
+      "status": "FAIL",
+      "failed_items": [
+        "iii"
+      ],
+      "detail": {
+        "i": "PRESERVED \u2014 The candidate frames the ceiling as governing whether an estimate is \"worth using\" versus falling back to \"a",
+        "ii": "PRESERVED \u2014 The candidate conditions the decision on \"how wrong a count-style estimate may typically be,\" mirroring the ",
+        "iii": "NOT-PRESERVED \u2014 The candidate makes the decision retrospective (\"Once a tool has produced its estimate, the user measure",
+        "iv": "PRESERVED \u2014 The candidate's tiered structure (\"If the measured error stays under the ceiling ... near a middle level it ",
+        "v": "PASS \u2014 The candidate states the tiers only in generic terms (\"ceiling,\" \"middle level,\" \"most of its potential benefit,\"",
+        "vi": "[]"
+      }
+    },
+    "S-b": {
+      "status": "FAIL",
+      "failed_items": [
+        "iv"
+      ],
+      "detail": {
+        "i": "PRESERVED \u2014 the notes frame the core question as \"how good must a dependence estimate be before it beats simply not havi",
+        "ii": "PRESERVED \u2014 the notes condition on accuracy (\"An estimator needs log-count RMSE \u2272 0.3\" and it \"takes the true planted co",
+        "iii": "PRESERVED \u2014 the notes are explicitly prospective (\"The detector is SIMULATED, not run\", asked in a \"cold-start setting (",
+        "iv": "NOT-PRESERVED \u2014 the notes have explicit threshold structure (\"keep ~85% of that prize; ~0.6 keeps half; past ~1.0 it bec",
+        "v": "PASS \u2014 the definition uses only generic language (\"a fixed default number\", \"typical-error level\") and introduces no ben",
+        "vi": "[]"
+      }
+    },
+    "S-c": {
+      "status": "FAIL",
+      "failed_items": [
+        "iv"
+      ],
+      "detail": {
+        "i": "PRESERVED \u2014 The notes frame exactly this build-or-not decision: \"how good must a dependence estimate be before it beats ",
+        "ii": "PRESERVED \u2014 The decision is conditioned on a stated accuracy level, per the notes: \"An estimator needs log-count RMSE \u2272 ",
+        "iii": "PRESERVED \u2014 The notes make it prospective: the detector \"is SIMULATED, not run\" and it \"asks 'would an estimator this ac",
+        "iv": "NOT-PRESERVED \u2014 The candidate inverts the threshold direction, saying \"build the tool only when its typical error exceed",
+        "v": "PASS \u2014 The candidate introduces no benchmark, dataset, or metric specifics beyond the excerpts; its qualitative grading ",
+        "vi": "[]"
+      }
+    },
+    "S-d": {
+      "status": "FAIL",
+      "failed_items": [
+        "vi"
+      ],
+      "detail": {
+        "i": "PRESERVED",
+        "ii": "PRESERVED",
+        "iii": "PRESERVED",
+        "iv": "PRESERVED",
+        "v": "PASS",
+        "vi": "[\"Neyman\\u2013Pearson\", \"acceptance test\", \"signal detection literature / classical signal detection\"]"
+      }
+    },
+    "S-e": {
+      "status": "FAIL",
+      "failed_items": [
+        "v"
+      ],
+      "detail": {
+        "i": "PRESERVED \u2014 The notes frame exactly this decision: \"how good must a dependence estimate be before it beats simply not ha",
+        "ii": "PRESERVED \u2014 The notes condition on a stated accuracy level (\"An estimator needs log-count RMSE \u2272 0.3 to keep ~85% of tha",
+        "iii": "PRESERVED \u2014 The notes' test is explicitly pre-build and hypothetical: \"The detector is SIMULATED, not run... corrupts it",
+        "iv": "PRESERVED \u2014 The notes state a bar with act/don't-act sides (\"past ~1.0 it becomes WORSE THAN NO ESTIMATOR\"; \"Both estima",
+        "v": "UNSUPPORTED-ADDITION \u2014 The candidate invents metric and dataset specifics found nowhere in the notes (\"typical percentag",
+        "vi": "[]"
+      }
+    }
+  },
+  "preregistered": {
+    "fp_rate_faithful": "0/4",
+    "detection_rate_seeded": "5/5",
+    "attribution_rate_seeded": "5/5"
+  },
+  "exploratory": {
+    "strict_isolation_catches": "5/5"
+  }
+}

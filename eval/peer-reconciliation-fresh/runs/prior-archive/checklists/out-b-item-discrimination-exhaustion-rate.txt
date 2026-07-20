@@ -1,0 +1,6 @@
+- Mechanism: computed after each evaluation round (and separately within each task tier) by measuring the proportion of suite items that have become "exhausted" — i.e., solved universally/reliably across model releases (e.g., basic API-formatting or simple retrieval/formatting items).
+- Produced/scored: a single numeric value between 0 and 1 (observed range ~0.18–0.46) representing the fraction of exhausted items, read/tracked over time and per tier.
+- Applies at: suite maintenance time, after each evaluation round, across successive model releases, and can be broken down per task tier (e.g., entry-tier vs. highest tier).
+- Constraint: items above the exhaustion threshold are excluded from the primary ranking but retained for longitudinal reporting.
+- Constraint: removing exhausted items increases rank stability across weekly reruns.
+- Constraint: the value can differ sharply by tier (e.g., 0.46 for entry-tier vs. below 0.20 for the highest tier), showing maintenance pressure concentrates in simpler tasks.

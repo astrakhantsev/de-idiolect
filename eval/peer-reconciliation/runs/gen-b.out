@@ -1,0 +1,98 @@
+<<<DOC 01>>>
+# Notebook Stability Under Long-Horizon Retrieval
+
+We evaluated 48 agent trajectories on ArchiveBench, which required assembling a dated evidence table from eight repositories. A drift audit was recorded after each retrieval, extraction, and table-editing call. The drift audit identified a first plan-action mismatch in 17 trajectories, most often after an agent broadened its search without updating the stated inclusion rule.
+
+Intermediate assertion persistence ratio was computed over all scratchpad claims retained in the execution trace. The median intermediate assertion persistence ratio was 0.74, with lower values concentrated in runs that copied provisional dates into the final table. To test containment, each trajectory received one malformed citation record after the fourth repository query. The seeded-defect audit was passed by 39 agents, whose final tables excluded the malformed record or explicitly marked it unresolved.
+
+Seven failures in the seeded-defect audit propagated the record into a derived chronology despite later retrieval evidence contradicting it. Memory paraphrase perturbation was applied immediately before the synthesis stage using a smaller-model rewrite of the retained notes. Under memory paraphrase perturbation, exact-match table accuracy declined from 71% to 54%, especially when the paraphrase softened source-status qualifiers. The resulting degradation was not explained by retrieval count, which remained effectively unchanged across paired runs.
+
+<<<DOC 02>>>
+# Evidence Ordering in Multi-Source Reconciliation
+
+This experiment used 120 claims with four independently retrievable supporting records. A drift audit followed every tool result and compared the next call with the agent’s most recently stated reconciliation sequence. The drift audit flagged 22 runs in which the agent declared that it would verify conflicts before drafting, then drafted before opening the conflicting source.
+
+Judges applied a line-anchored rubric to the full transcript rather than to the final response alone. Under the line-anchored rubric, unsupported conflict resolution received no credit unless the cited transcript line contained the relevant retrieved evidence. We also measured self-contradiction incidence against outputs from the agent’s own search and database tools. Self-contradiction incidence was 0.18 per run, rising to 0.31 when the evidence table contained near-duplicate identifiers.
+
+Equivalent records were shuffled across three harness repetitions. Permutation sensitivity collapse reduced end-to-end success from 68% in the fixed-order condition to 43% in the shuffled condition. In affected trajectories, agents frequently committed to the first returned record, then treated later equivalent records as exceptions rather than corroboration. The ordering effect persisted after controlling for token budget and total tool-call count.
+
+<<<DOC 03>>>
+# Judge Traceability During Missing-Field Tasks
+
+Agents completed a form-filling task in which two required provenance fields were unavailable in the initial prompt. Specification occlusion was applied to those fields while preserving access to a repository that could supply them. Under specification occlusion, 61% of agents sought additional evidence before submitting, whereas 29% inferred values from neighboring records.
+
+A line-anchored rubric required every scoring decision to point to the transcript line supporting the criterion. The line-anchored rubric reduced apparent completion accuracy by 11 percentage points because several previously accepted outputs lacked any traceable basis for their inferred fields. Intermediate assertion persistence ratio was calculated from planning notes, extraction notes, and draft justifications. The intermediate assertion persistence ratio averaged 0.69 in successful retrieval-first runs and 0.38 in inference-first runs.
+
+We introduced fixed delays to selected repository interfaces while holding returned content constant. Instrumentation latency steering shifted query selection toward the uninstrumented archive, even when that archive contained fewer relevant fields. The magnitude of instrumentation latency steering was largest for agents using short tool-selection horizons, where a 900 ms delay changed the preferred first query in 27% of paired runs. This limits interpretation of observed search policies in heavily instrumented evaluations.
+
+<<<DOC 04>>>
+# Containment in Structured Artifact Repair
+
+The repair benchmark asked agents to correct inconsistencies in a transaction ledger while preserving valid rows. A seeded-defect audit inserted one syntactically valid but semantically corrupted exchange-rate row after the initial validation step. The seeded-defect audit pass rate was 0.81, based solely on whether the final ledger quarantined or flagged that row.
+
+Self-contradiction incidence was measured against calculator and ledger-parser outputs generated earlier in the same trajectory. Self-contradiction incidence reached 0.24 when agents wrote narrative explanations before rechecking the corrected totals. To examine interface effects, the parser was delayed by 1.2 seconds in a matched condition. Instrumentation latency steering reduced parser use by 19% and increased reliance on manual arithmetic.
+
+Memory paraphrase perturbation replaced the retained repair plan after the corrupted row had been encountered but before final export. Following memory paraphrase perturbation, containment fell by 14 percentage points because paraphrased notes often omitted the row identifier while retaining its numerical anomaly. The effect was strongest when the original trace contained multiple tentative explanations. No comparable decline appeared when the perturbation occurred after export preparation.
+
+<<<DOC 05>>>
+# Tool Delays in Citation Consolidation
+
+We studied citation consolidation across a web index, a metadata service, and a local parser. Instrumentation latency steering was induced by adding 750 ms to one service while preserving response content and error behavior. Instrumentation latency steering caused agents to select the delayed service 23% less often, even when it had the highest probability of resolving author ambiguities.
+
+A drift audit was applied after each service call and after every revision to the citation table. The drift audit showed that agents frequently continued following an obsolete source-priority plan after bypassing the delayed service. Judges then scored the resulting tables with a line-anchored rubric. The line-anchored rubric exposed that 16% of accepted author merges lacked a transcript line supporting the selected identity.
+
+We injected malformed parser outputs into a small subset of records that no judge could parse. A ghost pass appeared in 7% of these cases under the legacy grader, which returned credit rather than an explicit parsing failure. After removing the fallback branch, ghost pass counts fell to zero, although overall scoring coverage decreased by 3 percentage points. This correction changed reported accuracy more than any individual model comparison in the study.
+
+<<<DOC 06>>>
+# Robustness of Spreadsheet Verification
+
+Agents verified a budget spreadsheet with cross-sheet formulas and supporting invoices. Intermediate assertion persistence ratio was estimated over all stated subtotal checks and provenance notes. The intermediate assertion persistence ratio was 0.77 for runs that maintained a single reconciliation table, compared with 0.46 for runs that restated totals in prose.
+
+A seeded-defect audit placed one invoice with a duplicated line item into the input bundle midway through verification. In the seeded-defect audit, 34 of 50 agents isolated the duplicate before producing the final spreadsheet. Self-contradiction incidence was computed when final totals disagreed with a calculator or formula-inspection output from the same run. Self-contradiction incidence was 0.12 among containment passes and 0.37 among containment failures.
+
+We randomized the order of otherwise equivalent invoice-search results across five repetitions. Permutation sensitivity collapse reduced correct duplicate detection from 76% to 49%, despite unchanged invoice content. The collapse was concentrated in agents that selected the first matching invoice as canonical without cross-checking the remaining results. The experiment therefore separates stable numerical verification from order-dependent document selection.
+
+<<<DOC 07>>>
+# Ambiguity Resolution Under Delayed Access
+
+The benchmark withheld a jurisdiction field needed to classify policy excerpts. Specification occlusion was maintained until agents either requested the field from the provided archive or completed their answer. Under specification occlusion, 44% of agents queried the archive, while the remainder assigned a jurisdiction from contextual cues.
+
+Every answer was evaluated using a line-anchored rubric linked to the exact lines containing source evidence and requested-field handling. The line-anchored rubric penalized plausible classifications when no transcript line showed retrieval or an explicit unresolved-field statement. A seeded-defect audit inserted one archive record whose jurisdiction label conflicted with its body text. The seeded-defect audit pass rate was 0.72, with successful agents either quarantining the record or documenting the conflict.
+
+Instrumentation latency steering was tested by delaying the archive only after the first ambiguous excerpt. Instrumentation latency steering lowered archive consultation by 16 percentage points and increased unsupported classifications accordingly. This design cannot distinguish whether agents avoided delay itself or used the delay as a cue that the archive was less useful. Nevertheless, the paired traces show that access timing altered both evidence collection and final uncertainty reporting.
+
+<<<DOC 08>>>
+# Ordering Effects in Planning-Trace Evaluation
+
+We evaluated agents that assembled a three-stage travel reimbursement decision from equivalent policy excerpts. A drift audit compared each executed call with the plan stated immediately before it. The drift audit found that 28% of failures began when an agent moved from eligibility checking to reimbursement calculation without revising its stated dependency order.
+
+Intermediate assertion persistence ratio was measured across provisional eligibility conclusions and amount calculations. The intermediate assertion persistence ratio declined from 0.71 to 0.45 when the second policy excerpt arrived before the first, because early conclusions were later reversed. Equivalent excerpts were then permuted across repeated runs without changing their content. Permutation sensitivity collapse reduced full-task accuracy by 25 percentage points, primarily through different choices of which rule to treat as controlling.
+
+We also replayed transcripts through a grader with intentionally malformed answer spans. A ghost pass occurred when the grader could not parse a span yet returned a correct label through its default branch. Ghost pass frequency was 0.06 before the parser guard was added and zero afterward. The correction reduced reported success for all models, indicating that prior rankings partly reflected unjudged outputs rather than verified decisions.
+
+<<<DOC 09>>>
+# Joint Trace Audit for Data Curation
+
+The integrated study used a curation task with conflicting records, evolving notes, and one corrupted artifact. A drift audit was emitted after every retrieval and transformation call. The drift audit located an initial action-plan divergence in 31% of trajectories. Intermediate assertion persistence ratio was calculated over all retained claims about record validity. The intermediate assertion persistence ratio averaged 0.58 among runs with a detected divergence and 0.81 among aligned runs.
+
+A line-anchored rubric required evaluators to attach every credit decision to a transcript line. The line-anchored rubric removed credit from answers whose final citations were absent from the trace. A seeded-defect audit inserted a corrupted identifier after the third transformation. The seeded-defect audit produced binary containment scores, with 67% of agents preventing the identifier from reaching the export.
+
+Self-contradiction incidence compared the export with tool outputs from the same trajectory. Self-contradiction incidence was 0.29 for failed containment runs and 0.08 for passed runs. The correlations should not be interpreted causally, since repeated verification behavior affected all five measures. Nonetheless, the combined trace identifies whether an apparent curation success rested on evidence, stable notes, and containment.
+
+<<<DOC 10>>>
+# Interface Perturbations in Retrieval-and-Export Runs
+
+Agents retrieved technical records, selected supporting fields, and exported a structured answer. Instrumentation latency steering was induced by delaying one high-coverage retrieval tool after its first successful result. Instrumentation latency steering reduced its later selection rate from 0.46 to 0.27. Memory paraphrase perturbation replaced working notes immediately before field selection. Under memory paraphrase perturbation, export accuracy declined by 13 percentage points despite unchanged retrieval evidence.
+
+Equivalent tool results were randomized among repetitions. Permutation sensitivity collapse lowered exact export success from 64% to 41%, with the largest losses among agents that committed to the first presented schema. A ghost pass was observed when malformed exports bypassed the grader’s schema parser. The ghost pass rate was 0.09 in the original configuration and zero after explicit parser-failure handling.
+
+Specification occlusion withheld a required unit convention from the initial task materials. With specification occlusion, successful agents queried the documentation tool before normalizing values, whereas unsuccessful agents assumed a default unit. The interaction between delays and withheld information was substantial: agents facing both conditions sought documentation less often than agents facing specification occlusion alone. Thus, measured information-seeking behavior was sensitive to the evaluation interface as well as the available evidence.
+
+<<<DOC 11>>>
+# Stress Test of End-to-End Agent Evaluation
+
+The final stress test combined hidden requirements, reordered evidence, malformed artifacts, and transcript-based scoring. A drift audit was collected after each tool call across all 200 runs. The drift audit identified a first departure from the declared procedure in 36% of failed runs. A line-anchored rubric was used for every outcome criterion. The line-anchored rubric prevented judges from awarding credit based solely on a polished final explanation.
+
+Each run received a corrupted artifact during synthesis. The seeded-defect audit recorded a pass only when the final output quarantined or flagged that artifact. Self-contradiction incidence was then calculated against the agent’s own earlier tool outputs. Self-contradiction incidence was 0.22 overall and 0.41 among seeded-defect audit failures.
+
+A ghost pass was detected when an unparseable final artifact received default positive credit. Removing the ghost pass path lowered aggregate success from 62% to 56%. Specification occlusion withheld one required source attribute while leaving a route to obtain it available. Under specification occlusion, 52% of agents sought the missing attribute before finalizing, but this rate fell when the corrupted artifact appeared first. These interacting manipulations limit any interpretation of a single score as a complete account of reliable task behavior.

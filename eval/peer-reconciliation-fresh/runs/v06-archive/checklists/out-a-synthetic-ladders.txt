@@ -1,0 +1,6 @@
+- A model generates new benchmark items by taking existing items (e.g., an easy-tier or baseline set) as seed input and producing variant/harder items from them, without a human authoring the item from scratch.
+- Applies specifically to filling gaps in benchmark item "census" (item pools), especially the mid-difficulty tier where hand-authoring throughput is worst.
+- Runs as a batch process ("queued overnight"), producing a set of items per run that can be evaluated for difficulty and re-run with harder seeds if too easy.
+- Output items are scored/assessed via pass rates (when used in an "adversarial" tier) and via spread of some measured metric compared against a hand-authored baseline.
+- Items produced this way require validation against real-world/production cases before being trusted as still "live" — unvalidated items are flagged as a liability.
+- A single generation run can produce a large, fixed count of items (e.g., 60) that fully substitute for an entire tier without any human-written items in that batch.

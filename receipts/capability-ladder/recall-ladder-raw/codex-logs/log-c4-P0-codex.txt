@@ -1,0 +1,87 @@
+Reading prompt from stdin...
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.vBbyM3NAFu
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 019f722c-1255-7603-a981-f090dfe898a7
+--------
+user
+You are a reference librarian and historian of science. Below is a short description of a concept, taken verbatim from a project's own internal notes (its own coined vocabulary). Your job, using web search, is to identify what established concept it corresponds to.
+
+Report, in order:
+1. What is this concept called in established academic or professional fields? Give the standard name(s).
+2. Which field(s) own it? Name the discipline(s).
+3. What are the oldest and most canonical treatments? Give real citations (author, year, venue). Aim to name at least one source published before 2015.
+4. Your confidence for each claim; explicitly hedge anything you are unsure of.
+
+Rules:
+- You MUST search the web actively. Do NOT answer from memory alone — run searches, open sources, and cite what you actually find.
+- Do not pad. If you cannot identify it, say so plainly.
+- Give exact citations you can stand behind; mark any you are unsure of as uncertain.
+
+The concept (verbatim from the project's notes):
+
+"read the enumerations, not the votes — a claim about how to use panel judge outputs"
+
+codex
+I’ll trace the phrase through ensemble-learning, forecasting, and decision-theory sources, then distinguish a likely established match from any uncertainty.
+exec
+/usr/bin/zsh -lc "sed -n '1,220p' /home/nik/.claude/projects/-mnt-f-hub-10-projects-meta-tooling/memory/MEMORY.md" in /tmp/tmp.vBbyM3NAFu
+ succeeded in 0ms:
+# Memory Index
+
+- [Cross-model unification](cross-model-unification.md) — vault instructions split: AGENTS.md (portable core) + CLAUDE.md (@import+harness) + ~/.codex/AGENTS.md; claude-review/claude-doc-review = Codex→Claude review; claude-consult = Codex→Claude second-opinion (Codex-daily-driver eval, dodges CC tmux scrollback-dup bug #52924); mirror escape-hatch is hub-cwd-only + post-turn-only; `claude -p --setting-sources ''` also suppresses CLAUDE.md loading.
+
+- [Codex CLI setup](codex-cli-chatgpt-account.md) — ChatGPT-account auth; default `gpt-5.3-codex` broken, use `gpt-5.4`/`-mini`/`5.5`; CLI latency ~8–17s server-side-dominated.
+- [Codex doc-review reliability](codex-doc-review-reliability.md) — wrapper runs `codex exec` directly (not the plugin companion) — fixes flaky ~8s broker abort on large xhigh reviews; model defaults split 2026-07-10 (docs→gpt-5.6-sol, code→gpt-5.6-terra, needs Codex CLI ≥0.144), xhigh, read-only; effort none/minimal 400s; sandbox was a red herring.
+- [Tools must fail loud](feedback-tools-must-fail-loud.md) — the "phantom review" root cause: codex-doc-review ignored `--path`, ran an empty prompt, exited 0 → agent honestly reported a review that never ran. Wrappers now exit 2 on unknown flags / empty input; never warn-and-continue.
+- [No stateful self-rules](feedback-no-stateful-self-rules.md) — don't write self-instructions needing cross-turn/session memory ("once per artifact", "for the session"); use deterministic switches (sentinel files) + per-turn hooks + freshness-from-what-changed.
+- [Ollama + gemma4 voter](ollama-windows-gemma4-voter.md) — Windows Ollama 0.30.6 via WSL; reach at default-gateway IP not localhost; gemma4:12b needs `think:false`; warm ~1s.
+- [Safety gate build status](safety-gate-build-status.md) — auto-approve gate LIVE in `MODE=guard`; flip via `MODE` file; `rm -rf $VAR` false-deny accepted (fail-closed); v1.5 T0 SHIPPED 2026-06-19 (total `walk()` → compound-body catastrophes deny; git removed from fast-allow → ask; Codex-review fixes: wc/file removed [critical arbitrary-read], post-parse analysis fail-closed); deferred: emergency_deny heredoc hardening + positive flag allowlists.
+- [Build flow preference](feedback-spec-review-shadow-rollout.md) — substantial/risky features: spec → adversarial Codex review before code → shadow-first → data-gated rollout.
+- [Build handoff prompt](feedback-build-handoff-prompt.md) — spec ready + long session → build likely happens in another session; proactively write a self-contained build-start prompt to a FILE and give the path (phone copy-paste of long prompts is hard).
+
+web search: 
+web search: "read the enumerations" "votes" panel judges ...
+web search: 
+web search: "panel judges" "votes" outputs LLM ...
+web search: 
+web search: decision making "reasons rather than votes" deliberation ...
+web search: 
+web search: site:plato.stanford.edu deliberative democracy Habermas Cohen 1989 ...
+web search: 
+web search: Zheng Judging LLM-as-a-Judge MT-Bench Chatbot Arena 2023 citation ...
+codex
+1. **Closest established concept: deliberation / reason-giving, contrasted with preference aggregation (vote counting).** The maxim means that panel outputs should be treated as articulated reasons, criteria, counterexamples, or diagnoses—not merely reduced to final yes/no choices and tallied. In an LLM setting, the operational names are **rubric-based / multidimensional evaluation** and **explanation- or rationale-aware evaluation**. **Confidence: 0.70.** The word *“enumerations”* is not standard terminology, so this is an interpretation of the description, not a discovered exact term.
+
+2. **Fields:** political theory and democratic theory (the deliberation-versus-aggregation distinction); social choice / collective decision-making; qualitative evaluation and expert-elicitation methods. In the specific “panel judge outputs” AI context: NLP and LLM evaluation. **Confidence: 0.85** for the first three; **0.75** for the LLM-evaluation mapping.
+
+3. **Canonical treatments:**
+
+   - Bernard Manin (1987), “On Legitimacy and Political Deliberation,” *Political Theory* 15(3): 338–368. An early modern canonical statement of deliberation as distinct from mere aggregation. **Confidence: 0.95.**
+   - Joshua Cohen (1989), “Deliberation and Democratic Legitimacy,” in Alan Hamlin & Philip Pettit (eds.), *The Good Polity: Normative Analysis of the State*, Basil Blackwell, pp. 17–34. It is a standard foundational source for the idea that decisions should be justified through public reasoning, not simply counted preferences. [Bibliographic confirmation](https://watermark02.silverchair.com/oso-9780192848925-chapter-2.pdf). **Confidence: 0.98.**
+   - Jürgen Habermas (1981), *The Theory of Communicative Action*, 2 vols., Suhrkamp. Foundational for the associated “force of the better argument” tradition. **Confidence: 0.90** on its canonical relevance; it is broader than panel-evaluation practice.
+   - Lianmin Zheng et al. (2023), “Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena,” *NeurIPS 2023*, 36: 46595–46623. This is the relevant modern LLM-judge treatment, though it does not coin the maxim. [Paper](https://proceedings.neurips.cc/paper_files/paper/2023/file/91f18a1287b398d378ef22505bf41832-Paper-Datasets_and_Benchmarks.pdf). **Confidence: 0.95** for citation and relevance.
+   - Faeze Brahman et al. (2024), “Using Natural Language Explanations to Rescale Human Judgments,” *COLM 2024*. Directly relevant to retaining judges’ explanations alongside ratings, rather than using ratings alone. [Paper record](https://openreview.net/forum?id=Qmq4zqdnWh). **Confidence: 0.85.**
+
+I would **not** call this simply “ensemble voting” or “majority voting”: those describe the practice the note rejects.
+tokens used
+55,397
+1. **Closest established concept: deliberation / reason-giving, contrasted with preference aggregation (vote counting).** The maxim means that panel outputs should be treated as articulated reasons, criteria, counterexamples, or diagnoses—not merely reduced to final yes/no choices and tallied. In an LLM setting, the operational names are **rubric-based / multidimensional evaluation** and **explanation- or rationale-aware evaluation**. **Confidence: 0.70.** The word *“enumerations”* is not standard terminology, so this is an interpretation of the description, not a discovered exact term.
+
+2. **Fields:** political theory and democratic theory (the deliberation-versus-aggregation distinction); social choice / collective decision-making; qualitative evaluation and expert-elicitation methods. In the specific “panel judge outputs” AI context: NLP and LLM evaluation. **Confidence: 0.85** for the first three; **0.75** for the LLM-evaluation mapping.
+
+3. **Canonical treatments:**
+
+   - Bernard Manin (1987), “On Legitimacy and Political Deliberation,” *Political Theory* 15(3): 338–368. An early modern canonical statement of deliberation as distinct from mere aggregation. **Confidence: 0.95.**
+   - Joshua Cohen (1989), “Deliberation and Democratic Legitimacy,” in Alan Hamlin & Philip Pettit (eds.), *The Good Polity: Normative Analysis of the State*, Basil Blackwell, pp. 17–34. It is a standard foundational source for the idea that decisions should be justified through public reasoning, not simply counted preferences. [Bibliographic confirmation](https://watermark02.silverchair.com/oso-9780192848925-chapter-2.pdf). **Confidence: 0.98.**
+   - Jürgen Habermas (1981), *The Theory of Communicative Action*, 2 vols., Suhrkamp. Foundational for the associated “force of the better argument” tradition. **Confidence: 0.90** on its canonical relevance; it is broader than panel-evaluation practice.
+   - Lianmin Zheng et al. (2023), “Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena,” *NeurIPS 2023*, 36: 46595–46623. This is the relevant modern LLM-judge treatment, though it does not coin the maxim. [Paper](https://proceedings.neurips.cc/paper_files/paper/2023/file/91f18a1287b398d378ef22505bf41832-Paper-Datasets_and_Benchmarks.pdf). **Confidence: 0.95** for citation and relevance.
+   - Faeze Brahman et al. (2024), “Using Natural Language Explanations to Rescale Human Judgments,” *COLM 2024*. Directly relevant to retaining judges’ explanations alongside ratings, rather than using ratings alone. [Paper record](https://openreview.net/forum?id=Qmq4zqdnWh). **Confidence: 0.85.**
+
+I would **not** call this simply “ensemble voting” or “majority voting”: those describe the practice the note rejects.

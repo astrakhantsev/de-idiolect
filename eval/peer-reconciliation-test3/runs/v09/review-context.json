@@ -1,0 +1,2574 @@
+{
+ "tau0": {
+  "P01": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "config_fail",
+    "reason": "artifact-gate-exhaustion"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "missing",
+     "L": null,
+     "base_L": null,
+     "promoted": null,
+     "aggs": null,
+     "levels": null,
+     "monotone": null,
+     "starved": null,
+     "collapsed": null
+    },
+    "b2a": {
+     "status": "missing",
+     "L": null,
+     "base_L": null,
+     "promoted": null,
+     "aggs": null,
+     "levels": null,
+     "monotone": null,
+     "starved": null,
+     "collapsed": null
+    }
+   },
+   "mutual": false,
+   "flag": false,
+   "symcheck": null,
+   "decompose": null,
+   "containment": null,
+   "terminal": "artifact-gate-exhaustion"
+  },
+  "P02": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "review_required",
+    "reason": "detail-divergence"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 2,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "covers"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 5,
+       "c": 0,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 4,
+       "c": 0,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 2,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 2,
+       "agg": "covers",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": 1,
+     "base_L": 1,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 3,
+       "c": 0,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 3,
+       "c": 0,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 0,
+       "u": 6,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": null,
+   "containment": null,
+   "terminal": null
+  },
+  "P03": {
+   "verdict": {
+    "proposed_relation": "broadnarrow",
+    "status": "asserted",
+    "reason": null,
+    "broader_side": "a"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 1,
+     "base_L": 1,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 1,
+       "c": 0,
+       "u": 5,
+       "pre_decided": 1,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "mixed",
+      "L1": "abstain",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 2,
+       "c": 1,
+       "u": 1,
+       "pre_decided": 3,
+       "agg": "mixed",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 1,
+       "u": 3,
+       "pre_decided": 1,
+       "agg": "abstain",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 1,
+       "u": 3,
+       "pre_decided": 1,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities measure the excess number of unnecessary actions an agent takes after it has already completed a task whose objective was revised or switched, instead of recognizing that the objective was met and stopping. In particular, both note that this excess is driven largely by extra, unneeded verification steps or checks tacked onto an already-finished task rather than by productive or destructive work.",
+    "quote_1": "the agent kept a couple of stray tool calls going after the revised objective was already achieved, like it forgot to check whether it was done",
+    "quote_2": "\u27e6T2\u27e7 increased by 1.7 actions under corrupted feedback, mostly through unnecessary verification commands."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "t2_within_t1"
+   },
+   "terminal": null
+  },
+  "P04": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "insufficient_evidence",
+    "reason": "decompose-quote-validation"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 1,
+       "c": 2,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 2,
+       "u": 4,
+       "pre_decided": 2,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 2,
+       "u": 4,
+       "pre_decided": 2,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "fail",
+    "detail": "quote-validation"
+   },
+   "containment": null,
+   "terminal": null
+  },
+  "P05": {
+   "verdict": {
+    "proposed_relation": "relatedMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 3,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 3,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 3,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities run a controlled component-substitution experiment: they take an agent pipeline, swap out exactly one module (the planning step in one case, the tool-selection module in the other) for an alternative version while holding every other part of the pipeline identical, and then measure how that single swap changes downstream outcomes (task success, action counts) relative to the unmodified baseline pipeline.",
+    "quote_1": "keeping the exact same execution model but routing the planning step through a much cheaper backend",
+    "quote_2": "The tool-selection module was then exchanged between two otherwise identical agent stacks."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "partial_overlap"
+   },
+   "terminal": null
+  },
+  "P06": {
+   "verdict": {
+    "proposed_relation": "relatedMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 4,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities check the reliability of an automated grader/scorer by resubmitting the exact same completed answers to it more than once and comparing the resulting verdicts or numeric scores. Because the answer content itself is unchanged between submissions, any difference in the grader's output on the repeated pass reveals inconsistency or noise in the scoring process itself, rather than any real change in answer quality. This resubmission-and-compare method is used as evidence for how much the scorer's judgments can be trusted or vary across repeated evaluations of the same material.",
+    "quote_1": "Reflowed line breaks, changed nothing else, resubmitted through the same grader. 9 out of 80 flipped verdicts.",
+    "quote_2": "The same completed answers were then submitted to the scorer on four dates separated by at least 21 days."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "partial_overlap"
+   },
+   "terminal": null
+  },
+  "P07": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "config_fail",
+    "reason": "artifact-gate-exhaustion"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "missing",
+     "L": null,
+     "base_L": null,
+     "promoted": null,
+     "aggs": null,
+     "levels": null,
+     "monotone": null,
+     "starved": null,
+     "collapsed": null
+    },
+    "b2a": {
+     "status": "missing",
+     "L": null,
+     "base_L": null,
+     "promoted": null,
+     "aggs": null,
+     "levels": null,
+     "monotone": null,
+     "starved": null,
+     "collapsed": null
+    }
+   },
+   "mutual": false,
+   "flag": true,
+   "symcheck": null,
+   "decompose": null,
+   "containment": null,
+   "terminal": "artifact-gate-exhaustion"
+  },
+  "P08": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "config_fail",
+    "reason": "artifact-gate-exhaustion"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "missing",
+     "L": null,
+     "base_L": null,
+     "promoted": null,
+     "aggs": null,
+     "levels": null,
+     "monotone": null,
+     "starved": null,
+     "collapsed": null
+    },
+    "b2a": {
+     "status": "missing",
+     "L": null,
+     "base_L": null,
+     "promoted": null,
+     "aggs": null,
+     "levels": null,
+     "monotone": null,
+     "starved": null,
+     "collapsed": null
+    }
+   },
+   "mutual": false,
+   "flag": true,
+   "symcheck": null,
+   "decompose": null,
+   "containment": null,
+   "terminal": "artifact-gate-exhaustion"
+  },
+  "P09": {
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "abstain"
+   },
+   "containment": null,
+   "terminal": null
+  },
+  "P10": {
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities specifically study agent behavior when task instructions are reversed partway through work: they design trials that insert a mid-task instruction reversal after initial progress, then compare outcomes from before that reversal to after it. Community 1 measures how much prior work gets discarded once the agent adopts the new, reversed objective; community 2 measures whether previously stated constraints are still satisfied once the reversal is introduced. In both cases the reversal scenario is treated as a harder, distinct condition than straightforward single-objective tasks, with performance explicitly tracked as worse under it.",
+    "quote_1": "worse on multi-turn tasks with instruction reversals than on straightforward single-objective ones",
+    "quote_2": "an instruction reversal inserted after initial inspection"
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "no_relation"
+   },
+   "terminal": null
+  }
+ },
+ "tau1": {
+  "P01": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "config_fail",
+    "reason": "artifact-gate-exhaustion"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "missing",
+     "L": null,
+     "base_L": null,
+     "promoted": null,
+     "aggs": null,
+     "levels": null,
+     "monotone": null,
+     "starved": null,
+     "collapsed": null
+    },
+    "b2a": {
+     "status": "missing",
+     "L": null,
+     "base_L": null,
+     "promoted": null,
+     "aggs": null,
+     "levels": null,
+     "monotone": null,
+     "starved": null,
+     "collapsed": null
+    }
+   },
+   "mutual": false,
+   "flag": false,
+   "symcheck": null,
+   "decompose": null,
+   "containment": null,
+   "terminal": "artifact-gate-exhaustion"
+  },
+  "P02": {
+   "verdict": {
+    "proposed_relation": "exactMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 2,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "covers"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 5,
+       "c": 0,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 4,
+       "c": 0,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 2,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 2,
+       "agg": "covers",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 1,
+     "promoted": true,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 3,
+       "c": 0,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 3,
+       "c": 0,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 0,
+       "u": 6,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": null,
+   "containment": null,
+   "terminal": null
+  },
+  "P03": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "review_required",
+    "reason": "unexplained-asymmetry"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 1,
+     "promoted": true,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 1,
+       "c": 0,
+       "u": 5,
+       "pre_decided": 1,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "mixed",
+      "L1": "abstain",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 2,
+       "c": 1,
+       "u": 1,
+       "pre_decided": 3,
+       "agg": "mixed",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 1,
+       "u": 3,
+       "pre_decided": 1,
+       "agg": "abstain",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 1,
+       "u": 3,
+       "pre_decided": 1,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities measure the excess number of unnecessary actions an agent takes after it has already completed a task whose objective was revised or switched, instead of recognizing that the objective was met and stopping. In particular, both note that this excess is driven largely by extra, unneeded verification steps or checks tacked onto an already-finished task rather than by productive or destructive work.",
+    "quote_1": "the agent kept a couple of stray tool calls going after the revised objective was already achieved, like it forgot to check whether it was done",
+    "quote_2": "\u27e6T2\u27e7 increased by 1.7 actions under corrupted feedback, mostly through unnecessary verification commands."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "t2_within_t1"
+   },
+   "terminal": null
+  },
+  "P04": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "insufficient_evidence",
+    "reason": "decompose-quote-validation"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 1,
+       "c": 2,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 2,
+       "u": 4,
+       "pre_decided": 2,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 2,
+       "u": 4,
+       "pre_decided": 2,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "fail",
+    "detail": "quote-validation"
+   },
+   "containment": null,
+   "terminal": null
+  },
+  "P05": {
+   "verdict": {
+    "proposed_relation": "relatedMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 3,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 3,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 3,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities run a controlled component-substitution experiment: they take an agent pipeline, swap out exactly one module (the planning step in one case, the tool-selection module in the other) for an alternative version while holding every other part of the pipeline identical, and then measure how that single swap changes downstream outcomes (task success, action counts) relative to the unmodified baseline pipeline.",
+    "quote_1": "keeping the exact same execution model but routing the planning step through a much cheaper backend",
+    "quote_2": "The tool-selection module was then exchanged between two otherwise identical agent stacks."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "partial_overlap"
+   },
+   "terminal": null
+  },
+  "P06": {
+   "verdict": {
+    "proposed_relation": "relatedMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 4,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities check the reliability of an automated grader/scorer by resubmitting the exact same completed answers to it more than once and comparing the resulting verdicts or numeric scores. Because the answer content itself is unchanged between submissions, any difference in the grader's output on the repeated pass reveals inconsistency or noise in the scoring process itself, rather than any real change in answer quality. This resubmission-and-compare method is used as evidence for how much the scorer's judgments can be trusted or vary across repeated evaluations of the same material.",
+    "quote_1": "Reflowed line breaks, changed nothing else, resubmitted through the same grader. 9 out of 80 flipped verdicts.",
+    "quote_2": "The same completed answers were then submitted to the scorer on four dates separated by at least 21 days."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "partial_overlap"
+   },
+   "terminal": null
+  },
+  "P07": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "config_fail",
+    "reason": "artifact-gate-exhaustion"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "missing",
+     "L": null,
+     "base_L": null,
+     "promoted": null,
+     "aggs": null,
+     "levels": null,
+     "monotone": null,
+     "starved": null,
+     "collapsed": null
+    },
+    "b2a": {
+     "status": "missing",
+     "L": null,
+     "base_L": null,
+     "promoted": null,
+     "aggs": null,
+     "levels": null,
+     "monotone": null,
+     "starved": null,
+     "collapsed": null
+    }
+   },
+   "mutual": false,
+   "flag": true,
+   "symcheck": null,
+   "decompose": null,
+   "containment": null,
+   "terminal": "artifact-gate-exhaustion"
+  },
+  "P08": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "config_fail",
+    "reason": "artifact-gate-exhaustion"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "missing",
+     "L": null,
+     "base_L": null,
+     "promoted": null,
+     "aggs": null,
+     "levels": null,
+     "monotone": null,
+     "starved": null,
+     "collapsed": null
+    },
+    "b2a": {
+     "status": "missing",
+     "L": null,
+     "base_L": null,
+     "promoted": null,
+     "aggs": null,
+     "levels": null,
+     "monotone": null,
+     "starved": null,
+     "collapsed": null
+    }
+   },
+   "mutual": false,
+   "flag": true,
+   "symcheck": null,
+   "decompose": null,
+   "containment": null,
+   "terminal": "artifact-gate-exhaustion"
+  },
+  "P09": {
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "abstain"
+   },
+   "containment": null,
+   "terminal": null
+  },
+  "P10": {
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": false,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities specifically study agent behavior when task instructions are reversed partway through work: they design trials that insert a mid-task instruction reversal after initial progress, then compare outcomes from before that reversal to after it. Community 1 measures how much prior work gets discarded once the agent adopts the new, reversed objective; community 2 measures whether previously stated constraints are still satisfied once the reversal is introduced. In both cases the reversal scenario is treated as a harder, distinct condition than straightforward single-objective tasks, with performance explicitly tracked as worse under it.",
+    "quote_1": "worse on multi-turn tasks with instruction reversals than on straightforward single-objective ones",
+    "quote_2": "an instruction reversal inserted after initial inspection"
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "no_relation"
+   },
+   "terminal": null
+  }
+ },
+ "tau2": {
+  "P01": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "config_fail",
+    "reason": "artifact-gate-exhaustion"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "missing",
+     "L": null,
+     "base_L": null,
+     "promoted": null,
+     "aggs": null,
+     "levels": null,
+     "monotone": null,
+     "starved": null,
+     "collapsed": null
+    },
+    "b2a": {
+     "status": "missing",
+     "L": null,
+     "base_L": null,
+     "promoted": null,
+     "aggs": null,
+     "levels": null,
+     "monotone": null,
+     "starved": null,
+     "collapsed": null
+    }
+   },
+   "mutual": false,
+   "flag": false,
+   "symcheck": null,
+   "decompose": null,
+   "containment": null,
+   "terminal": "artifact-gate-exhaustion"
+  },
+  "P02": {
+   "verdict": {
+    "proposed_relation": "exactMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 2,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "covers"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 5,
+       "c": 0,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 4,
+       "c": 0,
+       "u": 2,
+       "pre_decided": 4,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 2,
+       "c": 0,
+       "u": 4,
+       "pre_decided": 2,
+       "agg": "covers",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 1,
+     "promoted": true,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 3,
+       "c": 0,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 3,
+       "c": 0,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 0,
+       "u": 6,
+       "pre_decided": 0,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": null,
+   "containment": null,
+   "terminal": null
+  },
+  "P03": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "review_required",
+    "reason": "unexplained-asymmetry"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 2,
+     "base_L": 1,
+     "promoted": true,
+     "aggs": {
+      "L0": "covers",
+      "L1": "covers",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 1,
+       "c": 0,
+       "u": 5,
+       "pre_decided": 1,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "abstain",
+      "L2": "abstain"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 2,
+       "c": 1,
+       "u": 1,
+       "pre_decided": 3,
+       "agg": "mixed",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 1,
+       "u": 3,
+       "pre_decided": 1,
+       "agg": "abstain",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 1,
+       "u": 3,
+       "pre_decided": 1,
+       "agg": "abstain",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities measure the excess number of unnecessary actions an agent takes after it has already completed a task whose objective was revised or switched, instead of recognizing that the objective was met and stopping. In particular, both note that this excess is driven largely by extra, unneeded verification steps or checks tacked onto an already-finished task rather than by productive or destructive work.",
+    "quote_1": "the agent kept a couple of stray tool calls going after the revised objective was already achieved, like it forgot to check whether it was done",
+    "quote_2": "\u27e6T2\u27e7 increased by 1.7 actions under corrupted feedback, mostly through unnecessary verification commands."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "t2_within_t1"
+   },
+   "terminal": null
+  },
+  "P04": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "insufficient_evidence",
+    "reason": "decompose-quote-validation"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 1,
+       "c": 2,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 2,
+       "u": 4,
+       "pre_decided": 2,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 2,
+       "u": 4,
+       "pre_decided": 2,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "fail",
+    "detail": "quote-validation"
+   },
+   "containment": null,
+   "terminal": null
+  },
+  "P05": {
+   "verdict": {
+    "proposed_relation": "relatedMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 3,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 3,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 3,
+       "u": 3,
+       "pre_decided": 3,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities run a controlled component-substitution experiment: they take an agent pipeline, swap out exactly one module (the planning step in one case, the tool-selection module in the other) for an alternative version while holding every other part of the pipeline identical, and then measure how that single swap changes downstream outcomes (task success, action counts) relative to the unmodified baseline pipeline.",
+    "quote_1": "keeping the exact same execution model but routing the planning step through a much cheaper backend",
+    "quote_2": "The tool-selection module was then exchanged between two otherwise identical agent stacks."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "partial_overlap"
+   },
+   "terminal": null
+  },
+  "P06": {
+   "verdict": {
+    "proposed_relation": "relatedMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 6,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": 0,
+     "base_L": 0,
+     "promoted": false,
+     "aggs": {
+      "L0": "covers",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 4,
+       "c": 0,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "covers",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities check the reliability of an automated grader/scorer by resubmitting the exact same completed answers to it more than once and comparing the resulting verdicts or numeric scores. Because the answer content itself is unchanged between submissions, any difference in the grader's output on the repeated pass reveals inconsistency or noise in the scoring process itself, rather than any real change in answer quality. This resubmission-and-compare method is used as evidence for how much the scorer's judgments can be trusted or vary across repeated evaluations of the same material.",
+    "quote_1": "Reflowed line breaks, changed nothing else, resubmitted through the same grader. 9 out of 80 flipped verdicts.",
+    "quote_2": "The same completed answers were then submitted to the scorer on four dates separated by at least 21 days."
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "partial_overlap"
+   },
+   "terminal": null
+  },
+  "P07": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "config_fail",
+    "reason": "artifact-gate-exhaustion"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "missing",
+     "L": null,
+     "base_L": null,
+     "promoted": null,
+     "aggs": null,
+     "levels": null,
+     "monotone": null,
+     "starved": null,
+     "collapsed": null
+    },
+    "b2a": {
+     "status": "missing",
+     "L": null,
+     "base_L": null,
+     "promoted": null,
+     "aggs": null,
+     "levels": null,
+     "monotone": null,
+     "starved": null,
+     "collapsed": null
+    }
+   },
+   "mutual": false,
+   "flag": true,
+   "symcheck": null,
+   "decompose": null,
+   "containment": null,
+   "terminal": "artifact-gate-exhaustion"
+  },
+  "P08": {
+   "verdict": {
+    "proposed_relation": null,
+    "status": "config_fail",
+    "reason": "artifact-gate-exhaustion"
+   },
+   "dirs": {
+    "a2b": {
+     "status": "missing",
+     "L": null,
+     "base_L": null,
+     "promoted": null,
+     "aggs": null,
+     "levels": null,
+     "monotone": null,
+     "starved": null,
+     "collapsed": null
+    },
+    "b2a": {
+     "status": "missing",
+     "L": null,
+     "base_L": null,
+     "promoted": null,
+     "aggs": null,
+     "levels": null,
+     "monotone": null,
+     "starved": null,
+     "collapsed": null
+    }
+   },
+   "mutual": false,
+   "flag": true,
+   "symcheck": null,
+   "decompose": null,
+   "containment": null,
+   "terminal": "artifact-gate-exhaustion"
+  },
+  "P09": {
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 5,
+       "u": 1,
+       "pre_decided": 5,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": true,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "abstain"
+   },
+   "containment": null,
+   "terminal": null
+  },
+  "P10": {
+   "verdict": {
+    "proposed_relation": "noMatch",
+    "status": "asserted",
+    "reason": null
+   },
+   "dirs": {
+    "a2b": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 6,
+       "k": 0,
+       "c": 6,
+       "u": 0,
+       "pre_decided": 6,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    },
+    "b2a": {
+     "status": "ok",
+     "L": -1,
+     "base_L": -1,
+     "promoted": false,
+     "aggs": {
+      "L0": "fails",
+      "L1": "fails",
+      "L2": "fails"
+     },
+     "levels": {
+      "L0": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L1": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      },
+      "L2": {
+       "n": 4,
+       "k": 0,
+       "c": 4,
+       "u": 0,
+       "pre_decided": 4,
+       "agg": "fails",
+       "quote_downgrades": []
+      }
+     },
+     "monotone": true,
+     "starved": false,
+     "collapsed": false
+    }
+   },
+   "mutual": false,
+   "flag": false,
+   "symcheck": null,
+   "decompose": {
+    "status": "ok",
+    "core": "Both communities specifically study agent behavior when task instructions are reversed partway through work: they design trials that insert a mid-task instruction reversal after initial progress, then compare outcomes from before that reversal to after it. Community 1 measures how much prior work gets discarded once the agent adopts the new, reversed objective; community 2 measures whether previously stated constraints are still satisfied once the reversal is introduced. In both cases the reversal scenario is treated as a harder, distinct condition than straightforward single-objective tasks, with performance explicitly tracked as worse under it.",
+    "quote_1": "worse on multi-turn tasks with instruction reversals than on straightforward single-objective ones",
+    "quote_2": "an instruction reversal inserted after initial inspection"
+   },
+   "containment": {
+    "status": "ok",
+    "relation": "no_relation"
+   },
+   "terminal": null
+  }
+ }
+}

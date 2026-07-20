@@ -1,0 +1,6 @@
+- The same completed/final answers are resubmitted to the same automated scorer multiple times (repeated submissions/scorings of identical answers, not new answers).
+- Resubmissions occur on multiple dates, separated by at least 21 days in some cases, to test scoring consistency over time.
+- ⟦TERM⟧ is estimated from the resulting numeric-score pairs produced across these repeated submissions.
+- It is reported as a value that can exceed 0.90 (e.g., 0.93, 0.88) or drop lower (e.g., 0.71) depending on task type.
+- It applies to scored task outcomes such as repository-state tasks, executable-task outcomes, open-ended incident reports, and explanatory summaries.
+- Lower values are associated with borderline partial-credit judgments rather than with answer length.

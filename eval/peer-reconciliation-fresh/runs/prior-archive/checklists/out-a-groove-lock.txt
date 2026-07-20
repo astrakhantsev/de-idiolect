@@ -1,0 +1,6 @@
+- The agent carries over an action or strategy from its immediately preceding task and applies it to the current, different task without re-evaluating fit.
+- Detectable/confirmed by clearing the session (removing recent-task memory) and re-presenting the same task cold — the agent then picks the correct action instead.
+- The transferred behavior was appropriate for the prior task but wrong for the current one (e.g., a merge strategy, a grep-twice-guess pattern, or an open-patch-close move).
+- Applies specifically when a resource/budget constraint (a "ration") governs the task, and the carried-over action ends up tripping or ignoring that constraint.
+- Occurs across consecutive/same-batch tasks handled by the same agent session, discovered incidentally while reviewing logs for another issue.
+- The failure is attributed to recency (bias toward the just-completed task's approach) rather than any lack of capability.

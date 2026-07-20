@@ -1,0 +1,29 @@
+Three DEFINITIONS of the same concept at increasing specificity:
+
+DEFINITION L0 (genus only): A numeric score for how well an agent detects and appropriately handles degraded tool feedback during an active task session.
+
+DEFINITION L1 (adds mechanism): A numeric score for how well an agent detects and appropriately handles degraded tool feedback during an active browser, shell, or task session. Recorded interactions are replayed with tool observations replaced at specific action or tool-call boundaries by syntactically valid content that is semantically meaningless, irrelevant, or inconsistent with the requested operation, while the agent continues the session.
+
+DEFINITION L2 (adds measurement and conditions): A numeric score for how well an agent detects and appropriately handles degraded tool feedback during an active browser, shell, or task session. Recorded interactions are replayed with directory listings, test output, and other tool observations replaced at prespecified action or tool-call boundaries by syntactically valid content that is semantically meaningless, irrelevant, or misleading, while the agent continues the session. The score is computed at each degraded observation boundary from whether the agent responds appropriately, including issuing an explicit retry or retaining an explicit validation step. It is read as a value from 0 to 1, such as 0.68, 0.31, 0.59, 0.44, 0.42, and 0.63, and is calculated separately by agent type, task provenance, and selector assignment. It rises with retries and validation, falls with unfamiliar task structure or unchallenged plausible-but-wrong output, and can differ despite identical corruption frequency because task familiarity and provenance matter.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used (other local jargon masked ⟦X⟧).
+
+For EACH excerpt, and for EACH definition level INDEPENDENTLY, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by THAT definition?
+
+- "instantiates" — the usage is consistent with and exemplifies that definition.
+- "contradicts" — the usage is incompatible with that definition (the referent has a property that definition excludes, or lacks one it requires).
+- "insufficient" — this excerpt alone does not contain enough to decide for that definition.
+
+A usage can instantiate L0 while contradicting L2 — judge each level on its own content. Judge each excerpt on its own text only. For L1 and L2, any decided verdict (instantiates or contradicts) requires a verbatim supporting quote from the excerpt; L0 needs no quote.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "L0": "instantiates|contradicts|insufficient", "L1": {"verdict": "...", "quote": "verbatim or empty for insufficient"}, "L2": {"verdict": "...", "quote": "..."}}, ...]
+
+EXCERPTS:
+
+1. We've started diffing the final output against the abandoned branch just to catch it automatically instead of eyeballing transcripts. Separately, I ran a ⟦TERM⟧ pass on the same session logs to see if the two failure modes correlate, and they mostly don't. ⟦TERM⟧ is a different beast entirely — you feed the agent noise where the tool output should be, syntactically fine JSON with meaningless fields, and watch whether it just barrels forward treating garbage as gospel.
+2. Separately, I ran a ⟦TERM⟧ pass on the same session logs to see if the two failure modes correlate, and they mostly don't. ⟦TERM⟧ is a different beast entirely — you feed the agent noise where the tool output should be, syntactically fine JSON with meaningless fields, and watch whether it just barrels forward treating garbage as gospel. Our agent actually does okay here, flags the malformed-looking data and asks for a re-fetch about 80% of the time.
+3. It's not that the agent doesn't know how to stop — the ⟦TERM⟧ numbers prove it can recognize when something's wrong and halt to ask. It's specifically that once it's invested tokens into a plan, sunk cost takes over and it can't let the CSV branch die even after being told explicitly to.
+4. Paired that with a ⟦TERM⟧ of the same task recordings, corrupting every test runner output into plausible-looking but meaningless pass/fail noise, to see if the post-swap model would sanity-check what it was being told versus a fresh model on the same corrupted feed. No real difference between pre-swap and post-swap behavior here, both flagged the garbled results about 70% of the time and asked to rerun the suite, so at least the swap didn't damage its skepticism.
+5. Spent the afternoon on ⟦TERM⟧ against our data-pipeline agent, swapping every tool call result for syntactically valid but semantically empty JSON blobs. It caught the corruption on 22 of 30 degraded steps and explicitly asked for a retry instead of just proceeding, which honestly beat my expectations going in.
+6. That actually helped, oddly — success on the ⟦TERM⟧ steps for that tool type went from 8/30 misses down to 3/30. My best guess is the examples were anchoring the agent toward one specific failure shape and making it pattern-match too loosely against anything resembling that shape, garbled or not.

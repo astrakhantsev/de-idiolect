@@ -1,0 +1,46 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.PZ3qfAXjQX"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.O1bHvudKsV
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7b1c-9b7e-7763-8a0f-b3215be03823
+--------
+user
+Below are usage excerpts from one community's documents, all containing the same term, shown masked as ⟦TERM⟧ (other local jargon is masked as ⟦X⟧).
+
+Write a short, self-contained, operational definition of the concept ⟦TERM⟧ names AS USED in these excerpts: what kind of thing it is (a phenomenon, a procedure, a score, a rule…), its inputs and outputs where applicable, what it asserts, and when it applies.
+
+COMMITMENTS CHECKLIST (extracted from the same excerpts — the definition must state every commitment, including the specific mechanism):
+- Mechanism: ⟦TERM⟧ is computed/estimated over a specific set of stated intermediate claims (e.g., scratchpad claims, planning/extraction/draft notes, subtotal checks and provenance notes, or provisional conclusions) recorded during the task's execution trace, not over final outputs alone.
+- Measurement: ⟦TERM⟧ is expressed as a numeric score (a value roughly between 0 and 1) derived from these retained claims/notes.
+- Setting/trigger: it applies to multi-step agent task runs involving retrieval, extraction, or verification against external sources (repository queries, citations, invoices, policy excerpts) where intermediate claims are recorded before a final answer is produced.
+- Constraint: the score is sensitive to whether early/provisional claims are later reused, restated, or reversed without being reconciled — e.g., copying provisional values into a final table, restating totals in prose instead of a single table, or reversing earlier conclusions lowers the score.
+- Constraint: the score differs systematically between retrieval-first and inference-first strategies, with retrieval-first runs scoring higher.
+- Constraint: the score is affected by the order in which supporting information arrives (e.g., excerpt order), not just its content.
+
+Constraints:
+- Ordinary words and simple notation only.
+- Do NOT use the masked terms or guess at them; do not use names of people, published methods, fields, systems, models, or communities.
+- Base the definition ONLY on what the excerpts support; do not import outside assumptions.
+- Do NOT add generalizing catch-all phrases (such as "or otherwise", "or any similar", "in any way", "or by other means") beyond what the excerpts support — state the specific mechanism, not its genus.
+- 60–160 words. Output ONLY the definition text, nothing else.
+
+EXCERPTS:
+
+1. ⟦TERM⟧ was computed over all scratchpad claims retained in the execution trace. The median ⟦TERM⟧ was 0.74, with lower values concentrated in runs that copied provisional dates into the final table.
+2. ⟦TERM⟧ was computed over all scratchpad claims retained in the execution trace. The median ⟦TERM⟧ was 0.74, with lower values concentrated in runs that copied provisional dates into the final table. To test containment, each trajectory received one malformed citation record after the fourth repository query.
+3. ⟦TERM⟧ was calculated from planning notes, extraction notes, and draft justifications. The ⟦TERM⟧ averaged 0.69 in successful retrieval-first runs and 0.38 in inference-first runs.
+4. ⟦TERM⟧ was calculated from planning notes, extraction notes, and draft justifications. The ⟦TERM⟧ averaged 0.69 in successful retrieval-first runs and 0.38 in inference-first runs. We introduced fixed delays to selected repository interfaces while holding returned content constant.
+5. Agents verified a budget spreadsheet with cross-sheet formulas and supporting invoices. ⟦TERM⟧ was estimated over all stated subtotal checks and provenance notes. The ⟦TERM⟧ was 0.77 for runs that maintained a single reconciliation table, compared with 0.46 for runs that restated totals in prose.
+6. ⟦TERM⟧ was estimated over all stated subtotal checks and provenance notes. The ⟦TERM⟧ was 0.77 for runs that maintained a single reconciliation table, compared with 0.46 for runs that restated totals in prose.
+7. ⟦TERM⟧ was measured across provisional eligibility conclusions and amount calculations. The ⟦TERM⟧ declined from 0.71 to 0.45 when the second policy excerpt arrived before the first, because early conclusions were later reversed.
+8. ⟦TERM⟧ was measured across provisional eligibility conclusions and amount calculations. The ⟦TERM⟧ declined from 0.71 to 0.45 when the second policy excerpt arrived before the first, because early conclusions were later reversed. Equivalent excerpts were then permuted across repeated runs without changing their content.
+codex
+A numeric score, roughly from 0 to 1, computed from retained scratchpad claims, planning and extraction notes, draft justifications, subtotal checks, provenance notes, and provisional conclusions recorded during a multi-step agent run. It applies when the run retrieves, extracts, or verifies external material before producing its final answer. The score asserts how consistently those intermediate claims are reconciled as the run proceeds: it falls when provisional dates are copied into a final table, totals are restated in prose rather than kept in one reconciliation table, or early conclusions are later reversed. Retrieval-first runs score higher than inference-first runs, and changing the order of equivalent supporting excerpts can change the score.
+tokens used
+3,257

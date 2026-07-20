@@ -1,0 +1,44 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.lOsdXL2Byn"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.RZyVEfLgmA
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7c26-471a-7553-bbc3-16a2b5424f69
+--------
+user
+Three DEFINITIONS of the same concept at increasing specificity:
+
+DEFINITION L0 (genus only): It is a session-level error pattern used to identify inappropriate influence of a just-completed successful task on the next unrelated task.
+
+DEFINITION L1 (adds mechanism): It is a session-level error pattern used to identify inappropriate influence of a just-completed successful task on the next unrelated task. After a high-confidence or successful task, agents carry over and replay its search, action, and validation sequence on the immediately following unrelated task, even when the task states are incompatible.
+
+DEFINITION L2 (adds measurement and conditions): It is a session-level error pattern used to identify inappropriate influence of a just-completed successful task on the next unrelated task within the same session. It occurs when agents carry over and replay search, action, and validation sequences from a high-confidence or successful task on the immediately following unrelated task: billing-oriented searches and validation were replayed on access-control tasks, and credential-reset actions were repeated on unrelated systems after billing recovery before incident response. It is read as the percentage of subsequent tasks affected, such as 14% of access-control tasks; clearing prior-session traces reduced this to 3%, and resetting session history reduced the pattern by 79%. It correlates with prior trace length rather than prior answer correctness. Reducing redundant page openings left the rate nearly unchanged, so shortening traces alone does not eliminate it. Clearing or resetting history substantially, but not fully, reduces it, modestly increases tool setup time, and has little effect on ordinary same-domain task performance.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used (other local jargon masked ⟦X⟧).
+
+For EACH excerpt, and for EACH definition level INDEPENDENTLY, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by THAT definition?
+
+- "instantiates" — the usage is consistent with and exemplifies that definition.
+- "contradicts" — the usage is incompatible with that definition (the referent has a property that definition excludes, or lacks one it requires).
+- "insufficient" — this excerpt alone does not contain enough to decide for that definition.
+
+A usage can instantiate L0 while contradicting L2 — judge each level on its own content. Judge each excerpt on its own text only. For L1 and L2, any decided verdict (instantiates or contradicts) requires a verbatim supporting quote from the excerpt; L0 needs no quote.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "L0": "instantiates|contradicts|insufficient", "L1": {"verdict": "...", "quote": "verbatim or empty for insufficient"}, "L2": {"verdict": "...", "quote": "..."}}, ...]
+
+EXCERPTS:
+
+1. Blew away someone's WIP branch. Classic ⟦TERM⟧, and the tell was obvious in hindsight: clear the session, hand it the same ticket cold, and it picks the correct merge strategy first try. No capability gap, just recency doing the choosing instead of the task.
+2. Going to rerun at five before we conclude anything. While debugging that I also caught a ⟦TERM⟧ case in the same log. The agent had just finished a task where grepping twice and then guessing worked fine, and it tried that same grep-twice-guess pattern on the navigation benchmark even though the ration made guessing expensive here — wrong move for this task, right move for the last one, cleared session and it adapted immediately.
+3. Would've spent the whole day debugging the wrong thing without that log. While in there I also noticed a ⟦TERM⟧ case buried in the failure logs from the same batch. One of the agents had aced a similar-looking task earlier in the day by opening a config file, patching one line, and closing it — well within the ration — then tried the identical open-patch-close move on a task that actually needed cross-referencing two files simultaneously, tripped the ration, failed.
+4. Long morning. Corvid replayed a ⟦TERM⟧ pattern on the deploy-verification task — it had just passed a task where restarting the service twice fixed a flaky health check, then tried restart-twice on a completely unrelated networking failure that needed an actual config fix. Cleared history, it diagnosed the real cause immediately, so same story as always: recency, not reasoning.
+codex
+[{"excerpt":1,"L0":"instantiates","L1":{"verdict":"insufficient","quote":""},"L2":{"verdict":"insufficient","quote":""}},{"excerpt":2,"L0":"instantiates","L1":{"verdict":"instantiates","quote":"The agent had just finished a task where grepping twice and then guessing worked fine, and it tried that same grep-twice-guess pattern on the navigation benchmark"},"L2":{"verdict":"insufficient","quote":""}},{"excerpt":3,"L0":"insufficient","L1":{"verdict":"insufficient","quote":""},"L2":{"verdict":"insufficient","quote":""}},{"excerpt":4,"L0":"instantiates","L1":{"verdict":"instantiates","quote":"it had just passed a task where restarting the service twice fixed a flaky health check, then tried restart-twice on a completely unrelated networking failure"},"L2":{"verdict":"insufficient","quote":""}}]
+tokens used
+3,646

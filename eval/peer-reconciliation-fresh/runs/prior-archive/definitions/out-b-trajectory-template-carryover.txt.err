@@ -1,0 +1,44 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.S6qU2XP276"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.5dhoaKE84J
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7b43-e0af-7640-b721-8fa17f738100
+--------
+user
+Below are usage excerpts from one community's documents, all containing the same term, shown masked as ⟦TERM⟧ (other local jargon is masked as ⟦X⟧).
+
+Write a short, self-contained, operational definition of the concept ⟦TERM⟧ names AS USED in these excerpts: what kind of thing it is (a phenomenon, a procedure, a score, a rule…), its inputs and outputs where applicable, what it asserts, and when it applies.
+
+COMMITMENTS CHECKLIST (extracted from the same excerpts — the definition must state every commitment, including the specific mechanism):
+- Mechanism: after a task succeeds, the agent carries over and replays action/search/validation sequences from that prior successful session into a subsequent, task-state-incompatible task (e.g., billing search/validation steps reused on access-control tasks; credential-reset actions reused on unrelated incident-response systems).
+- Measured/produced: rate of occurrence as a percentage of subsequent tasks exhibiting the reused-sequence behavior (e.g., 14% of access-control tasks; reduced to 3% after clearing prior-session traces; reduced by 79% after resetting session history between items).
+- Setting/trigger: occurs specifically when a new task immediately follows a prior high-confidence/successful task (billing-repair → access-control, or billing recovery → incident-response), not during ordinary continued performance on the same task type.
+- Constraint: correlates with prior trace length, not with prior answer correctness.
+- Constraint: shortening traces alone (without clearing session history) does not eliminate it — it persists at nearly the original rate.
+- Constraint: clearing/resetting prior-session traces or history substantially reduces the rate, with minimal or modest cost to unrelated performance (little effect on ordinary billing performance; modest increase in tool setup time).
+
+Constraints:
+- Ordinary words and simple notation only.
+- Do NOT use the masked terms or guess at them; do not use names of people, published methods, fields, systems, models, or communities.
+- Base the definition ONLY on what the excerpts support; do not import outside assumptions.
+- Do NOT add generalizing catch-all phrases (such as "or otherwise", "or any similar", "in any way", "or by other means") beyond what the excerpts support — state the specific mechanism, not its genus.
+- 60–160 words. Output ONLY the definition text, nothing else.
+
+EXCERPTS:
+
+1. Session logs also exposed ⟦TERM⟧ following successful billing-repair tasks. ⟦TERM⟧ appeared on 14% of subsequent access-control tasks, where agents replayed billing-oriented search and validation sequences despite incompatible task states.
+2. Session logs also exposed ⟦TERM⟧ following successful billing-repair tasks. ⟦TERM⟧ appeared on 14% of subsequent access-control tasks, where agents replayed billing-oriented search and validation sequences despite incompatible task states. Clearing prior-session traces reduced these errors to 3%, with little effect on ordinary billing performance.
+3. Under the ⟦X⟧, agents reduced redundant page openings but retained ⟦TERM⟧ at nearly the original rate. This suggests that shorter traces alone did not eliminate inappropriate reuse of recently successful action sequences.
+4. The same sessions were examined for ⟦TERM⟧ after high-confidence successes. ⟦TERM⟧ was most frequent when an incident-response task immediately followed a successful billing recovery, producing repeated credential-reset actions on unrelated systems.
+5. The same sessions were examined for ⟦TERM⟧ after high-confidence successes. ⟦TERM⟧ was most frequent when an incident-response task immediately followed a successful billing recovery, producing repeated credential-reset actions on unrelated systems. Resetting session history between items reduced this pattern by 79%, although it modestly increased tool setup time.
+6. After removing halted sessions, ⟦TERM⟧ remained associated with prior trace length rather than prior answer correctness. The analysis is limited by the fixed task ordering; a fully randomized schedule may yield a smaller effect.
+codex
+A session-to-session error pattern in which, immediately after a high-confidence successful task, an agent replays that task’s action, search, and validation sequence on a subsequent task with an incompatible state. Its rate is the percentage of such subsequent tasks showing the replay: for example, 14% of access-control tasks after billing repair. It includes billing searches and validations reused on access-control work, and credential-reset actions repeated on unrelated incident-response systems after billing recovery. The pattern correlates with prior trace length, not prior answer correctness. Shortening traces without clearing history leaves it near its original rate; clearing prior-session traces or resetting session history substantially reduces it, with little effect on ordinary billing performance or a modest increase in tool setup time.
+tokens used
+3,060

@@ -1,0 +1,6 @@
+- Mechanism: after a task succeeds, the agent carries over and replays action/search/validation sequences from that prior successful session into a subsequent, task-state-incompatible task (e.g., billing search/validation steps reused on access-control tasks; credential-reset actions reused on unrelated incident-response systems).
+- Measured/produced: rate of occurrence as a percentage of subsequent tasks exhibiting the reused-sequence behavior (e.g., 14% of access-control tasks; reduced to 3% after clearing prior-session traces; reduced by 79% after resetting session history between items).
+- Setting/trigger: occurs specifically when a new task immediately follows a prior high-confidence/successful task (billing-repair → access-control, or billing recovery → incident-response), not during ordinary continued performance on the same task type.
+- Constraint: correlates with prior trace length, not with prior answer correctness.
+- Constraint: shortening traces alone (without clearing session history) does not eliminate it — it persists at nearly the original rate.
+- Constraint: clearing/resetting prior-session traces or history substantially reduces the rate, with minimal or modest cost to unrelated performance (little effect on ordinary billing performance; modest increase in tool setup time).

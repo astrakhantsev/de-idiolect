@@ -1,0 +1,134 @@
+```json
+{
+  "pairs": [
+    {
+      "pair_id": "P01",
+      "class": "exactMatch",
+      "a": {
+        "term": "pivot check",
+        "desc": "Partway through execution a scripted user message reverses an earlier instruction; graders record whether the agent discards the now-invalid partial work and pursues the revised objective, versus finishing the stale one. Scored as the fraction of trials in which the agent fully switches without carrying abandoned artifacts into its final output. Applies to multi-turn interactive runs where instructions can change mid-task."
+      },
+      "b": {
+        "term": "goal-revision compliance rate",
+        "desc": "Partway through execution a scripted user message reverses an earlier instruction; graders record whether the agent discards the now-invalid partial work and pursues the revised objective, versus finishing the stale one. Scored as the fraction of trials in which the agent fully switches without carrying abandoned artifacts into its final output. Applies to multi-turn interactive runs where instructions can change mid-task."
+      }
+    },
+    {
+      "pair_id": "P02",
+      "class": "exactMatch",
+      "a": {
+        "term": "garble replay",
+        "desc": "A recorded run is executed again while every tool result is replaced with syntactically valid but semantically meaningless content. Observers track whether the agent flags the unusable feedback and requests a retry rather than proceeding as though the output were sound. Reported as the proportion of degraded steps that trigger an explicit recovery attempt. Used when assessing how a testing rig behaves under faulty observation channels."
+      },
+      "b": {
+        "term": "corrupted-observation recovery index",
+        "desc": "A recorded run is executed again while every tool result is replaced with syntactically valid but semantically meaningless content. Observers track whether the agent flags the unusable feedback and requests a retry rather than proceeding as though the output were sound. Reported as the proportion of degraded steps that trigger an explicit recovery attempt. Used when assessing how a testing rig behaves under faulty observation channels."
+      }
+    },
+    {
+      "pair_id": "P03",
+      "class": "broadnarrow",
+      "broader_side": "a",
+      "a": {
+        "term": "quit sense",
+        "desc": "Any assessment of whether an agent halts at the appropriate moment rather than continuing needlessly, regardless of how the stopping condition is detected. It spans premature abandonment, unbounded looping, and pushing on past a finished objective, and is evaluated by comparing the actual stop point against an ideal stop point for the task. Every specific stopping-behavior probe sits inside this general question."
+      },
+      "b": {
+        "term": "post-completion action count",
+        "desc": "One specific case inside the general question of whether an agent halts at the right moment: an automated checker confirms the objective is already fully satisfied, and from that instant every further tool invocation the agent issues before terminating is tallied. It captures only overruns past a solved state, ignoring stopping too early or looping without progress, which the wider question also covers."
+      }
+    },
+    {
+      "pair_id": "P04",
+      "class": "broadnarrow",
+      "broader_side": "b",
+      "a": {
+        "term": "example strip",
+        "desc": "A single specific case within the wider study of how much supportive instruction structure props up performance: the solved demonstrations are deleted from the prompt while formatting cues, step outlines, and hints are left untouched, and the resulting success drop is recorded. It probes the demonstrations alone, one element among the several supportive ingredients the wider study also weakens."
+      },
+      "b": {
+        "term": "prompt scaffolding dependence measure",
+        "desc": "Any quantification of how far an agent's success rests on helpful structure supplied in its instructions, covering removal or degradation of any supportive ingredient whatsoever — solved demonstrations, formatting cues, step outlines, or embedded hints — with performance re-measured after the support is weakened. Each single-ingredient ablation is one case contained within this general quantification."
+      }
+    },
+    {
+      "pair_id": "P05",
+      "class": "relatedMatch",
+      "core": "gauging how load-bearing one internal sub-component is by re-running an otherwise identical task with only that sub-component's underlying model exchanged",
+      "a": {
+        "term": "brain swap",
+        "desc": "A task is repeated with the component that produces the high-level plan reassigned to a cheaper model while every execution step retains the original model. The change in overall task success between the two runs is recorded to reveal how much the planning component was carrying the result.",
+        "residue": "Targets the plan-producing component specifically, and reports the change in pass rate."
+      },
+      "b": {
+        "term": "component substitution elasticity",
+        "desc": "A task is repeated with the module that decides which tool to invoke reassigned to a different model while the remainder of the stack is held fixed. The change in how many total actions the run consumes is measured to characterize that module's contribution to efficiency.",
+        "residue": "Targets the tool-deciding module specifically, and reports the change in action count."
+      }
+    },
+    {
+      "pair_id": "P06",
+      "class": "relatedMatch",
+      "core": "quantifying an automated scorer's self-consistency by having it score one fixed agent response two separate times under altered conditions",
+      "a": {
+        "term": "double mark",
+        "desc": "One agent answer is submitted to the automated scorer twice, with the answer's whitespace and line wrapping reflowed between the two passes while its content stays byte-equivalent in meaning. Disagreement between the two verdicts is logged across a corpus of answers.",
+        "residue": "Perturbs surface formatting between passes, and reports how often the verdict flips."
+      },
+      "b": {
+        "term": "grader temporal stability coefficient",
+        "desc": "One agent answer is submitted to the automated scorer at two well-separated times with the scorer's own sampling randomness left unconstrained and its input held byte-identical. The correlation between the numeric scores across the repeats is computed over a corpus.",
+        "residue": "Perturbs nothing but elapsed time and sampling randomness, and reports score correlation."
+      }
+    },
+    {
+      "pair_id": "P07",
+      "class": "noMatchDespiteSimilarity",
+      "a": {
+        "term": "cold start",
+        "desc": "The very first task an agent attempts in a fresh session is scored apart from all later tasks in that session, capturing how much weaker it performs before settling into a working rhythm with the tools on offer. The gap between the opening task's score and the session-wide average is reported as the ramp-up penalty."
+      },
+      "b": {
+        "term": "cold start",
+        "desc": "The wall-clock delay between an evaluation being launched and the agent issuing its first executable action is measured, isolating time spent provisioning the sandbox, mounting the repository, and loading the harness from the agent's own deliberation time. Reported as fixed overhead per run so that throughput figures can be corrected for infrastructure cost."
+      }
+    },
+    {
+      "pair_id": "P08",
+      "class": "noMatchDespiteSimilarity",
+      "a": {
+        "term": "hot swap",
+        "desc": "Partway through an unfinished task the underlying model is exchanged for a different one without clearing accumulated run state. Observers judge whether the successor continues coherently from the existing context — honoring decisions already made and files already edited — rather than restarting from scratch or contradicting the earlier steps it inherited."
+      },
+      "b": {
+        "term": "hot swap",
+        "desc": "Freshly authored problems are quietly substituted for a portion of a standing benchmark's items between evaluation cycles, with difficulty held comparable. Any sudden score drop on the substituted slots relative to the untouched slots is treated as evidence that the retired problems had been absorbed during training rather than genuinely solved."
+      }
+    },
+    {
+      "pair_id": "P09",
+      "class": "noMatch",
+      "a": {
+        "term": "spray test",
+        "desc": "One identical task is dispatched to a large batch of worker instances executing simultaneously against shared infrastructure. Results are inspected for cross-contamination — instances reading each other's scratch files, clobbering a common cache, or racing on a shared port — and the contamination rate is reported as a concurrency-safety figure for the execution fabric."
+      },
+      "b": {
+        "term": "reference trajectory alignment score",
+        "desc": "An agent's ordered sequence of actions is aligned against a hand-curated ideal sequence for the same task using an edit-distance procedure over action types and arguments. The normalized similarity is reported to indicate how closely the route taken tracks the intended one, computed independently of whether the final answer was correct."
+      }
+    },
+    {
+      "pair_id": "P10",
+      "class": "noMatch",
+      "a": {
+        "term": "budget bleed",
+        "desc": "Across a run, the token cost consumed by attempts that were later discarded, undone, or retried is accumulated separately from cost that fed into the delivered result. The ratio of dead-end expenditure to total expenditure is reported; high values flag an agent that thrashes among approaches instead of converging."
+      },
+      "b": {
+        "term": "cross-lingual instruction fidelity",
+        "desc": "Task instructions are presented in a language other than the one the surrounding harness scaffolding is written in, with task difficulty and constraint count held constant. Adherence to each stated constraint is scored to detect whether an agent silently relaxes its constraint-following when a request arrives outside its dominant language."
+      }
+    }
+  ]
+}
+```

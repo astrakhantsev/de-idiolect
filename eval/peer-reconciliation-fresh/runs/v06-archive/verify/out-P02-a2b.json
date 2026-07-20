@@ -1,0 +1,6 @@
+Looking at each excerpt against the definition — a recurring suite-maintenance diagnostic that measures the share of items that have become non-separating (pass-everything or fail-everything) across the last several agent versions.
+
+[{"excerpt": 1, "verdict": "instantiates", "quote": "rose from 0.18 to 0.41 across four model releases, primarily because basic API-formatting items became universally solvable"},
+{"excerpt": 2, "verdict": "instantiates", "quote": "rose from 0.18 to 0.41 across four model releases, primarily because basic API-formatting items became universally solvable"},
+{"excerpt": 3, "verdict": "instantiates", "quote": "reached 0.46 for entry-tier tasks but remained below 0.20 for the highest tier, indicating that maintenance pressure was concentrated in simple retrieval and formatting tasks"},
+{"excerpt": 4, "verdict": "instantiates", "quote": "Removing exhausted items increased rank stability across weekly reruns"}]

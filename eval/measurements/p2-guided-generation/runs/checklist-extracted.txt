@@ -1,0 +1,6 @@
+1. There must be a fixed "do nothing" baseline — an estimate is judged against the value of having no estimate at all, not merely against a perfect one.
+2. Quality must be measured on a continuous scale, so that "how good" is a matter of degree, not a single pass/fail check.
+3. The benefit gained from using the estimate must shrink smoothly as its error grows, rather than staying flat until some fixed point.
+4. There must exist a specific error level beyond which the estimate stops being merely less useful and turns actively harmful — worse than having nothing.
+5. The harm past that level must come from the estimate manufacturing false confidence, not simply from its numbers being off.
+6. The bar for "good enough" must be statable and checkable on its own, before anyone knows whether a particular candidate estimate meets it.

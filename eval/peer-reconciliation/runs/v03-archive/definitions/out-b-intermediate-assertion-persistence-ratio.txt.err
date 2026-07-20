@@ -1,0 +1,37 @@
+WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir "/tmp" (codex_home: AbsolutePathBuf("/tmp/tmp.w0rWS70O2S"))
+OpenAI Codex v0.144.1
+--------
+workdir: /tmp/tmp.5dEonHuFZv
+model: gpt-5.6-terra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f7ada-c845-7b43-8431-561e1d673ae7
+--------
+user
+Below are usage excerpts from one community's documents, all containing the same term, shown masked as ⟦TERM⟧.
+
+Write a short, self-contained, operational definition of the concept ⟦TERM⟧ names AS USED in these excerpts: what kind of thing it is (a phenomenon, a procedure, a score, a rule…), its inputs and outputs where applicable, what it asserts, and when it applies.
+
+Constraints:
+- Ordinary words and simple notation only.
+- Do NOT use the masked term or guess at it; do not use names of people, published methods, fields, systems, models, or communities.
+- Base the definition ONLY on what the excerpts support; do not import outside assumptions.
+- 60–140 words. Output ONLY the definition text, nothing else.
+
+EXCERPTS:
+
+1. ⟦TERM⟧ was computed over all scratchpad claims retained in the execution trace.
+2. The median ⟦TERM⟧ was 0.74, with lower values concentrated in runs that copied provisional dates into the final table.
+3. ⟦TERM⟧ was calculated from planning notes, extraction notes, and draft justifications.
+4. The ⟦TERM⟧ averaged 0.69 in successful retrieval-first runs and 0.38 in inference-first runs.
+5. ⟦TERM⟧ was estimated over all stated subtotal checks and provenance notes.
+6. The ⟦TERM⟧ was 0.77 for runs that maintained a single reconciliation table, compared with 0.46 for runs that restated totals in prose.
+7. ⟦TERM⟧ was measured across provisional eligibility conclusions and amount calculations.
+8. The ⟦TERM⟧ declined from 0.71 to 0.45 when the second policy excerpt arrived before the first, because early conclusions were later reversed.
+codex
+A run-level score that measures how well the claims recorded during work remain mutually consistent and compatible with later conclusions. It takes the stated planning, extraction, checking, provenance, eligibility, calculation, and justification claims in an execution trace as input and outputs a value, apparently on a 0-to-1 scale. Higher values indicate that intermediate statements, totals, dates, and conclusions are maintained or reconciled rather than copied provisionally, restated inconsistently, or later reversed. It applies when a run contains recorded intermediate claims that can be compared across its trace.
+tokens used
+2,567

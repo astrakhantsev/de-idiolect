@@ -1,0 +1,29 @@
+Three DEFINITIONS of the same concept at increasing specificity:
+
+DEFINITION L0 (genus only): A per-run alignment score used to characterize how closely an agent's work pattern follows an expected route, separately from whether the task result succeeds.
+
+DEFINITION L1 (adds mechanism): A per-run alignment score is derived by comparing an agent's actual sequence of inspection, transformation, validation, and reporting actions with an expert- or curator-authored reference route for the same task. It is calculated independently of, and before, checking final success or answer correctness, so it can be assigned even when the final result is invalid or unchanged.
+
+DEFINITION L2 (adds measurement and conditions): A per-run alignment score is derived by comparing an agent's executed action sequence, including inspection, transformation, validation, and reporting steps, with an expert- or curator-authored reference route for the same task. It is computed independently of and before final success or answer correctness is checked, so completed runs can receive a score even when their artifacts are invalid or their answers are unchanged. The score expresses the degree of match between the executed path and the reference route, not a pass/fail result. Shorter unconventional routes, skipped exploratory inspection, and extra detours before completion can lower it even when tests pass or the run succeeds. It is computed for each completed trial in multi-step tasks, including data-cleaning and replayed tasks with replaced or hot-swapped items. Results must be reported separately for successful and unsuccessful trials to distinguish constraint failures from changed work patterns. Its only moderate correlation with pass rate means it is not interchangeable with a success or correctness metric.
+
+Below are numbered excerpts from a community's documents in which one term — masked as ⟦TERM⟧ — is used (other local jargon masked ⟦X⟧).
+
+For EACH excerpt, and for EACH definition level INDEPENDENTLY, decide: is the referent of ⟦TERM⟧, as used in THIS excerpt, an instance of the concept described by THAT definition?
+
+- "instantiates" — the usage is consistent with and exemplifies that definition.
+- "contradicts" — the usage is incompatible with that definition (the referent has a property that definition excludes, or lacks one it requires).
+- "insufficient" — this excerpt alone does not contain enough to decide for that definition.
+
+A usage can instantiate L0 while contradicting L2 — judge each level on its own content. Judge each excerpt on its own text only. For L1 and L2, any decided verdict (instantiates or contradicts) requires a verbatim supporting quote from the excerpt; L0 needs no quote.
+
+Output ONLY a JSON array, one object per excerpt:
+[{"excerpt": 1, "L0": "instantiates|contradicts|insufficient", "L1": {"verdict": "...", "quote": "verbatim or empty for insufficient"}, "L2": {"verdict": "...", "quote": "..."}}, ...]
+
+EXCERPTS:
+
+1. Kicked off a ⟦TERM⟧ on the new deployment pipeline agent, 500 identical copies hitting the same task against our staging cluster. Found that 6% of runs were reading a scratch file that a completely different worker instance had written to, because our tempdir naming scheme wasn't actually unique per worker, just per host.
+2. Classic. ⟦TERM⟧ is supposed to be about smoking out exactly this kind of shared-infrastructure race, and it did its job, but it also ate half our staging budget before someone noticed the contamination number wasn't zero.
+3. Spent two days chasing what I thought was a ⟦X⟧ regression before realizing it was actually a ⟦TERM⟧ problem in disguise.
+4. Lesson learned: run a dedicated ⟦TERM⟧ on any harness before trusting behavioral metrics that come out of batched execution, especially ones sensitive to file state like ⟦X⟧ is.
+5. Fifth, we finally ran a proper ⟦TERM⟧ on the shared execution cluster and found 11% cross-contamination between worker instances writing to a common cache directory, which we now suspect explains some of the weirder outliers from earlier in the month that we'd previously written off as model noise.
+6. ⟦TERM⟧ contamination on the shared cluster dropped from 11% to 4% after the tempdir isolation fix, though it's not zero and probably never will be given how our worker pool shares a cache layer by design.

@@ -1,0 +1,6 @@
+Runs a suite of items across multiple agent versions (e.g., four, six agent versions fielded over time).
+For each item, checks whether outcomes are pass-everything or fail-everything across all those versions.
+Produces a single percentage/count of items falling into the pass-everything-or-fail-everything category out of the total suite size.
+Applies to eval suites with many items (hundreds), run periodically (e.g., quarterly) or as an ad hoc sanity check.
+A high or rising percentage indicates items no longer discriminate between agent versions (a plateau on the skill being tested).
+Results are compared across different suites and across time (quarter to quarter) to track trends.

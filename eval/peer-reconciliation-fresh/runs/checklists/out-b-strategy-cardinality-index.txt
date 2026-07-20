@@ -1,0 +1,6 @@
+- Mechanism: computed only from successful/completed attempts (runs), across multiple independent attempts per task, after clustering successful runs by structural tool-use pattern.
+- Measures diversity/variation in the structural tool-use pattern (sequence of tool-use steps) among successful traces on a task, not a pass/fail or accuracy score.
+- Traces are normalized before scoring (for incidental file paths, number of available tools, and task instruction length) prior to computing the value.
+- Applies per task/task-set in agentic tool-use settings (e.g., repository-repair or browser-workflow tasks), computed after each evaluation round or release.
+- Value is independent of pass/completion rate: it can shift substantially (e.g., 1.3 to 2.7) even when pass rates are nearly unchanged.
+- Value rises when successful runs follow varied patterns (e.g., alternating inspection/verification, abbreviated traces under reduced budgets) and falls when successful runs converge on one common pattern (e.g., single retrieval-first or browser workflow).

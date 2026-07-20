@@ -1,0 +1,7 @@
+- Submit the exact same prompt twice in the same session (identical conditions, no changes) and compare the two outputs directly against each other.
+- Mechanism: re-run the identical prompt/session pair and diff the resulting outputs token-for-token (or output-for-output) to detect divergence.
+- Measures/produces a divergence rate expressed as a percentage (e.g., 4%, 6%, 9%) comparing the two identical-condition outputs.
+- Applies even when temperature is nominally pinned to zero, to check whether outputs are actually deterministic.
+- Can surface differences beyond wording, including different substantive outcomes (e.g., a different citation or a different truncation point), not just token-level drift.
+- Used diagnostically on suspicious cases (e.g., identical scores across differently-worded items, or an output that looks off) to test whether stack-level nondeterminism is present.
+- Result is a noise/divergence baseline that must be separated from other known effects before trusting other measurements (e.g., pass rates) on the same batch.

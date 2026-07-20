@@ -1,0 +1,5 @@
+- One model generates candidate items (questions/bugs), and a second, different model filters/curates that candidate pool before use.
+- The filtering step removes items the second model judges "too easy" or "trivial," retaining only the harder-seeming subset.
+- Applies in eval/benchmark construction settings — e.g., drafting test questions or candidate bugs for agent evaluation.
+- No check is made on whether the filtering model shares blind spots or biases with the generating model.
+- The process can systematically skew resulting difficulty/coverage toward the generating model's authoring strengths and weaknesses.

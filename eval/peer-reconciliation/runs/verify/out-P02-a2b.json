@@ -1,0 +1,19 @@
+Looking at each excerpt against the core of the definition — a per-run proportion score over the agent's own intermediate notes/claims reflecting how many stay true (survive later contradiction), including under fault injection.
+
+- **1:** Score over the agent's own scratchpad claims; lower when unverified ("provisional") notes propagate to the final answer — matches truth-survival. Instantiates.
+- **2:** Same, plus an injected malformed record — matches the definition's fault-injection element. Instantiates.
+- **3:** Proportion over the run's notes; lower for inference-first (guessed, likely later disproven) vs retrieval-first (grounded). Instantiates.
+- **4:** Same; the added latency manipulation ("holding returned content constant") doesn't alter what ⟦TERM⟧ measures. Instantiates.
+- **5:** Audit/reconciliation task; score over subtotal checks and provenance notes, lower when prose restatement introduces inconsistency. Instantiates.
+- **6:** Same core statement. Instantiates.
+
+None state a property the definition excludes (single-run, over the agent's own notes, truth-at-end), so no contradictions; each supplies the note-level survival signal, so none are merely insufficient.
+
+```json
+[{"excerpt": 1, "verdict": "instantiates", "quote": "computed over all scratchpad claims retained in the execution trace"},
+{"excerpt": 2, "verdict": "instantiates", "quote": "computed over all scratchpad claims retained in the execution trace"},
+{"excerpt": 3, "verdict": "instantiates", "quote": "calculated from planning notes, extraction notes, and draft justifications"},
+{"excerpt": 4, "verdict": "instantiates", "quote": "calculated from planning notes, extraction notes, and draft justifications"},
+{"excerpt": 5, "verdict": "instantiates", "quote": "estimated over all stated subtotal checks and provenance notes"},
+{"excerpt": 6, "verdict": "instantiates", "quote": "estimated over all stated subtotal checks and provenance notes"}]
+```

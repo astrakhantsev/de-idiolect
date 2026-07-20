@@ -1,0 +1,262 @@
+{
+  "_note": "Cross-community cell corpus (half-synthetic: real PubMed records, authored A/B/E grouping). docs_A use term A, docs_B use term B for the SAME MeSH concept; E = off-topic distractors. Every doc tagged contains_other_term so retrieval can be scored inclusive AND clean. Built by build_corpus.py.",
+  "pair": {
+    "term_a": "Photoreflexometry",
+    "term_b": "Photoplethysmography",
+    "seed_concept": "photoplethysmography",
+    "mesh_uid": "D017156 (NLM UID 68017156)"
+  },
+  "guards": {
+    "citation_reconciliation_G2": {
+      "ran": true,
+      "a_docs_resolved_in_openalex": 4,
+      "b_docs_resolved_in_openalex": 5,
+      "a_docs_with_references": 0,
+      "b_docs_with_references": 4,
+      "direct_A_cites_B": 0,
+      "direct_B_cites_A": 0,
+      "shared_reference_count": 0,
+      "reference_jaccard": 0.0,
+      "verdict": "INSUFFICIENT DATA (too few docs with references in OpenAlex; cannot judge)"
+    },
+    "comention_census_G4b": {
+      "B_in_A": {
+        "n_docs": 4,
+        "docs_containing_other_term": 1,
+        "doc_rate": 0.25,
+        "total_mentions": 4,
+        "note": "how often term B appears in the term-A search set"
+      },
+      "A_in_B": {
+        "n_docs": 10,
+        "docs_containing_other_term": 0,
+        "doc_rate": 0.0,
+        "total_mentions": 0,
+        "note": "how often term A appears in the term-B search set"
+      },
+      "lexical_reconciliation_verdict": "LOW co-mention (separable communities; tool-relevant)"
+    }
+  },
+  "documents": [
+    {
+      "id": "A_2626472",
+      "pmid": "2626472",
+      "community": "A",
+      "title": "[Photoplethysmography (PPG) or photoreflexometry (PRM): principle and reproducibility (study of the validity of the method in healthy subjects)].",
+      "text": "[Photoplethysmography (PPG) or photoreflexometry (PRM): principle and reproducibility (study of the validity of the method in healthy subjects)]. Photoplethysmography, a non-invasive vascular exploratory test, has recently made great in the evaluation of venous haemodynamics. The principle of Photoplethysmography uses the cutaneous reflection of infrared light in the intradermal venous plexi. Then methods are presented for a reliable implementation of the tests. Validity of the method is verified by applying statistical tests to measurements carried out in two healthy subjects. In conclusion, Photoplethysmography may be produced, providing that the method used is strict, that three successive measurements are carried out, so that only the mean value is considered; because of the low value of the variability index of the total filling time, this parameter is used in the interpretation of the method.",
+      "self_term_hits": 1,
+      "other_term_hits": 4,
+      "contains_other_term": true
+    },
+    {
+      "id": "A_2951751",
+      "pmid": "2951751",
+      "community": "A",
+      "title": "[Venous exploration in the aged subject: Doppler, plethysmography, photoreflexometry].",
+      "text": "[Venous exploration in the aged subject: Doppler, plethysmography, photoreflexometry]. The performance and the interpretation of venous explorations in the elderly patient are often difficult due to the frequency of a past history of venous diseases and associated pathologies. Nevertheless it provides valuable and often conclusive informations since, in our series of 110 patients over 70 years, in a city practice: more than 50 per cent of the clinical diagnoses of phlebitis were wrong (27 out of 47); 80 per cent of the phlebites that were diagnosed, did not ha a phlebogram (sural and/or isolated femoro-popliteal phlebites). In all patients suffering from chronic edema as well as 96 per cent of those with trophic disorders, an etiological diagnosis was possible. Finally, it must be emphasized that, in 110 patients, 23 (or 21%) presented disorders secondary to a superficial venous insufficiency, isolated or predominant, which, as a rule, had not been diagnosed clinically.",
+      "self_term_hits": 1,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "A_3786440",
+      "pmid": "3786440",
+      "community": "A",
+      "title": "[Is photoreflexometry valid as a diagnostic method in the physician's office].",
+      "text": "[Is photoreflexometry valid as a diagnostic method in the physician's office]. The results of measurements of photoreflexometry (PRM) in 1852 patients in phlebological consultations were broken down statistically. These were patients who had come to consultation of their own free will or who had been sent by their G.P. for an ambulatory phlebological examination. The authors assess the interpretative possibilities of PRM in treatment. They were particularly interested in the question of knowing whether or not PRM is capable of exposing a postphlebitic syndrome. In 9, 1% of these cases, a control phlebography was necessary. In a quarter of these patients, the previous diagnosis of \"post-phlebitic syndrome\" did not match the result of the phlebography. In each of these cases the deep veins were permeable and it was simply a matter of the incompetence of the deep axes.",
+      "self_term_hits": 2,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "A_6514792",
+      "pmid": "6514792",
+      "community": "A",
+      "title": "[Noninvasive functional exploration using photoreflexometry].",
+      "text": "[Noninvasive functional exploration using photoreflexometry]. Photoreflexometry measures the filling time of the intradermic venous plexus and quantifies the function of the venous pump in the leg. Thus it completes the other methods of venous functional investigation and provides data-figures on the seriousness of post-phlebitic illness. The essential interest of the non-invasive examination is that it makes it possible to read the phlebographic and therapeutic indications more discerningly.",
+      "self_term_hits": 2,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "B_42468947",
+      "pmid": "42468947",
+      "community": "B",
+      "title": "Diagnosis of postoperative atrial fibrillation using smartwatch monitoring after cardiac surgery: protocol for the FAWATCH single-centre, open-label, randomised controlled trial.",
+      "text": "Diagnosis of postoperative atrial fibrillation using smartwatch monitoring after cardiac surgery: protocol for the FAWATCH single-centre, open-label, randomised controlled trial. Postoperative atrial fibrillation (POAF) remains the most frequent arrhythmic complication after cardiac surgery, with most episodes occurring after discharge from the intensive care unit (ICU) when continuous rhythm monitoring is no longer routinely available. Early detection of POAF is clinically relevant and influences long-term cardiovascular outcomes. Wearable devices combining photoplethysmography technology with single-lead ECG capability offer a potential solution for continuous rhythm monitoring in conventional surgical wards. However, their effectiveness and feasibility in the immediate postoperative in-hospital setting remain insufficiently evaluated. The FAWATCH trial aims to determine whether smartwatch-based rhythm monitoring improves POAF detection within the first 5\u2009days after ICU discharge compared with standard. FAWATCH is a single-centre, open-label, randomised controlled trial conducted in the cardiac surgery department of Amiens-Picardie University Hospital. Adult patients undergoing cardiac surgery with cardiopulmonary bypass and transferred to the conventional surgical ward within 96 hours are eligible for inclusion. Patients are randomised in a 1:1 ratio using a centralised, computer-generated block randomisation sequence implemented through secure electronic software. Randomisation is stratified by age (>65 years), diabetes status and type of surgery (valvular, coronary or combined procedures). Participants are allocated to either standard care or smartwatch-based monitoring using a conformity European-marked single-lead ECG device (ScanWatch, Withings Move ECG, Withings, France). In the intervention group, patients wear the smartwatch continuously for 5\u2009days and perform on-demand single-lead ECG recordings when alerted or symptomatic, with confirmation by standard 12-lead ECG. In the control group, POAF is diagnosed exclusively by a 12-lead ECG performed on clinical suspicion, as per routine practice. The primary outcome is the incidence of POAF within 5\u2009days following ICU discharge. Secondary outcomes are the proportion of asymptomatic POAF, the association between left atrial reservoir strain and POAF occurrence, the feasibility of smartwatch monitoring, recurrence of POAF and major adverse cardiovascular events at 30 days, 3 months and 6 months. Recruitment began in January 2023, and the trial is currently ongoing, with 258 patients enrolled to date. Ethical approval has been obtained from the Institutional Review Board of Amiens-Picardie University Hospital (IRB-ID: 2022-A00497-36). All participants provide written informed consent in accordance with French regulations for interventional clinical research. The study's results will be disseminated through peer-reviewed publications and presentations at national and international conferences. NCT05573633.",
+      "self_term_hits": 1,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "B_42467418",
+      "pmid": "42467418",
+      "community": "B",
+      "title": "Mobile Apps for Heart Rate Variability: App Store Search and Content Analysis.",
+      "text": "Mobile Apps for Heart Rate Variability: App Store Search and Content Analysis. Heart rate variability (HRV) is a noninvasive indicator of autonomic nervous system activity that is increasingly used for health and performance monitoring. Digital and mobile technologies are increasingly providing opportunities for remote HRV monitoring outside of laboratory-based settings. This study aimed to describe the landscape of mobile apps that measure, analyze, and provide feedback on HRV, with a focus on how HRV is measured, analyzed, interpreted, and communicated to users. A secondary aim was to assess the transparency of these apps, including the extent to which they disclose the evidence underpinning their HRV metrics and feedback. This study was an app store search and content analysis. Searches were conducted in the Google Play Store and Apple iTunes Store. Apps were eligible for inclusion if they had functionality to record, analyze, or provide feedback on HRV and were available in English. Data were extracted from app descriptions, screenshots, websites, and, where necessary, contact with developers. Data were extracted on app metadata (developer, release and update dates, and pricing), alongside information about HRV measurement, analysis, and feedback. This included the type of sensor used; HRV measurement characteristics (sensor placement, recording duration, and body position or standardization procedures); methods to calculate and interpret HRV (ie, metrics derived and how they were interpreted for users); and additional app functionality such as reminders, the ability to log self-reported stressors, and the type of feedback or guidance provided based on HRV. We used previously published criteria for assessing the quality of information on the internet, which included authorship, scientific attribution, currency of updates, and data privacy. Of 746 apps identified, 206 met eligibility criteria. Of these, 132 were primary measurement apps, 59 were aggregators, and 15 were hybrid. Photoplethysmogram was the most common sensing modality (n=117, 56.8%), followed by multiple sensors (n=60, 29.1%). Full data extraction across app metadata and HRV measurement and analysis data was only achievable for 93 (45.1%) apps, representing a transparent subset with sufficient available information for content analysis. The most commonly reported HRV metrics were root mean square of successive differences (n=51) and SD of normal-to-normal intervals (n=48), while frequency-domain power (n=22) and low frequency to high frequency ratios (n=15) were less common. Most apps presented data as personalized trends or individualized ranges (76/93, 81.7%), emphasizing user-specific context rather than isolated values. Although 86% (80/93) offered contextual guidance (eg, readiness or recovery scores), many relied on proprietary algorithms that were not transparently described, limiting independent assessment of how these scores were derived and validated. Consumer HRV apps are widely available but vary considerably in how data are collected, processed, and contextualized. While many offer personalized trends and guidance, methodological transparency is often limited, particularly regarding the proprietary algorithms underlying the feedback scores.",
+      "self_term_hits": 0,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "B_42463166",
+      "pmid": "42463166",
+      "community": "B",
+      "title": "Photoplethysmography-derived Heart Rate Variability as a Marker of Physiological Stress in Korean American Home Care Workers Providing Dementia Care.",
+      "text": "Photoplethysmography-derived Heart Rate Variability as a Marker of Physiological Stress in Korean American Home Care Workers Providing Dementia Care. This pilot study explored the longitudinal relationship between daily dementia caregiving and physiological stress, assessed through heart rate variability (HRV) measured using a wearable device, among Korean American home care workers (HCWs). Fifteen HCWs wore the \u014cura ring for 21 days, providing 14 days of valid nocturnal HRV data after baseline calibration. HRV was quantified as the root mean square of successive differences (RMSSD) derived from photoplethysmography (PPG)-based interbeat intervals. To minimize interindividual variability, HRV values were standardized within participants. Multilevel linear models examined within- and between-person associations of dementia caregiving (yes or no and total hours) with HRV, adjusting for covariates. All were women, and the majority of HCWs (86.96%) were unsure about the type of dementia their care recipients had. Of 210 potential daily observations, 198 (94.3%) were valid. HRV displayed substantial within-person day-to-day fluctuations (intraclass correlation = 0.20) despite relatively low baseline self-reported stress. Although dementia caregiving was not significantly associated with HRV, the estimated coefficients suggested small-to-moderate within-person effect sizes. These findings highlight the dynamic nature of physiological stress and underscore both the feasibility and limitations of nocturnal PPG-derived HRV for real-world stress assessment. The study provides preliminary methodological guidance for wearable-based HRV research in understudied caregiver populations.",
+      "self_term_hits": 2,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "B_42461792",
+      "pmid": "42461792",
+      "community": "B",
+      "title": "Postoperative stress assessment using PPG-based heart rate variability and exploratory ECG analysis in colorectal surgery.",
+      "text": "Postoperative stress assessment using PPG-based heart rate variability and exploratory ECG analysis in colorectal surgery. NCT04996511.",
+      "self_term_hits": 0,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "B_42461735",
+      "pmid": "42461735",
+      "community": "B",
+      "title": "MAGIC: Multi-Grained Conditional Diffusion for High-Fidelity PPG-to-ECG Translation.",
+      "text": "MAGIC: Multi-Grained Conditional Diffusion for High-Fidelity PPG-to-ECG Translation. Building a cardiac digital twin relies on high fidelity electrocardiogram signals to accurately simulate individual cardiovascular function. However, conventional ECG acquisition is not well suited for long term, unobtrusive home monitoring, while photoplethysmography, despite its advantage in continuous collection, lacks electrophysiological information. To bridge these complementary modalities for computational analysis, we propose MAGIC, a multi-grained conditional diffusion framework for generating ECG-like waveforms from PPG. MAGIC separates conditional information into a global condition and token-wise local conditions: the former summarizes segment-level cardiovascular context and modulates the diffusion Transformer through adaptive layer normalization, while the latter preserves patch-level PPG cues and is injected through gated cross-attention. The conditional encoder is pre-trained with paired PPG and ECG signals using ROI-weighted reconstruction, contrastive learning, and latent alignment, so that PPG-derived conditions are explicitly encouraged to match ECG-derived representations. Across four public datasets and four downstream proxy tasks, MAGIC improves distributional fidelity in most settings and shows competitive task-level utility. In representative analyses, pre-training reduces FD from 0.908 to 0.693 on MIMIC-AFib; MAGIC also achieves lower FD with 50 sampling steps than RDDM with 500 steps.",
+      "self_term_hits": 1,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "B_42460368",
+      "pmid": "42460368",
+      "community": "B",
+      "title": "Missed isochromatic cardiac pulsation in remote photoplethysmography: detection, impact, and removal.",
+      "text": "Missed isochromatic cardiac pulsation in remote photoplethysmography: detection, impact, and removal. Remote photoplethysmography (rPPG) extracts the cardiac pulse from facial video by isolating chromatic variation due to wavelength-dependent hemoglobin absorption. We report that this signal model is incomplete. A second cardiac-frequency signal is present in skin video: an isochromatic pulsation along the skin's mean reflectance direction, arising from ballistocardiographic modulation of skin surface geometry and changes in the effective scattering cross-section of the dermal vascular bed. This isochromatic component is conflated with the chromatic signal by every rPPG method we evaluated, including chrominance-based methods (POS, CHROM) and other projection or decomposition methods (OMIT, LGI, PBV, ICA). The two signals share the cardiac frequency but differ in phase and signal fidelity, and their relative directions vary with skin tone, lighting, and recording conditions. To assess whether the isochromatic component contributes significant error to rPPG, we constructed chrominance Phase-Aware Cardiac Eigenprojection (cPACE), a method that removes the isochromatic direction via a subject-adaptive projection orthogonal to the measured skin reflectance before extracting the cardiac signal through eigen-vector projection. Across UBFC-Phys (rest and speech) and the CMU-rPPG India and Sierra Leone cohorts, cross-ROI phase-locking values of the recovered signal are systematically higher under cPACE than under any other method evaluated, indicating cleaner waveform recovery. The resulting heart rate estimates achieve mean absolute error of 1.7, 3.7, 1.7, and 1.1 BPM, respectively, on these cohorts, compared to 2.8, 9.5, 16.8, and 17.8 BPM for POS with homodyne envelope correction applied for parity. Together, these results show that the isochromatic component is a major source of error in existing rPPG methods, and future methods should explicitly account for it.",
+      "self_term_hits": 2,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "B_42459755",
+      "pmid": "42459755",
+      "community": "B",
+      "title": "Autonomic-salience stability as a candidate Gate for awake low-dose ketamine: a systems neuroscience framework with a clinical anchor.",
+      "text": "Autonomic-salience stability as a candidate Gate for awake low-dose ketamine: a systems neuroscience framework with a clinical anchor. Ketamine responses vary across patients and sessions, suggesting that dose alone is an incomplete organizing principle. We propose a state-first Gate-Amplifier-Reintegration framework in which awake low-dose ketamine acts primarily as an Amplifier of transient network flexibility, whereas autonomic-salience stability is treated as a candidate Gate that may shape whether this flexibility remains steerable. In this framework, cardio-autonomic and interoceptive state may constrain or modulate salience-network gain, interoceptive precision, and thalamocortical selectivity, thereby influencing whether ketamine-associated loosening of default-mode constraints is available for frontoparietal-control-compatible reintegration or drifts toward dysphoric dissociation and vigilance instability. We formalize a three-step sequence: Gate, Amplifier, Reintegration. Gate refers to candidate autonomic-salience stability; Amplifier refers to awake low-dose ketamine delivered under operational invariants that preserve vigilance and behavioral interpretability; Reintegration refers to the organization of ketamine-amplified flexibility into language, joint attention, task context, and action-oriented consolidation. Heart-rate variability (HRV) is used only as a bounded peripheral state-verification proxy. We distinguish observed Autonomic Affirmative Window quality assurance (AAW-QA), a post-sequence quality-assurance signal, from AAW-Gate, a proposed prospective pre-dose criterion. The framework is informed by, but not validated by, observations from a single-center outpatient chronic pain care pathway using awake low-dose ketamine and route-defined cervicothoracic sympathetic modulation. These observations document clinical provenance but do not provide comparative efficacy evidence, causal efficacy, dose-sparing evidence, salience-network mediation, or HRV biomarker validity. The clinical provenance was nonrandomized, chart-based, clinician-directed, and lacked concurrent neural measurement. The framework yields falsifiable predictions: prospective Gate manipulation should reproducibly alter pre-dose autonomic state; prospectively defined AAW-Gate-positive sessions should be tested for convergence with low-burden EEG/fNIRS markers of salience switching and task control; and randomized Gate designs should determine whether autonomic shifts moderate, and in adequately powered designs mediate, session-level tolerability, reintegration, and usable clinical change. Alternative accounts, including analgesia, expectancy, clinician attention, workflow era, documentation bias, respiratory/postural effects, and photoplethysmography (PPG) artifact, are treated as competing explanations that future designs must separate.",
+      "self_term_hits": 1,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "B_42456268",
+      "pmid": "42456268",
+      "community": "B",
+      "title": "Non-invasive arterial blood pressure waveform generation in critically ill patients: A sensor-based deep learning approach.",
+      "text": "Non-invasive arterial blood pressure waveform generation in critically ill patients: A sensor-based deep learning approach. Continuous monitoring of Arterial Blood Pressure (ABP) in critically ill patients requires invasive arterial catheterization, which carries risks of thrombosis, vascular injury and infection. Here, we train and validate a computational model for continuous non-invasive ABP estimation in Intensive Care Unit (ICU) patients using a novel wearable sensor array. The sensor acquires continuous high frequency photoplethysmography (PPG) and electrocardiography (ECG) signals which are used as inputs in a deep learning algorithm for beat-to-beat reconstruction of ABP waveforms. We include 28 patients enrolled in four ICU units at Johns Hopkins Hospital, comprising 15,489 5-s ECG and PPG segments. A CNN/LSTM hybrid architecture achieved an R2 of 0.732 and a mean absolute error (MAE) of 6.42\u202f\u00b1\u202f3.82\u202fmmHg, with systolic and diastolic blood pressure MAEs of 6.21\u202f\u00b1\u202f3.89 and 3.41\u202f\u00b1\u202f3.02\u202fmmHg, respectively. This performance closely approached an upper-bound model trained on contemporaneously acquired ground truth ECG and PPG signals (R2=0.799, MAE=5.67 mmHg), indicating that the sensors retain most hemodynamically relevant information. Split-conformal prediction provided calibrated uncertainty intervals with coverage meeting nominal targets, offering a principled framework for bedside confidence assessment. These findings demonstrate the feasibility of accurate, continuous, non-invasive ABP waveform estimation from wearable biosignals in critically ill patients, establishing a foundation for reducing dependence on invasive arterial monitoring while preserving the waveform-level information essential for hemodynamic management.",
+      "self_term_hits": 1,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "B_42455166",
+      "pmid": "42455166",
+      "community": "B",
+      "title": "Autonomic nervous system influences on beat-to-beat blood pressure variability in healthy young adults.",
+      "text": "Autonomic nervous system influences on beat-to-beat blood pressure variability in healthy young adults. Purpose: Based on evidence from 24-hour and visit-to-visit blood pressure (BP) monitoring, recent laboratory-based studies have begun investigating beat-to-beat average real variability (ARV) in BP as a prognostic indicator of cardiovascular risk. However, beat-to-beat BP ARV may be influenced by adaptive parasympathetic modulation of heart period, particularly in young otherwise healthy adults. This profound modulation of heart rate between consecutive cardiac cycles might paradoxically increase ARV, yet the autonomic underpinnings of BP ARV remain uncharacterized. Herein, we characterize the association between beat-to-beat BP variability (BPV), estimated cardiac parasympathetic modulation via heart rate variability (HRV), and muscle sympathetic nerve activity (MSNA) in humans. Methods: Recordings of continuous BP (finger photoplethysmography) and heart rate (HR, electrocardiogram) were obtained in 145 healthy young adults (97M, 48F; age: 22\u00b14 years; BMI: 24\u00b13 kg/m2) across a 10-minute resting period. Recordings of MSNA (microneurography) were available in 103 participants. BP ARV, standard deviation (SD), and coefficient of variation (CV) were used to quantify BPV. Results: Time and frequency-domain HRV were associated positively with BP ARV (rs=0.388-0.820, ps<0.001), but not SD or CV (ps>0.05). Sympathetic baroreflex sensitivity (sBRS) was weakly correlated with mean arterial pressure ARV (r=0.225, p=0.025) and unrelated to systolic and diastolic BP ARV (p>0.05) but negatively associated with BPV quantified as the SD or CV (rs=0.412-0.514, p<0.001). Conclusion: The positive association between BP ARV and resting HRV suggests that elevated BP ARV in young healthy adults is influenced by cardiac parasympathetic modulation, whereas other traditional measures of BPV are not as affected.",
+      "self_term_hits": 1,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "B_42454571",
+      "pmid": "42454571",
+      "community": "B",
+      "title": "Vertical Heterojunction Nanowire-Based Ambient-Stable \u03b3-CsPbI3 Self-Powered Photodetectors with Enhanced Performance for Photoplethysmography.",
+      "text": "Vertical Heterojunction Nanowire-Based Ambient-Stable \u03b3-CsPbI3 Self-Powered Photodetectors with Enhanced Performance for Photoplethysmography. Photoactive \u03b3-CsPbI3 perovskites hold great promise for high-performance optoelectronics, but their development is hindered by severe phase instability and undesired lateral photocarrier diffusion in conventional continuous thin-film architectures. Here, we integrate an electron transport layer, CsPbI3 active layer, and hole transport layer within vertically aligned anodic aluminum oxide nanochannels to form heterojunction nanowire arrays (HJNWs) that disrupt both lateral photocarrier diffusion and the propagation of phase transitions. This architecture stabilizes the photoactive \u03b3-CsPbI3 in ambient air for more than 4 months. Self-powered photodetectors based on these HJNWs deliver competitive photodetection performance, simultaneously achieving a high external quantum efficiency of \u223c85% and a short response time of 54 \u03bcs under zero bias. Our fabrication approach is also compatible with large-area (8 cm \u00d7 8 cm) rigid and flexible substrates. These results demonstrate that nanoconfined device architectures provide a promising route toward stable and high-performance self-powered perovskite optoelectronics.",
+      "self_term_hits": 1,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "E_42469879",
+      "pmid": "42469879",
+      "community": "E",
+      "title": "Autoreactive and parasite-specific IgG repertoires in asymptomatic and mild Plasmodium falciparum infection in C\u00f4te d'Ivoire.",
+      "text": "Autoreactive and parasite-specific IgG repertoires in asymptomatic and mild Plasmodium falciparum infection in C\u00f4te d'Ivoire. Naturally acquired immunity to Plasmodium falciparum involves parasite-specific antibodies as well as autoreactive responses that may contribute to immune regulation and tolerance. Characterizing these antibody repertoires across clinical phenotypes and transmission settings may help distinguish asymptomatic carriage from clinical malaria and identify biomarkers of exposure and protection. We conducted a cross-sectional study in three malaria-endemic settings in C\u00f4te d'Ivoire (Korhogo, Man, and Abobo). Individuals with mild malaria (MM; n\u2009=\u200994) were enrolled across all three sites, whereas asymptomatic carriers (AS; n\u2009=\u200933) and endemic controls (EC; n\u2009=\u200939) were enrolled in Abobo only. Total IgG responses to P. falciparum (3D7 whole-parasite extract), self-antigens (human brain extract), and mosquito exposure (gSG6-P1) were measured by ELISA or Luminex. The breadth and specificity of autoreactive IgGs were assessed by PANAMA blotting followed by mass spectrometry. Multivariate analyses were used to identify antigenic signatures associated with clinical phenotype and, among MM individuals, differences in transmission intensity. Compared with MM, AS individuals exhibited lower total IgG reactivity to P. falciparum antigens but higher levels of autoreactive IgG3 with a broader antigenic repertoire. Proteomic analysis identified \u03b3- and \u03b2-actin, as well as several metabolic enzymes (including succinate-CoA ligase, acetyl-CoA acyltransferase 2, acyl-CoA dehydrogenase, and glutaryl-CoA dehydrogenase) as targets distinguishing AS and EC from MM. Among MM cases, a cluster of brain antigens in the 50-75\u00a0kDa range differentiated sites with distinct transmission intensities. IgG responses to gSG6-P1 correlated with autoreactive IgG levels, suggesting an association between mosquito exposure and autoreactive immune responses. Asymptomatic P. falciparum infection in a high-transmission setting was associated with enhanced autoreactive IgG3 responses, a profile that may reflect clinical tolerance and cumulative exposure. Autoreactive antibody signatures, together with markers of mosquito exposure, may serve as candidate biomarkers of malaria exposure and naturally acquired immunity and could inform surveillance and control strategies in endemic areas.",
+      "self_term_hits": 0,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "E_42469846",
+      "pmid": "42469846",
+      "community": "E",
+      "title": "Metabolic reprogramming via SIRT2-deficient microglial large extracellular vesicles ameliorates alzheimer's pathology.",
+      "text": "Metabolic reprogramming via SIRT2-deficient microglial large extracellular vesicles ameliorates alzheimer's pathology. Current therapies for Alzheimer's disease (AD) offer only symptomatic relief, highlighting the urgent need for disease-modifying approaches capable of halting or reversing neurodegeneration. Extracellular vesicles (EVs) have attracted growing interest as therapeutic vehicles owing to their inherent capacity to bypass the blood-brain barrier and deliver complex biological cargo to the central nervous system. Here, we examined whether large EVs (LEVs) derived from microglia with stable Sirtuin-2 knockdown (SIRT2-KD) confer the neuroprotective effects associated with SIRT2 inhibition. LEVs harvested from SIRT2-KD microglia were administered intranasally to APP/PS1 mice. We assessed microglial uptake of LEVs, along with subsequent changes in cellular metabolism, migration toward amyloid-beta (A\u03b2) plaques, phagocytic activity, and downstream pathological and behavioral outcomes. Proteomic and acetylomic profiling were employed to characterize the molecular cargo of LEVs-SIRT2-KD. LEVs-SIRT2-KD were readily internalized by microglia in vivo following intranasal delivery. Uptake of these vesicles markedly enhanced microglial bioenergetics, driving coordinated upregulation of both oxidative phosphorylation and glycolysis. This metabolic shift was accompanied by improved microglial recruitment to A\u03b2 plaques and increased phagocytic clearance. Consequently, treated mice showed reduced A\u03b2 plaque deposition, restored synaptic integrity, and reversal of cognitive deficits. Proteomic and acetylomic analyses revealed that LEVs-SIRT2-KD are selectively enriched in proteins and acetylation modifications linked to energy metabolism and phagocytic function, offering a mechanistic basis for the observed metabolic reprogramming. Together, these results identify LEVs as a critical vesicle subtype mediating the effects of SIRT2 knockdown and support a cell-free therapeutic strategy for AD centered on EVs-driven metabolic reprogramming of microglia.",
+      "self_term_hits": 0,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "E_42468749",
+      "pmid": "42468749",
+      "community": "E",
+      "title": "Potential of N-Acetylcysteine as an Adjuvant to Amoxicillin Against Mastitis-Associated Staphylococcus aureus and Escherichia coli.",
+      "text": "Potential of N-Acetylcysteine as an Adjuvant to Amoxicillin Against Mastitis-Associated Staphylococcus aureus and Escherichia coli. Bovine mastitis is a major health and economic problem in dairy animals, primarily caused by bacterial pathogens such as Staphylococcus aureus, Streptococcus spp. and Escherichia coli. The rise of antimicrobial resistance has reduced the effectiveness of conventional antibiotics, emphasizing the need for alternative or adjunct treatment strategies. mastitis remains a major health and economic concern in dairy animals worldwide and is predominantly associated with bacterial pathogens such asStaphylococcus aureus,Streptococcusspp. andEscherichia coli. The increasing emergence of antimicrobial resistance among these pathogens has considerably reduced the effectiveness of conventional antibiotic therapy, highlighting the need for alternative or adjunct treatment strategies. The present study evaluated the in vitro synergistic antimicrobial activity of amoxicillin in combination with N-acetylcysteine (NAC) against virulent isolates of S. aureus and E. coli recovered from clinical bovine mastitis cases. Antimicrobial susceptibility test was conducted using disc diffusion test, and the interaction between amoxicillin and NAC was assessed through a qualitative minimum inhibitory concentration test strip method and quantitative checkerboard assay. The combination of amoxicillin and NAC exhibited enhanced antibacterial activity compared to amoxicillin alone, indicating a synergistic effect against the virulent S. aureus and E. coli. Qualitative analysis revealed an increased zone of inhibition with the combination treatment relative to individual agents. Quantitative findings showed a 32-fold reduction in MIC for S. aureus and E. coli. The improved antimicrobial efficacy attributed to the antibiofilm and mucolytic properties of NAC, which can disrupt biofilm architecture and enhance antibiotic penetration. Overall, the findings suggest that NAC serve as a potential adjuvant to conventional antibiotic therapy for improved management of mastitis caused by resistant bacterial pathogens.",
+      "self_term_hits": 0,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "E_42460840",
+      "pmid": "42460840",
+      "community": "E",
+      "title": "Type 2 diabetes and diabetic retinopathy in Finland during 2000-2017 based on nationwide survey and register data.",
+      "text": "Type 2 diabetes and diabetic retinopathy in Finland during 2000-2017 based on nationwide survey and register data. To evaluate changes in the prevalence and incidence of type 2 diabetes, the association between type 2 diabetes and diabetic retinopathy (DR), and the impact of type 2 diabetes and DR on visual acuity (VA) in Finland during 2000-2017. We used three nationwide health examination surveys conducted in 2000, 2011 and 2017, with a total of 18\u2009966 participants representing the Finnish population aged 18\u2009years and older. All surveys were linked to national health registers covering diagnoses related to diabetes and DR between 2000 and 2017. All surveys included a health examination, in which distance and near VAs were measured. All data were analysed at the individual level. The prevalence of type 2 diabetes increased from 2.6% to 9.6% between 2000 and 2017, while its annual incidence increased from 0.5% to 0.7%. The annual incidence of DR among type 2 diabetes patients decreased from 1.4% to 0.3% between 2000 and 2017. Both distance and near VA were the best among individuals without diabetes, significantly worse among type 2 diabetes patients without DR, and the worst among type 2 diabetes patients with DR. Both distance and near VAs significantly improved between 2000 and 2017 in these study groups. The prevalence of type 2 diabetes has increased during the 2000s, which can be explained by the improved screening and unfavourable changes in lifestyle. However, the incidence of DR has decreased among type 2 diabetes patients, indicating the successful development and effectiveness of screening and therapies for both diabetes and DR.",
+      "self_term_hits": 0,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "E_42465295",
+      "pmid": "42465295",
+      "community": "E",
+      "title": "Confined T cell migration controls programmed cell death 1 expression.",
+      "text": "Confined T cell migration controls programmed cell death 1 expression. T cell immune checkpoint expression and dysfunction are attributed solely to molecular cues. We discover using microphysiological systems and in vivo models that transmigration through confined pores induces acute loss of programmed cell death 1 within minutes of surface immune checkpoint markers on CD8+ T cells through ubiquitin-mediated proteasomal degradation, corresponding with enhanced fitness and function. Such imprints and its underlying mechanism of programmed cell death 1 loss are conserved across species and applicable to human TIL and CAR T cells, and are correlative with disease outcomes in human melanoma. Our findings establish the diverse tissues landscapes that T cells traverse during immunosurveillance, and specifically transmigration, as a form of mechanical immune regulation, and reveal a mechano-modulatory strategy to improve the quality and persistence of engineered or patient-derived T cells for adoptive immunotherapy.",
+      "self_term_hits": 0,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "E_42459575",
+      "pmid": "42459575",
+      "community": "E",
+      "title": "The conundrum of alpha-synuclein antibody failures in Parkinson's disease: a narrative review of mechanisms and alternative metabolic hypotheses.",
+      "text": "The conundrum of alpha-synuclein antibody failures in Parkinson's disease: a narrative review of mechanisms and alternative metabolic hypotheses. Parkinson's disease (PD) remains the second most common neurodegenerative disorder globally, yet disease-modifying therapies remain elusive. The past decade of therapeutic development has been dominated by the hypothesis that alpha-synuclein aggregates spread in a prion-like manner. This catalysed the development of immunotherapy approaches targeting extracellular alpha-synuclein. However, high-profile Phase II and III clinical trials, such as those for cinpanemab and prasinezumab, failed to demonstrate clinical efficacy. This narrative review evaluates alpha-synuclein-targeted immunotherapies, their mechanistic rationale, the underlying reasons for recent clinical trial failures and to propose alternative metabolic frameworks. A literature search of peer-reviewed articles published up to 10 December 2025 was performed using the PubMed database to evaluate immunotherapies, mechanistic models and trial failures in PD. The prevailing 'prion-like' spread hypothesis may be overemphasised in the context of human disease. We propose the 'Single-Neuron Degeneration Hypothesis', suggesting that PD pathology is primarily driven by intracellular autotoxicity - specifically involving the dopamine metabolite aminochrome, mitochondrial dysfunction and oxidative stress - occurring independently within each dopaminergic neuron. Multifactorial contributors to trial failure include the inadequacy of preclinical models such as MPTP, the insensitivity of the MDS-UPDRS, diagnostic heterogeneity and the statistical reality of neuronal loss rates. Future therapeutic strategies must integrate intracellular neuroprotection alongside extracellular clearance approaches, with significantly earlier intervention.",
+      "self_term_hits": 0,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "E_42466635",
+      "pmid": "42466635",
+      "community": "E",
+      "title": "A quarter-century of montelukast: clinical lessons for adult and pediatric asthma and allergic rhinitis care.",
+      "text": "A quarter-century of montelukast: clinical lessons for adult and pediatric asthma and allergic rhinitis care. Montelukast entered routine respiratory practice in the late 1990s and remains widely used for asthma, allergic rhinitis (AR), and exercise-induced bronchoconstriction (EIBC). Its continued use has been driven largely by once-daily oral administration, ease of implementation, broad indications, and perceived advantages in patients with poor adherence to or difficulty using inhaled therapies. However, over time, the role of montelukast has evolved as comparative efficacy data, long-term safety findings, and treatment guidelines have modified expectations regarding its clinical value. This review re-examines the contemporary role of montelukast via integrating evidence on its mechanism of action, comparative clinical efficacy, prescribing patterns, safety outcomes, and future directions for individualized therapy. Clinical evidence demonstrates measurable benefit across asthma, AR, and EIBC; however, treatment effects are generally modest and variable and typically inferior to inhaled corticosteroid (ICS)-based regimens or intranasal corticosteroids (INCS). Nevertheless, patients, with poor inhaler adherence, exercise-related symptoms, aspirin-exacerbated respiratory disease, concomitant AR, or preference for oral therapy, may derive clinically meaningful benefit. Post-marketing surveillance has altered the therapeutic positioning of montelukast. Recognition of infrequent, but potentially serious, neuropsychiatric adverse events culminated in strengthened regulatory warnings and more cautious prescribing practices. Current management, therefore, emphasizes patient selection, pre-treatment counseling, shared decision-making, monitoring for behavioral changes, and timely review of treatment response. Current guidelines generally position montelukast as an alternative or add-on controller rather than a preferred first-line therapy. In the future, advances in pharmacogenomics, biomarker development, and phenotype-guided treatment strategies may improve the identification of patients most likely to benefit from montelukast.",
+      "self_term_hits": 0,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    },
+    {
+      "id": "E_42469717",
+      "pmid": "42469717",
+      "community": "E",
+      "title": "Pregnancy history is associated with lower odds of osteoporosis among Taiwanese women.",
+      "text": "Pregnancy history is associated with lower odds of osteoporosis among Taiwanese women. Osteoporosis is a major public health concern worldwide. Although female reproductive factors have been suggested to influence bone health, their associations with osteoporosis remain inconclusive. This study aimed to investigate the associations between reproductive characteristics and the odds of osteoporosis in Taiwanese women. We conducted a cross-sectional analysis using data from women randomly selected from the Taiwan Biobank. Bone mineral density (BMD) status was classified into three categories according to the World Health Organization (WHO) criteria: normal BMD (T-score\u2009>\u2009-\u20091.0), osteopenia (-\u20092.5\u2009<\u2009T-score\u2009\u2264\u2009-\u20091.0), and osteoporosis (T-score\u2009\u2264\u2009-\u20092.5). Univariable and multivariable logistic regression analyses were performed to assess the association between reproductive factors and the odds of BMD status. Among the 4,854 participants, 3,107 (64.0%) were classified as having normal BMD, 1,374 (28.3%) as having osteopenia, and 373 (7.7%) as having osteoporosis. Univariate analysis showed that a history of pregnancy was associated with a higher odd of osteopenia (odds ratio [OR]\u2009=\u20091.946, 95% CI: 1.589-2.382, p\u2009<\u20090.001), osteoporosis (OR\u2009=\u20091.825, 95% CI: 1.288-2.586, p\u2009=\u20090.001), and low BMD level (T-score < -0.1) (OR\u2009=\u20091.919, 95% CI: 1.597-2.306, p\u2009<\u20090.001). After adjusting for known confounders, pregnancy history was associated with a lower odd of osteoporosis (adjusted OR\u2009=\u20090.644, 95% CI: 0.422-0.981, p\u2009=\u20090.041), but not significantly associated with the odds of osteopenia or low BMD level. Pregnancy history was independently associated with lower odds of osteoporosis among Taiwanese women after adjustment for known confounding factors. However, given the cross-sectional nature of this study, causal relationships cannot be established. Future longitudinal studies are warranted to validate this finding.",
+      "self_term_hits": 0,
+      "other_term_hits": 0,
+      "contains_other_term": false
+    }
+  ]
+}

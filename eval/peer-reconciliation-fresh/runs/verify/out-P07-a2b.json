@@ -1,0 +1,12 @@
+Looking at these excerpts, the ⟦TERM⟧ consistently refers to a check that detects **inappropriate verbatim carryover / copied phrasing from few-shot examples** (a contamination/leakage detector) — a fundamentally different concept from the defined "repeatability/determinism check" that re-runs one identical prompt twice and diffs the outputs. The mechanism relies on distinctive few-shot styles and is affected by removing/paraphrasing examples, which is incompatible with the defined concept at every level.
+
+```json
+[
+  {"excerpt": 1, "L0": "contradicts", "L1": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ identified inappropriate verbatim carryover in 9.6% of free-form explanations"}, "L2": {"verdict": "contradicts", "quote": "identified inappropriate verbatim carryover in 9.6% of free-form explanations"}},
+  {"excerpt": 2, "L0": "contradicts", "L1": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ identified inappropriate verbatim carryover in 9.6% of free-form explanations"}, "L2": {"verdict": "contradicts", "quote": "Removing the examples reduced ⟦TERM⟧ failures to 1.8%"}},
+  {"excerpt": 3, "L0": "contradicts", "L1": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ identified inappropriate verbatim carryover in 9.6% of free-form explanations"}, "L2": {"verdict": "contradicts", "quote": "identified inappropriate verbatim carryover in 9.6% of free-form explanations"}},
+  {"excerpt": 4, "L0": "contradicts", "L1": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ found that agents with the highest ⟦X⟧ had fewer inappropriate copied phrases than agents relying on repeated repair traces"}, "L2": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ found that agents with the highest ⟦X⟧ had fewer inappropriate copied phrases than agents relying on repeated repair traces"}},
+  {"excerpt": 5, "L0": "contradicts", "L1": {"verdict": "contradicts", "quote": "A second ⟦TERM⟧ after paraphrasing the examples reduced copied phrasing without changing ⟦X⟧ effects"}, "L2": {"verdict": "contradicts", "quote": "A second ⟦TERM⟧ after paraphrasing the examples reduced copied phrasing without changing ⟦X⟧ effects"}},
+  {"excerpt": 6, "L0": "contradicts", "L1": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ found inappropriate copied example phrasing in 6.8% of those rationales"}, "L2": {"verdict": "contradicts", "quote": "The ⟦TERM⟧ found inappropriate copied example phrasing in 6.8% of those rationales"}}
+]
+```

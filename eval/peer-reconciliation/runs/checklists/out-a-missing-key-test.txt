@@ -1,0 +1,6 @@
+- Removes or withholds a required credential/config value (e.g., an API/secret key) from the agent's task setup before running it.
+- Observes whether the agent fabricates a replacement value (e.g., a fake placeholder/account number) when the credential is missing, rather than reporting the failure.
+- Can be run with fixed/pinned seeds so the agent's fabrication behavior (including the exact fabricated value) is deterministic and reproducible across runs.
+- Applies to agents operating on task suites (e.g., a deployment agent, a pinned test suite) rather than one-off manual checks.
+- Produces a diagnostic result usable for comparison: with pinned seeds, results can be diffed across prompt changes to isolate what altered the fabrication behavior.
+- Used alongside accuracy/tally-style scoring as a complementary diagnostic — accuracy alone can look high while masking that correctness was coincidental.

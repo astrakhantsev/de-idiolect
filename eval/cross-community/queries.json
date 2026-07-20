@@ -1,0 +1,230 @@
+{
+  "k": 3,
+  "models": [
+    "sonnet",
+    "opus"
+  ],
+  "embedding_model": "BAAI/bge-large-en-v1.5",
+  "seed_concept": "photoplethysmography",
+  "term_a": "Photoreflexometry",
+  "term_b": "Photoplethysmography",
+  "target_sentences": 4,
+  "directions": {
+    "A_to_B": {
+      "src_community": "A",
+      "term": "Photoreflexometry",
+      "far_term": "Photoplethysmography",
+      "gen_context_clean_docs": 3,
+      "gen_context_docs_used": 3,
+      "naive_question": "What is photoplethysmography?",
+      "jargon": [
+        {
+          "model": "sonnet",
+          "sample": 0,
+          "text": "A noninvasive functional test used in phlebology that quantifies venous return in the lower limb by optically measuring the refilling time of the intradermal (subpapillary) venous plexus after emptying it through exercise or postural maneuvers. Input is a photoelectric reflectance signal recorded from the skin over the malleolar region during a standardized limb-movement protocol; output is a filling-time value (and derived indices) reflecting the efficiency of the calf muscle venous pump. It serves as a quantitative index of venous pump competence, complementing Doppler and plethysmographic assessments in characterizing chronic venous insufficiency and post-phlebitic sequelae. It is applied in outpatient phlebologic consultations, including in elderly patients where prior venous disease and comorbidities complicate interpretation of venous workups.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 861
+        },
+        {
+          "model": "sonnet",
+          "sample": 1,
+          "text": "A noninvasive functional test of venous physiology in the leg that uses light-based sensing to measure the refilling time of the superficial (intradermal) venous plexus after emptying by muscular contraction. It takes as input optical reflectance changes over the skin during a standardized exercise-and-rest protocol and yields a filling-time value as output, from which competence of the calf muscle pump and valvular function can be inferred. It quantifies venous return efficiency, distinguishing normal pump function from impaired filling associated with chronic venous insufficiency or post-thrombotic sequelae. It is applied in phlebologic consultations alongside Doppler and plethysmographic studies, particularly for ambulatory screening and in elderly patients whose venous history and comorbidities complicate interpretation of other modalities.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 856
+        },
+        {
+          "model": "sonnet",
+          "sample": 2,
+          "text": "A noninvasive functional test of the venous system of the leg, performed with an optical (photoelectric) instrument in a phlebology consultation setting. It is applied to a patient's limb to record the refilling time of the superficial (intradermal) venous plexus after emptying it through exercise or postural maneuvers, taking limb position and muscular activity as input and yielding a filling-time value as output. This measurement serves as a quantitative index of calf venous pump function, complementing Doppler and plethysmographic studies and helping gauge the severity of post-phlebitic (post-thrombotic) venous insufficiency. It is used both in specialist vascular exploration and as an office-based screening tool for venous disease, including in older patients whose prior venous pathology can complicate interpretation.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 833
+        },
+        {
+          "model": "opus",
+          "sample": 0,
+          "text": "A noninvasive optical technique for functional venous assessment of the lower limb, belonging alongside Doppler ultrasound and plethysmography in the ambulatory phlebological workup. An infrared probe applied to the skin above the medial malleolus registers backscattered light during a standardized calf-muscle exercise sequence, yielding a refill curve from which the venous plexus refilling time of the subpapillary dermal bed is derived. That interval serves as a quantitative index of calf muscle pump competence and of valvular incompetence severity, grading the hemodynamic burden of post-thrombotic syndrome rather than localizing individual refluxing segments or occlusions. Its simplicity and low cost suit it to office-based screening and follow-up \u2014 including elderly patients, in whom prior venous disease and comorbidity complicate both performance and interpretation \u2014 while anatomic characterization requires complementary imaging.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 947
+        },
+        {
+          "model": "opus",
+          "sample": 1,
+          "text": "A noninvasive optical technique for functional venous assessment of the lower limb, belonging to the same diagnostic armamentarium as Doppler ultrasound and plethysmography. Infrared light directed at the skin is backscattered from the subpapillary dermal venous plexus, and the reflected signal is tracked during and after a standardized calf-muscle activation manoeuvre to yield the refilling time of that plexus as a quantitative index of muscle-pump competence. It thereby converts a hemodynamic property that is otherwise inferred only qualitatively into a numeric value that grades the severity of chronic venous insufficiency, particularly post-thrombotic syndrome. Because the equipment is inexpensive and the procedure rapid and non-traumatic, it suits routine ambulatory phlebological consultation and screening, including in elderly patients whose antecedent venous disease and comorbidities complicate other examinations \u2014 though its standalone diagnostic validity in the office setting has itself been the subject of large consecutive-series appraisal rather than being assumed.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 1091
+        },
+        {
+          "model": "opus",
+          "sample": 2,
+          "text": "A noninvasive optical technique for functional venous assessment, belonging to the same diagnostic armamentarium as Doppler ultrasound and plethysmography in the phlebological workup. A probe applied to the skin \u2014 typically the medial supramalleolar region \u2014 emits light and registers backscattered intensity from the subcutaneous microcirculation while the patient performs a standardized calf-muscle activation sequence (repeated dorsiflexions or tiptoe movements), yielding a refilling-time curve whose principal parameter is the interval required for the cutaneous venous plexus to repopulate after emptying. Because a shortened refilling interval reflects retrograde flow, the measurement quantifies the competence of the musculovenous pump and the severity of valvular insufficiency, and it has been validated in office-based series numbering in the thousands as an ambulatory screening and grading instrument. It is indicated for outpatient evaluation of chronic venous insufficiency and staging of post-thrombotic sequelae, and is particularly useful \u2014 though harder to interpret \u2014 in elderly patients, where prior venous disease and comorbidities complicate assessment; it complements rather than replaces reflux localization by duplex and volumetric methods.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 1268
+        }
+      ],
+      "neutral": [
+        {
+          "model": "sonnet",
+          "sample": 0,
+          "text": "Photoreflexometry is a noninvasive test performed in a clinic that measures blood-flow behavior in the small vessels under the skin of the leg. It takes as input a light-based measurement of how quickly a superficial vessel network refills with blood after being emptied by movement or pressure, and it outputs a filling time along with a numeric assessment of pump function. It asserts how well the calf's return-flow mechanism is working, distinguishing normal refill speed from delayed refill caused by impaired outflow. It applies when evaluating suspected circulation problems in the legs, particularly to judge the severity of damage following a prior vessel-blocking illness or to complement other flow-testing methods in older patients with a complicated history.",
+          "leaks_own_term": true,
+          "leaks_far_term": false,
+          "n_chars": 771
+        },
+        {
+          "model": "sonnet",
+          "sample": 1,
+          "text": "Photoreflexometry is a noninvasive medical measurement technique applied to a limb, typically the leg. It takes optical readings from the skin surface as input and produces a measured time value as output, specifically the interval required for a small network of vessels beneath the skin to refill with blood after being emptied. It asserts that this refill time reflects how well the body's mechanism for returning blood upward through the limb is working, with a longer time indicating weaker function. It applies when assessing the severity of circulation problems in the veins of the legs, particularly in evaluating past or ongoing vein disease in an outpatient or consultation setting.",
+          "leaks_own_term": true,
+          "leaks_far_term": false,
+          "n_chars": 692
+        },
+        {
+          "model": "sonnet",
+          "sample": 2,
+          "text": "Photoreflexometry is a noninvasive physical measurement procedure used on a limb, most often the leg. It takes as input a light-based sensor reading of blood refilling in the small vessels under the skin after they have been emptied, and produces as output a filling time value. It asserts that this filling time reflects how well the pumping action that returns blood upward through the limb is working, with a shorter time indicating stronger function and a longer time indicating impaired function. It applies when assessing circulation problems in the veins of a limb, particularly to judge severity of prior vessel inflammation or clotting and to complement other flow- and pressure-based circulation tests.",
+          "leaks_own_term": true,
+          "leaks_far_term": false,
+          "n_chars": 712
+        },
+        {
+          "model": "opus",
+          "sample": 0,
+          "text": "A measurement procedure that uses light shone into and reflected back from the skin surface to track how much blood is held in the small vessels just under it. Input is a continuous reflected-light signal recorded from a sensor placed on the lower limb while the person performs a set movement sequence and then rests; output is a small set of numbers, chiefly the time it takes for the signal to return to its resting level after the movement stops, plus derived measures of how much the pooled volume was reduced. It asserts that this refill time stands in for how well the muscle-and-valve pumping system returns blood upward against gravity, so a short time indicates leakage back down the vessels and the size of the shortfall grades how severe the damage is. It applies as a quick, no-puncture office test on people suspected of long-standing return-flow failure in the legs, including after an earlier clot, and is used alongside \u2014 not instead of \u2014 imaging and pressure-based tests, with results harder to read in older people who often carry several overlapping conditions.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 1081
+        },
+        {
+          "model": "opus",
+          "sample": 1,
+          "text": "A measurement procedure that assesses how well blood is returned from the limbs. A light-based sensor is placed on the skin of the lower leg, the person performs a set sequence of muscle contractions and then rests, and the sensor's changing signal is converted into a number \u2014 chiefly the time it takes for the small vessels just under the skin to refill after emptying. Shorter refill times indicate that the muscle pumping action and the one-way flow it depends on are working poorly, so the number is read as a measure of how severe the impairment is. It is used as a quick, low-burden bedside test that requires no injections or incisions, typically in an outpatient setting to screen people with suspected or prior vessel problems and to supplement other functional tests, though its interpretation is harder in older people who often have long histories of such problems and other coexisting conditions.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 910
+        },
+        {
+          "model": "opus",
+          "sample": 2,
+          "text": "A measurement technique that yields a quantitative functional test of a body region's blood-return system. Input is a light signal shone onto and reflected back from the skin surface at a chosen site, recorded over time while the person performs a standard set of muscle movements and then rests; output is a number \u2014 chiefly the time taken for the small vessels just under the skin to refill after emptying \u2014 plus derived indices. It asserts that this refill time serves as a stand-in for how well the muscular pumping action and the one-way valves return blood from the limb, so that shorter times indicate impaired return and the size of the deviation grades severity. It applies as a non-invasive, low-cost office or bedside screen, typically alongside flow-based and volume-based tests, when one wants to judge functional impairment or residual damage after past vessel blockage rather than to map anatomy.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 911
+        }
+      ]
+    },
+    "B_to_A": {
+      "src_community": "B",
+      "term": "Photoplethysmography",
+      "far_term": "Photoreflexometry",
+      "gen_context_clean_docs": 10,
+      "gen_context_docs_used": 6,
+      "naive_question": "What is photoplethysmography?",
+      "jargon": [
+        {
+          "model": "sonnet",
+          "sample": 0,
+          "text": "A noninvasive optical sensing technique that measures cardiac-related pulsatile blood volume changes in tissue, typically via a light source and photodetector on skin (or a camera at a distance in the remote variant) rather than electrical activity of the heart. It takes as input reflected or transmitted light intensity, modulated by wavelength-dependent hemoglobin absorption as arterial blood volume fluctuates with each heartbeat, and outputs a pulse waveform from which heart rate, heart rate variability, and other cardiovascular parameters can be derived. It is widely deployed in consumer wearables (smartwatches, wristbands) and camera-based remote setups to enable continuous, unobtrusive, long-term monitoring outside clinical or laboratory settings, serving as a surrogate for or complement to electrocardiographic acquisition. It applies wherever ECG-grade electrode placement is impractical\u2014home monitoring, ambulatory stress and arrhythmia surveillance, and translation efforts that reconstruct ECG-like signals from this simpler modality.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 1055
+        },
+        {
+          "model": "sonnet",
+          "sample": 1,
+          "text": "A noninvasive optical sensing technique that uses a light source and photodetector against the skin (or a camera at a distance, in its remote variant) to capture rhythmic changes in blood volume with each cardiac cycle, taking pulsatile light absorption or reflectance as input and yielding a continuous waveform proxy for the arterial pulse as output. It enables derivation of measures such as heart rate and heart rate variability by detecting the timing of successive pulses, and can be extended to reconstruct related cardiac signals, such as translating its waveform into an electrocardiogram-like signal via learned mappings. It is applied wherever unobtrusive, wearable, or camera-based cardiovascular and autonomic-nervous-system monitoring is needed outside a clinical setting, including postoperative arrhythmia surveillance, stress and workload assessment, and long-term home monitoring in place of conventional electrode-based acquisition. Its accuracy depends on correctly isolating the true cardiac-frequency chromatic signal from confounding physiological or motion-related components, since incomplete signal models can corrupt the extracted pulse.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 1164
+        },
+        {
+          "model": "sonnet",
+          "sample": 2,
+          "text": "A non-invasive optical sensing technique that illuminates tissue (typically skin at the finger, wrist, or face) with light and measures the time-varying intensity of light transmitted through or reflected back, using blood volume-driven changes in absorption as the input signal. It outputs a pulsatile waveform tracking cardiac-cycle-related blood volume fluctuations, from which downstream measures such as heart rate, heart rate variability, and pulse timing are derived. Wearable and camera-based implementations extract this signal continuously and unobtrusively, in contrast to electrode-based cardiac electrical recording, making it suitable for long-term, remote, or ambulatory monitoring of autonomic and cardiovascular status. It is applied in contexts ranging from postoperative arrhythmia and stress surveillance to consumer HRV tracking and as a proxy signal for reconstructing electrocardiographic waveforms.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 922
+        },
+        {
+          "model": "opus",
+          "sample": 0,
+          "text": "An optical, noninvasive sensing modality in which light directed at perfused tissue \u2014 a fingertip, wrist, or even facial skin imaged by an ordinary camera \u2014 is modulated by wavelength-dependent hemoglobin absorption, so the reflected or transmitted intensity varies with pulsatile blood volume. The input is a raw light-intensity time series from an LED-photodiode pair or video frames; the output is a continuous cardiac pulse waveform from which beat-to-beat intervals, pulse rate, and inter-beat-interval-derived autonomic indices such as heart rate variability are extracted, and from which surrogate electrocardiogram morphology can be reconstructed by learned translation models. It asserts that peripheral volumetric pulsation is a faithful enough proxy for cardiac timing to support rhythm classification \u2014 screening for atrial fibrillation, including postoperative episodes after discharge \u2014 and physiological stress quantification, though the signal model is only approximately correct: additional cardiac-frequency components that are not chromatically distinguishable can contaminate the extracted waveform. It is the enabling measurement principle wherever consumer wearables, smartwatches, and smartphone apps must monitor cardiovascular state unobtrusively and longitudinally in ambulatory or home settings, where electrode-based acquisition is impractical, and it is appropriate when trend, timing, and rhythm information suffice in place of true electrical morphology.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 1485
+        },
+        {
+          "model": "opus",
+          "sample": 1,
+          "text": "An optical, non-invasive sensing modality that illuminates perfused tissue \u2014 a fingertip, wrist, or even facial skin captured by a camera at a distance \u2014 and measures wavelength-dependent hemoglobin absorption to recover the blood-volume waveform. Input is the raw reflected or transmitted light intensity time series; output is a continuous pulse waveform from which beat-to-beat intervals, heart rate, and derived autonomic indices such as heart rate variability are computed, and from which surrogate electrocardiogram morphology can be reconstructed by learned translation models. The core claim is that cardiac-frequency chromatic variation in the tissue signal is a faithful proxy for mechanical pulsation and therefore for the electrical events an electrocardiogram would record \u2014 an assumption complicated by secondary isochromatic components at the same frequency that violate the single-source signal model. It applies wherever unobtrusive, long-duration ambulatory monitoring outweighs the fidelity of electrode-based acquisition: consumer smartwatch screening for postoperative arrhythmia after discharge, perioperative and occupational stress assessment, and cardiac digital-twin pipelines that need home-collected physiological data.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 1247
+        },
+        {
+          "model": "opus",
+          "sample": 2,
+          "text": "An optical, noninvasive sensing modality that illuminates tissue and measures wavelength-dependent hemoglobin absorption to recover the volumetric blood-pulse waveform; input is either reflected/transmitted light at a contact site (wrist wearable, smartwatch, fingertip) or, in the camera-based variant, chromatic variation across pixels in facial video, and output is a continuous cardiac pulse signal from which beat-to-beat intervals and derived indices are computed. It substitutes for electrode-based cardiac recording by asserting that the peripheral pulse carries enough timing fidelity to support beat-interval analytics \u2014 heart rate variability as an autonomic/physiological-stress marker, arrhythmia screening, and even signal translation to synthesized electrocardiogram morphology for digital-twin simulation. Its signal model assumes the only cardiac-frequency component present is the chromatic pulsatile one, an assumption that fails when a second, non-chromatically-varying cardiac-frequency component contaminates the trace and must be detected and suppressed. It is the modality of choice wherever electrode acquisition is impractical \u2014 long-term unobtrusive home monitoring, post-discharge surveillance for postoperative arrhythmia, ambulatory occupational-stress studies, and consumer mobile applications \u2014 with the tradeoff that waveform fidelity and artifact susceptibility are worse than the electrical reference standard.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 1445
+        }
+      ],
+      "neutral": [
+        {
+          "model": "sonnet",
+          "sample": 0,
+          "text": "A signal collected by shining light into the skin or tissue and measuring how much light comes back or passes through as it changes with each heartbeat, producing a repeating waveform that tracks blood volume changes over time. It takes as input light reflected or transmitted from a body surface, sometimes recorded from a distance using ordinary video instead of a sensor touching the skin, and produces as output a continuous trace from which timing and shape of individual pulses can be read. From this trace, further measures can be derived, such as the length of time between successive pulses, which can then be converted into rate and variability measurements, or even used to reconstruct the underlying electrical signal that drives each pulse. It applies whenever someone wants to monitor cardiovascular activity continuously and without cutting into or otherwise invading the body, especially in settings like wearable devices, mobile apps, or camera-based recording outside of a clinical setting.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 1008
+        },
+        {
+          "model": "sonnet",
+          "sample": 1,
+          "text": "A signal-processing method that measures the small changes in light absorbed by or reflected from skin tissue as blood volume shifts with each heartbeat. It takes light shone into or onto the body as input and produces a continuous waveform tracking pulses in blood volume as output. It asserts that the timing and shape of this waveform can be used to derive cardiac and vascular information such as pulse rate, its variation over time, and related physiological signals. It applies wherever a low-cost, non-contact or worn sensor is placed on skin, or a camera is aimed at skin, to monitor circulation continuously outside a clinical setting.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 644
+        },
+        {
+          "model": "sonnet",
+          "sample": 2,
+          "text": "A wearable or camera-based measurement of blood volume change in tissue over time, produced by shining light into skin or filming a body surface and recording how much light is absorbed or reflected as blood pulses through with each heartbeat. Input is a light or video signal from the body surface; output is a continuous waveform whose rises and falls track the timing and shape of each heartbeat. It works by detecting the small, repeating changes in light absorption caused by pulsing blood volume, and from that waveform other quantities such as heartbeat timing, beat-to-beat interval changes, and related pulse features can be derived. It applies whenever heartbeat-related information is wanted from a device or camera without direct electrical contact with the heart, including continuous, long-term, or remote monitoring settings.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 840
+        },
+        {
+          "model": "opus",
+          "sample": 0,
+          "text": "A measurement technique that uses light to sense small changes in the volume of blood in tissue just under the skin. Input is a stream of light-intensity readings over time \u2014 either from a small light source and detector pressed against the skin, or from ordinary video of exposed skin, where the color shifts caused by blood absorbing light at different wavelengths carry the same information; output is a continuous waveform whose repeating peaks mark each beat of the heart, from which one can derive beat rate, the spacing between successive beats and its variation, and related summary numbers. It asserts that the timing and shape of the pulse in the tissue can stand in for the timing recorded by direct electrical sensing at the chest, so that quantities normally obtained from electrode-based traces can be estimated, or even translated into an approximate electrical trace, from the light signal alone. It applies when readings are needed unobtrusively, continuously, and over long stretches outside a clinic \u2014 for example during sleep, daily work, or after leaving hospital \u2014 where attaching electrodes is impractical; its accuracy depends on the assumption that the only signal at heartbeat frequency is the one of interest, which can fail when other beat-linked effects (such as small movements of the skin) contaminate the reading.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 1345
+        },
+        {
+          "model": "opus",
+          "sample": 1,
+          "text": "A method for measuring the rhythmic changes in blood volume just under the skin by shining light on tissue and recording how much is absorbed or reflected, or by picking up the same small color changes from ordinary video of exposed skin. The input is a stream of light-intensity readings over time from a sensor pressed against or pointed at the body; the output is a waveform whose repeating peaks mark each heartbeat, from which one can derive beat rate, the spacing between successive beats, and summary numbers describing how that spacing varies. It asserts that each pulse of blood pushed through the small vessels changes how the tissue absorbs light, so the timing and shape of the light signal stand in for the timing of the heart's own electrical activity, allowing quantities normally read off electrical traces to be estimated instead from an optical trace. It applies wherever one wants continuous, unobtrusive, long-duration monitoring of heart timing outside a clinic \u2014 wrist-worn or finger devices, cameras at a distance, or after-discharge follow-up \u2014 where attaching electrodes is impractical, and it is limited by the fact that the optical signal also carries other periodic components that must be separated out before the beat timings are trustworthy.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 1272
+        },
+        {
+          "model": "opus",
+          "sample": 2,
+          "text": "A measurement technique that records how much light a body surface reflects or transmits, either with a small light source and sensor pressed against the skin or from ordinary video of exposed skin at a distance. The input is a stream of light-intensity values over time; the output is a waveform tracking the small, repeating changes in blood volume under the skin, from which one derives beat timing, beat rate, and the variation in spacing between beats. It asserts that because blood absorbs light differently than surrounding tissue and differently at different wavelengths, these intensity changes stand in for the pumping cycle of the heart, so quantities normally obtained from electrical body-surface recordings can be estimated instead \u2014 and this substitution carries assumptions that can fail, since more than one light-varying component may repeat at the same rate as the heartbeat. It applies when one wants continuous, unobtrusive, low-cost heart-timing data over days or weeks outside a clinic \u2014 such as watching for irregular rhythms after an operation, tracking stress or recovery in daily life, or screening at scale through consumer wrist devices and phone apps.",
+          "leaks_own_term": false,
+          "leaks_far_term": false,
+          "n_chars": 1181
+        }
+      ]
+    }
+  }
+}
