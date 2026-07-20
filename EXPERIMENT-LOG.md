@@ -1,10 +1,10 @@
 # Experiment log — "The vocabulary seam" (FLF entry)
 
-This file carries the protocol-level detail behind the entry's §5: pre-registered endpoints, operating characteristics, per-arm observations, and bounds. The entry (‹URL›) gives readable summaries and links here; per-claim grades are in the claims register (CLAIMS.md); raw pre-registrations, spec hashes, run receipts, and review logs are in the materials linked from the entry's appendix. Numbering mirrors the entry's §5.
+This file carries the protocol-level detail behind the entry's §5: pre-registered endpoints, operating characteristics, per-arm observations, and bounds. The entry (https://github.com/astrakhantsev/de-idiolect/blob/main/ENTRY.md) gives readable summaries and links here; per-claim grades are in the claims register (CLAIMS.md); raw pre-registrations, spec hashes, run receipts, and review logs are in the materials linked from the entry's appendix. Numbering mirrors the entry's §5.
 
 ## E1 (§5.1) — A retrieval check on FLF's eggs case
 
-Can the core move — using a definition rather than a term as the retrieval key — route correctly? A small prototype (~170 lines + a pluggable LLM backend; published ‹URL›) measures that link on FLF's eggs case, offline and deterministically (`bge-large-en-v1.5`). The check is **conditional on an oracle-supplied concept**: the three specialist concepts and their owners are hand-supplied, so it tests the definition-as-key move, not whether a lay question *discovers* the concepts. For three concepts surrounding a lay *"are eggs bad for me?"* question but unavailable to its vocabulary, the rank of the owning sub-field's best document among 15 is (lower is better):
+Can the core move — using a definition rather than a term as the retrieval key — route correctly? A small prototype (~170 lines + a pluggable LLM backend; published at https://github.com/astrakhantsev/de-idiolect/tree/main/prototype) measures that link on FLF's eggs case, offline and deterministically (`bge-large-en-v1.5`). The check is **conditional on an oracle-supplied concept**: the three specialist concepts and their owners are hand-supplied, so it tests the definition-as-key move, not whether a lay question *discovers* the concepts. For three concepts surrounding a lay *"are eggs bad for me?"* question but unavailable to its vocabulary, the rank of the owning sub-field's best document among 15 is (lower is better):
 
 | concept (owning sub-field) | naive question | raw term | **constrained definition** |
 |---|--:|--:|--:|

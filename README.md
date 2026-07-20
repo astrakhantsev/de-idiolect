@@ -2,10 +2,11 @@
 
 Code and receipts for **"The vocabulary seam: why cross-community knowledge doesn't compound, and a lazy way to bridge it"** — an FLF Epistemic Case Study Competition entry. *De-idiolect* (verb): produce a description of a concept with the community's local vocabulary removed, and use that — not the term — as the retrieval key.
 
-**Status: draft package.** The entry itself is published separately and links here; the interactive architecture diagram is pending realignment.
+**Status: draft package.** The interactive architecture diagram is pending realignment.
 
-## Entry companions (repo root)
+## The entry and its companions (repo root)
 
+- **`ENTRY.md` — the competition entry itself.**
 - `CLAIMS.md` — the claims register: every load-bearing claim, one line each, with evidence grade and support.
 - `GLOSSARY.md` — the entry's terms.
 - `EXPERIMENT-LOG.md` — protocol-level detail behind the entry's §5 (endpoints, operating characteristics, bounds).
