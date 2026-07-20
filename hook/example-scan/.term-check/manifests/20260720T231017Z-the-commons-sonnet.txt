@@ -1,0 +1,13 @@
+term: the commons
+model: sonnet
+trigger: scan
+prompt_sha256: 1314402587e7301f2b255b8de25bd748c5a74ec397037cf5179921e5235f9c84
+source_files: ENTRY.md
+tmp_cwd: fresh mktemp -d, removed after run
+tmp_home_policy: credentials file only (no settings/CLAUDE.md/memory)
+cwd_listing_before: [] (must be empty)
+cmd: HOME=<fresh> CLAUDE_CONFIG_DIR=<fresh>/.claude claude -p --model sonnet --disallowedTools <all>
+timeout: 300s via timeout
+date: 2026-07-20T23:10:17Z
+out_sha256: 217c8feabcabd06e568f81ece8de5d68abffb19f978110e34e52af94627d407d
+status: ok  latency_s: 58

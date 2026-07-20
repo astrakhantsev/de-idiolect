@@ -1,0 +1,898 @@
+You are given prose excerpts from a SINGLE project's working documents. Each excerpt is tagged with its source file as [source: <path>].
+
+Task: identify the terms this project uses in a PROJECT-LOCAL way — coinages, or ordinary words given a special local sense — that an outside expert in the relevant field would NOT recognize as this field's established vocabulary. These are the project's idiolect: names it made up (or repurposed) for things established fields usually call something else. Established terms of art are NOT what we want, however technical.
+
+Return the up-to-15 MOST project-local such terms, most-local first. For each term, ALL of:
+- it MUST appear verbatim in the excerpts. Do not invent, generalize, translate, or normalize a term that is not literally present in the text.
+- a one-line gloss of what it denotes AS USED HERE, in plain language (do not merely repeat the term).
+- the source files it appears in, taken from the [source: ...] tags.
+
+Exclude: established terms of art; ordinary English used ordinarily; proper names of people, products, or venues; citations; and section/heading scaffolding.
+
+Output NOTHING but the list — no preamble, no numbering, no trailing commentary, no code fence. One term per line, exactly three fields separated by " | " (space, pipe, space):
+
+<term> | <one-line gloss> | <file1>, <file2>
+
+If fewer than 15 qualify, return fewer. If none qualify, output a single line containing only: NONE
+
+EXCERPTS (231 of 479 paragraphs, 15885 words):
+
+[source: ENTRY.md]
+**Abstract.** Knowledge fails to compound across people partly for a mechanical reason: groups coin private vocabulary, search under it, and cannot find each other's work. This failure has been measured repeatedly, from 1985 (recall around 20% where searchers had stipulated they needed 75%) to 2016 (9% average retrieval of relevant constructs in modern digital-library search). We document the same failure in our own 2026 research project using agent-assisted search: three retracted headline novelty claims across two programs, each preceded by a confident null from a search in the project's own vocabulary. The tooling changed across four decades; the recall failure did not.
+
+[source: ENTRY.md]
+We tested the pieces at small scale, most against pre-registered endpoints. On the competition's eggs case, the term-free definition retrieves the owning specialist literature that the lay question misses (rank 1 versus 4–8). A pilot on our own record locates where the method earns its keep: coinages whose surface words hide, or misdirect from, the concept. And the pipeline's first full run — a sealed test on a synthetic two-community benchmark — held detection precision 1.00, made zero false matches, and typed every asserted relation correctly, but resolved only 5 of 10 planted pairs against a pre-registered target of 7, with the shortfall at its own generation-quality gates rather than wrong matches. The pre-registered negatives redraw the test map: (1) public synonym pairs cannot test tools like this, because any pair prominent enough for a curated thesaurus — *Kawasaki disease* / *mucocutaneous lymph node syndrome*, one pair from our screen — is already reconciled in the models' training data; and (2) generation fails first at faithfulness — definitions subtly distort what the concept claims — a failure our round-trip check catches before any search runs.
+
+[source: ENTRY.md]
+*Companions: a claims register, one line per claim with grade and support ([CLAIMS.md](https://github.com/astrakhantsev/de-idiolect/blob/main/CLAIMS.md)); a glossary of the entry's terms ([GLOSSARY.md](https://github.com/astrakhantsev/de-idiolect/blob/main/GLOSSARY.md)); and an experiment log with full protocol detail ([EXPERIMENT-LOG.md](https://github.com/astrakhantsev/de-idiolect/blob/main/EXPERIMENT-LOG.md)). The citation-verification protocol appears at the References; all materials are linked in the appendix.*
+
+[source: ENTRY.md]
+- **§1 Diagnosis.** The measured failure: search keys are private vocabulary; precision is observable, recall is not; better models cannot be assumed to correct it.
+- **§2 The case.** Three novelty claims retracted from our project, each after a confident null, and a pilot locating the countermeasure's value regime: opaque coinages over non-obvious owners.
+- **§3 History.** Why universal shared vocabularies failed before, and what LLM economics changes.
+- **§4 The workflow.** Outward: detect → define → match (§4.1). Inward: coin-time, claim-time, and cite-time checks (§4.2). Design decisions and commitments.
+- **§5 Experiments.** One positive routing check (§5.1); two pre-registered negatives (§5.2, §5.3); follow-up measurements (§5.4); the pipeline's first full run on a sealed synthetic test — perfect detection precision, coverage 0.6, below its pre-registered bar (§5.5).
+- **§6 Prior work.** The stages and sub-assemblies exist in prior work, credited by name; the full assembly was not found as one system — an absence claim bounded to the searches on record.
+- **§7 Discussion.** FLF's four questions; the next evaluation; what is built, designed, and unbuilt.
+- **§8 Contributions**, **References**, **Appendix** (component status, checking protocol, links to all materials).
+
+[source: ENTRY.md]
+FLF's first-stated limitation of today's tools is that they "mostly produce single-user artifacts tuned to one investigator's context, not the kind that travel, combine, or survive (especially adversarial) scrutiny." We ask a narrower question beneath it: *mechanically, why doesn't knowledge combine across the people who hold it?*
+
+[source: ENTRY.md]
+- **Blair & Maron (1985, *CACM* 28(3):289–299.)** In a litigation-support corpus, lawyers "stipulated that they must be able to retrieve at least 75 percent of all the documents relevant to a given request"; measured recall was **about 20 percent**. The paper explains why the gap is invisible: "they have seen that the proportion of relevant documents in the retrieved set (i.e., Precision) is quite good (around 80 percent)." You can observe precision but not recall, so a clean search feels thorough even when it misses most of what exists.
+- **Larsen & Bong (2016, *MIS Quarterly* 40(3):529–551.)** "The name of that construct can neither be trusted to elicit high recall … nor high precision." Doctoral students using full-text search retrieved **9%** of relevant constructs on average (per-task as low as **3%**); in the meta-analytic follow-up, "**83%** of participants would arrive at the conclusion that the relationship had not been tested at all." Extending Swanson (1986), they write that "the vast majority of *discovered* knowledge is hidden from the individual researcher by the very nature of the search process itself" and note that "the renaming of an existing construct (jangle fallacy) may increase the *perceived novelty* of a construct."
+- **Furnas, Landauer, Gomez & Dumais (1987, *CACM* 30(11):964–971.)** The probability that two people spontaneously choose the same term for the same thing was **.07–.18**. Naming divergence is the default. (Their base rate is untrained people naming everyday objects; the magnitude transfers by analogy, not measurement.)
+- The failure's name is old: the **jangle fallacy** — treating two things as different because they are named differently — is **Kelley (1927, pp. 63–64)**; its twin *jingle* is **Thorndike (1904) quoting Aikins**.
+
+[source: ENTRY.md]
+**From FLF's problem statement to this proposal in two steps.** Artifacts fail to travel, combine, or survive scrutiny because they are *indexed under private keys*: people search in the vocabulary they coined. Other communities' work cannot be found, built on, or confronted. Scrutiny cannot locate the prior art your claim collides with, and you cannot locate theirs. The cause suggests the countermeasure: describe the concept in community-neutral language and search with that description. The same operation points in two directions. **Outward**: find another community's work (§4.1; §5.1 measures the within-community half; §5.5 runs a sealed synthetic cross-community evaluation; live-community deployment is owed, §7). **Inward**: let a field's prior work reach your coinages before you commit to them (§4.2).
+
+[source: ENTRY.md]
+The nearest measurements concern framing agreement and presupposition handling rather than terminology, so they are analogies, not measurements of this failure. Preference data rewards matching the user's frame: "both humans and preference models (PMs) prefer convincingly-written sycophantic responses over correct ones a non-negligible fraction of the time" (**Sharma et al. 2023, arXiv:2310.13548**). Mirroring worsens with scale: "Larger LMs repeat back a dialog user's preferred answer ('sycophancy')" (**Perez et al. 2022, arXiv:2212.09251**). A coinage also embeds a presupposition of the kind QA systems handle poorly: models "struggle when predicting whether a presupposition is factually correct," largely because of "difficulty in retrieving relevant evidence passages" (**CREPE, ACL 2023, arXiv:2211.17257**) — again, a recall problem. We do not claim that the terminology-specific failure *worsens* with capability: our probe returned "not shown" (materials linked). We claim only that it did not self-correct in the tested case and cannot be assumed to do so.
+
+[source: ENTRY.md]
+## 2. The case: the failure, documented on this project's own record
+
+[source: ENTRY.md]
+Two consecutive research programs. **Program A** tried to build a *source-dependence detector*: estimate how many effectively independent sources stand behind a multi-source verdict. **Program B** asked whether cross-judge LLM error correlation is locked in the weights or reducible by elicitation. Both used pre-registration, adversarial cross-model review, and repeated prior-art searches.
+
+[source: ENTRY.md]
+| the coinage                                                                                     | program | the field's owner                                                                         | outcome                                                                                                                                                                                                                                                                                                                                                         |
+| ----------------------------------------------------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `m*`, "the audit unit" — how many independent looks a verdict needs                             | A       | **Clemen & Winkler 1985** (equivalent number of independent sources)                      | predated; retracted at close-out when the claims inventory was checked against primary texts. The Kish design-effect connection was asserted internally from day one — a knowing borrowing; the *miss* was the forecasting-aggregation literature                                                                                               |
+| "the operating requirement" — the accuracy an instrument must reach before it is worth building | A       | **value-of-information threshold analysis** (Raiffa & Schlaifer 1961 lineage (secondary)) | predated; retracted in the same check                                                                                                                                                                                                                                                                                                                           |
+| "the signal, not the cut, is the bottleneck" — Program B's central finding                      | B       | **Bröcker 2008**, a proper-score uniqueness theorem (extending DeGroot & Fienberg)        | **foreclosed** for the exact theoretical claim — no scoring headroom beyond the calibrated conditional forecast, under the theorem's sufficiency condition and strictly proper scoring; found by the disjoint-literature sweep that closed Program B. The program's own analyses used a non-proper metric and sit outside the theorem — a defect, not an escape |
+
+[source: ENTRY.md]
+- **Every retraction was preceded by a confident null** — a novelty search in the project's own vocabulary that found nothing and appeared thorough. This is §1's observability asymmetry in practice.
+- **Knowing the failure mode did not prevent it.** The day-one scoping declared a terminology sweep owed; the pre-mortem named the risk; a mid-program sweep concluded "novelty survives" one week before both Program-A claims were found predated. Every sweep searched the coined vocabulary over overlapping literature.
+- **Same-briefed agreement supplied no independent evidence.** A "six agents out of six agree" verdict was one search run six times. A refuter assigned a disjoint literature overturned one consensus in minutes, pointing to 1990s psychometrics after three agents had searched only post-2023 preprints.
+
+[source: ENTRY.md]
+For concreteness, here are the opening sentences of the frozen definition generated for "operating requirement," the artifact at the proposal's center (full texts in the materials):
+
+[source: ENTRY.md]
+Ordinary words, with no field or method names; this paragraph recovered the owner hidden by the coinage.
+
+[source: ENTRY.md]
+Four caveats:
+
+[source: ENTRY.md]
+The generalizable reading *(measured (exploratory))* is that the definition layer's value tracked **the semantic transparency of the coinage**. For an opaque coinage over a non-obvious owner, the definition recovered what the term hid while the surface words misled. A transparent slogan carried the concept itself. When the field was already known at coinage, the problem was a missed citation rather than a hidden field. The supported regime is narrow: **de-idiolection earns its place on opaque coinages over non-obvious owners**. This is a scope hypothesis from a four-case pilot (per-case predictions sealed, cross-case pattern read after the fact), not a validated rule; a real pipeline should triage coinages by opacity first.
+
+[source: ENTRY.md]
+## 3. Why the shared-vocabulary fix failed before, and what changed
+
+[source: ENTRY.md]
+The pattern is **universal + manual + build-once**. Each post-mortem suggests a different escape: drop universality (Shirky), drop manual acquisition (Cyc's lesson), or fund continual re-curation (Hoekstra). ("Every failed project" is not claimable; a full case matrix has not been built.)
+
+[source: ENTRY.md]
+## 4. The proposed workflow
+
+[source: ENTRY.md]
+A lazy service rather than a standard: run one concept at a time, on demand, separately for each community.
+
+[source: ENTRY.md]
+The two properties the architecture is built on — live cross-community matching and an enforced wordlist — are exactly the unrun ones; per-stage implementation status is tabulated in the appendix. (An interactive architecture diagram with per-node evidence status is in the supplementary materials ‹URL›.)
+
+[source: ENTRY.md]
+- **(i) Split the definition's two roles.** Retrieval keys may be cheap, lossy, and plural; only verification requires a *faithful representation*, checked for round-trip fidelity. We propose a multi-key union (raw term + restated question + definition), but it remains conjectural: the first frozen fusion cell was null — no union beat the best single key, and fusion promoted the misroute document (§5.4) — while recall, false-positive load, and verification cost at scale remain unevaluated. Fidelity-before-retrieval remains the default ordering. Under the split, lossy keys may fetch *candidates*, but no mapping advances to verification or publication without a gate-passing representation.
+- **(ii) The generator is replaceable behind a contract.** Any implementation — model, prompting strategy, extractive selection, or human — satisfies the architecture if its output passes the fidelity checklist (round-trip entailment + external-name ban) *and* the stage-2 lexical constraint. The contract is the design; no implementation, including this prototype's, has demonstrated full compliance. One step has been measured: regeneration guided by a checklist extracted from source excerpts cleared the fidelity half of the contract two-for-two where unguided generation failed (§5.4). Wordlist enforcement remains unbuilt.
+
+[source: ENTRY.md]
+**Two design commitments.**
+
+[source: ENTRY.md]
+**One shared artifact is allowed, and the distinction matters.** The fixed defining wordlist (LDOCE-style: small, domain-general, comparatively low-maintenance — revised only a few times in decades) *is* shared. We exclude an *authoritative, agreement-first domain concept resource* — a canonical ontology, termbase, or glossary on which communities must converge. The optional commons (commitment ii) remains permitted because it is derived, versioned, non-authoritative, and forkable. The invariant is "no canonical merge," not "nothing shared." Generic defining wordlists survived for decades largely because they require little curation, avoiding the economics blamed in §3's critiques for domain-resource failures. This is an argument, not a measurement.
+
+[source: ENTRY.md]
+§2's *verified* failures sort one-to-one onto the pipeline's stages *(small counts, stated)*. The ~3 recall misses were missed coining moments (**detection**, stage 1). The ~4 self-errors were definition or estimand drift, including the retracted headline that substituted one quantity's role for another's (**definition**, stage 2). **Verification** — stage 3's checking step — failed in provenance: both retractions checked against primary text used real quotes with defective citations, and one work appeared under conflicting identifiers. Across ~85 recorded review findings, none identified an erroneous computed value. The failures lie in the layer connecting claims to sources, where this pipeline operates.
+
+[source: ENTRY.md]
+- **Coin-time interception** (detection): when a term is minted, generate its neutral definition and propose the field's nearest existing terms, recording the translation while it is cheapest. §4.1's naming note applies this practice to the proposal's own term.
+- **Claim-time estimand self-audit** (definition): regenerate the definition of what a claim *measures* and compare it with what the instrument *computes* — the error class that inverted Program A's headline.
+- **Cite-time provenance check** (verification): before a load-bearing citation ships, open the primary, check the venue, and read past the ellipsis. This now has a measured yield and cost on the project's record *(measured)*. In a seeded sample of 100 model-proposed citation occurrences, roughly half to two-thirds survived verification depending on strictness (66/100 at the lenient primary; 43/91 at the strictest sensitivity, which also drops nine ineligible candidates; full contingency detail in the materials). There were zero confirmed fabrications and zero major bibliographic mismatches among checkable cases. Attrition came mostly from publisher access walls and attribution precision, at roughly one search and two fetches per work. Reachability constrained checking, arguing for durable verified mappings (the commons, §4.1) over repeated verification by each user.
+
+[source: ENTRY.md]
+**The minimal implementation, and what the architecture adds.** For the anchoring case (owner long-established), the minimal inward tool is a *hook*: at coin, claim, or cite time, send the frozen excerpts to a separate model call — "what is this called, and who owns it?" — and surface the answer. Does the proposal reduce to that? The *prompt* half has been measured on this record: the agents running §2's "novelty survives" sweep already had standing instructions to *search the field's vocabulary before committing*. The instruction was installed, and the failure still occurred. A standing instruction must win an attention contest every turn (§1's incentive argument); a hook fires deterministically. The hook half is argued and unbuilt. The architecture adds four elements, each addressing a measured failure:
+
+[source: ENTRY.md]
+## 5. Experiments
+
+[source: ENTRY.md]
+### 5.1 A retrieval check on FLF's eggs case
+
+[source: ENTRY.md]
+| concept (owning sub-field) | naive question | raw term | **constrained definition** |
+|---|--:|--:|--:|
+| hyper-responder (lipidology) | 5 | 1 | **1** |
+| apolipoprotein B particle number (cardiology biomarkers) | 4 | 1 | **1** |
+| isocaloric substitution model (nutrition-epi methods) | 8 | 1 | **1** |
+
+[source: ENTRY.md]
+### 5.2 A cross-community cell on curated vocabulary (pre-registered; negative)
+
+[source: ENTRY.md]
+### 5.3 An end-to-end cell on the project's own coinage (pre-registered; negative, with baseline)
+
+[source: ENTRY.md]
+A **grounded direct-model baseline** — the same excerpts and corpus, given to a frontier model — ranked the true owner literature 1–2. Against an equal-information direct ask, the pipeline's mechanical form earned **no measured margin on this cell** (the baseline had the corpus, so this does not map the memorized-vs-inferred boundary); the remaining case rests on §4.2's process properties. Post-gate retrieval observations, the Larsen & Bong precedent, and the full accounting are in the log.
+
+[source: ENTRY.md]
+A second frozen specification measured the gate and the candidate fix on the same cell (endpoints frozen before running). Four results: **the gate calibrates** — faithful definitions pass 4/4, seeded defects are caught 5/5 with correct attribution *(pre-registered; a non-degeneracy check on author-constructed materials, not a population false-positive estimate)*; **a cheap fix clears it** — regeneration guided by a checklist extracted from the source excerpts passes the gate 2/2 where unguided generation had failed 0/2 *(pre-registered; n = 1 per configuration, and a stricter prospectivity reading is arguably still unmet)*; **fidelity bought no routing** — the gate-passing definitions rank the owner no better than the drifted ones they replace *(measured (exploratory))*; and **union-of-keys returned a null** — no fusion beat the best single key, and every fusion promoted the misroute document *(pre-registered)*. The single-cell, answer-aware limits of §5.3 apply; full bounds are in the log. (A fourth measurement from the same set — provenance-verification yield on the project's citations — appears where it applies, §4.2.)
+
+[source: ENTRY.md]
+We then implemented and ran the synthetic core of §7's continuation design: eight pre-registered pipeline versions on synthetic two-community corpora (10 planted pairs per key; no live-community claim), with cross-family blind generation and bilateral usage-based verification, under a train/test protocol with a sealed held-out key. **On the sealed key — the pipeline's first full run — it scored 5/10 with detection precision 1.00, zero false positives and zero false escalations, and all five hard relation assertions typed correctly; that is below its pre-registered bar of ≥ 7, at every pre-registered operating point.** Coverage (0.6) was the binding constraint: three pairs were lost at generation-stage artifact gates and one at quote validation. Across versions the binding layer moved from definition fidelity to generated-artifact gate survival, extending §5.3–§5.4's negative. Protocol, the sealed-key procedure, per-version record, and the five adversarial review rounds are in the log. *(Measured.)*
+
+[source: ENTRY.md]
+**The stages, and several sub-assemblies, exist in prior work; we did not find the full assembly as one system.** Two blind passes reproduced this map and found no fused system. The nearest whole-system efforts — **LAVOHA** (CEUR Vol-4177) and Battelle's **Vocabulary Switching System** (Niehoff & Mack 1984 evaluation of the system designed ~1980, with a 1976 Niehoff precursor) — build merged canonical resources, the opposite of the no-merge commitment, and neither combines an automatic detection trigger with definitions constrained to a controlled defining vocabulary (LAVOHA produces harmonized consensus definitions). The absence claim is bounded: the searches used one model family and one web surface, later passes kept surfacing closer neighbours (EDC, since read; GESIS cross-concordances/KoMoHe (secondary) — manual persistent crosswalks, the architectural opposite; Guo et al. 2024, arXiv:2311.09481, for detection), and the draft search ledger with its coverage gaps is linked in the appendix. The entry rests on the diagnosis, the documented case, the measurements, and attribution — not on novelty.
+
+[source: ENTRY.md]
+- **The core pipeline** (generate definitions → embed → match → type relations) exists in prior work:
+  - **SciCo-Radar** (arXiv:2409.15113, Forer & Hope): LLM-generated context-dependent, relational definitions for cross-document concept coreference with typed relations (mentions pre-annotated).
+  - **GenOM** (arXiv:2508.10703): definition-embedding as retrieval key with pairwise LLM verification, over existing ontologies.
+  - Structurally closest, **EDC** (Zhang & Soh, arXiv:2404.03868): extract → define → canonicalize-by-definition-vector — the same shape as detect → define → match, but with a different purpose: a persisted self-generated knowledge-graph schema from one corpus (the master list this proposal refuses), without a detection trigger or controlled vocabulary.
+  - **KGGen** (NeurIPS 2025): the same different-names matching, resolved through the canonical merge this proposal rejects. LLMs4OM and KROMA (both (secondary)) complete the landscape.
+  - The pre-LLM ancestor of content-based rather than name-based matching is **CID** (Larsen & Bong 2016): construct identity by semantic similarity over measurement *items*, with names explicitly set aside, thresholded candidates for expert review, and automatic construct knowledge bases as the goal (Li & Larsen 2011/2013 (secondary)). CID matches existing curated item pools within one discipline; it has no detection trigger or generated definitions, and seeks a persistent curated resource.
+- **Detection-as-trigger** is predated: Microsoft **US8589791B2 / US10552522B2** (unfamiliar-term detection → definition; one continuation family), **NeoN** (arXiv:2505.15426; neologism detection feeding LLM definitions), and the **AXOLOTL'24** line (novel senses → generated definitions).
+- **The lazy / no-global-resource stance** is predated for single-community use: emergent semantics and dataspaces (§4.1), ad hoc terminography (Wright & Budin; Cabré — both (secondary)), and at least one shipped product providing lazy per-workspace LLM definitions (Confluence "Define" (secondary)). Atlan Sage (secondary) reportedly resolves conflicts into one canonical answer — the opposite philosophy and a useful contrast.
+- **Two strips stay at "not found in the searches on record" (candidate status only — not the pitch):** (i) a controlled defining vocabulary for machine-generated cross-community definitions (all systems found use free text) — our ablation of whether the constraint helps retrieval was inconclusive (experiment log), weakening rather than strengthening this point; (ii) the full assembly as one system — detector-triggered, constrained-vocabulary definitions used as cross-community matching keys with typed relations and no canonical merge — per the paragraph above.
+
+[source: ENTRY.md]
+- **Would it help someone reason better about these cases?** On FLF's eggs case, §5.1 measures the definition placing the owning sub-literature at rank 1 where the lay question buries it, conditional on an oracle-supplied concept. The most immediately usable piece is the cite-time provenance check, measured on our own citations: 66/100 survived at the lenient endpoint with zero confirmed fabrications, at about one search and two fetches per work (§4.2). On a real research program, §2 records three retractions, each preceded by a confident null, and §4.2 identifies the three moments when the inward stages would have fired. (The programs also failed on separate technical grounds; the claim that earlier field vocabulary would have saved them is a counterfactual, stated as such.)
+- **Does it generalize?** Only at small-prototype plus one-clean-cell strength, bounded by the transparency gradient: routing on eggs (§5.1 — a specificity effect; neutrality untested), one cross-domain owner recovered in the clean cell, and a three-decade-old owner recovered from a confounded cell (§2). The supported regime is opaque coinages over non-obvious owners. Stronger claims require more runs; we make none.
+- **Does it scale with AI / compute? A mechanism with a boundary, not a measured result.** The naive worry ("won't better models just know all these links?") conflates memorization with inference. A stronger model memorizes more equivalences already stated somewhere: reconciled seams where the tool is redundant. On an unreconciled seam, there is nothing to memorize. A capable model can still *infer* equivalence when given both communities' texts, but that grounded inference is the define→match operation, not a shortcut around it. Capability may improve inference; recall still determines whether the other community's work surfaces at all (Blair & Maron: precision is observable, recall is not). The tool's value therefore concentrates on the coined / post-cutoff / genuinely-parallel frontier, and remains marginal over asking a frontier model directly with the same corpus access — a baseline that improves every generation. **The two §5 negatives bound this from both sides**: curated public pairs are memorized (§5.2); on one private-coinage cell, the equal-information direct ask matched or beat the pipeline's mechanical form (§5.3); and faithful definitions did not route better (§5.4). The remaining case rests on §4.2's process properties and candidate regimes unreached by these experiments. The §3 economics remains a hypothesis-grade companion and does not price other lifecycle costs.
+- **Does it compound?** The architecture's criterion (§4.1) is reconciliation as a lazy service: a regenerable-cache commons where forks coexist and disagreement is a typed link, allowing accumulation without agreement. This directly addresses FLF's stated limitation. Not demonstrated: the prototype does not run the commons.
+
+[source: ENTRY.md]
+The held-out result (§5.5) bounds the design: the no-fabrication property transferred, but coverage fell to 0.6 and the pre-registered bar was missed. The next work, ordered by information per unit cost, is to harden generation-stage artifact survival on fresh corpora, where the held-out run lost coverage. Only then comes the live-community deployment described above: post-cutoff, wild rather than planted vocabulary pairs, beyond the reach of any synthetic result here.
+
+[source: ENTRY.md]
+**What is built and what is not.**
+
+[source: ENTRY.md]
+1. A mechanical diagnosis of FLF's compounding failure — search keys are private vocabulary — assembled from measured prior work, 1985–2016, and linked in two steps to FLF's stated limitation (§1).
+2. A documented, dated case study from the author's own project: ~20 renamings, three retracted novelty claims, one foreclosed by a theorem; owners verified against primary text (§2).
+3. A measured within-community retrieval check on FLF's eggs case, isolating specificity rather than neutrality (§5.1).
+4. An exploratory pilot locating the value regime (the transparency gradient) and surfacing one three-decade-old owner missed by three manual audits (§2).
+5. Two pre-registered negatives: curated synonym pairs could not test this tool class (memorized by construction on the vocabularies searched, §5.2), and definition fidelity rather than leakage was where generation first failed its contract (§5.3). A follow-up frozen set calibrated the fidelity gate, measured a checklist-guided fix that cleared it without retrieval gain, and returned a union-of-keys null (§5.4). These results motivate §4.1's component contract and key/representation split.
+6. An outward and inward workflow architecture — deterministic hook, verification stack, no-canonical commons — with novelty bounded to the searches on record and a continuation evaluation designed, built, and run through a sealed held-out test (§4, §5.5, §6, §7).
+
+[source: ENTRY.md]
+*Verification: except where marked (secondary) or (unconfirmed), each citation was checked against a primary-source surface appropriate to the attribution — full text for quoted passages, numbers, and load-bearing theorem or method claims; otherwise the primary abstract, bibliographic record, patent, or product documentation. Claude Sonnet performed extraction and first checks; Claude Fable and GPT-5.6 independently spot-reviewed load-bearing and uncertain items. This does not mean every work was read in full. Citations marked (secondary) were checked only via secondary surfaces (abstracts, product pages, indexes, or another work's citation of them).*
+
+[source: ENTRY.md]
+---
+
+[source: ENTRY.md]
+**Stage count vs. component count.** Stage 3 bundles retrieval, pairwise verification, and relation typing — hence four rows below. The fidelity gate is stage 2's exit check, validating the definition itself before any candidate mapping proceeds; §4.2's inward third checkpoint is stage 3's verification step.
+
+[source: ENTRY.md]
+| pipeline stage | implementation | run status | receipt | evaluated? |
+|---|---|---|---|---|
+| detection (keyness) | TF-IDF keyness, offline, deterministic | ran; wired retrospectively in the end-to-end cell | `results.json`, e2e `detection.json` | surfaces community-local terms, but **not wired** to the eggs concepts (log E1); in the e2e cell the frozen top-25 endpoint **missed** (exploratory rank ~224) — raw keyness under-delivers; novel-sense detection unbuilt |
+| definition generation | LLM via `llm_backend` | **live** — `results-live.json` (constrained; routing held) + the ablation (constrained + free, k=3, two models); author-frozen only in the *committed* run | `results-live.json`, `ablation_definitions*.json`, e2e fidelity judgments | vocabulary ablation (in-sample, saturated, **inconclusive**); generator fidelity measured in the e2e cell: **failed the round-trip check 2/2** (prospectivity drift) — fidelity is this stage's first contract failure (§4.1); gate calibrated FP 0/4 · detection 5/5, checklist-guided regeneration passes 2/2 (§5.4) |
+| retrieval / matching | `bge-large-en-v1.5`, offline, deterministic | ran — **the load-bearing measurement** | `results.json`, `ablation-results*.json` | rank-of-owner (§5.1); no precision–recall on a real corpus; multi-key RRF fusion null on one cell (§5.4) |
+| relation typing (SKOS) | LLM via `llm_backend` | interface only in the §5.1 prototype; author-frozen; **no live run in the prototype** — measured on the synthetic §5.5 harness | `relation_fixtures.json` | **measured in §5.5 only** |
+
+[source: ENTRY.md]
+**Division of labor (human and model).** The author designed the experiments, froze specifications and endpoints, adjudicated results, and guided the work. Model work, by role: citation extraction and first checks — Claude Sonnet, with Claude Fable and GPT-5.6 spot-reviewing (per the note at the References); definition generation and the blind naming draws — Claude models at several tiers, isolated from project context, all draws from one family (a limitation stated in §2); the capability ladder — two families across four capability tiers (§1); adversarial reviews — cross-family, GPT-5.6 (via Codex) and Claude, including five rounds on §5.5's final versions; §5.5's two synthetic communities were authored by different model families by design. The entry text itself was drafted and revised with Claude assistance, under the author's direction and final review. Exact model identities per run are recorded in the linked materials.
+
+[source: ENTRY.md]
+Published alongside the entry: the claims register ([CLAIMS.md](https://github.com/astrakhantsev/de-idiolect/blob/main/CLAIMS.md)), the glossary ([GLOSSARY.md](https://github.com/astrakhantsev/de-idiolect/blob/main/GLOSSARY.md)), and the experiment log ([EXPERIMENT-LOG.md](https://github.com/astrakhantsev/de-idiolect/blob/main/EXPERIMENT-LOG.md)).
+
+[source: receipts/citation-audit-2026-07-17.md]
+# Citation audit — FLF recall-extender entry (2026-07-17)
+
+[source: receipts/citation-audit-2026-07-17.md]
+## The one real defect — FIXED
+
+[source: receipts/citation-audit-2026-07-17.md]
+## Verified clean (primaries opened)
+
+[source: receipts/citation-audit-2026-07-17.md]
+## Minor precision line-edits applied (§5)
+
+[source: receipts/citation-audit-2026-07-17.md]
+## Net
+
+[source: receipts/citation-dossier-casestudy.md]
+---
+title: "Citation dossier — idiolect-trap-case-study.md"
+date: 2026-07-18
+status: "complete"
+---
+
+[source: receipts/citation-dossier-casestudy.md]
+## Note on the prior audit (citation-audit-2026-07-17.md)
+
+[source: receipts/citation-dossier-casestudy.md]
+## Scope note on the task's citation list vs. the document's actual content
+
+[source: receipts/citation-dossier-casestudy.md]
+---
+
+[source: receipts/citation-dossier-casestudy.md]
+### 1. Clemen & Winkler 1985
+
+[source: receipts/citation-dossier-casestudy.md]
+**Checks:**
+1. *Work exists / identifier resolves* — YES. "Limits for the Precision and Value of Information from Dependent Sources," R.T. Clemen & R.L. Winkler, *Operations Research*, 1985, vol. 33, issue 2, pp. 427–442. DOI `10.1287/opre.33.2.427`. Confirmed independently via Semantic Scholar/DBLP (`journals/ior/ClemenW85`, CorpusId 10142978) and the INFORMS publisher page.
+2. *Bibliographic details match* — YES (author names, year, journal, title all consistent across INFORMS and Semantic Scholar).
+3. *Verbatim quotes* — the document does not put this citation in quotation marks (it's a paraphrase, "equivalent-number-of-independent-sources result"), so no verbatim-quote check applies.
+4. *Characterization match* — the phrase is strongly corroborated but not read off the primary itself. Two independent secondary sources describe the paper's actual content in these terms: (a) a companion/follow-up INFORMS paper explicitly titled "How Many Forecasters Do You Really Have? Mahalanobis Provides the Intuition for the Surprising Clemen and Winkler Result," which reframes the 1985 result exactly as an effective/equivalent-count question; (b) a WebSearch-grounded synopsis describing the paper's own content as producing "the y-axis showing the equivalent number of independent sources for various correlation coefficients" (i.e., the paper itself plots this quantity).
+
+[source: receipts/citation-dossier-casestudy.md]
+**Verdict: PARTIAL.** Bibliographic identity is fully verified (title/authors/year/journal/DOI cross-confirmed on two independent indexes). The substantive characterization is well-corroborated by secondary sources describing the paper's own content, but the primary text itself was not opened (paywalled + Cloudflare-blocked on all three access attempts; Wayback unavailable at check time). No quote is at stake since the document doesn't quote it verbatim.
+
+[source: receipts/citation-dossier-casestudy.md]
+---
+
+[source: receipts/citation-dossier-casestudy.md]
+**Location in document:** Headline #3 (line 31); Table A row 3 (line 71); Program B event-flow 07-16 (line 55).
+**Attributed claim:** proper-score uniqueness theorem, extending DeGroot & Fienberg 1982, forecloses Program B's keystone. Two direct quotes given: "the forecasting scheme π^γ achieves the best possible average score among all forecasts for which γ is sufficient" and (separately) "is uniquely defined through this optimum property."
+
+[source: receipts/citation-dossier-casestudy.md]
+**Evidence surfaces checked:** `arxiv.org/abs/0806.0813` (abstract, via safefetch); `ar5iv.labs.arxiv.org/html/0806.0813` (full paper HTML, via safefetch — flagged 101 zero-width-space occurrences as a HIGH finding, almost certainly a LaTeXML rendering artifact of math markup, not a real injection attempt — no suspicious instructions found in the extracted content); direct PDF fetch attempts (`arxiv.org/pdf/0806.0813`, `.../0806.0813v2`) failed (defuddle extracted nothing from the raw PDF response) — worked around via the ar5iv HTML mirror instead, which reproduces the full text.
+
+[source: receipts/citation-dossier-casestudy.md]
+**For senior review:** This is the strongest-verified citation in the ledger — direct primary-text quote match plus a disambiguation of a real trap (two different DeGroot & Fienberg papers share the "1982/1983" confusion in secondary indexes; the document's year is correct for the paper Bröcker actually cites). The safefetch injection flag on the ar5iv page is a false positive (LaTeXML math markup artifact); noted for transparency, not a content concern.
+
+[source: receipts/citation-dossier-casestudy.md]
+### 3. Raiffa & Schlaifer 1961
+
+[source: receipts/citation-dossier-casestudy.md]
+**Checks:**
+1. *Work exists* — YES. Howard Raiffa & Robert Schlaifer, *Applied Statistical Decision Theory*, Graduate School of Business Administration, Harvard University (Boston), 1961, 356 pp. Confirmed via 5 independent listings (Wiley reprint page, Amazon, AbeBooks, Google Books, and a hosted PDF on gwern.net).
+2. *Bibliographic details* — match.
+3. *Verbatim quote* — none attributed; the document uses "lineage," a genealogy claim, not a quote.
+4. *Characterization* — this book is the standard foundational reference for Bayesian value-of-information analysis; it is universally cited as such in VOI literature (confirmed via multiple sources describing it as the origin of the VOI framework used in modern health-economic threshold/target-product-profile analysis). "Lineage" is an appropriately hedged word for a 65-year influence chain, not a direct-descent claim, and matches how the field itself describes the connection.
+
+[source: receipts/citation-dossier-casestudy.md]
+**Verdict: PARTIAL.** Bibliographic identity solid (5-way corroborated); the "lineage" framing is a general, appropriately-hedged claim rather than a specific quoted fact, and matches field consensus, but the primary book text itself was not opened (PDF inaccessible to the available fetch tooling).
+
+[source: receipts/citation-dossier-casestudy.md]
+---
+
+[source: receipts/citation-dossier-casestudy.md]
+**Location in document:** Headline note area / Table A row 4 (line 72).
+**Attributed claim:** evidence-overlap metric in the dietary-cholesterol worked example → corrected covered area (CCA), owned by Pieper 2014, reached via Hennessy & Johnson 2020; "verified against the full text" per the document; honest note: "the field *retains* high-overlap reviews rather than discarding them."
+
+[source: receipts/citation-dossier-casestudy.md]
+**Evidence surfaces checked:** `pmc.ncbi.nlm.nih.gov/articles/PMC8555740/` (open-access full text, fetched via safefetch, no injection findings) — the Pieper 2014 paper itself is paywalled at J Clin Epidemiol / ScienceDirect and was not separately opened; its bibliographic identity was cross-confirmed via the Hennessy & Johnson reference list plus independent PubMed/ResearchGate listings, which is sufficient to confirm it's a real, correctly-cited work but short of reading Pieper's own text directly.
+
+[source: receipts/citation-dossier-casestudy.md]
+**For senior review:** Solid. The "via" framing in the document is precise and matches what's actually in Hennessy & Johnson's paper — this is not a case of citation-laundering; H&J really do build on and attribute Pieper's index.
+
+[source: receipts/citation-dossier-casestudy.md]
+**Location in document:** Program A event-flow 07-09 (line 43); Table A row 5 (line 73, marked **retracted — self-confound**, not a positive novelty claim).
+**Attributed claim:** the extremization line traces to Satopää (no year given in the document) and Karmarkar 1978; the "78 forecasters ≈ 1 independent update" headline is a self-confound (extremization coefficient mistaken for an independence count), not a claim about what Satopää/Karmarkar say.
+
+[source: receipts/citation-dossier-casestudy.md]
+**Evidence surfaces checked:** WebSearch only (Karmarkar 1978's existence and topic cross-confirmed via standard citation indexes; Satopää's extremization work confirmed via IJF listing). Did not open either primary text — both are paywalled journal articles and the document doesn't quote either verbatim, so there was no specific sentence to check against a primary.
+
+[source: receipts/citation-dossier-casestudy.md]
+**For senior review:** No red flags, but flag to the author that "Satopää" without a year is the least pinned-down citation in the ledger — worth tightening to a specific paper if this document is meant to be citably precise (the novelty ledger presumably already has the pinpoint).
+
+[source: receipts/citation-dossier-casestudy.md]
+### 6. Makridakis & Winkler 1983
+
+[source: receipts/citation-dossier-casestudy.md]
+**Checks:**
+1. *Work exists* — YES. Spyros Makridakis & Robert L. Winkler, "Averages of Forecasts: Some Empirical Results," *Management Science* 29(9):987–996, 1983. This is a well-known, widely-cited paper establishing that combining a small number of independent forecasts (typically cited as accuracy gains plateauing around 2-5 forecasts) captures most of the achievable accuracy gain from combination.
+2. *Characterization* — "m* ≈ 2–3 regularity" (i.e., accuracy gains from combining forecasts plateau after roughly 2-3 forecasts) matches this paper's standard characterization in the forecasting-aggregation literature.
+3. *"18.1 decibans" anecdote flagged apocryphal and dropped* — this is the document reporting its own internal correction (removing a claim it decided was unreliable), not an assertion about Makridakis & Winkler's text — nothing to verify against the primary here; it is a self-report of due diligence, and its accuracy as a self-report can't be externally checked from outside the project's internal history (consistent with the document's own stated limits on internal-history verifiability, see its "What this document is" section).
+
+[source: receipts/citation-dossier-casestudy.md]
+**Verdict: PARTIAL.** Bibliographic identity and general characterization confirmed via secondary sources; primary text not opened (no verbatim quote at stake, and access was paywalled).
+
+[source: receipts/citation-dossier-casestudy.md]
+---
+
+[source: receipts/citation-dossier-casestudy.md]
+**Location in document:** Headline #1 (line 29, "knowing borrowing" note); Program A event-flow 07-01 (line 38); Table A row 1 (line 69); Table A row "N_eff used as a log-odds multiplier" (line 74, marked **retracted — misuse**).
+**Attributed claim:** the project's `N_eff` formula was asserted (07-01) to **be** the Kish design effect. Later (07-12) this use as a log-odds/posterior multiplier is retracted as a misuse — the design effect is valid for a correlated *mean*, not a posterior multiplier.
+
+[source: receipts/citation-dossier-casestudy.md]
+**Evidence surfaces checked:** WebSearch confirming the standard definition and attribution of the design effect to Kish (1965) is uncontested textbook material; did not locate or open a specific primary text since the document does not pin a specific work/page — there is no specific verbatim claim to check.
+
+[source: receipts/citation-dossier-casestudy.md]
+**For senior review:** No issue with the Kish attribution itself — this is uncontroversial, well-known statistical machinery, correctly named and correctly formalized.
+
+[source: receipts/citation-dossier-casestudy.md]
+### 8. Scott Alexander — Multiple Stage Fallacy
+
+[source: receipts/citation-dossier-casestudy.md]
+**Checks:**
+1. *Work exists / identifier resolves* — YES. "The Multiple Stage Fallacy" is a named concept from a Scott Alexander blog post (Slate Star Codex / Astral Codex Ten), describing the error of multiplying a chain of conditional probabilities each rounded down conservatively, producing an overall probability that's biased low (or, in the correlated-factor-double-counting framing the document uses, an error from treating stage-wise probabilities as if independent when they're correlated).
+2. *Attribution* — "named by Scott Alexander" is accurate; this is a term Alexander introduced and that is widely cited under his name in the rationalist/forecasting blogosphere with no competing academic originator.
+
+[source: receipts/citation-dossier-casestudy.md]
+**Verdict: VERIFIED** (the attribution itself — "named by Scott Alexander" — is accurate). No verbatim quote or specific post identified by the document to check further.
+
+[source: receipts/citation-dossier-casestudy.md]
+---
+
+[source: receipts/citation-dossier-casestudy.md]
+**Location in document:** Table A row 8 (line 77).
+**Attributed claim:** prediction-interval-as-likelihood-width used as a heterogeneity fix → estimand substitution; correct tool is HKSJ; **foreclosed as a fix**; "HKSJ citations checked by review."
+
+[source: receipts/citation-dossier-casestudy.md]
+**Evidence surfaces checked:** WebSearch confirming both papers' existence, authors, journal, year, and their joint association with the "HKSJ" method name; did not open either primary (both paywalled, and the document attributes no verbatim quote to either — it names them as the correct-tool citations for a methodological point, which is a characterization check, not a quote check).
+
+[source: receipts/citation-dossier-casestudy.md]
+**For senior review:** No issue. Standard, correctly-paired citations for the HKSJ method.
+
+[source: receipts/citation-dossier-casestudy.md]
+### 10. Rowe & Wright 1996/99 and Best 1974
+
+[source: receipts/citation-dossier-casestudy.md]
+**Evidence surfaces checked:** WebSearch confirming both works' existence and topical fit; did not open either primary (paywalled, no specific quote/page cited by the document for the hedge itself, so nothing precise to check against).
+
+[source: receipts/citation-dossier-casestudy.md]
+**For senior review:** Flag for a follow-up pass: if this row matters for a specific downstream claim, the specific hedge sentence in Rowe & Wright should be pinned down and quoted, since the document is explicitly warning readers not to over-trust its own first pass here.
+
+[source: receipts/citation-dossier-casestudy.md]
+### 11. Kohli 2026
+
+[source: receipts/citation-dossier-casestudy.md]
+**Checks:**
+1. *Work exists / identifier resolves* — YES. Guneet Kohli, "Nine Judges, Two Effective Votes: Correlated Errors Undermine LLM Evaluation Panels," arXiv:2605.29800 [cs.CL], submitted 28 May 2026 (also an Apple Machine Learning Research publication). Confirmed via the arXiv abstract page.
+2. *Bibliographic details* — YES, year (2026) matches.
+3. *Content match* — YES, closely. The paper tests a 9-judge, 7-model-family LLM panel and finds effectively only ~2 independent votes (n_eff ≈ 2.0–2.5) using the Kish effective-sample-size framework; the deficit is "robust across prompt variants, temperatures, chain-of-thought reasoning" and aggregation-algorithm changes close at most 11% of the gap. Fetched the full HTML text (`arxiv.org/html/2605.29800v1`) and located the paper's own closing "open question," verbatim: *"The path forward requires models that genuinely differ in how they process information — not merely different brand names on similar architectures. … Whether architecturally diverse models, specialist fine-tuning, or hybrid human-LLM panels can achieve this remains an open question."*
+4. *"the open lever" framing* — the document's phrase "elicitation-dependent or weights-locked" is a **compressed paraphrase**, not a verbatim quote from Kohli 2026 — the paper itself frames the open question as "architecturally diverse models / specialist fine-tuning / hybrid human-LLM panels" vs. "different brand names on similar architectures," which maps reasonably onto "weights-locked" (architecture/weights) vs. some form of "elicitation" (prompting-only variation, which the paper explicitly tested and found does *not* close the gap). This is a fair compression of the paper's real finding and real open question, not a fabrication, but it is worth flagging that the document's two-way framing ("elicitation-dependent or weights-locked") is the case-study author's own gloss, not Kohli's own words.
+
+[source: receipts/citation-dossier-casestudy.md]
+**Verdict: VERIFIED** (work exists, details match, content characterization is a fair non-fabricated compression of the paper's actual findings and stated open question), with a **note**: the "elicitation-dependent or weights-locked" phrase is the document's own paraphrase, not a quote from Kohli's paper — appropriately unquoted in the document, so this is not a mismatch, just a precision note for the reviewer.
+
+[source: receipts/citation-dossier-casestudy.md]
+---
+
+[source: receipts/citation-dossier-casestudy.md]
+**Location in document:** Section B (line 85) — the model-family finding (credence-carrying behavior splitting by model family). Document's own characterization: **"Asserted — and possibly false**: a 2026 result reports within-family spread exceeding between-family, which would make 'family' the wrong unit. The project's own digest had whispered the same doubt and did not follow it."
+
+[source: receipts/citation-dossier-casestudy.md]
+**Checks:**
+1. *Work exists / identifier resolves* — YES, and venue is exactly right. Kaitlyn Zhou, Jena D. Hwang, Xiang Ren, Maarten Sap, "Relying on the Unreliable: The Impact of Language Models' Reluctance to Express Uncertainty," *Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)*, pp. 3623–3643, 2024 (ACL Anthology ID `2024.acl-long.198`; also arXiv:2401.06730). This is genuinely **ACL** 2024 (main conference), not a misattributed EMNLP/NAACL paper — confirmed directly against the ACL Anthology listing.
+2. *Topical fit for "model-family finding"* — confirmed by opening the arXiv HTML full text (`arxiv.org/html/2401.06730v2`). The paper does structure part of its analysis by model family: *"The authors then qualitatively code... for epistemic markers in generated responses from each model family..."* and a dedicated section comparing "models from the GPT and LLaMA-2 family," including base vs. supervised-fine-tuned vs. RLHF variants within each family, to locate "the origin of model overconfidence." This is a real, substantive family-structured analysis in the primary text — the document's characterization is not a fabrication of what this paper does.
+3. *The document's own "possibly false" caveat* — I did not locate the specific 2026 result the document alludes to (no author/title given to search against — this is itself an unpinned, background caveat inside a row the document already marks Asserted, not a citation requiring resolution). I can't confirm or refute it; I can confirm it isn't contradicted by anything found in this pass.
+
+[source: receipts/citation-dossier-casestudy.md]
+**Verdict: The document's own "Asserted" framing is ACCURATE and appropriately hedged** — the underlying paper is real, correctly venued (ACL 2024, not a nearby-conference mix-up), and does perform family-level analysis, so the mapping is a *plausible, non-fabricated* asserted claim, exactly the confidence level the document itself claims for it (not more, not less). The "possibly false" 2026-result caveat could not be independently checked (no citable specifics given) but is also not contradicted.
+
+[source: receipts/citation-dossier-casestudy.md]
+---
+
+[source: receipts/citation-dossier-casestudy.md]
+**Location in document:** Section B, first bullet (line 84). Document's own characterization: *"'GPT threshold unidentifiable in principle' → Rasch null-category estimability (Wilson & Masters; Linacre). **Citation defective** — the quotes are real but come from a software help manual, not the cited Psychometrika paper, and a truncation hid a sentence contradicting the gloss. The concept is genuine old psychometrics; the citation as first recorded would not survive a reviewer."*
+
+[source: receipts/citation-dossier-casestudy.md]
+**Checks:**
+1. *Wilson & Masters paper exists* — YES. M. Wilson & G.N. Masters, "The Partial Credit Model and Null Categories," *Psychometrika* 58, 87–99, 1993. Confirmed via Cambridge Core's Psychometrika listing (matches the document's implicit claim that a real *Psychometrika* paper on exactly this topic exists — "null categories" in the (partial-credit) Rasch model).
+2. *Linacre software-manual material on the same topic exists, separately* — YES. John Michael Linacre's Winsteps/Facets help documentation includes dedicated pages on exactly this topic, distinct from the Psychometrika paper: `winsteps.com/winman/nullcats.htm` ("Null or unobserved categories: structural and incidental zeroes") and `winsteps.com/facetman/unobserved.htm` ("Unobserved or null categories: Facets Help") — live help-manual pages (not journal articles) discussing null/unobserved category estimability in Rasch models, including exactly the kind of estimability-under-extreme-categories reasoning ("Extreme incidental null categories... are essentially out of range of the sample and so the sample provides no direct information about their estimates...") that a "GPT threshold unidentifiable" argument would draw on.
+3. *Plausibility of the specific defect* — the document's claimed error (quotes attributed to the 1993 Psychometrika journal article that actually originate in Linacre's Winsteps/Facets help-manual prose) is structurally very plausible given what I found: both a real journal paper AND real, topically-overlapping software-manual pages exist side by side in the same research tradition (Linacre is a major figure in applied Rasch/Winsteps software built on the same null-category theory Wilson & Masters formalized), which is exactly the kind of adjacent-source confusion that produces a "real quote, wrong venue" defect. I could not verify the *specific* truncated sentence or the *specific* quotes originally used internally, since the case-study document (correctly, per its own scope) does not reproduce them — that level of detail lives in the internal audit trail, out of scope for this document.
+
+[source: receipts/citation-dossier-casestudy.md]
+**Verdict: The document's own characterization is PLAUSIBLE AND WELL-GROUNDED, not disprovable from outside** — both named sources are real, correctly distinguished (one is a 1993 journal paper, the other is ongoing software-vendor documentation by a different-but-related author on the same underlying theory), and the claimed defect type (quote misattributed across exactly these two sources) is structurally coherent. I cannot independently confirm the *exact* quoted sentence or the *specific* truncation, since those details aren't reproduced in the document under audit.
+
+[source: receipts/citation-dossier-casestudy.md]
+---
+
+[source: receipts/citation-dossier-casestudy.md]
+The following Section B items name a phenomenon or field but **no specific author/year/identifier** — there is nothing for a citation check to resolve against, so each is noted rather than scored:
+
+[source: receipts/citation-dossier-casestudy.md]
+**Verdict: N/A (no resolvable citation).** All of the above are consistent with the document's own labeling of Section B as "asserted at abstract level" — i.e., the document itself does not claim citation-grade precision for these rows, and my check confirms it isn't overclaiming precision it doesn't have.
+
+[source: receipts/citation-dossier-casestudy.md]
+### 15. Not found in the document — Murphy 1973, Blackwell, Ho, Hull & Srihari 1994
+
+[source: receipts/citation-dossier-casestudy.md]
+---
+
+[source: receipts/citation-dossier-casestudy.md]
+## Counts
+
+[source: receipts/citation-dossier-casestudy.md]
+## Note on the prior audit (recap)
+
+[source: receipts/citation-dossier-casestudy.md]
+---
+*Status: complete — all citations named in the task brief and found in the document have been checked.*
+
+[source: receipts/citation-dossier-entry.md]
+# Citation verification dossier
+
+[source: receipts/citation-dossier-entry.md]
+---
+
+[source: receipts/citation-dossier-entry.md]
+**Why re-verified in full rather than spot-checked**: this is the one citation the 07-17 audit found fabricated (a quote wrapped in quotation marks that did not appear in the paper, since fixed in §1) and the entry adds substantial new content drawing on it beyond the 07-17 fix (§1 Swanson extension, §7 CID description, §8 the 90.5%/precision/recall figures). Given the known defect and the added material, this citation gets full fresh verification, not a spot-check, using the local PDF `idiolect/sources/larsen-bong-2016-construct-identity-AM.pdf` (converted to text via `pdftotext -layout` for grepping) plus a Crossref lookup for bibliographic details.
+
+[source: receipts/citation-dossier-entry.md]
+1. **§1** — "doctoral students using full-text search retrieved **9%** of the relevant constructs on average (per-task recall as low as **3%**)": paper (p.35 of AM, "the participants assigned to EBSCO retrieved 9% of the relevant constructs, even in such a small sample of articles") confirms the 9% figure attributed to EBSCO (the paper's full-text-search condition). The per-task low of 3% is confirmed at a different point ("recall under the full-text search condition (EBSCO) was at its peak, 19% (relative to 3%, 6%, and 7%)" — the four EBSCO per-task recall values across the paper's four tasks) — 3% is indeed the floor of those four. MATCH.
+2. **§1** — quoted: "**83% of participants would arrive at the conclusion that the relationship had not been tested at all**": paper — "The meta-analytic approach employed in this article shows that 83% of participants would arrive at the conclusion that the relationship had not been tested at all." VERBATIM MATCH.
+3. **§1** — "They frame this as extending Swanson (1986): '**the vast majority of discovered knowledge is hidden from the individual researcher by the very nature of the search process itself**.'": paper — "While Swanson addressed undiscovered knowledge, we found the vast majority of discovered knowledge is hidden from the individual researcher by the very nature of the search process itself." VERBATIM MATCH. The "extending Swanson (1986)" framing is also the paper's own language: "Third, extending Swanson's (1986) conclusions, we demonstrate that relationships need not be hidden in order to be inaccessible to researchers." MATCH.
+4. **§1** — quoted: "**the renaming of an existing construct (jangle fallacy) may increase the perceived novelty of a construct**": paper — "The renaming of an existing construct (jangle fallacy) may increase the perceived novelty of a construct, whereas the reuse of an existing construct name to represent a different phenomenon (jingle fallacy) may increase the perceived novelty of a relationship..." VERBATIM MATCH.
+5. **§7** — CID described as "construct-identity detection by semantic similarity over measurement *items*, with construct names explicitly set aside, thresholded candidate pairs for expert review, and automatic construct knowledge bases as the stated goal (Li & Larsen 2011/2013)": paper — designs operate over constructs' "measurement items"; "Such designs allow for detection of correspondent construct pairs regardless of the names of these constructs"; threshold-based candidate-pair assignment ("we assign any construct pair with a similarity score equal to or higher than the threshold as a correspondent-pair prediction"); stated goal — "necessary to make ontology learning possible and useful through automatic creation of construct knowledge bases, as proposed by Li and Larsen (2011; 2013)." All elements confirmed; "expert review" is a fair characterization of the paper's "evaluated against human expert decisions" / "supplement to expert efforts" framing (not a verbatim quote in the entry, so no verbatim bar applies). MATCH.
+6. **§8** — "Larsen & Bong's follow-up studies, where their construct-identity detector outperformed all 36 human participants precisely on *uncommon* constructs — **90.5%** of their construct sample — while curated keyword search plus expert recall won on common ones": paper — "Here, CID1 outperformed all 36 human participants" (in the uncommon-construct "website familiarity" task); "314 (90.5%) fit our definition of uncommon." On common-construct tasks, INN ("Inter-Nomological Networks," a curated keyword-search engine over pre-extracted constructs, built on Lucene) outperforms both EBSCO and CID1 by a wide margin (e.g., F1 .45 vs .13/.23; precision 86–88%) — confirms "curated keyword search... won on common ones." MATCH.
+7. **Appendix** — "precision **.68** vs **.46**, recall **.58** vs **.39** against full-text search": paper — "CID1 outperformed EBSCO on every assessment measure: average precision (.68 vs .46), average recall (.58 vs .39)..." VERBATIM MATCH (EBSCO = the paper's full-text-search condition).
+8. **Bibliographic details** — "*MIS Quarterly* 40(3):529–551": confirmed via Crossref (`api.crossref.org/works/10.25300/MISQ/2016/40.3.01`) — container-title "MIS Quarterly", volume "40", issue "3", page "529-551", first author Kai R. Larsen. MATCH. (Publisher's own page, misq.umn.edu, and the DOI resolver both returned a Cloudflare bot-check page rather than content — worked around via Crossref's API, which is the canonical bibliographic record.)
+
+[source: receipts/citation-dossier-entry.md]
+**For senior review:** none — the one prior fabrication (the mis-quoted "9%/3%" sentence flagged in the 07-17 audit) is fixed, and the corrected text plus all newly-added Larsen & Bong material checks out clean against primary text.
+
+[source: receipts/citation-dossier-entry.md]
+## Batch: citations previously verified in the 07-17 audit — verdicts copied forward, one detail spot-checked fresh per item
+
+[source: receipts/citation-dossier-entry.md]
+**Blair & Maron (1985), *CACM* 28(3):289–299.** Per 07-17 audit: VERIFIED (75% recall stipulation / ~20% measured recall / ~80% precision quotes all verbatim). Spot-check: Crossref record for DOI 10.1145/3166.3197 confirms title "An evaluation of retrieval effectiveness for a full-text document-retrieval system," authors David C. Blair and M. E. Maron, container-title "Communications of the ACM," volume 28, issue 3, **page 289-299** (exact match to entry's cited page range), and an abstract stating the system was "retrieving less than 20 percent of the documents relevant to a particular search." **Verdict: VERIFIED (per 07-17 audit + spot-check).**
+
+[source: receipts/citation-dossier-entry.md]
+**Kelley (1927), pp. 63–64 — coins "jangle fallacy."** Per 07-17 audit: VERIFIED. Not independently re-fetched this pass (pre-1928 monograph, not indexed on Crossref/arXiv; the 07-17 audit's method — Wayback for blocked primaries — was already the strongest available route and its verdict is taken as-is). **Verdict: VERIFIED (per 07-17 audit; not independently re-checked this pass).**
+
+[source: receipts/citation-dossier-entry.md]
+**Hoekstra (2010), *Semantic Web* 1(1).** Per 07-17 audit: VERIFIED ("a continuous relation of trust"; knowledge-reengineering bottleneck; extends Feigenbaum's acquisition bottleneck). Spot-check: Crossref record for DOI 10.3233/sw-2010-0004 confirms title "The knowledge reengineering bottleneck," author Rinke Hoekstra, container-title "Semantic Web," volume 1, issue "1,2" (the journal's first, combined issue — matches entry's "1(1)" citation), pages 111-115. **Verdict: VERIFIED (per 07-17 audit + spot-check).**
+
+[source: receipts/citation-dossier-entry.md]
+**Shirky, "The Semantic Web, Syllogism, and Worldview" (2003).** Per 07-17 audit: VERIFIED ("you can't force an agreement to exist where none actually does"). Not independently re-fetched this pass, same reasoning. **Verdict: VERIFIED (per 07-17 audit; not independently re-checked this pass).**
+
+[source: receipts/citation-dossier-entry.md]
+**Bowker & Star (1999).** Per 07-17 audit: VERIFIED ("there is no such thing as a natural or universal classification system," verbatim, p. 131). Not independently re-fetched this pass (a well-known monograph, *Sorting Things Out*; the audit's page-level verbatim check is taken as-is). **Verdict: VERIFIED (per 07-17 audit; not independently re-checked this pass).**
+
+[source: receipts/citation-dossier-entry.md]
+**SciCo-Radar (arXiv:2409.15113).** Per 07-17 audit: VERIFIED (identifier resolves, description accurate). Spot-check: arXiv abstract page confirms title "Inferring Scientific Cross-Document Coreference and Hierarchy with Definition-Augmented Relational Reasoning," authors Lior Forer and Tom Hope (matches entry's "Forer & Hope" attribution in §7), abstract confirms LLM-generated context-dependent and relational definitions for cross-document coreference — matches entry's description. **Verdict: VERIFIED (per 07-17 audit + spot-check).**
+
+[source: receipts/citation-dossier-entry.md]
+**EDC (Zhang & Soh, arXiv:2404.03868).** Per 07-17 audit: VERIFIED. Spot-check: arXiv abstract page confirms title "Extract, Define, Canonicalize: An LLM-based Framework for Knowledge Graph Construction," authors Bowen Zhang and Harold Soh; abstract confirms the three-phase "Extract-Define-Canonicalize (EDC)" framework — matches entry's "extract → define → canonicalize-by-definition-vector skeleton." **Verdict: VERIFIED (per 07-17 audit + spot-check).**
+
+[source: receipts/citation-dossier-entry.md]
+**Guo et al. 2024, "Personalized Jargon Identification," arXiv:2311.09481.** Per 07-17 audit: VERIFIED. Spot-check: arXiv abstract page confirms title "Personalized Jargon Identification for Enhanced Interdisciplinary Communication," author Yue Guo (first), submitted 16 Nov 2023; abstract addresses jargon familiarity varying by individual researcher background — consistent with entry's use as a detection-step citation. Note: the entry cites this as "Guo et al. 2024" (§7's novelty list) while the arXiv submission date is Nov 2023 — this is very likely the paper's conference/journal publication year (common for a 2023 arXiv preprint to publish at a 2024 venue) rather than a factual error, but the entry does not state a venue for this one, so there is nothing to mismatch against. Flagged as a minor note, not a verdict-changing issue. **Verdict: VERIFIED (per 07-17 audit + spot-check).**
+
+[source: receipts/citation-dossier-entry.md]
+**Microsoft patents US8589791B2 / US10552522B2.** Per 07-17 audit: VERIFIED, with a correction applied (one continuation family, not two independent efforts). Spot-check: Google Patents pages for both confirm title "Automatically generating a glossary of terms for a given document or group of documents" on both; identical inventors (Nicholas Caldwell, Saliha Azzam, Courtney Anne O'Keefe, Tu Huy Phan) and identical priority date (2011-06-28) on both, with US10552522B2 filed 2013-11-19 as a later application against the same priority — confirms the continuation-family relationship. Assignee on both: Microsoft (Corp. / Technology Licensing LLC). **Verdict: VERIFIED (per 07-17 audit + spot-check).**
+
+[source: receipts/citation-dossier-entry.md]
+### Sharma et al. (2023), arXiv:2310.13548 — "Towards Understanding Sycophancy in Language Models"
+
+[source: receipts/citation-dossier-entry.md]
+**Checks:** arXiv abstract page fetched directly. Abstract text: "We find that when a response matches a user's views, it is more likely to be preferred." — VERBATIM MATCH. "Moreover, both humans and preference models (PMs) prefer convincingly-written sycophantic responses over correct ones a non-negligible fraction of the time." — VERBATIM MATCH. Title, authors (Mrinank Sharma et al.), and 2023 submission date (20 Oct 2023) all confirmed on the abstract page.
+
+[source: receipts/citation-dossier-entry.md]
+### Perez et al. (2022), arXiv:2212.09251 — "Discovering Language Model Behaviors with Model-Written Evaluations"
+
+[source: receipts/citation-dossier-entry.md]
+**Checks:** arXiv abstract page fetched directly. Abstract: "We generate 154 datasets and discover new cases of inverse scaling where LMs get worse with size. Larger LMs repeat back a dialog user's preferred answer ("sycophancy") and express greater desire to pursue concerning goals..." — VERBATIM MATCH, and it is explicitly presented in the same sentence as the paper's inverse-scaling discovery, confirming the entry's framing.
+
+[source: receipts/citation-dossier-entry.md]
+### CREPE — Yu, Min, Zettlemoyer & Hajishirzi, ACL 2023, arXiv:2211.17257 — "Open-Domain Question Answering with False Presuppositions"
+
+[source: receipts/citation-dossier-entry.md]
+**Checks:** arXiv abstract page fetched directly. Abstract: "...adaptations of existing open-domain QA models can find presuppositions moderately well, but struggle when predicting whether a presupposition is factually correct. This is in large part due to difficulty in retrieving relevant evidence passages from a large text corpus." First fragment VERBATIM MATCH. Second fragment: the entry's ellipsis stands in for the single word "due" (paper: "in large part **due** to difficulty..."; entry: "in large part **…** to difficulty..." ) — text before and after the ellipsis is exact and in original order; using an ellipsis to elide one connective word is stylistically unusual but not a misquote (the omitted word is not load-bearing to the claim). Author list confirmed via OpenAlex (DOI 10.18653/v1/2023.acl-long.583): Xinyan Yu, Sewon Min, Luke Zettlemoyer, Hannaneh Hajishirzi — exact match to entry's "Yu, Min, Zettlemoyer & Hajishirzi." Venue confirmed: ACL 2023 (Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics, Volume 1: Long Papers).
+
+[source: receipts/citation-dossier-entry.md]
+### Bröcker (2008), arXiv:0806.0813 — "Reliability, Sufficiency, and the Decomposition of Proper Scores"
+
+[source: receipts/citation-dossier-entry.md]
+**Checks:** Given the stakes, went beyond the abstract to the full text (arXiv PDF wouldn't render through safefetch/defuddle — tried directly and got an empty DOM; worked around via the ar5iv.labs.arxiv.org HTML mirror, which rendered the full paper). Confirmed:
+- Title "Reliability, Sufficiency, and the Decomposition of Proper Scores," author Jochen Bröcker, arXiv:0806.0813 (also has a published version, DOI 10.1002/qj.456, *Quarterly Journal of the Royal Meteorological Society* — listed as "Related DOI" on the arXiv page).
+- The uniqueness claim itself, in the paper's own words (Section on sufficiency): "If the score is strictly proper, π^γ is uniquely defined through this optimum property, in the sense that any forecast for which γ is sufficient is either equal to π^γ or it will have a worse average score." — this is a genuine uniqueness result gated on strict propriety, matching the entry's "uniqueness theorem... under strictly proper scoring rules" characterization precisely (including the "under strictly proper" qualifier the entry uses to scope the foreclosure narrowly).
+- "Extending DeGroot & Fienberg": the paper's own reference list, item [8]: "Morris W. DeGroot and Stephen E. Fienberg. Assessing probability assessors: calibration and refinement. *Statistical Decision Theory and Related Topics*, 1(3):291–314, 1982." The paper also has a dedicated appendix titled "Sufficiency and refinement of DeGroot and Fienberg" formally relating its own sufficiency condition to theirs — confirms the "extending" relationship is not a loose citation but a worked-out formal connection.
+
+[source: receipts/citation-dossier-entry.md]
+### DeGroot & Fienberg (1982) — cited as what Bröcker 2008 extends
+
+[source: receipts/citation-dossier-entry.md]
+**Checks:** confirmed directly from Bröcker (2008)'s own reference list (see above): "[8] Morris W. DeGroot and Stephen E. Fienberg. Assessing probability assessors: calibration and refinement. *Statistical Decision Theory and Related Topics*, 1(3):291–314, 1982," plus a dedicated appendix in Bröcker 2008 titled "Sufficiency and refinement of DeGroot and Fienberg." Real work, correctly attributed as the paper Bröcker extends.
+
+[source: receipts/citation-dossier-entry.md]
+### Clemen & Winkler (1985) — "the equivalent-number-of-independent-sources result"
+
+[source: receipts/citation-dossier-entry.md]
+**Checks:** Crossref record for DOI 10.1287/opre.33.2.427 confirms title "Limits for the Precision and Value of Information from Dependent Sources," authors Robert T. Clemen and Robert L. Winkler, *Operations Research* 33(2):427–442, 1985. Abstract: "This paper investigates the impact of dependence on the precision and value of information... the limiting value of information as more sources are considered can be considerably less than the expected value of perfect information" — this is the paper's actual subject: how the value/precision of aggregated information saturates as dependent sources accumulate, which is the "equivalent number of independent sources" concept the entry attributes to it. Bibliographically real and topically matches.
+
+[source: receipts/citation-dossier-entry.md]
+### Raiffa & Schlaifer (1961) — "value-of-information threshold analysis... lineage"
+
+[source: receipts/citation-dossier-entry.md]
+**Checks:** could not fetch the book itself (a 1961 monograph, not indexed as full text anywhere accessible), so verified via independent secondary citations: two book reviews indexed on OpenAlex both confirm the book's existence and exact title — "Howard Raiffa and Robert Schlaifer. Applied Statistical Decision Theory. Boston: Harvard Business School, 1961" (reviewed independently in *Behavioral Science* and *Psychometrika*, and again as the 1968 MIT Press reprint in *Biometrische Zeitschrift*). *Applied Statistical Decision Theory* is the canonical text founding Bayesian value-of-information analysis, which is the concept the entry attributes to it ("value-of-information threshold analysis... lineage" — the entry hedges with "lineage" rather than claiming a specific page-level result, appropriately given no primary-text page check was possible here).
+
+[source: receipts/citation-dossier-entry.md]
+### Ho, Hull & Srihari (1994), *IEEE TPAMI* 16(1):66–75 — "Decision Combination in Multiple Classifier Systems"
+
+[source: receipts/citation-dossier-entry.md]
+**Checks:** Crossref record for DOI 10.1109/34.273716 confirms title "Decision combination in multiple classifier systems," authors Tin Kam Ho, J.J. Hull, S.N. Srihari, container-title "IEEE Trans. Pattern Anal. Machine Intell.," **volume 16, issue 1, page 66-75** — exact match to the entry's "*IEEE TPAMI* 16(1):66–75."
+
+[source: receipts/citation-dossier-entry.md]
+### Murphy (1973) — cited alongside Blackwell's comparison of experiments
+
+[source: receipts/citation-dossier-entry.md]
+**Verdict: VERIFIED.** **For senior review:** none.
+
+[source: receipts/citation-dossier-entry.md]
+**Entry location/claim:** same cell as Murphy 1973, "Blackwell's comparison of experiments." No year given in the entry text itself, no verbatim quote.
+
+[source: receipts/citation-dossier-entry.md]
+**Verdict: VERIFIED.** **For senior review:** none — note only that the entry never states a year for Blackwell in-line, so there's nothing to mismatch against, but a reviewer wanting a full citation would need "Blackwell (1953)."
+
+[source: receipts/citation-dossier-entry.md]
+**Entry location/claim (§4):** "pay-as-you-go dataspaces (Franklin, Halevy & Maier 2005)... credited from secondary descriptions — I did not read their primary texts."
+
+[source: receipts/citation-dossier-entry.md]
+**Verdict: VERIFIED.** **For senior review:** none.
+
+[source: receipts/citation-dossier-entry.md]
+**Entry location/claim (§4):** "emergent semantics (Aberer & Cudré-Mauroux 2004)... credited from secondary descriptions — I did not read their primary texts."
+
+[source: receipts/citation-dossier-entry.md]
+**Verdict: VERIFIED.** **For senior review:** none — note only that the paper has more than two authors; the entry's two-name shorthand is a defensible convention, not a misattribution, but a reviewer might want the full author list if precision matters here.
+
+[source: receipts/citation-dossier-entry.md]
+**Entry location/claim (§7):** "automatic construct knowledge bases as the stated goal (Li & Larsen 2011/2013)."
+
+[source: receipts/citation-dossier-entry.md]
+**Verdict: VERIFIED.** **For senior review:** none.
+
+[source: receipts/citation-dossier-entry.md]
+**Entry location/claim (§3):** "The ALPAC report (1966) is the standard marker for the end of interlingua-MT funding; cited as a historical datum, not from its primary text."
+
+[source: receipts/citation-dossier-entry.md]
+**Verdict: VERIFIED.** **For senior review:** none.
+
+[source: receipts/citation-dossier-entry.md]
+**Entry location/claim (§4):** "The relation labels are taken verbatim from SKOS (`skos:exactMatch`, `skos:broadMatch`, `skos:narrowMatch`, `skos:relatedMatch`) rather than re-coined."
+
+[source: receipts/citation-dossier-entry.md]
+**Verdict: VERIFIED.** **For senior review:** the SKOS fetch tripped a HIGH-severity safefetch injection-pattern match ("no restriction" boilerplate in the W3C legal text) — almost certainly a false positive on a standards document, but noting per the third-party-content-safety protocol so it doesn't get silently smoothed over.
+
+[source: receipts/citation-dossier-entry.md]
+**Entry location/claim (§4):** "an LDOCE-style controlled defining wordlist: static, domain-generic, maintenance-free."
+
+[source: receipts/citation-dossier-entry.md]
+**Verdict: VERIFIED.** **For senior review:** none.
+
+[source: receipts/citation-dossier-entry.md]
+**Entry location/claim (§7):** cited as read "in primary," grouped with the Vocabulary Switching System as an academic canonicalization effort — "both build merged canonical resources; neither has a detection trigger or generated neutral definitions."
+
+[source: receipts/citation-dossier-entry.md]
+**Verdict: VERIFIED (existence, venue, and title-level topical match); PARTIAL on the full-text content the entry claims to have read (PDF did not render through the available fetch tooling in this pass).** **For senior review:** if precision on this one matters, a reviewer with direct PDF access should confirm the paper's mechanism description (canonical merge, no detection trigger) against the entry's specific claims — the venue and title are solid, only the full-body verification is outstanding.
+
+[source: receipts/citation-dossier-entry.md]
+**Entry location/claim (§7):** "LLMs4OM and KROMA round out the landscape" of LLM-based ontology matching systems, listed alongside SciCo-Radar, GenOM, EDC, KGGen, and CID with no further detail or quotes.
+
+[source: receipts/citation-dossier-entry.md]
+### AXOLOTL'24 — "novel senses → generated definitions"
+
+[source: receipts/citation-dossier-entry.md]
+**Checks:** Crossref record confirms "AXOLOTL'24 Shared Task on Multilingual Explainable Semantic Change Modeling," authors Mariia Fedorova, Timothee Mickus, Niko Partanen, Janine Siewert, Elena Spaziani, Andrey Kutuzov, published in *Proceedings of the 5th Workshop on Computational Approaches to Historical Language Change* (ACL 2024, DOI 10.18653/v1/2024.lchange-1.8). A real shared task on detecting and explaining new/changed word senses over time — the "explainable semantic change" framing is precisely "novel senses → [explanations/definitions of what changed]," matching the entry's shorthand.
+
+[source: receipts/citation-dossier-entry.md]
+### Wright & Budin — "ad hoc terminography in terminology science"
+
+[source: receipts/citation-dossier-entry.md]
+**Checks:** Crossref confirms the *Handbook of Terminology Management* (Volumes 1 and 2, John Benjamins, 1997/2001), edited by Sue Ellen Wright (Kent State University) and Gerhard Budin (University of Vienna) — the standard comprehensive reference work in terminology science, exactly matching the entry's field-level citation.
+
+[source: receipts/citation-dossier-entry.md]
+### Cabré — "ad hoc terminography in terminology science"
+
+[source: receipts/citation-dossier-entry.md]
+**Checks:** Crossref confirms *Terminology: Theory, Methods and Applications* by Teresa Cabré (Universitat Pompeu Fabra), DOI 10.1075/tlrp.1, John Benjamins, 1999 — the canonical Cabré text founding the Communicative Theory of Terminology, matching the entry's citation.
+
+[source: receipts/citation-dossier-entry.md]
+### Vocabulary Switching System — Niehoff / Battelle (1976)
+
+[source: receipts/citation-dossier-entry.md]
+**Checks:** could not open a primary document (two attempted PDF fetches — an ERIC-hosted final report and a Svenonius paper likely citing the original — both failed to render through safefetch/defuddle, returning empty DOM). Verified via independent secondary sources instead: an ERIC catalog record (ED247948) for "Evaluation of the Vocabulary Switching System. Final Report" (1984), authors **Niehoff, Robert; Mack, Greg**, authoring institution **Battelle Memorial Inst., Columbus, OH, Columbus Labs**, describing "an experimental online database consisting of 15 vendor-supplied, controlled subject vocabularies or thesauri... designed to enhance search strategies... by integrating vocabularies into common VSS files" — this independently confirms Niehoff, Battelle, and the "Vocabulary Switching System" name are all real and connected, and that the system existed at least by 1979 (the 1984 report references "a similar 1979 survey"). A separate, confirmed 1976 Niehoff/Battelle Columbus Labs report, "Development of an Integrated Energy Vocabulary" (NTIS PB 253 781), describes building a cross-vocabulary "conversion guide designed for automated, online switching" in the same year — strongly consistent with the entry's 1976 date and topic, though this is a differently-titled report (on energy-domain vocabulary specifically) rather than a confirmed primary titled exactly "Vocabulary Switching System" dated 1976.
+
+[source: receipts/citation-dossier-entry.md]
+**For senior review:** if this citation is load-bearing anywhere beyond the general "academic canonicalization efforts" contrast (it doesn't appear to be — no verbatim quote or specific claim rides on it), the current level of verification is probably sufficient; a reviewer with library/NTIS access could close this gap by pulling PB 253 781 or the original VSS development report directly.
+
+[source: receipts/citation-dossier-entry.md]
+**Entry location/claim (§7):** "shipped products reported to do lazy per-workspace LLM definitions (Confluence 'Define,' Slack hover-definitions)... known from search-run summaries, not primary texts."
+
+[source: receipts/citation-dossier-entry.md]
+**Verdict: VERIFIED.** **For senior review:** none.
+
+[source: receipts/citation-dossier-entry.md]
+**Entry location/claim (§7):** same sentence as Confluence Define.
+
+[source: receipts/citation-dossier-entry.md]
+**Verdict: PARTIAL — could not independently confirm a native or well-documented "hover" definition mechanism in Slack; the closest matches (a static glossary page, a command-based third-party app) don't precisely match "hover-definitions."** **For senior review:** worth double-checking against whatever the original search-run summary actually said — this dossier could not reproduce a source describing Slack definitions as hover-triggered specifically, only command-triggered (third-party) or static-reference (native).
+
+[source: receipts/citation-dossier-entry.md]
+**Entry location/claim (§7):** "Atlan Sage reportedly resolves conflicting definitions into one canonical answer — the opposite philosophy; a useful contrast."
+
+[source: receipts/citation-dossier-entry.md]
+**Verdict: VERIFIED.** **For senior review:** none — this is one of the entry's stronger product citations; the match is exact.
+
+[source: receipts/citation-dossier-entry.md]
+**Entry location/claim (§7):** "GESIS cross-concordances / KoMoHe — manual, persistent cross-vocabulary crosswalks for exactly this recall goal, the architectural opposite."
+
+[source: receipts/citation-dossier-entry.md]
+**Verdict: VERIFIED — and better-sourced than the entry's own "search-run summaries" characterization suggests; primary academic literature (not just product pages) was locatable.** **For senior review:** none — if anything, the entry undersells how well-documented this citation is; a reviewer could easily upgrade it from "known from search-run summaries" to a properly cited academic reference if desired.
+
+[source: receipts/citation-dossier-entry.md]
+**Entry location/claim (§2 table note):** "the Kish design-effect connection was asserted internally from day one — a knowing borrowing; the *miss* was the forecasting-aggregation literature." No specific work, year, or quote is cited — just a name-check of the concept's originator (Leslie Kish) alongside "the audit unit"/`m*` coinage.
+
+[source: receipts/citation-dossier-entry.md]
+### bge-large-en-v1.5 (embedding model used in the §6 prototype)
+
+[source: receipts/citation-dossier-entry.md]
+**Checks:** confirmed via Hugging Face model card (`BAAI/bge-large-en-v1.5`) — a real, publicly available embedding model from BAAI's FlagEmbedding project.
+
+[source: receipts/citation-dossier-entry.md]
+---
+
+[source: receipts/citation-dossier-entry.md]
+| # | Citation | Verdict |
+|---|---|---|
+| 1 | Larsen & Bong (2016), *MIS Quarterly* 40(3):529–551 | VERIFIED |
+| 2 | Blair & Maron (1985), *CACM* 28(3):289–299 | VERIFIED (per 07-17 audit + spot-check) |
+| 3 | Furnas, Landauer, Gomez & Dumais (1987), *CACM* 30(11):964–971 | VERIFIED (per 07-17 audit + spot-check) |
+| 4 | Kelley (1927), pp. 63–64 ("jangle") | VERIFIED (per 07-17 audit) |
+| 5 | Thorndike (1904) ("jingle," credits Aikins) | VERIFIED (per 07-17 audit) |
+| 6 | Hoekstra (2010), *Semantic Web* 1(1) | VERIFIED (per 07-17 audit + spot-check) |
+| 7 | Doctorow, "Metacrap" (2001) | VERIFIED (per 07-17 audit) |
+| 8 | Shirky (2003) | VERIFIED (per 07-17 audit) |
+| 9 | Star & Griesemer (1989), *Social Studies of Science* 19(3) | VERIFIED (per 07-17 audit + spot-check) |
+| 10 | Bowker & Star (1999) | VERIFIED (per 07-17 audit) |
+| 11 | Relink (Huang et al., arXiv:2601.07192) | VERIFIED (per 07-17 audit + spot-check) |
+| 12 | SciCo-Radar (arXiv:2409.15113) | VERIFIED (per 07-17 audit + spot-check) |
+| 13 | GenOM (arXiv:2508.10703) | VERIFIED (per 07-17 audit + spot-check) |
+| 14 | EDC (Zhang & Soh, arXiv:2404.03868) | VERIFIED (per 07-17 audit + spot-check) |
+| 15 | KGGen (arXiv:2502.09956, NeurIPS 2025) | VERIFIED (per 07-17 audit + spot-check) |
+| 16 | Guo et al. (2024), arXiv:2311.09481 | VERIFIED (per 07-17 audit + spot-check) |
+| 17 | NeoN (arXiv:2505.15426) | VERIFIED (per 07-17 audit + spot-check) |
+| 18 | Microsoft patents US8589791B2 / US10552522B2 | VERIFIED (per 07-17 audit + spot-check) |
+| 19 | Sharma et al. (2023), arXiv:2310.13548 | VERIFIED |
+| 20 | Perez et al. (2022), arXiv:2212.09251 | VERIFIED |
+| 21 | CREPE — Yu, Min, Zettlemoyer & Hajishirzi, ACL 2023, arXiv:2211.17257 | VERIFIED |
+| 22 | Bröcker (2008), arXiv:0806.0813 | VERIFIED |
+| 23 | DeGroot & Fienberg (1982) | VERIFIED |
+| 24 | Clemen & Winkler (1985) | VERIFIED |
+| 25 | Raiffa & Schlaifer (1961) | VERIFIED (existence + secondary citation; primary text not opened) |
+| 26 | Ho, Hull & Srihari (1994), *IEEE TPAMI* 16(1):66–75 | VERIFIED |
+| 27 | Murphy (1973) | VERIFIED |
+| 28 | Blackwell (1953), "Equivalent Comparisons of Experiments" | VERIFIED |
+| 29 | Franklin, Halevy & Maier (2005) | VERIFIED |
+| 30 | Aberer & Cudré-Mauroux (2004) | VERIFIED |
+| 31 | Li & Larsen (2011; 2013) | VERIFIED |
+| 32 | ALPAC (1966) | VERIFIED |
+| 33 | SKOS (`skos:exactMatch` etc.) | VERIFIED |
+| 34 | LDOCE (Longman Defining Vocabulary) | VERIFIED |
+| 35 | LLMs4OM | VERIFIED |
+| 36 | KROMA | VERIFIED |
+| 37 | AXOLOTL'24 | VERIFIED |
+| 38 | Wright & Budin (*Handbook of Terminology Management*) | VERIFIED |
+| 39 | Cabré (*Terminology: Theory, Methods and Applications*) | VERIFIED |
+| 40 | Confluence "Define" | VERIFIED |
+| 41 | Atlan Sage | VERIFIED |
+| 42 | GESIS cross-concordances / KoMoHe | VERIFIED |
+| 43 | Kish (design-effect concept) | VERIFIED (concept-existence bar, matching entry's unspecific citation) |
+| 44 | bge-large-en-v1.5 (embedding model) | VERIFIED |
+| 45 | LAVOHA (CEUR Vol-4177) | PARTIAL (existence/venue/title confirmed; full-text content not independently re-verified — PDF would not render) |
+| 46 | Vocabulary Switching System — Niehoff / Battelle (1976) | PARTIAL (Niehoff/Battelle/VSS existence confirmed via secondary sources; exact 1976 primary title/date not directly opened) |
+| 47 | Slack "hover-definitions" | PARTIAL (no native Slack hover-definition mechanism located; closest matches are a static glossary page and a command-triggered third-party app) |
+
+[source: receipts/citation-dossier-entry.md]
+No MISMATCH or UNREACHABLE verdicts were found in this pass. The one previously-known fabrication (Larsen & Bong 2016's misquoted "9%/3%" sentence, flagged and fixed in the 07-17 audit) was re-verified as correctly fixed, with all newly-added Larsen & Bong material in the current entry text checking out clean against the primary PDF. The highest-stakes citation audited — Bröcker (2008), which the entry uses to mark Program B's central claim "foreclosed" — was independently traced to the specific uniqueness theorem and its formal extension of DeGroot & Fienberg (1982), not just an abstract-level check.
+
+[source: receipts/idiolect-trap-case-study.md]
+# The idiolect trap in the wild: a day-by-day, self-inflicted case study
+
+[source: receipts/idiolect-trap-case-study.md]
+The claim this document supports: groups (down to a single investigator working with LLM agents) coin private vocabulary for objects that established fields already own, run their novelty searches *in that vocabulary*, receive confident nulls, and read "not findable from here" as "unoccupied." The evidence here is not a constructed example but a case where it happened on the record — it happened to my own project, three times at the level of a headline novelty claim, and roughly twenty times at the level of individual renamings (not all of one class — the headline section gives the breakdown), over eighteen days of documented work, numbered below as Day 1 through Day 18.
+
+[source: receipts/idiolect-trap-case-study.md]
+## Background: what the research was trying to do
+
+[source: receipts/idiolect-trap-case-study.md]
+**Program A — the source-dependence detector (Days 1–15).** Research goal: when a verdict rests on many sources (news reports, studies, forecasters, LLM agents), the sources are usually correlated — copies, shared upstream origins, shared methods — so the *effective* number of independent looks is far smaller than the count. The program aimed to build a detector that estimates that effective number from the texts themselves and corrects overconfident aggregation. The central quantity was written `N_eff = N/(1+(N−1)ρ̄)`; the program coined terms like `m*` ("the audit unit" — how many independent looks a verdict needs) and "the operating requirement" (the accuracy an instrument must reach to be worth building).
+
+[source: receipts/idiolect-trap-case-study.md]
+Both programs practiced what most researchers would recognize as diligence: pre-registrations, adversarial review of every major digest, and repeated prior-art searches. That is what makes the case instructive — the trap fired *anyway*, because the searches were run in the programs' own coined vocabulary.
+
+[source: receipts/idiolect-trap-case-study.md]
+The project's conceptual vocabulary across both programs — `effective-N`, `m*`, "operating requirement," "decision-sensitivity," "gate," "credence," "coverage," "signal-not-cut," "read the enumerations," "set contract" — turned out, term by term, to be local renamings of objects owned by design-of-experiments, decision theory, meta-analysis, forecasting, psychometrics, argumentation, and proper-scoring-rule theory: roughly twenty renamings at the vocabulary level. **The twenty are not one class**, and counting them as one would repeat the inflation this document warns against. A post-hoc funnel over the full internal ledger sorts them into **~3 genuine recall misses** (dated coinage, a novelty search that failed to find the owner, the owner verified later), **~10 knowing borrowings** (the field's term was cited at or near coinage — context, not misses), **~4 self-errors** (the project misusing or confounding its own quantities), and **~4 rows whose owners remain asserted or defective** — that last class is not detailed in this document; it stays flagged in the project's novelty ledger. Three renamings reached the level of a headline novelty claim that then died:
+
+[source: receipts/idiolect-trap-case-study.md]
+The project's own diagnosis, recorded identically at each instance: *our invented vocabulary hid the occupation. The lesson is not "search harder" — it is search in the field's vocabulary, not ours, and before the program, not after.* It ran that sweep too late three times running.
+
+[source: receipts/idiolect-trap-case-study.md]
+- **Day 1** — Program scoped. A missed-terminology sweep is *declared owed* on day one; status recorded as "no prior art found, NOT confirmed absent." The idiolect risk is named before any experiment runs.
+- **Day 3** — Design committed. The central rename is made explicit as an *assertion*: the project's `N_eff` formula **is** the Kish design effect. The pre-mortem's item #7 names the exact idiolect risk: a terminology sweep might find the core claim already exists, retracting novelty mid-build.
+- **Days 4–5** — Pre-test round 2 (round 1 killed by adversarial review). Load-bearing negative: a cheap factor-salience baseline *beats* the expensive perturbation method.
+- **Day 8** — The owed novelty sweep is run and returns "novelty survives" (a 5-cluster same-model fan-out plus a deep read of two 2026 near-neighbours). **This resolution is overturned a week later.**
+- **Day 9** — The interventional method beats the cheap baseline on the pre-registered comparison; an independent audit verifies the numbers and raises five process findings.
+- **Day 10** — Prior-art collisions land: the phenomenon under study already has three field names (circular reporting / non-independence / correlated error). A rule is adopted in writing: *"DON'T claim we invented debate for independence."*
+- **Day 11** — Deepest sweep yet: `m*` maps onto the fail-safe-N / E-value / same-decision-probability family; the extremization line traces to Satopää and Karmarkar (catching a *withdrawn* preprint in the process); a label-leak in an evaluation set is caught by review.
+- **Day 12** — A worked example on the dietary-cholesterol literature ("are eggs bad for me?"). The field already owns the evidence-overlap metric the example was coining: **corrected covered area (CCA)**, from the umbrella-review literature.
+- **Day 13** — The detector thesis breaks: the frozen estimand *inverts as a magnitude* on a constructed case (a fully-copied 6-source pool scores m̂ = 4.47 against a truth of 1), and a tuned global constant absorbs the entire correction, undercutting the per-question detector.
+- **Day 14** — The headline "78 forecasters ≈ 1 independent update" is **retracted as a self-confound**: `m` is an extremization coefficient, not an independence count — an independent-by-construction pool of 78 yields the same number. The project had committed the very confound it existed to name, in its own headline. Five kickoff premises are overturned against full text; two cited reviews turn out not to exist.
+- **Day 15** — The program is dropped. The claims inventory retracts its own novelty ratings: `m*`'s aggregation-literature owner is Clemen & Winkler, newly verified (the Kish connection had been asserted since Day 3); operating requirement = value of information / TPP — both *verified directly*. A meta-document written specifically to eliminate quantity-role substitution errors is found to have committed that error at least four times, caught by adversarial review in ~15 minutes.
+
+[source: receipts/idiolect-trap-case-study.md]
+- **Day 15** — New direction: is cross-judge LLM error correlation *elicitation-dependent* or *weights-locked* (the open lever in Kohli 2026)? The decision record's own worry list flags "over-eager pivoting" and notes the replacement direction "is genuinely more interesting… a suspicious feeling worth flagging as such."
+- **Day 16** — Ambiguity screen; a dissociation surfaces (near-perfect reading-of-enumerations under ambiguity vs failed gating); a regime-shift anomaly is observed (a model's hedge gate halving under byte-identical prompts).
+- **Day 17** — Re-anchor to the registered question. The dependence wall measures in (effective judge count 1.2–1.35); repeat- and elicitation-rungs buy nothing; an earlier "beats the best single judge" claim is retired as regime-specific.
+- **Day 18** — Held-out evaluation: every constructive recipe fails its pre-registered transfer bar while the mechanism findings replicate. The keystone is formulated: "the signal, not the cut, is the bottleneck."
+- **Day 18** — The prior-art sweep — triggered by the investigator's own doubt (*"I'd assume there is tons of literature… not clear we have any true edge"*) and designed per the Day-15 lesson: four agents over *disjoint* literatures plus an adversarial refuter. Verdict: **nothing survives at claim level.** The keystone is **foreclosed by Bröcker 2008** (verified against the primary text). The internal record names the moment explicitly as the third occurrence, citing the two prior ones. The program is closed.
+
+[source: receipts/idiolect-trap-case-study.md]
+A separation the chronology requires: **technical invalidation and novelty invalidation were distinct events.** Program A's detector broke on its own terms (the estimand inversion of Day 13, the self-confound of Day 14) *before* the Day-15 prior-art verification; Program B's constructive recipes failed their held-out transfer bar before the Day-18 sweep. So the eighteen days were not spent *because of* the idiolect trap, and this document does not claim they were. What the trap demonstrably added is the **novelty-claim lifecycle**: three claims survived as believed-novel for days to weeks past the point where the field's vocabulary would have surfaced their owners, each protected by a confident null from a search run in the project's own terms. What day-one field vocabulary would have *saved* — different scoping, earlier kills, redirected effort — is a counterfactual, and it is stated here as a hypothesis, not a measurement.
+
+[source: receipts/idiolect-trap-case-study.md]
+`status` uses the internal record's own framing: **predated** (the field owns it; extension possible), **foreclosed** (a theorem occupies the exact claim), **retracted** (self-error). Every row was verified against primary text. One granularity caveat: rows compress families of related owners into single lines for narrative (e.g. value-of-information *and* target-product-profile thresholds), so this table should not be cited past its granularity — the atomic claim-by-claim mapping is the novelty ledger's job.
+
+[source: receipts/idiolect-trap-case-study.md]
+## Three structural lessons the record states about itself
+
+[source: receipts/idiolect-trap-case-study.md]
+## Which of these events can serve as clean test cases for de-idiolection?
+
+[source: receipts/idiolect-trap-case-study.md]
+**Net test yield: one clean recall case, already run.** In that experiment — per-case predictions were sealed before scoring, but the cross-case pattern was read after the fact, so this is a **pilot with a post-hoc reading, not a validated result** — the definition arm beat the term arm on exactly the one *opaque* coinage (operating requirement) and did nothing on the transparent slogan or the already-known-field case. I call the pattern the **transparency gradient** — de-idiolection earns its place on opaque coinages over non-obvious owners, not on transparent phrasings, and not where the field was already in hand at coinage — and grade it a **scope hypothesis** from a four-case pilot on the same history that motivates the countermeasure. Validation would need held-out cases selected before outcomes are known; none exist on this project's history, which is the point of this table.
+
+[source: receipts/novelty-position.md]
+# Novelty position — the recall extender
+
+[source: receipts/novelty-position.md]
+## Search ledger (auditable, with one stated deficiency)
+
+[source: receipts/novelty-position.md]
+## Findings — one row per claim, never one verdict
+
+[source: receipts/novelty-position.md]
+- **Does-it-need-LLMs:** the *economics* claim is LLM-dependent (marginal cost of definition generation); every *mechanism* component is statable without LLMs and — as the protocol predicts — has a pre-2015 owner (see anchor set). The general antecedents were searched, found, and are cited; no component novelty is claimed.
+- **Pass B verification on record:** orchestrator primary reads — Ho, Hull & Srihari 1994 (full) · SciCo-Radar + GenOM (method sections) · Blair & Maron 1985 (full, 07-16) · Larsen & Bong 2016 (full, 07-16, prior session) · Liu Cyc essay (quote-level, all four verbatim). Everything else inherits the per-item grades in the Gate-2 doc; **nothing marked UNVERIFIED there may be cited publicly without opening.**
+- **Self-application blind pass (2026-07-17, `2026-07-17-selfapp-blind-naming.md`) — the tool run on its own operational description:** 2 valid cross-model draws (opus+sonnet), contamination-grep clean, all 5 sealed predictions hit. It reproduced the targeted map and the central null (no fused "same thing" system) AND surfaced closer neighbours the earlier passes missed — **EDC** (arXiv:2404.03868, opened — closest structural twin) · **KGGen** (NeurIPS 2025, opened — LM-triples + embedding-cluster + LLM canonical-representative de-dup; canonical-merge KG builder) · **GESIS cross-concordances / KoMoHe** (run-level — manual persistent cross-vocabulary crosswalks for the same recall goal, the architectural opposite) · **Guo et al. 2024 "Personalized Jargon Identification"** (arXiv:2311.09481, run-level — the detection step) · and stance-wise **Relink** (arXiv:2601.07192, Jan 2026 — query-specific on-the-fly evidence graph, "reason-and-construct" over "build-then-reason"). All are canonical-merge / single-KG builders, single-step neighbours, or stance parallels; none is the fused no-merge cross-community assembly. **That a blind pass keeps finding closer prior art is why the assembly stays `open (candidate)` not `open`, and why the programme makes no novelty claim.** (Two of these — EDC, and the user surfacing KGGen + Relink — arrived after this doc's first draft; the gate is open, not closed.)
+- **Programme-level go/no-go: NOT THIS DOCUMENT.** The decision entry now EXISTS — a **conditional GO** for the recall-extender theory (`20_areas/thinking/decisions/2026-07-17-flf-recall-extender-conditional-go.md`, DRAFT pending user sign-off); the 2026-07-16 NO SUBMIT stands for the **judge-dependence** theory only. Coin-time tax on this direction's own coinages: paid at `glossary.md` — the working name stays internal-only until its own naming pass runs. Stop-rule status: condition (i) not fired (no KILL); condition (ii) PARTIALLY met — strip 2's neighbours ISO 704 (run-level full read) and GenOM (orchestrator read) are covered, and the assembly blind Pass-A DID run (2026-07-17); the remaining gap is orchestrator primary-verification of the assembly row's strip-1 neighbours (Microsoft patent family, NeoN, Confluence Define docs), still unopened. Hence `status: draft` stands.
+
+[source: receipts/novelty-protocol.md]
+# Novelty protocol — defeating the idiolect trap
+
+[source: receipts/novelty-protocol.md]
+## Why this exists — the receipts
+
+[source: receipts/novelty-protocol.md]
+| # | episode | what it concluded | what actually happened |
+|---|---|---|---|
+| 1 | **2026-06-29** — 9-agent same-model fan-out | "**No prior art found** doing the full target; 6/6 CLOSE-BUT-GAP" | Confident null. Overturned later. |
+| 2 | **2026-07-13** — refuter across different literatures | `m*` is novel | **Killed in ~5 minutes** by Clemen & Winkler (1985) |
+| 3 | **2026-07-16** — 4 disjoint-literature agents + refuter | the replacement direction is novel | **Killed.** Keystone foreclosed by Bröcker (2008) |
+
+[source: receipts/novelty-protocol.md]
+**Corroborating observations** (mappings *within* those three episodes — **not** eight independent replications):
+
+[source: receipts/novelty-protocol.md]
+**Two lessons from that table, both load-bearing:**
+1. **The knowledge was in the weights the whole time.** A correctly-briefed refuter found Clemen & Winkler in five minutes. This is a **workflow bug, not a capability ceiling**.
+2. **Every kill that was checked had a real quote and a defective citation** (2-for-2; Bröcker was the exception that held). **Subagents get the *idea* right and the *provenance* wrong** — wrong venue, dropped qualifiers, truncation exactly where the source turns against the claim. Hence §8.
+
+[source: receipts/novelty-protocol.md]
+1. **Naming is cheap and happens early.** Coining crisp project-local terms aids internal communication, and crispness feels like understanding. By definition the coinage diverges from the field's name — if you knew the field's name, you would have used it.
+2. **The idiolect colonizes every artifact** — state docs, digests, prompts. Then: **every agent spawned from those artifacts is socialized into the idiolect at spawn time.** A human collaborator brings their own vocabulary and asks "isn't this just Murphy decomposition?" — the fresh-eyes function. An agent's entire worldview arrives via your prompt. **The onboarding context that makes agents useful is what destroys their independence for novelty checks.**
+3. **Shared context is a hidden correlator** stacked on shared training corpus. N agents briefed from the same docs are one searcher with variance. (`feedback_fanout_agreement_not_independence`.) Demonstrated live on 2026-07-16: agents 1–3, all searching post-2023 arXiv in overlapping vocabulary, **converged** on "the identifiability framing survives" — and the convergence was worth nothing, because a refuter tasked to hunt pre-LLM literature killed their survivor. (The *specific* 1991 citation that refuter used later proved defective — see the withdrawn row above — which only sharpens the point: convergence was worthless **and** the thing that broke it needed verifying too.)
+4. **Models mirror your ontology rather than correct it.** Nothing in the interaction rewards an agent for volunteering the field's name unprompted. Sycophancy at the ontology level.
+5. **Novelty is an absence claim** — exactly where convergence is worth nothing. So the null comes back **confident**.
+
+[source: receipts/novelty-protocol.md]
+Any of: a novelty or "is this new?" claim · entering a research programme or direction · a grant/competition entry · a public artifact asserting a contribution · coining a term for a phenomenon you intend to build on.
+
+[source: receipts/novelty-protocol.md]
+### 1. Coin-time tax — pay it the moment you mint a word
+
+[source: receipts/novelty-protocol.md]
+| our term | candidate field term(s) | owner / citation | verification | status / next action |
+|---|---|---|---|---|
+
+[source: receipts/novelty-protocol.md]
+### 2. Two frozen passes — never one
+
+[source: receipts/novelty-protocol.md]
+- **Pass A — blind naming/refutation.** The agent gets **only** the phenomenon restated in plain mathematical/operational language. **No project docs, no project vocabulary, no candidate terms, no prior conclusions, no preferred fields.** Ask it to name the concept and its owners cold. Freeze and archive this brief verbatim — it is the evidence that the pass was blind.
+- **Pass B — verification and citation-walk.** *This* pass may receive Pass A's candidates, prior sweeps, and adjacent papers, and is tasked to verify against primary text and to citation-walk backward.
+
+[source: receipts/novelty-protocol.md]
+#### ⚠ Blindness is a TOOL-LEVEL control, not a prompt-level one (measured 2026-07-16)
+
+[source: receipts/novelty-protocol.md]
+```bash
+claude -p --model <m> \
+  --allowedTools "WebSearch,Bash(safefetch:*)" \
+  --disallowedTools "Read,Glob,Grep,Task,Agent,Edit,Write" \
+  < frozen-brief.md
+```
+
+[source: receipts/novelty-protocol.md]
+#### The disjointness result — why 3 cross-model draws, not 5 same-briefed agents (measured 2026-07-16)
+
+[source: receipts/novelty-protocol.md]
+Consequences, both load-bearing:
+- **The union is the payload; the agreement count is noise.** Pass B's five same-briefed agents produced *one* union. Three blind cross-model draws produced three.
+- **A single draw's null is worthless, and so is a single draw's hit.** The one *correct* pre-registered prediction that session (reliability engineering as the general antecedent → Knight & Leveson) was found by **1 of 3** draws. Running only the other two would have scored a right prediction as wrong.
+- **Pre-register predictions before any run returns.** 4 of 5 were wrong or mis-scoped; the blind draws beat the orchestrator's socialized priors. Sealed predictions are what makes that visible instead of retrofittable.
+
+[source: receipts/novelty-protocol.md]
+Not *"search for prior art on X"* — that returns comfortable nulls. Instead: **"What is this called? In which fields does it live? Who owns it? Name the oldest treatments you would expect to exist."** This forces **positive, checkable claims** where a null cannot hide, and elicits from weights before touching the web.
+
+[source: receipts/novelty-protocol.md]
+**Date rule: at least one source published before 2015, with no lower bound.** (Kelley 1927 and Blackwell 1953 both matter here; a "1950–2015 window" would wrongly exclude the former.) Old literature is reached by **graph-walking from a hit**, not keyword search — modern surfaces bury it. Every minelit scoop was pre-LLM: 1961, 1985, 2008, plus 1953/1973/1974/2001 in the 07-16 sweep.
+
+[source: receipts/novelty-protocol.md]
+**If the claim can be stated without mentioning LLMs, expect a pre-2015 owner.** Generality equals age: a threshold on a score, information garbling, expert aggregation, correlated evidence — all owned decades ago.
+
+[source: receipts/novelty-protocol.md]
+### 6. Classify the claim — and attach foreclosure to an *exact* claim
+
+[source: receipts/novelty-protocol.md]
+- **Predated** — someone got there first. Extension, measurement, or a new regime remains possible.
+- **Foreclosed** — a theorem or definition settles **the exact claim, under stated assumptions**. Record both: *which* claim, and *which* assumptions.
+
+[source: receipts/novelty-protocol.md]
+### 7. Do not price novelty against the reviewer you expect
+
+[source: receipts/novelty-protocol.md]
+### 8. Verify the kills — the mirror failure
+
+[source: receipts/novelty-protocol.md]
+- Read the load-bearing citation's **primary text yourself**. Check the **venue** actually matches (the withdrawn Wilson row was a software manual dressed as *Psychometrika*).
+- **Read past the ellipsis.** Truncation lands exactly where the source turns against the claim.
+- **Check for the authors' own hedges** before reporting a result as settled (Rowe & Wright disowned the strong reading their quotes were used for).
+- Conflicting IDs for one paper across agents = **hallucination signature**; report the conflict, don't pick one.
+- A small model's "NOT FOUND" on a math PDF is **worth nothing** — it returned false negatives on all three real Bröcker quotes.
+- **★ A snippet that states your conclusion in perfect words is a fabrication signal, not a find.** Measured **2-for-2 in the 07-16 patent sweep**: a search engine attributed to gwern's "Internet Search Tips" a near-perfect statement of the loop's search half — **not on the page** (grep returned zero); and attributed *"patent applicants use vague and abstract terms…"* to Lupu & Hanbury 2013 — the 99-page survey has **zero** occurrences of "vague"/"obfuscat"/"intentional." Both read as exactly what the searcher hoped for; both were inventions. **When a quote lands too cleanly on your thesis, that is the moment to open the primary, not to celebrate.**
+
+[source: receipts/novelty-protocol.md]
+- **An aggregator's "closed / not open access" is NOT evidence of absence.** OpenAlex and Semantic Scholar both reported **Larsen & Bong 2016 CLOSED** — it was freely archived; Unpaywall reported **Alcácer & Gittelman 2006** as `oa_status: closed, oa_locations: []` — a live green copy existed. Two aggregators, two wrong "closed"s, one session. Treat their negative as unchecked.
+- **The Wayback CDX index of the authors' OWN uploads is the best route.** `safefetch "http://web.archive.org/cdx/search/cdx?url=<host/path>*&output=text&fl=original,timestamp,statuscode,mimetype&limit=40"`, then fetch the original bytes via `https://web.archive.org/web/<timestamp>id_/<original-url>`. ResearchGate/academia/SSRN uploads are frequently archived there even when the live host is Cloudflare-walled. **This is how both Larsen & Bong (author's RG upload) and Alcácer (a now-dead host's green copy) were finally read.**
+- **A repository's "full text" link can be a cover sheet.** UNIMAS's advertised full text of Larsen & Bong was a **2-page** ResearchGate cover sheet + p.529 — which is why every route "almost" worked. **Check the page count before believing you have the paper.**
+- **Crossref exposes direct publisher PDF paths** search engines don't surface: `https://api.crossref.org/works?query.bibliographic=...&rows=3&mailto=<you>`.
+- **Fetch mechanics:** `safefetch`'s renderer refuses raw PDFs; use `wget` + `pdftotext -layout` (write the script and run via `saferun -f` — a compound `wget && pdftotext` line is denied). `r.jina.ai/<url>` extracts some PDFs the renderer won't, but blocks `web.archive.org`. **The PDF's internal metadata title can confirm provenance** — Larsen & Bong's read `Round 5. INN Synonymy 20151217_Accepted`, i.e. the accepted manuscript.
+- **Scanned/typeset article PDFs often have a near-empty text layer** (the UNIMAS cover sheet extracted to 6k chars of nothing). A `pdftotext` "not found" on such a file is a false negative — read the pages visually with the Read tool's `pages` before concluding anything is absent.
+
+[source: receipts/novelty-protocol.md]
+Written **before** the programme, at **`<project>/novelty-position.md`**, gating entry. Same status as a pre-registration: if it is not written, the programme has not started.
+
+[source: receipts/novelty-protocol.md]
+- **The claim, in the field's vocabulary:** <exact claim; no project-local terms permitted>
+- **Fields it plausibly lives in:** <2-3 neighbouring — statistics, psychometrics, forecasting,
+  epistemology, IR, decision theory...>
+
+[source: receipts/novelty-protocol.md]
+### Findings (one row per claim — never one verdict for the programme)
+| claim / delta | nearest neighbour (cited) | novelty_status | verification | if foreclosed: exact claim + assumptions |
+|---|---|---|---|---|
+
+[source: receipts/novelty-protocol.md]
+**The cost asymmetry is the entire argument:** the refuter takes minutes; the programme it can kill takes weeks. There is no version of this that is not worth running.
+
+[source: receipts/novelty-protocol.md]
+> **✅ VERIFICATION RAN 2026-07-16.** The prompt this section was waiting on has been executed — 5 blind-briefed agents, primary-text verification, results at `10_projects/minelit/idiolect/2026-07-16-targeted-prior-art-search-RESULTS.md` (Codex-reviewed → MAJOR REVISION → repaired; read its Review note before citing anything). **Three of the four anchors below now hold against primary text, with corrections. Two carried errors that this section had already propagated.** Remaining unverified items are marked inline and must not be cited publicly. The sweep also produced **its own instance of the trap**: a search engine attributed to gwern a near-perfect statement of the phenomenon that does not exist on the page — caught only by fetching the primary.
+
+[source: receipts/novelty-protocol.md]
+**Updated 2026-07-16 (second pass), after the primary-text verification prompt this document was waiting on actually ran** (5 blind agents → `10_projects/minelit/idiolect/2026-07-16-targeted-prior-art-search-RESULTS.md`, itself Codex-reviewed → MAJOR REVISION → repaired). §"What the phenomenon is called" is no longer provisional. **Three anchors verified against primary text; two carried errors this document had propagated:** (a) *jingle* was misattributed to Kelley — it is Thorndike 1904 quoting Aikins; Kelley coins only *jangle*; (b) "CPC/IPC indexes by function/structure **rather than** words" overstated the record — examiners' own documented practice is classification **plus** keyword supplement, and "countermeasure to vocabulary variance" was our inference, not any document's wording. **One load-bearing reframe was withdrawn:** Furnas's <20% is real (.07–.18, `primary-full`), but its base is **untrained people naming everyday objects**, not experts naming constructs — so "correct for a known base rate" was never underwritten by the citation, and the weaker supportable claim replaced it. The absence claim survived a dedicated refutation attempt **only in narrowed form** ("the composite is unnamed *in the recorded searches*, while every component has an owner"), and arXiv:2604.20622 turns out to already name the outcome and prescribe this protocol's blind refuter. **The pattern held again:** the verification's own first draft leaned a conclusion on a quote it had flagged as unverified, and headlined a date its own audit called undetermined — `feedback_unreviewed_artifact_assume_wrong`, twice, inside the document about this exact failure.
+
+[source: receipts/novelty-protocol.md]
+## Related

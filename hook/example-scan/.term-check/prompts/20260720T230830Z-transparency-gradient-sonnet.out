@@ -1,0 +1,23 @@
+## 1. What the term denotes (excerpt-only, no jargon reuse)
+
+Across the excerpts, the phrase tracks a boundary condition on when a "translate an invented term into the field's own words, then search" step actually pays off. The payoff is concentrated on cases where the invented term's own wording gives no hint of the underlying, already-established idea *and* the discipline that owns that idea is not obvious — in those cases, supplying the underlying meaning (not just the coined word) is what makes the right prior work findable. Where the invented wording already reveals the underlying idea, or where the owning discipline was already known at the time of coining, the extra step adds nothing.
+
+## 2. Closest terms of art
+
+- **Semantic transparency** (of compounds/coinages) — psycholinguistics & morphology
+- **Term transparency / motivation** — terminology science (terminography, standardized term formation)
+- **Motivated vs. arbitrary sign** — structural linguistics / semantics
+- **The vocabulary problem** — information science / human-computer interaction
+- **Incommensurability / "obliteration by incorporation"** (independent naming of the same idea across paradigms or fields) — philosophy and sociology of science
+
+## 3. Oldest expected treatments
+
+- Semantic transparency: Bloomfield's *Language* (1933) already distinguishes transparent from opaque compounds; the modern experimental literature is 1990s psycholinguistics (e.g., Zwitserlood, Libben on compound processing).
+- Term transparency/motivation: Eugen Wüster and the Vienna School of terminology, 1930s (his standardization program treats "motivation"/transparency as a criterion for good term formation); later codified in ISO 704 and in Sager's *A Practical Course in Terminology Processing* (1990) and Cabré's *Terminology: Theory, Methods and Applications* (1999).
+- Motivated/arbitrary sign: Saussure, *Cours de linguistique générale* (1916); Ullmann, *Semantics: An Introduction to the Science of Meaning* (1962).
+- Vocabulary problem: Furnas, Landauer, Gomez & Dumais, "The Vocabulary Problem in Human-System Communication," *CACM* (1987), building on late-1970s/80s indexing work.
+- Incommensurability / multiple discovery: Kuhn, *The Structure of Scientific Revolutions* (1962); Merton on multiple independent discovery, *American Sociological Review* (1957).
+
+## 4. Coverage by the best candidate, and the gap
+
+The best single match is **term/semantic transparency** — that literature is exactly about whether a term's meaning can be recovered from its surface form, which is one half of what's described here (the "opaque coinage" vs. "transparent slogan" distinction). What it does *not* cover is the other half of the usage: this is not a claim about term form in the abstract, but an applied, tool-specific finding — that a particular retrieval/bridging method's *return on effort* is gated jointly by (a) surface opacity of the coinage and (b) how non-obvious the owning field is, the latter being closer to the vocabulary-problem / independent-discovery literature than to transparency research proper. No single established term names that joint gradient tied to a tool's payoff; the excerpts' "transparency gradient" is a local coinage that borrows the linguistic property as one ingredient of a two-factor, tool-evaluation claim that classical transparency work doesn't itself make.

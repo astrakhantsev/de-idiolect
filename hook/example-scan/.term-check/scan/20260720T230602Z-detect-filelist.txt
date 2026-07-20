@@ -1,0 +1,7 @@
+    8877  ENTRY.md
+     597  receipts/citation-audit-2026-07-17.md
+    6898  receipts/citation-dossier-casestudy.md
+    7566  receipts/citation-dossier-entry.md
+    3331  receipts/idiolect-trap-case-study.md
+    2348  receipts/novelty-position.md
+    7398  receipts/novelty-protocol.md

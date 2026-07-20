@@ -24,6 +24,27 @@ This assembles the ENTRY.md paragraphs that use the entry's coinage *misroute*, 
 
 Not shipped in v1, deliberately: trigger T3 (novel-phrase detection over arbitrary prose — the prototype's detection endpoint missed its target in the e2e cell, so v1 keeps only high-precision triggers); any search-enabled draw (v1 is weights-only; see boundary note below); claim-time and cite-time automation (§4.2 proposes them; their v1 would be shaped the same way); portability beyond Claude Code (the protocol is harness-agnostic, this implementation is not).
 
+## Scan mode — give a project a seed glossary (`term-scan.sh`)
+
+> **Post-submission addition (2026-07-20), built on the v1 hook above.** A separate script; `term-check.sh` is unmodified.
+
+T1 checks a term you already know is a coinage; T2 fires when one enters a glossary. On a project that has **no glossary yet**, neither has anything to fire on. `term-scan.sh` closes that gap: point it at a project's prose and it surfaces the project's most local coinages, then — on the ones you keep — runs the existing per-term check and assembles a seed glossary. **Detect → curate → check → seed**, and the seed is written to match `glossary-watch.py`'s entry regex, so T2 can watch it afterward (scan bootstraps the loop the hook needs).
+
+```
+# phase 1 — detect (one model call over the prose), then STOP for curation:
+bash hook/term-scan.sh <path-or-files...>
+# ... edit scan-candidates.md, mark [x] the terms worth checking ...
+# phase 2 — check only the [x]-marked terms, assemble GLOSSARY-SEED.md:
+bash hook/term-scan.sh --check <same paths...>
+# or, one shot, auto-keep the top N:  bash hook/term-scan.sh --top 5 <paths...>
+```
+
+**Two phases, and the gate between them is mandatory.** Phase 1 costs exactly one detection call, writes `scan-candidates.md`, and stops. **No naming draw runs until you mark terms `[x]`.** This is the design's load-bearing safety property: surfacing is heuristic, and a weak candidate that silently spent a naming draw — or a junk entry that silently entered the seed glossary — would leave a user worse off than with no scan mode at all. Phase 2 additionally drops any term that does not literally appear in the source files (a detector can hallucinate a term; the prose is the arbiter). Default caps: ~18k input words for detection (evenly downsampled beyond the cap, recorded in the manifest), and ≤10 checked terms per run; phase-2 batch is sonnet-only, opus opt-in via `-m`.
+
+**What isolation buys here, and what it does not.** The detection call *may* see the project's files wholesale — the [information boundary](#the-two-rules-that-make-it-a-measurement-and-not-a-vibe) (frozen excerpts only, no candidate owners) binds the per-term **naming** call in `term-check.sh`, which scan calls unchanged. Detection still runs through the same isolation mechanics (fresh cwd + credentials-only HOME + pinned `CLAUDE_CONFIG_DIR` + all tools disallowed) so your own global config (CLAUDE.md, memory) cannot steer *which* terms it surfaces. It is isolation-from-config, not blindness-to-project.
+
+**Honest expectations — surfacing is heuristic; the per-term check is the product.** Detection is the entry's weakest measured component: the prototype's own detector missed its one retrospective coinage endpoint (§4.1, §5.3). Scan's model-assisted detector is a *different* detector, and shipping it **does not** claim to fix that record — it is a convenience that produces a curatable list, gated so its errors cost a curator's glance, not credibility. Expect the raw list to mix real coinages, real-but-off-target coinages, and the occasional junk one; that mix is exactly why the curation gate is not optional. A worked self-application run on this repo's own prose (with `GLOSSARY.md`/`PSEUDOCODE.md`/`hook/` held out as answer-key contamination) is committed under [`example-scan/`](example-scan/), scored by hand against `GLOSSARY.md`'s coinage list.
+
 ## Install into your own project
 
 **Manual check only (T1):** copy `term-check.sh` anywhere (or call it from this clone) and run it with a term + the files that use it. No other integration needed; this alone is useful on day one.
@@ -60,7 +81,7 @@ Point `TERM_CHECK_GLOSSARIES` at your glossary file(s) if they are not named `GL
 
 ## Instrumentation
 
-Every trigger evaluation and draw appends a JSONL row (`.term-check/log.jsonl`): timestamp, term, trigger (`manual`/`glossary-watch`), model, status, latency, prompt hash — including quiet watcher evaluations that fired nothing (burden needs the denominator, not just the firings). After a week of normal use this yields **flags/day and trigger burden**. It does *not* by itself yield flag **precision**: nothing records whether you then opened a primary and confirmed an owner. The v1 convention for that half is manual — when you verify a candidate, add a `verified: <candidate> — <yes|no|partial>, <source opened>` line to that term's block in `term-flags.md`; the blocks are grep-able and the join to the log is by term. Without the log this is a gadget; with it plus your verification lines, it is the experiment.
+Every trigger evaluation and draw appends a JSONL row (`.term-check/log.jsonl`): timestamp, term, trigger (`manual`/`glossary-watch`/`scan`), model, status, latency, prompt hash — including quiet watcher evaluations that fired nothing (burden needs the denominator, not just the firings). Scan adds a `scan-detect` row (files, words, candidates returned, sampling) and a `scan-check` row per curated term (real source files, status, whether it produced a seed entry) to the same log. After a week of normal use this yields **flags/day and trigger burden**. It does *not* by itself yield flag **precision**: nothing records whether you then opened a primary and confirmed an owner. The v1 convention for that half is manual — when you verify a candidate, add a `verified: <candidate> — <yes|no|partial>, <source opened>` line to that term's block in `term-flags.md`; the blocks are grep-able and the join to the log is by term. Without the log this is a gadget; with it plus your verification lines, it is the experiment.
 
 ## Standing limitations
 

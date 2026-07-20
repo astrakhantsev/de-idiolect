@@ -1,0 +1,29 @@
+## 1. What it denotes
+
+A specific candidate document that, when retrieval/ranking signals are combined, outscores the correct target document — causing the system to attribute a term to the wrong source instead of its true defining source. It's a known, recurring false-positive competitor to the correct answer, not just any irrelevant hit.
+
+## 2. Closest established terms of art
+
+| Candidate | Field |
+|---|---|
+| **False drop** | Information retrieval / library & information science (classic, pre-digital IR) |
+| **Hard negative** | Machine learning / dense retrieval & learning-to-rank |
+| **False match** (or "conflation") | Record linkage / entity resolution |
+| **Distractor** | Psychometrics / test design (also QA-benchmark construction) |
+| **Confusable class** | Pattern recognition / speech & handwriting recognition |
+
+## 3. Oldest expected treatments
+
+- **False drop** — 1950s–60s automatic-indexing literature; associated with Mortimer Taube's Uniterm coordinate-indexing debates, Calvin Mooers' critiques, and formalized in Cleverdon's Cranfield studies and Salton's IR textbooks (late 1960s–70s).
+- **Hard negative** — object-detection "bootstrapping" negatives (Sung & Poggio, early-mid 1990s face detection), later hard-negative mining in detection (Felzenszwalb et al., ~2008–2010) and metric learning (Schroff et al., FaceNet, 2015).
+- **False match** — Fellegi & Sunter, "A Theory for Record Linkage" (1969), the foundational probabilistic record-linkage paper.
+- **Distractor** — early-20th-century multiple-choice testing literature, formalized in mid-century educational-measurement/psychometrics work (ETS-adjacent).
+- **Confusable class** — mid-20th-century signal detection theory (1950s) and speech-recognition confusability studies (1960s–70s); the confusion-matrix concept descends from the same lineage.
+
+## 4. Fit assessment
+
+No single candidate is a clean match. **False drop** is closest in spirit — it's the classic IR term for an observed, specific bad retrieval event rather than a general training category — but the term is archaic and doesn't carry any notion of competing against a *correct, canonical owner*. **Hard negative** captures the "outranks the true positive under fusion/scoring" mechanics well, matching the excerpt's fusion-of-keys framing, but that term is normally prospective/training-oriented (an example type you mine for a model), not a label for a specific document caught misbehaving in an evaluation. **False match** from record linkage captures the "wrong entity chosen as the attribution target" idea but is tied to matching two record sets, not term-to-definition retrieval.
+
+What doesn't fit any candidate cleanly: the *routing* framing itself — that there's a canonical "owner" document a term should resolve to (like an entity-linking target), combined with the specific, recurring, singular character implied by "the misroute document" (definite article, cross-referenced instance rather than a general phenomenon). That composite — glossary/definition attribution + a specific known troublesome competitor — sits between hard-negative and false-match/entity-linking vocabulary without being fully named by either.
+
+The excerpts don't say enough to tell whether "the misroute document" names one specific recurring document across the whole project or is being used generically for "whichever document caused misrouting in this cell" — that distinction matters for picking between "false drop" (event-specific) and "hard negative" (class of example) and isn't resolvable from what's given.

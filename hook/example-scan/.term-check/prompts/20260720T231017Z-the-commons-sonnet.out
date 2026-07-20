@@ -1,0 +1,27 @@
+## 1. What the term denotes
+
+A shared, persistent store of already-vetted translations between the specialized vocabularies of different communities — built up collectively so that once someone has checked that Community A's term X maps to Community B's term Y, no other user has to redo that verification. The store is meant to tolerate multiple simultaneous, possibly conflicting entries for the same mapping (when communities don't agree), recording the disagreement itself as a labeled relationship rather than forcing a single resolved answer.
+
+## 2. Closest existing terms of art
+
+1. **Ontology/schema alignment (mapping) repository** — Semantic Web / knowledge representation
+2. **Authority control / authority file** — library & information science
+3. **Terminology crosswalk / term bank** — terminology science, metadata standards
+4. **Knowledge commons** — information-policy / commons theory
+5. **Wiki-style versioned knowledge base with forking** — CSCW / distributed systems
+
+## 3. Oldest expected treatments per candidate
+
+1. **Ontology alignment**: roots in schema matching (Rahm & Bernstein, early 2000s survey); ontology-specific work like Noy & Musen's PROMPT (~2000); formalized as a subfield via the Ontology Alignment Evaluation Initiative (OAEI, mid-2000s onward).
+2. **Authority control**: cataloging practice traces to early-20th-century library science (AACR-era rules); modern shared/networked form realized in projects like VIAF (2000s), but the underlying idea — a single verified authoritative form that many catalogers reuse instead of re-deciding — is much older.
+3. **Terminology crosswalk / term bank**: grounded in Wüster's General Theory of Terminology (1930s–70s, Vienna school); institutionalized in early machine-readable term banks such as EURODICAUTOM (1970s) and later ISO terminology standards.
+4. **Knowledge commons**: Ostrom's *Governing the Commons* (1990) on collectively managed shared resources, extended explicitly to informational/knowledge resources by Hess & Ostrom, *Understanding Knowledge as a Commons* (2007).
+5. **Wiki / versioned knowledge base**: Ward Cunningham's original wiki (1995); the fork/merge-without-forced-consensus model is more explicitly theorized in distributed version control (practice from SCCS/RCS in the 1970s–80s, popularized by git in the mid-2000s).
+
+## 4. Fit assessment
+
+The *purpose* described — persist a verified cross-vocabulary mapping once so it can be reused instead of re-verified — is well covered by both **ontology alignment repositories** and **authority control**: both exist precisely to eliminate redundant reconciliation work across users. That's the strongest match for the "durable verified mapping... over repeated verification by each user" language.
+
+What doesn't fit cleanly is the *governance model* layered on top: "forks coexist," disagreement is recorded as "a typed link" rather than resolved, and accumulation proceeds "without agreement." Classical ontology alignment and authority control both generally assume convergence toward one authoritative mapping (possibly confidence-scored, but not designed to hold permanently-unresolved forks as first-class citizens). That fork-tolerant, consensus-optional property is closer to the wiki/version-control tradition, or to argumentation-based knowledge models (e.g., IBIS-style issue/position/argument structures) that explicitly represent disagreement as structured data rather than requiring resolution.
+
+So the excerpts describe something like an ontology-alignment/crosswalk *content* model wearing a wiki/commons-style *governance* model — no single established term of art owns that combination. Also worth flagging: the excerpts explicitly place this item under "Not built," so its data model (what a "typed link" actually consists of, how regeneration/caching works) is underspecified — the term may be doing double duty as both a described concept and an unimplemented design placeholder, which limits how precisely it can be mapped onto any one existing field's vocabulary.

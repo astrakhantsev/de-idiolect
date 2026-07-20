@@ -1,0 +1,47 @@
+# Contamination check — phase-2 term selection (scan example, 2026-07-20)
+# Question: for each term chosen for the phase-2 naming check, do the frozen
+#   excerpts term-check.sh feeds the isolated call already contain that term's
+#   GLOSSARY answer-key owner vocabulary? (If yes, 'recovery' proves nothing.)
+# Method: assemble the same excerpts term-check.sh uses (its --dry-run), then
+#   case-insensitive grep for the owner vocabulary inside the EXCERPTS block.
+# Selected (marked [x]): transparency gradient, the commons, misroute document
+# Considered but EXCLUDED for contamination (shown for the record):
+#   quantity-role substitution, self-application blind pass, operating requirement.
+
+== [SELECTED] 'transparency gradient'  vs owner vocab [semantic transparency|compositional|lexicolog|term transparency|motivation of terms]
+   excerpts: 887 excerpt words, 4 paragraphs, truncated=0, sha256=07a59c8b5443d1a97969e90bb6be23ab79b2eff56313422d374c442280ea888b
+   OWNER VOCAB IN EXCERPTS: none — CLEAN
+
+== [SELECTED] 'the commons'  vs owner vocab [dataspace|franklin|halevy|emergent semantics|aberer|pay-as-you-go]
+   excerpts: 865 excerpt words, 4 paragraphs, truncated=0, sha256=1314402587e7301f2b255b8de25bd748c5a74ec397037cf5179921e5235f9c84
+   OWNER VOCAB IN EXCERPTS: none — CLEAN
+
+== [SELECTED] 'misroute document'  vs owner vocab [false drop|vocabulary mismatch|furnas|vocabulary problem]
+   excerpts: 350 excerpt words, 2 paragraphs, truncated=0, sha256=301c466156dea9a9d1f2080540482ee34857a9f68952e65368983ad30e45bd5a
+   OWNER VOCAB IN EXCERPTS: none — CLEAN
+
+== [EXCLUDED] 'quantity-role substitution'  vs owner vocab [estimand|role substitution|substituted one quantity]
+   excerpts: 854 excerpt words, 2 paragraphs, truncated=0, sha256=c218bc93ac825a333e97da7b6e28499ac552688e7aa7f9a472761bfe47a31243
+   OWNER VOCAB IN EXCERPTS: 3 line(s) — CONTAMINATED:
+     12:- **Day 13** — The detector thesis breaks: the frozen estimand *inverts as a magnitude* on a constructed case (a fully-copied 6-source pool scores m̂ = 4.
+     14:- **Day 15** — The program is dropped. The claims inventory retracts its own novelty ratings: `m*`'s aggregation-literature owner is Clemen & Winkler, newl
+
+== [EXCLUDED] 'self-application blind pass'  vs owner vocab [held-out|blind test|sealed|self-application]
+   excerpts: 1352 excerpt words, 2 paragraphs, truncated=0, sha256=10436d35d4d6fc689ee2baf32c11a6247c30a207a9e74e32164a444f81645300
+   OWNER VOCAB IN EXCERPTS: 4 line(s) — CONTAMINATED:
+     6:| Core pipeline: LLM-generated definition → embedding retrieval → pairwise verification → typed relation | **SciCo-Radar** arXiv:2409.15113 (definitions
+     10:| **The assembly (the surviving core claim):** detector-triggered, constrained-vocabulary generated definitions as *cross-community* matching keys with typed
+
+== [EXCLUDED] 'operating requirement'  vs owner vocab [value[ -]of[ -]information|raiffa|schlaifer]
+   excerpts: 2421 excerpt words, 14 paragraphs, truncated=1, sha256=2d4cb24c03f5123cbf074c4e74cfc9abec8707d3f275a4348352ae9e3f993274
+   OWNER VOCAB IN EXCERPTS: 8 line(s) — CONTAMINATED:
+     7:| "the operating requirement" — the accuracy an instrument must reach before it is worth building | A       | **value-of-information threshold analysis** (R
+     19:| "operating requirement" | opaque | **actively misrouted** — "audit unit" → accounting, "cold-start" → recommender systems | **owner recovered**: Raif
+
+Notes:
+- 'transparency gradient' is a semantically TRANSPARENT coinage (surface word 'transparency'
+  overlaps the owner 'semantic transparency'); clean of the owner TERMS above, but a hit is
+  cheap by construction — the transparency-gradient finding (ENTRY.md §2) applied to itself.
+- 'misroute document' ran on a thin 2-paragraph input (the thin-input stress case).
+- 'the commons' is an opaque §A coinage; its owner (dataspaces / emergent semantics) is absent
+  from the excerpts, so a recovery there is meaningful.

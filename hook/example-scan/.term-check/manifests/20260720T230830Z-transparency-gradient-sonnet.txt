@@ -1,0 +1,13 @@
+term: transparency gradient
+model: sonnet
+trigger: scan
+prompt_sha256: 07a59c8b5443d1a97969e90bb6be23ab79b2eff56313422d374c442280ea888b
+source_files: ENTRY.md receipts/idiolect-trap-case-study.md
+tmp_cwd: fresh mktemp -d, removed after run
+tmp_home_policy: credentials file only (no settings/CLAUDE.md/memory)
+cwd_listing_before: [] (must be empty)
+cmd: HOME=<fresh> CLAUDE_CONFIG_DIR=<fresh>/.claude claude -p --model sonnet --disallowedTools <all>
+timeout: 300s via timeout
+date: 2026-07-20T23:08:30Z
+out_sha256: b13f512dd1362a3ab7db547cdef5b13e6525b65bc010fce180fbe30808dc61f2
+status: ok  latency_s: 57

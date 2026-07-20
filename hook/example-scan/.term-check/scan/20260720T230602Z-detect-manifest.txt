@@ -1,0 +1,17 @@
+phase: 1 (detect)
+date: 2026-07-20T23:06:02Z
+paths: ENTRY.md receipts/citation-audit-2026-07-17.md receipts/citation-dossier-casestudy.md receipts/citation-dossier-entry.md receipts/idiolect-trap-case-study.md receipts/novelty-position.md receipts/novelty-protocol.md
+includes: *.md,*.txt,*.rst
+excludes (default+user): GLOSSARY* glossary* 99_private GLOSSARY-SEED.md scan-candidates.md term-flags.md GLOSSARY-SEED.md scan-candidates.md term-flags.md
+files_matched: 7 (per-file words in 20260720T230602Z-detect-filelist.txt)
+words_total: 37015   words_in_prompt: 15885   cap: 18000
+paragraphs: kept 231 of 479
+sampling: even paragraph downsample, ratio 0.486289 (input 37015 words > cap 18000)
+detect_model: sonnet
+prompt_sha256: dd6a37f0a0ae1d7e6489ae8ab64027e1bc9bf934f72ee691ba34e6a529592a2a
+isolation: fresh cwd + fresh HOME (credentials only) + CLAUDE_CONFIG_DIR pinned + all tools disallowed
+timeout: 300s via timeout
+cwd_listing_before: [] (must be empty)
+tmp_home_policy: credentials file only (no settings/CLAUDE.md/memory)
+out_sha256: 1b8dac6355a4cb6cce2bc0ae69f2251271f2ae6c06e15ab1ab2c4e72a617ec55
+status: ok  latency_s: 50

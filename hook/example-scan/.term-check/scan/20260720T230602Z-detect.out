@@ -1,0 +1,15 @@
+idiolect trap | this project's name for coining private vocabulary that hides a concept an established field already owns | receipts/idiolect-trap-case-study.md, receipts/novelty-protocol.md, ENTRY.md
+de-idiolection | the countermeasure practice of generating a neutral definition to recover the field that a coined term obscures | ENTRY.md, receipts/idiolect-trap-case-study.md
+the audit unit | the project's name for m*, the number of independent looks a verdict needs before it's trustworthy | ENTRY.md, receipts/idiolect-trap-case-study.md
+operating requirement | the project's name for the accuracy threshold an instrument must clear before it's worth building | ENTRY.md, receipts/idiolect-trap-case-study.md
+transparency gradient | the observed pattern that the definition method only helps on opaque coinages, not transparent slogans or already-known fields | receipts/idiolect-trap-case-study.md
+the signal, not the cut, is the bottleneck | Program B's keystone finding, that score gains come from information content rather than thresholding choice | ENTRY.md, receipts/idiolect-trap-case-study.md, receipts/citation-dossier-casestudy.md
+minelit | internal codename for the research effort, used in project file paths | receipts/novelty-position.md, receipts/novelty-protocol.md
+coin-time tax | the cost paid at the moment a term is minted, by checking it against the field's vocabulary before building on it | receipts/novelty-position.md, receipts/novelty-protocol.md
+misroute document | a wrong candidate document that a retrieval/fusion method incorrectly promotes to top rank | ENTRY.md
+the commons | the project's proposed shared, versioned, non-authoritative cache of definitions that forks can consult without forced agreement | ENTRY.md
+novelty ledger | the internal record tracking each claim's novelty status against verified owners | receipts/idiolect-trap-case-study.md, receipts/novelty-position.md
+self-application blind pass | a validation run where the tool's own detection method is applied to the project's own operational description | receipts/novelty-position.md
+quantity-role substitution | the project's name for the error of using one quantity in the role meant for a different one | receipts/idiolect-trap-case-study.md
+decision-sensitivity | one of the project's internally coined vocabulary items later found to correspond to an existing field concept | receipts/idiolect-trap-case-study.md
+read the enumerations | one of the project's internally coined procedural/vocabulary terms | receipts/idiolect-trap-case-study.md, receipts/novelty-protocol.md

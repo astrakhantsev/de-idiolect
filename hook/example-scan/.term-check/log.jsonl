@@ -1,0 +1,7 @@
+{"ts":"20260720T230602Z","event":"scan-detect","status":"ok","detect_model":"sonnet","files":7,"words":15885,"words_total":37015,"candidates":15,"sampling":"even paragraph downsample, ratio 0.486289 (input 37015 words > cap 18000)","prompt_sha256":"dd6a37f0a0ae1d7e6489ae8ab64027e1bc9bf934f72ee691ba34e6a529592a2a"}
+{"ts":"20260720T230830Z","term":"transparency gradient","trigger":"scan","model":"sonnet","event":"draw","status":"ok","latency_s":57,"prompt_sha256":"07a59c8b5443d1a97969e90bb6be23ab79b2eff56313422d374c442280ea888b","files":"ENTRY.md receipts/idiolect-trap-case-study.md"}
+{"ts":"20260720T230830Z","event":"scan-check","term":"transparency gradient","status":"ok","files":2,"models":"sonnet","seeded":true}
+{"ts":"20260720T230927Z","term":"misroute document","trigger":"scan","model":"sonnet","event":"draw","status":"ok","latency_s":50,"prompt_sha256":"301c466156dea9a9d1f2080540482ee34857a9f68952e65368983ad30e45bd5a","files":"ENTRY.md"}
+{"ts":"20260720T230830Z","event":"scan-check","term":"misroute document","status":"ok","files":1,"models":"sonnet","seeded":true}
+{"ts":"20260720T231017Z","term":"the commons","trigger":"scan","model":"sonnet","event":"draw","status":"ok","latency_s":58,"prompt_sha256":"1314402587e7301f2b255b8de25bd748c5a74ec397037cf5179921e5235f9c84","files":"ENTRY.md"}
+{"ts":"20260720T230830Z","event":"scan-check","term":"the commons","status":"ok","files":1,"models":"sonnet","seeded":true}
