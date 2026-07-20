@@ -8,6 +8,7 @@ Code and receipts for **"The vocabulary seam: why cross-community knowledge does
 
 Competition rules permit labeled post-deadline additions; nothing in the submitted entry or companions is silently edited. ENTRY.md remains frozen as submitted.
 
+- **2026-07-20 — `PSEUDOCODE.md`.** The workflow in compact annotated pseudocode (answering the competition's format guidance for code submissions): outward detect→define→match, the inward coin/claim/cite hooks, and the key decision points — carrying the entry's **at-submission** implementation grades (`[P]` component in prototype / `[M]` measured / `[U]` unbuilt; the composed pipelines are `[U]`). No new claims; Codex fidelity-reviewed against ENTRY.md before publication.
 - **2026-07-20 — `hook/`: the coin-time hook, v1.** ENTRY.md §4.2 proposes the minimal inward tool and grades it "argued and unbuilt"; this directory builds it: `term-check.sh` (isolated reverse-dictionary check on frozen usage excerpts), a `/term-check` Claude Code skill, a deterministic glossary-watch Stop hook, per-draw isolation manifests, and JSONL instrumentation. Includes a committed self-application run on two of the entry's own coinages, scored against GLOSSARY.md as the answer key, with a contamination-check receipt. See `hook/README.md` for install/use.
 
 ## The entry and its companions (repo root)
