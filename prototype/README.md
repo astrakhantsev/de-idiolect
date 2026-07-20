@@ -17,7 +17,7 @@ The **matching measurement (stage 3) is the point, and it is real**: it needs no
 
 ## Setup
 
-Python 3.12. Install dependencies (any venv works; this repo layout assumes one at `../../.venv`):
+Python 3.12. Install dependencies (any venv works):
 
 ```bash
 pip install 'sentence-transformers>=5' 'torch>=2' 'numpy>=2' 'scikit-learn>=1.5'
@@ -28,8 +28,8 @@ The matching step uses `BAAI/bge-large-en-v1.5` (~1.3 GB); **the first run downl
 ## Run it
 
 ```bash
-../../.venv/bin/python recall_extender.py --backend fixtures   # deterministic, reproducible (default)
-../../.venv/bin/python recall_extender.py --backend claude     # generates definitions + relations live
+python recall_extender.py --backend fixtures   # deterministic, reproducible (default)
+python recall_extender.py --backend claude     # generates definitions + relations live
 ```
 
 The run prints a `BACKEND EFFECTIVE` line and warns if `--backend claude` silently fell back to fixtures, so a live run cannot be mistaken for fixtures or vice versa.
@@ -56,7 +56,7 @@ The **naive question** ("are eggs bad for you for heart health") retrieves the l
 
 ## Files
 
-- `corpus.json` — 15 docs across 4 real eggs sub-fields + distractors (paraphrased real titles/snippets). Source URLs are listed in the **hub vault** at `10_projects/minelit/idiolect/def-naming-raw/eggs-routing-raw.md` (a separate tree — not reachable by relative path from this repo; copy it into the published package when publishing).
+- `corpus.json` — 15 docs across 4 real eggs sub-fields + distractors (paraphrased real titles/snippets). Source URLs are listed in [`../receipts/naming-experiment/def-naming-raw/eggs-routing-raw.md`](../receipts/naming-experiment/def-naming-raw/eggs-routing-raw.md).
 - `concepts.json` — 3 specialist concepts + their frozen constrained definitions (stage-2 fixtures).
 - `relation_fixtures.json` — stage-3b SKOS judgments (fixtures).
 - `recall_extender.py` — the pipeline.
