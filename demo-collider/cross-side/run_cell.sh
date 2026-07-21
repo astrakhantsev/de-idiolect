@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-# run_cell.sh — component 3: cross-side definition-mediated matching (ENTRY §4.1 stage 2-3,
-# §5.5 output shape) on the collider corpus. New code, kept in demo-collider/ (term-check.sh
+# run_cell.sh — component 3: cross-side matching = definition generation + usage-based
+# verification (ENTRY §4.1 stage 2-3; §5.5 output shape) on the collider corpus. Verification
+# is on raw usage, NOT definition-vs-definition (§5.5), so the definitions are the stage-2
+# artifact, not the matching key. New code, kept in demo-collider/ (term-check.sh
 # and term-scan.sh are unchanged); same receipts standard — every draw is isolated and writes
 # a manifest with prompt/output hashes.
 #

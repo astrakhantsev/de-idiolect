@@ -22,7 +22,7 @@ Unlike a project with invented jargon (the eggs/entry cases), the LHC-safety lit
 
 1. **The three sides do have visibly distinct vocabularies** — which is the premise of the whole seam argument: a reader crossing from the theory argument to the bounds argument to the critique is crossing three lexicons.
 2. **Because most terms are established (reconciled within their fields, hence memorized), the per-term check should recover owners cheaply** — a *reconciled seam* where the hook is largely redundant (entry §5.2: curated/established vocabulary is memorized by construction; §7: the tool's value concentrates on unreconciled seams). Component 2 tests this directly and, honestly, mostly confirms it.
-3. **The value here is not in the hook but in the cross-side dependence** the vocabularies hide — that a bounds-side reassurance and a theory-side mechanism are the *same* Bondi-accretion premise in two lexicons. That is component 3, not this scan.
+3. **The value here is not in the hook but in the cross-side dependence** between the sides — that a bounds-side reassurance and a theory-side mechanism rest on the *same* Bondi-accretion premise, packaged as two separately-counted reassurances. (In this corpus the two sides even share the word "accretion" — a *reconciled* seam, not two disjoint lexicons; the demonstration is that separate packaging invites double-counting despite shared terms. See the cross-side RESULTS.) That is component 3, not this scan.
 
 ## Curation
 
