@@ -1,0 +1,34 @@
+## 1. What the term appears to denote
+
+In context, it names the regime in which a small gravitating body embedded in dense matter swallows the surrounding material as a **continuous bulk medium** — capturing many constituent particles collectively, treated as a fluid — rather than picking off individual particles one at a time. The switch happens when the body's gravitational reach (its capture/influence radius) grows larger than the mean spacing between the medium's constituent particles (here, ~1 fm between nucleons); below that spacing the body sees discrete particles ("microscopic"), above it a smooth continuum ("macroscopic").
+
+So the term is really shorthand for **"the continuum/fluid regime of gravitational accretion, as opposed to discrete particle-by-particle capture."**
+
+## 2. Closest established terms of art
+
+- **Bondi accretion / Bondi–Hoyle–Lyttleton accretion** — astrophysics & fluid dynamics. The continuum, hydrodynamic capture of gas onto a compact body; this is the standard name for the "macroscopic" side.
+- **Continuum vs. free‑molecular (kinetic) flow, indexed by the Knudsen number** — kinetic theory / rarefied gas dynamics. This is the canonical framework for exactly the micro→macro crossover being invoked: continuum when the characteristic length ≫ particle mean free path/spacing, free-molecular (particle-by-particle) when ≪.
+- **Collisional vs. collisionless accretion** — plasma astrophysics. Distinguishes fluid (hydrodynamic) capture from ballistic single-particle capture.
+- **Breakdown of the continuum hypothesis** — continuum mechanics. The generic statement that a medium can be modeled as a field only above a granularity scale.
+- **Gravitational (geometric) capture cross-section** — general relativity / celestial mechanics. Names the *microscopic* side (per-particle capture probability), against which "macroscopic" is contrasted.
+
+## 3. Oldest / classic treatments
+
+- **Bondi–Hoyle–Lyttleton:** Hoyle & Lyttleton (Proc. Camb. Phil. Soc., 1939); Bondi & Hoyle (MNRAS, 1944); Bondi, "On spherically symmetrical accretion" (MNRAS, 1952).
+- **Knudsen number / rarefied-gas regimes:** Martin Knudsen's effusion/molecular-flow work (~1909); the kinetic-theory foundation from Maxwell and Boltzmann (1860s–1870s); Chapman & Cowling, *The Mathematical Theory of Non-Uniform Gases* (1939).
+- **Continuum hypothesis in fluid mechanics:** standard in Lamb's *Hydrodynamics* (early 1900s) and later Batchelor's *An Introduction to Fluid Dynamics* (1967).
+- **Gravitational capture cross-section:** classical geometric-capture treatments; textbook form in Zel'dovich & Novikov, *Relativistic Astrophysics / Stars and Relativity* (~1971).
+- **Compact/DM object inside a neutron star (the specific setting):** the tradition around Goldman & Nussinov (Phys. Rev. D, 1989) and subsequent trapped-object/accretion-onto-endoparasitic-black-hole work through the 2010s. (I'd expect references of this kind; I'm not certain of the exact paper this document draws on, so I won't attribute specifics.)
+
+## 4. How well covered, and what doesn't fit
+
+The **best single match is Bondi(–Hoyle–Lyttleton) accretion** for the "macroscopic" regime itself, and the **Knudsen-number continuum/free-molecular dichotomy** for the crossover being described. Together these cover the core idea almost completely: it is the standard "does the object see a fluid or individual particles?" question, and mature vocabulary already exists for both sides and the transition.
+
+What does not cleanly fit any candidate:
+
+- **The crossover length is the inter-particle *spacing* (~1 fm), not a mean free path.** Standard Knudsen-number reasoning sets continuum breakdown by the mean free path between *collisions*, which in dense degenerate matter differs from the bare spacing. Using nucleon separation as the dividing scale is a nonstandard choice.
+- **The medium is a degenerate, quantum, strongly-interacting fluid,** not a classical rarefied gas. The "microscopic" side is quantum/degenerate nucleon matter, so the Knudsen picture (built for classical gases) is only an analogy.
+- **The governing length on the "macroscopic" side is gravitational** (a capture/Bondi radius) rather than a geometric obstacle size, so it's a gravitational-capture problem wearing a rarefied-gas-dynamics label.
+- The paragraph also couples this to **dimensional-crossover radii $R_D$, $R_C$ ("lower-dimensional behavior")**, which is outside all of the candidates above and isn't determined by this excerpt.
+
+Underdetermined from one paragraph: whether "macroscopic absorption" is meant to be literally Bondi accretion (with a defined accretion rate) or just the qualitative continuum limit, and what physically sets the body's "range of influence" (Bondi radius, tidal radius, or Schwarzschild radius). If the document defines that influence radius and an accretion rate, the identification with Bondi accretion would be firm; without it, only the continuum-vs-kinetic reading is certain.

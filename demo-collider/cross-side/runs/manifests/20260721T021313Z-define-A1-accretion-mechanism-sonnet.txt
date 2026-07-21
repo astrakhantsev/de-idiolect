@@ -1,0 +1,8 @@
+label: define-A1-accretion-mechanism
+model: sonnet
+prompt_sha256: 00ac243d0581ce4ef1087ee609c26818c9ca230f645932ceeae18ffbb3eadd23
+tmp_home_policy: credentials file only (no settings/CLAUDE.md/memory)
+cwd_listing_before: [] (must be empty)
+cmd: HOME=<fresh> CLAUDE_CONFIG_DIR=<fresh>/.claude claude -p --model sonnet --disallowedTools <all>
+date: 2026-07-21T02:13:13Z
+out_sha256: f0d61a823065e7b394dfeeb0aaf80deb79f7332e5844205691035c339f17f551

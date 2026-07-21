@@ -1,0 +1,11 @@
+Below is an excerpt from a technical document that repeatedly uses one central concept. From the excerpt ALONE, write a short, self-contained, operational definition of that concept: what kind of thing it is, its inputs and outputs, what it asserts, and when it applies.
+
+Hard constraints:
+- Use only ordinary, domain-neutral words and simple notation.
+- Do NOT use any proper nouns: no names of people, methods, theories, fields, instruments, or specific physical objects. Describe roles generically (e.g. "a compact heavy object", "a surrounding medium"), not by name.
+- Two to four sentences. Do not restate these instructions.
+
+EXCERPT:
+
+
+Cosmic rays hit Earth with energies known to exceed 10^20 eV, corresponding to center-of-mass (CM) energies exceeding 100 TeV. Thus, anything that can be made with Earth-based accelerators up to this energy is already being made by nature. This argument can be used to effectively rule out the existence of particles predicted by some speculative scenarios, or to exclude possible macroscopic consequences of high energy collisions, as discussed for example in the literature. This argument requires however more attention if the large momentum imparted to the produced particles by the cosmic-ray kinematics has an impact on how they evolve after production.

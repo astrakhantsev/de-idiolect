@@ -1,0 +1,12 @@
+**1. CORE OF EACH:**
+- PASSAGE 1: Establishes a general framework for how a black hole trapped inside a dense astronomical body grows by gravitational accretion, parameterized by a capture radius r_c and a mass flux F via dM/dt = πr_c²F, to estimate a worst-case (fastest) growth timescale.
+- PASSAGE 2: Argues that in TeV-gravity scenarios, cosmic-ray-produced black holes would be stopped in and then accrete white dwarfs, and uses the observed survival of white dwarfs to >~10⁸ yr to infer that Earth is safe over its solar lifetime.
+
+**2. SHARED CORE:**
+Yes. Both depend on the premise that **a small black hole embedded in dense matter grows by gravitational capture/accretion of the surrounding medium** — i.e., accretion governed by a capture radius and mass flux (dM/dt = πr_c²F). Passage 1 states this mechanism explicitly and abstractly. Passage 2 relies on the very same mechanism as its load-bearing engine: its claim that the black hole is "stopped… by accreting and scattering the dense matter" and that "the white dwarf will then be accreted" is exactly an application of the capture-radius/flux accretion physics. If that accretion premise were wrong (small black holes don't efficiently capture surrounding dense matter), Passage 1's timescale estimate and Passage 2's stopping-and-accretion conclusion would both fail. Note Passage 2 layers an *additional*, separable premise on top — an empirical safety inference by analogy (white dwarf survival ⇒ Earth survival) — that Passage 1 does not depend on.
+
+**3. RELATION:** broadMatch — PASSAGE 2 is the narrower one (a specific white-dwarf instantiation of the general accretion mechanism that PASSAGE 1 lays out).
+
+**4. PER-SIDE RESIDUE:**
+- Specific to PASSAGE 1: the explicit general formalism (r_c vs. Schwarzschild radius R, F = ρv from relative motion, the "most pessimistic / fastest growth" methodology), applicable to any host body (planets, stars, neutron stars).
+- Specific to PASSAGE 2: the TeV-scale LHC/cosmic-ray production context, the requirement that the black hole first be *stopped* (transit/scattering), white-dwarf-specific factors (liquid vs. solid matter, high density/pressure, magnetic field), and — most distinctively — the *empirical safety-argument logic* that uses observed white-dwarf lifetimes to bound risk to Earth, which is a form of reasoning entirely absent from Passage 1.

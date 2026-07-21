@@ -1,0 +1,4 @@
+accretion slow-down
+macroscopic absorption
+crust penetration time
+multiple bounds argument

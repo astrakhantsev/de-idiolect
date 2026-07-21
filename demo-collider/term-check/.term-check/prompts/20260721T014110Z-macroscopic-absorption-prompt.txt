@@ -1,0 +1,13 @@
+You are given excerpts from a working document that repeatedly use the term "macroscopic absorption". The term may be a local coinage — a name this project made up for something that established fields already treat under a different name. From the usage in the excerpts alone:
+
+1. Restate in one or two sentences, in plain domain-neutral language, what the term appears to denote. Do not reuse the term itself in the restatement.
+2. What is this concept called in established fields? List the closest existing terms of art (up to 5), each with the field that owns it.
+3. For each candidate, name the oldest treatments or classic references you would expect to exist (author, venue, or decade is enough; exact citations are not required, and do not fabricate any).
+4. Say how well the concept, as used in the excerpts, is already covered by the best candidate — and what about this usage, if anything, does not fit any of them.
+
+Answer from general knowledge. Be specific about fields and their canonical vocabulary; do not pad the list. If the excerpts underdetermine the concept, say what is missing instead of guessing.
+
+EXCERPTS (1 paragraphs):
+
+[source: demo-collider/corpus/_work/sideB-prose.md]
+Like in atomic matter, one might expect different phases for black hole accretion within a NS, depending on the relative range of the black hole’s influence as compared to the radii $R_{D}$, $R_{C}$ representing crossover to lower-dimensional behavior, and as compared to $1\operatorname{}{fm}$, the characteristic separation between nucleons, which delineates the crossover from microscopic to macroscopic absorption in the NS context.

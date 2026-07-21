@@ -1,0 +1,13 @@
+term: multiple bounds argument
+model: opus
+trigger: collider-demo
+prompt_sha256: 8db0eba514f15dcb6041b8f1155151b73d06fe4a4e8c8abea2f18b05ae81c8c9
+source_files: demo-collider/corpus/_work/sideC-prose.md
+tmp_cwd: fresh mktemp -d, removed after run
+tmp_home_policy: credentials file only (no settings/CLAUDE.md/memory)
+cwd_listing_before: [] (must be empty)
+cmd: HOME=<fresh> CLAUDE_CONFIG_DIR=<fresh>/.claude claude -p --model opus --disallowedTools <all>
+timeout: 300s via timeout
+date: 2026-07-21T01:45:35Z
+out_sha256: 881e4faef0497a85ced228fc43ee597dbc433d97afe165b08aec63159692b563
+status: ok  latency_s: 55

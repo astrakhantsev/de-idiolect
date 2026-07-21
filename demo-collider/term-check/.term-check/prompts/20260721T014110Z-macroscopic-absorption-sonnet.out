@@ -1,0 +1,27 @@
+## 1. Plain-language restatement
+
+The term marks a **crossover in how a small, localized absorber (here, a black hole embedded in dense matter) "sees" the material around it**: when the absorber's zone of influence is smaller than the typical spacing between the individual particles making up the medium, it interacts with them one at a time as discrete objects; when its zone of influence is larger than that spacing, the surrounding matter behaves for its purposes like a smooth, continuous substance rather than a collection of separate particles.
+
+## 2. Closest existing terms of art
+
+| Candidate | Field |
+|---|---|
+| Continuum vs. free-molecular flow (Knudsen-number regime) | Kinetic theory of gases / fluid dynamics |
+| Hydrodynamic vs. collisionless (ballistic) accretion | Astrophysics (compact-object accretion, esp. primordial-black-hole capture in stars) |
+| Coherent vs. incoherent scattering | Nuclear/particle physics, scattering theory |
+| Homogenization / effective-medium approximation | Condensed matter physics, electromagnetism of composites |
+| Discrete-particle vs. continuum limit (kinetic–hydrodynamic crossover) | Statistical mechanics |
+
+## 3. Oldest expected treatments
+
+- **Knudsen regime**: Martin Knudsen, ~1909, on gas flow through tubes at low pressure; conceptually anticipated in Maxwell's kinetic theory papers of the 1860s–70s.
+- **Hydrodynamic vs. collisionless accretion**: Bondi's 1952 accretion paper is the classic root for the hydrodynamic side; the specific application to black holes swallowing neutron-star matter traces to early-2010s primordial-black-hole capture papers (e.g., work by Capela, Pani, and Olinto, ~2013), which explicitly compare a capture radius to the nucleon mean free path/spacing.
+- **Coherent vs. incoherent scattering**: van Hove's 1954 correlation-function treatment of scattering is the classic general reference; for the nuclear case specifically, Freedman's 1974 paper on coherent neutrino–nucleus scattering.
+- **Effective-medium theory**: Maxwell Garnett, 1904; Bruggeman, 1935; with roots in 19th-century Clausius–Mossotti/Lorentz–Lorenz work.
+- **Kinetic–hydrodynamic crossover**: Boltzmann's kinetic equation (1870s) and its continuum reduction via Chapman–Enskog theory (~1916–17).
+
+## 4. Fit assessment
+
+The **hydrodynamic vs. collisionless accretion** distinction from the primordial-black-hole-in-neutron-star literature is the best match — it's the same physical system (a compact absorber, a capture/interaction radius, nucleon spacing as the discreteness scale) and the same qualitative question (does the absorber sample the medium as discrete nucleons or as a continuous fluid). The generic **Knudsen-number** framing captures the same logical structure (compare an absorber/interaction length to inter-particle spacing) but is a flow concept, not natively about absorption/capture, so it fits the physics but not the vocabulary.
+
+What doesn't fully fit any candidate: this one paragraph doesn't tell us what "absorption" quantitatively means here — a capture cross-section, an accretion rate, an energy-loss rate — so I can't confirm whether the paper needs the *rate-calculation* apparatus of Bondi-type accretion theory or just the qualitative regime language. Also, the black hole itself (not an external probe) is the thing whose "radius of influence" sets the microscopic scale, which is a slightly different geometry than the Knudsen or effective-medium pictures, where the small-scale structure belongs to the medium alone. With only one excerpt, I can't tell whether "macroscopic absorption" is meant as this project's own name for the hydrodynamic-accretion regime specifically, or a broader placeholder covering several of the above; more surrounding text (e.g., how $R_D$, $R_C$ are defined) would resolve that.

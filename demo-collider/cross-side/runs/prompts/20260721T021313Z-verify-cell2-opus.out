@@ -1,0 +1,11 @@
+1. CORE OF EACH:
+- PASSAGE 1: Hawking's prediction that black holes radiate thermally rests on an apparently invalid intermediate assumption (ultra-planckian/transplanckian modes), but its robustness is supported by independent re-derivations that either confront or avoid those modes.
+- PASSAGE 2: The "nature already did the experiment" safety argument (cosmic rays reach CM energies above any accelerator, so accelerators produce nothing new) may fail because the large momentum/boost imparted to cosmic-ray-produced particles can change how they evolve compared to accelerator-produced ones.
+
+2. SHARED CORE: NONE. There is no single premise, quantity, or mechanism that both depend on. Passage 1's load-bearing concern is whether transplanckian-frequency modes invalidate a quantum-gravity derivation. Passage 2's load-bearing concern is whether relativistic kinematics (boost/momentum) breaks the equivalence between cosmic-ray and accelerator collisions. Falsifying one leaves the other untouched: the transplanckian-mode issue has no bearing on cosmic-ray boost kinematics, and vice versa. What they share is only a *methodological posture* — "a widely-accepted argument rests on an extreme-energy assumption that deserves scrutiny" — which is a theme, not a common core premise.
+
+3. RELATION: relatedMatch. Both are high-energy-physics robustness arguments that interrogate whether an extreme-energy assumption undermines an accepted conclusion, so they are associated; but neither contains the other and they share no load-bearing premise. (Neither is the narrower of the other.)
+
+4. PER-SIDE RESIDUE:
+- Specific to PASSAGE 1: black hole thermodynamics, Hawking evaporation temperature, quantum-gravity unification, the transplanckian-mode problem, and the existence of multiple independent confirming derivations/consistency checks.
+- Specific to PASSAGE 2: cosmic rays at >10^20 eV, the empirical CM-energy comparison to accelerators, the use of this to exclude speculative particles or macroscopic collision consequences, and the specific kinematic caveat about large produced-particle momentum affecting post-production evolution.

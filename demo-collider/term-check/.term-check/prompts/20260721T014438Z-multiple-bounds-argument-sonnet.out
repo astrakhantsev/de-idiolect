@@ -1,0 +1,25 @@
+**1. What the term denotes**
+
+An argument structure for showing that some catastrophic outcome is acceptably improbable, built not from a single calculation but from several logically independent sub-arguments, each of which — if sound — would on its own suffice to rule out (or sharply limit) the danger. The sub-arguments are not just piled up for redundancy; here they're arranged so that a later one only needs to be invoked if an earlier one fails, i.e., a primary argument backed by a contingent fallback.
+
+**2. Closest existing terms of art**
+
+- **Robustness analysis / triangulation** — philosophy of science (esp. philosophy of biology/modeling)
+- **Consilience of inductions / convergent evidence** — philosophy of science and epistemology
+- **Defense in depth** — safety/systems engineering (esp. nuclear and process safety)
+- **Weight-of-evidence / multiple lines of evidence** — environmental and ecological risk assessment
+- **Independent argument legs in an assurance case** — safety-critical systems/software engineering (assurance case methodology)
+
+**3. Oldest expected treatments**
+
+- Robustness analysis: Richard Levins, *The Strategy of Model Building in Population Biology* (1966); William Wimsatt, "Robustness, Reliability, and Overdetermination" (1981)
+- Consilience: William Whewell, *Philosophy of the Inductive Sciences* (1840); later formalized as "convergent validity" by Campbell & Fiske (1959, psychometrics)
+- Defense in depth: mid-20th-century US nuclear reactor safety doctrine, canonically associated with the Rasmussen Report / WASH-1400 (1975), though the principle predates that report
+- Weight of evidence: traceable informally to Austin Bradford Hill's causal criteria in epidemiology (1965); formalized in US EPA ecological/environmental risk assessment guidance from the 1990s–2000s
+- Assurance-case argument legs: safety-critical engineering literature from the 1990s, e.g. Tim Kelly's work on Goal Structuring Notation, and Bloomfield & Rushby's later taxonomy of assurance-case argument types
+
+**4. Fit of the best candidate, and the gap**
+
+*Defense in depth* is the closest match in spirit: it's explicitly about bounding risk (not just building positive confidence) through layers, and — unlike consilience — its classic formulations already allow for layers that activate only when a prior layer fails, matching the "only if this understanding is flawed will the next section come into play" structure in the excerpt. *Robustness analysis* and *consilience* capture the "independent lines converging on the same conclusion" idea well but are normally used for positive claims (this result is real/robust), not adversarial risk-bounding, and they don't naturally encode a sequential primary/fallback ordering.
+
+What doesn't fit cleanly anywhere: the excerpt shows only two sub-arguments (A1, A2) and a stated dependency between them (A2 is conditional on A1's failure), so it's ambiguous from this fragment alone whether the intended structure is (a) a genuinely parallel redundant set like defense-in-depth's independent barriers, or (b) a strictly hierarchical fallback chain, which is a narrower and less commonly named pattern in any of these fields — closer to a "primary argument plus contingency argument" than to the simultaneous, mutually reinforcing layers that defense-in-depth or consilience usually describe. A single paragraph isn't enough to tell whether later sub-arguments in the fuller document (A3, A4, etc.) are independent of each other or chained the same way, which would decide which established term ultimately fits best.

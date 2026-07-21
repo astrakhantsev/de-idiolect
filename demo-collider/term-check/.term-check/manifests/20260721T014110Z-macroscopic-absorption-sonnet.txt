@@ -1,0 +1,13 @@
+term: macroscopic absorption
+model: sonnet
+trigger: collider-demo
+prompt_sha256: ac27410a58630c13fb3b89b07d6ada7803679eb1862da4be991b38aa388179bc
+source_files: demo-collider/corpus/_work/sideB-prose.md
+tmp_cwd: fresh mktemp -d, removed after run
+tmp_home_policy: credentials file only (no settings/CLAUDE.md/memory)
+cwd_listing_before: [] (must be empty)
+cmd: HOME=<fresh> CLAUDE_CONFIG_DIR=<fresh>/.claude claude -p --model sonnet --disallowedTools <all>
+timeout: 300s via timeout
+date: 2026-07-21T01:41:10Z
+out_sha256: d7de043aa31154cf72d4369cd44349a3c775cbcbaf3c232161d05d0eed4a96f5
+status: ok  latency_s: 47

@@ -1,0 +1,15 @@
+[source: demo-collider/corpus/_work/sideC-prose.md]
+A new risk analysis of LHC black-hole production (Giddings and Mangano 2008)
+provides a good example of how risks can be more effectively bounded through
+multiple sub-arguments. While never attempting to give a probability of disaster
+(rather concluding "there is no risk of any significance whatsoever from such black
+holes") it uses a multiple bounds argument. It first shows that rapid black hole decay
+is a robust consequence of several different physical theories (A1). Second it discusses
+the likely incompatibility between non-evaporating black holes and mechanisms for
+neutralising black holes: in order for cosmic!ray–produced stable black holes to be
+innocuous but accelerator-produced black holes to be dangerous, they have to be
+able to shed excess charge rapidly (A2). Our current understanding of physics
+suggests both that black holes decay and that even if they didn’t, they would be
+unable to discharge themselves. Only if this understanding is flawed will the next
+section come into play.
+

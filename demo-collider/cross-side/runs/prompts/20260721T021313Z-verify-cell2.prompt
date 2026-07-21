@@ -1,0 +1,21 @@
+Below are two passages, PASSAGE 1 and PASSAGE 2, each taken from an unspecified technical document. Each describes a concept or argument. They may or may not be related.
+
+Your task is to judge whether the two concepts share a COMMON CORE PREMISE: a single underlying assumption, quantity, or mechanism that BOTH depend on, such that if that premise were wrong, both would be affected. Do not treat mere topical similarity ("both are about safety", "both mention the same kind of object") as a shared core premise.
+
+Answer with exactly these four labelled parts:
+1. CORE OF EACH: one sentence restating the core of PASSAGE 1, and one for PASSAGE 2, in neutral terms.
+2. SHARED CORE: Is there a single premise/mechanism both depend on? If yes, name it precisely and explain how each passage relies on it. If no, say "NONE" and explain why they are independent (e.g. complementary or alternative arguments).
+3. RELATION: classify using one of these labels verbatim — exactMatch, broadMatch, narrowMatch, relatedMatch, or NO-MATCH. If broadMatch/narrowMatch, state which passage is the narrower one. (relatedMatch = associated but neither contains the other and they share no load-bearing premise; NO-MATCH = essentially unrelated.)
+4. PER-SIDE RESIDUE: what is specific to PASSAGE 1 that PASSAGE 2 does not share, and vice versa.
+
+"NONE / NO-MATCH / relatedMatch" are fully acceptable answers — many pairs genuinely do not share a core. Judge only from the two passages.
+
+PASSAGE 1:
+
+
+One of the most profound steps so far towards the yet-incomplete unification of quantum mechanical and gravitational principles was Hawking's discovery that black holes evaporate. This provided an important missing link in the pre-existing laws of black hole thermodynamics, by explicitly calculating the temperature that characterizes a radiating black hole. While Hawking's result has become nearly universally accepted, it is certainly true that elements of the original derivation of black hole radiance rely on assumptions that are apparently not valid. Notable among these is the use of modes of ultra-planckian frequencies at intermediate steps in the derivation. This naturally raises the question of the robustness of the result. Belief in the robustness of Hawking's prediction of nearly thermal evaporation has been boosted by arguments for the result which have now been produced from several different directions. These derivations have the virtue of either facing head-on the issue of the transplanckian modes, or being independent of them, and the basic effect has survived a number of important consistency checks.
+
+PASSAGE 2:
+
+
+Cosmic rays hit Earth with energies known to exceed 10^20 eV, corresponding to center-of-mass (CM) energies exceeding 100 TeV. Thus, anything that can be made with Earth-based accelerators up to this energy is already being made by nature. This argument can be used to effectively rule out the existence of particles predicted by some speculative scenarios, or to exclude possible macroscopic consequences of high energy collisions, as discussed for example in the literature. This argument requires however more attention if the large momentum imparted to the produced particles by the cosmic-ray kinematics has an impact on how they evolve after production.

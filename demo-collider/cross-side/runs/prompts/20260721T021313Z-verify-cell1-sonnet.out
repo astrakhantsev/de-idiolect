@@ -1,0 +1,12 @@
+1. CORE OF EACH:
+PASSAGE 1 sets up the general physics framework for black-hole accretion inside astronomical bodies, defining mass growth as dM/dt = π r_c² F, governed by capture radius and mass flux.
+PASSAGE 2 applies accretion reasoning specifically to argue that a hypothetical LHC-produced black hole trapped in a white dwarf would accrete the star faster than an Earth-trapped black hole would accrete Earth, and uses this comparison plus observed white dwarf survival times to infer Earth's safety.
+
+2. SHARED CORE:
+Yes — both rely on the same underlying mechanism: the black hole accretion-rate formula (mass growth rate set by capture radius and ambient matter flux/density, dM/dt ∝ r_c² F). Passage 1 states this formula as the general governing law it will use to estimate growth timescales. Passage 2's entire comparative argument (white dwarfs accrete faster than Earth) is a direct application of that same rate law — it depends on the fact that accretion rate scales with local density/pressure/state of matter (liquid vs. solid) that enter into F and r_c. If the premise that accretion rate is governed by this r_c²·F relationship (and that density/state of matter meaningfully set F) were wrong, Passage 2's comparative claim about white dwarfs vs. Earth would collapse, and Passage 1's entire framework would be undermined too.
+
+3. RELATION: broadMatch — PASSAGE 1 is the broader passage (it presents the general accretion framework and formula), and PASSAGE 2 is the narrower passage (a specific applied case study using that same framework to compare white dwarf vs. Earth accretion for a safety argument).
+
+4. PER-SIDE RESIDUE:
+Specific to PASSAGE 1: the general definitions of capture radius vs. Schwarzschild radius, the two possible sources of flux (black hole motion vs. constituent motion), and the stated goal of estimating pessimistic/fastest-growth timescales in general astronomical bodies.
+Specific to PASSAGE 2: the LHC/TeV-gravity black-hole production scenario, cosmic-ray production on white dwarfs, magnetic field constraints, the liquid-vs-solid state-of-matter argument, and the specific inference chain concluding Earth's safety from observed white dwarf survival times.

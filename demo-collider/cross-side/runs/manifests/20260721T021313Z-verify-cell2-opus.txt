@@ -1,0 +1,8 @@
+label: verify-cell2
+model: opus
+prompt_sha256: d3a076eff21eb8ae1500e49c4bfcbc0cd33bcbf7282daf0f0d39175b067e8ea0
+tmp_home_policy: credentials file only (no settings/CLAUDE.md/memory)
+cwd_listing_before: [] (must be empty)
+cmd: HOME=<fresh> CLAUDE_CONFIG_DIR=<fresh>/.claude claude -p --model opus --disallowedTools <all>
+date: 2026-07-21T02:14:28Z
+out_sha256: fe2727b37a31a268f0aa72d224736b606f22bdb763ec74a76601b5758ee74118

@@ -1,0 +1,34 @@
+## 1. What the term denotes
+
+A conclusion (here, "the process is safe") is established not by one chain of reasoning but by several logically independent sub-arguments, *each of which would on its own be enough* to rule the bad outcome out — so the conclusion fails only if all of them fail together. The excerpt also adds an ordering: later sub-arguments are held in reserve and only become relevant if the earlier, more robust ones turn out to be wrong.
+
+## 2. Established terms of art (closest first)
+
+1. **Defense in depth** — safety / reliability engineering (esp. nuclear-reactor safety). Multiple independent barriers, any one of which suffices.
+2. **Robustness / robustness analysis** — philosophy of science and mathematical modeling. A result trusted because it is derivable by several independent routes.
+3. **Convergent argument** (as opposed to a *linked* argument) — informal logic / argumentation theory. Several independent premise-sets each supporting the same conclusion.
+4. **Consilience of inductions** — philosophy of science / epistemology. Independent lines converging on one conclusion.
+5. **Triangulation** — social-science methodology. Corroboration of a finding by methodologically independent measures.
+
+(Adjacent but *not* the right fit: the **union bound / Boole's inequality** in probability bounds a *disjunction* of failures — the opposite combinator. The structure here is a conjunction of failures, i.e. reliability of a *parallel/redundant* system, whose failure probability is the product under independence.)
+
+## 3. Oldest / classic treatments I'd expect
+
+- **Defense in depth**: origin in military strategy; formalized for engineered systems via fault-tree analysis — H. Watson / Bell Labs on the Minuteman program (early 1960s) — and codified in U.S. reactor-safety practice (AEC/NRC, 1960s–70s). Foundational reliability-of-redundant-components result: **von Neumann**, "Probabilistic Logics and the Synthesis of Reliable Organisms from Unreliable Components" (1956).
+- **Robustness**: **Richard Levins**, "The Strategy of Model Building in Population Biology" (1966); **William Wimsatt**, "Robustness, Reliability, and Overdetermination" (1981).
+- **Convergent vs. linked arguments**: **Monroe Beardsley**, *Practical Logic* (1950); **Stephen Thomas**, *Practical Reasoning in Natural Language* (1970s).
+- **Consilience of inductions**: **William Whewell**, *The Philosophy of the Inductive Sciences* (1840).
+- **Triangulation**: **Campbell & Fiske**, multitrait–multimethod / convergent validation (1959); **Webb et al.**, *Unobtrusive Measures* (1966).
+
+## 4. How well the best candidate covers it, and what doesn't fit
+
+The safety-engineering flavor is captured best by **defense in depth**: independent barriers, each individually sufficient, so the system fails only on joint failure. The *epistemic* flavor — trusting a claim because it survives several independent derivations (A1 robust across "several different physical theories") — is exactly **robustness analysis**. The bare logical shape is a **convergent argument**.
+
+What no single term of art cleanly bundles is the conjunction of three features present here:
+- each sub-argument is independently **sufficient to bound the outcome**, not merely a piece of accumulating evidence (this rules out consilience/triangulation, which are about *confirming a positive fact* by convergence, not about upper-bounding a catastrophe);
+- the sub-arguments are arranged as a **conditional cascade / ordered fallback** ("only if this understanding is flawed will the next section come into play") — a hierarchy of defeaters, which defense-in-depth's *parallel* barriers don't quite express;
+- the target is an **upper bound on a disaster probability reached without ever stating a probability** — a qualitative bounding, unlike the quantitative redundancy calculus of reliability engineering.
+
+Net: "multiple bounds argument" is a local coinage for what is essentially **defense in depth realized at the level of arguments rather than physical barriers**, shading into **robustness** on the epistemic side. That is a real and adequately-named concept; the only genuinely distinctive twist in this usage is the explicit *ranked-fallback* structure, for which the nearest vocabulary is **defeaters / defeasible reasoning** in argumentation theory rather than any of the convergence terms.
+
+One caveat on determinacy: a single paragraph is thin. It's clear the sub-arguments are meant to be independent and individually sufficient, but the excerpt doesn't say whether the author treats their *combination* quantitatively (multiplying failure probabilities) or purely qualitatively — that distinction is what would decide between the reliability-engineering reading and the informal-logic reading.

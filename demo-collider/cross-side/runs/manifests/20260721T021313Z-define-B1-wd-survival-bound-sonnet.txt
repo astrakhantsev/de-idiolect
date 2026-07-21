@@ -1,0 +1,8 @@
+label: define-B1-wd-survival-bound
+model: sonnet
+prompt_sha256: 27265368e171a152399b0e24910fe010bf85405de0732a71e6f317d34358dd22
+tmp_home_policy: credentials file only (no settings/CLAUDE.md/memory)
+cwd_listing_before: [] (must be empty)
+cmd: HOME=<fresh> CLAUDE_CONFIG_DIR=<fresh>/.claude claude -p --model sonnet --disallowedTools <all>
+date: 2026-07-21T02:13:18Z
+out_sha256: 3f0eab461844ad3a28a53d2ab8f5bc358b5f0f5f856a047d48b485614da53f19

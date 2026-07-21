@@ -1,0 +1,21 @@
+**1. What the term denotes (plain language):**
+The elapsed time for something undergoing repeated random scattering (a random walk, characterized by a shortest mean free path and a correspondingly reduced average speed) to work its way down through a bounding outer layer, where a steady downward pull adds a net directional drift on top of the random motion. The paragraph is deriving a lower bound on this time from the slowest point in the layer.
+
+**2. Closest established terms of art:**
+- **Diffusion time / radiative diffusion timescale** — stellar astrophysics (radiative transfer)
+- **Gravitational settling time / diffusive settling** — stellar astrophysics (element stratification in stars, white dwarfs)
+- **Thermalization time / capture-and-sink time** — astroparticle physics (dark matter capture in stars/compact objects)
+- **First-passage time of a biased random walk (Kramers problem)** — statistical mechanics / stochastic processes
+- **Drift-diffusion transit time** — semiconductor device physics
+
+**3. Oldest expected treatments:**
+- Diffusion time: Eddington, *The Internal Constitution of the Stars* (1926); Rosseland's opacity/diffusion-approximation work (1920s)
+- Gravitational settling: Schatzman (1958) on diffusion in stellar envelopes; Burgers, *Flow Equations for Composite Gases* (1969) for the multi-species diffusion formalism later applied to settling
+- Thermalization/capture time: Press & Spergel (1985) and Goldman & Nussinov (1989) on particle capture and thermalization in stars/neutron stars; this lineage is what later astroparticle papers on WIMP capture in compact objects build on
+- First-passage/biased random walk: Kramers, "Brownian Motion in a Field of Force" (1940); underlying Brownian-motion math traces to Einstein (1905) and Smoluchowski
+- Drift-diffusion transit time: Shockley-era semiconductor transport theory (1950s), itself built on the same Einstein/Smoluchowski drift-diffusion relation
+
+**4. Coverage assessment:**
+The mechanics described — mean free path setting a random-walk step, a velocity floor at the point of slowest transport, and a gravitational term added as a drift — is fully standard territory for the "gravitational settling time" / "thermalization time" family in stellar and astroparticle physics; the math (diffusion coefficient plus drift velocity, bounding the transit time by the worst-case point in the profile) is the same machinery used there. Given the femtometer-cubed density scale ($\rho = m_p/\mathrm{fm}^3$, i.e., nuclear density) and the word "crust," this reads specifically like a particle (possibly a WIMP or other exotic particle) working through a neutron-star crust toward the core — which would place it in the dark-matter-capture-in-neutron-stars literature rather than ordinary stellar settling.
+
+What doesn't fully pin down to one term from the excerpt alone: I can't tell what is doing the penetrating (photon, neutron, dark-matter particle) or what "crust" physically is (neutron-star crust, planetary crust, or something else), and those choices are exactly what decides whether the field's own vocabulary would call this a "settling time," a "thermalization time," or a "diffusion time." The excerpt gives the physics but not the referent, so "crust penetration time" is very likely just this project's ad hoc label for a diffusion-with-drift transit time whose established name depends on that missing context.

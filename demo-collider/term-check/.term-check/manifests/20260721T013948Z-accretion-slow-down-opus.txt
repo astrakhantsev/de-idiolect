@@ -1,0 +1,13 @@
+term: accretion slow-down
+model: opus
+trigger: collider-demo
+prompt_sha256: a2709d7099c09ad59ffce5c223a245d92f56332716f8484b5b95d82f828ddf1d
+source_files: demo-collider/corpus/_work/sideA-prose.md
+tmp_cwd: fresh mktemp -d, removed after run
+tmp_home_policy: credentials file only (no settings/CLAUDE.md/memory)
+cwd_listing_before: [] (must be empty)
+cmd: HOME=<fresh> CLAUDE_CONFIG_DIR=<fresh>/.claude claude -p --model opus --disallowedTools <all>
+timeout: 300s via timeout
+date: 2026-07-21T01:40:26Z
+out_sha256: 5b199adca9b9c48e09425bb596694f53d7cc09030d1d85cf59b4b8311a60b629
+status: ok  latency_s: 44

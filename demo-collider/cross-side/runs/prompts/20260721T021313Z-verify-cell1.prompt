@@ -1,0 +1,21 @@
+Below are two passages, PASSAGE 1 and PASSAGE 2, each taken from an unspecified technical document. Each describes a concept or argument. They may or may not be related.
+
+Your task is to judge whether the two concepts share a COMMON CORE PREMISE: a single underlying assumption, quantity, or mechanism that BOTH depend on, such that if that premise were wrong, both would be affected. Do not treat mere topical similarity ("both are about safety", "both mention the same kind of object") as a shared core premise.
+
+Answer with exactly these four labelled parts:
+1. CORE OF EACH: one sentence restating the core of PASSAGE 1, and one for PASSAGE 2, in neutral terms.
+2. SHARED CORE: Is there a single premise/mechanism both depend on? If yes, name it precisely and explain how each passage relies on it. If no, say "NONE" and explain why they are independent (e.g. complementary or alternative arguments).
+3. RELATION: classify using one of these labels verbatim — exactMatch, broadMatch, narrowMatch, relatedMatch, or NO-MATCH. If broadMatch/narrowMatch, state which passage is the narrower one. (relatedMatch = associated but neither contains the other and they share no load-bearing premise; NO-MATCH = essentially unrelated.)
+4. PER-SIDE RESIDUE: what is specific to PASSAGE 1 that PASSAGE 2 does not share, and vice versa.
+
+"NONE / NO-MATCH / relatedMatch" are fully acceptable answers — many pairs genuinely do not share a core. Judge only from the two passages.
+
+PASSAGE 1:
+
+
+Our interest is in accretion of black holes trapped inside astronomical bodies such as planets, stars, neutron stars, etc. One parameter governing this accretion is the effective capture radius r_c(M) of the black hole, for a given mass. This is the radius out to which the gravitational field of the black hole succeeds in attracting matter that will eventually be absorbed. The other parameter is the flux of mass towards the black hole, F. Specifically, the black hole mass grows as dM/dt = pi r_c^2 F. [...] The flux can arise either from the motion of the black hole relative to the body, or from the motion of the constituents of the body relative to the black hole. In the case where the dominant effect is the velocity v of the black hole, we have F = rho v [...] where rho is the mass density near the capture radius. [...] The capture radius r_c is frequently different from the Schwarzschild radius R, and depends on the size and state of motion of the black hole, as well as on properties of the surrounding medium. [...] Our goal will be to estimate, under the most pessimistic assumptions, namely of fastest possible growth, the timescale required for accretion of black holes to macroscopic size.
+
+PASSAGE 2:
+
+
+This and the preceding sections have argued that in the hypothetical TeV-scale gravity scenarios possibly relevant to LHC, 1) cosmic rays will produce significant numbers of black holes on white dwarfs of low (few x 10^5 G) magnetic fields, on time scales short as compared to known white dwarf lifetimes; 2) such black holes, even if neutral and with the highest masses accessible at the LHC, will be stopped on white dwarfs with masses M >~ M_sun, by accreting and scattering the dense matter of the star during their transit; and 3) the white dwarf will then be accreted. Accretion of a white dwarf has been argued to be more rapid than that of Earth. Different considerations reinforce this statement. First, before the ~Gyr time scale, white dwarf matter is in a liquid form, in contrast to significant solidity of matter in Earth. Second, white dwarfs pack the mass of the Sun into a region the size of the Earth, so are much more dense, and have much higher internal pressures, assisting accretion. [...] The above arguments thus state that comparison of respective accretion rates, together with survival of white dwarfs to observed time scales >~ 10^8 years, implies survival of Earth for a significantly longer time, and in particular longer than the natural solar lifetime.

@@ -1,0 +1,8 @@
+label: define-A2-hawking-decay
+model: sonnet
+prompt_sha256: 163174e1a6c2852fb5c071082c3b80df488df1e603c0abe73488bed93e8d0d4f
+tmp_home_policy: credentials file only (no settings/CLAUDE.md/memory)
+cwd_listing_before: [] (must be empty)
+cmd: HOME=<fresh> CLAUDE_CONFIG_DIR=<fresh>/.claude claude -p --model sonnet --disallowedTools <all>
+date: 2026-07-21T02:13:25Z
+out_sha256: fdd5e88d6a0c0cc1e33db9e4f8782fa0435db8271ed5496062a8dbf36e5720e3

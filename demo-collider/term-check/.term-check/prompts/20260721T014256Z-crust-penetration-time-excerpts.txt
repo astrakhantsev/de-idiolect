@@ -1,0 +1,3 @@
+[source: demo-collider/corpus/_work/sideB-prose.md]
+The mean free path $d_{free}$ reaches a minimum near the bottom of the crust, and consequently the average velocity is slowest there. We can therefore bound the crust penetration time by using $\rho = {m_{p}/{fm}^{3}}$ to derive a minimum gravitational drift velocity and time:
+

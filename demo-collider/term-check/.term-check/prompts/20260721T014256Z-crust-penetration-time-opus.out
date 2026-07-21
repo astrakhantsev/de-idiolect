@@ -1,0 +1,40 @@
+## 1. What the term appears to denote
+
+The time for a body to travel all the way through a bounded material layer (here, the dense outer shell of a compact star) when its speed is not free but is capped by collisions with the medium: scattering sets a short mean free path, which limits the object to a slow terminal fall speed under gravity, and the traversal time is dominated by (and bounded from the slow-velocity extreme of) the region where scattering is densest.
+
+In short: **a gravity-driven, drag-limited traversal (settling) time through a resisting slab.**
+
+## 2. Established terms of art (closest first)
+
+| Term of art | Field that owns it |
+|---|---|
+| **Gravitational settling / sedimentation time** (terminal-velocity–limited) | fluid dynamics, colloid science; stellar astrophysics (element diffusion/settling in stellar interiors and WD/NS envelopes) |
+| **Terminal (drift) velocity; mobility-limited drift time** | transport physics; plasma & semiconductor transport (drift velocity = mobility × force) |
+| **First-passage / mean transit time** under drift–diffusion | stochastic processes, statistical physics |
+| **Diffusion (crossing) time** through a slab | neutron/radiative transport theory |
+| **Stopping time / stopping range** of a body slowing in matter | nuclear & radiation physics |
+
+## 3. Oldest / classic treatments you'd expect
+
+- **Settling / terminal velocity:** Stokes (1851) on the drag on a sphere; the whole "Stokes settling velocity" lineage. For astrophysical settling/diffusion: Chapman & Cowling, *The Mathematical Theory of Non-Uniform Gases* (1939/1952); later Michaud (1970s) on stellar element diffusion.
+- **Terminal drift / mobility:** kinetic-theory drift-velocity results running back through Chapman–Cowling and Langevin-era mobility theory (early 1900s).
+- **First-passage / drift–diffusion:** Einstein (1905) and Smoluchowski (1906) on Brownian motion; Chandrasekhar, "Stochastic Problems in Physics and Astronomy" (1943); Kramers (1940) escape times; modern synthesis in Redner, *A Guide to First-Passage Processes* (2001).
+- **Diffusion/crossing time:** classical neutron-diffusion and radiative-transport texts of the mid-20th century (e.g. random-walk photon/neutron escape-time arguments).
+- **Stopping time/range:** Bohr (1913) and Bethe (1930s) stopping-power theory.
+
+(Author/decade only, as requested; I have not manufactured exact citations.)
+
+## 4. Fit of the best candidate, and residue
+
+The best match is **gravitational settling / sedimentation time at terminal velocity** (equivalently, mobility-limited gravitational drift). The excerpt's exact logic — mean free path minimizes → drift velocity is set by gravity balanced against scattering drag → integrate/bound to get a traversal time — *is* the standard terminal-velocity settling calculation. Established fields cover this fully; the physics is not novel, only the name is.
+
+Two things about the usage sit slightly outside the plain "sedimentation" label:
+
+- **"Penetration" framing.** Sedimentation normally describes a native constituent settling within its own medium; "penetration" connotes a *foreign* intruder entering and crossing the slab from outside. That reframes the same drag-limited-drift math as an intrusion/traversal problem — but it adds no new mechanism, so it's still the same concept under a border-crossing name.
+- **The bounding move.** The excerpt does not compute the settling time; it *bounds* it by evaluating at the slowest-velocity (minimum-mean-free-path) point. That's a worst-case estimate layered on top of the standard concept, not a distinct one.
+
+**What the single paragraph underdetermines** (so I won't guess):
+- **What is penetrating** — a microscopic particle, a macroscopic intruder (strangelet, dark-matter clump, primordial black hole), or a diffusing chemical species. This decides whether the right owner is stochastic first-passage (small particle, random walk) vs. deterministic terminal-velocity settling (macroscopic body).
+- **Whether motion is deterministic drift or diffusive.** The chain "mean free path → velocity → time" reads as deterministic terminal drift, which would make the stochastic first-passage / diffusion-time candidates overkill — but the excerpt doesn't state the transport regime or the drag law, so I can't fix this from the text alone.
+
+If you can supply the identity of the penetrating object and whether its transport is treated as drift or diffusion, the choice between "sedimentation/settling time" and "first-passage time" becomes determinate.

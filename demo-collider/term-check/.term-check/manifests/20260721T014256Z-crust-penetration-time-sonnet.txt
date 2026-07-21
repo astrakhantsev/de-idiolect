@@ -1,0 +1,13 @@
+term: crust penetration time
+model: sonnet
+trigger: collider-demo
+prompt_sha256: be8fc23a5d188ac2b0e71a90d07f24b74b4d3abb747ca410840b3c080325aa90
+source_files: demo-collider/corpus/_work/sideB-prose.md
+tmp_cwd: fresh mktemp -d, removed after run
+tmp_home_policy: credentials file only (no settings/CLAUDE.md/memory)
+cwd_listing_before: [] (must be empty)
+cmd: HOME=<fresh> CLAUDE_CONFIG_DIR=<fresh>/.claude claude -p --model sonnet --disallowedTools <all>
+timeout: 300s via timeout
+date: 2026-07-21T01:42:56Z
+out_sha256: 1b9ebc92d1f970890d12914c50013e3731cc08f175a23871730b8d99b79965f2
+status: ok  latency_s: 45

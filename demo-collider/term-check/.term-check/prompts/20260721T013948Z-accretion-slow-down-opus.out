@@ -1,0 +1,31 @@
+## 1. What the term denotes
+
+The momentum loss (deceleration) a moving massive body suffers because it *captures and absorbs* the particles it runs into: each swallowed particle adds its mass to the body but carries away net forward momentum relative to the body's motion, so the enlarged body moves slower. It is the drag contribution from direct capture, as distinct from the drag from merely deflecting particles that are *not* captured (which the same document calls "Coulomb slow-down").
+
+## 2. Established terms of art (closest first)
+
+1. **Accretion drag / Bondi–Hoyle–Lyttleton (BHL) drag** — astrophysics / accretion theory. The drag on a compact object moving through a medium, arising from the momentum of the material it accretes within its capture radius. This is the direct match.
+2. **Variable-mass ("sweep-up") dynamics; the growing-raindrop / Meshchersky problem** — classical mechanics. A body that accretes mass as it moves and decelerates to conserve momentum.
+3. **Snowplow (momentum-conserving) phase** — astrophysics of supernova remnants / blast waves. A shell slows as it sweeps up and incorporates ambient mass.
+4. **Ram-pressure / geometric-capture drag** — plasma & interstellar-medium physics. Deceleration set by the flux of mass intercepted by a physical (here, gravitational) capture cross-section.
+5. **Dynamical friction** — stellar dynamics / plasma kinetics — listed only to *exclude* it: this is the scattering-without-capture channel, i.e. the document's "Coulomb slow-down," not "accretion slow-down."
+
+## 3. Oldest / classic treatments
+
+- **Accretion drag (BHL):** Hoyle & Lyttleton (1939, *Proc. Camb. Phil. Soc.*); Bondi & Hoyle (1944, *MNRAS*); Bondi (1952). Later standard: Edgar's review (2004).
+- **Variable-mass / raindrop:** Meshchersky (1897); the falling-raindrop problem appears throughout early-20th-century mechanics texts (e.g. Lamb, Whittaker); Tsiolkovsky (1903) for the rocket-equation lineage.
+- **Snowplow phase:** Oort (1951); Sedov (1959); Cox (1972); McKee & Ostriker (1977).
+- **Ram-pressure:** Gunn & Gott (1972) for the interstellar/galactic ram-pressure formulation.
+- **Dynamical friction (the excluded neighbor):** Chandrasekhar (1943, *ApJ*) — matches their "Coulomb slow-down," named by analogy to Coulomb scattering.
+
+## 4. Fit of the best candidate, and what doesn't fit
+
+**Accretion drag (BHL)** covers the concept well: a body moving through a particle background loses momentum to the material it captures, gaining mass in the process — exactly the mechanism described. The document's own pairing (scattering channel = dynamical friction/"Coulomb," capture channel = "accretion") reproduces the standard split between deflection drag and accretion drag, so "accretion slow-down" is essentially a rebranding of accretion drag.
+
+What does not cleanly fit the classic candidate:
+- **Collisionless, per-particle capture rather than hydrodynamic gas.** Canonical BHL is a fluid/gas treatment with a pressure and sound speed. Here the medium is discrete particles (cosmic-ray context) interacting *only gravitationally*, so the relevant object is a gravitational *capture cross-section* for individual quanta, closer to kinetic-theory / geometric-capture drag than to the Bondi gas formulae.
+- **Relativistic mass–energy bookkeeping.** The clause "possibly emitting some radiation, and typically increasing its mass" implies a full energy–momentum balance (absorbed energy, radiated losses) that the Newtonian BHL and raindrop treatments don't carry.
+
+Neither gap changes the identification — the concept is *accretion drag* — they just mark that the usage sits in a collisionless, relativistic regime where you'd compute the capture cross-section from geodesics rather than from Bondi's gas formulae.
+
+Nothing in the excerpt is underdetermined for naming purposes; the one thing left unspecified is the *medium's* nature (are these the cosmic-ray particles themselves, or an ambient background?), which would decide whether the ram-pressure/capture-cross-section framing or the gas BHL framing is the more precise reference.

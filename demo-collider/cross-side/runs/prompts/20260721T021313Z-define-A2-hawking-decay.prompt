@@ -1,0 +1,11 @@
+Below is an excerpt from a technical document that repeatedly uses one central concept. From the excerpt ALONE, write a short, self-contained, operational definition of that concept: what kind of thing it is, its inputs and outputs, what it asserts, and when it applies.
+
+Hard constraints:
+- Use only ordinary, domain-neutral words and simple notation.
+- Do NOT use any proper nouns: no names of people, methods, theories, fields, instruments, or specific physical objects. Describe roles generically (e.g. "a compact heavy object", "a surrounding medium"), not by name.
+- Two to four sentences. Do not restate these instructions.
+
+EXCERPT:
+
+
+One of the most profound steps so far towards the yet-incomplete unification of quantum mechanical and gravitational principles was Hawking's discovery that black holes evaporate. This provided an important missing link in the pre-existing laws of black hole thermodynamics, by explicitly calculating the temperature that characterizes a radiating black hole. While Hawking's result has become nearly universally accepted, it is certainly true that elements of the original derivation of black hole radiance rely on assumptions that are apparently not valid. Notable among these is the use of modes of ultra-planckian frequencies at intermediate steps in the derivation. This naturally raises the question of the robustness of the result. Belief in the robustness of Hawking's prediction of nearly thermal evaporation has been boosted by arguments for the result which have now been produced from several different directions. These derivations have the virtue of either facing head-on the issue of the transplanckian modes, or being independent of them, and the basic effect has survived a number of important consistency checks.

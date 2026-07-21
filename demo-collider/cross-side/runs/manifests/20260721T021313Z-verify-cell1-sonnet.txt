@@ -1,0 +1,8 @@
+label: verify-cell1
+model: sonnet
+prompt_sha256: a683ca3b74c9ac2900c3e1ffa6a987b70c6dc89ca66e3189cafb8771783fb654
+tmp_home_policy: credentials file only (no settings/CLAUDE.md/memory)
+cwd_listing_before: [] (must be empty)
+cmd: HOME=<fresh> CLAUDE_CONFIG_DIR=<fresh>/.claude claude -p --model sonnet --disallowedTools <all>
+date: 2026-07-21T02:13:39Z
+out_sha256: bf15a1dfa77df29dcbb6442e5f8f7ee774897cfdad849e377387a7d1784f1be2

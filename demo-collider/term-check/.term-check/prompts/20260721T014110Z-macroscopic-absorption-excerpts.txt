@@ -1,0 +1,3 @@
+[source: demo-collider/corpus/_work/sideB-prose.md]
+Like in atomic matter, one might expect different phases for black hole accretion within a NS, depending on the relative range of the black hole’s influence as compared to the radii $R_{D}$, $R_{C}$ representing crossover to lower-dimensional behavior, and as compared to $1\operatorname{}{fm}$, the characteristic separation between nucleons, which delineates the crossover from microscopic to macroscopic absorption in the NS context.
+

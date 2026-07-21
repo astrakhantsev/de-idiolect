@@ -1,0 +1,11 @@
+Below is an excerpt from a technical document that repeatedly uses one central concept. From the excerpt ALONE, write a short, self-contained, operational definition of that concept: what kind of thing it is, its inputs and outputs, what it asserts, and when it applies.
+
+Hard constraints:
+- Use only ordinary, domain-neutral words and simple notation.
+- Do NOT use any proper nouns: no names of people, methods, theories, fields, instruments, or specific physical objects. Describe roles generically (e.g. "a compact heavy object", "a surrounding medium"), not by name.
+- Two to four sentences. Do not restate these instructions.
+
+EXCERPT:
+
+
+Our interest is in accretion of black holes trapped inside astronomical bodies such as planets, stars, neutron stars, etc. One parameter governing this accretion is the effective capture radius r_c(M) of the black hole, for a given mass. This is the radius out to which the gravitational field of the black hole succeeds in attracting matter that will eventually be absorbed. The other parameter is the flux of mass towards the black hole, F. Specifically, the black hole mass grows as dM/dt = pi r_c^2 F. [...] The flux can arise either from the motion of the black hole relative to the body, or from the motion of the constituents of the body relative to the black hole. In the case where the dominant effect is the velocity v of the black hole, we have F = rho v [...] where rho is the mass density near the capture radius. [...] The capture radius r_c is frequently different from the Schwarzschild radius R, and depends on the size and state of motion of the black hole, as well as on properties of the surrounding medium. [...] Our goal will be to estimate, under the most pessimistic assumptions, namely of fastest possible growth, the timescale required for accretion of black holes to macroscopic size.

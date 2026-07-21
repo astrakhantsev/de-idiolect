@@ -6,3 +6,13 @@ __pycache__/
 .DS_Store
 /.term-check/
 term-flags.md
+
+# demo-collider working corpus: full third-party paper texts and the per-side
+# working files are NOT committed (copyright boundary — see demo-collider/README.md).
+# Committed instead: corpus/manifest.md, corpus/fetch.sh, and the tools' own
+# paragraph-level excerpt receipts.
+demo-collider/corpus/_work/
+# term-scan detection prompts embed bulk downsampled prose; route scan state here
+# and keep it out of git. The prose-free detection manifests are copied to
+# demo-collider/scan/manifests/ and committed.
+demo-collider/scan/.term-check-scan/

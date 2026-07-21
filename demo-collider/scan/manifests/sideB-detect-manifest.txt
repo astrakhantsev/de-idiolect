@@ -1,0 +1,17 @@
+phase: 1 (detect)
+date: 2026-07-21T01:32:02Z
+paths: demo-collider/corpus/_work/sideB-prose.md
+includes: *.md,*.txt,*.rst
+excludes (default+user): GLOSSARY* glossary* 99_private GLOSSARY-SEED.md scan-candidates.md term-flags.md sideB-SEED.md sideB-candidates.md sideB-term-flags.md
+files_matched: 1 (per-file words in 20260721T013202Z-detect-filelist.txt)
+words_total: 3953   words_in_prompt: 3953   cap: 18000
+paragraphs: kept 84 of 84
+sampling: full (3953 words <= cap 18000)
+detect_model: sonnet
+prompt_sha256: a8c06d062cefbb37ba0e902877729bf6a4435d2de2954453e9f49c96aa457a8d
+isolation: fresh cwd + fresh HOME (credentials only) + CLAUDE_CONFIG_DIR pinned + all tools disallowed
+timeout: 300s via timeout
+cwd_listing_before: [] (must be empty)
+tmp_home_policy: credentials file only (no settings/CLAUDE.md/memory)
+out_sha256: 1df928edb57abae583304fe6b1f538ebafc57ee6d7b1d3fb7cec4cebe9cfdec7
+status: ok  latency_s: 91
