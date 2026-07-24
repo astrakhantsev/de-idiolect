@@ -1,0 +1,11 @@
+{
+  "_note": "TEMPLATE for recall_extender.py --concepts (schema documented in prototype/README.md's 'run it on your own corpus' section, added 2026-07-23). Each entry needs 'term' (the community's own name for the thing) and 'naive_question' (a plain lay question that circles the concept without naming it -- the retrieval baseline the definition is compared against; it is fine to reuse the same naive_question across all your concepts, as the shipped corpus.json/concepts.json do). Two ways to fill in the rest, matching the two run modes: SCORED (has an answer key) -- add 'owning_community' naming a community value that exists in your corpus file, so the tool can measure the rank of that community's own documents (the routing-gain measurement, see prototype/README.md's worked-run table). Provide 'constrained_definition' by hand (a plain-language, community-neutral description -- do NOT use the term itself, any proper name, or the field/community's own name -- see llm_backend.py's DEFINE_PROMPT for the exact constraints), OR omit it and pass --backend claude to generate one live. UNSCORED / --define-only (no answer key) -- omit 'owning_community' entirely, or run with the --define-only flag regardless of what the concepts file contains. The tool still ranks corpus documents against your naive_question / raw term / definition, but reports the ranked list only -- no owner-rank accuracy metric, because there is nothing to check it against. Either way the output is a DEMONSTRATION that the retrieval interface runs on your data, not a validated measurement, unless you independently verify the ranking against ground truth you trust.",
+  "concepts": [
+    {
+      "term": "your community's own term for the thing",
+      "owning_community": "community-a",
+      "naive_question": "a plain lay question that does not use the term or name the field",
+      "constrained_definition": "A hand-written, community-neutral definition -- 2-4 sentences, plain words, no jargon, no proper names, does not use the term itself. Delete this key to require live generation via --backend claude; delete 'owning_community' too (or pass --define-only) for the unscored path."
+    }
+  ]
+}

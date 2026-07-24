@@ -1,0 +1,317 @@
+{
+  "backend": "fixtures",
+  "embedding_model": "BAAI/bge-large-en-v1.5",
+  "keyness": {
+    "collider-theory": [
+      "black",
+      "hole",
+      "black hole",
+      "radius",
+      "slow",
+      "mass",
+      "parameter",
+      "hawking"
+    ],
+    "collider-bounds": [
+      "white",
+      "earth",
+      "time",
+      "dwarfs",
+      "white dwarfs",
+      "dwarf",
+      "10",
+      "cosmic"
+    ]
+  },
+  "concepts": [
+    {
+      "term": "accretion slow-down",
+      "owning_community": "collider-theory",
+      "definition": "A reduction in a moving compact object's speed that happens specifically because the object is capturing nearby matter into itself as it travels, gaining mass in the process, as distinct from slowing that comes only from gravitationally deflecting nearby matter without taking any of it in.",
+      "definition_source": "fixture",
+      "retrieval": {
+        "naive_question": {
+          "top3": [
+            [
+              "BD1",
+              0.6731
+            ],
+            [
+              "TH6",
+              0.6419
+            ],
+            [
+              "TH5",
+              0.6398
+            ]
+          ],
+          "owner_best_rank": 2,
+          "owner_mean_rank": 6.33,
+          "owner_ranks": [
+            2,
+            3,
+            6,
+            8,
+            9,
+            10
+          ]
+        },
+        "raw_term": {
+          "top3": [
+            [
+              "TH6",
+              0.7371
+            ],
+            [
+              "TH5",
+              0.6251
+            ],
+            [
+              "BD2",
+              0.6192
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 6.67,
+          "owner_ranks": [
+            1,
+            2,
+            6,
+            9,
+            10,
+            12
+          ]
+        },
+        "constrained_definition": {
+          "top3": [
+            [
+              "TH6",
+              0.7104
+            ],
+            [
+              "TH5",
+              0.6628
+            ],
+            [
+              "TH1",
+              0.6377
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 4.67,
+          "owner_ranks": [
+            1,
+            2,
+            3,
+            4,
+            8,
+            10
+          ]
+        }
+      },
+      "routing_gain_naive_to_definition": 1,
+      "top_match": {
+        "doc_id": "TH6",
+        "skos_relation": "relatedMatch",
+        "reason": "(no fixture; default)",
+        "source": "fixture-default"
+      }
+    },
+    {
+      "term": "macroscopic absorption",
+      "owning_community": "collider-bounds",
+      "definition": "A regime describing how a small, localized body that pulls in nearby matter interacts with the material around it: when its range of influence is smaller than the typical spacing between the individual particles making up that matter, it takes them in one at a time as separate objects; when its range of influence is larger than that spacing, the surrounding matter behaves instead like one smooth, continuous substance.",
+      "definition_source": "fixture",
+      "retrieval": {
+        "naive_question": {
+          "top3": [
+            [
+              "BD1",
+              0.6731
+            ],
+            [
+              "TH6",
+              0.6419
+            ],
+            [
+              "TH5",
+              0.6398
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 7.57,
+          "owner_ranks": [
+            1,
+            4,
+            5,
+            7,
+            11,
+            12,
+            13
+          ]
+        },
+        "raw_term": {
+          "top3": [
+            [
+              "BD5",
+              0.5615
+            ],
+            [
+              "TH1",
+              0.5288
+            ],
+            [
+              "TH4",
+              0.5141
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 8.0,
+          "owner_ranks": [
+            1,
+            4,
+            7,
+            9,
+            10,
+            12,
+            13
+          ]
+        },
+        "constrained_definition": {
+          "top3": [
+            [
+              "BD5",
+              0.629
+            ],
+            [
+              "TH1",
+              0.5645
+            ],
+            [
+              "TH6",
+              0.552
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 8.0,
+          "owner_ranks": [
+            1,
+            4,
+            5,
+            10,
+            11,
+            12,
+            13
+          ]
+        }
+      },
+      "routing_gain_naive_to_definition": 0,
+      "top_match": {
+        "doc_id": "BD5",
+        "skos_relation": "relatedMatch",
+        "reason": "(no fixture; default)",
+        "source": "fixture-default"
+      }
+    },
+    {
+      "term": "crust penetration time",
+      "owning_community": "collider-bounds",
+      "definition": "The time for a body undergoing repeated random redirection by nearby matter -- traveling only as fast as a limited average distance between redirections allows, with a steady pull adding a net drift on top of that random motion -- to work its way completely through an outer bounding layer of material, estimated from the slowest-moving point within that layer.",
+      "definition_source": "fixture",
+      "retrieval": {
+        "naive_question": {
+          "top3": [
+            [
+              "BD1",
+              0.6731
+            ],
+            [
+              "TH6",
+              0.6419
+            ],
+            [
+              "TH5",
+              0.6398
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 7.57,
+          "owner_ranks": [
+            1,
+            4,
+            5,
+            7,
+            11,
+            12,
+            13
+          ]
+        },
+        "raw_term": {
+          "top3": [
+            [
+              "BD7",
+              0.6362
+            ],
+            [
+              "BD2",
+              0.5249
+            ],
+            [
+              "BD6",
+              0.514
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 4.43,
+          "owner_ranks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            10
+          ]
+        },
+        "constrained_definition": {
+          "top3": [
+            [
+              "BD7",
+              0.5988
+            ],
+            [
+              "BD6",
+              0.5986
+            ],
+            [
+              "BD5",
+              0.5815
+            ]
+          ],
+          "owner_best_rank": 1,
+          "owner_mean_rank": 6.57,
+          "owner_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            11,
+            13
+          ]
+        }
+      },
+      "routing_gain_naive_to_definition": 0,
+      "top_match": {
+        "doc_id": "BD7",
+        "skos_relation": "relatedMatch",
+        "reason": "(no fixture; default)",
+        "source": "fixture-default"
+      }
+    }
+  ],
+  "run_mode": "custom_data",
+  "corpus_source": "/mnt/f/src/de-idiolect/prototype/example-owndata/corpus.json",
+  "concepts_source": "/mnt/f/src/de-idiolect/prototype/example-owndata/concepts.json",
+  "note": "DEMONSTRATION run on user-supplied data, not a measurement: no independently verified answer key beyond what the concepts file itself hand-supplies (or omits). Stage 1 (detect) is not wired into the concepts above; stage 2 (define) and stage 3b (type) are the live-interface generative stages; only stage 3 (retrieval/matching) is deterministic and offline. See prototype/README.md's 2026-07-23 section."
+}

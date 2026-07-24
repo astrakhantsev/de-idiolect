@@ -1,0 +1,9 @@
+{
+  "_note": "TEMPLATE for recall_extender.py --corpus (schema documented in prototype/README.md's 'run it on your own corpus' section, added 2026-07-23). 'documents' is a flat list; each entry needs 'id' (unique string), 'community' (groups documents for stage-1 keyness and, if a concept in your concepts file names it as 'owning_community', for stage-3 owner-rank scoring), and 'text' (a short passage, ideally 1-3 sentences / under ~60 words, in that community's own voice). Use REAL material with a source you can point to -- do not fabricate passages; an optional 'source' field (ignored by the loader, kept for your own bookkeeping) is a good place to cite it. More documents and more communities generally give a more legible keyness table and a more meaningful owner-rank measurement, but there is no required minimum -- even 2 communities with a handful of documents each is enough to exercise the interface (see prototype/example-owndata/ for a 13-document, 2-community worked example built from material already in this repo).",
+  "documents": [
+    {"id": "A1", "community": "community-a", "source": "OPTIONAL: cite where this passage came from -- paper/section/URL/etc.", "text": "Replace with a short, real passage written in community A's own vocabulary."},
+    {"id": "A2", "community": "community-a", "source": "OPTIONAL", "text": "A second short passage from community A, ideally on a related but distinct point."},
+    {"id": "B1", "community": "community-b", "source": "OPTIONAL", "text": "Replace with a short, real passage written in community B's own vocabulary."},
+    {"id": "B2", "community": "community-b", "source": "OPTIONAL", "text": "A second short passage from community B."}
+  ]
+}

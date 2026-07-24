@@ -72,13 +72,27 @@ def _claude(prompt: str, model: str = "sonnet", timeout: int = 120) -> str | Non
 
 
 class Backend:
-    def __init__(self, kind: str = "fixtures", model: str = "sonnet"):
+    def __init__(self, kind: str = "fixtures", model: str = "sonnet", concepts_path: str | Path | None = None,
+                 custom_run: bool = False):
         assert kind in ("claude", "fixtures")
         self.kind = kind
         self.model = model
-        self._concepts = {c["term"]: c for c in json.loads((HERE / "concepts.json").read_text())["concepts"]}
+        # NOTE: defaults to the shipped eggs concepts.json for backward compatibility, but a caller
+        # passing --concepts (e.g. a user's own corpus) should pass that same path here too, so the
+        # fixtures fallback below (and any hand-supplied constrained_definition it reads) matches the
+        # concepts actually being run rather than silently falling back to the eggs fixtures.
+        concepts_path = Path(concepts_path) if concepts_path else HERE / "concepts.json"
+        self._concepts = {c["term"]: c for c in json.loads(concepts_path.read_text())["concepts"]}
+        # custom_run=True (custom --corpus and/or --concepts, or --define-only) disables
+        # relation_fixtures.json entirely in type_relation() below: that file's keys are
+        # "{eggs term}||{eggs doc_id}" pairs, and a custom run's own term/doc_id could coincidentally
+        # collide with one of them, silently returning a frozen EGGS judgment mislabeled as
+        # "source: fixture" for unrelated data. Custom runs fall straight through to the generic
+        # labeled default instead (source: "fixture-default"); only the shipped eggs run (this flag
+        # False) may use relation_fixtures.json.
+        self.custom_run = custom_run
         rf = HERE / "relation_fixtures.json"
-        self._relations = json.loads(rf.read_text()) if rf.exists() else {}
+        self._relations = json.loads(rf.read_text()) if (not custom_run and rf.exists()) else {}
 
     def define(self, term: str, context: str) -> tuple[str, str]:
         """Return (definition, source) where source in {'live','fixture'}."""
@@ -86,8 +100,15 @@ class Backend:
             out = _claude(DEFINE_PROMPT.format(term=term, context=textwrap.shorten(context, 1200)), self.model)
             if out:
                 return out, "live"
-        # fixtures fallback
-        return self._concepts[term]["constrained_definition"], "fixture"
+        # fixtures fallback: a hand-supplied 'constrained_definition' in the concepts file being run
+        rec = self._concepts.get(term)
+        if rec and rec.get("constrained_definition"):
+            return rec["constrained_definition"], "fixture"
+        raise RuntimeError(
+            f"No definition available for term {term!r}: backend={self.kind!r} produced nothing live, "
+            f"and no 'constrained_definition' was found for it in the concepts file. Either hand-supply "
+            f"'constrained_definition' for this term in your --concepts file, or run with --backend claude."
+        )
 
     def type_relation(self, definition: str, doc_id: str, doc_text: str, concept_term: str) -> tuple[str, str, str]:
         """Return (label, reason, source)."""

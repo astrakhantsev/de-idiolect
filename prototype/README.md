@@ -62,3 +62,30 @@ The **naive question** ("are eggs bad for you for heart health") retrieves the l
 - `recall_extender.py` — the pipeline.
 - `llm_backend.py` — the pluggable LLM interface (`claude`/`fixtures`).
 - `results.json` — the worked-run output.
+
+## Post-submission addition (2026-07-23): run it on your own corpus
+
+**Labeled and dated, added after submission (2026-07-19 AoE).** This section adds nothing to the entry's evidentiary record and changes no at-submission grade above. It documents two new, backward-compatible CLI flags and a worked example, so a reader with their own material can run the same interface instead of only reading about the eggs case.
+
+### What's new
+
+- **`--corpus PATH` / `--concepts PATH`** — point `recall_extender.py` at your own documents/concepts JSON instead of the shipped eggs files. Defaults are unchanged (`corpus.json` / `concepts.json` in this directory), so **plain `python recall_extender.py` behaves exactly as before** — verified byte-identical against the committed `results.json` when these flags were added.
+- **`--define-only`** — run definitions + retrieval ranking with **no owner-rank scoring**, for when you don't have (or don't want to assert) an answer key. Use it when your concepts omit `owning_community`, or force it regardless. The printed report and the `results.json` output both switch to a ranked-top-3-per-query view with no `owner_best_rank`/`routing_gain` fields, and `results.json` gets extra `run_mode`/`corpus_source`/`concepts_source`/`note` fields spelling out that this is a demonstration, not a measurement — those fields only appear when `--corpus`, `--concepts`, or `--define-only` is used; the default eggs invocation's output is untouched.
+
+### Schema, and templates
+
+`documents` entries need `id` (unique), `community` (groups documents for stage-1 keyness, and — if a concept names it as `owning_community` — for stage-3 scoring), and `text` (a short, real passage — do not fabricate). `concepts` entries need `term` and `naive_question`; add `owning_community` (+ either a hand-written `constrained_definition` or a live `--backend claude` call) for the **scored** path, or omit `owning_community` (or pass `--define-only`) for the **unscored, no-answer-key** path. Minimal annotated templates: [`templates/corpus-template.json`](templates/corpus-template.json), [`templates/concepts-template.json`](templates/concepts-template.json).
+
+### Worked example on non-eggs material
+
+[`example-owndata/`](example-owndata/) runs the pipeline on 13 short documents built from material already committed elsewhere in this repo (`demo-collider/`'s paragraph-level usage excerpts from the LHC/collider safety case), across two communities (`collider-theory`, `collider-bounds`), with 3 hand-authored concept definitions, using the exact `--corpus`/`--concepts` command documented in [`example-owndata/README.md`](example-owndata/README.md). Its `results.json` is a real, unedited run — not a fabricated or hand-adjusted output. Its own README explains, in the same terms as this file's "Honest scope" section above, why its numbers are a smaller and less meaningful routing-gain effect than the eggs demo's (an artifact of a smaller, two-community corpus), and why it is a demonstration that the interface runs on new data, not a new measurement.
+
+### The honesty scope above still applies
+
+Any run on your own data, scored or not, inherits every limit in this file's "Honest scope" section: **stage 1 (detect) is not wired into whatever concepts you evaluate; stage 2 (define) and stage 3b (type) are the live-interface generative stages (frozen/hand-authored unless you pass `--backend claude`); only stage 3 (retrieval/matching) is the deterministic, offline, load-bearing measurement.** `recall_extender.py` prints this explicitly, plus an additional "CUSTOM DATA RUN" / "no answer key" notice, whenever `--corpus`, `--concepts`, or `--define-only` is used — the **default eggs invocation's stdout is unchanged, banners included**, since a plain `python recall_extender.py` is neither a custom corpus/concepts run nor `--define-only`. A run on your own corpus, with or without an answer key, is a demonstration that the interface works on that data — not an independent measurement of recall, definition quality, or routing gain, unless you separately verify it.
+
+Stage 3b's SKOS typing also never leaks an eggs judgment into a custom run: `relation_fixtures.json` is eggs-only (keyed by `"{eggs term}||{eggs doc_id}"`), and a custom run's own term/doc-id pair could coincidentally collide with one of those keys, so on any custom run the fixtures file is bypassed entirely — every custom-run relation falls straight to the generic labeled default (`relatedMatch`, `source: "fixture-default"`) unless you pass `--backend claude` for a live judgment.
+
+### Validation, and what fails loudly
+
+Malformed input fails fast with a clear message rather than producing a silently wrong or crashed run: a corpus document missing `id`/`community`/`text`, or reusing an `id` already seen (which would otherwise let `doc_comm`/`doc_text` silently overwrite while the embedding matrix still holds both rows — misattributing scored results to the wrong document), raises immediately in `load()`, before any model loading. A **scored** concept (`owning_community` set, `--define-only` not passed) whose `owning_community` matches no document's `community` in the corpus also raises immediately, before the embedding model loads, naming the concept, the community, and the communities actually present — this is a deliberate choice of the loud-error behavior over silently downgrading that concept to unscored, so a typo'd or stale `owning_community` can't quietly change what a run measures.
