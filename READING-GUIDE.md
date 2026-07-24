@@ -20,6 +20,7 @@ The entry end-to-end is ~1.5× the core budget; this is the ~10-page path throug
 - **[EXPERIMENT-LOG.md](EXPERIMENT-LOG.md)** — protocol depth behind §5; E1–E5 map to §5.1–§5.5. If you open two slices: **E5** (the sealed-key protocol and per-version record) and **E3** (the end-to-end negative, with the grounded direct-model baseline).
 - **[PSEUDOCODE.md](PSEUDOCODE.md)** **[post-submission]** — the workflow in annotated pseudocode, at-submission grades on every element.
 - **[BASELINES.md](BASELINES.md)** **[post-submission]** — which baseline each number answers to: A (your own coined vocabulary) versus B (an equal-information grounded direct ask), each figure's actual comparator named — the sealed §5.5 run has no baseline arm of either kind. Reading only; no new results, no grade changes.
+- **[DIGEST.md](DIGEST.md)** **[post-submission]** — a ~2-page AI-generated digest of the three companions, grades preserved verbatim and negatives included; on any discrepancy the companion is authoritative.
 
 ## Run it — the most informative invocations
 
