@@ -43,6 +43,12 @@ STATE_EVENTS = {
     "scoring-attempt": "bounded pre-read scoring attempt marker (max 2); NOT the claim",
     "generation-started": "DURABLE marker: the first key-3 generation call is about to run under this H "
                           "(round-9); a startup that finds this for a DIFFERENT H must HALT + classify",
+    "attest1-mismatch-pending-classification": "TERMINAL (round-10): a POST-confirmatory attestation-1 "
+                          "mismatch; this H NEVER proceeds — requires an explicit operator classification",
+    "attest1-classified-benign": "audit: operator classified the attest-1 mismatch benign; a NEW freeze "
+                          "instance (fresh checkout + new draws) is required; THIS H stays refused",
+    "attest1-classified-configuration": "audit: operator classified the attest-1 mismatch as a configuration "
+                          "mismatch; the configuration is RETIRED; THIS H stays refused",
 }
 STRUCTURE_EVENTS = {
     "read": "NON-SPEND: isolated projector parsed the sealed key STRUCTURE (terms+pairing), "
@@ -62,11 +68,20 @@ ANSWER_READ_EVENTS = {"spend:authorized-read-claimed", "spend:authorized-read-co
 # revision stays eligible. The two genuine spends/forfeits below block within-H; the custody
 # ledger blocks them cross-run/cross-H.
 TERMINAL_BLOCK = {"spend:fault-after-authorized-read", "state:terminated-during-gen-or-attest2-mismatch",
-                  "state:confirmatory-phase-fail"}
+                  "state:confirmatory-phase-fail", "state:attest1-mismatch-pending-classification"}
+
+# accidental answer-read events — these MUST ALSO transition the durable custody ledger to `spent`
+# (round-10 finding 1): an accidental read is a SPEND that blocks EVERY later instance, not just this H.
+ACCIDENTAL_EVENTS = {"spend:accidental-access-during-gen", "spend:accidental-access-post-hash"}
 
 # cross-run key-custody ledger (§4.3 table)
 CUSTODY_STATES = ("eligible", "forfeited-unspent", "spent")
 CUSTODY_BLOCK = {"forfeited-unspent", "spent"}   # block scoring EVERYWHERE (across all H)
+# the canonical, out-of-tree, operator-local durable ledger path (round-10 finding 1). It lives
+# OUTSIDE every checkout so a fresh-checkout revised-prereg instance still sees a key spent/forfeited
+# elsewhere. It is INFRASTRUCTURE, not repo content; the driver hard-codes it in runtime mode and the
+# operator seeds a genesis record once via `spend.py genesis`.
+CANONICAL_CUSTODY_LEDGER = "/mnt/f/hub/10_projects/minelit/idiolect/key3-custody.jsonl"
 
 
 def _lock(logpath):
@@ -128,13 +143,20 @@ def _append_line(path, entry):
         f.write(json.dumps(entry) + "\n")
 
 
-def append_event(logpath, event, run_H, notes=""):
+def append_event(logpath, event, run_H, notes="", custody_ledger=None):
     """Locked append (per-H namespaced) with the enforced transition gates. Raises SystemExit
-    (nonzero) on a refused transition; returns the appended entry on success."""
+    (nonzero) on a refused transition; returns the appended entry on success. Round-10 finding 1:
+    an ACCIDENTAL-access event is a SPEND — it REQUIRES `custody_ledger` and transitions the durable
+    ledger to `spent` FIRST (sequential ledger-then-log order, matching atomic_claim) so it blocks
+    every later instance, not just this H."""
     if event not in TABLE:
         raise SystemExit(f"unknown spend/state event {event!r}; valid: {sorted(TABLE)}")
     if not run_H:
         raise SystemExit("append_event requires run_H (per-H namespace)")
+    if event in ACCIDENTAL_EVENTS:
+        if not custody_ledger:
+            raise SystemExit(f"{event}: accidental answer-read is a SPEND — requires custody_ledger")
+        record_custody(custody_ledger, "spent", run_H, event, notes="accidental answer read (SPEND)")
     BLOCKED_BY_ACCIDENTAL = {"structure:read", "state:scoring-attempt",
                              "spend:authorized-read-claimed", "spend:authorized-read-complete"}
     fh = _lock(logpath)
@@ -241,9 +263,11 @@ def _custody_refuse_or_noop(cur_state, cur_H, state, run_H):
 def record_custody(ledger, state, run_H, event_ref, notes=""):
     """Append a cross-run custody transition (locked). `state` ∈ CUSTODY_STATES. Monotone +
     idempotent: once spent/forfeited, a conflicting transition is refused and a DUPLICATE
-    spent/forfeited append by the SAME run_H is a no-op success (round-9 idempotent recovery)."""
+    spent/forfeited append by the SAME run_H is a no-op success (round-9 idempotent recovery).
+    Round-10: requires an initialized (genesis) ledger — never creates custody state ex nihilo."""
     if state not in CUSTODY_STATES:
         raise SystemExit(f"unknown custody state {state!r}; valid: {CUSTODY_STATES}")
+    assert_ledger_initialized(ledger)
     fh = _lock(ledger)
     try:
         cur_state, cur_H = _custody_last(ledger)
@@ -258,9 +282,11 @@ def record_custody(ledger, state, run_H, event_ref, notes=""):
 
 
 def assert_key_available(ledger, run_H=None):
-    """Cross-run gate: refuse if the durable custody ledger shows the key spent/forfeited. Round-9:
-    when `run_H` is given, a spent/forfeited state set by that SAME H is a recovery case and is
-    ALLOWED (the atomic claim handles it idempotently); a different H (or run_H omitted) is refused."""
+    """Cross-run gate: refuse if the durable custody ledger is MISSING/un-seeded (fail-closed —
+    round-10: a missing ledger must NEVER read as 'eligible'), or shows the key spent/forfeited.
+    Round-9: when `run_H` is given, a spent/forfeited state set by that SAME H is a recovery case and
+    is ALLOWED (the atomic claim handles it idempotently); a different H (or run_H omitted) is refused."""
+    assert_ledger_initialized(ledger)
     st, holder = _custody_last(ledger)
     if st in CUSTODY_BLOCK and not (run_H is not None and holder == run_H):
         raise SystemExit(f"KEY-CUSTODY: key-3 is {st!r} (run_H {holder!r}, cross-run) — refusing any scoring/read")
@@ -275,6 +301,7 @@ def atomic_claim(spend_log, custody_ledger, run_H, notes=""):
     DIFFERENT-H spent/forfeited state is refused. Never suppresses a persistence failure."""
     if not run_H:
         raise SystemExit("atomic_claim requires run_H")
+    assert_ledger_initialized(custody_ledger)   # round-10: fail-closed on a missing/un-seeded ledger
     lfh = _lock(custody_ledger)                 # 1) custody ledger lock FIRST
     try:
         sfh = _lock(spend_log)                  # 2) then the spend-log lock
@@ -296,3 +323,82 @@ def atomic_claim(spend_log, custody_ledger, run_H, notes=""):
             _unlock(sfh)
     finally:
         _unlock(lfh)
+
+
+# ------------------------- genesis + ledger availability (round-10 finding 1) -------------------------
+def has_genesis(ledger):
+    """True iff the ledger has an explicit eligible GENESIS record as its first entry."""
+    evs = read_events(ledger)
+    return bool(evs) and evs[0].get("kind") == "genesis" and evs[0].get("state") == "eligible"
+
+
+def genesis(ledger, note="operator-seeded key-3 custody genesis"):
+    """Operator one-shot: write the explicit eligible GENESIS record. Refuses if the ledger already
+    exists (never clobbers custody history)."""
+    p = Path(ledger)
+    if p.exists() and read_events(ledger):
+        raise SystemExit(f"GENESIS-REFUSE: {ledger} already exists with records — refusing to re-seed")
+    p.parent.mkdir(parents=True, exist_ok=True)
+    entry = {"kind": "genesis", "key": "key-3", "state": "eligible", "note": note,
+             "created": datetime.datetime.now(datetime.timezone.utc).isoformat()}
+    _append_line(ledger, entry)
+    return entry
+
+
+def assert_ledger_initialized(ledger):
+    """Round-10 finding 1: every run REFUSES (before phase 0) unless the durable ledger EXISTS, is
+    readable, and carries the explicit eligible genesis. A missing/unreadable/un-seeded ledger halts."""
+    p = Path(ledger)
+    if not p.is_file():
+        raise SystemExit(f"KEY-CUSTODY: ledger {ledger} MISSING — run `spend.py genesis --out {ledger}` first (refusing)")
+    try:
+        read_events(ledger)
+    except Exception as e:
+        raise SystemExit(f"KEY-CUSTODY: ledger {ledger} UNREADABLE ({e}) — refusing")
+    if not has_genesis(ledger):
+        raise SystemExit(f"KEY-CUSTODY: ledger {ledger} lacks the eligible genesis record — refusing")
+
+
+# ------------------------- attestation-1 mismatch classification (round-10 finding 2) -------------------------
+def _has_attest1_pending(logpath, run_H):
+    return _count(_cur(read_events(logpath), run_H), "state:attest1-mismatch-pending-classification") >= 1
+
+
+def assert_no_attest1_mismatch(logpath, run_H):
+    """Startup guard: an H under a persisted attestation-1 mismatch NEVER proceeds (round-10 finding 2)."""
+    if _has_attest1_pending(logpath, run_H):
+        raise SystemExit("ATTEST1-REFUSE: this H has a persisted attestation-1 mismatch "
+                         "(pending/classified) — it NEVER proceeds; start a fresh freeze instance")
+
+
+def classify_attest1(logpath, run_H, resolution, notes=""):
+    """Operator records the classification of a persisted attest-1 mismatch. `resolution` ∈
+    {benign, configuration}. Requires the pending terminal to exist for this H. Either way THIS H
+    stays refused (benign => a NEW freeze instance is required; configuration => retirement)."""
+    if resolution not in ("benign", "configuration"):
+        raise SystemExit("classify-attest1 resolution must be 'benign' or 'configuration'")
+    if not _has_attest1_pending(logpath, run_H):
+        raise SystemExit("classify-attest1: no pending attestation-1 mismatch for this H")
+    return append_event(logpath, f"state:attest1-classified-{resolution}", run_H, notes=notes)
+
+
+def _cli():
+    import argparse
+    ap = argparse.ArgumentParser(description="key-3 custody / spend-state operator tools")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    g = sub.add_parser("genesis", help="operator one-shot: seed the eligible custody genesis")
+    g.add_argument("--out", default=CANONICAL_CUSTODY_LEDGER); g.add_argument("--note", default="operator-seeded key-3 custody genesis")
+    c = sub.add_parser("classify-attest1", help="record an attestation-1 mismatch classification")
+    c.add_argument("--resolution", required=True, choices=("benign", "configuration"))
+    c.add_argument("--H", required=True); c.add_argument("--out", required=True); c.add_argument("--notes", default="")
+    a = ap.parse_args()
+    if a.cmd == "genesis":
+        e = genesis(a.out, a.note); print(f"custody GENESIS seeded (eligible) -> {a.out}\n  {e['created']}")
+    elif a.cmd == "classify-attest1":
+        classify_attest1(a.out, a.H, a.resolution)
+        print(f"attest-1 mismatch classified {a.resolution!r} for H {a.H[:12]} — THIS H stays refused "
+              f"({'new freeze instance required' if a.resolution == 'benign' else 'configuration retired'})")
+
+
+if __name__ == "__main__":
+    _cli()

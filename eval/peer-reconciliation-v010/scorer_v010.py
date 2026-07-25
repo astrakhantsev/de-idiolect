@@ -320,7 +320,7 @@ EMBARGO_PATH = BASE / "runs/scoring/.embargo/per-pair.json"
 def score(args):
     hobj = attest.load_and_verify_H(args.H)
     run_H = hobj["H"]
-    ledger = args.custody_ledger or str(BASE / "key-custody.jsonl")
+    ledger = args.custody_ledger or spend.CANONICAL_CUSTODY_LEDGER   # round-10: out-of-tree canonical
     # (a) PRE-CLAIM gate (per-H spend log + cross-run custody ledger): refuse before ANY key/H
     #     work unless the current-H log has exactly one structure:read + an in-range attempt and
     #     no claim/terminal, AND the durable ledger shows the key is not spent/forfeited.

@@ -26,13 +26,33 @@
 # key/{concepts,answer_key}.json (SEALED), freeze-manifest.txt, recorded-cli.json, PREREG.md,
 # REQUIRED-INVENTORY.txt. pairs.json is produced by the isolated projector below (phase 0.5).
 set -euo pipefail
+TESTMODE=0
+if [ "${1:-}" = "--test" ]; then TESTMODE=1; shift; fi   # --test: env overrides for the offline suite ONLY
 BASE="$(cd "$(dirname "$0")" && pwd)"; cd "$BASE"
 VENVPY="$BASE/../../.venv/bin/python"
-RECORDED="${RECORDED_MANIFEST:-$BASE/freeze-manifest.txt}"
+# The ONE committed canonical v0.9 freeze manifest + the ONE out-of-tree operator-local custody
+# ledger (round-10 findings 1+4). In RUNTIME mode both are FIXED (not env-selectable); only --test
+# permits overrides for the offline suite.
+CANONICAL_MANIFEST="$BASE/../peer-reconciliation-test3/freeze-manifest.txt"
+CANONICAL_CUSTODY="/mnt/f/hub/10_projects/minelit/idiolect/key3-custody.jsonl"
+if [ "$TESTMODE" = 1 ]; then
+  RECORDED="${RECORDED_MANIFEST:-$CANONICAL_MANIFEST}"
+  KEYCUSTODY="${KEYCUSTODY:-$BASE/runs/test-key-custody.jsonl}"
+else
+  RECORDED="$CANONICAL_MANIFEST"                 # committed canonical, used DIRECTLY (no env path)
+  KEYCUSTODY="$CANONICAL_CUSTODY"                # out-of-tree durable ledger (no env path)
+  if [ -f "$BASE/freeze-manifest.txt" ] && ! cmp -s "$BASE/freeze-manifest.txt" "$CANONICAL_MANIFEST"; then
+    echo "FATAL: local freeze-manifest.txt != committed canonical (../peer-reconciliation-test3) — refuse"; exit 1
+  fi
+fi
 RECORDED_CLI="${RECORDED_CLI:-$BASE/recorded-cli.json}"
 SPENDLOG="$BASE/runs/spend-log.jsonl"
-KEYCUSTODY="$BASE/key-custody.jsonl"   # durable cross-run key-3 custody ledger (gitignored)
 mkdir -p runs
+
+# PREFLIGHT (round-10 finding 1): every run REFUSES before phase 0 unless the durable out-of-tree
+# custody ledger EXISTS, is readable, and carries the eligible genesis (seed once: `spend.py genesis`).
+python3 -c "import sys;sys.path.insert(0,'.');import spend;spend.assert_ledger_initialized('$KEYCUSTODY')" \
+  || { echo "FATAL: key-3 custody ledger unavailable at $KEYCUSTODY — seed it once with 'python3 spend.py genesis' (refusing)"; exit 1; }
 
 # Per-H terminal/state documentation marker (called only AFTER H is built). Round-9 finding 2:
 # a FAILURE to persist a state/custody transition is a HARD HALT — never suppressed.
@@ -114,6 +134,10 @@ if [ -f runs/generation-started.json ]; then
     exit 1
   fi
 fi
+# Round-10 finding 2: an H under a persisted attestation-1 mismatch NEVER proceeds (even after the
+# operator classifies it) — a fresh freeze instance is required.
+python3 -c "import sys;sys.path.insert(0,'.');import spend;spend.assert_no_attest1_mismatch('$SPENDLOG','$H')" \
+  || { echo "FATAL: this H carries a persisted attestation-1 mismatch — it never proceeds; start a FRESH freeze instance"; exit 1; }
 
 echo "== phase 1.5: structure:read custody entry (per-H, one-shot; on behalf of a VERIFIED projector receipt) =="
 if python3 -c "import sys;sys.path.insert(0,'.');import spend;sys.exit(0 if spend.projector_completed('$SPENDLOG','$H') else 1)"; then
@@ -157,9 +181,12 @@ echo "== phase 5: ATTESTATION POINT 1 (POST-confirmatory; verifies BOTH confirma
 if phase_check attest1; then echo "  attest-1 already complete (typed receipt) — skip"; else
   python3 attest.py attest --H runs/H.json --point 1 --recorded-cli "$RECORDED_CLI" --probe-log runs/probe-log.json \
       --confirmatory runs/confirmatory/conf-key-1 runs/confirmatory/conf-key-2 \
-    || { echo "ATTESTATION-1 MISMATCH (post-confirmatory) — HALT, do NOT resume. CLASSIFY:";
-         echo "  benign (non-configuration) mismatch -> re-freeze + two NEW draws required (once), fresh instance;";
-         echo "  configuration mismatch -> configuration RETIRED. Observed draws are NOT reusable across a re-freeze.";
+    || { log_state state:attest1-mismatch-pending-classification;
+         python3 attest.py receipt --H runs/H.json --kind attest1-mismatch-pending-classification --out runs/receipts.jsonl;
+         echo "ATTESTATION-1 MISMATCH (post-confirmatory) — PERSISTED as pending-classification; this H NEVER proceeds.";
+         echo "  Operator must run: python3 spend.py classify-attest1 --resolution benign|configuration --H <H> --out $SPENDLOG";
+         echo "  benign -> re-freeze + two NEW draws (once) in a FRESH instance; configuration -> configuration RETIRED.";
+         echo "  Observed draws are NOT reusable across a re-freeze (new freeze = new H = new receipts).";
          exit 4; }
   python3 attest.py receipt --H runs/H.json --kind pre-generation --out runs/receipts.jsonl
   phase_receipt attest1 runs/attestation-point-1.json

@@ -201,6 +201,16 @@ def corpora_exact_errs(base=BASE):
 
 
 def build_H(args):
+    # Round-10 finding 4: in RUNTIME mode the supplied --recorded-manifest MUST be byte-equal to the
+    # ONE committed canonical v0.9 freeze manifest (../peer-reconciliation-test3/freeze-manifest.txt);
+    # otherwise a stale/wrong copy could bless different corpus/sealed-key hashes. --test permits an
+    # override for the offline suite (toy manifests).
+    if not getattr(args, "test", False):
+        if not RECORDED_MANIFEST.exists():
+            sys.exit(f"build-H REFUSED: committed canonical manifest missing at {RECORDED_MANIFEST}")
+        if Path(args.recorded_manifest).read_bytes() != RECORDED_MANIFEST.read_bytes():
+            sys.exit("build-H REFUSED: --recorded-manifest != the committed canonical freeze-manifest.txt "
+                     "(../peer-reconciliation-test3) — pass the canonical, or --test for the offline suite")
     # REQUIRED-inventory enforcement (round-6): build-H REFUSES if a required file is missing,
     # rather than silently omitting it (a later "STRICT" verify cannot notice an omission).
     #   freeze-package tier (always): PREREG.md (the ratified spec copy) + recorded-cli.json.
@@ -446,8 +456,11 @@ def _verify_output_manifest_errs(output_manifest, expected_H, base=BASE):
 
 
 def _verify_confirmatory_receipt(conf_dir, expected_H):
-    """Finding 3: attestation-1 verifies a confirmatory draw's TYPED receipt — it must exist,
-    bind H, assert gate_pass=true, and its recorded accepted-corpora hashes must re-hash-match."""
+    """Finding 3 + round-10 finding 5: attestation-1 verifies a confirmatory draw's TYPED receipt —
+    it must exist, bind H, assert gate_pass=true, its recorded accepted-corpora hashes must re-hash,
+    the full-draw stage-completion flags must all be true, AND the COMPLETE per-key setup manifest
+    (briefs, attempts, corpora, pairs.json, leakcheck, key records, source) must re-verify."""
+    import setup_confirmatory as sc
     r = Path(conf_dir) / "runs/confirmatory-result.json"
     if not r.exists():
         return [f"confirmatory receipt missing: {r}"]
@@ -463,6 +476,13 @@ def _verify_confirmatory_receipt(conf_dir, expected_H):
             errs.append(f"{conf_dir}: corpus {rel} missing/drift vs receipt")
     if not rec.get("corpora_sha256"):
         errs.append(f"{conf_dir}: confirmatory receipt has no accepted-corpora hashes")
+    # round-10 finding 3: the draw ran the FULL tool path — every stage flag must be present + true.
+    stages = rec.get("stages") or {}
+    for st in ("polarity", "retrieval", "verify", "aggregate", "adaptive1", "adaptive2", "compose"):
+        if stages.get(st) is not True:
+            errs.append(f"{conf_dir}: confirmatory full-draw stage {st!r} not completed")
+    # round-10 finding 5: the complete per-key setup manifest must re-verify.
+    errs += sc.verify_setup_manifest(conf_dir)
     return errs
 
 
@@ -518,6 +538,15 @@ def attest(args):
         print("  MISMATCH:", e); ok = False
     if args.point == 2:
         print("  (probe-log identity vs attestation-1 checked)")
+    # 2c. EXACT corpora + key-dir set at BOTH attestation points (round-10 finding 6): a gitignored
+    #     extra key/corpus file added AFTER build-H is rediscovered and rejected here (build-H alone
+    #     could not catch a post-freeze addition).
+    ce = corpora_exact_errs(BASE)
+    if ce["extra"] or ce["missing"] or ce["key_extra"]:
+        print(f"  MISMATCH: corpora/key != exact set (extra={ce['extra']}, missing={ce['missing']}, "
+              f"key_extra={ce['key_extra']})"); ok = False
+    else:
+        print("  exact corpora + key-dir set (no extras): OK")
     # 3. recorded-cli.json: live CLI-version enforcement (env-dependent) == recorded
     rec = json.load(open(args.recorded_cli))
     cur = _cli_versions()
@@ -672,7 +701,8 @@ def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
     b = sub.add_parser("build-H"); b.add_argument("--recorded-manifest", required=True); b.add_argument("--out", required=True)
-    b.add_argument("--runtime", action="store_true", help="also require the exact run-time inventory (corpora 01..11, pairs.json, leakcheck, key)"); b.set_defaults(fn=build_H)
+    b.add_argument("--runtime", action="store_true", help="also require the exact run-time inventory (corpora 01..11, pairs.json, leakcheck, key)")
+    b.add_argument("--test", action="store_true", help="offline suite ONLY: permit a non-canonical --recorded-manifest (round-10 finding 4)"); b.set_defaults(fn=build_H)
     v = sub.add_parser("verify-files"); v.add_argument("--H", required=True); v.set_defaults(fn=verify_files)
     a = sub.add_parser("attest"); a.add_argument("--H", required=True); a.add_argument("--point", type=int, choices=(1, 2), required=True)
     a.add_argument("--recorded-cli", required=True); a.add_argument("--probe-log", required=True)

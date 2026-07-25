@@ -47,6 +47,54 @@ SITES = [  # (name, cli, model, prompt-source)
 def _sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 
 
+# frozen v0.9 setup source scripts (bound in H; also bound here BASE-relative for completeness)
+SETUP_SOURCE_SCRIPTS = ["harness/keyspec-author.md", "harness/validate_key.py", "harness/build_briefs.py",
+                        "harness/gen_leakcheck.py", "harness/split_corpus.py"]
+
+
+def _setup_manifest(key_dir):
+    """Round-10 finding 5: the EXACT per-key setup state. `key_local` covers the generated briefs,
+    every attempt output+manifest+receipt, the accepted corpora (+ their manifests), pairs.json,
+    leakcheck_peer.sh, and the key-derived records; `source_scripts` binds the frozen setup scripts
+    (BASE-relative). Deterministic (sorted) so restart/attestation can re-verify byte-for-byte."""
+    kd = Path(key_dir)
+    local = {}
+    globs = ["prompts/gen-community-a.md", "prompts/gen-community-b.md",
+             "corpora/a/*.md", "corpora/b/*.md", "corpora/a/manifest.json", "corpora/b/manifest.json",
+             "pairs.json", "leakcheck_peer.sh", "key/concepts.json", "key/answer_key.json",
+             "manifests/*.json", "manifests/*.out", "manifests/*.receipt.json"]
+    for g in globs:
+        for p in sorted(kd.glob(g)):
+            if p.is_file():
+                local[str(p.relative_to(kd))] = _sha(p)
+    source = {rel: _sha(BASE / rel) for rel in SETUP_SOURCE_SCRIPTS if (BASE / rel).is_file()}
+    return {"key_local": local, "source_scripts": source}
+
+
+def verify_setup_manifest(key_dir):
+    """Re-verify a key's setup-manifest.json: every key_local file (relative to key_dir) and every
+    source_scripts file (relative to BASE) must be present + hash-match. Returns a list of errors."""
+    kd = Path(key_dir); mf = kd / "setup-manifest.json"
+    if not mf.is_file():
+        return [f"{key_dir}: setup-manifest.json missing"]
+    try:
+        m = json.loads(mf.read_text())
+    except Exception as e:
+        return [f"{key_dir}: setup-manifest.json unreadable ({e})"]
+    errs = []
+    for rel, h in (m.get("key_local") or {}).items():
+        p = kd / rel
+        if not p.is_file() or _sha(p) != h:
+            errs.append(f"{key_dir}: setup artifact {rel} missing/drift vs setup-manifest")
+    for rel, h in (m.get("source_scripts") or {}).items():
+        p = BASE / rel
+        if not p.is_file() or _sha(p) != h:
+            errs.append(f"{key_dir}: setup source {rel} missing/drift vs setup-manifest")
+    if not m.get("key_local"):
+        errs.append(f"{key_dir}: setup-manifest has no key_local artifacts")
+    return errs
+
+
 def _isolated(cli, model, prompt, out, manifest, dry):
     if dry:
         print(f"    [dry-run] {RUNISO} {cli} {model} {prompt} {out} {manifest}")
@@ -183,15 +231,15 @@ def build_key(key_id, args):
     if done_receipt.exists():
         rec = json.loads(done_receipt.read_text())
         if rec.get("H") == args.H_value:
-            # finding 3: TYPED skip — re-hash the accepted corpora + require leakcheck_pass before
-            # skipping. A corrupted/altered accepted corpus HALTS setup rather than being reused.
-            if rec.get("leakcheck_pass") is not True or not rec.get("accepted_corpora_sha256"):
-                sys.exit(f"  [{key_id}] setup-key.done lacks a typed accepted-corpora/leakcheck receipt — HALT")
-            for rel, h in rec["accepted_corpora_sha256"].items():
-                f = key_dir / rel
-                if not f.is_file() or _sha(f) != h:
-                    sys.exit(f"  [{key_id}] accepted corpus {rel} missing/drift vs receipt — HALT (no skip)")
-            print(f"  [{key_id}] already complete (setup-key.done, H + corpora re-hash OK) — SKIP")
+            # finding 3 + round-10 finding 5: TYPED skip — require leakcheck_pass AND re-verify the
+            # COMPLETE per-key setup manifest (briefs, attempts, corpora, pairs.json, leakcheck,
+            # key records, source scripts) before skipping. Any drift HALTS (never silently reused).
+            if rec.get("leakcheck_pass") is not True:
+                sys.exit(f"  [{key_id}] setup-key.done lacks leakcheck_pass — HALT")
+            se = verify_setup_manifest(key_dir)
+            if se:
+                sys.exit(f"  [{key_id}] setup-manifest drift on restart — HALT: {se}")
+            print(f"  [{key_id}] already complete (setup-key.done, H + full setup-manifest re-verify OK) — SKIP")
             return rec, True
         sys.exit(f"  [{key_id}] setup-key.done present with a DIFFERENT H — refusing to overwrite a "
                  f"prior confirmatory key")
@@ -229,14 +277,18 @@ def build_key(key_id, args):
     # 4. answer-blind pairs manifest
     subprocess.run([sys.executable, str(BASE / "make_pairs_manifest.py"),
                     str(key_dir / "key"), str(key_dir / "pairs.json")], check=True)
-    # 5. per-key completion receipt (H-bound, TYPED) — finding 3: embed the ACCEPTED corpora
-    #    hashes + leakcheck_pass so a restart re-hashes the promoted corpora before skipping (a
-    #    corrupted/altered accepted corpus cannot be silently reused). Reaching here means every
-    #    frozen leak check passed (a failure would have returned False above).
+    # 5. per-key EXACT setup manifest (round-10 finding 5): hash the COMPLETE accepted setup state
+    #    (briefs, attempts, corpora, pairs.json, leakcheck, key records, source scripts) into
+    #    setup-manifest.json — restart, each draw, and attestation-1 re-verify it. Reaching here means
+    #    every frozen leak check passed (a failure would have returned False above).
     accepted = {f"corpora/{s}/{n}": _sha(key_dir / f"corpora/{s}/{n}")
                 for s in ("a", "b") for n in EXACT_DOCS if (key_dir / f"corpora/{s}/{n}").is_file()}
+    sm = {**_setup_manifest(key_dir), "key_id": key_id, "H": args.H_value,
+          "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}
+    (key_dir / "setup-manifest.json").write_text(json.dumps(sm, indent=1))
     done_receipt.write_text(json.dumps({**receipt, "ok": True, "complete": True,
-                                        "accepted_corpora_sha256": accepted, "leakcheck_pass": True}, indent=1))
+                                        "accepted_corpora_sha256": accepted, "leakcheck_pass": True,
+                                        "setup_manifest_sha256": _sha(key_dir / "setup-manifest.json")}, indent=1))
     return receipt, True
 
 
@@ -247,7 +299,16 @@ def main():
                     help="frozen v0.9 split_corpus.py (defaults to the in-workspace harness/ copy, bound in H)")
     ap.add_argument("--out", default=str(BASE / "runs/confirmatory/setup-receipt.jsonl"))
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--verify-setup", help="VERIFY mode (round-10 finding 5): re-verify a conf key's "
+                    "setup-manifest.json (used by run_confirmatory.sh before a draw); exit 0/1")
     args = ap.parse_args()
+    if args.verify_setup:
+        errs = verify_setup_manifest(args.verify_setup)
+        if errs:
+            for e in errs: print("  SETUP-MANIFEST MISMATCH:", e)
+            sys.exit(1)
+        print(f"setup-manifest verified: {args.verify_setup}")
+        return
     (BASE / "runs/confirmatory").mkdir(parents=True, exist_ok=True)
     print("== confirmatory setup: 2 fresh TRAIN keys via the UNCHANGED frozen v0.9 path (§4.1a) ==")
     all_ok = True

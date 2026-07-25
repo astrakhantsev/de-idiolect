@@ -29,6 +29,12 @@ import verify_gate_fidelity as vgf
 HT = "H-test-fixed-namespace"
 
 
+def _genesis_led(path):
+    """round-10: seed an eligible genesis custody ledger at `path` (every custody op now requires one)."""
+    spend.genesis(str(path))
+    return path
+
+
 class TestGateFidelity(unittest.TestCase):
     def test_verifier_passes(self):
         r = subprocess.run([sys.executable, str(WS / "scripts/verify_gate_fidelity.py")],
@@ -713,12 +719,13 @@ class TestReviewFixes(unittest.TestCase):
             spend.append_event(log, "state:scoring-attempt", HT)  # 3rd refused
 
     def test_spend_accidental_blocks_everything(self):
-        tmp = Path(tempfile.mkdtemp()); log = tmp / "spend.jsonl"
-        spend.append_event(log, "spend:accidental-access-during-gen", HT)
+        tmp = Path(tempfile.mkdtemp()); log = tmp / "spend.jsonl"; led = _genesis_led(tmp / "c.jsonl")
+        spend.append_event(log, "spend:accidental-access-during-gen", HT, custody_ledger=led)
+        self.assertEqual(spend.custody_state(led), "spent")   # round-10: accidental read transitions custody
         with self.assertRaises(SystemExit):
             spend.append_event(log, "state:scoring-attempt", HT)
         with self.assertRaises(SystemExit):
-            spend.assert_scoring_allowed(log, HT)
+            spend.assert_scoring_allowed(log, HT, custody_ledger=led)
 
     def test_scorer_gate_refuses_after_claim(self):
         tmp = Path(tempfile.mkdtemp()); log = self._ready_log(tmp)
@@ -1083,7 +1090,8 @@ class TestRound6(unittest.TestCase):
 
     # ---- finding 4: H/attestation freeze-package completeness ----
     def _build_H(self, out, extra=()):
-        return subprocess.run([sys.executable, str(WS / "attest.py"), "build-H",
+        # round-10 finding 4: --test permits the toy (non-canonical) manifest in the offline suite.
+        return subprocess.run([sys.executable, str(WS / "attest.py"), "build-H", "--test",
                                "--recorded-manifest", str(WS / "toy-key/recorded-hashes.txt"),
                                "--out", str(out), *extra], capture_output=True, text=True)
 
@@ -1175,9 +1183,9 @@ class TestRound7(unittest.TestCase):
     def test_custody_ledger_blocks_scoring_cross_run(self):
         # round-8: the durable custody ledger blocks scoring EVERYWHERE once spent/forfeited,
         # even under a fresh H whose per-H spend log is otherwise clean.
-        tmp = Path(tempfile.mkdtemp()); log = tmp / "s.jsonl"; ledger = tmp / "custody.jsonl"
+        tmp = Path(tempfile.mkdtemp()); log = tmp / "s.jsonl"; ledger = _genesis_led(tmp / "custody.jsonl")
         spend.append_event(log, "structure:read", HT); spend.append_event(log, "state:scoring-attempt", HT)
-        spend.assert_scoring_allowed(log, HT, custody_ledger=ledger)   # eligible -> OK
+        spend.assert_scoring_allowed(log, HT, custody_ledger=ledger)   # eligible genesis -> OK
         spend.record_custody(ledger, "forfeited-unspent", "H-prev", "attest2-mismatch")
         with self.assertRaises(SystemExit):
             spend.assert_scoring_allowed(log, HT, custody_ledger=ledger)
@@ -1189,18 +1197,21 @@ class TestRound7(unittest.TestCase):
         import setup_confirmatory as sc
         kid = "test-skip-key"; kd = sc.BASE / f"runs/confirmatory/{kid}"; (kd).mkdir(parents=True, exist_ok=True)
         self.addCleanup(lambda: __import__("shutil").rmtree(kd, ignore_errors=True))
-        # round-8: a completed key's skip is TYPED — the receipt embeds accepted-corpora hashes
-        # + leakcheck_pass, and the resume re-hashes those corpora before skipping.
+        # round-8/10: a completed key's skip is TYPED — leakcheck_pass + a re-verifying full setup
+        # manifest (the round-10 completeness check) before skipping.
         (kd / "corpora/a").mkdir(parents=True, exist_ok=True)
         (kd / "corpora/a/01.md").write_text("hello corpus")
         ch = hashlib.sha256((kd / "corpora/a/01.md").read_bytes()).hexdigest()
+        (kd / "setup-manifest.json").write_text(json.dumps(
+            {"key_local": {"corpora/a/01.md": ch}, "source_scripts": {}, "key_id": kid, "H": "HX"}))
         (kd / "setup-key.done").write_text(json.dumps({"key_id": kid, "H": "HX", "complete": True,
-            "leakcheck_pass": True, "accepted_corpora_sha256": {"corpora/a/01.md": ch}}))
+            "leakcheck_pass": True, "accepted_corpora_sha256": {"corpora/a/01.md": ch},
+            "setup_manifest_sha256": hashlib.sha256((kd / "setup-manifest.json").read_bytes()).hexdigest()}))
         args = type("A", (), {"H_value": "HX", "dry_run": False})()
         rec, ok = sc.build_key(kid, args)
         self.assertTrue(ok)
         self.assertFalse((kd / "key/concepts.json").exists())  # NOT regenerated
-        # a corrupted accepted corpus HALTS the skip (does not silently reuse)
+        # a corrupted accepted corpus HALTS the skip (setup-manifest drift; does not silently reuse)
         (kd / "corpora/a/01.md").write_text("TAMPERED")
         with self.assertRaises(SystemExit):
             sc.build_key(kid, args)
@@ -1240,6 +1251,48 @@ class TestRound7(unittest.TestCase):
         for p in ("phase_check probe", "phase_check attest1", "phase_check generation",
                   'phase_check "draw-$ck"'):
             self.assertIn(p, drv)
+        # round-10 finding 1: preflight refuses without the out-of-tree genesis ledger; runtime mode
+        # fixes the canonical manifest + out-of-tree custody (no env path); --test gates overrides.
+        self.assertIn("assert_ledger_initialized", drv)
+        self.assertIn("/mnt/f/hub/10_projects/minelit/idiolect/key3-custody.jsonl", drv)
+        self.assertIn("peer-reconciliation-test3/freeze-manifest.txt", drv)
+        self.assertRegex(drv, r'--test')
+        # round-10 finding 2: a post-confirmatory attest-1 mismatch PERSISTS a pending-classification
+        # terminal + a startup guard refuses that H.
+        self.assertIn("state:attest1-mismatch-pending-classification", drv)
+        self.assertIn("assert_no_attest1_mismatch", drv)
+
+    def test_confirmatory_full_tool_path_wired(self):
+        # round-10 finding 3 (offline stage-plan verification — no LLM calls): run_confirmatory.sh
+        # runs the FULL tool path (not just generation) + verifies the setup manifest + embeds stages.
+        rc = (WS / "run_confirmatory.sh").read_text()
+        self.assertIn("--verify-setup", rc)   # finding 5: setup manifest verified before the draw
+        for stage in ("prompts-polarity", "retrieve_xc_v010.py --v010", "v010.py stage-verify",
+                      "v010.py aggregate", "v010.py stage-adaptive-1", "v010.py stage-adaptive-2",
+                      "v010.py compose"):
+            self.assertIn(stage, rc)
+        self.assertIn('"stages"', rc)                              # full-draw stage flags embedded
+        self.assertIn("qualification", rc.lower())                 # ≤1/40 gate still generation-only
+
+    def test_driver_preflight_refuses_without_genesis_ledger(self):
+        # round-10 finding 1: `run_v010.sh --test` with a missing custody ledger REFUSES before phase 0.
+        tmp = Path(tempfile.mkdtemp())
+        env = {**os.environ, "KEYCUSTODY": str(tmp / "absent-ledger.jsonl")}
+        r = subprocess.run(["bash", str(WS / "run_v010.sh"), "--test"], cwd=str(WS),
+                           env=env, capture_output=True, text=True, timeout=60)
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn("custody ledger unavailable", r.stdout + r.stderr)
+
+    def test_fresh_checkout_consults_out_of_tree_spent_ledger(self):
+        # round-10 finding 1: a FRESH checkout (clean per-H spend log) still sees a key spent ELSEWHERE
+        # via the out-of-tree ledger and refuses.
+        tmp = Path(tempfile.mkdtemp()); led = _genesis_led(tmp / "out-of-tree.jsonl")
+        spend.record_custody(led, "spent", "H-some-other-instance", "read elsewhere")
+        fresh_log = tmp / "fresh-spend.jsonl"    # a pristine per-H log in the "new checkout"
+        spend.append_event(fresh_log, "structure:read", "H-fresh")
+        spend.append_event(fresh_log, "state:scoring-attempt", "H-fresh")
+        with self.assertRaises(SystemExit):
+            spend.assert_scoring_allowed(fresh_log, "H-fresh", custody_ledger=led)
 
     # ---- finding 3: output-manifest binds the scorer's inputs ----
     def _make_scored_workspace(self):
@@ -1276,8 +1329,11 @@ class TestRound7(unittest.TestCase):
         return a2
 
     def _scorer(self, base, om, spendlog, extra=(), bound_om=None):
-        # round-8/9: `score` subcommand + a per-invocation custody ledger (fresh => eligible) +
-        # the attestation-2 receipt binding the output-manifest hash.
+        # round-8/9/10: `score` subcommand + a per-invocation GENESIS-seeded custody ledger
+        # (round-10: a missing ledger now refuses) + the attestation-2 receipt binding the manifest hash.
+        led = str(spendlog) + ".custody"
+        if not Path(led).exists():
+            spend.genesis(led)
         a2 = self._attest2(base, om, bound_om)
         return subprocess.run([sys.executable, str(WS / "scorer_v010.py"), "score",
                                "--key-dir", str(WS / "toy-key/key"),
@@ -1627,15 +1683,26 @@ class TestRound8(unittest.TestCase):
         base = Path(tempfile.mkdtemp())
         cd = base / "conf-key-1"; (cd / "runs").mkdir(parents=True); (cd / "corpora/a").mkdir(parents=True)
         (cd / "corpora/a/01.md").write_text("corpus one")
+        (cd / "pairs.json").write_text('{"count":0,"pairs":[]}')
         ch = hashlib.sha256((cd / "corpora/a/01.md").read_bytes()).hexdigest()
+        ph = hashlib.sha256((cd / "pairs.json").read_bytes()).hexdigest()
         H = "H-conf-test"
-        (cd / "runs/confirmatory-result.json").write_text(json.dumps(
-            {"H": H, "gate_pass": True, "numerator": 0, "corpora_sha256": {"corpora/a/01.md": ch}}))
-        self.assertEqual(at._verify_confirmatory_receipt(cd, H), [])              # valid
+        # round-10: a valid receipt needs full-draw stage flags AND a re-verifying setup manifest.
+        STAGES = {s: True for s in ("polarity", "retrieval", "verify", "aggregate", "adaptive1", "adaptive2", "compose")}
+        (cd / "setup-manifest.json").write_text(json.dumps(
+            {"key_local": {"corpora/a/01.md": ch, "pairs.json": ph}, "source_scripts": {}}))
+        def receipt(**over):
+            d = {"H": H, "gate_pass": True, "numerator": 0, "corpora_sha256": {"corpora/a/01.md": ch}, "stages": STAGES}
+            d.update(over); (cd / "runs/confirmatory-result.json").write_text(json.dumps(d))
+        receipt(); self.assertEqual(at._verify_confirmatory_receipt(cd, H), [])   # valid
         self.assertTrue(at._verify_confirmatory_receipt(cd, "OTHER-H"))          # H mismatch
-        (cd / "runs/confirmatory-result.json").write_text(json.dumps(
-            {"H": H, "gate_pass": False, "corpora_sha256": {"corpora/a/01.md": ch}}))
-        self.assertTrue(at._verify_confirmatory_receipt(cd, H))                  # gate_pass false
+        receipt(gate_pass=False); self.assertTrue(at._verify_confirmatory_receipt(cd, H))   # gate_pass false
+        receipt(stages={**STAGES, "compose": False})                             # a missing full-draw stage
+        self.assertTrue(any("compose" in e for e in at._verify_confirmatory_receipt(cd, H)))
+        receipt()                                                                # restore valid receipt
+        (cd / "pairs.json").write_text("TAMPERED")                               # round-10 finding 5: setup drift
+        self.assertTrue(any("pairs.json" in e for e in at._verify_confirmatory_receipt(cd, H)))
+        (cd / "pairs.json").write_text('{"count":0,"pairs":[]}')                 # restore
         (cd / "corpora/a/01.md").write_text("TAMPERED")
         self.assertTrue(at._verify_confirmatory_receipt(cd, H))                  # corpus drift
         __import__("shutil").rmtree(cd / "runs")
@@ -1718,7 +1785,7 @@ class TestRound9(unittest.TestCase):
     H9 = "H-round9-fixed"
 
     def _ready(self, tmp):
-        log = tmp / "sp.jsonl"; led = tmp / "cust.jsonl"
+        log = tmp / "sp.jsonl"; led = _genesis_led(tmp / "cust.jsonl")   # round-10: seeded genesis
         spend.append_event(log, "structure:read", self.H9)
         spend.append_event(log, "state:scoring-attempt", self.H9)
         return log, led
@@ -1738,7 +1805,8 @@ class TestRound9(unittest.TestCase):
         spend.record_custody(led, "spent", self.H9, "crash-window")
         spend.atomic_claim(log, led, self.H9)                          # idempotent recovery: appends the missing claim
         self.assertEqual(log.read_text().count("authorized-read-claimed"), 1)
-        self.assertEqual(len(spend.read_events(led)), 1)               # ledger NOT double-appended
+        # ledger = [genesis, spent]; the recovery must NOT append a second spent (idempotent)
+        self.assertEqual(sum(1 for e in spend.read_events(led) if e.get("state") == "spent"), 1)
         with self.assertRaises(SystemExit):
             spend.atomic_claim(log, led, self.H9)                      # a re-run (key now read) is refused
 
@@ -1750,23 +1818,50 @@ class TestRound9(unittest.TestCase):
         self.assertNotIn("authorized-read-claimed", log.read_text())   # never claimed
 
     def test_record_custody_idempotent_and_monotone(self):
-        tmp = Path(tempfile.mkdtemp()); led = tmp / "c.jsonl"
+        tmp = Path(tempfile.mkdtemp()); led = _genesis_led(tmp / "c.jsonl")
         spend.record_custody(led, "spent", self.H9, "a")
         self.assertIsNone(spend.record_custody(led, "spent", self.H9, "b"))   # same-H dup = no-op
-        self.assertEqual(len(spend.read_events(led)), 1)
+        self.assertEqual(sum(1 for e in spend.read_events(led) if e.get("state") == "spent"), 1)
         with self.assertRaises(SystemExit):
             spend.record_custody(led, "forfeited-unspent", self.H9, "c")      # conflicting state refused
         with self.assertRaises(SystemExit):
             spend.record_custody(led, "spent", "H-other", "d")               # different-H dup refused
 
     def test_assert_key_available_recovery_aware(self):
-        tmp = Path(tempfile.mkdtemp()); led = tmp / "c.jsonl"
+        tmp = Path(tempfile.mkdtemp()); led = _genesis_led(tmp / "c.jsonl")
         spend.record_custody(led, "spent", self.H9, "x")
         spend.assert_key_available(led, self.H9)                              # same H -> recovery OK
         with self.assertRaises(SystemExit):
             spend.assert_key_available(led, "H-other")                       # different H -> refused
         with self.assertRaises(SystemExit):
             spend.assert_key_available(led)                                  # no run_H -> strict refuse
+
+    def test_missing_ledger_refuses_fail_closed(self):
+        # round-10 finding 1: a MISSING ledger must NEVER read as eligible.
+        tmp = Path(tempfile.mkdtemp())
+        with self.assertRaises(SystemExit):
+            spend.assert_ledger_initialized(tmp / "nope.jsonl")
+        with self.assertRaises(SystemExit):
+            spend.assert_key_available(tmp / "nope.jsonl", self.H9)
+
+    def test_genesis_seeds_eligible_once(self):
+        tmp = Path(tempfile.mkdtemp()); led = tmp / "c.jsonl"
+        spend.genesis(str(led))
+        self.assertTrue(spend.has_genesis(led))
+        self.assertEqual(spend.custody_state(led), "eligible")
+        with self.assertRaises(SystemExit):
+            spend.genesis(str(led))                                          # refuses to re-seed
+
+    def test_accidental_access_transitions_custody_spent(self):
+        # round-10 finding 1: an accidental answer read is a SPEND that blocks EVERY later instance.
+        tmp = Path(tempfile.mkdtemp()); log = tmp / "sp.jsonl"; led = _genesis_led(tmp / "c.jsonl")
+        spend.append_event(log, "spend:accidental-access-during-gen", self.H9, custody_ledger=led)
+        self.assertEqual(spend.custody_state(led), "spent")
+        with self.assertRaises(SystemExit):                                  # requires the ledger
+            spend.append_event(tmp / "sp2.jsonl", "spend:accidental-access-post-hash", "H-x")
+        # a later DIFFERENT-H run is now blocked cross-run
+        with self.assertRaises(SystemExit):
+            spend.assert_key_available(led, "H-later")
 
     def test_generation_started_event_appendable(self):
         tmp = Path(tempfile.mkdtemp()); log = tmp / "sp.jsonl"
