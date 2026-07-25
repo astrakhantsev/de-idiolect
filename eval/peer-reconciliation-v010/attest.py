@@ -481,8 +481,19 @@ def _verify_confirmatory_receipt(conf_dir, expected_H):
     for st in ("polarity", "retrieval", "verify", "aggregate", "adaptive1", "adaptive2", "compose"):
         if stages.get(st) is not True:
             errs.append(f"{conf_dir}: confirmatory full-draw stage {st!r} not completed")
-    # round-10 finding 5: the complete per-key setup manifest must re-verify.
-    errs += sc.verify_setup_manifest(conf_dir)
+    # round-11 finding 8: RE-HASH the recorded full-draw output set (a deleted/drifted polarity/
+    # retrieval/verify/aggregate/adaptive/compose artifact refuses — not a stale exists() boolean).
+    fdo = rec.get("full_draw_outputs") or {}
+    for rel, h in fdo.items():
+        p = Path(conf_dir) / rel
+        if not p.exists() or _sha(p) != h:
+            errs.append(f"{conf_dir}: full-draw output {rel} missing/drift vs receipt")
+    if not fdo:
+        errs.append(f"{conf_dir}: confirmatory receipt records no full_draw_outputs hashes")
+    # round-10 finding 5 + round-11 finding 7: the complete per-key setup manifest must re-verify,
+    # ANCHORED to the setup_manifest_sha256 bound into the confirmatory result (a regenerated manifest
+    # is refused).
+    errs += sc.verify_setup_manifest(conf_dir, expected_sha=rec.get("setup_manifest_sha256"))
     return errs
 
 

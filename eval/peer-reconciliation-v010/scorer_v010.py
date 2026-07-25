@@ -318,9 +318,19 @@ EMBARGO_PATH = BASE / "runs/scoring/.embargo/per-pair.json"
 
 
 def score(args):
+    # round-11 finding 2: in RUNTIME mode the custody ledger is FIXED to the out-of-tree canonical —
+    # a --custody-ledger override is REFUSED (it could point at a fresh ledger and bypass a canonical
+    # spent/forfeited). --test permits an override for the offline suite ONLY. Checked FIRST, before
+    # any H/key work, so the refusal is unambiguous.
+    if not args.test:
+        if args.custody_ledger and args.custody_ledger != spend.CANONICAL_CUSTODY_LEDGER:
+            sys.exit("SCORER-REFUSE: --custody-ledger override is not permitted in runtime mode "
+                     "(the canonical out-of-tree ledger is fixed); use --test for the offline suite")
+        ledger = spend.CANONICAL_CUSTODY_LEDGER
+    else:
+        ledger = args.custody_ledger or spend.CANONICAL_CUSTODY_LEDGER
     hobj = attest.load_and_verify_H(args.H)
     run_H = hobj["H"]
-    ledger = args.custody_ledger or spend.CANONICAL_CUSTODY_LEDGER   # round-10: out-of-tree canonical
     # (a) PRE-CLAIM gate (per-H spend log + cross-run custody ledger): refuse before ANY key/H
     #     work unless the current-H log has exactly one structure:read + an in-range attempt and
     #     no claim/terminal, AND the durable ledger shows the key is not spent/forfeited.
@@ -436,7 +446,9 @@ def main():
     s = sub.add_parser("score")
     s.add_argument("--key-dir", required=True); s.add_argument("--recorded-hashes", required=True)
     s.add_argument("--pairs", required=True); s.add_argument("--H", required=True)
-    s.add_argument("--spend-log", required=True); s.add_argument("--custody-ledger")
+    s.add_argument("--spend-log", required=True)
+    s.add_argument("--custody-ledger", help="runtime: MUST be the canonical path (or omitted); overridable only with --test")
+    s.add_argument("--test", action="store_true", help="offline suite ONLY: permit a --custody-ledger override (round-11 finding 2)")
     s.add_argument("--tool-verdicts"); s.add_argument("--baseline-a"); s.add_argument("--baseline-b")
     s.add_argument("--output-manifest", required=True)
     s.add_argument("--attest2-receipt", default=str(BASE / "runs/attestation-point-2.json"),

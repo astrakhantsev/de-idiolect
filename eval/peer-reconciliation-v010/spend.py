@@ -154,9 +154,13 @@ def append_event(logpath, event, run_H, notes="", custody_ledger=None):
     if not run_H:
         raise SystemExit("append_event requires run_H (per-H namespace)")
     if event in ACCIDENTAL_EVENTS:
+        # round-11 finding 1: an accidental answer read is a SPEND. Route through the ONE fail-closed
+        # locked op (custody `spent` FIRST, then the per-H event) so a crash between the two writes
+        # leaves custody already spent (blocking EVERY instance); the accidental `spent` carries its
+        # event_ref and is NEVER treated as recoverable atomic-claim state.
         if not custody_ledger:
             raise SystemExit(f"{event}: accidental answer-read is a SPEND — requires custody_ledger")
-        record_custody(custody_ledger, "spent", run_H, event, notes="accidental answer read (SPEND)")
+        return record_accidental_spend(logpath, custody_ledger, run_H, event, notes)
     BLOCKED_BY_ACCIDENTAL = {"structure:read", "state:scoring-attempt",
                              "spend:authorized-read-claimed", "spend:authorized-read-complete"}
     fh = _lock(logpath)
@@ -233,45 +237,63 @@ def assert_scoring_allowed(logpath, run_H, custody_ledger=None):
 
 
 # ------------------------- cross-run key-custody ledger -------------------------
+# The ONLY spent-state recovery permitted (round-11 finding 1): a same-H `spent` record is
+# recoverable ONLY when its event_ref is the authorized-read claim (a crash between atomic_claim's
+# ledger write and its per-H claim). An ACCIDENTAL-access `spent` is NEVER recoverable.
+RECOVERABLE_SPEND_REF = "spend:authorized-read-claimed"
+
+
+def _state_events(ledger):
+    """Only the custody entries that carry a `state` (genesis + transitions) — skips non-state audit
+    records such as `benign-refreeze-used` (round-11 finding 3)."""
+    return [e for e in read_events(ledger) if "state" in e]
+
+
 def custody_state(ledger):
-    """The current key-3 custody state — the LAST recorded transition, default 'eligible'."""
-    evs = read_events(ledger)
+    """The current key-3 custody state — the LAST state-bearing transition, default 'eligible'."""
+    evs = _state_events(ledger)
     return evs[-1]["state"] if evs else "eligible"
 
 
 def _custody_last(ledger):
-    """(state, run_H) of the last custody transition, default ('eligible', None)."""
-    evs = read_events(ledger)
+    """(state, run_H, event_ref) of the last state-bearing transition, default ('eligible', None, None)."""
+    evs = _state_events(ledger)
     if not evs:
-        return "eligible", None
-    return evs[-1]["state"], evs[-1].get("run_H")
+        return "eligible", None, None
+    return evs[-1]["state"], evs[-1].get("run_H"), evs[-1].get("event_ref")
 
 
-def _custody_refuse_or_noop(cur_state, cur_H, state, run_H):
-    """Shared monotonicity + idempotency check (used by record_custody AND atomic_claim). Returns
-    'append' | 'noop'; raises SystemExit on a refused transition. Round-9: a blocking state may be
-    RE-appended as a no-op ONLY by the SAME run_H that set it (idempotent recovery); any different
-    state, or the same blocking state from a DIFFERENT H, is refused."""
+def _recoverable(cur_state, cur_H, cur_ref, run_H):
+    """A blocking state is same-H recoverable ONLY if it is a `spent` recorded by THIS H whose
+    event_ref is the authorized-read claim (never an accidental-access spend; round-11 finding 1)."""
+    return cur_state == "spent" and cur_H == run_H and cur_ref == RECOVERABLE_SPEND_REF
+
+
+def _custody_refuse_or_noop(cur_state, cur_H, cur_ref, state, run_H, event_ref):
+    """Shared monotonicity + idempotency check (record_custody AND atomic_claim). Returns
+    'append' | 'noop'; raises SystemExit on a refused transition. A blocking state may be RE-appended
+    as a no-op ONLY when it is recoverable (same-H authorized-read-claimed spent) and the new append is
+    the same recoverable spend; every other conflicting/accidental/different-H case is refused."""
     if cur_state in CUSTODY_BLOCK:
-        if state == cur_state and cur_H == run_H:
+        if state == cur_state and _recoverable(cur_state, cur_H, cur_ref, run_H) and event_ref == RECOVERABLE_SPEND_REF:
             return "noop"
-        raise SystemExit(f"CUSTODY-REFUSE: key already {cur_state!r} (run_H {cur_H!r}) — cannot transition to "
-                         f"{state!r} (run_H {run_H!r})")
+        raise SystemExit(f"CUSTODY-REFUSE: key already {cur_state!r} (run_H {cur_H!r}, ref {cur_ref!r}) — cannot "
+                         f"transition to {state!r} (run_H {run_H!r}, ref {event_ref!r})")
     return "append"
 
 
 def record_custody(ledger, state, run_H, event_ref, notes=""):
     """Append a cross-run custody transition (locked). `state` ∈ CUSTODY_STATES. Monotone +
-    idempotent: once spent/forfeited, a conflicting transition is refused and a DUPLICATE
-    spent/forfeited append by the SAME run_H is a no-op success (round-9 idempotent recovery).
-    Round-10: requires an initialized (genesis) ledger — never creates custody state ex nihilo."""
+    idempotent: once spent/forfeited a conflicting transition is refused; a DUPLICATE recoverable
+    (same-H authorized-read-claimed) `spent` append is a no-op success. Round-10: requires an
+    initialized (genesis) ledger — never creates custody state ex nihilo."""
     if state not in CUSTODY_STATES:
         raise SystemExit(f"unknown custody state {state!r}; valid: {CUSTODY_STATES}")
     assert_ledger_initialized(ledger)
     fh = _lock(ledger)
     try:
-        cur_state, cur_H = _custody_last(ledger)
-        if _custody_refuse_or_noop(cur_state, cur_H, state, run_H) == "noop":
+        cur_state, cur_H, cur_ref = _custody_last(ledger)
+        if _custody_refuse_or_noop(cur_state, cur_H, cur_ref, state, run_H, event_ref) == "noop":
             return None
         entry = {"state": state, "run_H": run_H, "event_ref": event_ref, "notes": notes,
                  "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}
@@ -281,15 +303,63 @@ def record_custody(ledger, state, run_H, event_ref, notes=""):
         _unlock(fh)
 
 
+def record_accidental_spend(spend_log, custody_ledger, run_H, event, notes=""):
+    """Round-11 finding 1: the ONE fail-closed accidental-read transition. Under BOTH locks (custody
+    ledger THEN spend log) record custody `spent` (event_ref = the accidental event — NEVER
+    recoverable) FIRST, then append the per-H accidental event. A crash after the custody write leaves
+    the key spent for EVERY instance; a crash after the per-H write is likewise covered."""
+    if event not in ACCIDENTAL_EVENTS:
+        raise SystemExit(f"record_accidental_spend: {event!r} is not an accidental-access event")
+    assert_ledger_initialized(custody_ledger)
+    lfh = _lock(custody_ledger)
+    try:
+        sfh = _lock(spend_log)
+        try:
+            cur_state, cur_H, cur_ref = _custody_last(custody_ledger)
+            if _custody_refuse_or_noop(cur_state, cur_H, cur_ref, "spent", run_H, event) == "append":
+                _append_line(custody_ledger, {"state": "spent", "run_H": run_H, "event_ref": event,
+                    "notes": notes or "accidental answer read (SPEND)",
+                    "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()})
+            entry = {"event": event, "run_H": run_H, "meaning": TABLE[event], "notes": notes,
+                     "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}
+            _append_line(spend_log, entry)
+            return entry
+        finally:
+            _unlock(sfh)
+    finally:
+        _unlock(lfh)
+
+
 def assert_key_available(ledger, run_H=None):
     """Cross-run gate: refuse if the durable custody ledger is MISSING/un-seeded (fail-closed —
     round-10: a missing ledger must NEVER read as 'eligible'), or shows the key spent/forfeited.
-    Round-9: when `run_H` is given, a spent/forfeited state set by that SAME H is a recovery case and
-    is ALLOWED (the atomic claim handles it idempotently); a different H (or run_H omitted) is refused."""
+    A blocking state is tolerated ONLY when it is same-H RECOVERABLE (an authorized-read-claimed
+    spent, round-11 finding 1) — an accidental-access spent or a different-H block is refused."""
     assert_ledger_initialized(ledger)
-    st, holder = _custody_last(ledger)
-    if st in CUSTODY_BLOCK and not (run_H is not None and holder == run_H):
-        raise SystemExit(f"KEY-CUSTODY: key-3 is {st!r} (run_H {holder!r}, cross-run) — refusing any scoring/read")
+    st, holder, ref = _custody_last(ledger)
+    if st in CUSTODY_BLOCK and not (run_H is not None and _recoverable(st, holder, ref, run_H)):
+        raise SystemExit(f"KEY-CUSTODY: key-3 is {st!r} (run_H {holder!r}, ref {ref!r}, cross-run) — refusing any read")
+
+
+# ------------------------- one-time benign attest-1 re-freeze (round-11 finding 3) -------------------------
+def benign_refreeze_used(ledger):
+    """True iff the canonical ledger already carries the monotone `benign-refreeze-used` audit record
+    (the ONE preregistered benign attestation-1 re-freeze has been consumed)."""
+    return any(e.get("kind") == "benign-refreeze-used" for e in read_events(ledger))
+
+
+def record_benign_refreeze(ledger, run_H, notes=""):
+    """Append the monotone one-per-key `benign-refreeze-used` audit record (locked). Refuses a second."""
+    assert_ledger_initialized(ledger)
+    fh = _lock(ledger)
+    try:
+        if benign_refreeze_used(ledger):
+            raise SystemExit("BENIGN-REFREEZE-REFUSE: the one preregistered benign re-freeze is already used "
+                             "— only configuration/retirement remains")
+        _append_line(ledger, {"kind": "benign-refreeze-used", "run_H": run_H, "notes": notes,
+                              "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()})
+    finally:
+        _unlock(fh)
 
 
 def atomic_claim(spend_log, custody_ledger, run_H, notes=""):
@@ -306,8 +376,9 @@ def atomic_claim(spend_log, custody_ledger, run_H, notes=""):
     try:
         sfh = _lock(spend_log)                  # 2) then the spend-log lock
         try:
-            cur_state, cur_H = _custody_last(custody_ledger)
-            decision = _custody_refuse_or_noop(cur_state, cur_H, "spent", run_H)  # refuses cross-H
+            cur_state, cur_H, cur_ref = _custody_last(custody_ledger)
+            decision = _custody_refuse_or_noop(cur_state, cur_H, cur_ref, "spent", run_H,
+                                               RECOVERABLE_SPEND_REF)  # refuses cross-H + accidental spent
             cur = _cur(read_events(spend_log), run_H)
             _assert_claim_gate(cur)             # refuses if a claim already exists (key already read)
             if decision == "append":
@@ -371,14 +442,27 @@ def assert_no_attest1_mismatch(logpath, run_H):
                          "(pending/classified) — it NEVER proceeds; start a fresh freeze instance")
 
 
-def classify_attest1(logpath, run_H, resolution, notes=""):
+def _attest1_classified(logpath, run_H):
+    cur = _cur(read_events(logpath), run_H)
+    return (_count(cur, "state:attest1-classified-benign")
+            + _count(cur, "state:attest1-classified-configuration"))
+
+
+def classify_attest1(logpath, run_H, resolution, ledger, notes=""):
     """Operator records the classification of a persisted attest-1 mismatch. `resolution` ∈
-    {benign, configuration}. Requires the pending terminal to exist for this H. Either way THIS H
-    stays refused (benign => a NEW freeze instance is required; configuration => retirement)."""
+    {benign, configuration}. Requires the pending terminal for this H. Round-11 finding 3: ONE-SHOT
+    per pending mismatch (a repeat/conflicting classification is refused); a `benign` resolution
+    consumes the ONE preregistered cross-run benign re-freeze (recorded monotone in the CANONICAL
+    ledger) and a SECOND benign classification anywhere is refused — only configuration/retirement
+    remains. Either way THIS H stays refused."""
     if resolution not in ("benign", "configuration"):
         raise SystemExit("classify-attest1 resolution must be 'benign' or 'configuration'")
     if not _has_attest1_pending(logpath, run_H):
         raise SystemExit("classify-attest1: no pending attestation-1 mismatch for this H")
+    if _attest1_classified(logpath, run_H) >= 1:
+        raise SystemExit("classify-attest1: this pending mismatch is already classified (one-shot)")
+    if resolution == "benign":
+        record_benign_refreeze(ledger, run_H, notes="benign attest-1 re-freeze consumed")  # refuses a 2nd
     return append_event(logpath, f"state:attest1-classified-{resolution}", run_H, notes=notes)
 
 
@@ -390,14 +474,17 @@ def _cli():
     g.add_argument("--out", default=CANONICAL_CUSTODY_LEDGER); g.add_argument("--note", default="operator-seeded key-3 custody genesis")
     c = sub.add_parser("classify-attest1", help="record an attestation-1 mismatch classification")
     c.add_argument("--resolution", required=True, choices=("benign", "configuration"))
-    c.add_argument("--H", required=True); c.add_argument("--out", required=True); c.add_argument("--notes", default="")
+    c.add_argument("--H", required=True); c.add_argument("--out", required=True,
+                   help="the per-H spend log"); c.add_argument("--ledger", default=CANONICAL_CUSTODY_LEDGER,
+                   help="the canonical custody ledger (records the one-time benign re-freeze)")
+    c.add_argument("--notes", default="")
     a = ap.parse_args()
     if a.cmd == "genesis":
         e = genesis(a.out, a.note); print(f"custody GENESIS seeded (eligible) -> {a.out}\n  {e['created']}")
     elif a.cmd == "classify-attest1":
-        classify_attest1(a.out, a.H, a.resolution)
+        classify_attest1(a.out, a.H, a.resolution, a.ledger)
         print(f"attest-1 mismatch classified {a.resolution!r} for H {a.H[:12]} — THIS H stays refused "
-              f"({'new freeze instance required' if a.resolution == 'benign' else 'configuration retired'})")
+              f"({'benign re-freeze CONSUMED (one allowed); new fresh-checkout instance required' if a.resolution == 'benign' else 'configuration RETIRED'})")
 
 
 if __name__ == "__main__":

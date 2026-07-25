@@ -52,36 +52,57 @@ SETUP_SOURCE_SCRIPTS = ["harness/keyspec-author.md", "harness/validate_key.py", 
                         "harness/gen_leakcheck.py", "harness/split_corpus.py"]
 
 
+SETUP_LOCAL_GLOBS = ["prompts/gen-community-a.md", "prompts/gen-community-b.md",
+                     "corpora/a/*.md", "corpora/b/*.md", "corpora/a/manifest.json", "corpora/b/manifest.json",
+                     "pairs.json", "leakcheck_peer.sh", "key/concepts.json", "key/answer_key.json",
+                     "manifests/*.json", "manifests/*.out", "manifests/*.receipt.json"]
+
+
+def _discover_key_local(key_dir):
+    """The CURRENT discovered key-local setup set {rel: sha} (round-11 finding 7: used for BOTH
+    building the manifest AND set-equality verification, so an unlisted EXTRA is caught)."""
+    kd = Path(key_dir)
+    local = {}
+    for g in SETUP_LOCAL_GLOBS:
+        for p in sorted(kd.glob(g)):
+            if p.is_file():
+                local[str(p.relative_to(kd))] = _sha(p)
+    return local
+
+
 def _setup_manifest(key_dir):
     """Round-10 finding 5: the EXACT per-key setup state. `key_local` covers the generated briefs,
     every attempt output+manifest+receipt, the accepted corpora (+ their manifests), pairs.json,
     leakcheck_peer.sh, and the key-derived records; `source_scripts` binds the frozen setup scripts
     (BASE-relative). Deterministic (sorted) so restart/attestation can re-verify byte-for-byte."""
-    kd = Path(key_dir)
-    local = {}
-    globs = ["prompts/gen-community-a.md", "prompts/gen-community-b.md",
-             "corpora/a/*.md", "corpora/b/*.md", "corpora/a/manifest.json", "corpora/b/manifest.json",
-             "pairs.json", "leakcheck_peer.sh", "key/concepts.json", "key/answer_key.json",
-             "manifests/*.json", "manifests/*.out", "manifests/*.receipt.json"]
-    for g in globs:
-        for p in sorted(kd.glob(g)):
-            if p.is_file():
-                local[str(p.relative_to(kd))] = _sha(p)
     source = {rel: _sha(BASE / rel) for rel in SETUP_SOURCE_SCRIPTS if (BASE / rel).is_file()}
-    return {"key_local": local, "source_scripts": source}
+    return {"key_local": _discover_key_local(key_dir), "source_scripts": source}
 
 
-def verify_setup_manifest(key_dir):
-    """Re-verify a key's setup-manifest.json: every key_local file (relative to key_dir) and every
-    source_scripts file (relative to BASE) must be present + hash-match. Returns a list of errors."""
+def verify_setup_manifest(key_dir, expected_sha=None):
+    """Re-verify a key's setup-manifest.json (round-10 finding 5 + round-11 finding 7):
+      * DISCOVERED-SET EQUALITY — the current discovered key-local set must EQUAL the manifest's
+        key_local set (an unlisted EXTRA or a missing entry is caught, not just listed entries);
+      * every key_local file (relative to key_dir) + source_scripts file (relative to BASE) present + hash-match;
+      * when `expected_sha` is given, the manifest BYTES must hash to it (anchors the manifest to the
+        completion receipt / confirmatory result — a regenerated manifest is refused).
+    Returns a list of errors."""
     kd = Path(key_dir); mf = kd / "setup-manifest.json"
     if not mf.is_file():
         return [f"{key_dir}: setup-manifest.json missing"]
+    if expected_sha is not None and _sha(mf) != expected_sha:
+        return [f"{key_dir}: setup-manifest.json bytes != bound setup_manifest_sha256 (regenerated/altered)"]
     try:
         m = json.loads(mf.read_text())
     except Exception as e:
         return [f"{key_dir}: setup-manifest.json unreadable ({e})"]
     errs = []
+    listed = set(m.get("key_local") or {})
+    discovered = set(_discover_key_local(key_dir))
+    for rel in sorted(discovered - listed):
+        errs.append(f"{key_dir}: UNLISTED setup artifact {rel} (extra vs setup-manifest)")
+    for rel in sorted(listed - discovered):
+        errs.append(f"{key_dir}: setup artifact {rel} MISSING vs setup-manifest")
     for rel, h in (m.get("key_local") or {}).items():
         p = kd / rel
         if not p.is_file() or _sha(p) != h:
@@ -174,53 +195,81 @@ def _corpus_attempt_ok(key_dir, side, out_file):
         shutil.rmtree(attempt, ignore_errors=True)
 
 
-def _attempt_paths(manifest, n):
-    """Round-9 finding 5: per-site/attempt DURABLE, attempt-indexed snapshot + manifest + receipt
-    paths (next to the canonical call manifest). Written immediately; never overwritten on restart."""
+def _attempt_paths(manifest, gen, n):
+    """Round-11 finding 5: per-site/attempt DURABLE paths, namespaced by the fresh-setup GENERATION
+    (`gen{gen}`) and attempt index. Written immediately (a `.receipt.json` before the call returns);
+    never overwritten on restart, so exhausted-generation evidence is preserved."""
     md = Path(manifest).parent
     stem = Path(manifest).stem
-    return (md / f"{stem}.a{n}.out", md / f"{stem}.a{n}.manifest.json", md / f"{stem}.a{n}.receipt.json")
+    pre = f"{stem}.gen{gen}.a{n}"
+    return (md / f"{pre}.out", md / f"{pre}.manifest.json", md / f"{pre}.receipt.json")
 
 
-def _call_with_retry(name, cli, model, prompt, out, manifest, validate, receipt, dry):
-    """Per-call malformed-retry cap 1. Round-9 finding 5: every site/attempt gets a UNIQUE durable
-    output+manifest+receipt written IMMEDIATELY; on restart a completed attempt is VERIFIED and
-    REUSED (never re-issued — so infrastructure recovery cannot create extra uncounted draws), and
-    exhausted-attempt evidence is preserved. Every output is hashed into `receipt`; none discarded.
-    Returns True on a structurally valid output, False on setup exhaustion (malformed RETRY_CAP+1x)."""
+def _call_with_retry(name, cli, model, prompt, out, manifest, validate, receipt, dry, gen):
+    """Per-call malformed-retry cap 1, within generation `gen`. Round-11 finding 5: EVERY issued
+    attempt is recorded IMMEDIATELY — a `.receipt.json` (status `issued`) is written BEFORE the call,
+    then updated (`completed`, with the output hash iff an output exists). On restart an attempt whose
+    receipt exists is NEVER re-issued: a completed-with-valid-output attempt is REUSED; an issued/
+    no-output attempt is CONSUMED (counts against the cap; not reissued). A fresh generation (gen+1,
+    started only after a full exhaustion) resets the per-call cap while preserving all prior evidence.
+    Returns True on a structurally valid output, False on exhaustion of THIS generation."""
+    md = Path(manifest).parent; md.mkdir(parents=True, exist_ok=True)
     for attempt in range(RETRY_CAP + 1):
-        snap_out, snap_man, att_rcpt = _attempt_paths(manifest, attempt)
+        snap_out, snap_man, att_rcpt = _attempt_paths(manifest, gen, attempt)
         if not dry and att_rcpt.exists():
-            # RESTART: this attempt's isolated call already completed — verify + REUSE, never re-issue.
             rec = json.loads(att_rcpt.read_text())
-            if not snap_out.exists() or _sha(snap_out) != rec.get("sha256"):
-                sys.exit(f"  [{name}] attempt {attempt}: durable snapshot missing/tampered vs receipt — HALT")
-            print(f"  [{name}] attempt {attempt}: RESUME reuse (completed snapshot, no re-issue)")
-            Path(out).parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy(snap_out, out)
-            if snap_man.exists():
-                Path(manifest).parent.mkdir(parents=True, exist_ok=True); shutil.copy(snap_man, manifest)
-            rc = rec.get("rc", 0)
-        else:
-            print(f"  [{name}] attempt {attempt} -> {out}")
-            rc = _isolated(cli, model, prompt, out, manifest, dry)
-            if not dry and Path(out).exists():
-                # write the DURABLE attempt snapshot + manifest + receipt IMMEDIATELY (attempt-indexed)
-                shutil.copy(out, snap_out)
-                if Path(manifest).exists():
-                    shutil.copy(manifest, snap_man)
-                att_rcpt.write_text(json.dumps({"site": name, "attempt": attempt, "path": str(out),
-                    "sha256": _sha(out), "rc": rc,
-                    "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}, indent=1))
-        if not dry and Path(out).exists():
-            receipt["outputs"].append({"site": name, "attempt": attempt, "path": str(out),
-                                       "sha256": _sha(out), "rc": rc})
-        if validate():
+            if rec.get("status") == "completed" and rec.get("out_present"):
+                if not snap_out.exists() or _sha(snap_out) != rec.get("sha256"):
+                    sys.exit(f"  [{name}] gen{gen} attempt {attempt}: durable snapshot missing/tampered — HALT")
+                print(f"  [{name}] gen{gen} attempt {attempt}: RESUME reuse (completed snapshot, no re-issue)")
+                Path(out).parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy(snap_out, out)
+                if snap_man.exists():
+                    Path(manifest).parent.mkdir(parents=True, exist_ok=True); shutil.copy(snap_man, manifest)
+                receipt["outputs"].append({"site": name, "gen": gen, "attempt": attempt,
+                                           "path": str(out), "sha256": rec.get("sha256"), "rc": rec.get("rc")})
+                if validate():
+                    return True
+            else:
+                # issued but produced NO reusable output (no-output / interrupted) — CONSUMED, not reissued
+                print(f"  [{name}] gen{gen} attempt {attempt}: prior issued attempt had no reusable output — CONSUMED")
+                receipt["outputs"].append({"site": name, "gen": gen, "attempt": attempt, "out_present": False})
+            continue
+        if dry:
+            print(f"    [dry-run] {name} gen{gen} attempt {attempt}")
+            if validate():
+                return True
+            continue
+        # write the `issued` receipt IMMEDIATELY (before the call returns), so an interruption still
+        # records the attempt and it cannot be reissued beyond the cap.
+        att_rcpt.write_text(json.dumps({"site": name, "gen": gen, "attempt": attempt, "status": "issued",
+            "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}, indent=1))
+        print(f"  [{name}] gen{gen} attempt {attempt} -> {out}")
+        rc = _isolated(cli, model, prompt, out, manifest, dry)
+        out_present = Path(out).exists()
+        if out_present:
+            shutil.copy(out, snap_out)
+            if Path(manifest).exists():
+                shutil.copy(manifest, snap_man)
+        att_rcpt.write_text(json.dumps({"site": name, "gen": gen, "attempt": attempt, "status": "completed",
+            "out_present": out_present, "sha256": _sha(out) if out_present else None, "rc": rc,
+            "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}, indent=1))
+        receipt["outputs"].append({"site": name, "gen": gen, "attempt": attempt,
+                                   "path": str(out) if out_present else None,
+                                   "sha256": _sha(out) if out_present else None, "rc": rc, "out_present": out_present})
+        if out_present and validate():
             return True
-        print(f"  [{name}] attempt {attempt}: MALFORMED (rc={rc})")
-    print(f"  [{name}] SETUP EXHAUSTION (malformed {RETRY_CAP+1}x) -> phase FAILS, "
+        print(f"  [{name}] gen{gen} attempt {attempt}: MALFORMED/no-output (rc={rc})")
+    print(f"  [{name}] SETUP EXHAUSTION gen{gen} (cap {RETRY_CAP+1}) -> phase FAILS, "
           f"configuration NOT retired (§4.1a)")
     return False
+
+
+def _current_generation(key_dir):
+    """Round-11 finding 5: the current fresh-setup generation = the count of prior EXHAUSTED
+    generations (`setup-gen-*.exhausted` markers). A re-run after exhaustion starts a NEW generation
+    (fresh per-call cap) while all prior generations' attempt evidence is preserved on disk."""
+    return len(list(Path(key_dir).glob("setup-gen-*.exhausted")))
 
 
 def build_key(key_id, args):
@@ -231,30 +280,38 @@ def build_key(key_id, args):
     if done_receipt.exists():
         rec = json.loads(done_receipt.read_text())
         if rec.get("H") == args.H_value:
-            # finding 3 + round-10 finding 5: TYPED skip — require leakcheck_pass AND re-verify the
-            # COMPLETE per-key setup manifest (briefs, attempts, corpora, pairs.json, leakcheck,
-            # key records, source scripts) before skipping. Any drift HALTS (never silently reused).
+            # finding 3 + round-10/11 findings 5/7: TYPED skip — require leakcheck_pass AND re-verify
+            # the COMPLETE per-key setup manifest with DISCOVERED-SET EQUALITY and the manifest BYTES
+            # anchored to the completion receipt's setup_manifest_sha256. Any drift/extra HALTS.
             if rec.get("leakcheck_pass") is not True:
                 sys.exit(f"  [{key_id}] setup-key.done lacks leakcheck_pass — HALT")
-            se = verify_setup_manifest(key_dir)
+            se = verify_setup_manifest(key_dir, expected_sha=rec.get("setup_manifest_sha256"))
             if se:
                 sys.exit(f"  [{key_id}] setup-manifest drift on restart — HALT: {se}")
-            print(f"  [{key_id}] already complete (setup-key.done, H + full setup-manifest re-verify OK) — SKIP")
+            print(f"  [{key_id}] already complete (setup-key.done, H + anchored setup-manifest re-verify OK) — SKIP")
             return rec, True
         sys.exit(f"  [{key_id}] setup-key.done present with a DIFFERENT H — refusing to overwrite a "
                  f"prior confirmatory key")
     (key_dir / "key").mkdir(parents=True, exist_ok=True)
     (key_dir / "manifests").mkdir(parents=True, exist_ok=True)
     dry = args.dry_run
-    receipt = {"key_id": key_id, "H": args.H_value, "draw_begins": "at key-author call",
+    gen = _current_generation(key_dir)   # round-11 finding 5: fresh generation after each exhaustion
+    receipt = {"key_id": key_id, "H": args.H_value, "generation": gen, "draw_begins": "at key-author call",
                "outputs": [], "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}
+
+    def _exhaust():
+        (key_dir / f"setup-gen-{gen}.exhausted").write_text(json.dumps(
+            {"generation": gen, "H": args.H_value,
+             "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}, indent=1))
+        return receipt, False
+
     # 1. key-author (DRAW BEGINS here) -> concepts.json ; validate -> answer_key.json
     concepts = key_dir / "key/concepts.json"
     if not _call_with_retry("key-author", "claude", "claude-opus-4-8",
                             BASE / "harness/keyspec-author.md", concepts,
                             key_dir / "manifests/key-author.json",
-                            lambda: _validate_key(concepts, dry), receipt, dry):
-        return receipt, False
+                            lambda: _validate_key(concepts, dry), receipt, dry, gen):
+        return _exhaust()
     if dry:
         print("    [dry-run] gen_leakcheck; build_briefs; corpus-gen a/b -> per-attempt fresh split "
               "(exact 01..11) + FROZEN leak checks + atomic promote; make_pairs")
@@ -272,8 +329,8 @@ def build_key(key_id, args):
         if not _call_with_retry(site, cli, model, prompt, out,
                                 key_dir / f"manifests/{site}.json",
                                 lambda s=side, o=out: _corpus_attempt_ok(key_dir, s, o),
-                                receipt, dry):
-            return receipt, False
+                                receipt, dry, gen):
+            return _exhaust()
     # 4. answer-blind pairs manifest
     subprocess.run([sys.executable, str(BASE / "make_pairs_manifest.py"),
                     str(key_dir / "key"), str(key_dir / "pairs.json")], check=True)
@@ -303,11 +360,14 @@ def main():
                     "setup-manifest.json (used by run_confirmatory.sh before a draw); exit 0/1")
     args = ap.parse_args()
     if args.verify_setup:
-        errs = verify_setup_manifest(args.verify_setup)
+        # round-11 finding 7: anchor to setup-key.done's bound hash (a regenerated manifest is refused).
+        kd = Path(args.verify_setup); dr = kd / "setup-key.done"
+        exp = json.loads(dr.read_text()).get("setup_manifest_sha256") if dr.is_file() else None
+        errs = verify_setup_manifest(args.verify_setup, expected_sha=exp)
         if errs:
             for e in errs: print("  SETUP-MANIFEST MISMATCH:", e)
             sys.exit(1)
-        print(f"setup-manifest verified: {args.verify_setup}")
+        print(f"setup-manifest verified (anchored): {args.verify_setup}")
         return
     (BASE / "runs/confirmatory").mkdir(parents=True, exist_ok=True)
     print("== confirmatory setup: 2 fresh TRAIN keys via the UNCHANGED frozen v0.9 path (§4.1a) ==")

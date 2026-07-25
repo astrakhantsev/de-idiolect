@@ -161,13 +161,22 @@ echo "== phase 3: confirmatory setup (per-key idempotent; completed keys are ski
 python3 setup_confirmatory.py --H-value "$H" \
   || { log_state state:setup-exhaustion; echo "SETUP EXHAUSTION -> phase fails, config NOT retired, key still eligible (§4.1a)"; exit 2; }
 
-echo "== phase 4: confirmatory draws — tool-path per conf key under H; gate <=1/40 =="
+echo "== phase 4: confirmatory draws — FULL tool-path per conf key under H; gate <=1/40 =="
+# Round-11 finding 4: route on run_confirmatory.sh's EXIT CLASS — ONLY the qualification-gate code (3)
+# retires the configuration; an infrastructure fault (2) is a resumable halt (NO terminal); an
+# integrity failure (5) is a typed halt for repair (NO terminal, NOT a config outcome).
 for ck in conf-key-1 conf-key-2; do
   if phase_check "draw-$ck" gate_pass=true; then echo "  draw $ck already complete (typed receipt) — skip"; continue; fi
-  bash run_confirmatory.sh runs/confirmatory/$ck "$H" \
-    || { log_state state:confirmatory-phase-fail; echo "CONFIRMATORY $ck FAILED -> configuration/H RETIRED (§4.1); key eligible for a new H"; exit 3; }
+  CONF_RC=0; bash run_confirmatory.sh runs/confirmatory/$ck "$H" || CONF_RC=$?
+  case "$CONF_RC" in
+    0) ;;  # qualified + full tool path complete
+    3) log_state state:confirmatory-phase-fail; echo "CONFIRMATORY $ck: qualification-gate FAIL -> configuration/H RETIRED (§4.1); key eligible for a new H"; exit 3 ;;
+    2) echo "CONFIRMATORY $ck: INFRASTRUCTURE fault -> resumable halt (no terminal; fix + re-run)"; exit 2 ;;
+    5) echo "CONFIRMATORY $ck: INTEGRITY failure (setup/receipt mismatch) -> typed halt for repair (no terminal)"; exit 5 ;;
+    *) echo "CONFIRMATORY $ck: unexpected exit $CONF_RC -> halt"; exit "$CONF_RC" ;;
+  esac
   # the TYPED confirmatory receipt IS runs/confirmatory/$ck/runs/confirmatory-result.json (gate_pass,
-  # H, corpora hashes). Bind it as the phase receipt (require the result file; re-hashed on resume).
+  # H, corpora + full-draw-output hashes, setup_manifest_sha256). Bind it as the phase receipt.
   phase_receipt "draw-$ck" "runs/confirmatory/$ck/runs/confirmatory-result.json" gate_pass=true
 done
 
@@ -239,7 +248,12 @@ if phase_check baselines; then echo "  baselines already complete (typed receipt
 fi
 
 echo "== phase 8a: build the EXACT step-7 OUTPUT MANIFEST (finding 4; set-equality vs staged calls) =="
-python3 attest.py build-output-manifest --H runs/H.json --out runs/output-manifest.json
+# Round-11 finding 6: manifest construction happens AFTER key-3 generation began, so a refusal
+# (missing/extra/drifted output) is a non-infrastructure post-generation termination -> persist the
+# per-H terminated terminal AND the canonical custody forfeit BEFORE exiting (via the fail-closed API).
+python3 attest.py build-output-manifest --H runs/H.json --out runs/output-manifest.json \
+  || { log_state state:terminated-during-gen-or-attest2-mismatch; forfeit_custody output-manifest-fail; \
+       echo "OUTPUT-MANIFEST construction REFUSED after generation -> forfeited-unspent (§4.3)"; exit 1; }
 
 echo "== phase 9: scoring — fresh attest-2 + atomic-claim spend, with the ONE bounded relaunch =="
 # Each attempt runs attestation-point-2 FRESH (finding 1), then appends a bounded
@@ -255,8 +269,12 @@ run_attempt() {
   python3 attest.py receipt --H runs/H.json --kind attest2 --out runs/receipts.jsonl
   python3 attest.py spend-log --event state:scoring-attempt --H "$H" --out "$SPENDLOG" \
     || { echo "scoring-attempt REFUSED (cap reached or terminal state) — NOT launching the scorer"; exit 1; }
+  # Round-11 finding 2: RUNTIME passes NO --custody-ledger (the scorer fixes the out-of-tree canonical);
+  # only --test may override it (the offline suite). A runtime --custody-ledger would be REFUSED.
+  local SCORER_LEDGER=()
+  [ "$TESTMODE" = 1 ] && SCORER_LEDGER=(--test --custody-ledger "$KEYCUSTODY")
   python3 scorer_v010.py score --key-dir key --recorded-hashes "$RECORDED" --pairs pairs.json \
-    --H runs/H.json --spend-log "$SPENDLOG" --custody-ledger "$KEYCUSTODY" \
+    --H runs/H.json --spend-log "$SPENDLOG" "${SCORER_LEDGER[@]+"${SCORER_LEDGER[@]}"}" \
     --output-manifest runs/output-manifest.json \
     --tool-verdicts runs/v010/verdicts.json --baseline-a runs/baseline_a/records.json \
     --baseline-b runs/baseline_b/records.json --out runs/scores.json

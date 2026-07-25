@@ -9,6 +9,11 @@
 # there; corpora/pairs.json/leakcheck were built by setup_confirmatory.py. The prompts +
 # controllers are byte-identical to the key-3 instrument (bound in H).
 set -euo pipefail
+# EXIT-CODE CONVENTION (round-11 finding 4) — the parent driver routes on these:
+#   2 = INFRASTRUCTURE fault (resumable halt; NO terminal) — missing runner, run-scoped call fault, retrieval fail
+#   3 = QUALIFICATION-GATE fail (retire -> state:confirmatory-phase-fail)
+#   5 = INTEGRITY failure (typed halt) — setup-manifest mismatch, missing pairs.json, missing/drifted full-draw output
+#   0 = success (qualified + full tool path complete)
 WS="${1:?conf-key dir}"; H="${2:?H}"
 SRC="$(cd "$(dirname "$0")" && pwd)"
 # Capture the SOURCE workspace's isolation-runner ABSOLUTE path BEFORE any cd/copy. The
@@ -27,11 +32,12 @@ cp "$SRC"/prompts/*.md "$WS/prompts/"
 # make "<WS>/../e2e-cell/run_isolated.sh" resolve for the copied (frozen) run_calls.sh
 mkdir -p "$WS/../e2e-cell"
 cp "$ISO_SRC" "$WS/../e2e-cell/run_isolated.sh"; chmod +x "$WS/../e2e-cell/run_isolated.sh"
-[ -f "$WS/pairs.json" ] || { echo "conf key missing pairs.json (run setup_confirmatory.py first)"; exit 2; }
+[ -f "$WS/pairs.json" ] || { echo "INTEGRITY: conf key missing pairs.json (run setup_confirmatory.py first)"; exit 5; }
 
 cd "$WS"
 VENVPY="$SRC/../../.venv/bin/python"
-calls() { local rc=0; bash "$WS/run_calls.sh" "$1" || rc=$?; [ "$rc" -lt 2 ] || { echo "HALT rc=$rc"; exit "$rc"; }; }
+# a run-scoped call fault (rc>=2) is INFRASTRUCTURE -> exit 2 (resumable), never a config outcome.
+calls() { local rc=0; bash "$WS/run_calls.sh" "$1" || rc=$?; [ "$rc" -lt 2 ] || { echo "INFRA-HALT (call rc=$rc)"; exit 2; }; }
 gen_loop() {
   python3 smoke_v010.py "$1"; calls "runs/$3"; python3 smoke_v010.py "$2"
   for _ in 1 2; do [ -s "runs/$4" ] || break; calls "runs/$4"; python3 smoke_v010.py "$2"; done
@@ -39,7 +45,7 @@ gen_loop() {
 
 # round-10 finding 5: re-verify the COMPLETE per-key setup manifest BEFORE the draw (a corrupted
 # pairs.json / leakcheck / corpus / brief after setup HALTs the draw rather than silently changing it).
-python3 "$SRC/setup_confirmatory.py" --verify-setup "$WS" || { echo "HALT: setup-manifest mismatch for $WS"; exit 2; }
+python3 "$SRC/setup_confirmatory.py" --verify-setup "$WS" || { echo "INTEGRITY-HALT: setup-manifest mismatch for $WS"; exit 5; }
 
 # ---- GENERATION (the 40 artifacts the ≤1/40 qualification gate reads) ----
 python3 smoke_v010.py excerpts
@@ -86,27 +92,43 @@ python3 smoke_v010.py prompts-polarity; calls runs/polarity/calls.tsv; python3 s
 while [ -s runs/polarity/rerun-calls.tsv ]; do calls runs/polarity/rerun-calls.tsv; python3 smoke_v010.py gate-polarity; done
 python3 smoke_v010.py alive
 "$VENVPY" retrieve_xc_v010.py --v010 --no-determinism > runs/v010/retrieval-summary.txt 2>&1 \
-  || { echo "CONFIRMATORY RETRIEVAL FAILED"; tail -5 runs/v010/retrieval-summary.txt; exit 1; }
+  || { echo "INFRA-HALT: confirmatory retrieval failed"; tail -5 runs/v010/retrieval-summary.txt; exit 2; }
 python3 v010.py stage-verify; calls runs/v010/verify/calls.tsv
 python3 v010.py aggregate
 python3 v010.py stage-adaptive-1; calls runs/v010/symcheck/calls.tsv; calls runs/v010/decompose/calls.tsv
 python3 v010.py stage-adaptive-2; calls runs/v010/containment/calls.tsv
 python3 v010.py compose
 
-# ---- finalize: embed full-draw stage-completion flags (attestation-1 re-checks they are all true) ----
-python3 - <<'PY'
-import json, sys
+# ---- finalize: record the EXACT full-draw output set WITH HASHES (round-11 finding 8: attestation-1
+#      re-hashes them, so a deleted/drifted full-draw artifact refuses) + bind setup_manifest_sha256
+#      (round-11 finding 7) into the confirmatory result. Missing output => INTEGRITY halt (exit 5). ----
+python3 - "$WS" <<'PY'
+import json, sys, hashlib, glob
 from pathlib import Path
+ws = Path(sys.argv[1])
 d = json.load(open("runs/confirmatory-result.json"))
-outs = {"polarity": "runs/polarity", "retrieval": "runs/v010/retrieval.json",
-        "verify": "runs/v010/verify/meta.json", "aggregate": "runs/v010/agg.json",
-        "adaptive1": "runs/v010/symcheck", "adaptive2": "runs/v010/containment",
-        "compose": "runs/v010/verdicts.json"}
-stages = {k: Path(v).exists() for k, v in outs.items()}
-d["stages"] = stages
-open("runs/confirmatory-result.json", "w").write(json.dumps(d, indent=1))
-missing = [k for k, ok in stages.items() if not ok]
+# the deterministic derived full-draw outputs (always produced by a complete draw) + the staged
+# per-stage call outputs (polarity/symcheck/decompose/containment/verify out-*).
+required = ["runs/v010/retrieval.json", "runs/v010/verify/meta.json", "runs/v010/agg.json",
+           "runs/v010/route-union.json", "runs/v010/verdicts.json", "runs/v010/review-context.json"]
+globbed = []
+for g in ("runs/polarity/out-*.json", "runs/v010/verify/out-*.json", "runs/v010/symcheck/out-*.json",
+          "runs/v010/decompose/out-*.json", "runs/v010/containment/out-*.json"):
+    globbed += sorted(glob.glob(g))
+missing = [r for r in required if not Path(r).is_file()]
 if missing:
-    print(f"CONFIRMATORY FULL-DRAW INCOMPLETE — missing stage outputs: {missing}"); sys.exit(1)
-print("confirmatory FULL draw complete: qualification PASS + full tool path (all stages)")
+    print(f"CONFIRMATORY FULL-DRAW INCOMPLETE — missing outputs: {missing}"); sys.exit(5)
+fdo = {rel: hashlib.sha256(Path(rel).read_bytes()).hexdigest() for rel in required + globbed}
+d["full_draw_outputs"] = fdo
+# stage flags derived from the recorded outputs (representative markers per stage).
+d["stages"] = {"polarity": Path("runs/polarity").exists(), "retrieval": "runs/v010/retrieval.json" in fdo,
+               "verify": "runs/v010/verify/meta.json" in fdo, "aggregate": "runs/v010/agg.json" in fdo,
+               "adaptive1": Path("runs/v010/symcheck").exists() and Path("runs/v010/decompose").exists(),
+               "adaptive2": Path("runs/v010/containment").exists(), "compose": "runs/v010/verdicts.json" in fdo}
+# round-11 finding 7: bind the setup_manifest_sha256 from setup-key.done into the confirmatory result.
+dr = ws / "setup-key.done"
+if dr.is_file():
+    d["setup_manifest_sha256"] = json.loads(dr.read_text()).get("setup_manifest_sha256")
+open("runs/confirmatory-result.json", "w").write(json.dumps(d, indent=1))
+print(f"confirmatory FULL draw complete: qualification PASS + full tool path ({len(fdo)} outputs hashed)")
 PY

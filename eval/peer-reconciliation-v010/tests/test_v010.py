@@ -1261,6 +1261,17 @@ class TestRound7(unittest.TestCase):
         # terminal + a startup guard refuses that H.
         self.assertIn("state:attest1-mismatch-pending-classification", drv)
         self.assertIn("assert_no_attest1_mismatch", drv)
+        # round-11 finding 4: confirmatory exit-class routing — ONLY the gate-fail code retires.
+        self.assertIn("CONF_RC", drv)
+        self.assertRegex(drv, r"qualification-gate FAIL -> configuration/H RETIRED")
+        self.assertRegex(drv, r"INFRASTRUCTURE fault -> resumable")
+        self.assertRegex(drv, r"INTEGRITY failure")
+        # round-11 finding 6: an output-manifest construction refusal forfeits (terminal + custody).
+        self.assertRegex(drv, r"OUTPUT-MANIFEST construction REFUSED")
+        self.assertIn("forfeit_custody output-manifest-fail", drv)
+        # round-11 finding 2: runtime scoring passes NO --custody-ledger (only --test does).
+        self.assertIn("TESTMODE", drv)
+        self.assertRegex(drv, r"SCORER_LEDGER=\(--test --custody-ledger")
 
     def test_confirmatory_full_tool_path_wired(self):
         # round-10 finding 3 (offline stage-plan verification — no LLM calls): run_confirmatory.sh
@@ -1335,7 +1346,7 @@ class TestRound7(unittest.TestCase):
         if not Path(led).exists():
             spend.genesis(led)
         a2 = self._attest2(base, om, bound_om)
-        return subprocess.run([sys.executable, str(WS / "scorer_v010.py"), "score",
+        return subprocess.run([sys.executable, str(WS / "scorer_v010.py"), "score", "--test",
                                "--key-dir", str(WS / "toy-key/key"),
                                "--recorded-hashes", str(WS / "toy-key/recorded-hashes.txt"),
                                "--pairs", str(WS / "toy-key/pairs.json"),
@@ -1684,23 +1695,39 @@ class TestRound8(unittest.TestCase):
         cd = base / "conf-key-1"; (cd / "runs").mkdir(parents=True); (cd / "corpora/a").mkdir(parents=True)
         (cd / "corpora/a/01.md").write_text("corpus one")
         (cd / "pairs.json").write_text('{"count":0,"pairs":[]}')
+        (cd / "fdo.json").write_text('{"full_draw": 1}')                          # a full-draw output
         ch = hashlib.sha256((cd / "corpora/a/01.md").read_bytes()).hexdigest()
         ph = hashlib.sha256((cd / "pairs.json").read_bytes()).hexdigest()
+        fh = hashlib.sha256((cd / "fdo.json").read_bytes()).hexdigest()
         H = "H-conf-test"
-        # round-10: a valid receipt needs full-draw stage flags AND a re-verifying setup manifest.
         STAGES = {s: True for s in ("polarity", "retrieval", "verify", "aggregate", "adaptive1", "adaptive2", "compose")}
-        (cd / "setup-manifest.json").write_text(json.dumps(
-            {"key_local": {"corpora/a/01.md": ch, "pairs.json": ph}, "source_scripts": {}}))
+        def write_manifest(extra=None):
+            m = {"key_local": {"corpora/a/01.md": ch, "pairs.json": ph}, "source_scripts": {}}
+            if extra: m.update(extra)
+            (cd / "setup-manifest.json").write_text(json.dumps(m))
+            return hashlib.sha256((cd / "setup-manifest.json").read_bytes()).hexdigest()
+        sm_sha = write_manifest()
         def receipt(**over):
-            d = {"H": H, "gate_pass": True, "numerator": 0, "corpora_sha256": {"corpora/a/01.md": ch}, "stages": STAGES}
+            d = {"H": H, "gate_pass": True, "numerator": 0, "corpora_sha256": {"corpora/a/01.md": ch},
+                 "stages": STAGES, "full_draw_outputs": {"fdo.json": fh}, "setup_manifest_sha256": sm_sha}
             d.update(over); (cd / "runs/confirmatory-result.json").write_text(json.dumps(d))
         receipt(); self.assertEqual(at._verify_confirmatory_receipt(cd, H), [])   # valid
         self.assertTrue(at._verify_confirmatory_receipt(cd, "OTHER-H"))          # H mismatch
         receipt(gate_pass=False); self.assertTrue(at._verify_confirmatory_receipt(cd, H))   # gate_pass false
         receipt(stages={**STAGES, "compose": False})                             # a missing full-draw stage
         self.assertTrue(any("compose" in e for e in at._verify_confirmatory_receipt(cd, H)))
-        receipt()                                                                # restore valid receipt
-        (cd / "pairs.json").write_text("TAMPERED")                               # round-10 finding 5: setup drift
+        receipt()
+        (cd / "fdo.json").write_text('{"full_draw": 999}')                        # round-11 finding 8: full-draw drift
+        self.assertTrue(any("fdo.json" in e for e in at._verify_confirmatory_receipt(cd, H)))
+        (cd / "fdo.json").write_text('{"full_draw": 1}')                          # restore
+        write_manifest(extra={"note": "regenerated"})                            # round-11 finding 7: manifest regenerated
+        self.assertTrue(any("setup_manifest_sha256" in e for e in at._verify_confirmatory_receipt(cd, H)))
+        write_manifest()                                                          # restore anchored manifest
+        (cd / "corpora/a/02.md").write_text("unlisted extra")                     # round-11 finding 7: unlisted extra
+        self.assertTrue(any("UNLISTED" in e or "02.md" in e for e in at._verify_confirmatory_receipt(cd, H)))
+        (cd / "corpora/a/02.md").unlink()                                         # restore
+        receipt(); self.assertEqual(at._verify_confirmatory_receipt(cd, H), [])   # valid again
+        (cd / "pairs.json").write_text("TAMPERED")                               # setup drift
         self.assertTrue(any("pairs.json" in e for e in at._verify_confirmatory_receipt(cd, H)))
         (cd / "pairs.json").write_text('{"count":0,"pairs":[]}')                 # restore
         (cd / "corpora/a/01.md").write_text("TAMPERED")
@@ -1766,17 +1793,32 @@ class TestRound8(unittest.TestCase):
             "output_manifest_sha256": hashlib.sha256((base / "om.json").read_bytes()).hexdigest()}))
         sp = base / "spend.jsonl"
         spend.append_event(sp, "structure:read", H); spend.append_event(sp, "state:scoring-attempt", H)
+        led = base / "c.jsonl"; spend.genesis(str(led))    # seeded genesis (round-10 fail-closed)
         empty_key = base / "emptykey"; empty_key.mkdir()   # no concepts.json / answer_key.json
-        r = subprocess.run([sys.executable, str(WS / "scorer_v010.py"), "score",
+        r = subprocess.run([sys.executable, str(WS / "scorer_v010.py"), "score", "--test",
                             "--key-dir", str(empty_key),
                             "--recorded-hashes", str(WS / "toy-key/recorded-hashes.txt"),
                             "--pairs", str(WS / "toy-key/pairs.json"), "--H", str(base / "H.json"),
-                            "--spend-log", str(sp), "--custody-ledger", str(base / "c.jsonl"),
+                            "--spend-log", str(sp), "--custody-ledger", str(led),
                             "--output-manifest", str(base / "om.json"), "--attest2-receipt", str(a2),
                             "--tool-verdicts", str(base / "runs/v010/verdicts.json"),
                             "--out", str(base / "scores.json")], capture_output=True, text=True)
         self.assertNotEqual(r.returncode, 0)
         self.assertNotIn("authorized-read-claimed", sp.read_text())   # refused BEFORE the claim
+
+    def test_scorer_refuses_noncanonical_ledger_in_runtime(self):
+        # round-11 finding 2: a runtime (non --test) --custody-ledger override is REFUSED.
+        base = Path(tempfile.mkdtemp())
+        (base / "H.json").write_text(json.dumps({"H": "x", "manifest_of_manifests": {}}))
+        r = subprocess.run([sys.executable, str(WS / "scorer_v010.py"), "score",
+                            "--key-dir", str(WS / "toy-key/key"),
+                            "--recorded-hashes", str(WS / "toy-key/recorded-hashes.txt"),
+                            "--pairs", str(WS / "toy-key/pairs.json"), "--H", str(base / "H.json"),
+                            "--spend-log", str(base / "sp.jsonl"), "--custody-ledger", str(base / "rogue.jsonl"),
+                            "--output-manifest", str(base / "om.json"),
+                            "--out", str(base / "scores.json")], capture_output=True, text=True)
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn("override is not permitted", r.stdout + r.stderr)
 
 
 class TestRound9(unittest.TestCase):
@@ -1802,7 +1844,8 @@ class TestRound9(unittest.TestCase):
     def test_atomic_claim_recovery_after_ledger_before_claim(self):
         # crash AFTER the ledger write, BEFORE the claim: ledger spent (this H), no claim yet.
         tmp = Path(tempfile.mkdtemp()); log, led = self._ready(tmp)
-        spend.record_custody(led, "spent", self.H9, "crash-window")
+        # the crash simulated is AFTER atomic_claim's ledger write (event_ref=authorized-read-claimed).
+        spend.record_custody(led, "spent", self.H9, "spend:authorized-read-claimed")
         spend.atomic_claim(log, led, self.H9)                          # idempotent recovery: appends the missing claim
         self.assertEqual(log.read_text().count("authorized-read-claimed"), 1)
         # ledger = [genesis, spent]; the recovery must NOT append a second spent (idempotent)
@@ -1819,18 +1862,29 @@ class TestRound9(unittest.TestCase):
 
     def test_record_custody_idempotent_and_monotone(self):
         tmp = Path(tempfile.mkdtemp()); led = _genesis_led(tmp / "c.jsonl")
-        spend.record_custody(led, "spent", self.H9, "a")
-        self.assertIsNone(spend.record_custody(led, "spent", self.H9, "b"))   # same-H dup = no-op
+        REF = "spend:authorized-read-claimed"                                 # the ONLY recoverable ref
+        spend.record_custody(led, "spent", self.H9, REF)
+        self.assertIsNone(spend.record_custody(led, "spent", self.H9, REF))   # same-H recoverable dup = no-op
         self.assertEqual(sum(1 for e in spend.read_events(led) if e.get("state") == "spent"), 1)
         with self.assertRaises(SystemExit):
             spend.record_custody(led, "forfeited-unspent", self.H9, "c")      # conflicting state refused
         with self.assertRaises(SystemExit):
-            spend.record_custody(led, "spent", "H-other", "d")               # different-H dup refused
+            spend.record_custody(led, "spent", "H-other", REF)               # different-H dup refused
+
+    def test_accidental_spent_never_recoverable(self):
+        # round-11 finding 1: a `spent` recorded by an accidental read (event_ref != authorized-read-claimed)
+        # is NEVER same-H recoverable — even the same H is refused.
+        tmp = Path(tempfile.mkdtemp()); led = _genesis_led(tmp / "c.jsonl")
+        spend.record_custody(led, "spent", self.H9, "spend:accidental-access-during-gen")
+        with self.assertRaises(SystemExit):
+            spend.assert_key_available(led, self.H9)                          # same-H accidental spent -> refused
+        with self.assertRaises(SystemExit):
+            spend.atomic_claim(tmp / "sp.jsonl", led, self.H9)               # cannot claim after accidental
 
     def test_assert_key_available_recovery_aware(self):
         tmp = Path(tempfile.mkdtemp()); led = _genesis_led(tmp / "c.jsonl")
-        spend.record_custody(led, "spent", self.H9, "x")
-        spend.assert_key_available(led, self.H9)                              # same H -> recovery OK
+        spend.record_custody(led, "spent", self.H9, "spend:authorized-read-claimed")  # recoverable ref
+        spend.assert_key_available(led, self.H9)                              # same H + claimed ref -> recovery OK
         with self.assertRaises(SystemExit):
             spend.assert_key_available(led, "H-other")                       # different H -> refused
         with self.assertRaises(SystemExit):
@@ -1863,6 +1917,24 @@ class TestRound9(unittest.TestCase):
         with self.assertRaises(SystemExit):
             spend.assert_key_available(led, "H-later")
 
+    def test_accidental_crash_between_writes_both_orders(self):
+        # round-11 finding 1: a crash between the accidental custody-spent and the per-H event must
+        # not authorize another read, in EITHER partial-write order.
+        # Partial A — only the custody `spent` (accidental) landed: every H (same or new) is refused.
+        tmpA = Path(tempfile.mkdtemp()); ledA = _genesis_led(tmpA / "c.jsonl")
+        spend.record_custody(ledA, "spent", self.H9, "spend:accidental-access-during-gen")
+        with self.assertRaises(SystemExit):
+            spend.assert_key_available(ledA, self.H9)                         # same-H not recoverable
+        with self.assertRaises(SystemExit):
+            spend.assert_key_available(ledA, "H-new")                         # cross-H blocked
+        # Partial B — only the per-H accidental event landed (custody eligible): the same H's scorer
+        # gate refuses (accidental present in this run's log).
+        tmpB = Path(tempfile.mkdtemp()); logB = tmpB / "sp.jsonl"; ledB = _genesis_led(tmpB / "c.jsonl")
+        logB.write_text(json.dumps({"event": "spend:accidental-access-during-gen", "run_H": self.H9,
+                                    "utc": "x"}) + "\n")
+        with self.assertRaises(SystemExit):
+            spend.assert_scoring_allowed(logB, self.H9, custody_ledger=ledB)
+
     def test_generation_started_event_appendable(self):
         tmp = Path(tempfile.mkdtemp()); log = tmp / "sp.jsonl"
         spend.append_event(log, "state:generation-started", self.H9)
@@ -1873,23 +1945,57 @@ class TestRound9(unittest.TestCase):
         import setup_confirmatory as sc
         tmp = Path(tempfile.mkdtemp()); (tmp / "manifests").mkdir()
         out = tmp / "call.out"; manifest = tmp / "manifests/site.json"
-        snap_out, snap_man, att_rcpt = sc._attempt_paths(manifest, 0)
+        snap_out, snap_man, att_rcpt = sc._attempt_paths(manifest, 0, 0)   # gen 0, attempt 0
         snap_out.write_text("completed output")
         snap_man.write_text("exit: 0\n")
-        att_rcpt.write_text(json.dumps({"site": "s", "attempt": 0, "path": str(out),
-                                        "sha256": sc._sha(snap_out), "rc": 0}))
+        att_rcpt.write_text(json.dumps({"site": "s", "gen": 0, "attempt": 0, "status": "completed",
+                                        "out_present": True, "sha256": sc._sha(snap_out), "rc": 0}))
         calls = {"n": 0}
         orig = sc._isolated
         sc._isolated = lambda *a, **k: calls.__setitem__("n", calls["n"] + 1) or 0
         try:
             receipt = {"outputs": []}
             ok = sc._call_with_retry("s", "claude", "m", tmp / "p.md", out, manifest,
-                                     lambda: True, receipt, dry=False)
+                                     lambda: True, receipt, dry=False, gen=0)
         finally:
             sc._isolated = orig
         self.assertTrue(ok)
         self.assertEqual(calls["n"], 0)                       # the model call was NOT re-issued
         self.assertEqual(out.read_text(), "completed output") # canonical output restored from snapshot
+
+    def test_setup_no_output_attempt_not_reissued_beyond_cap(self):
+        # round-11 finding 5: a no-output attempt is RECORDED immediately + CONSUMED; on restart it is
+        # not reissued, and once the cap is exhausted _call_with_retry returns False (no extra draw).
+        import setup_confirmatory as sc
+        tmp = Path(tempfile.mkdtemp()); (tmp / "manifests").mkdir()
+        out = tmp / "call.out"; manifest = tmp / "manifests/site.json"
+        for attempt in range(sc.RETRY_CAP + 1):                             # pre-record all attempts as no-output
+            _, _, att_rcpt = sc._attempt_paths(manifest, 0, attempt)
+            att_rcpt.write_text(json.dumps({"site": "s", "gen": 0, "attempt": attempt,
+                                            "status": "completed", "out_present": False, "rc": 1}))
+        calls = {"n": 0}; orig = sc._isolated
+        sc._isolated = lambda *a, **k: calls.__setitem__("n", calls["n"] + 1) or 0
+        try:
+            ok = sc._call_with_retry("s", "c", "m", tmp / "p.md", out, manifest,
+                                     lambda: True, {"outputs": []}, dry=False, gen=0)
+        finally:
+            sc._isolated = orig
+        self.assertFalse(ok)                                  # exhausted — no reusable output
+        self.assertEqual(calls["n"], 0)                       # NONE reissued (all attempts already consumed)
+
+    def test_setup_fresh_generation_preserves_old_evidence(self):
+        # round-11 finding 5: a fresh generation (after an .exhausted marker) namespaces new attempts
+        # and preserves the prior generation's attempt receipts.
+        import setup_confirmatory as sc
+        tmp = Path(tempfile.mkdtemp())
+        self.assertEqual(sc._current_generation(tmp), 0)
+        _, _, g0 = sc._attempt_paths(tmp / "manifests/site.json", 0, 0)
+        g0.parent.mkdir(parents=True, exist_ok=True); g0.write_text("{}")   # gen-0 evidence
+        (tmp / "setup-gen-0.exhausted").write_text("{}")
+        self.assertEqual(sc._current_generation(tmp), 1)                     # next run is gen 1
+        _, _, g1 = sc._attempt_paths(tmp / "manifests/site.json", 1, 0)
+        self.assertNotEqual(g0, g1)                                          # distinct namespace
+        self.assertTrue(g0.exists())                                         # old evidence preserved
 
     # ---- finding 7: projector receipt bound to pairs.json; tamper refused ----
     def test_projector_receipt_tamper_refused(self):
@@ -1905,6 +2011,52 @@ class TestRound9(unittest.TestCase):
                              "--verify-receipt", str(rc), "--pairs", str(out)], capture_output=True, text=True)
         self.assertNotEqual(v2.returncode, 0)
         self.assertIn("REFUSE", v2.stdout + v2.stderr)
+
+
+class TestRound11(unittest.TestCase):
+    """round-11: one-shot attest-1 classification + one-time cross-run benign re-freeze."""
+
+    def _pending(self, tmp, H):
+        log = tmp / "sp.jsonl"
+        spend.append_event(log, "state:attest1-mismatch-pending-classification", H)
+        return log
+
+    def test_classify_attest1_one_shot(self):
+        tmp = Path(tempfile.mkdtemp()); led = _genesis_led(tmp / "c.jsonl")
+        H = "H-a"; log = self._pending(tmp, H)
+        spend.classify_attest1(log, H, "configuration", led)                 # first classification OK
+        with self.assertRaises(SystemExit):
+            spend.classify_attest1(log, H, "configuration", led)             # repeat refused (one-shot)
+        with self.assertRaises(SystemExit):
+            spend.classify_attest1(log, H, "benign", led)                    # conflicting refused
+
+    def test_classify_attest1_requires_pending(self):
+        tmp = Path(tempfile.mkdtemp()); led = _genesis_led(tmp / "c.jsonl")
+        with self.assertRaises(SystemExit):
+            spend.classify_attest1(tmp / "empty.jsonl", "H-x", "benign", led)  # no pending mismatch
+
+    def test_one_time_benign_refreeze_cross_run(self):
+        # round-11 finding 3: the ONE benign re-freeze is recorded in the CANONICAL ledger; a SECOND
+        # benign classification (any H) is refused — only configuration/retirement remains.
+        tmp = Path(tempfile.mkdtemp()); led = _genesis_led(tmp / "c.jsonl")
+        logA = self._pending(tmp / "a" if False else tmp, "H-1")
+        spend.classify_attest1(logA, "H-1", "benign", led)                   # consumes the one benign re-freeze
+        self.assertTrue(spend.benign_refreeze_used(led))
+        # a SECOND pending mismatch under a different H, classified benign -> refused cross-run
+        log2 = tmp / "sp2.jsonl"
+        spend.append_event(log2, "state:attest1-mismatch-pending-classification", "H-2")
+        with self.assertRaises(SystemExit):
+            spend.classify_attest1(log2, "H-2", "benign", led)
+        # configuration/retirement remains available for the second
+        spend.classify_attest1(log2, "H-2", "configuration", led)
+
+    def test_benign_refreeze_is_not_a_custody_state(self):
+        # the benign-refreeze-used audit record must NOT alter the custody STATE (still eligible).
+        tmp = Path(tempfile.mkdtemp()); led = _genesis_led(tmp / "c.jsonl")
+        spend.record_benign_refreeze(led, "H-x")
+        self.assertEqual(spend.custody_state(led), "eligible")
+        with self.assertRaises(SystemExit):
+            spend.record_benign_refreeze(led, "H-y")                         # monotone: one per key
 
 
 def aid_(term):
