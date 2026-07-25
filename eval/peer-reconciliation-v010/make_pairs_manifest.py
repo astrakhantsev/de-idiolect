@@ -22,18 +22,20 @@ CUSTODY (the two sanctioned-reader integrity + audit checks, mirroring the score
     H binds via recorded_manifest_sha256 + inherited_recorded.sealed; --H (when present, i.e.
     an already-built H) adds the H-self-consistency + recorded-hashes-bound-in-H check via
     attest.load_and_verify_H, exactly as the scorer does at the other sanctioned reader.
-  * TYPED STRUCTURE-READ (--spend-log): register a single `structure:read` (NON-SPEND) entry in
-    the ONE authoritative locked spend log that attest + the scorer read (a second is refused).
+  * TYPED STRUCTURE-READ: the NON-SPEND `structure:read` custody entry is registered by the
+    DRIVER in the ONE authoritative locked spend log AFTER build-H (round-8: it must carry the
+    run's H, which does not exist at phase 0.5 when this isolated projector runs; see run_v010.sh
+    phase 1). This projector no longer writes the spend log itself — it only reads the key
+    STRUCTURE, hash-gates it, and emits the blind pairs.json.
 
 stdout: exactly one line `pairs_sha256: <sha256 of the written pairs.json bytes>`.
-For confirmatory TRAIN keys (fresh, no recorded hashes / no key-3 spend log) call WITHOUT
---recorded-hashes/--H/--spend-log; the source key is fully readable and the checks are skipped.
+For confirmatory TRAIN keys (fresh, no recorded hashes) call WITHOUT --recorded-hashes/--H;
+the source key is fully readable and the checks are skipped.
 """
 import argparse, json, sys, hashlib
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import spend
 import attest
 
 
@@ -72,7 +74,6 @@ def main():
     ap.add_argument("out")
     ap.add_argument("--recorded-hashes", help="freeze-manifest.txt — hash-gate the sealed file before reading")
     ap.add_argument("--H", help="runs/H.json — additionally bind --recorded-hashes to the attested H")
-    ap.add_argument("--spend-log", help="the ONE authoritative locked spend log — register structure:read")
     args = ap.parse_args()
     key_dir, out = Path(args.key_dir), Path(args.out)
 
@@ -100,12 +101,9 @@ def main():
             if bound != hashlib.sha256(Path(args.recorded_hashes).read_bytes()).hexdigest():
                 sys.exit("ABORT (nothing read): --recorded-hashes not bound in H — state:abort-before-gen")
 
-    # ---- register the sanctioned NON-SPEND structure read (one-shot) ----
-    if args.spend_log:
-        spend.append_event(args.spend_log, "structure:read",
-                           notes=f"projector parsed {src.name} structure -> {out.name}")
-
     # ---- parse structure, project, emit blind pairs.json ----
+    # (the NON-SPEND structure:read custody entry is logged by the driver after build-H — see the
+    #  module docstring; it must carry the run's H, which is not known at this phase-0.5 read.)
     k = json.load(open(src))
     payload = build_payload([(get_a(p), get_b(p)) for p in k["pairs"]])
     for r in payload["pairs"]:

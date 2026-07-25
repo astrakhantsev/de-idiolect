@@ -56,13 +56,18 @@ python3 smoke_v010.py assert-resolved
 # checklist (the checklist AND its never-created ladder). A ladder configFail counts +1.
 # Denominator is fixed at 40 (20 checklists + 20 ladders).
 python3 - "$H" <<'PY'
-import json, sys
+import json, sys, hashlib
+from pathlib import Path
 st = json.load(open("runs/gate-state.json"))
 chk_cf = sorted(k for k, a in st["artifacts"].items() if a["kind"] == "chk" and a["state"] == "configFail")
 lad_cf = sorted(k for k, a in st["artifacts"].items() if a["kind"] == "lad" and a["state"] == "configFail")
 n = 2 * len(chk_cf) + len(lad_cf)   # +2 per exhausted checklist (chk + its phantom ladder)
+# finding 3: the TYPED confirmatory receipt embeds the accepted (train) corpora hashes so the
+# resume-skip and attestation-1 re-hash them (a corrupted draw cannot be skipped/attested).
+corpora = {f"corpora/{s}/{i:02d}.md": hashlib.sha256(Path(f"corpora/{s}/{i:02d}.md").read_bytes()).hexdigest()
+           for s in ("a", "b") for i in range(1, 12) if Path(f"corpora/{s}/{i:02d}.md").is_file()}
 detail = {"checklist_configFails": chk_cf, "ladder_configFails": lad_cf,
-          "numerator": n, "denominator": 40,
+          "numerator": n, "denominator": 40, "corpora_sha256": corpora,
           "rule": "checklist configFail counts 2 (the checklist AND its never-created ladder)"}
 print(f"confirmatory draw: numerator {n}/40  (chk_cf={len(chk_cf)}x2 + lad_cf={len(lad_cf)})  {chk_cf+lad_cf}")
 print(f"GATE {'PASS (<=1/40)' if n <= 1 else 'FAIL (>1/40 -> effective configuration RETIRED, §4.1)'}  H={sys.argv[1][:12]}")

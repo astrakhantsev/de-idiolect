@@ -18,17 +18,26 @@ At its first authorized read it VERIFIES the sealed-answer file hashes against t
 RECORDED values (from --recorded-hashes, i.e. the freeze-manifest.txt lines bound into H) —
 it never re-hashes to DISCOVER the truth; a mismatch aborts before any grading.
 
+Two subcommands (round-8):
+  score          the sealed-key scoring read (THE SPEND). Verifies the pre-claim gates (per-H
+                 spend log + cross-run custody ledger), key-file existence, and the step-7
+                 output-manifest binding BEFORE the atomic claim; writes AGGREGATE-ONLY
+                 scores.json and an EMBARGOED per-pair artifact (hash-bound into scores.json,
+                 never released here).
+  export-embargo NO-KEY exporter: releases the embargoed per-pair diagnostics ONLY after a real
+                 post-commit addendum (Q7) — verifies the commit carries the E5.1 marker.
+
 Usage:
-  scorer_v010.py --key-dir <dir> --recorded-hashes <file> --pairs <pairs.json>
-                 [--tool-verdicts <runs/v010/verdicts.json>]
-                 [--baseline-a <runs/baseline_a/records.json>]
-                 [--baseline-b <runs/baseline_b/records.json>]
-                 --out <scores.json>
+  scorer_v010.py score --key-dir <dir> --recorded-hashes <file> --pairs <pairs.json>
+                 --H <runs/H.json> --spend-log <log> [--custody-ledger <ledger>]
+                 --output-manifest <runs/output-manifest.json>
+                 [--tool-verdicts ...] [--baseline-a ...] [--baseline-b ...] --out <scores.json>
+  scorer_v010.py export-embargo --repo <repo> --commit <sha> --out <released.json>
 
 --recorded-hashes format: one "sha256␠␠relpath" line per sealed answer file (sha256sum
 format), covering at least key/answer_key.json and key/concepts.json.
 """
-import json, sys, hashlib, argparse
+import json, sys, hashlib, argparse, subprocess
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent
@@ -305,43 +314,34 @@ def _join_opaque(sealed_key, pairs_file):
                                     "expected": kp["expected"], "broader_side": kp.get("broader_side")}
     return key_opaque
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--key-dir", required=True)
-    ap.add_argument("--recorded-hashes", required=True)
-    ap.add_argument("--pairs", required=True)
-    ap.add_argument("--H", required=True, help="runs/H.json — the attested manifest-of-manifests")
-    ap.add_argument("--spend-log", required=True, help="the one-shot spend/state log (locked gate)")
-    ap.add_argument("--tool-verdicts")
-    ap.add_argument("--baseline-a")
-    ap.add_argument("--baseline-b")
-    ap.add_argument("--output-manifest", required=True,
-                    help="runs/output-manifest.json — the step-7 output receipt; the scorer verifies "
-                         "ALL its inputs against it BEFORE claiming the key")
-    ap.add_argument("--post-commit-receipt",
-                    help="path to a file holding the addendum COMMIT hash (Q7). ONLY with this does the "
-                         "scorer write per-pair diagnostics (to runs/scoring/per-pair-EMBARGOED.json); "
-                         "the committed scores.json is ALWAYS aggregate-only.")
-    ap.add_argument("--tau", default=PRIMARY)
-    ap.add_argument("--out", required=True)
-    args = ap.parse_args()
+EMBARGO_PATH = BASE / "runs/scoring/.embargo/per-pair.json"
 
-    # (a) PRE-CLAIM gate: refuse (before ANY key/H work) unless the log has exactly one
-    #     structure:read + a uniquely-open in-range scoring-attempt and no claim/terminal entry.
-    spend.assert_scoring_allowed(args.spend_log)
-    # (b) bind to the attested H + the recorded-hashes file, as before.
+
+def score(args):
     hobj = attest.load_and_verify_H(args.H)
+    run_H = hobj["H"]
+    ledger = args.custody_ledger or str(BASE / "key-custody.jsonl")
+    # (a) PRE-CLAIM gate (per-H spend log + cross-run custody ledger): refuse before ANY key/H
+    #     work unless the current-H log has exactly one structure:read + an in-range attempt and
+    #     no claim/terminal, AND the durable ledger shows the key is not spent/forfeited.
+    spend.assert_scoring_allowed(args.spend_log, run_H, custody_ledger=ledger)
+    # (a2) key files must EXIST as regular files (no content read) BEFORE claiming (finding 6).
+    kd = Path(args.key_dir)
+    for name in ("concepts.json", "answer_key.json"):
+        f = kd / name
+        if not f.is_file() or f.is_symlink():
+            sys.exit(f"SCORER-REFUSE (pre-claim): sealed key file {f} missing/not-a-regular-file")
+    # (b) bind H + the recorded-hashes file.
     bound = hobj["manifest_of_manifests"].get("recorded_manifest_sha256")
     got = hashlib.sha256(Path(args.recorded_hashes).read_bytes()).hexdigest()
     if bound != got:
         sys.exit(f"RECORDED-HASHES not bound in H: H has {bound} but --recorded-hashes hashes {got}")
-    # (b2) OUTPUT-MANIFEST binding: verify EVERY scorer input against the step-7 output receipt
-    #      BEFORE claiming the key. A missing or drifted input aborts PRE-CLAIM (unspent).
+    # (b2) OUTPUT-MANIFEST binding: verify EVERY scorer input against the step-7 receipt PRE-CLAIM.
     om = json.load(open(args.output_manifest))
-    if om.get("H") != hobj["H"]:
-        sys.exit(f"output-manifest H {om.get('H')} != attested H {hobj['H']} — abort pre-claim")
+    if om.get("H") != run_H:
+        sys.exit(f"output-manifest H {om.get('H')} != attested H {run_H} — abort pre-claim")
     om_files = om["files"]
-    def _tail(p):  # last two path components — disambiguates baseline_a/records.json vs baseline_b/records.json
+    def _tail(p):
         return "/".join(Path(p).parts[-2:])
     for path in (args.tool_verdicts, args.baseline_a, args.baseline_b):
         if not path:
@@ -352,21 +352,22 @@ def main():
         if not Path(path).exists() or hashlib.sha256(Path(path).read_bytes()).hexdigest() != entry:
             sys.exit(f"scorer input {path} MISSING/drifted vs the output-manifest — abort pre-claim (unspent)")
 
-    # (c) ATOMIC CLAIM under the lock, IMMEDIATELY before the first sealed-key byte.
-    spend.claim_authorized_read(args.spend_log, notes="scorer about to read the sealed key")
+    # (c) ATOMIC CLAIM (per-H) immediately before the first key byte; record the cross-run SPEND.
+    spend.claim_authorized_read(args.spend_log, run_H, notes="scorer about to read the sealed key")
+    spend.record_custody(ledger, "spent", run_H, "spend:authorized-read-claimed",
+                         notes="authorized scoring read")
     sealed_key = verify_and_load_key(args.key_dir, args.recorded_hashes)  # THE SPEND (first key byte)
-    key = _join_opaque(sealed_key, args.pairs)   # re-key by opaque id via the term-pair join
+    key = _join_opaque(sealed_key, args.pairs)
 
-    # score each arm; keep per-pair internally, but the COMMITTED output is AGGREGATE-ONLY.
     def aggregate_only(sc, decision=None):
         d = {"S": sc["S"], "P": sc["P"], "C": sc["C"], "jingle_specific": sc["jingle_specific"],
-             "detection": {"tp": sc["detection"]["tp"], "fp": sc["detection"]["fp"]},   # counts only
+             "detection": {"tp": sc["detection"]["tp"], "fp": sc["detection"]["fp"]},
              "promotions_count": len(sc["promotions"]),
              "false_escalations_count": len(sc["false_escalations"])}
         if decision:
             d["decision"], d["decision_reason"] = decision
         return d
-    result = {"tau": args.tau, "H": hobj["H"], "spend": "sealed answer material read (§4.4)"}
+    result = {"tau": args.tau, "H": run_H, "spend": "sealed answer material read (§4.4)"}
     per_pair_export = {}
     if args.tool_verdicts:
         sc = score_arm(key, tool_verdicts_at(args.tool_verdicts, args.tau))
@@ -377,25 +378,69 @@ def main():
     if args.baseline_b:
         sc = score_arm(key, baseline_b_verdicts(key, json.load(open(args.baseline_b))))
         result["baseline_b"] = aggregate_only(sc); per_pair_export["baseline_b"] = sc["per_pair"]
-    json.dump(result, open(args.out, "w"), indent=1)   # AGGREGATE-ONLY (no per_pair / expected / ids)
-    # (d) mark the authorized read COMPLETE (clean scoring read finished)
-    spend.complete_authorized_read(args.spend_log, notes=f"scores -> {args.out}")
-    # per-pair diagnostics ONLY under an addendum-commit receipt (Q7: post-commit operation)
-    if args.post_commit_receipt:
-        rc = Path(args.post_commit_receipt)
-        if not rc.exists() or not rc.read_text().strip():
-            sys.exit("--post-commit-receipt file missing/empty — refusing to write per-pair diagnostics")
-        exp = {"addendum_commit": rc.read_text().strip(), "H": hobj["H"], "per_pair": per_pair_export}
-        (BASE / "runs/scoring").mkdir(parents=True, exist_ok=True)
-        (BASE / "runs/scoring/per-pair-EMBARGOED.json").write_text(json.dumps(exp, indent=1))
-        print("per-pair diagnostics written (post-commit receipt present) -> runs/scoring/per-pair-EMBARGOED.json")
+    # (d) during the SINGLE authorized read, write the EMBARGOED per-pair artifact (finding 5) and
+    #     bind its hash into the AGGREGATE-ONLY scores.json. It is NOT released here.
+    EMBARGO_PATH.parent.mkdir(parents=True, exist_ok=True)
+    embargo = {"H": run_H, "per_pair": per_pair_export,
+               "note": "EMBARGOED (Q7): release ONLY via `scorer_v010.py export-embargo` with a real "
+                       "addendum-commit receipt; the scorer never re-enters the spend gate post-commit."}
+    EMBARGO_PATH.write_text(json.dumps(embargo, indent=1))
+    result["embargo_sha256"] = hashlib.sha256(EMBARGO_PATH.read_bytes()).hexdigest()
+    result["embargo_path"] = str(EMBARGO_PATH.relative_to(BASE))
+    json.dump(result, open(args.out, "w"), indent=1)   # AGGREGATE-ONLY (no per_pair/expected/ids)
+    spend.complete_authorized_read(args.spend_log, run_H, notes=f"scores -> {args.out}")
     for arm in ("tool_arm", "baseline_a", "baseline_b"):
         if arm in result:
             a = result[arm]
             line = f"{arm}: S={a['S']}/10 P={a['P']} C={a['C']} jingle={a['jingle_specific']}/2"
             if arm == "tool_arm": line += f" -> {a['decision']} ({a['decision_reason']})"
             print(line)
-    print(f"\nscores (aggregate-only) -> {args.out}")
+    print(f"\nscores (aggregate-only) -> {args.out}  (per-pair EMBARGOED at {EMBARGO_PATH.relative_to(BASE)})")
+
+
+def export_embargo(args):
+    """NO-KEY exporter (finding 5): release the embargoed per-pair diagnostics ONLY after a real
+    addendum commit exists (Q7 post-commit). Verifies that `--commit` is a real commit in `--repo`
+    whose tree contains the E5.1 addendum marker in `--addendum-file`; then copies the embargoed
+    file to `--out`. Never touches any key path and never enters the spend gate."""
+    emb = Path(args.embargo)
+    if not emb.exists():
+        sys.exit(f"export-embargo: embargoed file {emb} not present (score first)")
+    # verify a REAL addendum commit: the commit exists AND its tree's addendum file contains the marker
+    ok = subprocess.run(["git", "-C", args.repo, "cat-file", "-e", f"{args.commit}^{{commit}}"],
+                        capture_output=True).returncode == 0
+    if not ok:
+        sys.exit(f"export-embargo REFUSE: {args.commit} is not a commit in {args.repo}")
+    show = subprocess.run(["git", "-C", args.repo, "show", f"{args.commit}:{args.addendum_file}"],
+                          capture_output=True, text=True)
+    if show.returncode != 0 or args.addendum_marker not in show.stdout:
+        sys.exit(f"export-embargo REFUSE: commit {args.commit[:12]} tree lacks the {args.addendum_marker!r} "
+                 f"addendum in {args.addendum_file} — no genuine post-commit addendum")
+    Path(args.out).write_text(emb.read_text())
+    print(f"export-embargo: released per-pair diagnostics (addendum commit {args.commit[:12]} verified) -> {args.out}")
+
+
+def main():
+    import argparse as _a
+    ap = _a.ArgumentParser()
+    sub = ap.add_subparsers(dest="cmd")
+    s = sub.add_parser("score")
+    s.add_argument("--key-dir", required=True); s.add_argument("--recorded-hashes", required=True)
+    s.add_argument("--pairs", required=True); s.add_argument("--H", required=True)
+    s.add_argument("--spend-log", required=True); s.add_argument("--custody-ledger")
+    s.add_argument("--tool-verdicts"); s.add_argument("--baseline-a"); s.add_argument("--baseline-b")
+    s.add_argument("--output-manifest", required=True); s.add_argument("--tau", default=PRIMARY)
+    s.add_argument("--out", required=True); s.set_defaults(fn=score)
+    e = sub.add_parser("export-embargo")
+    e.add_argument("--embargo", default=str(EMBARGO_PATH)); e.add_argument("--repo", required=True)
+    e.add_argument("--commit", required=True); e.add_argument("--addendum-file", default="EXPERIMENT-LOG.md")
+    e.add_argument("--addendum-marker", default="E5.1"); e.add_argument("--out", required=True)
+    e.set_defaults(fn=export_embargo)
+    args = ap.parse_args()
+    if not getattr(args, "fn", None):
+        ap.error("a subcommand is required: score | export-embargo")
+    args.fn(args)
+
 
 if __name__ == "__main__":
     main()

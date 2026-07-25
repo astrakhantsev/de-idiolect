@@ -151,7 +151,15 @@ def build_key(key_id, args):
     if done_receipt.exists():
         rec = json.loads(done_receipt.read_text())
         if rec.get("H") == args.H_value:
-            print(f"  [{key_id}] already complete (setup-key.done, H matches) — SKIP (no regeneration)")
+            # finding 3: TYPED skip — re-hash the accepted corpora + require leakcheck_pass before
+            # skipping. A corrupted/altered accepted corpus HALTS setup rather than being reused.
+            if rec.get("leakcheck_pass") is not True or not rec.get("accepted_corpora_sha256"):
+                sys.exit(f"  [{key_id}] setup-key.done lacks a typed accepted-corpora/leakcheck receipt — HALT")
+            for rel, h in rec["accepted_corpora_sha256"].items():
+                f = key_dir / rel
+                if not f.is_file() or _sha(f) != h:
+                    sys.exit(f"  [{key_id}] accepted corpus {rel} missing/drift vs receipt — HALT (no skip)")
+            print(f"  [{key_id}] already complete (setup-key.done, H + corpora re-hash OK) — SKIP")
             return rec, True
         sys.exit(f"  [{key_id}] setup-key.done present with a DIFFERENT H — refusing to overwrite a "
                  f"prior confirmatory key")
@@ -189,8 +197,14 @@ def build_key(key_id, args):
     # 4. answer-blind pairs manifest
     subprocess.run([sys.executable, str(BASE / "make_pairs_manifest.py"),
                     str(key_dir / "key"), str(key_dir / "pairs.json")], check=True)
-    # 5. per-key completion receipt (H-bound) — restart will SKIP this key
-    done_receipt.write_text(json.dumps({**receipt, "ok": True, "complete": True}, indent=1))
+    # 5. per-key completion receipt (H-bound, TYPED) — finding 3: embed the ACCEPTED corpora
+    #    hashes + leakcheck_pass so a restart re-hashes the promoted corpora before skipping (a
+    #    corrupted/altered accepted corpus cannot be silently reused). Reaching here means every
+    #    frozen leak check passed (a failure would have returned False above).
+    accepted = {f"corpora/{s}/{n}": _sha(key_dir / f"corpora/{s}/{n}")
+                for s in ("a", "b") for n in EXACT_DOCS if (key_dir / f"corpora/{s}/{n}").is_file()}
+    done_receipt.write_text(json.dumps({**receipt, "ok": True, "complete": True,
+                                        "accepted_corpora_sha256": accepted, "leakcheck_pass": True}, indent=1))
     return receipt, True
 
 

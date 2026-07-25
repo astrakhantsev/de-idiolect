@@ -25,12 +25,12 @@ from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent
 NEW = BASE / "smoke_v010.py"
-REF_DIR = BASE / "_reference"
 RECORDED_MANIFEST = BASE / ".." / "peer-reconciliation-test3" / "freeze-manifest.txt"
-
-# each _reference file bound to a RECORDED name in the frozen test3 freeze-manifest
-REFERENCE_BINDINGS = {"smoke_v09_frozen.py": "smoke.py", "v09_frozen.py": "v09.py"}
-SMOKE_REF = REF_DIR / "smoke_v09_frozen.py"
+# round-8 finding 1: DERIVE the frozen reference DIRECTLY from the committed v0.9 source
+# (../peer-reconciliation-test3/smoke.py), hash-checked against freeze-manifest.txt — no
+# `_reference/` copy (that dir was removed; a fresh checkout has test3/ committed).
+SMOKE_REF = BASE / ".." / "peer-reconciliation-test3" / "smoke.py"
+SMOKE_REF_RECORDED_NAME = "smoke.py"
 
 # the ONLY functions allowed to differ from v0.9 (the hardening levers + answer-blind read)
 CHANGED = [
@@ -65,27 +65,21 @@ def _recorded_hashes(path):
 
 
 def verify_reference_binding():
-    """(a) bind every _reference file to the committed frozen record; refuse on absence/mismatch
-    or any extra unbound file in _reference."""
+    """(a) bind the frozen reference — the committed ../peer-reconciliation-test3/smoke.py —
+    to its recorded hash in freeze-manifest.txt; refuse on absence/mismatch. No `_reference`
+    copy: the reference IS the committed v0.9 source, so it cannot be altered without changing
+    freeze-manifest.txt (also committed)."""
     errs = []
     if not RECORDED_MANIFEST.exists():
         return [f"frozen record missing: {RECORDED_MANIFEST}"]
-    rec = _recorded_hashes(RECORDED_MANIFEST)
-    present = {p.name for p in REF_DIR.glob("*.py")}
-    extra = present - set(REFERENCE_BINDINGS)
-    if extra:
-        errs.append(f"_reference has UNBOUND file(s) {sorted(extra)} — every reference must bind "
-                    f"to a recorded hash")
-    for ref_name, recorded_name in REFERENCE_BINDINGS.items():
-        f = REF_DIR / ref_name
-        if not f.exists():
-            errs.append(f"reference missing: {ref_name}"); continue
-        want = rec.get(recorded_name)
-        if want is None:
-            errs.append(f"no recorded hash for {recorded_name} in {RECORDED_MANIFEST.name}"); continue
-        got = hashlib.sha256(f.read_bytes()).hexdigest()
-        if got != want:
-            errs.append(f"reference {ref_name} sha {got[:12]} != recorded {recorded_name} {want[:12]}")
+    if not SMOKE_REF.exists():
+        return [f"frozen v0.9 reference missing: {SMOKE_REF}"]
+    want = _recorded_hashes(RECORDED_MANIFEST).get(SMOKE_REF_RECORDED_NAME)
+    if want is None:
+        return [f"no recorded hash for {SMOKE_REF_RECORDED_NAME} in {RECORDED_MANIFEST.name}"]
+    got = hashlib.sha256(SMOKE_REF.read_bytes()).hexdigest()
+    if got != want:
+        errs.append(f"frozen reference {SMOKE_REF.name} sha {got[:12]} != recorded {want[:12]}")
     return errs
 
 

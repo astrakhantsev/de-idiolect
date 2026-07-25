@@ -137,4 +137,8 @@ setup_confirmatory.py
 smoke_v010.py
 spend.py
 tests/test_v010.py
+toy-key/key/answer_key.json
+toy-key/key/concepts.json
+toy-key/pairs.json
+toy-key/recorded-hashes.txt
 v010.py

@@ -1,20 +1,23 @@
 # v0.10 run workspace — raw key material + run outputs are NOT committed (§8).
 # The sealed key-3 answer material must never be committed; run outputs are large/derived.
-runs/
-key/
-corpora/
-leakcheck_peer.sh
-pairs.json
-freeze-manifest.txt
+# ROUND-8 finding 1: these sealed-key-3 / runtime patterns are ROOT-ANCHORED (leading `/`) so
+# they match ONLY the workspace-root sealed material — an un-anchored `key/`/`pairs.json`/`corpora/`
+# would ALSO match the COMMITTED `toy-key/key/`, `toy-key/pairs.json`, etc. and silently drop the
+# phase-0 fixtures from a fresh checkout (caught by the fresh-checkout battery).
+/runs/
+/key/
+/corpora/
+/leakcheck_peer.sh
+/pairs.json
+/freeze-manifest.txt
+/key-custody.jsonl
 # recorded-cli.json is NOT ignored — it is a freeze-package file, REQUIRED by build-H and
 # bound by hash into H (round-6); the operator commits it at the freeze. PREREG.md (the
 # ratified spec copy) is likewise committed and bound by hash.
 __pycache__/
 *.pyc
-# reference copies of the frozen v0.9 originals (already in the repo under peer-reconciliation-*)
-_reference/
-# toy-key is test scaffolding; keep concepts.json + the generated answer_key/pairs are fine to
-# ignore since they are regenerable from concepts.json via harness/validate_key.py + make_pairs.
-toy-key/key/answer_key.json
-toy-key/pairs.json
-toy-key/recorded-hashes.txt
+# NOTE (round-8, finding 1): `toy-key/` (synthetic, clearly labeled) is now COMMITTED and bound
+# in H (a fresh checkout must reproduce phase 0). The `_reference/` dir was REMOVED — the gate-
+# fidelity proof derives the frozen v0.9 reference directly from the committed
+# ../peer-reconciliation-test3/smoke.py (hash-checked vs freeze-manifest.txt), so nothing is
+# ignored that phase 0 needs.

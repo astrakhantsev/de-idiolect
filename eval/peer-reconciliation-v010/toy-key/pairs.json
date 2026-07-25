@@ -1,0 +1,55 @@
+{
+ "count": 10,
+ "pairs": [
+  {
+   "pair_id": "3775538b6edd801a",
+   "term_a": "widget iota",
+   "term_b": "gadget lambda score"
+  },
+  {
+   "pair_id": "5020dc6f8a1f9aba",
+   "term_a": "widget theta",
+   "term_b": "gadget kappa index"
+  },
+  {
+   "pair_id": "58851cdb48b23a1e",
+   "term_a": "widget alpha",
+   "term_b": "gadget alpha prime"
+  },
+  {
+   "pair_id": "847e83509ebf6871",
+   "term_a": "widget beta",
+   "term_b": "gadget beta prime"
+  },
+  {
+   "pair_id": "a38f789179c01e31",
+   "term_a": "widget gamma",
+   "term_b": "gadget gamma small"
+  },
+  {
+   "pair_id": "a3bda2f3eac9cbb4",
+   "term_a": "toy echo slot",
+   "term_b": "toy echo slot"
+  },
+  {
+   "pair_id": "a6afc7601b11fc1a",
+   "term_a": "widget delta small",
+   "term_b": "gadget delta"
+  },
+  {
+   "pair_id": "acc0f0945c68cef1",
+   "term_a": "widget zeta",
+   "term_b": "gadget zeta var"
+  },
+  {
+   "pair_id": "acffbb5321c681cd",
+   "term_a": "toy salt slot",
+   "term_b": "toy salt slot"
+  },
+  {
+   "pair_id": "eb636d16ac8e3d2e",
+   "term_a": "widget epsilon",
+   "term_b": "gadget epsilon var"
+  }
+ ]
+}
