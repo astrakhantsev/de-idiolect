@@ -51,6 +51,10 @@ TABLE = {**{f"spend:{k}": v for k, v in SPEND_EVENTS.items()},
 # entries meaning the sealed answer was (or began to be) read — refuse scoring if any present
 ANSWER_READ_EVENTS = {"spend:authorized-read-claimed", "spend:authorized-read-complete",
                       "spend:fault-after-authorized-read"}
+# terminal events: once ANY is present the run is over — no scoring-attempt/claim may proceed
+# (finding 1: block scoring after any terminal state, incl. the forfeiture marker).
+TERMINAL_BLOCK = {"spend:fault-after-authorized-read", "state:terminated-during-gen-or-attest2-mismatch",
+                  "state:abort-before-gen", "state:setup-exhaustion", "state:confirmatory-phase-fail"}
 
 
 def _lock(logpath):
@@ -114,13 +118,17 @@ def append_event(logpath, event, notes=""):
                 raise SystemExit(f"SPEND-REFUSE: scoring-attempt cap ({MAX_SCORING_ATTEMPTS}) reached "
                                  f"— the one permitted pre-read relaunch is exhausted")
         if event == "spend:authorized-read-claimed":
-            # the ATOMIC CLAIM: require exactly one structure:read, at least one scoring-attempt,
-            # and no prior claim — all checked under this same lock, then appended.
+            # the ATOMIC CLAIM: require exactly one structure:read, a UNIQUELY OPEN in-range
+            # scoring-attempt (1..2), no prior claim, and NO terminal event — all under this lock.
+            if any(e.get("event") in TERMINAL_BLOCK for e in events):
+                raise SystemExit("SPEND-REFUSE: a terminal event is present — the run is over; no claim")
             if _count(events, "structure:read") != 1:
                 raise SystemExit(f"SPEND-REFUSE: claim requires EXACTLY one structure:read "
                                  f"(have {_count(events, 'structure:read')})")
-            if _count(events, "state:scoring-attempt") < 1:
-                raise SystemExit("SPEND-REFUSE: claim requires a preceding scoring-attempt marker")
+            na = _count(events, "state:scoring-attempt")
+            if not 1 <= na <= MAX_SCORING_ATTEMPTS:
+                raise SystemExit(f"SPEND-REFUSE: claim requires an in-range scoring-attempt "
+                                 f"(have {na}, allowed 1..{MAX_SCORING_ATTEMPTS})")
             if _has_claim(events):
                 raise SystemExit("SPEND-REFUSE: a claim already exists — the key is already SPENT")
         if event == "spend:authorized-read-complete":
@@ -179,10 +187,15 @@ def assert_scoring_allowed(logpath):
             if e["event"] in ANSWER_READ_EVENTS:
                 raise SystemExit(f"SCORER-REFUSE: answer-read entry {e['event']!r} already present "
                                  f"— the sealed answer was already read; refusing")
+            if e["event"] in TERMINAL_BLOCK:
+                raise SystemExit(f"SCORER-REFUSE: terminal event {e['event']!r} present — the run is "
+                                 f"over (spent/forfeited/aborted); refusing to score")
         if _count(events, "structure:read") != 1:
             raise SystemExit(f"SCORER-REFUSE: require EXACTLY one structure:read "
                              f"(have {_count(events, 'structure:read')})")
-        if _count(events, "state:scoring-attempt") < 1:
-            raise SystemExit("SCORER-REFUSE: no scoring-attempt marker (driver must record the attempt)")
+        na = _count(events, "state:scoring-attempt")
+        if not 1 <= na <= MAX_SCORING_ATTEMPTS:
+            raise SystemExit(f"SCORER-REFUSE: require a UNIQUELY OPEN in-range scoring-attempt "
+                             f"(have {na}, allowed 1..{MAX_SCORING_ATTEMPTS}) — no third attempt reaches the scorer")
     finally:
         _unlock(fh)

@@ -21,7 +21,7 @@ H's manifest-of-manifests entries (§4.2 step 2):
     bound by their RECORDED hashes from freeze-manifest.txt — the sealed answer files are
     NEVER re-hashed here (that would cross the spend boundary).
 """
-import argparse, hashlib, json, subprocess, sys, datetime
+import argparse, hashlib, json, re, subprocess, sys, datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -69,6 +69,21 @@ RUNTIME_REQUIRED = (["pairs.json", "leakcheck_peer.sh",
                      "corpora/a/manifest.json", "corpora/b/manifest.json",
                      "key/concepts.json", "key/answer_key.json"]
                     + [f"corpora/{s}/{i:02d}.md" for s in ("a", "b") for i in range(1, 12)])
+# CANONICAL exact corpora set (finding 4): the ONLY numbered corpus docs allowed. build-H
+# --runtime rejects any extra (e.g. corpora/a/12.md) and any missing.
+CORPORA_CANONICAL = {f"corpora/{s}/{i:02d}.md" for s in ("a", "b") for i in range(1, 12)}
+
+# step-7 OUTPUT manifest (finding 3): the scorer's REQUIRED inputs + the broader deterministic
+# step-7 outputs, hashed at end of generation, enforced at attestation-2, and re-verified by the
+# scorer BEFORE it claims the key.
+OUTPUT_REQUIRED = ["runs/v010/verdicts.json", "runs/baseline_a/records.json", "runs/baseline_b/records.json"]
+OUTPUT_GLOBS = ["runs/v010/verdicts.json", "runs/v010/review-context.json", "runs/v010/agg.json",
+                "runs/v010/route-union.json", "runs/v010/verify/out-*.json", "runs/v010/symcheck/out-*.json",
+                "runs/v010/decompose/out-*.json", "runs/v010/containment/out-*.json", "runs/v010/manifests/*.json",
+                "runs/baseline_a/records.json", "runs/baseline_a/out-*.txt",
+                "runs/baseline_b/records.json", "runs/baseline_b/out-*.txt",
+                "runs/manifests/*.json", "runs/checklists/out-*.txt", "runs/definitions/out-*.json",
+                "runs/conformance/out-*.json", "runs/polarity/out-*.json"]
 
 
 def _sha(path):
@@ -153,6 +168,24 @@ def _canonical(obj):
     return json.dumps(obj, sort_keys=True, separators=(",", ":")).encode()
 
 
+def required_inventory(req_inv_path):
+    return {l.strip() for l in Path(req_inv_path).read_text().splitlines()
+            if l.strip() and not l.startswith("#")}
+
+
+def impl_inventory_diff(required_set, base=BASE):
+    """Return (sorted extras, sorted missing) between the discovered impl inventory and the
+    canonical required set — finding 4 exact-equality check."""
+    disc = set(_inventory(INVENTORY_GLOBS, base))
+    return sorted(disc - required_set), sorted(required_set - disc)
+
+
+def corpora_exact_errs(base=BASE):
+    """Return {extra, missing} vs the canonical exact corpora set (01..11 both sides)."""
+    disc = {r for r in _inventory(RUNTIME_GLOBS, base) if re.match(r"corpora/[ab]/\d\d\.md$", r)}
+    return {"extra": sorted(disc - CORPORA_CANONICAL), "missing": sorted(CORPORA_CANONICAL - disc)}
+
+
 def build_H(args):
     # REQUIRED-inventory enforcement (round-6): build-H REFUSES if a required file is missing,
     # rather than silently omitting it (a later "STRICT" verify cannot notice an omission).
@@ -160,12 +193,25 @@ def build_H(args):
     #     Pre-freeze, PREREG.md is absent -> build-H refuses, which is the correct behavior.
     #   runtime tier (--runtime): the exact corpora (01..11 both sides + manifests), pairs.json,
     #     leakcheck_peer.sh, and the sealed key files.
-    missing = [str(p.relative_to(BASE)) for p in (PREREG_MD, RECORDED_CLI_JSON) if not p.exists()]
+    req_inv = BASE / "REQUIRED-INVENTORY.txt"
+    missing = [str(p.relative_to(BASE)) for p in (PREREG_MD, RECORDED_CLI_JSON, req_inv) if not p.exists()]
     if args.runtime:
         missing += [r for r in RUNTIME_REQUIRED if not (BASE / r).exists()]
     if missing:
         sys.exit(f"build-H REFUSED: required file(s) missing: {missing} "
                  f"(pre-freeze absence of PREREG.md is correct — place the ratified spec first)")
+    # finding 4: EXACT implementation inventory — discovered names must EQUAL the canonical
+    # required set (reject any extra file and any missing normative source/prompt/fixture/wrapper).
+    required_impl = required_inventory(req_inv)
+    extra, miss = impl_inventory_diff(required_impl, BASE)
+    if extra or miss:
+        sys.exit(f"build-H REFUSED: implementation inventory != canonical "
+                 f"(extra={extra}, missing={miss})")
+    # finding 4: EXACT runtime corpora — reject any extra numbered doc (e.g. corpora/a/12.md).
+    if args.runtime:
+        ce = corpora_exact_errs(BASE)
+        if ce["extra"] or ce["missing"]:
+            sys.exit(f"build-H REFUSED: corpora != exactly 01..11 (extra={ce['extra']}, missing={ce['missing']})")
     recorded, bge = _parse_recorded(args.recorded_manifest)
     def pick(pred):
         return {rel: h for rel, h in recorded.items() if pred(rel)}
@@ -175,6 +221,7 @@ def build_H(args):
         "spec": "v0.10 generation-hardening (PREREG.md, ratified copy, hash below)",
         "prereg_sha256": _sha(PREREG_MD),          # binds the ratified spec BYTES, not a label
         "recorded_cli_sha256": _sha(RECORDED_CLI_JSON),  # binds the frozen CLI-version record
+        "required_inventory_sha256": _sha(req_inv),  # binds the canonical exact-inventory list
         "v010_files": _inventory(INVENTORY_GLOBS),
         "runtime_answer_blind_files": _inventory(RUNTIME_GLOBS),
         "decoding_params": DECODING_PARAMS,
@@ -241,7 +288,8 @@ def _verify_files_errs(man, base=BASE):
     if not man["inherited_recorded"]["sealed_key_recorded_hashes_BOUND_NOT_REHASHED"]:
         errs.append("no sealed-key recorded hashes bound in H")
     # ratified spec + CLI record bound in H must be present and match
-    for name, key in (("PREREG.md", "prereg_sha256"), ("recorded-cli.json", "recorded_cli_sha256")):
+    for name, key in (("PREREG.md", "prereg_sha256"), ("recorded-cli.json", "recorded_cli_sha256"),
+                      ("REQUIRED-INVENTORY.txt", "required_inventory_sha256")):
         f = Path(base) / name
         if key not in man:
             errs.append(f"{key} not bound in H")
@@ -262,6 +310,45 @@ def verify_files(args):
           f"{len(man['inherited_recorded']['corpora'])} corpora present & match H; "
           f"sealed key bound by recorded hash (not re-hashed).")
     return True
+
+
+def build_output_manifest_at(H_value, out_path, base=BASE):
+    """Finding 3: hash the COMPLETE step-7 output set (scorer inputs + model outputs / call
+    manifests / derived records) under `base` into a receipt bound to H_value."""
+    base = Path(base)
+    missing = [r for r in OUTPUT_REQUIRED if not (base / r).exists()]
+    if missing:
+        sys.exit(f"output-manifest REFUSED: required step-7 outputs missing: {missing}")
+    files = {}
+    for g in OUTPUT_GLOBS:
+        for p in sorted(base.glob(g)):
+            if p.is_file():
+                files[str(p.relative_to(base))] = _sha(p)
+    out = {"H": H_value, "files": files, "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}
+    json.dump(out, open(out_path, "w"), indent=1)
+    return files
+
+
+def build_output_manifest(args):
+    hobj = load_and_verify_H(args.H)
+    files = build_output_manifest_at(hobj["H"], args.out, BASE)
+    print(f"output-manifest: {len(files)} step-7 outputs bound (H {hobj['H'][:12]}) -> {args.out}")
+
+
+def _verify_output_manifest_errs(output_manifest, expected_H, base=BASE):
+    """attestation-2: every file in the output-manifest must be present + hash-match; H must bind."""
+    om = json.load(open(output_manifest))
+    errs = []
+    if om.get("H") != expected_H:
+        errs.append(f"output-manifest H {om.get('H')} != attested H {expected_H}")
+    for r in OUTPUT_REQUIRED:
+        if r not in om.get("files", {}):
+            errs.append(f"output-manifest omits required output {r}")
+    for rel, h in om.get("files", {}).items():
+        p = Path(base) / rel
+        if not p.exists() or _sha(p) != h:
+            errs.append(f"step-7 output MISSING/drift vs manifest: {rel}")
+    return errs
 
 
 def _cli_versions():
@@ -329,6 +416,18 @@ def attest(args):
         print("  MISMATCH: §3.6(f) conformance runner FAILED"); print(cr.stdout[-500:]); ok = False
     else:
         print("  §3.6(f) conformance runner: PASS")
+    # 6b. attestation-2 ONLY: enforce the step-7 output manifest (finding 3) — every scoring
+    #     input + model output present and hash-matching, bound to H.
+    if args.point == 2:
+        if not args.output_manifest:
+            print("  MISMATCH: attestation-2 requires --output-manifest"); ok = False
+        else:
+            om_errs = _verify_output_manifest_errs(args.output_manifest, load_and_verify_H(args.H)["H"], BASE)
+            if om_errs:
+                for e in om_errs: print("  MISMATCH (output-manifest):", e)
+                ok = False
+            else:
+                print("  step-7 output manifest: all outputs present & hash-match H: OK")
     # 7. write an integrity-bound attestation record (H + the exact recorded-cli + probe-log bytes)
     rec = {"point": args.point, "H": load_and_verify_H(args.H)["H"], "pass": ok,
            "recorded_cli_sha256": _sha(args.recorded_cli),
@@ -365,7 +464,10 @@ def main():
     b.add_argument("--runtime", action="store_true", help="also require the exact run-time inventory (corpora 01..11, pairs.json, leakcheck, key)"); b.set_defaults(fn=build_H)
     v = sub.add_parser("verify-files"); v.add_argument("--H", required=True); v.set_defaults(fn=verify_files)
     a = sub.add_parser("attest"); a.add_argument("--H", required=True); a.add_argument("--point", type=int, choices=(1, 2), required=True)
-    a.add_argument("--recorded-cli", required=True); a.add_argument("--probe-log", required=True); a.add_argument("--allow-dirty", action="store_true"); a.set_defaults(fn=attest)
+    a.add_argument("--recorded-cli", required=True); a.add_argument("--probe-log", required=True)
+    a.add_argument("--output-manifest", help="required at point 2: the step-7 output receipt to enforce")
+    a.add_argument("--allow-dirty", action="store_true"); a.set_defaults(fn=attest)
+    om = sub.add_parser("build-output-manifest"); om.add_argument("--H", required=True); om.add_argument("--out", required=True); om.set_defaults(fn=build_output_manifest)
     r = sub.add_parser("receipt"); r.add_argument("--H", required=True); r.add_argument("--kind", required=True); r.add_argument("--label", default=""); r.add_argument("--out", required=True); r.set_defaults(fn=receipt)
     s = sub.add_parser("spend-log"); s.add_argument("--event", required=True); s.add_argument("--notes", default=""); s.add_argument("--out", required=True); s.set_defaults(fn=spend_log)
     args = ap.parse_args()

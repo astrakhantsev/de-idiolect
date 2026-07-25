@@ -261,7 +261,9 @@ def decision_label(sc):
     if P is None:
         return "second miss (reported)", "P = n/a (zero positive assertions; S<=4<7)"
     if P < 1.00:
-        return "second miss (reported)", f"P<1.00 (promotions={sc['promotions']}, false_escalations={sc['false_escalations']})"
+        # aggregate COUNTS only — no pair-id lists (Q7 embargo)
+        return "second miss (reported)", (f"P<1.00 (promotions={len(sc['promotions'])}, "
+                                          f"false_escalations={len(sc['false_escalations'])})")
     if S < 7:
         return "second miss (reported)", f"P=1.00 but S={S}<7"
     if jingle == 0:
@@ -313,63 +315,87 @@ def main():
     ap.add_argument("--tool-verdicts")
     ap.add_argument("--baseline-a")
     ap.add_argument("--baseline-b")
+    ap.add_argument("--output-manifest", required=True,
+                    help="runs/output-manifest.json — the step-7 output receipt; the scorer verifies "
+                         "ALL its inputs against it BEFORE claiming the key")
+    ap.add_argument("--post-commit-receipt",
+                    help="path to a file holding the addendum COMMIT hash (Q7). ONLY with this does the "
+                         "scorer write per-pair diagnostics (to runs/scoring/per-pair-EMBARGOED.json); "
+                         "the committed scores.json is ALWAYS aggregate-only.")
     ap.add_argument("--tau", default=PRIMARY)
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
 
     # (a) PRE-CLAIM gate: refuse (before ANY key/H work) unless the log has exactly one
-    #     structure:read + a scoring-attempt and no prior claim/accidental/untyped entry.
+    #     structure:read + a uniquely-open in-range scoring-attempt and no claim/terminal entry.
     spend.assert_scoring_allowed(args.spend_log)
-    # (b) bind to the attested H: H must be self-consistent, and the --recorded-hashes file
-    #     must be exactly the one bound into H (else a post-attestation swap of both the key
-    #     and freeze-manifest would pass here while attestation still matched H's old values).
-    #     These reads DO NOT touch the sealed key, so they precede the claim.
+    # (b) bind to the attested H + the recorded-hashes file, as before.
     hobj = attest.load_and_verify_H(args.H)
     bound = hobj["manifest_of_manifests"].get("recorded_manifest_sha256")
     got = hashlib.sha256(Path(args.recorded_hashes).read_bytes()).hexdigest()
     if bound != got:
         sys.exit(f"RECORDED-HASHES not bound in H: H has {bound} but --recorded-hashes hashes {got}")
+    # (b2) OUTPUT-MANIFEST binding: verify EVERY scorer input against the step-7 output receipt
+    #      BEFORE claiming the key. A missing or drifted input aborts PRE-CLAIM (unspent).
+    om = json.load(open(args.output_manifest))
+    if om.get("H") != hobj["H"]:
+        sys.exit(f"output-manifest H {om.get('H')} != attested H {hobj['H']} — abort pre-claim")
+    om_files = om["files"]
+    def _tail(p):  # last two path components — disambiguates baseline_a/records.json vs baseline_b/records.json
+        return "/".join(Path(p).parts[-2:])
+    for path in (args.tool_verdicts, args.baseline_a, args.baseline_b):
+        if not path:
+            continue
+        entry = next((h for r, h in om_files.items() if _tail(r) == _tail(path)), None)
+        if entry is None:
+            sys.exit(f"scorer input {path} not in the output-manifest — abort pre-claim (unspent)")
+        if not Path(path).exists() or hashlib.sha256(Path(path).read_bytes()).hexdigest() != entry:
+            sys.exit(f"scorer input {path} MISSING/drifted vs the output-manifest — abort pre-claim (unspent)")
 
-    # (c) ATOMIC CLAIM under the lock, IMMEDIATELY before the first sealed-key byte. Once this
-    #     entry exists the key is SPENT; a crash after it -> any later invocation is refused.
+    # (c) ATOMIC CLAIM under the lock, IMMEDIATELY before the first sealed-key byte.
     spend.claim_authorized_read(args.spend_log, notes="scorer about to read the sealed key")
     sealed_key = verify_and_load_key(args.key_dir, args.recorded_hashes)  # THE SPEND (first key byte)
     key = _join_opaque(sealed_key, args.pairs)   # re-key by opaque id via the term-pair join
 
+    # score each arm; keep per-pair internally, but the COMMITTED output is AGGREGATE-ONLY.
+    def aggregate_only(sc, decision=None):
+        d = {"S": sc["S"], "P": sc["P"], "C": sc["C"], "jingle_specific": sc["jingle_specific"],
+             "detection": {"tp": sc["detection"]["tp"], "fp": sc["detection"]["fp"]},   # counts only
+             "promotions_count": len(sc["promotions"]),
+             "false_escalations_count": len(sc["false_escalations"])}
+        if decision:
+            d["decision"], d["decision_reason"] = decision
+        return d
     result = {"tau": args.tau, "H": hobj["H"], "spend": "sealed answer material read (§4.4)"}
+    per_pair_export = {}
     if args.tool_verdicts:
-        tv = tool_verdicts_at(args.tool_verdicts, args.tau)
-        sc = score_arm(key, tv)
-        label, why = decision_label(sc)
-        result["tool_arm"] = {**{k: sc[k] for k in ("S", "P", "C", "jingle_specific",
-                                                    "detection", "promotions", "false_escalations")},
-                              "decision": label, "decision_reason": why,
-                              "per_pair": sc["per_pair"]}
+        sc = score_arm(key, tool_verdicts_at(args.tool_verdicts, args.tau))
+        result["tool_arm"] = aggregate_only(sc, decision_label(sc)); per_pair_export["tool_arm"] = sc["per_pair"]
     if args.baseline_a:
-        recs = json.load(open(args.baseline_a))
-        bv = baseline_a_verdicts(key, recs)
-        sc = score_arm(key, bv)
-        result["baseline_a"] = {**{k: sc[k] for k in ("S", "P", "C", "jingle_specific",
-                                                      "detection", "promotions", "false_escalations")},
-                                "per_pair": sc["per_pair"]}
+        sc = score_arm(key, baseline_a_verdicts(key, json.load(open(args.baseline_a))))
+        result["baseline_a"] = aggregate_only(sc); per_pair_export["baseline_a"] = sc["per_pair"]
     if args.baseline_b:
-        recs = json.load(open(args.baseline_b))
-        bv = baseline_b_verdicts(key, recs)
-        sc = score_arm(key, bv)
-        result["baseline_b"] = {**{k: sc[k] for k in ("S", "P", "C", "jingle_specific",
-                                                      "detection", "promotions", "false_escalations")},
-                                "per_pair": sc["per_pair"]}
-    json.dump(result, open(args.out, "w"), indent=1)
+        sc = score_arm(key, baseline_b_verdicts(key, json.load(open(args.baseline_b))))
+        result["baseline_b"] = aggregate_only(sc); per_pair_export["baseline_b"] = sc["per_pair"]
+    json.dump(result, open(args.out, "w"), indent=1)   # AGGREGATE-ONLY (no per_pair / expected / ids)
     # (d) mark the authorized read COMPLETE (clean scoring read finished)
     spend.complete_authorized_read(args.spend_log, notes=f"scores -> {args.out}")
-    # aggregate print (no per-pair to stdout)
+    # per-pair diagnostics ONLY under an addendum-commit receipt (Q7: post-commit operation)
+    if args.post_commit_receipt:
+        rc = Path(args.post_commit_receipt)
+        if not rc.exists() or not rc.read_text().strip():
+            sys.exit("--post-commit-receipt file missing/empty — refusing to write per-pair diagnostics")
+        exp = {"addendum_commit": rc.read_text().strip(), "H": hobj["H"], "per_pair": per_pair_export}
+        (BASE / "runs/scoring").mkdir(parents=True, exist_ok=True)
+        (BASE / "runs/scoring/per-pair-EMBARGOED.json").write_text(json.dumps(exp, indent=1))
+        print("per-pair diagnostics written (post-commit receipt present) -> runs/scoring/per-pair-EMBARGOED.json")
     for arm in ("tool_arm", "baseline_a", "baseline_b"):
         if arm in result:
             a = result[arm]
             line = f"{arm}: S={a['S']}/10 P={a['P']} C={a['C']} jingle={a['jingle_specific']}/2"
             if arm == "tool_arm": line += f" -> {a['decision']} ({a['decision_reason']})"
             print(line)
-    print(f"\nscores -> {args.out}")
+    print(f"\nscores (aggregate-only) -> {args.out}")
 
 if __name__ == "__main__":
     main()

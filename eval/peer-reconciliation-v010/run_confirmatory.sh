@@ -39,11 +39,14 @@ gen_loop() {
 python3 smoke_v010.py excerpts
 gen_loop prompts-checklist gate-checklists checklists/calls.tsv checklists/regen-calls.tsv
 gen_loop prompts-def gate-ladders definitions/calls.tsv definitions/regen-calls.tsv
-for _ in 0 1 2; do
-  python3 smoke_v010.py prompts-conformance; [ -s runs/conformance/calls.tsv ] && calls runs/conformance/calls.tsv
+# finding 6: DRAIN ladder regens to quiescence before each conformance batch (no stranding)
+while true; do
+  while [ -s runs/definitions/regen-calls.tsv ]; do calls runs/definitions/regen-calls.tsv; python3 smoke_v010.py gate-ladders; done
+  python3 smoke_v010.py prompts-conformance
+  [ -s runs/conformance/calls.tsv ] || break
+  calls runs/conformance/calls.tsv
   python3 smoke_v010.py gate-conformance
-  [ -s runs/conformance/rerun-calls.tsv ] && { calls runs/conformance/rerun-calls.tsv; python3 smoke_v010.py gate-conformance; }
-  [ -s runs/definitions/regen-calls.tsv ] && { calls runs/definitions/regen-calls.tsv; python3 smoke_v010.py gate-ladders; } || true
+  while [ -s runs/conformance/rerun-calls.tsv ]; do calls runs/conformance/rerun-calls.tsv; python3 smoke_v010.py gate-conformance; done
 done
 python3 smoke_v010.py assert-resolved
 

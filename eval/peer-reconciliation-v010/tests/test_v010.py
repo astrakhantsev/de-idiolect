@@ -1110,5 +1110,289 @@ class TestRound6(unittest.TestCase):
         self.assertIn("corpora", r.stdout + r.stderr)
 
 
+class TestRound7(unittest.TestCase):
+    """round-7: scoring-relaunch/attempt-cap, restart/terminal routing, output-manifest binding,
+    exact inventories, aggregate-only output, conformance drain, corpus attempt hygiene."""
+
+    # ---- finding 1: attempt cap + no-third-attempt-reaches-scorer (shell-level) ----
+    def test_third_attempt_refused_before_scorer(self):
+        tmp = Path(tempfile.mkdtemp()); log = tmp / "s.jsonl"
+        spend.append_event(log, "structure:read")
+        spend.append_event(log, "state:scoring-attempt")   # attempt 1 (pre-read fail, no claim)
+        spend.append_event(log, "state:scoring-attempt")   # attempt 2 (pre-read fail, no claim)
+        # mimic the driver's run_attempt marker guard on RESTART: the 3rd marker append is refused
+        # with an EXPLICIT `|| exit` BEFORE the "scorer" would run.
+        script = (f'set -euo pipefail\n'
+                  f'python3 "{WS}/attest.py" spend-log --event state:scoring-attempt --out "{log}" '
+                  f'|| {{ echo REFUSED-BEFORE-SCORER; exit 7; }}\n'
+                  f'echo SCORER-LAUNCHED\n')
+        r = subprocess.run(["bash", "-c", script], capture_output=True, text=True)
+        self.assertEqual(r.returncode, 7)
+        self.assertIn("REFUSED-BEFORE-SCORER", r.stdout)
+        self.assertNotIn("SCORER-LAUNCHED", r.stdout)
+
+    def test_scoring_gates_reject_terminal_state(self):
+        for term in ("state:terminated-during-gen-or-attest2-mismatch", "spend:fault-after-authorized-read",
+                     "state:abort-before-gen"):
+            tmp = Path(tempfile.mkdtemp()); log = tmp / "s.jsonl"
+            spend.append_event(log, "structure:read"); spend.append_event(log, "state:scoring-attempt")
+            if term == "spend:fault-after-authorized-read":
+                spend.claim_authorized_read(log)  # fault needs a prior claim; but claim then blocks anyway
+            spend.append_event(log, term)
+            with self.assertRaises(SystemExit):
+                spend.assert_scoring_allowed(log)
+
+    # ---- finding 2: per-key idempotence + routing ----
+    def test_build_key_skips_completed_key(self):
+        import setup_confirmatory as sc
+        kid = "test-skip-key"; kd = sc.BASE / f"runs/confirmatory/{kid}"; (kd).mkdir(parents=True, exist_ok=True)
+        self.addCleanup(lambda: __import__("shutil").rmtree(kd, ignore_errors=True))
+        (kd / "setup-key.done").write_text(json.dumps({"key_id": kid, "H": "HX", "complete": True}))
+        args = type("A", (), {"H_value": "HX", "dry_run": False})()
+        rec, ok = sc.build_key(kid, args)
+        self.assertTrue(ok)
+        self.assertFalse((kd / "key/concepts.json").exists())  # NOT regenerated
+        args2 = type("A", (), {"H_value": "DIFFERENT", "dry_run": False})()
+        with self.assertRaises(SystemExit):                    # different H -> refuse overwrite
+            sc.build_key(kid, args2)
+
+    def test_driver_routes_and_resumes(self):
+        drv = (WS / "run_v010.sh").read_text()
+        # attest-1 / projector / probe route to abort-before-gen (NOT terminated)
+        self.assertRegex(drv, r"ATTEST-1 FAILED.*abort-before-gen")
+        self.assertRegex(drv, r"PROJECTOR failed.*abort-before-gen")
+        self.assertRegex(drv, r"PROBE failed.*abort-before-gen")
+        # generation faults route to forfeited-unspent via the EXIT trap after GEN_STARTED
+        self.assertIn("GEN_STARTED=1", drv)
+        self.assertIn("trap on_exit EXIT", drv)
+        # resume: H-bound phase receipts + per-conf-key skip
+        for p in ("phase_complete probe", "phase_complete attest1", "phase_complete generation",
+                  'phase_complete "draw-$ck"'):
+            self.assertIn(p, drv)
+
+    # ---- finding 3: output-manifest binds the scorer's inputs ----
+    def _make_scored_workspace(self):
+        base = Path(tempfile.mkdtemp())
+        for d in ("runs/v010", "runs/baseline_a", "runs/baseline_b"):
+            (base / d).mkdir(parents=True)
+        ak = json.load(open(WS / "toy-key/key/answer_key.json"))["pairs"]
+        (WS / "toy-key/pairs.json")  # ensure exists
+        pairs = json.load(open(WS / "toy-key/pairs.json"))["pairs"]
+        by_tp = {(p["term_a"], p["term_b"]): p for p in ak}
+        tau1 = {pp["pair_id"]: {"proposed_relation": by_tp[(pp["term_a"], pp["term_b"])]["expected"],
+                                "status": "asserted",
+                                "broader_side": by_tp[(pp["term_a"], pp["term_b"])].get("broader_side")}
+                for pp in pairs}
+        (base / "runs/v010/verdicts.json").write_text(json.dumps({"primary": "tau1", "tau1": tau1}))
+        (base / "runs/baseline_a/records.json").write_text(json.dumps(
+            {f"a:{pp['term_a']}": {"final": "negative"} for pp in pairs} |
+            {f"b:{pp['term_b']}": {"final": "negative"} for pp in pairs}))
+        (base / "runs/baseline_b/records.json").write_text(json.dumps(
+            {pp["pair_id"]: {"final": "no-assertion"} for pp in pairs}))
+        return base
+
+    def _scorer(self, base, om, spendlog, extra=()):
+        return subprocess.run([sys.executable, str(WS / "scorer_v010.py"),
+                               "--key-dir", str(WS / "toy-key/key"),
+                               "--recorded-hashes", str(WS / "toy-key/recorded-hashes.txt"),
+                               "--pairs", str(WS / "toy-key/pairs.json"),
+                               "--H", str(base / "H.json"), "--spend-log", str(spendlog),
+                               "--output-manifest", str(om),
+                               "--tool-verdicts", str(base / "runs/v010/verdicts.json"),
+                               "--baseline-a", str(base / "runs/baseline_a/records.json"),
+                               "--baseline-b", str(base / "runs/baseline_b/records.json"),
+                               "--out", str(base / "scores.json"), *extra], capture_output=True, text=True)
+
+    def _H_json(self, base):
+        # a minimal self-consistent H.json bound to the toy recorded-hashes
+        man = {"recorded_manifest_sha256": hashlib.sha256((WS / "toy-key/recorded-hashes.txt").read_bytes()).hexdigest()}
+        import attest as at
+        h = hashlib.sha256(at._canonical(man)).hexdigest()
+        (base / "H.json").write_text(json.dumps({"H": h, "manifest_of_manifests": man}))
+        return h
+
+    def test_scorer_verifies_inputs_against_output_manifest_before_claim(self):
+        import attest as at
+        base = self._make_scored_workspace(); H = self._H_json(base)
+        at.build_output_manifest_at(H, base / "om.json", base)
+        sp = base / "spend.jsonl"
+        spend.append_event(sp, "structure:read"); spend.append_event(sp, "state:scoring-attempt")
+        # normal run succeeds + writes aggregate-only scores.json
+        r = self._scorer(base, base / "om.json", sp)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        # TAMPER a baseline input after the manifest -> scorer refuses PRE-CLAIM (no claim appended)
+        (base / "runs/baseline_a/records.json").write_text('{"tampered": true}')
+        sp2 = base / "spend2.jsonl"
+        spend.append_event(sp2, "structure:read"); spend.append_event(sp2, "state:scoring-attempt")
+        r2 = self._scorer(base, base / "om.json", sp2)
+        self.assertNotEqual(r2.returncode, 0)
+        self.assertNotIn("authorized-read-claimed", (sp2).read_text())  # never claimed the key
+
+    def test_scorer_refuses_missing_verdicts_before_claim(self):
+        import attest as at
+        base = self._make_scored_workspace(); H = self._H_json(base)
+        at.build_output_manifest_at(H, base / "om.json", base)
+        (base / "runs/v010/verdicts.json").unlink()
+        sp = base / "spend.jsonl"
+        spend.append_event(sp, "structure:read"); spend.append_event(sp, "state:scoring-attempt")
+        r = self._scorer(base, base / "om.json", sp)
+        self.assertNotEqual(r.returncode, 0)
+        self.assertNotIn("authorized-read-claimed", sp.read_text())
+
+    # ---- finding 4: exact inventories ----
+    def test_impl_inventory_diff_detects_extra_and_missing(self):
+        import attest as at
+        req = at.required_inventory(WS / "REQUIRED-INVENTORY.txt")
+        extra, miss = at.impl_inventory_diff(req, WS)
+        self.assertEqual((extra, miss), ([], []))                 # workspace matches canonical
+        extra2, miss2 = at.impl_inventory_diff(req - {"pin_model.py"}, WS)
+        self.assertIn("pin_model.py", extra2)                     # a file present but not required = extra
+        extra3, miss3 = at.impl_inventory_diff(req | {"ghost.py"}, WS)
+        self.assertIn("ghost.py", miss3)                          # a required file absent = missing
+
+    def test_corpora_exact_rejects_extra_and_missing(self):
+        import attest as at
+        base = Path(tempfile.mkdtemp())
+        for s in ("a", "b"):
+            (base / f"corpora/{s}").mkdir(parents=True)
+            for i in range(1, 12):
+                (base / f"corpora/{s}/{i:02d}.md").write_text("x")
+        self.assertEqual(at.corpora_exact_errs(base), {"extra": [], "missing": []})
+        (base / "corpora/a/12.md").write_text("x")               # extra numbered doc
+        self.assertIn("corpora/a/12.md", at.corpora_exact_errs(base)["extra"])
+        (base / "corpora/b/05.md").unlink()                       # missing
+        self.assertIn("corpora/b/05.md", at.corpora_exact_errs(base)["missing"])
+
+    # ---- finding 5: aggregate-only scoring output ----
+    def test_scores_json_is_aggregate_only(self):
+        import attest as at
+        base = self._make_scored_workspace(); H = self._H_json(base)
+        at.build_output_manifest_at(H, base / "om.json", base)
+        sp = base / "spend.jsonl"
+        spend.append_event(sp, "structure:read"); spend.append_event(sp, "state:scoring-attempt")
+        r = self._scorer(base, base / "om.json", sp); self.assertEqual(r.returncode, 0, r.stderr)
+        blob = (base / "scores.json").read_text()
+        for banned in ("per_pair", "expected", '"promotions"', '"false_escalations"'):
+            self.assertNotIn(banned, blob)
+        d = json.load(open(base / "scores.json"))["tool_arm"]
+        self.assertIn("promotions_count", d); self.assertIn("fp", d["detection"])
+        self.assertFalse((base / "runs/scoring/per-pair-EMBARGOED.json").exists())  # no embargoed export
+
+    def test_per_pair_export_only_with_post_commit_receipt(self):
+        import attest as at
+        base = self._make_scored_workspace(); H = self._H_json(base)
+        at.build_output_manifest_at(H, base / "om.json", base)
+        sp = base / "spend.jsonl"
+        spend.append_event(sp, "structure:read"); spend.append_event(sp, "state:scoring-attempt")
+        rc = base / "addendum-commit.txt"; rc.write_text("deadbeefcafe\n")
+        r = self._scorer(base, base / "om.json", sp, extra=("--post-commit-receipt", str(rc)))
+        self.assertEqual(r.returncode, 0, r.stderr)
+        emb = WS / "runs/scoring/per-pair-EMBARGOED.json"
+        self.addCleanup(lambda: emb.unlink() if emb.exists() else None)
+        self.assertTrue(emb.exists())
+        self.assertIn("per_pair", emb.read_text())
+
+    # ---- finding 6: conformance drain e2e (through the actual gate loop, scripted outputs) ----
+    def test_conformance_drain_no_stranding_e2e(self):
+        tmp = Path(tempfile.mkdtemp()); orig = smoke.RUNS; smoke.RUNS = tmp
+        orig_leak = smoke.leak_ok; smoke.leak_ok = lambda f: (True, "")  # leak gate not under test here
+        try:
+            for d in ("definitions", "checklists", "conformance", "manifests"):
+                (tmp / d).mkdir(parents=True, exist_ok=True)
+            term = "widget alpha"; A = aid_(term)
+            L0 = "One sentence genus here."                        # 1 sentence, 4 words
+            L1 = "One sentence genus here. Then the mechanism does concrete work."  # 2 sentences
+            L2_ok = L1 + " Measured as " + " ".join(["w"] * 60)    # 60-160 words, > L1
+            L2_short = L1 + " Too short."                          # < 60 words -> L2-count mech fail
+            smoke.canon_path("chk", "a", term, "txt").write_text("- mech commitment\n- another")
+            smoke.canon_path("lad", "a", term, "json").write_text(json.dumps({"L0": L0, "L1": L1, "L2": L2_ok}))
+            smoke.base_prompt_path("lad", "a", term).write_text("BASE\nEXCERPTS:\n1. foo")
+            smoke.gate_save({"artifacts": {A: {"kind": "lad", "side": "a", "term": term, "total_regens": 0,
+                             "semantic_regens": 0, "state": "awaiting_semantic", "log": [],
+                             "cli": "claude", "model": "opus"}},
+                             "conf_batches": {}, "polarity": {}, "polarity_side_fail": []})
+
+            def exec_ladder(g, ok):   # write the scripted g-th ladder output + a clean manifest
+                out = smoke.gen_path("lad", "a", term, g, "json")
+                out.write_text(json.dumps({"L0": L0, "L1": L1, "L2": L2_ok if ok else L2_short}))
+                smoke.manifest_for("lad", "a", term, g).write_text(
+                    f"exit: 0\nout_sha256: {hashlib.sha256(out.read_bytes()).hexdigest()}\n")
+            def exec_open_conf(verdict):   # execute the single OPEN conformance batch
+                open_bids = [b for b, v in smoke.gate_load()["conf_batches"].items() if not v["resolved"]]
+                bid = open_bids[0]
+                n = len(json.load(open(tmp / f"conformance/batch-{bid}.json"))["terms"])
+                out = tmp / f"conformance/out-{bid}-r0.json"
+                out.write_text(json.dumps([{"item": i + 1, "verdict": verdict,
+                    "reason": "" if verdict == "conformant" else "dropped mechanism"} for i in range(n)]))
+                (tmp / f"manifests/conf-{bid}-r0.json").write_text(
+                    f"exit: 0\nout_sha256: {hashlib.sha256(out.read_bytes()).hexdigest()}\n")
+                _run_smoke("gate-conformance", tmp)
+
+            # DRIVER-LOOP mimic (the run_v010 phase-6 drain loop): drain ladder regens to
+            # quiescence, stage ONE conformance batch, gate it; repeat. Scripted path:
+            # g0 conform -> nonconformant (semantic fail -> g1) ; g1 ladder MECH-fails -> g2 ;
+            # g2 ladder ok -> conformance -> conformant.
+            verdicts = iter(["nonconformant", "conformant"])
+            for _ in range(6):   # bounded
+                regen = tmp / "definitions/regen-calls.tsv"
+                while regen.exists() and regen.read_text().strip():
+                    g = smoke.gate_load()["artifacts"][A]["total_regens"]
+                    exec_ladder(g, ok=(g != 1))       # g1 mechanically FAILS; g2 ok
+                    _run_smoke("gate-ladders", tmp)
+                _run_smoke("prompts-conformance", tmp)
+                if not (tmp / "conformance/calls.tsv").read_text().strip():
+                    break
+                exec_open_conf(next(verdicts))
+            smoke.assert_resolved([])   # must NOT halt — the late g2 entrant was NOT stranded
+            self.assertEqual(smoke.gate_load()["artifacts"][A]["state"], "passed")
+        finally:
+            smoke.RUNS = orig; smoke.leak_ok = orig_leak
+
+    # ---- finding 7: corpus attempt hygiene ----
+    def _synth_key(self):
+        import setup_confirmatory as sc
+        kd = Path(tempfile.mkdtemp()) / "conf"; (kd / "key").mkdir(parents=True)
+        (kd / "key/concepts.json").write_text((WS / "toy-key/key/concepts.json").read_text())
+        subprocess.run([sys.executable, str(WS / "harness/validate_key.py"), str(kd / "key/concepts.json")], check=True, capture_output=True)
+        subprocess.run([sys.executable, str(WS / "harness/gen_leakcheck.py"), str(kd)], check=True, capture_output=True)
+        return kd
+
+    def _gen(self, terms, start=1, count=11):
+        return "\n".join(f"<<<DOC {i}>>>\n# R{i}\nThe {terms[(i-1) % len(terms)]} run logged results."
+                         for i in range(start, start + count)) + "\n"
+
+    def test_corpus_misnumbered_rejected(self):
+        import setup_confirmatory as sc
+        kd = self._synth_key(); a = [p["term_a"] for p in json.load(open(kd / "key/answer_key.json"))["pairs"]]
+        (kd / "runs").mkdir(exist_ok=True)
+        (kd / "runs/gen-a.out").write_text(self._gen(a, start=0, count=11))   # DOC 0..10 -> 00..10.md
+        self.assertFalse(sc._corpus_attempt_ok(kd, "a", kd / "runs/gen-a.out"))
+        self.assertFalse((kd / "corpora/a").exists())   # nothing promoted
+
+    def test_corpus_retry_after_extra_file_is_clean(self):
+        import setup_confirmatory as sc
+        kd = self._synth_key(); a = [p["term_a"] for p in json.load(open(kd / "key/answer_key.json"))["pairs"]]
+        (kd / "runs").mkdir(exist_ok=True)
+        (kd / "runs/gen-a-bad.out").write_text(self._gen(a, start=1, count=12))   # 01..12 (extra 12)
+        self.assertFalse(sc._corpus_attempt_ok(kd, "a", kd / "runs/gen-a-bad.out"))  # rejected (temp discarded)
+        (kd / "runs/gen-a.out").write_text(self._gen(a, start=1, count=11))       # valid retry
+        self.assertTrue(sc._corpus_attempt_ok(kd, "a", kd / "runs/gen-a.out"))
+        names = sorted(p.name for p in (kd / "corpora/a").glob("*.md"))
+        self.assertEqual(names, [f"{i:02d}.md" for i in range(1, 12)])            # exactly 01..11, no stale 12
+
+
+def aid_(term):
+    return f"lad:a:{term}"
+
+def _run_smoke(cmd, runs):
+    import smoke_v010 as s
+    old = s.RUNS; s.RUNS = runs
+    try:
+        {"gate-ladders": s.gate_ladders, "prompts-conformance": s.prompts_conformance,
+         "gate-conformance": s.gate_conformance}[cmd]([])
+    finally:
+        s.RUNS = old
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

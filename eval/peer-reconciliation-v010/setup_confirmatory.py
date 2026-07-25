@@ -28,8 +28,10 @@ Per §6 setup call sites + pinned IDs:
   corpus-gen A     claude / claude-sonnet-5
   corpus-gen B     codex  / gpt-5.6-terra
 """
-import argparse, hashlib, json, subprocess, sys, datetime
+import argparse, hashlib, json, subprocess, sys, datetime, tempfile, shutil
 from pathlib import Path
+
+EXACT_DOCS = [f"{i:02d}.md" for i in range(1, 12)]  # the ONLY corpus filenames allowed (01..11)
 
 BASE = Path(__file__).resolve().parent
 RUNISO = BASE / "../e2e-cell/run_isolated.sh"
@@ -79,15 +81,15 @@ def copy_splitter(key_dir):
     return dst
 
 
-def leak_ok(key_dir, side):
-    """Run the FROZEN leak checks exactly as run_test_v09.sh does, over every doc of the side:
-    a-docs -> cross-a + meta ; b-docs -> cross-b + meta (leakcheck_peer.sh is a pure grep
-    script — no model calls). Any leak fails the corpus attempt."""
+def leak_ok(key_dir, side, corpus_dir):
+    """Run the FROZEN leak checks exactly as run_test_v09.sh does, over every doc in
+    `corpus_dir`: a-docs -> cross-a + meta ; b-docs -> cross-b + meta (leakcheck_peer.sh is a
+    pure grep script — no model calls; it lives under key_dir). Any leak fails the attempt."""
     lc = Path(key_dir) / "leakcheck_peer.sh"
     if not lc.exists():
         sys.exit(f"leakcheck_peer.sh missing under {key_dir} (gen_leakcheck must run first)")
     cross = "cross-a" if side == "a" else "cross-b"
-    for doc in sorted((Path(key_dir) / f"corpora/{side}").glob("[0-9][0-9].md")):
+    for doc in sorted(Path(corpus_dir).glob("[0-9][0-9].md")):
         for mode in (cross, "meta"):
             r = subprocess.run(["bash", str(lc), mode, str(doc)], capture_output=True, text=True)
             if r.returncode != 0:
@@ -97,17 +99,31 @@ def leak_ok(key_dir, side):
 
 
 def _corpus_attempt_ok(key_dir, side, out_file):
-    """A corpus attempt is valid iff the per-key splitter produces exactly 11 docs under
-    key_dir/corpora/<side>/ AND all frozen leak checks pass. A leak (or wrong doc count)
-    fails the attempt -> consumes it per §4.1a accounting."""
-    splitter = Path(key_dir) / "split_corpus.py"
-    r = subprocess.run([sys.executable, str(splitter), side, str(out_file)],
-                       capture_output=True, text=True)
-    docs = sorted((Path(key_dir) / f"corpora/{side}").glob("[0-9][0-9].md"))
-    if r.returncode != 0 or len(docs) != 11:
-        print(f"  split {side}: rc={r.returncode} docs={len(docs)} (need 11) {r.stdout.strip()}")
-        return False
-    return leak_ok(key_dir, side)
+    """Finding 7 (attempt hygiene): each attempt splits into a FRESH temp side dir, requires the
+    EXACT filename set 01.md..11.md (set equality, not just a count of 11), runs the frozen leak
+    checks THERE, then ATOMICALLY promotes only an accepted attempt into key_dir/corpora/<side>
+    (replacing any prior contents). Stale files from a prior malformed attempt can never leak
+    into or poison a retry. A wrong set, a leak, or a split failure consumes the attempt (§4.1a)."""
+    key_dir = Path(key_dir)
+    attempt = Path(tempfile.mkdtemp(prefix=f"{side}-attempt-", dir=str(key_dir)))
+    try:
+        splitter = copy_splitter(attempt)                       # BASE=attempt -> writes attempt/corpora/<side>
+        r = subprocess.run([sys.executable, str(splitter), side, str(out_file)],
+                           capture_output=True, text=True)
+        corp = attempt / f"corpora/{side}"
+        names = sorted(p.name for p in corp.glob("[0-9][0-9].md")) if corp.exists() else []
+        if r.returncode != 0 or names != EXACT_DOCS:
+            print(f"  split {side}: rc={r.returncode} names={names} (need EXACTLY 01..11) {r.stdout.strip()}")
+            return False
+        if not leak_ok(key_dir, side, corp):
+            return False
+        dest = key_dir / f"corpora/{side}"; dest.parent.mkdir(parents=True, exist_ok=True)
+        if dest.exists():
+            shutil.rmtree(dest)                                 # clean promote: no stale prior-attempt files
+        shutil.move(str(corp), str(dest))
+        return True
+    finally:
+        shutil.rmtree(attempt, ignore_errors=True)
 
 
 def _call_with_retry(name, cli, model, prompt, out, manifest, validate, receipt, dry):
@@ -129,6 +145,16 @@ def _call_with_retry(name, cli, model, prompt, out, manifest, validate, receipt,
 
 def build_key(key_id, args):
     key_dir = BASE / f"runs/confirmatory/{key_id}"
+    done_receipt = key_dir / "setup-key.done"
+    # finding 2: NEVER overwrite/regenerate a completed confirmatory key. If a completion receipt
+    # bound to the current H exists, skip this key (restart-safe; no new draw under the same config).
+    if done_receipt.exists():
+        rec = json.loads(done_receipt.read_text())
+        if rec.get("H") == args.H_value:
+            print(f"  [{key_id}] already complete (setup-key.done, H matches) — SKIP (no regeneration)")
+            return rec, True
+        sys.exit(f"  [{key_id}] setup-key.done present with a DIFFERENT H — refusing to overwrite a "
+                 f"prior confirmatory key")
     (key_dir / "key").mkdir(parents=True, exist_ok=True)
     (key_dir / "manifests").mkdir(parents=True, exist_ok=True)
     dry = args.dry_run
@@ -142,15 +168,15 @@ def build_key(key_id, args):
                             lambda: _validate_key(concepts, dry), receipt, dry):
         return receipt, False
     if dry:
-        print("    [dry-run] gen_leakcheck; build_briefs; copy split_corpus.py into key root; "
-              "corpus-gen a/b -> split (key_dir/corpora) + FROZEN leak checks; make_pairs")
+        print("    [dry-run] gen_leakcheck; build_briefs; corpus-gen a/b -> per-attempt fresh split "
+              "(exact 01..11) + FROZEN leak checks + atomic promote; make_pairs")
         return receipt, True
-    # 2. leakcheck script (from answer_key.json) + briefs + per-key hash-verified splitter
+    # 2. leakcheck script (from answer_key.json) + briefs (the per-attempt splitter is copied
+    #    inside _corpus_attempt_ok into a fresh temp dir — finding 7)
     subprocess.run([sys.executable, str(BASE / "harness/gen_leakcheck.py"), str(key_dir)], check=True)
     subprocess.run([sys.executable, str(BASE / "harness/build_briefs.py"), str(key_dir)], check=True)
-    copy_splitter(key_dir)
-    # 3. corpus-gen A (sonnet) + B (codex): attempt valid iff 11 docs under key_dir/corpora/<side>
-    #    AND all frozen leak checks pass; a split or leak failure consumes the attempt (§4.1a).
+    # 3. corpus-gen A (sonnet) + B (codex): each attempt splits into a fresh temp dir, requires the
+    #    exact 01..11 set + frozen leak checks, then atomically promotes; failure consumes the attempt.
     for site, cli, model, side in (("corpus-gen-a", "claude", "claude-sonnet-5", "a"),
                                    ("corpus-gen-b", "codex", "gpt-5.6-terra", "b")):
         out = key_dir / f"runs/gen-{side}.out"; out.parent.mkdir(parents=True, exist_ok=True)
@@ -163,6 +189,8 @@ def build_key(key_id, args):
     # 4. answer-blind pairs manifest
     subprocess.run([sys.executable, str(BASE / "make_pairs_manifest.py"),
                     str(key_dir / "key"), str(key_dir / "pairs.json")], check=True)
+    # 5. per-key completion receipt (H-bound) — restart will SKIP this key
+    done_receipt.write_text(json.dumps({**receipt, "ok": True, "complete": True}, indent=1))
     return receipt, True
 
 
