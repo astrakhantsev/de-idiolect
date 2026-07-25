@@ -34,10 +34,13 @@ SPENDLOG="$BASE/runs/spend-log.jsonl"
 KEYCUSTODY="$BASE/key-custody.jsonl"   # durable cross-run key-3 custody ledger (gitignored)
 mkdir -p runs
 
-# Per-H terminal/state documentation marker (called only AFTER H is built).
-log_state() { python3 attest.py spend-log --event "$1" --H "$H" --out "$SPENDLOG" 2>/dev/null || true; }
+# Per-H terminal/state documentation marker (called only AFTER H is built). Round-9 finding 2:
+# a FAILURE to persist a state/custody transition is a HARD HALT — never suppressed.
+log_state() { python3 attest.py spend-log --event "$1" --H "$H" --out "$SPENDLOG" \
+  || { echo "FATAL: could not persist state marker '$1' — halting (do NOT proceed unclassified)"; exit 99; }; }
 # Durable cross-run forfeit (attest-2 mismatch): the key can never be scored under any H after this.
-forfeit_custody() { python3 attest.py custody-log --state forfeited-unspent --H "$H" --event-ref "$1" --out "$KEYCUSTODY" 2>/dev/null || true; }
+forfeit_custody() { python3 attest.py custody-log --state forfeited-unspent --H "$H" --event-ref "$1" --out "$KEYCUSTODY" \
+  || { echo "FATAL: could not persist custody forfeit ('$1') — halting"; exit 99; }; }
 
 calls() {  # run a staged tsv via the isolation wrapper; halt on run-scoped fault (rc>=2)
   local rc=0; bash "$BASE/run_calls.sh" "$1" || rc=$?
@@ -77,23 +80,49 @@ python3 tests/test_v010.py
 
 echo "== phase 0.5: PROJECTOR — isolated blind pairs.json from the sealed key (custody) =="
 # RESUME: skip re-projection if pairs.json already exists (deterministic given the key). The
-# structure:read custody entry is logged at phase 1 (it must carry H, unknown here).
-if [ -s pairs.json ]; then
-  echo "  pairs.json already present — resume skip (re-projection)"
+# projector emits a receipt bound to the pairs.json hash (round-9 finding 7); the driver verifies
+# it at phase 1.5 before registering the per-H structure:read on the projector's behalf.
+if [ -s pairs.json ] && [ -s runs/pairs-receipt.json ]; then
+  echo "  pairs.json + receipt already present — resume skip (re-projection)"
 else
-  PAIRS_HASH_LINE="$(python3 make_pairs_manifest.py key pairs.json --recorded-hashes "$RECORDED")" \
+  PAIRS_HASH_LINE="$(python3 make_pairs_manifest.py key pairs.json --recorded-hashes "$RECORDED" --emit-receipt runs/pairs-receipt.json)" \
     || { echo "PROJECTOR failed (hash-gate) — nothing read/spent; resumable (fix inputs + re-run)"; exit 1; }
   echo "  $PAIRS_HASH_LINE"
 fi
 
-echo "== phase 1: FREEZE + build-H --runtime (exact inventories; binds PREREG.md + recorded-cli.json + pairs.json) =="
-python3 attest.py build-H --recorded-manifest "$RECORDED" --out runs/H.json --runtime
+echo "== phase 1: FREEZE + H (IMMUTABLE on restart; never rebuilt) =="
+# Round-9 finding 1: the frozen H is IMMUTABLE. If runs/H.json exists we LOAD + self-verify it
+# (verify-files re-hashes the tree vs H); a tree mismatch is an ATTESTATION FAILURE (HALT), NEVER a
+# silent rebuild. Only a first, clean run builds H.
+if [ -f runs/H.json ]; then
+  python3 attest.py verify-files --H runs/H.json \
+    || { echo "FATAL: runs/H.json exists but the tree no longer matches it (attestation failure) — do NOT rebuild; HALT"; exit 1; }
+  echo "  existing runs/H.json self-verified against the current tree — immutable, not rebuilt"
+else
+  python3 attest.py build-H --recorded-manifest "$RECORDED" --out runs/H.json --runtime
+fi
 H="$(python3 -c 'import json;print(json.load(open("runs/H.json"))["H"])')"
+# Round-9 finding 1: cross-H generation-start guard. If a DURABLE generation-started marker exists
+# for a DIFFERENT H, an observed key-3 instance was already generating — never proceed, never
+# overwrite; demand classification. (In-place new-H runs are unsupported — use a fresh checkout.)
+if [ -f runs/generation-started.json ]; then
+  PRIOR_GEN_H="$(python3 -c 'import json;print(json.load(open("runs/generation-started.json")).get("H",""))')"
+  if [ "$PRIOR_GEN_H" != "$H" ]; then
+    echo "FATAL: generation-started recorded for a DIFFERENT H ($PRIOR_GEN_H) than the loaded H ($H)."
+    echo "  An observed key-3 generation instance exists. CLASSIFY it (forfeit) in its own workspace;"
+    echo "  in-place new-H runs are UNSUPPORTED — start a revised-prereg instance in a FRESH checkout."
+    exit 1
+  fi
+fi
 
-echo "== phase 1.5: structure:read custody entry (per-H, one-shot; the projector's sanctioned read) =="
+echo "== phase 1.5: structure:read custody entry (per-H, one-shot; on behalf of a VERIFIED projector receipt) =="
 if python3 -c "import sys;sys.path.insert(0,'.');import spend;sys.exit(0 if spend.projector_completed('$SPENDLOG','$H') else 1)"; then
   echo "  structure:read already logged for this H — skip"
 else
+  # round-9 finding 7: re-verify the projector receipt vs the CURRENT pairs.json before registering
+  # (a tamper between projection and registration is refused).
+  python3 make_pairs_manifest.py --verify-receipt runs/pairs-receipt.json --pairs pairs.json \
+    || { echo "structure:read REFUSED — projector receipt does not match pairs.json (tamper) — HALT"; exit 1; }
   python3 attest.py spend-log --event structure:read --H "$H" --out "$SPENDLOG" \
     || { echo "structure:read REFUSED (already present / accidental-access) — HALT"; exit 1; }
 fi
@@ -118,17 +147,33 @@ for ck in conf-key-1 conf-key-2; do
   phase_receipt "draw-$ck" "runs/confirmatory/$ck/runs/confirmatory-result.json" gate_pass=true
 done
 
-echo "== phase 5: ATTESTATION POINT 1 (pre-generation; verifies BOTH confirmatory typed receipts) =="
+echo "== phase 5: ATTESTATION POINT 1 (POST-confirmatory; verifies BOTH confirmatory typed receipts) =="
+# Round-9 finding 3: an attestation-1 failure here is POST-confirmatory (the draws already ran at
+# phase 4), so it is NEVER silently resumable. It HALTS and demands classification: a benign
+# (non-configuration) mismatch requires a RE-FREEZE + two NEW draws (once) in a fresh instance;
+# a configuration mismatch RETIRES the configuration. Observed draw receipts are NOT reusable
+# across a re-freeze (a new freeze = new H = new receipts). Pre-confirmatory aborts
+# (projector/probe) are the resumable ones and were handled at their own phases.
 if phase_check attest1; then echo "  attest-1 already complete (typed receipt) — skip"; else
   python3 attest.py attest --H runs/H.json --point 1 --recorded-cli "$RECORDED_CLI" --probe-log runs/probe-log.json \
       --confirmatory runs/confirmatory/conf-key-1 runs/confirmatory/conf-key-2 \
-    || { echo "ATTEST-1 FAILED — pre-gen, unspent + unforfeited; resumable (re-run)"; exit 1; }
+    || { echo "ATTESTATION-1 MISMATCH (post-confirmatory) — HALT, do NOT resume. CLASSIFY:";
+         echo "  benign (non-configuration) mismatch -> re-freeze + two NEW draws required (once), fresh instance;";
+         echo "  configuration mismatch -> configuration RETIRED. Observed draws are NOT reusable across a re-freeze.";
+         exit 4; }
   python3 attest.py receipt --H runs/H.json --kind pre-generation --out runs/receipts.jsonl
   phase_receipt attest1 runs/attestation-point-1.json
 fi
 
 echo "== phase 6: key-3 tool-arm generation (sealed-answer-material-blind) =="
 if phase_check generation; then echo "  generation already complete (typed receipt) — skip"; else
+  # Round-9 finding 1: persist a DURABLE generation-started marker BEFORE the first key-3 call
+  # (spend log + a single-file receipt for the cross-H startup guard). Idempotent for this H.
+  if [ ! -f runs/generation-started.json ]; then
+    log_state state:generation-started
+    printf '{"H": "%s"}\n' "$H" > runs/generation-started.json
+    python3 attest.py receipt --H runs/H.json --kind generation-started --out runs/receipts.jsonl
+  fi
   python3 smoke_v010.py excerpts
   gen_loop prompts-checklist gate-checklists checklists/calls.tsv checklists/regen-calls.tsv
   gen_loop prompts-def gate-ladders definitions/calls.tsv definitions/regen-calls.tsv

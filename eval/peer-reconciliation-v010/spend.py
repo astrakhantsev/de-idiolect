@@ -41,6 +41,8 @@ STATE_EVENTS = {
     "confirmatory-phase-fail": "not spent, not forfeited; configuration RETIRED (§4.1; blocks only this run)",
     "terminated-during-gen-or-attest2-mismatch": "forfeited-unspent; key-4 needed (records custody forfeit)",
     "scoring-attempt": "bounded pre-read scoring attempt marker (max 2); NOT the claim",
+    "generation-started": "DURABLE marker: the first key-3 generation call is about to run under this H "
+                          "(round-9); a startup that finds this for a DIFFERENT H must HALT + classify",
 }
 STRUCTURE_EVENTS = {
     "read": "NON-SPEND: isolated projector parsed the sealed key STRUCTURE (terms+pairing), "
@@ -105,6 +107,27 @@ def _count(events, name):
     return sum(1 for e in events if e.get("event") == name)
 
 
+def _assert_claim_gate(cur):
+    """Pure per-H claim gate (shared by append_event and atomic_claim): a claim is admissible iff
+    no terminal event, EXACTLY one structure:read, an in-range scoring-attempt, and no prior claim.
+    Raises SystemExit on refusal."""
+    if any(e.get("event") in TERMINAL_BLOCK for e in cur):
+        raise SystemExit("SPEND-REFUSE: a terminal event is present (this run) — no claim")
+    if _count(cur, "structure:read") != 1:
+        raise SystemExit(f"SPEND-REFUSE: claim requires EXACTLY one structure:read (have {_count(cur, 'structure:read')})")
+    na = _count(cur, "state:scoring-attempt")
+    if not 1 <= na <= MAX_SCORING_ATTEMPTS:
+        raise SystemExit(f"SPEND-REFUSE: claim requires an in-range scoring-attempt (have {na})")
+    if _has_claim(cur):
+        raise SystemExit("SPEND-REFUSE: a claim already exists (this run) — SPENT")
+
+
+def _append_line(path, entry):
+    """Lock-free append of one JSON line (caller MUST already hold the lock)."""
+    with open(path, "a") as f:
+        f.write(json.dumps(entry) + "\n")
+
+
 def append_event(logpath, event, run_H, notes=""):
     """Locked append (per-H namespaced) with the enforced transition gates. Raises SystemExit
     (nonzero) on a refused transition; returns the appended entry on success."""
@@ -127,15 +150,7 @@ def append_event(logpath, event, run_H, notes=""):
             if _count(cur, "state:scoring-attempt") >= MAX_SCORING_ATTEMPTS:
                 raise SystemExit(f"SPEND-REFUSE: scoring-attempt cap ({MAX_SCORING_ATTEMPTS}) reached (this run)")
         if event == "spend:authorized-read-claimed":
-            if any(e.get("event") in TERMINAL_BLOCK for e in cur):
-                raise SystemExit("SPEND-REFUSE: a terminal event is present (this run) — no claim")
-            if _count(cur, "structure:read") != 1:
-                raise SystemExit(f"SPEND-REFUSE: claim requires EXACTLY one structure:read (have {_count(cur, 'structure:read')})")
-            na = _count(cur, "state:scoring-attempt")
-            if not 1 <= na <= MAX_SCORING_ATTEMPTS:
-                raise SystemExit(f"SPEND-REFUSE: claim requires an in-range scoring-attempt (have {na})")
-            if _has_claim(cur):
-                raise SystemExit("SPEND-REFUSE: a claim already exists (this run) — SPENT")
+            _assert_claim_gate(cur)
         if event == "spend:authorized-read-complete":
             if _count(cur, "spend:authorized-read-claimed") < 1:
                 raise SystemExit("SPEND-REFUSE: cannot complete without a prior claim (this run)")
@@ -145,8 +160,7 @@ def append_event(logpath, event, run_H, notes=""):
             raise SystemExit("SPEND-REFUSE: fault-after-authorized-read requires a prior claim (this run)")
         entry = {"event": event, "run_H": run_H, "meaning": TABLE[event], "notes": notes,
                  "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}
-        with open(logpath, "a") as f:
-            f.write(json.dumps(entry) + "\n")
+        _append_line(logpath, entry)
         return entry
     finally:
         _unlock(fh)
@@ -170,9 +184,10 @@ def assert_scoring_allowed(logpath, run_H, custody_ledger=None):
     """Pre-claim gate (per-H). Refuses on: any UNTYPED entry; accidental-access; any ANSWER-READ
     or TERMINAL entry — ALL within the current H's namespace; NOT exactly one structure:read;
     no in-range scoring-attempt. If `custody_ledger` is given, ALSO refuses if the key is
-    cross-run spent/forfeited (block everywhere). Raises SystemExit on refusal."""
+    cross-run spent/forfeited by a DIFFERENT H (a same-H spent state is a recovery case, left to
+    the atomic claim's idempotent handling). Raises SystemExit on refusal."""
     if custody_ledger is not None:
-        assert_key_available(custody_ledger)
+        assert_key_available(custody_ledger, run_H)
     fh = _lock(logpath)
     try:
         cur = _cur(read_events(logpath), run_H)
@@ -202,27 +217,82 @@ def custody_state(ledger):
     return evs[-1]["state"] if evs else "eligible"
 
 
+def _custody_last(ledger):
+    """(state, run_H) of the last custody transition, default ('eligible', None)."""
+    evs = read_events(ledger)
+    if not evs:
+        return "eligible", None
+    return evs[-1]["state"], evs[-1].get("run_H")
+
+
+def _custody_refuse_or_noop(cur_state, cur_H, state, run_H):
+    """Shared monotonicity + idempotency check (used by record_custody AND atomic_claim). Returns
+    'append' | 'noop'; raises SystemExit on a refused transition. Round-9: a blocking state may be
+    RE-appended as a no-op ONLY by the SAME run_H that set it (idempotent recovery); any different
+    state, or the same blocking state from a DIFFERENT H, is refused."""
+    if cur_state in CUSTODY_BLOCK:
+        if state == cur_state and cur_H == run_H:
+            return "noop"
+        raise SystemExit(f"CUSTODY-REFUSE: key already {cur_state!r} (run_H {cur_H!r}) — cannot transition to "
+                         f"{state!r} (run_H {run_H!r})")
+    return "append"
+
+
 def record_custody(ledger, state, run_H, event_ref, notes=""):
-    """Append a cross-run custody transition (locked). `state` ∈ CUSTODY_STATES. Monotone:
-    once spent/forfeited, further conflicting transitions are refused."""
+    """Append a cross-run custody transition (locked). `state` ∈ CUSTODY_STATES. Monotone +
+    idempotent: once spent/forfeited, a conflicting transition is refused and a DUPLICATE
+    spent/forfeited append by the SAME run_H is a no-op success (round-9 idempotent recovery)."""
     if state not in CUSTODY_STATES:
         raise SystemExit(f"unknown custody state {state!r}; valid: {CUSTODY_STATES}")
     fh = _lock(ledger)
     try:
-        cur = custody_state(ledger) if Path(ledger).exists() else "eligible"
-        if cur in CUSTODY_BLOCK and state != cur:
-            raise SystemExit(f"CUSTODY-REFUSE: key already {cur!r} — cannot transition to {state!r}")
+        cur_state, cur_H = _custody_last(ledger)
+        if _custody_refuse_or_noop(cur_state, cur_H, state, run_H) == "noop":
+            return None
         entry = {"state": state, "run_H": run_H, "event_ref": event_ref, "notes": notes,
                  "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}
-        with open(ledger, "a") as f:
-            f.write(json.dumps(entry) + "\n")
+        _append_line(ledger, entry)
         return entry
     finally:
         _unlock(fh)
 
 
-def assert_key_available(ledger):
-    """Cross-run gate: refuse if the durable custody ledger shows the key spent or forfeited."""
-    st = custody_state(ledger)
-    if st in CUSTODY_BLOCK:
-        raise SystemExit(f"KEY-CUSTODY: key-3 is {st!r} (cross-run) — refusing any scoring/read")
+def assert_key_available(ledger, run_H=None):
+    """Cross-run gate: refuse if the durable custody ledger shows the key spent/forfeited. Round-9:
+    when `run_H` is given, a spent/forfeited state set by that SAME H is a recovery case and is
+    ALLOWED (the atomic claim handles it idempotently); a different H (or run_H omitted) is refused."""
+    st, holder = _custody_last(ledger)
+    if st in CUSTODY_BLOCK and not (run_H is not None and holder == run_H):
+        raise SystemExit(f"KEY-CUSTODY: key-3 is {st!r} (run_H {holder!r}, cross-run) — refusing any scoring/read")
+
+
+def atomic_claim(spend_log, custody_ledger, run_H, notes=""):
+    """Round-9 finding 2: ONE fail-closed claim. Under BOTH locks (fixed order: custody ledger
+    THEN spend log) re-check availability + the per-H claim gate, then append custody `spent` and
+    the per-H `authorized-read-claimed` before releasing. Idempotent recovery: a same-H `spent`
+    ledger state with NO prior claim (crash after the ledger write, before the claim) proceeds and
+    appends only the missing claim; a prior claim (key already read) is refused (no second read); a
+    DIFFERENT-H spent/forfeited state is refused. Never suppresses a persistence failure."""
+    if not run_H:
+        raise SystemExit("atomic_claim requires run_H")
+    lfh = _lock(custody_ledger)                 # 1) custody ledger lock FIRST
+    try:
+        sfh = _lock(spend_log)                  # 2) then the spend-log lock
+        try:
+            cur_state, cur_H = _custody_last(custody_ledger)
+            decision = _custody_refuse_or_noop(cur_state, cur_H, "spent", run_H)  # refuses cross-H
+            cur = _cur(read_events(spend_log), run_H)
+            _assert_claim_gate(cur)             # refuses if a claim already exists (key already read)
+            if decision == "append":
+                _append_line(custody_ledger, {"state": "spent", "run_H": run_H,
+                    "event_ref": "spend:authorized-read-claimed", "notes": notes or "authorized scoring read",
+                    "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()})
+            entry = {"event": "spend:authorized-read-claimed", "run_H": run_H,
+                     "meaning": TABLE["spend:authorized-read-claimed"], "notes": notes,
+                     "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}
+            _append_line(spend_log, entry)      # per-H claim, still under BOTH locks
+            return entry
+        finally:
+            _unlock(sfh)
+    finally:
+        _unlock(lfh)

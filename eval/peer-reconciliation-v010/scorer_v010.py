@@ -336,26 +336,35 @@ def score(args):
     got = hashlib.sha256(Path(args.recorded_hashes).read_bytes()).hexdigest()
     if bound != got:
         sys.exit(f"RECORDED-HASHES not bound in H: H has {bound} but --recorded-hashes hashes {got}")
-    # (b2) OUTPUT-MANIFEST binding: verify EVERY scorer input against the step-7 receipt PRE-CLAIM.
+    # (b2) OUTPUT-MANIFEST binding (round-9 finding 4): the output-manifest bytes must hash-match
+    #     the value bound into the attestation-2 receipt (catches a manifest+input swapped between
+    #     attestation-2 and the claim), and EVERY file listed in the manifest — not just the three
+    #     scorer inputs — must be present + hash-match. H must bind.
     om = json.load(open(args.output_manifest))
     if om.get("H") != run_H:
         sys.exit(f"output-manifest H {om.get('H')} != attested H {run_H} — abort pre-claim")
-    om_files = om["files"]
+    a2 = json.load(open(args.attest2_receipt))
+    if a2.get("H") != run_H:
+        sys.exit(f"attestation-2 receipt H {a2.get('H')} != attested H {run_H} — abort pre-claim")
+    om_sha = hashlib.sha256(Path(args.output_manifest).read_bytes()).hexdigest()
+    if a2.get("output_manifest_sha256") != om_sha:
+        sys.exit("output-manifest bytes != the hash bound in the attestation-2 receipt — abort pre-claim (unspent)")
+    run_root = Path(args.run_root)                          # base the manifest's relpaths resolve against
+    for rel, h in om["files"].items():
+        p = run_root / rel
+        if not p.exists() or hashlib.sha256(p.read_bytes()).hexdigest() != h:
+            sys.exit(f"step-7 output {rel} MISSING/drifted vs the bound output-manifest — abort pre-claim (unspent)")
+    # the three direct scorer inputs must be members of that (now verified) manifest.
     def _tail(p):
         return "/".join(Path(p).parts[-2:])
     for path in (args.tool_verdicts, args.baseline_a, args.baseline_b):
-        if not path:
-            continue
-        entry = next((h for r, h in om_files.items() if _tail(r) == _tail(path)), None)
-        if entry is None:
+        if path and not any(_tail(r) == _tail(path) for r in om["files"]):
             sys.exit(f"scorer input {path} not in the output-manifest — abort pre-claim (unspent)")
-        if not Path(path).exists() or hashlib.sha256(Path(path).read_bytes()).hexdigest() != entry:
-            sys.exit(f"scorer input {path} MISSING/drifted vs the output-manifest — abort pre-claim (unspent)")
 
-    # (c) ATOMIC CLAIM (per-H) immediately before the first key byte; record the cross-run SPEND.
-    spend.claim_authorized_read(args.spend_log, run_H, notes="scorer about to read the sealed key")
-    spend.record_custody(ledger, "spent", run_H, "spend:authorized-read-claimed",
-                         notes="authorized scoring read")
+    # (c) ONE FAIL-CLOSED ATOMIC CLAIM (round-9 finding 2): under BOTH locks (custody ledger THEN
+    #     spend log) re-check availability + the per-H gate, record the cross-run SPEND and the
+    #     per-H claim together, immediately before the first key byte. A persistence failure raises.
+    spend.atomic_claim(args.spend_log, ledger, run_H, notes="scorer about to read the sealed key")
     sealed_key = verify_and_load_key(args.key_dir, args.recorded_hashes)  # THE SPEND (first key byte)
     key = _join_opaque(sealed_key, args.pairs)
 
@@ -429,7 +438,12 @@ def main():
     s.add_argument("--pairs", required=True); s.add_argument("--H", required=True)
     s.add_argument("--spend-log", required=True); s.add_argument("--custody-ledger")
     s.add_argument("--tool-verdicts"); s.add_argument("--baseline-a"); s.add_argument("--baseline-b")
-    s.add_argument("--output-manifest", required=True); s.add_argument("--tau", default=PRIMARY)
+    s.add_argument("--output-manifest", required=True)
+    s.add_argument("--attest2-receipt", default=str(BASE / "runs/attestation-point-2.json"),
+                   help="the attestation-2 record binding output_manifest_sha256 (round-9 finding 4)")
+    s.add_argument("--run-root", default=str(BASE),
+                   help="base that the output-manifest's relpaths resolve against (default: the workspace)")
+    s.add_argument("--tau", default=PRIMARY)
     s.add_argument("--out", required=True); s.set_defaults(fn=score)
     e = sub.add_parser("export-embargo")
     e.add_argument("--embargo", default=str(EMBARGO_PATH)); e.add_argument("--repo", required=True)

@@ -71,9 +71,11 @@ RUNTIME_REQUIRED = (["pairs.json", "leakcheck_peer.sh",
                      "corpora/a/manifest.json", "corpora/b/manifest.json",
                      "key/concepts.json", "key/answer_key.json"]
                     + [f"corpora/{s}/{i:02d}.md" for s in ("a", "b") for i in range(1, 12)])
-# CANONICAL exact corpora set (finding 4): the ONLY numbered corpus docs allowed. build-H
-# --runtime rejects any extra (e.g. corpora/a/12.md) and any missing.
+# CANONICAL exact corpora set (finding 4): the ONLY corpus docs allowed. build-H --runtime rejects
+# ANY extra .md (numeric like corpora/a/12.md OR nonnumeric like corpora/a/notes.md — round-9) and
+# any missing. The sealed key dir must contain EXACTLY these two files (round-9: no key-dir extras).
 CORPORA_CANONICAL = {f"corpora/{s}/{i:02d}.md" for s in ("a", "b") for i in range(1, 12)}
+KEY_CANONICAL = {"key/concepts.json", "key/answer_key.json"}
 
 # step-7 OUTPUT manifest (finding 3): the scorer's REQUIRED inputs + the broader deterministic
 # step-7 outputs, hashed at end of generation, enforced at attestation-2, and re-verified by the
@@ -186,9 +188,16 @@ def impl_inventory_diff(required_set, base=BASE):
 
 
 def corpora_exact_errs(base=BASE):
-    """Return {extra, missing} vs the canonical exact corpora set (01..11 both sides)."""
-    disc = {r for r in _inventory(RUNTIME_GLOBS, base) if re.match(r"corpora/[ab]/\d\d\.md$", r)}
-    return {"extra": sorted(disc - CORPORA_CANONICAL), "missing": sorted(CORPORA_CANONICAL - disc)}
+    """Round-9 finding 6: compare the COMPLETE discovered corpora/{a,b}/*.md set (ALL .md, not just
+    the numeric pattern — so `corpora/a/notes.md` is caught) against CORPORA_CANONICAL, and the
+    discovered key/* set against KEY_CANONICAL (an unexpected key-dir file is caught). Returns
+    {extra, missing, key_extra}."""
+    base = Path(base)
+    disc = {str(p.relative_to(base)) for s in ("a", "b")
+            for p in (base / f"corpora/{s}").glob("*.md") if p.is_file()}
+    key_disc = {str(p.relative_to(base)) for p in (base / "key").glob("*") if p.is_file()}
+    return {"extra": sorted(disc - CORPORA_CANONICAL), "missing": sorted(CORPORA_CANONICAL - disc),
+            "key_extra": sorted(key_disc - KEY_CANONICAL)}
 
 
 def build_H(args):
@@ -212,11 +221,13 @@ def build_H(args):
     if extra or miss:
         sys.exit(f"build-H REFUSED: implementation inventory != canonical "
                  f"(extra={extra}, missing={miss})")
-    # finding 4: EXACT runtime corpora — reject any extra numbered doc (e.g. corpora/a/12.md).
+    # finding 4/6: EXACT runtime corpora — reject any extra .md (numeric OR nonnumeric) and any
+    # unexpected key-dir file (round-9).
     if args.runtime:
         ce = corpora_exact_errs(BASE)
-        if ce["extra"] or ce["missing"]:
-            sys.exit(f"build-H REFUSED: corpora != exactly 01..11 (extra={ce['extra']}, missing={ce['missing']})")
+        if ce["extra"] or ce["missing"] or ce["key_extra"]:
+            sys.exit(f"build-H REFUSED: corpora/key != exact set "
+                     f"(extra={ce['extra']}, missing={ce['missing']}, key_extra={ce['key_extra']})")
     recorded, bge = _parse_recorded(args.recorded_manifest)
     def pick(pred):
         return {rel: h for rel, h in recorded.items() if pred(rel)}
@@ -317,6 +328,15 @@ def verify_files(args):
     return True
 
 
+def _manifest_recorded_sha(base, man_rel):
+    """The out_sha256 recorded in a completed call's isolation manifest, or None."""
+    m = Path(base) / man_rel
+    if not m.is_file():
+        return None
+    hm = re.search(r"^out_sha256: ([0-9a-f]{64})$", m.read_text(), re.M)
+    return hm.group(1) if hm else None
+
+
 def _manifest_expects_output(base, man_rel):
     """A staged call COMPLETED (and therefore SHOULD have produced an output) iff its isolation
     manifest records `exit: 0` + a recorded out_sha256. Determined from the MANIFEST ALONE — NOT
@@ -330,13 +350,9 @@ def _manifest_expects_output(base, man_rel):
     return bool(re.search(r"^exit: 0$", txt, re.M)) and bool(re.search(r"^out_sha256: [0-9a-f]{64}$", txt, re.M))
 
 
-def step7_expected(base=BASE):
-    """Finding 4: derive the EXACT expected step-7 output set from the staged call manifests +
-    the deterministic derived records. For every row in every staged calls tsv, the isolation
-    MANIFEST is expected; the OUTPUT is expected iff the manifest records a completed call. Plus
-    the deterministic derived files + the required scorer inputs. Returns a set of relpaths."""
+def _staged_rows(base):
+    """Yield (out_rel, man_rel) for every row of every staged calls tsv, base-relative."""
     base = Path(base)
-    expected = set()
     for tsv in sorted(base.glob("runs/**/*calls.tsv")):
         for line in tsv.read_text().splitlines():
             cols = line.split("\t")
@@ -344,28 +360,57 @@ def step7_expected(base=BASE):
                 continue
             out_rel = str(Path(cols[3]).resolve().relative_to(base)) if Path(cols[3]).is_absolute() else cols[3]
             man_rel = str(Path(cols[4]).resolve().relative_to(base)) if Path(cols[4]).is_absolute() else cols[4]
-            expected.add(man_rel)                                  # the call manifest is always expected
-            if _manifest_expects_output(base, man_rel):
-                expected.add(out_rel)                             # a completed call's output is expected
-    for rel in OUTPUT_REQUIRED + OUTPUT_DERIVED:                   # deterministic derived records
-        if (base / rel).exists():
-            expected.add(rel)
+            yield out_rel, man_rel
+
+
+def step7_expected(base=BASE):
+    """Finding 4: derive the EXACT expected step-7 output set from the staged call manifests +
+    the deterministic derived records. For every staged row, the isolation MANIFEST is expected;
+    the OUTPUT is expected iff the manifest records a completed call. Round-9: the deterministic
+    derived records (OUTPUT_REQUIRED + OUTPUT_DERIVED) are ALWAYS expected — UNCONDITIONALLY, so a
+    DELETED derived record is caught as missing (not silently omitted). Returns a set of relpaths."""
+    base = Path(base)
+    expected = set()
+    for out_rel, man_rel in _staged_rows(base):
+        expected.add(man_rel)                                  # the call manifest is always expected
+        if _manifest_expects_output(base, man_rel):
+            expected.add(out_rel)                             # a completed call's output is expected
+    expected.update(OUTPUT_REQUIRED)                          # scorer inputs — unconditional
+    expected.update(OUTPUT_DERIVED)                           # deterministic derived records — unconditional
     return expected
 
 
+def _completed_output_drift_errs(base=BASE):
+    """Round-9 finding 4: every PRESENT completed staged output must byte-hash EQUAL the value its
+    own call manifest recorded — a modified completed model output cannot be adopted as canonical.
+    (A missing completed output is caught by the set-equality missing-check, not here.)"""
+    base = Path(base)
+    errs = []
+    for out_rel, man_rel in _staged_rows(base):
+        if _manifest_expects_output(base, man_rel):
+            o = base / out_rel
+            if o.exists() and _sha(o) != _manifest_recorded_sha(base, man_rel):
+                errs.append(f"completed output {out_rel} hash != its call manifest out_sha256 ({man_rel})")
+    return errs
+
+
 def build_output_manifest_at(H_value, out_path, base=BASE):
-    """Finding 4: build the EXACT step-7 output manifest. Every expected output must be present
-    (missing => refuse) and no OUTPUT_GLOBS file outside the expected set may exist (extra =>
-    refuse). Hash exactly the expected set, bound to H_value."""
+    """Finding 4 (round-9): build the EXACT step-7 output manifest. Every expected output must be
+    present (missing => refuse), no OUTPUT_GLOBS file outside the expected set may exist (extra =>
+    refuse), and every completed output must hash-match its call manifest's recorded out_sha256
+    (drift => refuse). Hash exactly the expected set, bound to H_value."""
     base = Path(base)
     expected = step7_expected(base)
-    missing = sorted(r for r in list(OUTPUT_REQUIRED) + list(expected) if not (base / r).exists())
+    missing = sorted(r for r in expected if not (base / r).exists())
     if missing:
         sys.exit(f"output-manifest REFUSED: expected step-7 output(s) missing: {missing}")
     discovered = {str(p.relative_to(base)) for g in OUTPUT_GLOBS for p in base.glob(g) if p.is_file()}
     extra = sorted(discovered - expected)
     if extra:
         sys.exit(f"output-manifest REFUSED: unlisted step-7 output(s) present (extra): {extra}")
+    drift = _completed_output_drift_errs(base)
+    if drift:
+        sys.exit(f"output-manifest REFUSED: completed-output drift vs call manifest: {drift}")
     files = {rel: _sha(base / rel) for rel in sorted(expected)}
     out = {"H": H_value, "files": files, "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}
     json.dump(out, open(out_path, "w"), indent=1)
@@ -380,7 +425,8 @@ def build_output_manifest(args):
 
 def _verify_output_manifest_errs(output_manifest, expected_H, base=BASE):
     """attestation-2: SET EQUALITY — the manifest's file set must equal the freshly-derived
-    expected step-7 set (missing AND extra rejected), and every listed file present + hash-match."""
+    expected step-7 set (missing AND extra rejected), every listed file present + hash-match, AND
+    every completed output must still match its call manifest's out_sha256 (round-9 drift check)."""
     om = json.load(open(output_manifest))
     errs = []
     if om.get("H") != expected_H:
@@ -395,6 +441,7 @@ def _verify_output_manifest_errs(output_manifest, expected_H, base=BASE):
         p = Path(base) / rel
         if not p.exists() or _sha(p) != h:
             errs.append(f"step-7 output MISSING/drift vs manifest: {rel}")
+    errs += _completed_output_drift_errs(base)
     return errs
 
 
@@ -536,11 +583,15 @@ def attest(args):
                     ok = False
                 else:
                     print(f"  confirmatory typed receipt verified (gate_pass, H, corpora): {cd}")
-    # 7. write an integrity-bound attestation record (H + the exact recorded-cli + probe-log bytes)
+    # 7. write an integrity-bound attestation record (H + the exact recorded-cli + probe-log bytes;
+    #    at point 2 also BIND the output-manifest bytes — round-9 finding 4 — so the scorer can
+    #    refuse a manifest+input swapped between attestation-2 and the claim).
     rec = {"point": args.point, "H": load_and_verify_H(args.H)["H"], "pass": ok,
            "recorded_cli_sha256": _sha(args.recorded_cli),
            "probe_log_sha256": _sha(args.probe_log),
            "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}
+    if args.point == 2 and args.output_manifest:
+        rec["output_manifest_sha256"] = _sha(args.output_manifest)
     (BASE / f"runs/attestation-point-{args.point}.json").write_text(json.dumps(rec, indent=1))
     print(f"  attestation record bound: recorded-cli {rec['recorded_cli_sha256'][:12]}, "
           f"probe-log {rec['probe_log_sha256'][:12]}")

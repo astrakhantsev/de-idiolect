@@ -126,12 +126,44 @@ def _corpus_attempt_ok(key_dir, side, out_file):
         shutil.rmtree(attempt, ignore_errors=True)
 
 
+def _attempt_paths(manifest, n):
+    """Round-9 finding 5: per-site/attempt DURABLE, attempt-indexed snapshot + manifest + receipt
+    paths (next to the canonical call manifest). Written immediately; never overwritten on restart."""
+    md = Path(manifest).parent
+    stem = Path(manifest).stem
+    return (md / f"{stem}.a{n}.out", md / f"{stem}.a{n}.manifest.json", md / f"{stem}.a{n}.receipt.json")
+
+
 def _call_with_retry(name, cli, model, prompt, out, manifest, validate, receipt, dry):
-    """Per-call malformed-retry cap 1. Every output hashed into `receipt`; none discarded.
-    Returns True on a structurally valid output, False on setup exhaustion (malformed twice)."""
+    """Per-call malformed-retry cap 1. Round-9 finding 5: every site/attempt gets a UNIQUE durable
+    output+manifest+receipt written IMMEDIATELY; on restart a completed attempt is VERIFIED and
+    REUSED (never re-issued — so infrastructure recovery cannot create extra uncounted draws), and
+    exhausted-attempt evidence is preserved. Every output is hashed into `receipt`; none discarded.
+    Returns True on a structurally valid output, False on setup exhaustion (malformed RETRY_CAP+1x)."""
     for attempt in range(RETRY_CAP + 1):
-        print(f"  [{name}] attempt {attempt} -> {out}")
-        rc = _isolated(cli, model, prompt, out, manifest, dry)
+        snap_out, snap_man, att_rcpt = _attempt_paths(manifest, attempt)
+        if not dry and att_rcpt.exists():
+            # RESTART: this attempt's isolated call already completed — verify + REUSE, never re-issue.
+            rec = json.loads(att_rcpt.read_text())
+            if not snap_out.exists() or _sha(snap_out) != rec.get("sha256"):
+                sys.exit(f"  [{name}] attempt {attempt}: durable snapshot missing/tampered vs receipt — HALT")
+            print(f"  [{name}] attempt {attempt}: RESUME reuse (completed snapshot, no re-issue)")
+            Path(out).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy(snap_out, out)
+            if snap_man.exists():
+                Path(manifest).parent.mkdir(parents=True, exist_ok=True); shutil.copy(snap_man, manifest)
+            rc = rec.get("rc", 0)
+        else:
+            print(f"  [{name}] attempt {attempt} -> {out}")
+            rc = _isolated(cli, model, prompt, out, manifest, dry)
+            if not dry and Path(out).exists():
+                # write the DURABLE attempt snapshot + manifest + receipt IMMEDIATELY (attempt-indexed)
+                shutil.copy(out, snap_out)
+                if Path(manifest).exists():
+                    shutil.copy(manifest, snap_man)
+                att_rcpt.write_text(json.dumps({"site": name, "attempt": attempt, "path": str(out),
+                    "sha256": _sha(out), "rc": rc,
+                    "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}, indent=1))
         if not dry and Path(out).exists():
             receipt["outputs"].append({"site": name, "attempt": attempt, "path": str(out),
                                        "sha256": _sha(out), "rc": rc})

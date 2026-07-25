@@ -68,13 +68,45 @@ def _recorded_hash_for(recorded_file, basename):
     return None
 
 
+def verify_receipt(receipt_path, pairs_path):
+    """Round-9 finding 7: return True iff `receipt_path` exists, is a projector receipt, and its
+    recorded pairs_sha256 re-hash-matches the CURRENT bytes of `pairs_path`. The driver calls this
+    before registering structure:read so the custody event corresponds to the exact projected
+    pairs.json (a tamper between projection and registration is refused)."""
+    rp, pp = Path(receipt_path), Path(pairs_path)
+    if not rp.is_file() or not pp.is_file():
+        return False
+    try:
+        rec = json.loads(rp.read_text())
+    except Exception:
+        return False
+    return rec.get("kind") == "pairs-projection" and \
+        rec.get("pairs_sha256") == hashlib.sha256(pp.read_bytes()).hexdigest()
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("key_dir")
-    ap.add_argument("out")
+    ap.add_argument("key_dir", nargs="?")
+    ap.add_argument("out", nargs="?")
     ap.add_argument("--recorded-hashes", help="freeze-manifest.txt — hash-gate the sealed file before reading")
     ap.add_argument("--H", help="runs/H.json — additionally bind --recorded-hashes to the attested H")
+    ap.add_argument("--emit-receipt", help="write a projector receipt bound to the pairs.json hash (round-9 finding 7)")
+    ap.add_argument("--verify-receipt", help="VERIFY mode: check --pairs against this receipt (no projection); exit 0/1")
+    ap.add_argument("--pairs", help="VERIFY mode: the pairs.json whose hash must match the receipt")
     args = ap.parse_args()
+
+    # ---- VERIFY mode (round-9 finding 7): re-check a projector receipt vs pairs.json, no read ----
+    if args.verify_receipt:
+        if not args.pairs:
+            sys.exit("verify-receipt requires --pairs")
+        if not verify_receipt(args.verify_receipt, args.pairs):
+            sys.exit(f"PROJECTOR-RECEIPT REFUSE: {args.pairs} does not match receipt {args.verify_receipt} "
+                     f"(missing/tampered) — refusing to register structure:read")
+        print(f"projector receipt verified: {args.pairs} matches {args.verify_receipt}")
+        return
+
+    if not args.key_dir or not args.out:
+        sys.exit("projection mode requires <key_dir> <out>")
     key_dir, out = Path(args.key_dir), Path(args.out)
 
     conc, ak = key_dir / "concepts.json", key_dir / "answer_key.json"
@@ -111,7 +143,14 @@ def main():
             sys.exit(f"projection produced non-whitelisted field(s) — refusing: {sorted(r)}")
     data = json.dumps(payload, indent=1)
     out.write_text(data)
-    print(f"pairs_sha256: {hashlib.sha256(data.encode()).hexdigest()}")
+    pairs_sha = hashlib.sha256(data.encode()).hexdigest()
+    # round-9 finding 7: emit a projector receipt bound to the pairs.json hash. The driver verifies
+    # it (hash re-checked) before registering the per-H structure:read on the projector's behalf.
+    if args.emit_receipt:
+        Path(args.emit_receipt).write_text(json.dumps(
+            {"kind": "pairs-projection", "pairs_sha256": pairs_sha, "source": src.name,
+             "utc": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat()}, indent=1))
+    print(f"pairs_sha256: {pairs_sha}")
 
 
 if __name__ == "__main__":

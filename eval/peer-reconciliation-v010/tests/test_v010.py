@@ -1211,13 +1211,25 @@ class TestRound7(unittest.TestCase):
 
     def test_driver_routes_and_resumes(self):
         drv = (WS / "run_v010.sh").read_text()
-        # round-8: pre-generation failures (projector/probe/attest-1) are RESUMABLE — no forfeit.
+        # round-8/9: PRE-confirmatory failures (projector/probe) are RESUMABLE — no forfeit.
         self.assertRegex(drv, r"PROJECTOR failed.*resumable")
         self.assertRegex(drv, r"PROBE failed.*resumable")
-        self.assertRegex(drv, r"ATTEST-1 FAILED.*resumable")
+        # round-9 finding 3: a POST-confirmatory attestation-1 mismatch HALTS + demands classification
+        # (re-freeze + two NEW draws, or retirement) — it is NOT silently resumable.
+        self.assertRegex(drv, r"ATTESTATION-1 MISMATCH")
+        self.assertIn("re-freeze + two NEW draws", drv)
         # NO EXIT-trap auto-forfeit; infra faults during generation are resumable, not terminal.
         self.assertNotIn("trap on_exit EXIT", drv)
         self.assertNotIn("GEN_STARTED", drv)
+        # round-9 finding 1: H is IMMUTABLE on restart (verify, never rebuild) + a cross-H
+        # generation-started guard HALTs an in-place different-H run.
+        self.assertIn("verify-files --H runs/H.json", drv)
+        self.assertIn("generation-started", drv)
+        self.assertRegex(drv, r"DIFFERENT H")
+        # round-9 finding 2: persistence failures are HARD HALTS (no 2>/dev/null || true suppression).
+        self.assertNotIn("2>/dev/null || true", drv)
+        # round-9 finding 7: the projector receipt is verified before registering structure:read.
+        self.assertIn("--verify-receipt runs/pairs-receipt.json", drv)
         # forfeiture is EXPLICIT + only at the two genuine terminals, mirrored into the custody ledger.
         self.assertIn("forfeit_custody attest2-mismatch", drv)
         self.assertIn("state:terminated-during-gen-or-attest2-mismatch", drv)
@@ -1248,17 +1260,33 @@ class TestRound7(unittest.TestCase):
             {f"b:{pp['term_b']}": {"final": "negative"} for pp in pairs}))
         (base / "runs/baseline_b/records.json").write_text(json.dumps(
             {pp["pair_id"]: {"final": "no-assertion"} for pp in pairs}))
+        # round-9 finding 4: the deterministic derived records are REQUIRED unconditionally.
+        for rel in ("runs/v010/review-context.json", "runs/v010/agg.json",
+                    "runs/v010/route-union.json", "runs/v010/retrieval.json"):
+            (base / rel).write_text("{}")
         return base
 
-    def _scorer(self, base, om, spendlog, extra=()):
-        # round-8: `score` subcommand + a per-invocation custody ledger (fresh => eligible).
+    def _attest2(self, base, om, bound_om=None):
+        # round-9 finding 4: a minimal attestation-2 receipt binding output_manifest_sha256.
+        H = json.load(open(base / "H.json"))["H"]
+        a2 = base / (Path(om).name + ".attest2.json")
+        b = Path(bound_om or om)
+        a2.write_text(json.dumps({"H": H, "point": 2,
+                                  "output_manifest_sha256": hashlib.sha256(b.read_bytes()).hexdigest()}))
+        return a2
+
+    def _scorer(self, base, om, spendlog, extra=(), bound_om=None):
+        # round-8/9: `score` subcommand + a per-invocation custody ledger (fresh => eligible) +
+        # the attestation-2 receipt binding the output-manifest hash.
+        a2 = self._attest2(base, om, bound_om)
         return subprocess.run([sys.executable, str(WS / "scorer_v010.py"), "score",
                                "--key-dir", str(WS / "toy-key/key"),
                                "--recorded-hashes", str(WS / "toy-key/recorded-hashes.txt"),
                                "--pairs", str(WS / "toy-key/pairs.json"),
                                "--H", str(base / "H.json"), "--spend-log", str(spendlog),
                                "--custody-ledger", str(spendlog) + ".custody",
-                               "--output-manifest", str(om),
+                               "--output-manifest", str(om), "--attest2-receipt", str(a2),
+                               "--run-root", str(base),
                                "--tool-verdicts", str(base / "runs/v010/verdicts.json"),
                                "--baseline-a", str(base / "runs/baseline_a/records.json"),
                                "--baseline-b", str(base / "runs/baseline_b/records.json"),
@@ -1300,6 +1328,20 @@ class TestRound7(unittest.TestCase):
         self.assertNotEqual(r.returncode, 0)
         self.assertNotIn("authorized-read-claimed", sp.read_text())
 
+    def test_scorer_refuses_manifest_swapped_after_attest2(self):
+        # round-9 finding 4: a manifest swapped between attestation-2 and the claim is caught by the
+        # output_manifest_sha256 bound in the attestation-2 receipt.
+        import attest as at
+        base = self._make_scored_workspace(); H = self._H_json(base)
+        at.build_output_manifest_at(H, base / "om.json", base)
+        (base / "om2.json").write_text((base / "om.json").read_text() + "\n")   # different bytes, same set
+        sp = base / "spend.jsonl"
+        spend.append_event(sp, "structure:read", H); spend.append_event(sp, "state:scoring-attempt", H)
+        # attest-2 receipt binds om.json, but the scorer is handed the swapped om2.json
+        r = self._scorer(base, base / "om2.json", sp, bound_om=base / "om.json")
+        self.assertNotEqual(r.returncode, 0)
+        self.assertNotIn("authorized-read-claimed", sp.read_text())
+
     # ---- finding 4: exact inventories ----
     def test_impl_inventory_diff_detects_extra_and_missing(self):
         import attest as at
@@ -1318,11 +1360,17 @@ class TestRound7(unittest.TestCase):
             (base / f"corpora/{s}").mkdir(parents=True)
             for i in range(1, 12):
                 (base / f"corpora/{s}/{i:02d}.md").write_text("x")
-        self.assertEqual(at.corpora_exact_errs(base), {"extra": [], "missing": []})
+        (base / "key").mkdir()
+        (base / "key/concepts.json").write_text("{}"); (base / "key/answer_key.json").write_text("{}")
+        self.assertEqual(at.corpora_exact_errs(base), {"extra": [], "missing": [], "key_extra": []})
         (base / "corpora/a/12.md").write_text("x")               # extra numbered doc
         self.assertIn("corpora/a/12.md", at.corpora_exact_errs(base)["extra"])
+        (base / "corpora/a/notes.md").write_text("x")            # round-9: NONNUMERIC extra .md caught
+        self.assertIn("corpora/a/notes.md", at.corpora_exact_errs(base)["extra"])
         (base / "corpora/b/05.md").unlink()                       # missing
         self.assertIn("corpora/b/05.md", at.corpora_exact_errs(base)["missing"])
+        (base / "key/rogue.txt").write_text("x")                  # round-9: unexpected key-dir file caught
+        self.assertIn("key/rogue.txt", at.corpora_exact_errs(base)["key_extra"])
 
     # ---- finding 5: aggregate-only scoring output ----
     def test_scores_json_is_aggregate_only(self):
@@ -1527,7 +1575,20 @@ class TestRound8(unittest.TestCase):
         (base / "runs/v010/verdicts.json").write_text("{}")
         (base / "runs/baseline_a/records.json").write_text("{}")
         (base / "runs/baseline_b/records.json").write_text("{}")
+        for rel in ("runs/v010/review-context.json", "runs/v010/agg.json",
+                    "runs/v010/route-union.json", "runs/v010/retrieval.json"):
+            (base / rel).write_text("{}")   # round-9: derived records required unconditionally
         return base
+
+    def test_completed_output_drift_refused(self):
+        import attest as at
+        base = self._staged_workspace(); H = self._H_json(base)
+        at.build_output_manifest_at(H, base / "om.json", base)              # clean build OK
+        # MODIFY a completed staged output (manifest out_sha256 now stale) -> build + attest-2 refuse
+        (base / "runs/v010/verify/out-0.json").write_text('{"v": 999}')
+        with self.assertRaises(SystemExit):
+            at.build_output_manifest_at(H, base / "om2.json", base)
+        self.assertTrue(any("drift" in e for e in at._verify_output_manifest_errs(base / "om.json", H, base)))
 
     def test_output_manifest_exact_set_equality(self):
         import attest as at
@@ -1629,7 +1690,13 @@ class TestRound8(unittest.TestCase):
         (base / "runs/v010/verdicts.json").write_text(json.dumps({"primary": "tau1", "tau1": {}}))
         (base / "runs/baseline_a/records.json").write_text("{}")
         (base / "runs/baseline_b/records.json").write_text("{}")
+        for rel in ("runs/v010/review-context.json", "runs/v010/agg.json",
+                    "runs/v010/route-union.json", "runs/v010/retrieval.json"):
+            (base / rel).write_text("{}")
         at.build_output_manifest_at(H, base / "om.json", base)
+        a2 = base / "attest2.json"
+        a2.write_text(json.dumps({"H": H, "point": 2,
+            "output_manifest_sha256": hashlib.sha256((base / "om.json").read_bytes()).hexdigest()}))
         sp = base / "spend.jsonl"
         spend.append_event(sp, "structure:read", H); spend.append_event(sp, "state:scoring-attempt", H)
         empty_key = base / "emptykey"; empty_key.mkdir()   # no concepts.json / answer_key.json
@@ -1638,11 +1705,111 @@ class TestRound8(unittest.TestCase):
                             "--recorded-hashes", str(WS / "toy-key/recorded-hashes.txt"),
                             "--pairs", str(WS / "toy-key/pairs.json"), "--H", str(base / "H.json"),
                             "--spend-log", str(sp), "--custody-ledger", str(base / "c.jsonl"),
-                            "--output-manifest", str(base / "om.json"),
+                            "--output-manifest", str(base / "om.json"), "--attest2-receipt", str(a2),
                             "--tool-verdicts", str(base / "runs/v010/verdicts.json"),
                             "--out", str(base / "scores.json")], capture_output=True, text=True)
         self.assertNotEqual(r.returncode, 0)
         self.assertNotIn("authorized-read-claimed", sp.read_text())   # refused BEFORE the claim
+
+
+class TestRound9(unittest.TestCase):
+    """round-9: atomic custody claim (crash-window + concurrent-different-H), idempotent custody,
+    recovery-aware availability, generation-started marker, setup attempt reuse, projector receipt."""
+    H9 = "H-round9-fixed"
+
+    def _ready(self, tmp):
+        log = tmp / "sp.jsonl"; led = tmp / "cust.jsonl"
+        spend.append_event(log, "structure:read", self.H9)
+        spend.append_event(log, "state:scoring-attempt", self.H9)
+        return log, led
+
+    # ---- finding 2: ONE fail-closed atomic claim ----
+    def test_atomic_claim_writes_both_then_refuses_second(self):
+        tmp = Path(tempfile.mkdtemp()); log, led = self._ready(tmp)
+        spend.atomic_claim(log, led, self.H9)
+        self.assertEqual(spend.custody_state(led), "spent")            # ledger spent
+        self.assertIn("authorized-read-claimed", log.read_text())      # per-H claim
+        with self.assertRaises(SystemExit):                            # crash-after-claim: no second read
+            spend.atomic_claim(log, led, self.H9)
+
+    def test_atomic_claim_recovery_after_ledger_before_claim(self):
+        # crash AFTER the ledger write, BEFORE the claim: ledger spent (this H), no claim yet.
+        tmp = Path(tempfile.mkdtemp()); log, led = self._ready(tmp)
+        spend.record_custody(led, "spent", self.H9, "crash-window")
+        spend.atomic_claim(log, led, self.H9)                          # idempotent recovery: appends the missing claim
+        self.assertEqual(log.read_text().count("authorized-read-claimed"), 1)
+        self.assertEqual(len(spend.read_events(led)), 1)               # ledger NOT double-appended
+        with self.assertRaises(SystemExit):
+            spend.atomic_claim(log, led, self.H9)                      # a re-run (key now read) is refused
+
+    def test_atomic_claim_concurrent_different_H_refused(self):
+        tmp = Path(tempfile.mkdtemp()); log, led = self._ready(tmp)
+        spend.record_custody(led, "spent", "H-other-run", "another instance already read")
+        with self.assertRaises(SystemExit):
+            spend.atomic_claim(log, led, self.H9)
+        self.assertNotIn("authorized-read-claimed", log.read_text())   # never claimed
+
+    def test_record_custody_idempotent_and_monotone(self):
+        tmp = Path(tempfile.mkdtemp()); led = tmp / "c.jsonl"
+        spend.record_custody(led, "spent", self.H9, "a")
+        self.assertIsNone(spend.record_custody(led, "spent", self.H9, "b"))   # same-H dup = no-op
+        self.assertEqual(len(spend.read_events(led)), 1)
+        with self.assertRaises(SystemExit):
+            spend.record_custody(led, "forfeited-unspent", self.H9, "c")      # conflicting state refused
+        with self.assertRaises(SystemExit):
+            spend.record_custody(led, "spent", "H-other", "d")               # different-H dup refused
+
+    def test_assert_key_available_recovery_aware(self):
+        tmp = Path(tempfile.mkdtemp()); led = tmp / "c.jsonl"
+        spend.record_custody(led, "spent", self.H9, "x")
+        spend.assert_key_available(led, self.H9)                              # same H -> recovery OK
+        with self.assertRaises(SystemExit):
+            spend.assert_key_available(led, "H-other")                       # different H -> refused
+        with self.assertRaises(SystemExit):
+            spend.assert_key_available(led)                                  # no run_H -> strict refuse
+
+    def test_generation_started_event_appendable(self):
+        tmp = Path(tempfile.mkdtemp()); log = tmp / "sp.jsonl"
+        spend.append_event(log, "state:generation-started", self.H9)
+        self.assertEqual([e["event"] for e in spend.read_events(log)], ["state:generation-started"])
+
+    # ---- finding 5: setup attempt durability — a completed attempt is REUSED, never re-issued ----
+    def test_setup_completed_attempt_reused_on_restart(self):
+        import setup_confirmatory as sc
+        tmp = Path(tempfile.mkdtemp()); (tmp / "manifests").mkdir()
+        out = tmp / "call.out"; manifest = tmp / "manifests/site.json"
+        snap_out, snap_man, att_rcpt = sc._attempt_paths(manifest, 0)
+        snap_out.write_text("completed output")
+        snap_man.write_text("exit: 0\n")
+        att_rcpt.write_text(json.dumps({"site": "s", "attempt": 0, "path": str(out),
+                                        "sha256": sc._sha(snap_out), "rc": 0}))
+        calls = {"n": 0}
+        orig = sc._isolated
+        sc._isolated = lambda *a, **k: calls.__setitem__("n", calls["n"] + 1) or 0
+        try:
+            receipt = {"outputs": []}
+            ok = sc._call_with_retry("s", "claude", "m", tmp / "p.md", out, manifest,
+                                     lambda: True, receipt, dry=False)
+        finally:
+            sc._isolated = orig
+        self.assertTrue(ok)
+        self.assertEqual(calls["n"], 0)                       # the model call was NOT re-issued
+        self.assertEqual(out.read_text(), "completed output") # canonical output restored from snapshot
+
+    # ---- finding 7: projector receipt bound to pairs.json; tamper refused ----
+    def test_projector_receipt_tamper_refused(self):
+        tmp = Path(tempfile.mkdtemp()); out = tmp / "pairs.json"; rc = tmp / "receipt.json"
+        r = subprocess.run([sys.executable, str(WS / "make_pairs_manifest.py"),
+                            str(WS / "toy-key/key"), str(out), "--emit-receipt", str(rc)],
+                           check=True, capture_output=True, text=True)
+        v = subprocess.run([sys.executable, str(WS / "make_pairs_manifest.py"),
+                            "--verify-receipt", str(rc), "--pairs", str(out)], capture_output=True, text=True)
+        self.assertEqual(v.returncode, 0, v.stdout + v.stderr)           # matches
+        out.write_text(out.read_text() + "\n ")                          # TAMPER pairs.json
+        v2 = subprocess.run([sys.executable, str(WS / "make_pairs_manifest.py"),
+                             "--verify-receipt", str(rc), "--pairs", str(out)], capture_output=True, text=True)
+        self.assertNotEqual(v2.returncode, 0)
+        self.assertIn("REFUSE", v2.stdout + v2.stderr)
 
 
 def aid_(term):
