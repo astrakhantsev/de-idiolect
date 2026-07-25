@@ -91,12 +91,18 @@ def append_event(logpath, event, notes=""):
     refused transition; returns the appended entry on success."""
     if event not in TABLE:
         raise SystemExit(f"unknown spend/state event {event!r}; valid: {sorted(TABLE)}")
+    # events whose ACTIVE transition is blocked once the run is invalid (accidental access).
+    # Terminal/documentation markers (state:setup-exhaustion, confirmatory-phase-fail,
+    # terminated-*, abort-before-gen; spend:accidental-* / fault-after-authorized-read) always
+    # append — they RECORD an outcome and the driver must be able to write them at any failure site.
+    BLOCKED_BY_ACCIDENTAL = {"structure:read", "state:scoring-attempt",
+                             "spend:authorized-read-claimed", "spend:authorized-read-complete"}
     fh = _lock(logpath)
     try:
         events = read_events(logpath)
-        if _has_accidental(events):
+        if event in BLOCKED_BY_ACCIDENTAL and _has_accidental(events):
             raise SystemExit("SPEND-REFUSE: an accidental-access event is present — the run is "
-                             "invalid; no further transitions permitted")
+                             "invalid; no further active transitions permitted")
         if event == "structure:read" and _count(events, "structure:read") >= 1:
             raise SystemExit("SPEND-REFUSE: a structure:read already exists — exactly ONE sanctioned "
                              "projector structure-read is whitelisted")
@@ -122,6 +128,11 @@ def append_event(logpath, event, notes=""):
                 raise SystemExit("SPEND-REFUSE: cannot complete without a prior claim")
             if _count(events, "spend:authorized-read-complete") >= 1:
                 raise SystemExit("SPEND-REFUSE: authorized-read already completed")
+        if event == "spend:fault-after-authorized-read" and _count(events, "spend:authorized-read-claimed") < 1:
+            # a post-read fault presupposes the read began (a claim). Without a claim this is a
+            # PRE-read failure and must be recorded as terminated-*/forfeited-unspent instead.
+            raise SystemExit("SPEND-REFUSE: fault-after-authorized-read requires a prior claim "
+                             "(no claim -> the failure is pre-read, not post-read)")
         entry = {"event": event, "meaning": TABLE[event], "notes": notes,
                  "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}
         with open(logpath, "a") as f:
@@ -129,6 +140,14 @@ def append_event(logpath, event, notes=""):
         return entry
     finally:
         _unlock(fh)
+
+
+def projector_completed(logpath):
+    """Resume helper (§10-F2): the projector phase is done iff its sanctioned structure:read
+    is present. The driver uses this (with the pairs.json output present) to SKIP re-running the
+    projector on a restart-after-infra-fault — re-running would hit the one-shot structure:read
+    refusal."""
+    return _count(read_events(logpath), "structure:read") >= 1
 
 
 def claim_authorized_read(logpath, notes=""):

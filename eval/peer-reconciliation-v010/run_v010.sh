@@ -19,6 +19,7 @@ BASE="$(cd "$(dirname "$0")" && pwd)"; cd "$BASE"
 VENVPY="$BASE/../../.venv/bin/python"          # for retrieval (BGE); tool-path/baseline calls use CLIs
 RECORDED="${RECORDED_MANIFEST:-$BASE/freeze-manifest.txt}"
 RECORDED_CLI="${RECORDED_CLI:-$BASE/recorded-cli.json}"
+SPENDLOG="$BASE/runs/spend-log.jsonl"
 mkdir -p runs
 
 calls() {  # run a staged tsv via the isolation wrapper; halt on run-scoped fault (rc>=2)
@@ -26,6 +27,8 @@ calls() {  # run a staged tsv via the isolation wrapper; halt on run-scoped faul
   if [ "$rc" -ge 2 ]; then echo "HALT: run-scoped fault in $1 (rc=$rc)"; exit "$rc"; fi
   [ "$rc" -eq 0 ] || echo "NOTE: failures in $1 routed per the frozen failure taxonomy"
 }
+
+log_state() { python3 attest.py spend-log --event "$1" --out "$SPENDLOG" || true; }  # terminal marker
 
 # H1/H2 budget-2 loop: stage prompts -> run -> gate -> re-stage regens -> run -> gate ...
 gen_loop() {
@@ -51,27 +54,38 @@ echo "== phase 0.5: PROJECTOR — isolated blind pairs.json from the sealed key 
 # this blind pairs.json at phase 1 — so the integrity check is against the committed
 # freeze-manifest.txt, the same recorded values H then binds; --H is added at run time only if
 # an H already exists.) Hash also logged to the custody log.
-PAIRS_HASH_LINE="$(python3 make_pairs_manifest.py key pairs.json --recorded-hashes "$RECORDED" --spend-log runs/spend-log.jsonl)"
-echo "$(date -Iseconds) projector $PAIRS_HASH_LINE" >> runs/custody-log.txt
-echo "  $PAIRS_HASH_LINE (custody-logged; structure:read registered in runs/spend-log.jsonl)"
+# RESUME (§10-F2): after an infra-fault restart, skip the projector if it already completed
+# (its pairs.json output present AND its one-shot structure:read logged) — re-running would hit
+# the single-structure-read refusal.
+if [ -s pairs.json ] && python3 -c "import sys;sys.path.insert(0,'.');import spend;sys.exit(0 if spend.projector_completed('$SPENDLOG') else 1)"; then
+  echo "  projector already completed (pairs.json + structure:read present) — resume skip"
+else
+  PAIRS_HASH_LINE="$(python3 make_pairs_manifest.py key pairs.json --recorded-hashes "$RECORDED" --spend-log "$SPENDLOG")"
+  echo "$(date -Iseconds) projector $PAIRS_HASH_LINE" >> runs/custody-log.txt
+  echo "  $PAIRS_HASH_LINE (custody-logged; structure:read registered in $SPENDLOG)"
+fi
 
 echo "== phase 1: FREEZE + build-H (manifest-of-manifests; binds the blind pairs.json) =="
-python3 attest.py build-H --recorded-manifest "$RECORDED" --out runs/H.json
+python3 attest.py build-H --recorded-manifest "$RECORDED" --out runs/H.json --runtime
 H="$(python3 -c 'import json;print(json.load(open("runs/H.json"))["H"])')"
 
 echo "== phase 2: explicit-ID model probe (2 calls; membership) =="
 bash probe_explicit_id.sh    # writes runs/probe-log.json; aborts on membership failure
 
 echo "== phase 3: confirmatory setup — 2 fresh TRAIN keys via the frozen v0.9 path (§4.1a) =="
-python3 setup_confirmatory.py --H-value "$H"    # uses the in-workspace harness/split_corpus.py (in H)
+python3 setup_confirmatory.py --H-value "$H" \
+  || { log_state state:setup-exhaustion; echo "SETUP EXHAUSTION -> phase fails, config NOT retired (§4.1a)"; exit 2; }
 
 echo "== phase 4: confirmatory draws — run the tool-path on each conf key under H; gate <=1/40 =="
 # a draw failing the <=1/40 gate RETIRES the effective configuration (§4.1). Proceed only if both pass.
-bash run_confirmatory.sh runs/confirmatory/conf-key-1 "$H"
-bash run_confirmatory.sh runs/confirmatory/conf-key-2 "$H"
+for ck in conf-key-1 conf-key-2; do
+  bash run_confirmatory.sh runs/confirmatory/$ck "$H" \
+    || { log_state state:confirmatory-phase-fail; echo "CONFIRMATORY $ck FAILED -> configuration RETIRED (§4.1)"; exit 3; }
+done
 
 echo "== phase 5: ATTESTATION POINT 1 (pre-generation) =="
-python3 attest.py attest --H runs/H.json --point 1 --recorded-cli "$RECORDED_CLI" --probe-log runs/probe-log.json
+python3 attest.py attest --H runs/H.json --point 1 --recorded-cli "$RECORDED_CLI" --probe-log runs/probe-log.json \
+  || { log_state state:terminated-during-gen-or-attest2-mismatch; echo "ATTEST-1 FAILED -> abort pre-generation (§4.3)"; exit 1; }
 python3 attest.py receipt --H runs/H.json --kind pre-generation --out runs/receipts.jsonl
 
 echo "== phase 6: key-3 tool-arm generation (sealed-answer-material-blind) =="
@@ -106,16 +120,16 @@ python3 baseline_b.py prompts; calls runs/baseline_b/calls.tsv; python3 baseline
 if [ -s runs/baseline_b/reask-calls.tsv ]; then calls runs/baseline_b/reask-calls.tsv; python3 baseline_b.py gate; fi
 
 echo "== phase 8: ATTESTATION POINT 2 (post-generation, before scoring) =="
-python3 attest.py attest --H runs/H.json --point 2 --recorded-cli "$RECORDED_CLI" --probe-log runs/probe-log.json
+python3 attest.py attest --H runs/H.json --point 2 --recorded-cli "$RECORDED_CLI" --probe-log runs/probe-log.json \
+  || { log_state state:terminated-during-gen-or-attest2-mismatch; echo "ATTEST-2 MISMATCH -> invalid pre-scoring, forfeited-unspent (§4.3)"; exit 1; }
 python3 attest.py receipt --H runs/H.json --kind post-generation --out runs/receipts.jsonl
 
 echo "== phase 9: scoring — atomic-claim spend, with the ONE permitted pre-read relaunch =="
 # The scorer appends `spend:authorized-read-claimed` UNDER THE LOCK immediately before the
 # first key byte and `spend:authorized-read-complete` after; the driver appends NO post-hoc
-# authorized-read. Relaunch rule: the driver records a bounded `state:scoring-attempt` (max 2)
-# before each launch; a scorer failure BEFORE any claim (no claim entry) with attempts<2 gets
-# ONE relaunch; a failure AFTER the claim means the key is SPENT — no relaunch, run invalid.
-SPENDLOG="runs/spend-log.jsonl"
+# authorized-read. The SAME locked-log classifier runs after EVERY failed attempt (first AND
+# relaunch): a claim present => post-read fault => SPENT+invalid (append fault-after), no
+# relaunch; no claim => pre-read failure => relaunch if attempts<2 else terminated (forfeited).
 run_scorer_once() {
   python3 attest.py spend-log --event state:scoring-attempt --out "$SPENDLOG"   # bounded (max 2)
   python3 scorer_v010.py --key-dir key --recorded-hashes "$RECORDED" --pairs pairs.json \
@@ -123,12 +137,20 @@ run_scorer_once() {
     --tool-verdicts runs/v010/verdicts.json --baseline-a runs/baseline_a/records.json \
     --baseline-b runs/baseline_b/records.json --out runs/scores.json
 }
-if ! run_scorer_once; then
+classify_failure() {  # $1 = "first" | "final"; classify a failed scorer attempt via the LOCKED log
   if grep -q '"event": "spend:authorized-read-claimed"' "$SPENDLOG"; then
+    log_state spend:fault-after-authorized-read
     echo "FAULT AFTER CLAIM — the sealed key is SPENT and the run is INVALID; NO relaunch (§4.4)"; exit 1
   fi
+  if [ "$1" = "final" ]; then
+    log_state state:terminated-during-gen-or-attest2-mismatch
+    echo "pre-read failure after the one relaunch — forfeited-unspent (§4.4)"; exit 1
+  fi
+}
+if ! run_scorer_once; then
+  classify_failure first     # halts (SPENT) if a claim exists; else falls through to the relaunch
   echo "pre-read failure before any claim — taking the ONE permitted relaunch"
-  run_scorer_once || { echo "relaunch also failed pre-read — forfeited-unspent (§4.4)"; exit 1; }
+  run_scorer_once || classify_failure final
 fi
 
 echo "KEY3-V010-DONE"

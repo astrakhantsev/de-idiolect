@@ -6,7 +6,9 @@ corpora/
 leakcheck_peer.sh
 pairs.json
 freeze-manifest.txt
-recorded-cli.json
+# recorded-cli.json is NOT ignored — it is a freeze-package file, REQUIRED by build-H and
+# bound by hash into H (round-6); the operator commits it at the freeze. PREREG.md (the
+# ratified spec copy) is likewise committed and bound by hash.
 __pycache__/
 *.pyc
 # reference copies of the frozen v0.9 originals (already in the repo under peer-reconciliation-*)

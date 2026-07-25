@@ -973,5 +973,142 @@ class TestRound5(unittest.TestCase):
         self.assertTrue(attest.check_bge({"inherited_recorded": {"bge_snapshot_tree_sha256": "z"}}, d))
 
 
+class TestRound6(unittest.TestCase):
+    """round-6: executable setup (splitter path + leak checks), alias pinning at the boundary,
+    spend/driver terminal+resume closure, H/attestation freeze-package completeness."""
+
+    # ---- finding 1: confirmatory setup constructs a valid, leak-checked draw ----
+    def _gen_blocks(self, terms):
+        blocks = []
+        for i in range(1, 12):
+            t1, t2 = terms[(i - 1) % len(terms)], terms[i % len(terms)]
+            blocks.append(f"<<<DOC {i}>>>\n# Report {i}\nThe {t1} and {t2} runs completed with logged results.")
+        return "\n".join(blocks) + "\n"
+
+    def test_setup_corpus_attempt_valid_and_leak_detected(self):
+        import setup_confirmatory as sc
+        kd = Path(tempfile.mkdtemp()) / "conf"; (kd / "key").mkdir(parents=True)
+        (kd / "key" / "concepts.json").write_text((WS / "toy-key/key/concepts.json").read_text())
+        subprocess.run([sys.executable, str(WS / "harness/validate_key.py"), str(kd / "key/concepts.json")],
+                       check=True, capture_output=True)
+        subprocess.run([sys.executable, str(WS / "harness/gen_leakcheck.py"), str(kd)],
+                       check=True, capture_output=True)
+        ak = json.load(open(kd / "key/answer_key.json"))
+        a_terms = [p["term_a"] for p in ak["pairs"]]; b_terms = [p["term_b"] for p in ak["pairs"]]
+        (kd / "runs").mkdir(parents=True, exist_ok=True)
+        (kd / "runs/gen-a.out").write_text(self._gen_blocks(a_terms))
+        (kd / "runs/gen-b.out").write_text(self._gen_blocks(b_terms))
+        sc.copy_splitter(kd)
+        # valid draw: 11 docs per side UNDER the key dir + all frozen leak checks pass
+        self.assertTrue(sc._corpus_attempt_ok(kd, "a", kd / "runs/gen-a.out"))
+        self.assertTrue(sc._corpus_attempt_ok(kd, "b", kd / "runs/gen-b.out"))
+        self.assertEqual(len(list((kd / "corpora/a").glob("[0-9][0-9].md"))), 11)
+        self.assertEqual(len(list((kd / "corpora/b").glob("[0-9][0-9].md"))), 11)
+        # NEGATIVE: a b-term leaked into an a-doc fails cross-a -> attempt rejected
+        bad = self._gen_blocks(a_terms).replace("logged results.",
+                                                f"logged results. Also {b_terms[3]} appeared.", 1)
+        (kd / "runs/gen-a-bad.out").write_text(bad)
+        self.assertFalse(sc._corpus_attempt_ok(kd, "a", kd / "runs/gen-a-bad.out"))
+
+    def test_split_writes_under_key_dir_not_harness(self):
+        import setup_confirmatory as sc
+        kd = Path(tempfile.mkdtemp()) / "conf"; (kd / "runs").mkdir(parents=True)
+        (kd / "runs/gen-a.out").write_text(self._gen_blocks(["alpha term", "beta term"]))
+        splitter = sc.copy_splitter(kd)
+        self.assertEqual(sc._sha(splitter), sc.SPLIT_RECORDED)   # hash-verified copy
+        subprocess.run([sys.executable, str(splitter), "a", str(kd / "runs/gen-a.out")], check=True, capture_output=True)
+        self.assertEqual(len(list((kd / "corpora/a").glob("[0-9][0-9].md"))), 11)  # under KEY dir
+
+    # ---- finding 2: alias pinning at the boundary ----
+    def test_pin_model_translate(self):
+        import pin_model as pm
+        self.assertEqual(pm.translate("claude", "opus"), "claude-opus-4-8")
+        self.assertEqual(pm.translate("claude", "sonnet"), "claude-sonnet-5")
+        self.assertEqual(pm.translate("claude", "claude-opus-4-8"), "claude-opus-4-8")   # pinned pass-through
+        self.assertEqual(pm.translate("codex", "gpt-5.6-terra"), "gpt-5.6-terra")
+        for bad in [("claude", "haiku"), ("claude", "gpt-4o"), ("codex", "gpt-5"), ("weird", "x")]:
+            with self.assertRaises(ValueError):
+                pm.translate(*bad)
+
+    def test_every_staged_claude_model_is_pinnable(self):
+        import re, pin_model as pm
+        models = set()
+        for s in ("smoke_v010.py", "v010.py", "baseline_a.py", "baseline_b.py", "setup_confirmatory.py"):
+            models |= set(re.findall(r'"claude",\s*"([^"]+)"', (WS / s).read_text()))
+        self.assertTrue(models)  # found staged claude models
+        for m in models:                      # every effective model post-translation is pinned
+            self.assertIn(pm.translate("claude", m), pm.CLAUDE_PINNED)
+        self.assertIn("pin_model.py", (WS / "run_calls.sh").read_text())  # boundary actually translates
+
+    # ---- finding 3: spend/driver terminal + resume closure ----
+    def test_fault_after_requires_prior_claim(self):
+        tmp = Path(tempfile.mkdtemp()); log = tmp / "s.jsonl"
+        with self.assertRaises(SystemExit):   # no claim -> a "post-read" fault is refused
+            spend.append_event(log, "spend:fault-after-authorized-read")
+        spend.append_event(log, "structure:read"); spend.append_event(log, "state:scoring-attempt")
+        spend.claim_authorized_read(log)
+        spend.append_event(log, "spend:fault-after-authorized-read")  # post-claim fault OK (spent)
+
+    def test_projector_completed_helper(self):
+        tmp = Path(tempfile.mkdtemp()); log = tmp / "s.jsonl"
+        self.assertFalse(spend.projector_completed(log))
+        spend.append_event(log, "structure:read")
+        self.assertTrue(spend.projector_completed(log))   # restart would SKIP the projector
+
+    def test_terminal_markers_always_appendable(self):
+        tmp = Path(tempfile.mkdtemp()); log = tmp / "s.jsonl"
+        for ev in ("state:setup-exhaustion", "state:confirmatory-phase-fail",
+                   "state:terminated-during-gen-or-attest2-mismatch"):
+            spend.append_event(log, ev)   # documentation markers, no gate
+
+    def test_driver_wires_both_classifier_and_terminal_events(self):
+        drv = (WS / "run_v010.sh").read_text()
+        self.assertIn("classify_failure first", drv)   # first attempt classified
+        self.assertIn("classify_failure final", drv)   # AND the relaunch classified (same classifier)
+        for ev in ("spend:fault-after-authorized-read", "state:setup-exhaustion",
+                   "state:confirmatory-phase-fail", "state:terminated-during-gen-or-attest2-mismatch"):
+            self.assertIn(ev, drv)
+        self.assertIn("projector_completed", drv)       # resume skip wired
+
+    # ---- finding 4: H/attestation freeze-package completeness ----
+    def _build_H(self, out, extra=()):
+        return subprocess.run([sys.executable, str(WS / "attest.py"), "build-H",
+                               "--recorded-manifest", str(WS / "toy-key/recorded-hashes.txt"),
+                               "--out", str(out), *extra], capture_output=True, text=True)
+
+    def test_build_H_refuses_without_prereg(self):
+        # PREREG.md is absent in the normal (pre-freeze) workspace -> build-H must refuse
+        if (WS / "PREREG.md").exists():
+            self.skipTest("PREREG.md present (post-freeze)")
+        r = self._build_H(Path(tempfile.mkdtemp()) / "H.json")
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn("PREREG.md", r.stdout + r.stderr)
+
+    def test_build_H_determinism_with_dummy_freeze_package(self):
+        created = []
+        for p, txt in ((WS / "PREREG.md", "DUMMY PREREG for test\n"),
+                       (WS / "recorded-cli.json", '{"claude": "x", "codex": "y"}\n')):
+            if not p.exists():
+                p.write_text(txt); created.append(p)
+        self.addCleanup(lambda: [p.unlink() for p in created if p.exists()])
+        sp = Path(tempfile.mkdtemp())
+        r1 = self._build_H(sp / "H1.json"); self.assertEqual(r1.returncode, 0, r1.stdout + r1.stderr)
+        r2 = self._build_H(sp / "H2.json"); self.assertEqual(r2.returncode, 0)
+        m1 = json.load(open(sp / "H1.json")); m2 = json.load(open(sp / "H2.json"))
+        self.assertEqual(m1["H"], m2["H"])   # deterministic
+        self.assertIn("prereg_sha256", m1["manifest_of_manifests"])
+        self.assertIn("recorded_cli_sha256", m1["manifest_of_manifests"])
+
+    def test_build_H_runtime_refuses_without_corpora(self):
+        created = []
+        for p, txt in ((WS / "PREREG.md", "DUMMY\n"), (WS / "recorded-cli.json", "{}\n")):
+            if not p.exists():
+                p.write_text(txt); created.append(p)
+        self.addCleanup(lambda: [p.unlink() for p in created if p.exists()])
+        r = self._build_H(Path(tempfile.mkdtemp()) / "H.json", extra=("--runtime",))
+        self.assertNotEqual(r.returncode, 0)   # --runtime requires corpora/pairs/key (absent)
+        self.assertIn("corpora", r.stdout + r.stderr)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

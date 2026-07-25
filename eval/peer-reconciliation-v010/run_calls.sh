@@ -49,9 +49,13 @@ while IFS=$'\t' read -r kind model prompt out manifest; do
     echo "RE-EXEC (interrupted call — §4 run-scoped, logged): $out"
     rm -f "$out" "$manifest"
   fi
-  echo ">> $kind $model $(basename "$prompt")"
+  # v0.10 §6 pinning: translate the (carried, byte-identical) alias to its EXPLICIT pinned id
+  # at the boundary before the frozen wrapper runs it. A non-pinnable model is a REJECT (halt).
+  pinned="$(python3 "$BASE/pin_model.py" "$kind" "$model")" || {
+    echo "RUN-HALT: model $kind/$model is not pinnable (§6) — refusing to invoke"; exit 2; }
+  echo ">> $kind $pinned $(basename "$prompt")"
   attempted=$((attempted+1))
-  if ! "$RUN" "$kind" "$model" "$prompt" "$out" "$manifest"; then
+  if ! "$RUN" "$kind" "$pinned" "$prompt" "$out" "$manifest"; then
     echo "CALL FAILED: $prompt (output deleted)"
     rm -f "$out"
     fails=$((fails+1))

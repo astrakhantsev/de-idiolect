@@ -61,6 +61,14 @@ RECORDED_ARTIFACTS = [
     "prompts/containment-v2.md", "harness/split_corpus.py", "harness/gen_leakcheck.py",
     "../e2e-cell/run_isolated.sh",
 ]
+# freeze-package files build-H REQUIRES (refuse if absent) and binds by hash into H:
+PREREG_MD = BASE / "PREREG.md"                 # the ratified spec copy (placed at the freeze commit)
+RECORDED_CLI_JSON = BASE / "recorded-cli.json"  # the frozen CLI-version record
+# exact run-time inventory build-H --runtime additionally requires present:
+RUNTIME_REQUIRED = (["pairs.json", "leakcheck_peer.sh",
+                     "corpora/a/manifest.json", "corpora/b/manifest.json",
+                     "key/concepts.json", "key/answer_key.json"]
+                    + [f"corpora/{s}/{i:02d}.md" for s in ("a", "b") for i in range(1, 12)])
 
 
 def _sha(path):
@@ -146,14 +154,27 @@ def _canonical(obj):
 
 
 def build_H(args):
+    # REQUIRED-inventory enforcement (round-6): build-H REFUSES if a required file is missing,
+    # rather than silently omitting it (a later "STRICT" verify cannot notice an omission).
+    #   freeze-package tier (always): PREREG.md (the ratified spec copy) + recorded-cli.json.
+    #     Pre-freeze, PREREG.md is absent -> build-H refuses, which is the correct behavior.
+    #   runtime tier (--runtime): the exact corpora (01..11 both sides + manifests), pairs.json,
+    #     leakcheck_peer.sh, and the sealed key files.
+    missing = [str(p.relative_to(BASE)) for p in (PREREG_MD, RECORDED_CLI_JSON) if not p.exists()]
+    if args.runtime:
+        missing += [r for r in RUNTIME_REQUIRED if not (BASE / r).exists()]
+    if missing:
+        sys.exit(f"build-H REFUSED: required file(s) missing: {missing} "
+                 f"(pre-freeze absence of PREREG.md is correct — place the ratified spec first)")
     recorded, bge = _parse_recorded(args.recorded_manifest)
     def pick(pred):
         return {rel: h for rel, h in recorded.items() if pred(rel)}
-    inherited_corpora = pick(lambda r: r.startswith("corpora/") or r.endswith("/manifest.json") and "corpora" in r)
     inherited_corpora = pick(lambda r: "corpora/" in r)
     sealed = pick(lambda r: r.startswith("key/") or "/key/" in r or Path(r).parent.name == "key")
     manifest = {
-        "spec": "v0.10 generation-hardening (2026-07-23-v010-generation-hardening-PREREG-DRAFT.md)",
+        "spec": "v0.10 generation-hardening (PREREG.md, ratified copy, hash below)",
+        "prereg_sha256": _sha(PREREG_MD),          # binds the ratified spec BYTES, not a label
+        "recorded_cli_sha256": _sha(RECORDED_CLI_JSON),  # binds the frozen CLI-version record
         "v010_files": _inventory(INVENTORY_GLOBS),
         "runtime_answer_blind_files": _inventory(RUNTIME_GLOBS),
         "decoding_params": DECODING_PARAMS,
@@ -219,6 +240,13 @@ def _verify_files_errs(man, base=BASE):
             errs.append(f"corpus MISSING/drift vs recorded: {rel}")
     if not man["inherited_recorded"]["sealed_key_recorded_hashes_BOUND_NOT_REHASHED"]:
         errs.append("no sealed-key recorded hashes bound in H")
+    # ratified spec + CLI record bound in H must be present and match
+    for name, key in (("PREREG.md", "prereg_sha256"), ("recorded-cli.json", "recorded_cli_sha256")):
+        f = Path(base) / name
+        if key not in man:
+            errs.append(f"{key} not bound in H")
+        elif not f.exists() or _sha(f) != man[key]:
+            errs.append(f"{name} MISSING/drift vs H")
     return errs
 
 
@@ -301,6 +329,14 @@ def attest(args):
         print("  MISMATCH: §3.6(f) conformance runner FAILED"); print(cr.stdout[-500:]); ok = False
     else:
         print("  §3.6(f) conformance runner: PASS")
+    # 7. write an integrity-bound attestation record (H + the exact recorded-cli + probe-log bytes)
+    rec = {"point": args.point, "H": load_and_verify_H(args.H)["H"], "pass": ok,
+           "recorded_cli_sha256": _sha(args.recorded_cli),
+           "probe_log_sha256": _sha(args.probe_log),
+           "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}
+    (BASE / f"runs/attestation-point-{args.point}.json").write_text(json.dumps(rec, indent=1))
+    print(f"  attestation record bound: recorded-cli {rec['recorded_cli_sha256'][:12]}, "
+          f"probe-log {rec['probe_log_sha256'][:12]}")
     print(f"== ATTESTATION POINT {args.point}: {'PASS' if ok else 'FAIL'} ==")
     sys.exit(0 if ok else 1)
 
@@ -325,10 +361,11 @@ def spend_log(args):
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
-    b = sub.add_parser("build-H"); b.add_argument("--recorded-manifest", required=True); b.add_argument("--out", required=True); b.set_defaults(fn=build_H)
+    b = sub.add_parser("build-H"); b.add_argument("--recorded-manifest", required=True); b.add_argument("--out", required=True)
+    b.add_argument("--runtime", action="store_true", help="also require the exact run-time inventory (corpora 01..11, pairs.json, leakcheck, key)"); b.set_defaults(fn=build_H)
     v = sub.add_parser("verify-files"); v.add_argument("--H", required=True); v.set_defaults(fn=verify_files)
     a = sub.add_parser("attest"); a.add_argument("--H", required=True); a.add_argument("--point", type=int, choices=(1, 2), required=True)
-    a.add_argument("--recorded-cli"); a.add_argument("--probe-log"); a.add_argument("--allow-dirty", action="store_true"); a.set_defaults(fn=attest)
+    a.add_argument("--recorded-cli", required=True); a.add_argument("--probe-log", required=True); a.add_argument("--allow-dirty", action="store_true"); a.set_defaults(fn=attest)
     r = sub.add_parser("receipt"); r.add_argument("--H", required=True); r.add_argument("--kind", required=True); r.add_argument("--label", default=""); r.add_argument("--out", required=True); r.set_defaults(fn=receipt)
     s = sub.add_parser("spend-log"); s.add_argument("--event", required=True); s.add_argument("--notes", default=""); s.add_argument("--out", required=True); s.set_defaults(fn=spend_log)
     args = ap.parse_args()

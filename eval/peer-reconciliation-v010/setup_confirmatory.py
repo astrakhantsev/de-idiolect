@@ -61,12 +61,53 @@ def _validate_key(concepts, dry):
     return r.returncode == 0
 
 
-def _split_ok(split_script, side, out_file, key_dir, dry):
-    if dry: return True
-    r = subprocess.run([sys.executable, str(split_script), side, str(out_file)], cwd=str(key_dir),
+# recorded v0.9 split_corpus.py hash (freeze-manifest.txt); the per-key copy is verified to it
+SPLIT_RECORDED = "e240fbd46d374459cce1b649b2784795d37079c0645fd6c29fb782a80530684b"
+
+
+def copy_splitter(key_dir):
+    """v0.9 pattern: copy the hash-verified split_corpus.py INTO the key root so its
+    `BASE = Path(__file__).resolve().parent` resolves to key_dir and it writes
+    key_dir/corpora/<side>/ (the location _corpus_attempt_ok checks). Verified at copy."""
+    src = BASE / "harness/split_corpus.py"
+    if _sha(src) != SPLIT_RECORDED:
+        sys.exit(f"split_corpus.py hash {_sha(src)[:12]} != recorded {SPLIT_RECORDED[:12]} — refusing")
+    dst = Path(key_dir) / "split_corpus.py"
+    dst.write_text(src.read_text())
+    if _sha(dst) != SPLIT_RECORDED:
+        sys.exit("copied splitter hash mismatch")
+    return dst
+
+
+def leak_ok(key_dir, side):
+    """Run the FROZEN leak checks exactly as run_test_v09.sh does, over every doc of the side:
+    a-docs -> cross-a + meta ; b-docs -> cross-b + meta (leakcheck_peer.sh is a pure grep
+    script — no model calls). Any leak fails the corpus attempt."""
+    lc = Path(key_dir) / "leakcheck_peer.sh"
+    if not lc.exists():
+        sys.exit(f"leakcheck_peer.sh missing under {key_dir} (gen_leakcheck must run first)")
+    cross = "cross-a" if side == "a" else "cross-b"
+    for doc in sorted((Path(key_dir) / f"corpora/{side}").glob("[0-9][0-9].md")):
+        for mode in (cross, "meta"):
+            r = subprocess.run(["bash", str(lc), mode, str(doc)], capture_output=True, text=True)
+            if r.returncode != 0:
+                print(f"  LEAK [{mode}] {doc.name}: {r.stdout.strip()}")
+                return False
+    return True
+
+
+def _corpus_attempt_ok(key_dir, side, out_file):
+    """A corpus attempt is valid iff the per-key splitter produces exactly 11 docs under
+    key_dir/corpora/<side>/ AND all frozen leak checks pass. A leak (or wrong doc count)
+    fails the attempt -> consumes it per §4.1a accounting."""
+    splitter = Path(key_dir) / "split_corpus.py"
+    r = subprocess.run([sys.executable, str(splitter), side, str(out_file)],
                        capture_output=True, text=True)
-    docs = sorted((key_dir / f"corpora/{side}").glob("[0-9][0-9].md"))
-    return r.returncode == 0 and len(docs) == 11
+    docs = sorted((Path(key_dir) / f"corpora/{side}").glob("[0-9][0-9].md"))
+    if r.returncode != 0 or len(docs) != 11:
+        print(f"  split {side}: rc={r.returncode} docs={len(docs)} (need 11) {r.stdout.strip()}")
+        return False
+    return leak_ok(key_dir, side)
 
 
 def _call_with_retry(name, cli, model, prompt, out, manifest, validate, receipt, dry):
@@ -100,28 +141,28 @@ def build_key(key_id, args):
                             key_dir / "manifests/key-author.json",
                             lambda: _validate_key(concepts, dry), receipt, dry):
         return receipt, False
-    # 2. mechanical briefs from the sealed-input concepts (orchestrator never reads desc)
-    if not dry:
-        subprocess.run([sys.executable, str(BASE / "harness/build_briefs.py"), str(key_dir)], check=True)
-    else:
-        print(f"    [dry-run] build_briefs.py {key_dir}")
-    # 3. corpus-gen A (sonnet) + B (codex), each retry-capped 1, split-validated
+    if dry:
+        print("    [dry-run] gen_leakcheck; build_briefs; copy split_corpus.py into key root; "
+              "corpus-gen a/b -> split (key_dir/corpora) + FROZEN leak checks; make_pairs")
+        return receipt, True
+    # 2. leakcheck script (from answer_key.json) + briefs + per-key hash-verified splitter
+    subprocess.run([sys.executable, str(BASE / "harness/gen_leakcheck.py"), str(key_dir)], check=True)
+    subprocess.run([sys.executable, str(BASE / "harness/build_briefs.py"), str(key_dir)], check=True)
+    copy_splitter(key_dir)
+    # 3. corpus-gen A (sonnet) + B (codex): attempt valid iff 11 docs under key_dir/corpora/<side>
+    #    AND all frozen leak checks pass; a split or leak failure consumes the attempt (§4.1a).
     for site, cli, model, side in (("corpus-gen-a", "claude", "claude-sonnet-5", "a"),
                                    ("corpus-gen-b", "codex", "gpt-5.6-terra", "b")):
         out = key_dir / f"runs/gen-{side}.out"; out.parent.mkdir(parents=True, exist_ok=True)
         prompt = key_dir / f"prompts/gen-community-{side}.md"
         if not _call_with_retry(site, cli, model, prompt, out,
                                 key_dir / f"manifests/{site}.json",
-                                lambda s=side, o=out: _split_ok(args.split_script, s, o, key_dir, dry),
+                                lambda s=side, o=out: _corpus_attempt_ok(key_dir, s, o),
                                 receipt, dry):
             return receipt, False
-    # 4. leakcheck script + answer-blind pairs manifest
-    if not dry:
-        subprocess.run([sys.executable, str(BASE / "harness/gen_leakcheck.py"), str(key_dir)], check=True)
-        subprocess.run([sys.executable, str(BASE / "make_pairs_manifest.py"),
-                        str(key_dir / "key"), str(key_dir / "pairs.json")], check=True)
-    else:
-        print(f"    [dry-run] gen_leakcheck.py {key_dir}; make_pairs_manifest.py {key_dir}/key")
+    # 4. answer-blind pairs manifest
+    subprocess.run([sys.executable, str(BASE / "make_pairs_manifest.py"),
+                    str(key_dir / "key"), str(key_dir / "pairs.json")], check=True)
     return receipt, True
 
 

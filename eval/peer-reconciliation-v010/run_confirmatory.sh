@@ -22,7 +22,7 @@ WS="$(cd "$WS" && pwd)"
 
 # copy the frozen instrument (NOT data) into the conf-key workspace
 mkdir -p "$WS/prompts" "$WS/harness" "$WS/scripts" "$WS/tests"
-cp "$SRC"/smoke_v010.py "$SRC"/v010.py "$SRC"/retrieve_xc_v010.py "$SRC"/run_calls.sh "$WS/"
+cp "$SRC"/smoke_v010.py "$SRC"/v010.py "$SRC"/retrieve_xc_v010.py "$SRC"/run_calls.sh "$SRC"/pin_model.py "$WS/"
 cp "$SRC"/prompts/*.md "$WS/prompts/"
 # make "<WS>/../e2e-cell/run_isolated.sh" resolve for the copied (frozen) run_calls.sh
 mkdir -p "$WS/../e2e-cell"
