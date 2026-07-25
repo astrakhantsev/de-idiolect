@@ -21,6 +21,7 @@ The entry end-to-end is ~1.5× the core budget; this is the ~10-page path throug
 - **[PSEUDOCODE.md](PSEUDOCODE.md)** **[post-submission]** — the workflow in annotated pseudocode, at-submission grades on every element.
 - **[BASELINES.md](BASELINES.md)** **[post-submission]** — which baseline each number answers to: A (your own coined vocabulary) versus B (an equal-information grounded direct ask), each figure's actual comparator named — the sealed §5.5 run has no baseline arm of either kind. Reading only; no new results, no grade changes.
 - **[DIGEST.md](DIGEST.md)** **[post-submission]** — a ~2-page AI-generated digest of the three companions, grades preserved verbatim and negatives included; on any discrepancy the companion is authoritative.
+- **[PARAMETERS.md](PARAMETERS.md)** **[post-submission]** — the tool's parameters as a decision-level map: each knob's value at submission, how it was chosen, how to re-choose it on your own data, and its custody status (free knob / frozen / post-submission / drafted-v0.10), plus the protocol-level constants that are not tool parameters. Links prereg-v08/v09 for the mechanics.
 
 ## Run it — the most informative invocations
 
