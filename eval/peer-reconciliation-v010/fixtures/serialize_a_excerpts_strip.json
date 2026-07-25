@@ -1,0 +1,13 @@
+{
+ "kind": "serialize_a_excerpts",
+ "name": "serialize_a_excerpts_strip",
+ "oracle": "independent",
+ "why": "each excerpt .strip()'d: surrounding whitespace removed (\u00a73.6d)",
+ "excerpts": [
+  "  leading space",
+  "trailing space  ",
+  "\ttabbed\t",
+  "clean one"
+ ],
+ "expect": "1. leading space\n2. trailing space\n3. tabbed\n4. clean one"
+}

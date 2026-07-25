@@ -1,0 +1,14 @@
+{
+ "kind": "serialize_a_excerpts",
+ "name": "serialize_a_excerpts_5",
+ "oracle": "independent",
+ "why": "{a_excerpts} at k=5 (\u00a73.6c)",
+ "excerpts": [
+  "excerpt number 0",
+  "excerpt number 1",
+  "excerpt number 2",
+  "excerpt number 3",
+  "excerpt number 4"
+ ],
+ "expect": "1. excerpt number 0\n2. excerpt number 1\n3. excerpt number 2\n4. excerpt number 3\n5. excerpt number 4"
+}

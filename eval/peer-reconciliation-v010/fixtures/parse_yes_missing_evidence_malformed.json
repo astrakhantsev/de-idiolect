@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_yes_missing_evidence_malformed",
+ "oracle": "independent",
+ "why": "match=yes with evidence=none (missing evidence) -> malformed (\u00a73.4)",
+ "reply": "match: yes\nmatched_term: gadget alpha\nrelation: exact\nevidence: none",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_arm_b_rejects_corpus_broader",
+ "oracle": "independent",
+ "why": "arm B rejects arm-A relation enum 'corpus-broader' -> malformed (\u00a73.5 enum)",
+ "reply": "match: yes\nmatched_term: x\nrelation: corpus-broader\nevidence: y",
+ "arm": "B",
+ "expect_classification": "malformed"
+}

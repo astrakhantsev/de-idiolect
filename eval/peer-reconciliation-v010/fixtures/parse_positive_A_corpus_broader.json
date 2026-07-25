@@ -1,0 +1,12 @@
+{
+ "kind": "parse",
+ "name": "parse_positive_A_corpus_broader",
+ "oracle": "independent",
+ "why": "match=yes positive, relation=corpus-broader, arm A (\u00a73.4)",
+ "reply": "match: yes\nmatched_term: gadget delta\nrelation: corpus-broader\nevidence: a gadget delta span",
+ "arm": "A",
+ "expect_classification": "positive",
+ "expect_fields": {
+  "relation": "corpus-broader"
+ }
+}

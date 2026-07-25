@@ -1,0 +1,31 @@
+{
+ "kind": "pairs_manifest",
+ "name": "pairs_manifest_jingle_same_string",
+ "oracle": "independent (opaque id + shuffle recomputed via the §3.6 formula sha256(term_a||NUL||term_b)[:16], sorted by id — NOT via build_payload)",
+ "why": "§3.6 committed schema: {count,pairs}; record exactly {pair_id 16-hex,term_a,term_b}; opaque id = sha256(term_a||NUL||term_b)[:16]; key-independent shuffle (sorted by id)",
+ "term_pairs": [
+  [
+   "toy echo slot",
+   "toy echo slot"
+  ],
+  [
+   "widget beta",
+   "gadget beta prime"
+  ]
+ ],
+ "expect": {
+  "count": 2,
+  "pairs": [
+   {
+    "pair_id": "847e83509ebf6871",
+    "term_a": "widget beta",
+    "term_b": "gadget beta prime"
+   },
+   {
+    "pair_id": "a3bda2f3eac9cbb4",
+    "term_a": "toy echo slot",
+    "term_b": "toy echo slot"
+   }
+  ]
+ }
+}

@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_no_with_matched_term_present_malformed",
+ "oracle": "independent",
+ "why": "match=no with matched_term present -> malformed (\u00a73.4 truth table)",
+ "reply": "match: no\nmatched_term: gadget alpha\nrelation: n/a\nevidence: none",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

@@ -1,0 +1,12 @@
+{
+ "kind": "parse",
+ "name": "parse_wrapper_quotes_unbalanced_trailing_not_stripped",
+ "oracle": "independent",
+ "why": "unbalanced trailing double quote (no leading) NOT stripped (deviation #2)",
+ "reply": "match: yes\nmatched_term: gadget alpha\"\nrelation: exact\nevidence: a span",
+ "arm": "A",
+ "expect_classification": "positive",
+ "expect_fields": {
+  "matched_term": "gadget alpha\""
+ }
+}

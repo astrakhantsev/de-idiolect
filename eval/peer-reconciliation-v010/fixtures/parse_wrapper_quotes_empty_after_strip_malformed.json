@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_wrapper_quotes_empty_after_strip_malformed",
+ "oracle": "independent",
+ "why": "matched_term '\"\"' strips to empty -> match=yes with empty identifier -> malformed (deviation #2 x \u00a73.4)",
+ "reply": "match: yes\nmatched_term: \"\"\nrelation: exact\nevidence: a span",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

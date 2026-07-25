@@ -1,0 +1,24 @@
+{
+ "kind": "ground",
+ "name": "ground_A_both_present_true",
+ "oracle": "independent",
+ "why": "key-blind grounding incl. boundary-spanning",
+ "arm": "A",
+ "matched_term": "gadget alpha prime",
+ "evidence": "the gadget alpha prime metric",
+ "docs": [
+  [
+   "b/01",
+   "we compute the gadget alpha prime metric each run"
+  ],
+  [
+   "b/02",
+   "other"
+  ],
+  [
+   "b/03",
+   "more"
+  ]
+ ],
+ "expect_grounded": true
+}

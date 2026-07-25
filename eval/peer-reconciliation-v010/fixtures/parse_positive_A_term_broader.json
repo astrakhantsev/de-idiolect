@@ -1,0 +1,12 @@
+{
+ "kind": "parse",
+ "name": "parse_positive_A_term_broader",
+ "oracle": "independent",
+ "why": "match=yes positive, relation=term-broader, arm A (\u00a73.4)",
+ "reply": "match: yes\nmatched_term: gadget beta\nrelation: term-broader\nevidence: gadget beta here",
+ "arm": "A",
+ "expect_classification": "positive",
+ "expect_fields": {
+  "relation": "term-broader"
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "kind": "parse",
+ "name": "parse_relation_uppercase_positive",
+ "oracle": "independent",
+ "why": "uppercase keys+values: match/relation lower-cased (\u00a73.6a case); matched_term/evidence kept verbatim",
+ "reply": "MATCH: YES\nMATCHED_TERM: Gadget Alpha\nRELATION: EXACT\nEVIDENCE: A Span",
+ "arm": "A",
+ "expect_classification": "positive",
+ "expect_fields": {
+  "match": "yes",
+  "relation": "exact"
+ }
+}

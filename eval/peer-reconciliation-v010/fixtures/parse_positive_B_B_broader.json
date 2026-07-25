@@ -1,0 +1,12 @@
+{
+ "kind": "parse",
+ "name": "parse_positive_B_B_broader",
+ "oracle": "independent",
+ "why": "match=yes positive, relation=B-broader, arm B; enum lower-cased (\u00a73.5)",
+ "reply": "match: yes\nmatched_term: widget two\nrelation: B-broader\nevidence: widget two span",
+ "arm": "B",
+ "expect_classification": "positive",
+ "expect_fields": {
+  "relation": "b-broader"
+ }
+}

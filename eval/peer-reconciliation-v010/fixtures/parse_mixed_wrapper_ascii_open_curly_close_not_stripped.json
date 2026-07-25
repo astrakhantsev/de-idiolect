@@ -1,0 +1,12 @@
+{
+ "kind": "parse",
+ "name": "parse_mixed_wrapper_ascii_open_curly_close_not_stripped",
+ "oracle": "post-oracle regression (semantics per the oracle README's stated grammar: only a balanced ASCII \"...\" or curly “...” wrapper pair is stripped; MIXED wrappers are NOT balanced and retain their quotes)",
+ "why": "P2: mixed wrapper (ASCII open + curly close) is not a balanced pair; matched_term keeps its quotes",
+ "reply": "match: yes\nmatched_term: \"gadget alpha prime”\nrelation: exact\nevidence: a valid span",
+ "arm": "A",
+ "expect_classification": "positive",
+ "expect_fields": {
+  "matched_term": "\"gadget alpha prime”"
+ }
+}

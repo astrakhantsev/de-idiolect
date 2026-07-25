@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_negative_crossfield_violation",
+ "oracle": "independent",
+ "why": "parser total-grammar branch",
+ "reply": "match: no\nmatched_term: gadget alpha prime\nrelation: n/a\nevidence: none",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

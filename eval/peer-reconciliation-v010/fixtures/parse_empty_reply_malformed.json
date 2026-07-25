@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_empty_reply_malformed",
+ "oracle": "independent",
+ "why": "empty reply: all four fields missing -> malformed (\u00a73.6a totality)",
+ "reply": "",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

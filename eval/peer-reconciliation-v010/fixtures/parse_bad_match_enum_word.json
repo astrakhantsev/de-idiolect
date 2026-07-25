@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_bad_match_enum_word",
+ "oracle": "independent",
+ "why": "match value 'yes indeed' not exactly yes|no -> malformed (\u00a73.6a enum)",
+ "reply": "match: yes indeed\nmatched_term: x\nrelation: exact\nevidence: y",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

@@ -1,0 +1,62 @@
+{
+ "kind": "assemble_baseline_b",
+ "name": "Baseline-B assembled first-ask",
+ "oracle": "independent",
+ "why": "end-to-end assembled FIRST-ask bytes, arm B: 5 excerpts + 11-doc corpus join + single terminal newline (\u00a73.6c)",
+ "reask": false,
+ "term_a": "widget alpha",
+ "excerpts": [
+  "excerpt number 0",
+  "excerpt number 1",
+  "excerpt number 2",
+  "excerpt number 3",
+  "excerpt number 4"
+ ],
+ "docs": [
+  [
+   "b/01",
+   "corpus doc 1 body"
+  ],
+  [
+   "b/02",
+   "corpus doc 2 body"
+  ],
+  [
+   "b/03",
+   "corpus doc 3 body"
+  ],
+  [
+   "b/04",
+   "corpus doc 4 body"
+  ],
+  [
+   "b/05",
+   "corpus doc 5 body"
+  ],
+  [
+   "b/06",
+   "corpus doc 6 body"
+  ],
+  [
+   "b/07",
+   "corpus doc 7 body"
+  ],
+  [
+   "b/08",
+   "corpus doc 8 body"
+  ],
+  [
+   "b/09",
+   "corpus doc 9 body"
+  ],
+  [
+   "b/10",
+   "corpus doc 10 body"
+  ],
+  [
+   "b/11",
+   "corpus doc 11 body"
+  ]
+ ],
+ "expect": "Two research communities (A and B) use their own vocabularies. Below is one term from community A with the excerpts showing how A uses it, followed by community B's full corpus.\n\nCOMMUNITY A TERM: \"widget alpha\"\n\nHOW A USES IT (excerpts):\n1. excerpt number 0\n2. excerpt number 1\n3. excerpt number 2\n4. excerpt number 3\n5. excerpt number 4\n\nCOMMUNITY B CORPUS:\n=== DOCUMENT b/01 ===\ncorpus doc 1 body\n\n=== DOCUMENT b/02 ===\ncorpus doc 2 body\n\n=== DOCUMENT b/03 ===\ncorpus doc 3 body\n\n=== DOCUMENT b/04 ===\ncorpus doc 4 body\n\n=== DOCUMENT b/05 ===\ncorpus doc 5 body\n\n=== DOCUMENT b/06 ===\ncorpus doc 6 body\n\n=== DOCUMENT b/07 ===\ncorpus doc 7 body\n\n=== DOCUMENT b/08 ===\ncorpus doc 8 body\n\n=== DOCUMENT b/09 ===\ncorpus doc 9 body\n\n=== DOCUMENT b/10 ===\ncorpus doc 10 body\n\n=== DOCUMENT b/11 ===\ncorpus doc 11 body\n\nReturn ONLY these four fields, one per line, and nothing else:\nmatch: yes | no\nmatched_term: the exact community-B term string you judge to be the match, copied verbatim from B's corpus (or none)\nrelation: exact | A-broader | B-broader | partial-overlap | n/a\nevidence: one quoted span copied verbatim from B's corpus (or none)\n\nRules: answer \"yes\" only if a specific community-B term names the same concept, a broader concept, or a narrower concept than the community-A term. When match is yes, matched_term and evidence must be non-empty and copied verbatim from B's corpus, and relation must be one of exact / A-broader (the community-A term is broader) / B-broader (the matched community-B term is broader) / partial-overlap. When match is no, set matched_term to none, relation to n/a, and evidence to none.\n"
+}

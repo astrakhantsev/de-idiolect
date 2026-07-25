@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_prose_with_colon_ignored_negative",
+ "oracle": "independent",
+ "why": "non-field lines containing colons (Note:/Summary:) ignored (\u00a73.6a extraction)",
+ "reply": "Note: here is my reasoning\nmatch: no\nmatched_term: none\nrelation: n/a\nevidence: none\nSummary: done",
+ "arm": "A",
+ "expect_classification": "negative"
+}

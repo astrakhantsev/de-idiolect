@@ -1,0 +1,26 @@
+{
+ "kind": "assemble_baseline_b",
+ "name": "Baseline-B excerpt containing literal {B_CORPUS}",
+ "oracle": "independent",
+ "bug_ref": "BUG-2 (assemble.py placeholder-injection) [RESOLVED \u2014 now an ordinary passing assertion]",
+ "why": "SUBSTITUTION SEMANTICS / FINDING: an excerpt containing literal '{B_CORPUS}' must be inserted VERBATIM (\u00a73.6b 'assembled bytes = template + serialized inputs'). assemble.py chains .replace {TERM_A}->{A_EXCERPTS}->{B_CORPUS}, so the excerpt's '{B_CORPUS}' is re-substituted with the whole corpus. Expected = literal-preserving (single-pass). LOW severity (token never appears in real coinages/excerpts) \u2014 round-5 may waive by deleting this fixture or require single-pass substitution.",
+ "reask": false,
+ "term_a": "coin inj",
+ "excerpts": [
+  "contains {B_CORPUS} literally",
+  "ex one",
+  "ex two",
+  "ex three"
+ ],
+ "docs": [
+  [
+   "b/01",
+   "doc one body"
+  ],
+  [
+   "b/02",
+   "doc two body"
+  ]
+ ],
+ "expect": "Two research communities (A and B) use their own vocabularies. Below is one term from community A with the excerpts showing how A uses it, followed by community B's full corpus.\n\nCOMMUNITY A TERM: \"coin inj\"\n\nHOW A USES IT (excerpts):\n1. contains {B_CORPUS} literally\n2. ex one\n3. ex two\n4. ex three\n\nCOMMUNITY B CORPUS:\n=== DOCUMENT b/01 ===\ndoc one body\n\n=== DOCUMENT b/02 ===\ndoc two body\n\nReturn ONLY these four fields, one per line, and nothing else:\nmatch: yes | no\nmatched_term: the exact community-B term string you judge to be the match, copied verbatim from B's corpus (or none)\nrelation: exact | A-broader | B-broader | partial-overlap | n/a\nevidence: one quoted span copied verbatim from B's corpus (or none)\n\nRules: answer \"yes\" only if a specific community-B term names the same concept, a broader concept, or a narrower concept than the community-A term. When match is yes, matched_term and evidence must be non-empty and copied verbatim from B's corpus, and relation must be one of exact / A-broader (the community-A term is broader) / B-broader (the matched community-B term is broader) / partial-overlap. When match is no, set matched_term to none, relation to n/a, and evidence to none.\n"
+}

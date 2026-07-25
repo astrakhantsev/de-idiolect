@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_no_with_evidence_present_malformed",
+ "oracle": "independent",
+ "why": "match=no with evidence present -> malformed (\u00a73.4 truth table)",
+ "reply": "match: no\nmatched_term: none\nrelation: n/a\nevidence: some leftover span",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

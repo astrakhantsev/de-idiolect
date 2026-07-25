@@ -1,0 +1,16 @@
+{
+ "kind": "ground",
+ "name": "ground_fold_dash_true",
+ "oracle": "independent",
+ "why": "\u00a79-F5 dash folding: em-dash in evidence folds to ASCII hyphen to match doc -> grounded (\u00a73.5)",
+ "arm": "B",
+ "matched_term": "cold-start",
+ "evidence": "the cold\u2014start problem",
+ "docs": [
+  [
+   "b/01",
+   "the cold-start problem is hard"
+  ]
+ ],
+ "expect_grounded": true
+}

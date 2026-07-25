@@ -1,0 +1,24 @@
+{
+ "kind": "ground",
+ "name": "ground_A_both_absent_false",
+ "oracle": "independent",
+ "why": "neither field present -> grounding fails (\u00a73.4)",
+ "arm": "A",
+ "matched_term": "nope one",
+ "evidence": "nope two",
+ "docs": [
+  [
+   "b/01",
+   "unrelated body"
+  ],
+  [
+   "b/02",
+   "x"
+  ],
+  [
+   "b/03",
+   "y"
+  ]
+ ],
+ "expect_grounded": false
+}

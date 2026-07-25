@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_yes_missing_identifier_malformed",
+ "oracle": "independent",
+ "why": "match=yes with matched_term=none (missing identifier) -> malformed (\u00a73.4)",
+ "reply": "match: yes\nmatched_term: none\nrelation: exact\nevidence: a span",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

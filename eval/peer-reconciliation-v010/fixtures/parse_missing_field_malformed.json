@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_missing_field_malformed",
+ "oracle": "independent",
+ "why": "parser total-grammar branch",
+ "reply": "match: no\nmatched_term: none\nrelation: n/a",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

@@ -1,0 +1,12 @@
+{
+ "kind": "parse",
+ "name": "parse_positive_B_partial_overlap",
+ "oracle": "independent",
+ "why": "match=yes positive, relation=partial-overlap, arm B (\u00a73.5)",
+ "reply": "match: yes\nmatched_term: widget three\nrelation: partial-overlap\nevidence: widget three span",
+ "arm": "B",
+ "expect_classification": "positive",
+ "expect_fields": {
+  "relation": "partial-overlap"
+ }
+}

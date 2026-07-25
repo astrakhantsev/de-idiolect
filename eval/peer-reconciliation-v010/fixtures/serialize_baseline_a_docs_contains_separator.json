@@ -1,0 +1,21 @@
+{
+ "kind": "serialize_baseline_a_docs",
+ "name": "serialize_baseline_a_docs_contains_separator",
+ "oracle": "independent",
+ "why": "a doc body containing the literal RANK separator is preserved verbatim (\u00a73.6d)",
+ "ranked_docs": [
+  [
+   "b/07",
+   "quote a\n--- RANK 9 (document b/xx) ---\nquote b"
+  ],
+  [
+   "b/03",
+   "three"
+  ],
+  [
+   "b/09",
+   "nine"
+  ]
+ ],
+ "expect": "--- RANK 1 (document b/07) ---\nquote a\n--- RANK 9 (document b/xx) ---\nquote b\n\n--- RANK 2 (document b/03) ---\nthree\n\n--- RANK 3 (document b/09) ---\nnine"
+}

@@ -1,0 +1,12 @@
+{
+ "kind": "parse",
+ "name": "parse_wrapper_quotes_nested_inner_kept",
+ "oracle": "independent",
+ "why": "exactly ONE balanced outer pair stripped; inner quotes kept (deviation #2)",
+ "reply": "match: yes\nmatched_term: \"say \"hi\" now\"\nrelation: exact\nevidence: a span",
+ "arm": "A",
+ "expect_classification": "positive",
+ "expect_fields": {
+  "matched_term": "say \"hi\" now"
+ }
+}

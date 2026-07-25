@@ -1,0 +1,13 @@
+{
+ "kind": "parse",
+ "name": "parse_field_order_reversed_positive",
+ "oracle": "independent",
+ "why": "positive with fields in reversed order -> still parses (\u00a73.6a)",
+ "reply": "evidence: a verbatim span\nrelation: exact\nmatched_term: gadget alpha\nmatch: yes",
+ "arm": "A",
+ "expect_classification": "positive",
+ "expect_fields": {
+  "match": "yes",
+  "relation": "exact"
+ }
+}

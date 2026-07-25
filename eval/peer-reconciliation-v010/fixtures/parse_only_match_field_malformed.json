@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_only_match_field_malformed",
+ "oracle": "independent",
+ "why": "reply with only one field -> malformed (missing 3) (\u00a73.6a)",
+ "reply": "match: yes",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

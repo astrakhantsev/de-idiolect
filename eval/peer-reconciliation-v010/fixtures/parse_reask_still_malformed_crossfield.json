@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_reask_still_malformed_crossfield",
+ "oracle": "independent",
+ "why": "malformed SECOND (re-ask) reply via cross-field violation (yes + all-none) -> no-assertion (\u00a73.4 re-ask)",
+ "reply": "match: yes\nmatched_term: none\nrelation: n/a\nevidence: none",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_duplicate_identical_values_malformed",
+ "oracle": "independent",
+ "why": "duplicate field with identical values still malformed (\u00a73.6a duplicate rule)",
+ "reply": "match: no\nmatched_term: none\nmatched_term: none\nrelation: n/a\nevidence: none",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

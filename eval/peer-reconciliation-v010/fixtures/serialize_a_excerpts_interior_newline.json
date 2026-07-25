@@ -1,0 +1,13 @@
+{
+ "kind": "serialize_a_excerpts",
+ "name": "serialize_a_excerpts_interior_newline",
+ "oracle": "independent",
+ "why": "INTERIOR newline inside an excerpt is preserved by .strip() (documents fragility: breaks one-line-per-excerpt) (\u00a73.6d)",
+ "excerpts": [
+  "line one\nline two",
+  "second",
+  "third",
+  "fourth"
+ ],
+ "expect": "1. line one\nline two\n2. second\n3. third\n4. fourth"
+}

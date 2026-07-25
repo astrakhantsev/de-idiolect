@@ -1,0 +1,23 @@
+{
+ "kind": "assemble_baseline_a",
+ "name": "Baseline-A assembled re-ask",
+ "oracle": "independent",
+ "why": "end-to-end assembled RE-ASK bytes, arm A (arm A's own re-ask file) (\u00a73.6b/c)",
+ "reask": true,
+ "term": "widget alpha",
+ "ranked_docs": [
+  [
+   "b/07",
+   "doc seven body   "
+  ],
+  [
+   "b/03",
+   "doc three body"
+  ],
+  [
+   "b/09",
+   "doc nine body"
+  ]
+ ],
+ "expect": "Your previous reply could not be parsed. Answer again in the EXACT format below \u2014 four fields, one per line, no other text (no preamble, no explanation, no code fence).\n\nA single technical term coined by one research community is shown below, together with the three most similar full documents retrieved from a DIFFERENT community's corpus using that term as the search query.\n\nTERM: \"widget alpha\"\n\nRETRIEVED DOCUMENTS (other community's corpus; ranked most-similar first):\n--- RANK 1 (document b/07) ---\ndoc seven body\n\n--- RANK 2 (document b/03) ---\ndoc three body\n\n--- RANK 3 (document b/09) ---\ndoc nine body\n\nOutput EXACTLY these four fields, one per line, and nothing else:\nmatch: yes | no\nmatched_term: the exact other-side term string you judge to be the match, copied verbatim from the documents (or none)\nrelation: exact | term-broader | corpus-broader | partial-overlap | n/a\nevidence: one quoted span copied verbatim from the documents (or none)\n\nIf match is no, then matched_term must be none, relation must be n/a, and evidence must be none. If match is yes, then matched_term and evidence must be non-empty verbatim copies from the documents and relation must be one of exact / term-broader / corpus-broader / partial-overlap.\n"
+}

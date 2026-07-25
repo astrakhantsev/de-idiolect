@@ -1,0 +1,16 @@
+{
+ "kind": "ground",
+ "name": "ground_header_label_not_grounded_false",
+ "oracle": "independent",
+ "why": "grounding is against corpus PROSE only (concat_docs_text excludes '=== DOCUMENT <label> ===' headers), so a quote of the header label 'b/01' fails (\u00a73.4/\u00a73.5)",
+ "arm": "B",
+ "matched_term": "b/01",
+ "evidence": "real body",
+ "docs": [
+  [
+   "b/01",
+   "real body text here"
+  ]
+ ],
+ "expect_grounded": false
+}

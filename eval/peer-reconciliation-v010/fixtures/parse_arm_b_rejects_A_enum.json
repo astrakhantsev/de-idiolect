@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_arm_b_rejects_A_enum",
+ "oracle": "independent",
+ "why": "parser total-grammar branch",
+ "reply": "match: yes\nmatched_term: x\nrelation: term-broader\nevidence: y",
+ "arm": "B",
+ "expect_classification": "malformed"
+}

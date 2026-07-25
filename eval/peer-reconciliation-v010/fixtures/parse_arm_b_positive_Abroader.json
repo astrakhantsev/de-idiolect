@@ -1,0 +1,12 @@
+{
+ "kind": "parse",
+ "name": "parse_arm_b_positive_Abroader",
+ "oracle": "independent",
+ "why": "parser total-grammar branch",
+ "reply": "match: yes\nmatched_term: gadget gamma small\nrelation: A-broader\nevidence: span",
+ "arm": "B",
+ "expect_classification": "positive",
+ "expect_fields": {
+  "relation": "a-broader"
+ }
+}

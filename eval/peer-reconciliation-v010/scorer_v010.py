@@ -1,0 +1,375 @@
+#!/usr/bin/env python3
+"""scorer_v010.py — the ONE deterministic, non-LLM scorer (v0.10 prereg §4.2 step 9, §5).
+
+This is the ONLY component that references the sealed answer key, and it does so ONLY via
+PATH PARAMETERS (--key-dir, --recorded-hashes) — nothing resolves during build/test. Its
+first read of the sealed answer material is the SPEND (§4.4). Everything else in the
+workspace is answer-blind.
+
+Extends the v0.9 aggregate-scoring code path (smoke.score / is_correct, copied here) with:
+  * the COUNTERPART-IDENTITY ADAPTER for the baselines (case-fold + v0.8 §9-F5 folding;
+    a non-partner positive becomes no-assertion BEFORE E1, and is excluded from coverage);
+  * the directional relation mapping + two-direction combination table (§3.4/§3.5);
+  * the inherited coverage numerator C (§5);
+  * the full §5 decision-table classification (fixed / second miss) for the tool arm at τ1;
+  * the E1-plus-stricter P = 1.00 detection-precision guardrail.
+
+At its first authorized read it VERIFIES the sealed-answer file hashes against their
+RECORDED values (from --recorded-hashes, i.e. the freeze-manifest.txt lines bound into H) —
+it never re-hashes to DISCOVER the truth; a mismatch aborts before any grading.
+
+Usage:
+  scorer_v010.py --key-dir <dir> --recorded-hashes <file> --pairs <pairs.json>
+                 [--tool-verdicts <runs/v010/verdicts.json>]
+                 [--baseline-a <runs/baseline_a/records.json>]
+                 [--baseline-b <runs/baseline_b/records.json>]
+                 --out <scores.json>
+
+--recorded-hashes format: one "sha256␠␠relpath" line per sealed answer file (sha256sum
+format), covering at least key/answer_key.json and key/concepts.json.
+"""
+import json, sys, hashlib, argparse
+from pathlib import Path
+
+BASE = Path(__file__).resolve().parent
+sys.path.insert(0, str(BASE))
+import smoke_v010 as smoke  # sim_flag, norm, HARD_MATCH, NO_MATCH, display
+import attest               # load_and_verify_H (H self-consistency)
+import spend                # locked one-shot spend gate
+
+HARD_MATCH = smoke.HARD_MATCH               # (exactMatch, broadnarrow, relatedMatch)
+NO_MATCH = smoke.NO_MATCH                   # (noMatch, noMatchDespiteSimilarity)
+MATCH_CLASS = set(HARD_MATCH)               # planted-positive classes
+PRIMARY = "tau1"
+
+# ============================================================================
+# 0. sealed-answer custody: verify recorded hashes, then read the key (THE SPEND).
+# ============================================================================
+def _parse_recorded(recorded_file):
+    """sha256sum-format lines -> {relpath: sha256}. relpath is the last whitespace field;
+    we key on its basename-tail (key/answer_key.json, key/concepts.json)."""
+    recorded = {}
+    for line in Path(recorded_file).read_text().splitlines():
+        line = line.strip()
+        if not line or " " not in line: continue
+        h, rel = line.split(None, 1)
+        rel = rel.strip()
+        if len(h) == 64 and all(c in "0123456789abcdef" for c in h.lower()):
+            recorded[rel] = h.lower()
+    return recorded
+
+def verify_and_load_key(key_dir, recorded_file):
+    """THE SPEND. Verify each sealed answer file against its RECORDED hash, then read
+    answer_key.json for grading. Abort on any mismatch/missing recorded hash."""
+    key_dir = Path(key_dir)
+    recorded = _parse_recorded(recorded_file)
+    def recorded_for(name):
+        for rel, h in recorded.items():
+            if rel == name or rel.endswith("/" + name) or Path(rel).name == name:
+                return h
+        return None
+    for name in ("answer_key.json", "concepts.json"):
+        f = key_dir / name
+        if not f.exists():
+            sys.exit(f"SEALED FILE MISSING: {f}")
+        want = recorded_for(name)
+        if want is None:
+            sys.exit(f"NO RECORDED HASH for {name} in --recorded-hashes — cannot bind by "
+                     f"recorded value (prereg §4.2 forbids re-hashing to discover truth)")
+        got = hashlib.sha256(f.read_bytes()).hexdigest()
+        if got != want:
+            sys.exit(f"SEALED-HASH MISMATCH for {name}: recorded {want} != on-disk {got} "
+                     f"— aborting before grading (drift / wrong key)")
+    ak = json.load(open(key_dir / "answer_key.json"))
+    key = {}
+    for p in ak["pairs"]:
+        key[p["pair_id"]] = {"term_a": p["term_a"], "term_b": p["term_b"],
+                             "expected": p["expected"], "broader_side": p.get("broader_side")}
+    return key
+
+# ============================================================================
+# 1. scoring primitives (copied from the frozen v0.9 smoke.score / is_correct + coverage/P).
+#    A verdict dict: {proposed_relation, status, broader_side}. status in
+#    {asserted, review_required, insufficient_evidence, config_fail, no_assertion}.
+# ============================================================================
+def _display(v):
+    """Local, tolerant renderer (the frozen smoke.display requires a 'reason' key the lean
+    scorer verdicts do not carry)."""
+    if v["status"] == "no_assertion": return "no-assertion"
+    if v["status"] == "asserted":
+        rel = v["proposed_relation"]
+        return rel + (f"({v['broader_side']})" if rel == "broadnarrow" else "")
+    label = {"review_required": "reviewRequired", "insufficient_evidence": "insufficientEvidence",
+             "config_fail": "configFail"}.get(v["status"], v["status"])
+    return label + (f"({v['reason']})" if v.get("reason") else "")
+
+def is_correct(kp, v):
+    if v["status"] != "asserted": return False       # reviewRequired / no-assertion never correct
+    if v["proposed_relation"] != kp["expected"]: return False
+    if kp["expected"] == "broadnarrow" and v.get("broader_side") != kp.get("broader_side"):
+        return False
+    return True
+
+def is_positive(v):
+    return v["status"] == "review_required" or (v["status"] == "asserted"
+                                                and v["proposed_relation"] in HARD_MATCH)
+def is_negative(v):
+    return v["status"] == "asserted" and v["proposed_relation"] in NO_MATCH
+def is_covered(v):
+    # decided = one of the 5 hard relations OR reviewRequired (§5). no_assertion / insuff /
+    # configFail excluded.
+    return v["status"] == "review_required" or (v["status"] == "asserted"
+           and v["proposed_relation"] in (HARD_MATCH + NO_MATCH))
+
+def score_arm(key, verdicts):
+    """key: {pid: keypair}; verdicts: {pid: verdict}. Returns S/P/C/jingle/E1b + per_pair.
+    Pairs missing from `verdicts` are treated as no_assertion (uncovered abstain)."""
+    per = {}
+    NA = {"proposed_relation": None, "status": "no_assertion", "broader_side": None}
+    for pid, kp in key.items():
+        v = verdicts.get(pid, NA)
+        per[pid] = {"expected": kp["expected"] + (f"({kp['broader_side']})" if kp["expected"] == "broadnarrow" else ""),
+                    "verdict": v, "display": _display(v),
+                    "correct": is_correct(kp, v), "positive": is_positive(v),
+                    "covered": is_covered(v)}
+    S = sum(r["correct"] for r in per.values())
+    tp = sum(1 for pid, kp in key.items() if is_positive(per[pid]["verdict"]) and kp["expected"] in MATCH_CLASS)
+    fp = sum(1 for pid, kp in key.items() if is_positive(per[pid]["verdict"]) and kp["expected"] in NO_MATCH)
+    P = None if (tp + fp) == 0 else round(tp / (tp + fp), 4)
+    C = round(sum(r["covered"] for r in per.values()) / len(key), 4)
+    jingle = sum(1 for pid, kp in key.items()
+                 if kp["expected"] == "noMatchDespiteSimilarity"
+                 and per[pid]["verdict"]["status"] == "asserted"
+                 and per[pid]["verdict"]["proposed_relation"] == "noMatchDespiteSimilarity")
+    # promotions / false-escalations (reported; the P guardrail subsumes them)
+    promotions = [pid for pid, kp in key.items() if kp["expected"] in NO_MATCH
+                  and per[pid]["verdict"]["status"] == "asserted"
+                  and per[pid]["verdict"]["proposed_relation"] in HARD_MATCH]
+    false_esc = [pid for pid, kp in key.items() if kp["expected"] in NO_MATCH
+                 and per[pid]["verdict"]["status"] == "review_required"]
+    return {"S": S, "P": P, "C": C, "jingle_specific": jingle,
+            "detection": {"tp": tp, "fp": fp},
+            "promotions": promotions, "false_escalations": false_esc, "per_pair": per}
+
+# ============================================================================
+# 2. counterpart-identity adapter + directional mapping + combination (§3.4/§3.5).
+# ============================================================================
+def _adapt_direction(rec, planted_partner):
+    """rec: a baseline direction record with final in {positive, negative, no-assertion}
+    and (for positives) matched_term/relation. Returns 'NA' | ('negative') |
+    ('positive', mapped_relation, broader_side_or_None). The COUNTERPART-IDENTITY ADAPTER:
+    a positive whose matched_term does not fold-equal the planted partner -> NA."""
+    final = rec.get("final")
+    if final == "no-assertion" or final is None: return ("NA",)
+    if final == "negative": return ("negative",)
+    # positive: adapter check (case-fold + §9-F5 folding == smoke.norm)
+    if smoke.norm(rec.get("matched_term") or "") != smoke.norm(planted_partner):
+        return ("NA",)  # non-partner positive -> no-assertion before E1, excluded from C
+    return ("positive", rec["relation"])
+
+# relation -> (proposed_relation, broader_side) by arm+direction
+def _map_relation(relation, arm, direction):
+    """Directional relation mapping, positives only, post-adapter (§3.4/§3.5)."""
+    r = relation.lower()
+    if r == "exact": return ("exactMatch", None)
+    if r == "partial-overlap": return ("relatedMatch", None)
+    if arm == "A" and direction == "a2b":
+        if r == "term-broader": return ("broadnarrow", "a")
+        if r == "corpus-broader": return ("broadnarrow", "b")
+    if arm == "A" and direction == "b2a":
+        if r == "term-broader": return ("broadnarrow", "b")
+        if r == "corpus-broader": return ("broadnarrow", "a")
+    if arm == "B":  # a2b only; enum {exact, A-broader, B-broader, partial-overlap}
+        if r == "a-broader": return ("broadnarrow", "a")
+        if r == "b-broader": return ("broadnarrow", "b")
+    raise ValueError(f"unmapped relation {relation!r} for arm {arm} dir {direction}")
+
+def _neg_verdict(kp):
+    flag = smoke.sim_flag(kp["term_a"], kp["term_b"])
+    return {"proposed_relation": "noMatchDespiteSimilarity" if flag else "noMatch",
+            "status": "asserted", "broader_side": None}
+
+def _positive_verdict(mapped):
+    rel, side = mapped
+    return {"proposed_relation": rel, "status": "asserted", "broader_side": side}
+
+def _combine_two(a2b, b2a, kp):
+    """§3.4 two-direction combination table (exhaustive; first matching row wins).
+    a2b/b2a are ('NA',) | ('negative',) | ('positive', mapped_rel_tuple)."""
+    ta, tb = a2b[0], b2a[0]
+    if ta == "positive" and tb == "positive":
+        va, vb = a2b[1], b2a[1]  # mapped (rel, side)
+        if va == ("exactMatch", None) and vb == ("exactMatch", None):
+            return {"proposed_relation": "exactMatch", "status": "asserted", "broader_side": None}
+        if va[0] == "broadnarrow" and vb[0] == "broadnarrow" and va[1] == vb[1]:
+            return {"proposed_relation": "broadnarrow", "status": "asserted", "broader_side": va[1]}
+        return {"proposed_relation": "relatedMatch", "status": "asserted", "broader_side": None}
+    if ta == "positive" and tb == "negative": return _neg_verdict(kp)
+    if ta == "negative" and tb == "positive": return _neg_verdict(kp)
+    if ta == "negative" and tb == "negative": return _neg_verdict(kp)
+    if ta == "positive" and tb == "NA": return {"proposed_relation": None, "status": "no_assertion", "broader_side": None}
+    if ta == "NA" and tb == "positive": return {"proposed_relation": None, "status": "no_assertion", "broader_side": None}
+    if ta == "negative" and tb == "NA": return _neg_verdict(kp)
+    if ta == "NA" and tb == "negative": return _neg_verdict(kp)
+    return {"proposed_relation": None, "status": "no_assertion", "broader_side": None}  # NA/NA
+
+def baseline_a_verdicts(key, records):
+    """records keyed by 'side:term' (from baseline_a.py). For pair P: a2b = ('a', term_a),
+    b2a = ('b', term_b). Adapter partner: a2b's partner = term_b; b2a's partner = term_a."""
+    out = {}
+    for pid, kp in key.items():
+        ra = records.get(f"a:{kp['term_a']}")
+        rb = records.get(f"b:{kp['term_b']}")
+        a2b = _adapt_direction(ra, kp["term_b"]) if ra else ("NA",)
+        b2a = _adapt_direction(rb, kp["term_a"]) if rb else ("NA",)
+        a2b = ("positive", _map_relation(a2b[1], "A", "a2b")) if a2b[0] == "positive" else a2b
+        b2a = ("positive", _map_relation(b2a[1], "A", "b2a")) if b2a[0] == "positive" else b2a
+        out[pid] = _combine_two(a2b, b2a, kp)
+    return out
+
+def baseline_b_verdicts(key, records):
+    """records keyed by pair_id (from baseline_b.py); unidirectional A->B. Partner = term_b."""
+    out = {}
+    for pid, kp in key.items():
+        rec = records.get(pid)
+        adapted = _adapt_direction(rec, kp["term_b"]) if rec else ("NA",)
+        if adapted[0] == "NA":
+            out[pid] = {"proposed_relation": None, "status": "no_assertion", "broader_side": None}
+        elif adapted[0] == "negative":
+            out[pid] = _neg_verdict(kp)
+        else:
+            out[pid] = _positive_verdict(_map_relation(adapted[1], "B", "a2b"))
+    return out
+
+def tool_verdicts_at(tool_verdicts_json, tau):
+    """Read the answer-blind composed verdicts.json and reshape τ records into scoring
+    verdict dicts."""
+    data = json.load(open(tool_verdicts_json))
+    recs = data[tau]
+    out = {}
+    for pid, r in recs.items():
+        out[pid] = {"proposed_relation": r.get("proposed_relation"),
+                    "status": r["status"], "broader_side": r.get("broader_side")}
+    return out
+
+# ============================================================================
+# 3. §5 decision table (tool arm at τ1) + P = 1.00 guardrail.
+# ============================================================================
+def decision_label(sc):
+    """sc = score_arm(...) for the tool arm at τ1. Exhaustive; matches the §5 table."""
+    S, P, C, jingle = sc["S"], sc["P"], sc["C"], sc["jingle_specific"]
+    if P is None:
+        return "second miss (reported)", "P = n/a (zero positive assertions; S<=4<7)"
+    if P < 1.00:
+        return "second miss (reported)", f"P<1.00 (promotions={sc['promotions']}, false_escalations={sc['false_escalations']})"
+    if S < 7:
+        return "second miss (reported)", f"P=1.00 but S={S}<7"
+    if jingle == 0:
+        return "second miss (reported)", "P=1.00, S>=7 but jingle-specific=0 (inherited E1 jingle clause unmet)"
+    if C >= 0.8:
+        return "fixed", f"P=1.00, S={S}>=7, jingle>=1, C={C}>=0.8"
+    if abs(C - 0.7) < 1e-9:
+        return "fixed", f"P=1.00, S={S}>=7, jingle>=1, C=0.7 (mechanism-check shortfall noted; Q1 coverage subordinate)"
+    return "second miss (reported)", f"anomaly: P=1.00, S={S}>=7, jingle>=1, C={C} (<0.7 is impossible when S>=7)"
+
+# ============================================================================
+# 4. driver
+# ============================================================================
+def _join_opaque(sealed_key, pairs_file):
+    """P0/scorer join: the tool verdicts + baseline_b records are keyed by the OPAQUE pair_id
+    from pairs.json (no P01–P10 positional semantics); the sealed key is keyed by its own pids.
+    Join on the TERM PAIR (term_a, term_b) to produce a grading map keyed by the opaque id.
+    Refuse on any pairing mismatch (a term pair in pairs.json not present in the sealed key,
+    a duplicated term pair, or a count mismatch)."""
+    pairs = json.load(open(pairs_file))["pairs"]
+    sealed_by_tp = {}
+    for pid, kp in sealed_key.items():
+        tp = (kp["term_a"], kp["term_b"])
+        if tp in sealed_by_tp:
+            sys.exit(f"PAIRS/KEY: duplicate term pair {tp} in the sealed key — cannot join")
+        sealed_by_tp[tp] = kp
+    if len(pairs) != len(sealed_by_tp):
+        sys.exit(f"PAIRS/KEY: count {len(pairs)} != sealed {len(sealed_by_tp)}")
+    key_opaque, seen = {}, set()
+    for p in pairs:
+        tp = (p["term_a"], p["term_b"])
+        if tp not in sealed_by_tp:
+            sys.exit(f"PAIRS/KEY MISMATCH: term pair {tp} (opaque {p['pair_id']}) not in the sealed key")
+        if tp in seen:
+            sys.exit(f"PAIRS/KEY: duplicate term pair {tp} in pairs.json")
+        seen.add(tp)
+        kp = sealed_by_tp[tp]
+        key_opaque[p["pair_id"]] = {"term_a": kp["term_a"], "term_b": kp["term_b"],
+                                    "expected": kp["expected"], "broader_side": kp.get("broader_side")}
+    return key_opaque
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--key-dir", required=True)
+    ap.add_argument("--recorded-hashes", required=True)
+    ap.add_argument("--pairs", required=True)
+    ap.add_argument("--H", required=True, help="runs/H.json — the attested manifest-of-manifests")
+    ap.add_argument("--spend-log", required=True, help="the one-shot spend/state log (locked gate)")
+    ap.add_argument("--tool-verdicts")
+    ap.add_argument("--baseline-a")
+    ap.add_argument("--baseline-b")
+    ap.add_argument("--tau", default=PRIMARY)
+    ap.add_argument("--out", required=True)
+    args = ap.parse_args()
+
+    # (a) PRE-CLAIM gate: refuse (before ANY key/H work) unless the log has exactly one
+    #     structure:read + a scoring-attempt and no prior claim/accidental/untyped entry.
+    spend.assert_scoring_allowed(args.spend_log)
+    # (b) bind to the attested H: H must be self-consistent, and the --recorded-hashes file
+    #     must be exactly the one bound into H (else a post-attestation swap of both the key
+    #     and freeze-manifest would pass here while attestation still matched H's old values).
+    #     These reads DO NOT touch the sealed key, so they precede the claim.
+    hobj = attest.load_and_verify_H(args.H)
+    bound = hobj["manifest_of_manifests"].get("recorded_manifest_sha256")
+    got = hashlib.sha256(Path(args.recorded_hashes).read_bytes()).hexdigest()
+    if bound != got:
+        sys.exit(f"RECORDED-HASHES not bound in H: H has {bound} but --recorded-hashes hashes {got}")
+
+    # (c) ATOMIC CLAIM under the lock, IMMEDIATELY before the first sealed-key byte. Once this
+    #     entry exists the key is SPENT; a crash after it -> any later invocation is refused.
+    spend.claim_authorized_read(args.spend_log, notes="scorer about to read the sealed key")
+    sealed_key = verify_and_load_key(args.key_dir, args.recorded_hashes)  # THE SPEND (first key byte)
+    key = _join_opaque(sealed_key, args.pairs)   # re-key by opaque id via the term-pair join
+
+    result = {"tau": args.tau, "H": hobj["H"], "spend": "sealed answer material read (§4.4)"}
+    if args.tool_verdicts:
+        tv = tool_verdicts_at(args.tool_verdicts, args.tau)
+        sc = score_arm(key, tv)
+        label, why = decision_label(sc)
+        result["tool_arm"] = {**{k: sc[k] for k in ("S", "P", "C", "jingle_specific",
+                                                    "detection", "promotions", "false_escalations")},
+                              "decision": label, "decision_reason": why,
+                              "per_pair": sc["per_pair"]}
+    if args.baseline_a:
+        recs = json.load(open(args.baseline_a))
+        bv = baseline_a_verdicts(key, recs)
+        sc = score_arm(key, bv)
+        result["baseline_a"] = {**{k: sc[k] for k in ("S", "P", "C", "jingle_specific",
+                                                      "detection", "promotions", "false_escalations")},
+                                "per_pair": sc["per_pair"]}
+    if args.baseline_b:
+        recs = json.load(open(args.baseline_b))
+        bv = baseline_b_verdicts(key, recs)
+        sc = score_arm(key, bv)
+        result["baseline_b"] = {**{k: sc[k] for k in ("S", "P", "C", "jingle_specific",
+                                                      "detection", "promotions", "false_escalations")},
+                                "per_pair": sc["per_pair"]}
+    json.dump(result, open(args.out, "w"), indent=1)
+    # (d) mark the authorized read COMPLETE (clean scoring read finished)
+    spend.complete_authorized_read(args.spend_log, notes=f"scores -> {args.out}")
+    # aggregate print (no per-pair to stdout)
+    for arm in ("tool_arm", "baseline_a", "baseline_b"):
+        if arm in result:
+            a = result[arm]
+            line = f"{arm}: S={a['S']}/10 P={a['P']} C={a['C']} jingle={a['jingle_specific']}/2"
+            if arm == "tool_arm": line += f" -> {a['decision']} ({a['decision_reason']})"
+            print(line)
+    print(f"\nscores -> {args.out}")
+
+if __name__ == "__main__":
+    main()

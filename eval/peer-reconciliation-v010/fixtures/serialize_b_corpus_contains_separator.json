@@ -1,0 +1,17 @@
+{
+ "kind": "serialize_b_corpus",
+ "name": "serialize_b_corpus_contains_separator",
+ "oracle": "independent",
+ "why": "a doc body containing the literal separator '=== DOCUMENT ... ===' and interior blank line is preserved verbatim (rstripped) (\u00a73.6d)",
+ "docs": [
+  [
+   "b/01",
+   "first line\n\n=== DOCUMENT b/99 ===\nsecond line"
+  ],
+  [
+   "b/02",
+   "clean body"
+  ]
+ ],
+ "expect": "=== DOCUMENT b/01 ===\nfirst line\n\n=== DOCUMENT b/99 ===\nsecond line\n\n=== DOCUMENT b/02 ===\nclean body"
+}

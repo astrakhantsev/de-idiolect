@@ -1,0 +1,18 @@
+# v0.10 run workspace — raw key material + run outputs are NOT committed (§8).
+# The sealed key-3 answer material must never be committed; run outputs are large/derived.
+runs/
+key/
+corpora/
+leakcheck_peer.sh
+pairs.json
+freeze-manifest.txt
+recorded-cli.json
+__pycache__/
+*.pyc
+# reference copies of the frozen v0.9 originals (already in the repo under peer-reconciliation-*)
+_reference/
+# toy-key is test scaffolding; keep concepts.json + the generated answer_key/pairs are fine to
+# ignore since they are regenerable from concepts.json via harness/validate_key.py + make_pairs.
+toy-key/key/answer_key.json
+toy-key/pairs.json
+toy-key/recorded-hashes.txt

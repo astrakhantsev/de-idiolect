@@ -1,0 +1,21 @@
+{
+ "kind": "serialize_baseline_a_docs",
+ "name": "serialize_baseline_a_docs_rstrip",
+ "oracle": "independent",
+ "why": "all three ranked docs rstripped (\u00a73.6d)",
+ "ranked_docs": [
+  [
+   "b/07",
+   "seven\n"
+  ],
+  [
+   "b/03",
+   "three   "
+  ],
+  [
+   "b/09",
+   "nine\t\n "
+  ]
+ ],
+ "expect": "--- RANK 1 (document b/07) ---\nseven\n\n--- RANK 2 (document b/03) ---\nthree\n\n--- RANK 3 (document b/09) ---\nnine"
+}

@@ -1,0 +1,21 @@
+{
+ "kind": "ground",
+ "name": "ground_boundary_spanning_false",
+ "oracle": "independent",
+ "why": "FINDING (BUG-1): evidence 'beta gamma' crosses the doc boundary \u2014 present in NO single document. Per \u00a73.4/\u00a79-F5 (fabrication detection) a boundary-spanning quote MUST fail grounding. _ground checks the concatenation (docs joined by \\n\\n, then norm collapses to a single space), so the impl returns True. Expected = False.",
+ "arm": "B",
+ "matched_term": "alpha",
+ "evidence": "beta gamma",
+ "docs": [
+  [
+   "b/01",
+   "alpha beta"
+  ],
+  [
+   "b/02",
+   "gamma delta"
+  ]
+ ],
+ "expect_grounded": false,
+ "bug_ref": "BUG-1 (boundary-spanning grounding) [RESOLVED \u2014 now an ordinary passing assertion]"
+}

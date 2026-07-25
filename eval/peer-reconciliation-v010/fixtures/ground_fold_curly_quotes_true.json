@@ -1,0 +1,16 @@
+{
+ "kind": "ground",
+ "name": "ground_fold_curly_quotes_true",
+ "oracle": "independent",
+ "why": "\u00a79-F5 typographic folding: curly quotes in evidence fold to ASCII to match the doc's ASCII quotes -> grounded (\u00a73.5)",
+ "arm": "B",
+ "matched_term": "alpha",
+ "evidence": "called \u201calpha\u201d here",
+ "docs": [
+  [
+   "b/01",
+   "the model called \"alpha\" here"
+  ]
+ ],
+ "expect_grounded": true
+}

@@ -1,0 +1,13 @@
+{
+ "kind": "parse",
+ "name": "parse_interior_whitespace_preserved_positive",
+ "oracle": "independent",
+ "why": "parser preserves INTERIOR whitespace in matched_term/evidence (only surrounding stripped); grounding norm collapses later (\u00a73.6a norm)",
+ "reply": "match: yes\nmatched_term: gadget   alpha\nrelation: exact\nevidence: a   span",
+ "arm": "A",
+ "expect_classification": "positive",
+ "expect_fields": {
+  "matched_term": "gadget   alpha",
+  "evidence": "a   span"
+ }
+}

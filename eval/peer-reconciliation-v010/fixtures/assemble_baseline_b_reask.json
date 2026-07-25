@@ -1,0 +1,62 @@
+{
+ "kind": "assemble_baseline_b",
+ "name": "Baseline-B assembled re-ask",
+ "oracle": "independent",
+ "why": "end-to-end assembled RE-ASK bytes, arm B (Baseline-B's OWN re-ask file, not A's edited) (\u00a73.6b/c)",
+ "reask": true,
+ "term_a": "widget alpha",
+ "excerpts": [
+  "excerpt number 0",
+  "excerpt number 1",
+  "excerpt number 2",
+  "excerpt number 3",
+  "excerpt number 4"
+ ],
+ "docs": [
+  [
+   "b/01",
+   "corpus doc 1 body"
+  ],
+  [
+   "b/02",
+   "corpus doc 2 body"
+  ],
+  [
+   "b/03",
+   "corpus doc 3 body"
+  ],
+  [
+   "b/04",
+   "corpus doc 4 body"
+  ],
+  [
+   "b/05",
+   "corpus doc 5 body"
+  ],
+  [
+   "b/06",
+   "corpus doc 6 body"
+  ],
+  [
+   "b/07",
+   "corpus doc 7 body"
+  ],
+  [
+   "b/08",
+   "corpus doc 8 body"
+  ],
+  [
+   "b/09",
+   "corpus doc 9 body"
+  ],
+  [
+   "b/10",
+   "corpus doc 10 body"
+  ],
+  [
+   "b/11",
+   "corpus doc 11 body"
+  ]
+ ],
+ "expect": "Your previous reply could not be parsed. Answer again in the EXACT format below \u2014 four fields, one per line, no other text (no preamble, no explanation, no code fence).\n\nTwo research communities (A and B) use their own vocabularies. Below is one term from community A with the excerpts showing how A uses it, followed by community B's full corpus.\n\nCOMMUNITY A TERM: \"widget alpha\"\n\nHOW A USES IT (excerpts):\n1. excerpt number 0\n2. excerpt number 1\n3. excerpt number 2\n4. excerpt number 3\n5. excerpt number 4\n\nCOMMUNITY B CORPUS:\n=== DOCUMENT b/01 ===\ncorpus doc 1 body\n\n=== DOCUMENT b/02 ===\ncorpus doc 2 body\n\n=== DOCUMENT b/03 ===\ncorpus doc 3 body\n\n=== DOCUMENT b/04 ===\ncorpus doc 4 body\n\n=== DOCUMENT b/05 ===\ncorpus doc 5 body\n\n=== DOCUMENT b/06 ===\ncorpus doc 6 body\n\n=== DOCUMENT b/07 ===\ncorpus doc 7 body\n\n=== DOCUMENT b/08 ===\ncorpus doc 8 body\n\n=== DOCUMENT b/09 ===\ncorpus doc 9 body\n\n=== DOCUMENT b/10 ===\ncorpus doc 10 body\n\n=== DOCUMENT b/11 ===\ncorpus doc 11 body\n\nOutput EXACTLY these four fields, one per line, and nothing else:\nmatch: yes | no\nmatched_term: the exact community-B term string you judge to be the match, copied verbatim from B's corpus (or none)\nrelation: exact | A-broader | B-broader | partial-overlap | n/a\nevidence: one quoted span copied verbatim from B's corpus (or none)\n\nIf match is no, then matched_term must be none, relation must be n/a, and evidence must be none. If match is yes, then matched_term and evidence must be non-empty verbatim copies from B's corpus and relation must be one of exact / A-broader / B-broader / partial-overlap.\n"
+}

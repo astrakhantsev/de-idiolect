@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_code_fence_ignored",
+ "oracle": "independent",
+ "why": "parser total-grammar branch",
+ "reply": "```\nmatch: no\nmatched_term: none\nrelation: n/a\nevidence: none\n```",
+ "arm": "A",
+ "expect_classification": "negative"
+}

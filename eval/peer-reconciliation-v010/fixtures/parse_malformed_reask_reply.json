@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_malformed_reask_reply",
+ "oracle": "independent",
+ "why": "parser total-grammar branch",
+ "reply": "I still cannot decide, sorry.",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

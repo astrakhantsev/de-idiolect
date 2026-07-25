@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_reask_recovers_positive",
+ "oracle": "independent",
+ "why": "re-ask CAN recover: a well-formed positive second reply parses normally (\u00a73.4 re-ask)",
+ "reply": "match: yes\nmatched_term: gadget alpha\nrelation: exact\nevidence: a verbatim span",
+ "arm": "A",
+ "expect_classification": "positive"
+}

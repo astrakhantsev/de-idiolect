@@ -1,0 +1,24 @@
+{
+ "kind": "ground",
+ "name": "ground_A_evidence_absent_false",
+ "oracle": "independent",
+ "why": "key-blind grounding incl. boundary-spanning",
+ "arm": "A",
+ "matched_term": "gadget alpha prime",
+ "evidence": "totally fabricated span not present",
+ "docs": [
+  [
+   "b/01",
+   "we compute the gadget alpha prime metric each run"
+  ],
+  [
+   "b/02",
+   "x"
+  ],
+  [
+   "b/03",
+   "y"
+  ]
+ ],
+ "expect_grounded": false
+}

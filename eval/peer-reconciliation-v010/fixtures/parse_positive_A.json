@@ -1,0 +1,14 @@
+{
+ "kind": "parse",
+ "name": "parse_positive_A",
+ "oracle": "independent",
+ "why": "parser total-grammar branch",
+ "reply": "match: yes\nmatched_term: gadget alpha prime\nrelation: exact\nevidence: some verbatim span",
+ "arm": "A",
+ "expect_classification": "positive",
+ "expect_fields": {
+  "match": "yes",
+  "relation": "exact",
+  "matched_term": "gadget alpha prime"
+ }
+}

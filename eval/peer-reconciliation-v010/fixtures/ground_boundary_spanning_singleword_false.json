@@ -1,0 +1,21 @@
+{
+ "kind": "ground",
+ "name": "ground_boundary_spanning_singleword_false",
+ "oracle": "independent",
+ "why": "FINDING (BUG-1): single-word docs 'alpha' + 'beta' \u2014 evidence 'alpha beta' exists in no single doc; the \\n\\n join collapses to a space so the concatenation check falsely grounds it. Expected = False.",
+ "arm": "A",
+ "matched_term": "alpha",
+ "evidence": "alpha beta",
+ "docs": [
+  [
+   "b/01",
+   "alpha"
+  ],
+  [
+   "b/02",
+   "beta"
+  ]
+ ],
+ "expect_grounded": false,
+ "bug_ref": "BUG-1 (boundary-spanning grounding) [RESOLVED \u2014 now an ordinary passing assertion]"
+}

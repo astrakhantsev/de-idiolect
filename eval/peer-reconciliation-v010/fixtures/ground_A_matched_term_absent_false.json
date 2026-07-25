@@ -1,0 +1,24 @@
+{
+ "kind": "ground",
+ "name": "ground_A_matched_term_absent_false",
+ "oracle": "independent",
+ "why": "matched_term not a substring of any doc -> grounding fails (\u00a73.4)",
+ "arm": "A",
+ "matched_term": "totally absent term",
+ "evidence": "the gadget alpha prime metric",
+ "docs": [
+  [
+   "b/01",
+   "we compute the gadget alpha prime metric each run"
+  ],
+  [
+   "b/02",
+   "x"
+  ],
+  [
+   "b/03",
+   "y"
+  ]
+ ],
+ "expect_grounded": false
+}

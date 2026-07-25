@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_empty_match_value_malformed",
+ "oracle": "independent",
+ "why": "empty match value ('') not in {yes,no} -> malformed (\u00a73.6a enum)",
+ "reply": "match:\nmatched_term: none\nrelation: n/a\nevidence: none",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

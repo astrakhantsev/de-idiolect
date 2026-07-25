@@ -1,0 +1,13 @@
+{
+ "kind": "parse",
+ "name": "parse_wrapper_quotes_single_not_stripped",
+ "oracle": "independent",
+ "why": "SINGLE quotes are NOT wrapper-stripped (only ASCII/curly double) -> kept verbatim (deviation #2)",
+ "reply": "match: yes\nmatched_term: 'gadget alpha'\nrelation: exact\nevidence: 'a span'",
+ "arm": "A",
+ "expect_classification": "positive",
+ "expect_fields": {
+  "matched_term": "'gadget alpha'",
+  "evidence": "'a span'"
+ }
+}

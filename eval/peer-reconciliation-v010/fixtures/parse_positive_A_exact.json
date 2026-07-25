@@ -1,0 +1,14 @@
+{
+ "kind": "parse",
+ "name": "parse_positive_A_exact",
+ "oracle": "independent",
+ "why": "match=yes positive, relation=exact, arm A (\u00a73.4 truth table)",
+ "reply": "match: yes\nmatched_term: gadget alpha\nrelation: exact\nevidence: the gadget alpha span",
+ "arm": "A",
+ "expect_classification": "positive",
+ "expect_fields": {
+  "match": "yes",
+  "relation": "exact",
+  "matched_term": "gadget alpha"
+ }
+}

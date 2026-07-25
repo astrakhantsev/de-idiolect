@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_quoted_none_yes_malformed",
+ "oracle": "independent",
+ "why": "'\"none\"' strips to none -> match=yes missing identifier -> malformed (deviation #2 ordering)",
+ "reply": "match: yes\nmatched_term: \"none\"\nrelation: exact\nevidence: a span",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_yes_relation_na_malformed",
+ "oracle": "independent",
+ "why": "match=yes with relation=n/a -> malformed (\u00a73.4)",
+ "reply": "match: yes\nmatched_term: gadget alpha\nrelation: n/a\nevidence: a span",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

@@ -1,0 +1,13 @@
+{
+ "kind": "serialize_a_excerpts",
+ "name": "serialize_a_excerpts_4",
+ "oracle": "independent",
+ "why": "{a_excerpts} at k=4 (\u00a73.6c); 1..k labels incl. first (\u00a73.6d)",
+ "excerpts": [
+  "excerpt number 0",
+  "excerpt number 1",
+  "excerpt number 2",
+  "excerpt number 3"
+ ],
+ "expect": "1. excerpt number 0\n2. excerpt number 1\n3. excerpt number 2\n4. excerpt number 3"
+}

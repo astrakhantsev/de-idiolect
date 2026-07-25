@@ -1,0 +1,12 @@
+{
+ "kind": "parse",
+ "name": "parse_value_with_colon_positive",
+ "oracle": "independent",
+ "why": "value after first colon captured verbatim incl. further colons (\u00a73.6a extraction)",
+ "reply": "match: yes\nmatched_term: gadget alpha\nrelation: exact\nevidence: ratio a:b:c seen",
+ "arm": "A",
+ "expect_classification": "positive",
+ "expect_fields": {
+  "evidence": "ratio a:b:c seen"
+ }
+}

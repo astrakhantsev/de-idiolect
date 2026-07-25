@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_reask_still_malformed_prose",
+ "oracle": "independent",
+ "why": "malformed SECOND (re-ask) reply: pure prose, zero field lines -> malformed -> direction no-assertion (\u00a73.4 re-ask, \u00a73.6c)",
+ "reply": "I still cannot decide which term matches, sorry.",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_invalid_relation_enum",
+ "oracle": "independent",
+ "why": "parser total-grammar branch",
+ "reply": "match: yes\nmatched_term: x\nrelation: superMatch\nevidence: y",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

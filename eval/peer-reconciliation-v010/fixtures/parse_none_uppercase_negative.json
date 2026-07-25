@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_none_uppercase_negative",
+ "oracle": "independent",
+ "why": "'none' sentinel + n/a detected case-insensitively -> negative (\u00a73.6a)",
+ "reply": "match: no\nmatched_term: NONE\nrelation: N/A\nevidence: None",
+ "arm": "A",
+ "expect_classification": "negative"
+}

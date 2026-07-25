@@ -1,0 +1,40 @@
+{
+ "kind": "pairs_manifest",
+ "name": "pairs_manifest_3distinct",
+ "oracle": "independent (opaque id + shuffle recomputed via the §3.6 formula sha256(term_a||NUL||term_b)[:16], sorted by id — NOT via build_payload)",
+ "why": "§3.6 committed schema: {count,pairs}; record exactly {pair_id 16-hex,term_a,term_b}; opaque id = sha256(term_a||NUL||term_b)[:16]; key-independent shuffle (sorted by id)",
+ "term_pairs": [
+  [
+   "widget alpha",
+   "gadget alpha prime"
+  ],
+  [
+   "widget gamma",
+   "gadget gamma small"
+  ],
+  [
+   "widget theta",
+   "gadget kappa index"
+  ]
+ ],
+ "expect": {
+  "count": 3,
+  "pairs": [
+   {
+    "pair_id": "5020dc6f8a1f9aba",
+    "term_a": "widget theta",
+    "term_b": "gadget kappa index"
+   },
+   {
+    "pair_id": "58851cdb48b23a1e",
+    "term_a": "widget alpha",
+    "term_b": "gadget alpha prime"
+   },
+   {
+    "pair_id": "a38f789179c01e31",
+    "term_a": "widget gamma",
+    "term_b": "gadget gamma small"
+   }
+  ]
+ }
+}

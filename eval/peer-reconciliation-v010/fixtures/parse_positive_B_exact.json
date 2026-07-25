@@ -1,0 +1,12 @@
+{
+ "kind": "parse",
+ "name": "parse_positive_B_exact",
+ "oracle": "independent",
+ "why": "match=yes positive, relation=exact, arm B (\u00a73.5)",
+ "reply": "match: yes\nmatched_term: widget one\nrelation: exact\nevidence: the widget one span",
+ "arm": "B",
+ "expect_classification": "positive",
+ "expect_fields": {
+  "relation": "exact"
+ }
+}

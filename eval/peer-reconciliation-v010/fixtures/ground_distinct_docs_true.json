@@ -1,0 +1,20 @@
+{
+ "kind": "ground",
+ "name": "ground_distinct_docs_true",
+ "oracle": "independent",
+ "why": "CONTROL for BUG-1: matched_term in doc1, evidence a within-doc substring of doc2 \u2014 each field is individually grounded in SOME single doc, so grounding=True. Isolates 'distinct docs OK' from 'one span crossing a boundary NOT OK'.",
+ "arm": "B",
+ "matched_term": "alpha",
+ "evidence": "gamma delta",
+ "docs": [
+  [
+   "b/01",
+   "alpha beta"
+  ],
+  [
+   "b/02",
+   "gamma delta"
+  ]
+ ],
+ "expect_grounded": true
+}

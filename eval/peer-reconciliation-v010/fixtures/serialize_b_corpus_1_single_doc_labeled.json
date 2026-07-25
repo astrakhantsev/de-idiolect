@@ -1,0 +1,13 @@
+{
+ "kind": "serialize_b_corpus",
+ "name": "serialize_b_corpus_1_single_doc_labeled",
+ "oracle": "independent",
+ "why": "single doc: even the FIRST (only) doc gets its header (first-document-labeling rule, \u00a73.6d)",
+ "docs": [
+  [
+   "b/01",
+   "only doc body"
+  ]
+ ],
+ "expect": "=== DOCUMENT b/01 ===\nonly doc body"
+}

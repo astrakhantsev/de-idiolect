@@ -1,0 +1,25 @@
+{
+ "kind": "assemble_baseline_b",
+ "name": "Baseline-B assembled first-ask, k=4",
+ "oracle": "independent",
+ "why": "end-to-end assembled first-ask with the MINIMUM k=4 excerpts (\u00a73.6c)",
+ "reask": false,
+ "term_a": "coin four",
+ "excerpts": [
+  "ex zero",
+  "ex one",
+  "ex two",
+  "ex three"
+ ],
+ "docs": [
+  [
+   "b/01",
+   "doc one body"
+  ],
+  [
+   "b/02",
+   "doc two body"
+  ]
+ ],
+ "expect": "Two research communities (A and B) use their own vocabularies. Below is one term from community A with the excerpts showing how A uses it, followed by community B's full corpus.\n\nCOMMUNITY A TERM: \"coin four\"\n\nHOW A USES IT (excerpts):\n1. ex zero\n2. ex one\n3. ex two\n4. ex three\n\nCOMMUNITY B CORPUS:\n=== DOCUMENT b/01 ===\ndoc one body\n\n=== DOCUMENT b/02 ===\ndoc two body\n\nReturn ONLY these four fields, one per line, and nothing else:\nmatch: yes | no\nmatched_term: the exact community-B term string you judge to be the match, copied verbatim from B's corpus (or none)\nrelation: exact | A-broader | B-broader | partial-overlap | n/a\nevidence: one quoted span copied verbatim from B's corpus (or none)\n\nRules: answer \"yes\" only if a specific community-B term names the same concept, a broader concept, or a narrower concept than the community-A term. When match is yes, matched_term and evidence must be non-empty and copied verbatim from B's corpus, and relation must be one of exact / A-broader (the community-A term is broader) / B-broader (the matched community-B term is broader) / partial-overlap. When match is no, set matched_term to none, relation to n/a, and evidence to none.\n"
+}

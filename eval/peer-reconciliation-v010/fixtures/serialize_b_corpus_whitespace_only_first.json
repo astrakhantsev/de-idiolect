@@ -1,0 +1,17 @@
+{
+ "kind": "serialize_b_corpus",
+ "name": "serialize_b_corpus_whitespace_only_first",
+ "oracle": "independent",
+ "why": "whitespace-only doc rstrips to '': header + newline + empty body -> 3 newlines before next header (\u00a73.6d edge)",
+ "docs": [
+  [
+   "b/01",
+   "   \n \t"
+  ],
+  [
+   "b/02",
+   "real body"
+  ]
+ ],
+ "expect": "=== DOCUMENT b/01 ===\n\n\n=== DOCUMENT b/02 ===\nreal body"
+}

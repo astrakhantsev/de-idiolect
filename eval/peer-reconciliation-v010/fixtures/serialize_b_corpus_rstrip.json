@@ -1,0 +1,17 @@
+{
+ "kind": "serialize_b_corpus",
+ "name": "serialize_b_corpus_rstrip",
+ "oracle": "independent",
+ "why": "document text is rstripped (trailing whitespace/newlines removed) before joining (\u00a73.6d)",
+ "docs": [
+  [
+   "b/01",
+   "body with trailing\n\n  "
+  ],
+  [
+   "b/02",
+   "clean body"
+  ]
+ ],
+ "expect": "=== DOCUMENT b/01 ===\nbody with trailing\n\n=== DOCUMENT b/02 ===\nclean body"
+}

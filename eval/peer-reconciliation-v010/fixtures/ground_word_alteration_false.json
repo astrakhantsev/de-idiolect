@@ -1,0 +1,16 @@
+{
+ "kind": "ground",
+ "name": "ground_word_alteration_false",
+ "oracle": "independent",
+ "why": "\u00a79-F5 admits NO word-level alteration: 'metric'->'value' in evidence -> grounding fails (\u00a73.5)",
+ "arm": "B",
+ "matched_term": "metric",
+ "evidence": "we compute the value each run",
+ "docs": [
+  [
+   "b/01",
+   "we compute the metric each run"
+  ]
+ ],
+ "expect_grounded": false
+}

@@ -1,0 +1,12 @@
+{
+ "kind": "parse",
+ "name": "parse_negative_B",
+ "oracle": "independent",
+ "why": "match=no + none/n-a/none triple -> negative, arm B (\u00a73.4/\u00a73.5)",
+ "reply": "match: no\nmatched_term: none\nrelation: n/a\nevidence: none",
+ "arm": "B",
+ "expect_classification": "negative",
+ "expect_fields": {
+  "match": "no"
+ }
+}

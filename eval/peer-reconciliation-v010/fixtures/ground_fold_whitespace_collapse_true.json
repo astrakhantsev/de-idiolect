@@ -1,0 +1,16 @@
+{
+ "kind": "ground",
+ "name": "ground_fold_whitespace_collapse_true",
+ "oracle": "independent",
+ "why": "\u00a79-F5 whitespace collapse: runs of spaces/newlines in evidence collapse to single spaces to match -> grounded (\u00a73.5)",
+ "arm": "B",
+ "matched_term": "alpha",
+ "evidence": "alpha    beta\ngamma",
+ "docs": [
+  [
+   "b/01",
+   "alpha beta gamma delta"
+  ]
+ ],
+ "expect_grounded": true
+}

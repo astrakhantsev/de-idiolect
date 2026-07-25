@@ -1,0 +1,13 @@
+{
+ "kind": "parse",
+ "name": "parse_wrapper_quotes_curly_stripped",
+ "oracle": "independent",
+ "why": "one balanced pair of CURLY double quotes stripped from matched_term/evidence (deviation #2, \u00a73.6a norm)",
+ "reply": "match: yes\nmatched_term: \u201cgadget gamma\u201d\nrelation: exact\nevidence: \u201ca span\u201d",
+ "arm": "A",
+ "expect_classification": "positive",
+ "expect_fields": {
+  "matched_term": "gadget gamma",
+  "evidence": "a span"
+ }
+}

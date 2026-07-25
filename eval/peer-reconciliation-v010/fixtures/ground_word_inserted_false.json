@@ -1,0 +1,16 @@
+{
+ "kind": "ground",
+ "name": "ground_word_inserted_false",
+ "oracle": "independent",
+ "why": "\u00a79-F5 word insertion ('prime' added) -> evidence not a contiguous folded substring -> fails (\u00a73.5)",
+ "arm": "B",
+ "matched_term": "alpha",
+ "evidence": "the alpha prime widget",
+ "docs": [
+  [
+   "b/01",
+   "the alpha widget here"
+  ]
+ ],
+ "expect_grounded": false
+}

@@ -1,0 +1,17 @@
+{
+ "kind": "serialize_b_corpus",
+ "name": "serialize_b_corpus_2",
+ "oracle": "independent",
+ "why": "first-document labeling + NO terminal newline + rstrip (\u00a73.6c/d)",
+ "docs": [
+  [
+   "b/01",
+   "alpha body"
+  ],
+  [
+   "b/02",
+   "beta body"
+  ]
+ ],
+ "expect": "=== DOCUMENT b/01 ===\nalpha body\n\n=== DOCUMENT b/02 ===\nbeta body"
+}

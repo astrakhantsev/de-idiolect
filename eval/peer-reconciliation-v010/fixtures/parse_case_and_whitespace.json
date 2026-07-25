@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_case_and_whitespace",
+ "oracle": "independent",
+ "why": "parser total-grammar branch",
+ "reply": "  MATCH : No \n Matched_Term :  none \n RELATION : N/A \n Evidence : none ",
+ "arm": "A",
+ "expect_classification": "negative"
+}

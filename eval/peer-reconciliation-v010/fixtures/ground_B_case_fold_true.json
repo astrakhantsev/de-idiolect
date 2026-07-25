@@ -1,0 +1,16 @@
+{
+ "kind": "ground",
+ "name": "ground_B_case_fold_true",
+ "oracle": "independent",
+ "why": "key-blind grounding incl. boundary-spanning",
+ "arm": "B",
+ "matched_term": "GADGET Delta",
+ "evidence": "Wide TOY concept",
+ "docs": [
+  [
+   "b/01",
+   "a wide toy concept named gadget delta here"
+  ]
+ ],
+ "expect_grounded": true
+}

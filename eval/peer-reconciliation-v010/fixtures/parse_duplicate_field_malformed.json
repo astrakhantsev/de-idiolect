@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_duplicate_field_malformed",
+ "oracle": "independent",
+ "why": "parser total-grammar branch",
+ "reply": "match: no\nmatch: yes\nmatched_term: none\nrelation: n/a\nevidence: none",
+ "arm": "A",
+ "expect_classification": "malformed"
+}

@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_field_order_reversed_negative",
+ "oracle": "independent",
+ "why": "fields in reversed order -> still parses (order-agnostic, \u00a73.6a)",
+ "reply": "evidence: none\nrelation: n/a\nmatched_term: none\nmatch: no",
+ "arm": "A",
+ "expect_classification": "negative"
+}

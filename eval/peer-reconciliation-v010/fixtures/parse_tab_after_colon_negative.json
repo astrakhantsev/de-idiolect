@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_tab_after_colon_negative",
+ "oracle": "independent",
+ "why": "tab whitespace after colon stripped from value -> negative (\u00a73.6a whitespace)",
+ "reply": "match:\tno\nmatched_term:\tnone\nrelation:\tn/a\nevidence:\tnone",
+ "arm": "A",
+ "expect_classification": "negative"
+}

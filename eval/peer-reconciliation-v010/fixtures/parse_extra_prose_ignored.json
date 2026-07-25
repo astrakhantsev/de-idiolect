@@ -1,0 +1,9 @@
+{
+ "kind": "parse",
+ "name": "parse_extra_prose_ignored",
+ "oracle": "independent",
+ "why": "parser total-grammar branch",
+ "reply": "Reasoning: I looked...\nmatch: yes\nmatched_term: gadget beta prime\nrelation: partial-overlap\nevidence: a span here\nDone.",
+ "arm": "A",
+ "expect_classification": "positive"
+}

@@ -1,0 +1,21 @@
+{
+ "kind": "serialize_baseline_a_docs",
+ "name": "serialize_baseline_a_docs_3",
+ "oracle": "independent",
+ "why": "Baseline-A retrieved top-3 block: RANK 1..3 labels incl. first; rstrip (\u00a73.6d)",
+ "ranked_docs": [
+  [
+   "b/07",
+   "doc seven body   "
+  ],
+  [
+   "b/03",
+   "doc three body"
+  ],
+  [
+   "b/09",
+   "doc nine body"
+  ]
+ ],
+ "expect": "--- RANK 1 (document b/07) ---\ndoc seven body\n\n--- RANK 2 (document b/03) ---\ndoc three body\n\n--- RANK 3 (document b/09) ---\ndoc nine body"
+}
