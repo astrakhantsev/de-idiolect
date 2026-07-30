@@ -115,9 +115,15 @@ for exp in INPUTS:
     n = sum(1 for o in occurrences if o['experiment'] == exp)
     print(f"  {exp}: {n} occurrences")
 
-# seeded extraction-recall audit selection
+# seeded extraction-recall audit selection.
+# These pointed at the author's private vault by absolute path. The SAME raw
+# outputs are committed in this repo under receipts/, so they now resolve in-repo:
+# the selection is unchanged (same seed, same sorted basenames) and it runs from a
+# fresh checkout instead of only on one machine.
+_RECEIPTS = Path(__file__).resolve().parents[3] / "receipts"
 rng = random.Random(20260719)
-for exp, d in (("def-naming", "/mnt/f/hub/10_projects/minelit/idiolect/def-naming-raw"),
-               ("recall-backtest", "/mnt/f/hub/10_projects/minelit/idiolect/recall-backtest-raw")):
+for exp, d in (("def-naming", _RECEIPTS / "naming-experiment" / "def-naming-raw"),
+               ("recall-backtest",
+                _RECEIPTS / "capability-ladder" / "recall-backtest-raw")):
     files = sorted(p.name for p in Path(d).glob("out-*.md"))
     print(f"recall-audit files for {exp}: {rng.sample(files, 2)}")

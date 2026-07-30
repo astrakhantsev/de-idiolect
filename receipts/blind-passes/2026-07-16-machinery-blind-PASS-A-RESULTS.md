@@ -21,7 +21,7 @@ note: "Absence claims mean 'not found in the recorded searches.' Convergence acr
 
 **The attestation below was wrong. Run 1 read the vault dashboard, and the dashboard names four of run 1's key findings.**
 
-**How it happened.** The runs were started from a neutral cwd outside the vault with `--allowedTools "WebSearch,Bash(safefetch:*)"`. That is not sufficient. **`/home/nik/.claude/CLAUDE.md` is a *user-level* instruction file — it loads in every session regardless of cwd** — and its first directive is: *"At session start, read `/mnt/f/hub/_dashboard.md`."* Run 1 obeyed it. Its output opens by reporting my overdue [redacted-employer-term] reminder back to me, which is how this was caught at all.
+**How it happened.** The runs were started from a neutral cwd outside the vault with `--allowedTools "WebSearch,Bash(safefetch:*)"`. That is not sufficient. **`<home>/.claude/CLAUDE.md` is a *user-level* instruction file — it loads in every session regardless of cwd** — and its first directive is: *"At session start, read `<vault>/_dashboard.md`."* Run 1 obeyed it. Its output opens by reporting my overdue [redacted-employer-term] reminder back to me, which is how this was caught at all.
 
 **The contamination is direct and severe.** `_dashboard.md` line 121 contains the project's own prior-art candidate list:
 

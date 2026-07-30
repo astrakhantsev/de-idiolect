@@ -6,7 +6,7 @@ status: "complete"
 
 # Citation dossier — idiolect-trap-case-study.md
 
-Audit target: `/mnt/f/hub/10_projects/minelit/idiolect/entry/idiolect-trap-case-study.md`
+Audit target: `<vault>/10_projects/minelit/idiolect/entry/idiolect-trap-case-study.md`
 
 ## Note on the prior audit (citation-audit-2026-07-17.md)
 

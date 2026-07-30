@@ -31,7 +31,7 @@ The concept (verbatim from the project's notes):
 codex
 I’ll trace the phrase through ensemble-learning, forecasting, and decision-theory sources, then distinguish a likely established match from any uncertainty.
 exec
-/usr/bin/zsh -lc "sed -n '1,220p' /home/nik/.claude/projects/-mnt-f-hub-10-projects-meta-tooling/memory/MEMORY.md" in /tmp/tmp.vBbyM3NAFu
+/usr/bin/zsh -lc "sed -n '1,220p' <home>/.claude/projects/-mnt-f-hub-10-projects-meta-tooling/memory/MEMORY.md" in /tmp/tmp.vBbyM3NAFu
  succeeded in 0ms:
 # Memory Index
 

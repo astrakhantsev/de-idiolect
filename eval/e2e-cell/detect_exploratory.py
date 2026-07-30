@@ -9,14 +9,23 @@ Everything else identical to detect.py. Output: runs/detection_exploratory.json.
 """
 import hashlib
 import json
+import os
 import re
 from pathlib import Path
 
 import sklearn
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-FLF_DIR = Path("/mnt/f/hub/10_projects/minelit/flf")
-BG_DIR = Path("/mnt/f/hub/30_reference")
+# Same corpora as detect.py, same reason they are parameterized rather than
+# hardcoded: the inputs are a private vault, and absolute paths disclosed the local
+# layout while making this unrunnable elsewhere. See detect.py for the variables.
+_VAULT = os.environ.get("DEIDIOLECT_VAULT")
+FLF_DIR = Path(os.environ.get(
+    "DEIDIOLECT_PROJECT_DIR",
+    f"{_VAULT}/10_projects/minelit/flf" if _VAULT else "project-docs"))
+BG_DIR = Path(os.environ.get(
+    "DEIDIOLECT_BACKGROUND_DIR",
+    f"{_VAULT}/30_reference" if _VAULT else "background-corpus"))
 EXCLUDED_BG = {"novelty-protocol.md"}
 OUT = Path(__file__).parent / "runs" / "detection_exploratory.json"
 DATE_RE = re.compile(r"^(\d{4})-(\d{2})-(\d{2})")

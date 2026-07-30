@@ -31,7 +31,7 @@ The concept (verbatim from the project's notes):
 codex
 I’ll trace the phrase against auditing, control, and systems-engineering literature, then distinguish a direct established term from merely similar terminology.
 exec
-/usr/bin/zsh -lc "pwd && if [ -r /home/nik/.claude/projects/-mnt-f-hub-10-projects-meta-tooling/memory/MEMORY.md ]; then sed -n '1,160p' /home/nik/.claude/projects/-mnt-f-hub-10-projects-meta-tooling/memory/MEMORY.md; fi" in /tmp/tmp.Z7Q26htaEl
+/usr/bin/zsh -lc "pwd && if [ -r <home>/.claude/projects/-mnt-f-hub-10-projects-meta-tooling/memory/MEMORY.md ]; then sed -n '1,160p' <home>/.claude/projects/-mnt-f-hub-10-projects-meta-tooling/memory/MEMORY.md; fi" in /tmp/tmp.Z7Q26htaEl
  succeeded in 0ms:
 /tmp/tmp.Z7Q26htaEl
 # Memory Index

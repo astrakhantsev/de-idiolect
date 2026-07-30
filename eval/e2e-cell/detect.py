@@ -15,14 +15,32 @@ so pre-discovery file contents cannot be attested (spec rev-1 finding 9).
 """
 import hashlib
 import json
+import os
 import re
 import sys
 from pathlib import Path
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-FLF_DIR = Path("/mnt/f/hub/10_projects/minelit/flf")
-BG_DIR = Path("/mnt/f/hub/30_reference")
+# The corpora are the author's private research vault, which is not published (and
+# is not version-controlled, hence the RETROSPECTIVE label above). These were
+# hardcoded absolute paths on one machine, which disclosed the local layout and
+# made the script unrunnable by anyone else. Point them at your own directories:
+#
+#     DEIDIOLECT_PROJECT_DIR=/path/to/project-docs \
+#     DEIDIOLECT_BACKGROUND_DIR=/path/to/background-corpus python3 detect.py
+#
+# Behaviour is unchanged when these resolve to the original inputs. The committed
+# run of record (runs/detection.json) is from the author's vault; its
+# project-document basenames + sha256 are retained there, and the background
+# paths are reduced to opaque ids by scripts/redact_detection_manifest.py.
+_VAULT = os.environ.get("DEIDIOLECT_VAULT")
+FLF_DIR = Path(os.environ.get(
+    "DEIDIOLECT_PROJECT_DIR",
+    f"{_VAULT}/10_projects/minelit/flf" if _VAULT else "project-docs"))
+BG_DIR = Path(os.environ.get(
+    "DEIDIOLECT_BACKGROUND_DIR",
+    f"{_VAULT}/30_reference" if _VAULT else "background-corpus"))
 OUT = Path(__file__).parent / "runs" / "detection.json"
 DATE_RE = re.compile(r"^(\d{4})-(\d{2})-(\d{2})")
 CUTOFF = "2026-07-12"

@@ -48,8 +48,8 @@ Run `c2-S-immersed.md` across **4 capability points × 2 draws** = 8 draws: mode
 ```bash
 #!/bin/bash
 set -u
-BRIEF=/mnt/f/hub/10_projects/minelit/idiolect/recall-ladder-raw/briefs/c2-S-immersed.md
-OUT=/mnt/f/hub/10_projects/minelit/idiolect/recall-ladder-raw/socialization
+BRIEF=<vault>/10_projects/minelit/idiolect/recall-ladder-raw/briefs/c2-S-immersed.md
+OUT=<vault>/10_projects/minelit/idiolect/recall-ladder-raw/socialization
 RUNROOT=$OUT/runs
 mkdir -p "$OUT" "$RUNROOT"
 ALLOW="WebSearch,Bash(safefetch:*)"

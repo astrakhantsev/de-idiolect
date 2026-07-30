@@ -1,10 +1,10 @@
 #!/bin/bash
-# CLEAN re-run of the immersion arm: run dirs OUTSIDE /mnt/f/hub so Claude Code does NOT
+# CLEAN re-run of the immersion arm: run dirs OUTSIDE <vault> so Claude Code does NOT
 # auto-load the project's CLAUDE.md/AGENTS.md/MEMORY (the leak that confounded the first Part B —
 # 4th instance of feedback_blind_pass_tool_level). Brief read by absolute path from the vault
 # (reading the brief does NOT trigger project-context discovery; cwd does). File tools denied.
 set -u
-BRIEF=/mnt/f/hub/10_projects/minelit/idiolect/recall-ladder-raw/briefs/c2-S-immersed.md
+BRIEF=<vault>/10_projects/minelit/idiolect/recall-ladder-raw/briefs/c2-S-immersed.md
 BASE=/tmp/claude-1000/-mnt-f-hub/93d71aaf-aae4-4850-b7aa-51b8ddea4778/scratchpad/socialization-clean
 OUT=$BASE/out
 RUNROOT=$BASE/runs
