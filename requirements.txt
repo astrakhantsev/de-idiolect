@@ -1,0 +1,44 @@
+# de-idiolect Python dependencies — TIERED, because the most useful entry points
+# need none of this.
+#
+# WHAT NEEDS NOTHING (no pip install at all):
+#   hook/term-check.sh, hook/term-scan.sh  — bash + an authenticated `claude` CLI.
+#       This is the lowest-friction useful tool in the package: point it at a term
+#       you have coined and it checks whether the field already names that thing.
+#   The offline test suites — verified on a bare python3 with nothing installed:
+#       eval/peer-reconciliation-v010    python3 -m pytest tests/ -q    166 passed
+#       eval/peer-reconciliation-fresh   python3 test_v09.py            OK
+#       eval/peer-reconciliation-test3   python3 test_v08.py            OK
+#       (the first needs pytest; the other two are unittest and need nothing)
+#   Reading the results: ~30 committed results/receipt files are plain text.
+#
+# WHAT NEEDS THE FULL STACK:
+#   prototype/recall_extender.py, prototype/ablation_constrained_vs_free.py,
+#   eval/cross-community/*, eval/e2e-cell/{detect,retrieve}.py,
+#   eval/measurements/p{2,4}-*/*.py, and the peer-reconciliation retrieval stages.
+#
+#     pip install -r requirements.txt
+#     cd prototype && python3 recall_extender.py --backend fixtures
+#
+# Versions are FLOORS, not pins — this package ships no lockfile. The one version
+# recorded in a run receipt is scikit-learn 1.9.0 (eval/e2e-cell detection).
+
+# --- retrieval + numerics -------------------------------------------------
+numpy>=1.24
+scikit-learn>=1.3          # TF-IDF keyness detection (eval/e2e-cell/detect*.py)
+
+# --- the embedding re-rank (HEAVY: pulls torch, ~2.5 GB) ------------------
+# Model: BAAI/bge-large-en-v1.5 (~1.3 GB), downloaded from Hugging Face on first
+# use. Once cached, HF_HUB_OFFLINE=1 works. The prototype's keyword ranking is
+# not useful without this re-rank, so it is not really optional for the
+# retrieval path — but nothing else in the package imports it.
+sentence-transformers>=2.7
+
+# --- tests ----------------------------------------------------------------
+pytest>=8                  # only for eval/peer-reconciliation-v010/tests/
+
+# --- NOT pip-installable --------------------------------------------------
+# Live (non-fixture) runs additionally need an authenticated `claude` CLI, and
+# some legs a `codex` CLI. There are no API keys anywhere in this repo: every
+# model call shells out to a locally-authenticated CLI. Python 3.12 was used;
+# 3.10+ should work.

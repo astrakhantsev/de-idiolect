@@ -6,6 +6,32 @@ Code and receipts for **"The vocabulary seam: why cross-community knowledge does
 
 **Where to start:** [`READING-GUIDE.md`](READING-GUIDE.md) maps a limited reading budget across the whole package — a ~10-page core (abstract → §1 → §2 → §5.5 → §7), then supporting material and appendices. *(Post-submission, navigational only.)*
 
+## Use it
+
+Licensed [MIT](LICENSE) — code, entry, and original documentation; third-party excerpts keep their own terms, and full paper texts are deliberately not committed ([`NOTICE.md`](NOTICE.md)). Dependencies are tiered in [`requirements.txt`](requirements.txt), and **the most useful entry point needs none of them**:
+
+```bash
+# 1. Check a term YOU coined against the field's existing vocabulary.
+#    Needs only bash + an authenticated `claude` CLI. No Python, no install.
+bash hook/term-check.sh --help
+
+# 2. Reproduce the frozen prototype measurement, then point it at your own data.
+#    Needs the full stack (numpy, scikit-learn, sentence-transformers -> torch, ~2.5 GB).
+pip install -r requirements.txt
+cd prototype
+python3 recall_extender.py --backend fixtures          # deterministic, offline
+python3 recall_extender.py --corpus my-corpus.json \
+        --concepts my-concepts.json --define-only      # your data, no answer key
+#    Schemas: prototype/templates/{corpus,concepts}-template.json
+#    Worked example on other data: prototype/example-owndata/
+
+# 3. Run the offline test suites (no dependencies beyond pytest for the first).
+cd eval/peer-reconciliation-v010  && python3 -m pytest tests/ -q   # 166 passed
+cd eval/peer-reconciliation-fresh && python3 test_v09.py           # OK
+```
+
+To **audit rather than run**, it is all already text: [`CLAIMS.md`](CLAIMS.md) grades every load-bearing claim, [`EXPERIMENT-LOG.md`](EXPERIMENT-LOG.md) holds the protocol detail behind §5, [`BASELINES.md`](BASELINES.md) names what each figure actually answers to, and the negatives — the pre-registered nulls and the sealed 5/10-vs-≥7 miss — are reported alongside the wins.
+
 ## Post-submission additions (dated; the as-submitted state is tagged `flf-submission`)
 
 - **2026-07-20 — `PSEUDOCODE.md`.** The workflow in compact annotated pseudocode (answering the competition's format guidance for code submissions): outward detect→define→match, the inward coin/claim/cite hooks, and the key decision points — carrying the entry's **at-submission** implementation grades (`[P]` component in prototype / `[M]` measured / `[U]` unbuilt; the composed pipelines are `[U]`). No new claims; Codex fidelity-reviewed against ENTRY.md before publication.

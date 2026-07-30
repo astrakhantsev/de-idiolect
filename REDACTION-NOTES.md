@@ -68,9 +68,12 @@ python3 <minelit>/flf-epistack/scripts/redact_vault_paths.py . --dry-run \
   --exclude 'eval/peer-reconciliation-v010/*' \
   --exclude 'eval/e2e-cell/detect*.py' \
   --exclude 'eval/measurements/p3-provenance/link_ledger.py' \
-  --exclude '*freeze-manifest.txt' --exclude '*.sha256'
+  --exclude '*freeze-manifest.txt' --exclude '*.sha256' \
+  --exclude 'REDACTION-NOTES.md'
 ```
 
-Expected on a clean tree: `0 file(s) would be redacted`, **22 skipped as hash-bound, 11 skipped by `--exclude`** (the 7 v0.10 files and the 4 manifests; the three parameterized scripts no longer contain a prefix, so they are not reported), and `remaining files still containing a private prefix: 33`.
+The last exclusion is this file, which quotes the prefix on purpose in the "What was redacted" table above; without it the scan reports itself.
+
+Expected on a clean tree: `0 file(s) would be redacted`, **22 skipped as hash-bound, 12 skipped by `--exclude`** (the 7 v0.10 files, the 4 manifests, and this file; the three parameterized scripts no longer contain a prefix, so they are not reported), and `remaining files still containing a private prefix: 34` — the 33 accounted for above, plus this file's own documentation of the prefix.
 
 Any number above 0 in the first line means a new leak has entered the export — treat that as a release blocker.
